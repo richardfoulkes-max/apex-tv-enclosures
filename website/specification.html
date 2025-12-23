@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex TV Enclosures - Manufacturing Specification v2.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1428a0;
+            --primary-light: #e8ebf7;
+            --text: #1a1a1a;
+            --text-muted: #6b7280;
+            --bg: #ffffff;
+            --bg-alt: #f8f9fa;
+            --border: #e5e7eb;
+            --success: #059669;
+            --warning: #d97706;
+            --apex: #1428a0;
+            --apollo: #dc2626;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header .subtitle {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        header .version {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        .toc {
+            background: var(--bg-alt);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .toc h3 { margin-bottom: 1rem; }
+
+        .toc ul {
+            list-style: none;
+            columns: 2;
+        }
+
+        .toc a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .toc a:hover { text-decoration: underline; }
+
+        section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--text);
+        }
+
+        h4 {
+            font-size: 1rem;
+            margin: 1rem 0 0.5rem;
+            color: var(--text-muted);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg-alt);
+            font-weight: 600;
+        }
+
+        .highlight {
+            background: var(--primary-light);
+        }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .spec-card {
+            background: var(--bg-alt);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .spec-card h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        .spec-card ul {
+            margin: 0;
+            padding-left: 1.25rem;
+        }
+
+        .spec-card li {
+            margin: 0.5rem 0;
+        }
+
+        /* Comparison Table */
+        .comparison-table th:first-child { width: 30%; }
+        .comparison-table .apex { background: #e8f5e9; color: #1b5e20; }
+        .comparison-table .apollo { background: #ffebee; }
+        .comparison-table .better { font-weight: 600; }
+
+        /* Drawing Container */
+        .drawing-container {
+            background: var(--bg-alt);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .drawing-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .drawing-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .drawing-caption {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+        }
+
+        /* Callout boxes */
+        .callout {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .callout-critical {
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+        }
+
+        .callout-important {
+            background: #fffbeb;
+            border-left: 4px solid #d97706;
+        }
+
+        .callout-info {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-premium { background: #fef3c7; color: #92400e; }
+        .badge-critical { background: #fee2e2; color: #991b1b; }
+        .badge-new { background: #dbeafe; color: #1e40af; }
+
+        @media print {
+            header { background: var(--primary) !important; -webkit-print-color-adjust: exact; }
+            .no-print { display: none; }
+            section { page-break-inside: avoid; }
+        }
+
+        @media (max-width: 768px) {
+            .toc ul { columns: 1; }
+            .spec-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Apex TV Enclosures</h1>
+            <div class="subtitle">Premium OEM Manufacturing Specification - Dubai Grade</div>
+            <div class="version">Version 2.0 | December 2025 | RFQ Ready</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Table of Contents -->
+        <nav class="toc no-print">
+            <h3>Contents</h3>
+            <ul>
+                <li><a href="#comparison">0. Apex vs Apollo Comparison</a></li>
+                <li><a href="#scope">1. Scope & Design Priorities</a></li>
+                <li><a href="#environment">2. Environmental Requirements</a></li>
+                <li><a href="#sizes">3. Size Schedule</a></li>
+                <li><a href="#construction">4. Mechanical Construction</a></li>
+                <li><a href="#glass">5. Front Glass / Optical Stack</a></li>
+                <li><a href="#thermal">6. Thermal System</a></li>
+                <li><a href="#electrical">7. Electrical System</a></li>
+                <li><a href="#finish">8. Finish & Cosmetics</a></li>
+                <li><a href="#testing">9. Testing & QA</a></li>
+                <li><a href="#bom">10. Bill of Materials</a></li>
+            </ul>
+        </nav>
+
+        <!-- Section 0: Comparison -->
+        <section id="comparison">
+            <h2>0. Apex Premium vs Apollo Standard</h2>
+            <p>Apex enclosures are engineered to exceed Apollo specifications in every critical area:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Specification</th>
+                        <th>Apollo (Standard)</th>
+                        <th>Apex (Premium)</th>
+                        <th>Advantage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Frame Thickness</strong></td>
+                        <td>1.5mm aluminum</td>
+                        <td class="apex better">2.0mm aluminum</td>
+                        <td>33% stronger, no flex</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Aluminum Grade</strong></td>
+                        <td>6063-T5 (standard)</td>
+                        <td class="apex better">5052-H32 / 6061-T6</td>
+                        <td>Superior corrosion resistance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Max Operating Temp</strong></td>
+                        <td>50°C ambient</td>
+                        <td class="apex better">55°C ambient</td>
+                        <td>+5°C headroom for Dubai</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Glass Construction</strong></td>
+                        <td>4mm single tempered</td>
+                        <td class="apex better">4+4mm laminated tempered</td>
+                        <td>Shatter-safe, better insulation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Glass Coatings</strong></td>
+                        <td>AR coating only</td>
+                        <td class="apex better">AR + IR rejection + UV block</td>
+                        <td>Reduces solar heat gain 40%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fan Control</strong></td>
+                        <td>On/off thermostat</td>
+                        <td class="apex better">PWM microcontroller</td>
+                        <td>Smooth, quiet, intelligent</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fan Type</strong></td>
+                        <td>Generic 80mm DC</td>
+                        <td class="apex better">Noctua/Sunon 120-140mm PWM</td>
+                        <td>50% quieter, 3x lifespan</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Noise Level</strong></td>
+                        <td>~35-40 dBA</td>
+                        <td class="apex better">&lt;28 dBA normal</td>
+                        <td>Near-silent operation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hardware</strong></td>
+                        <td>Zinc-plated steel</td>
+                        <td class="apex better">316 Stainless (A4)</td>
+                        <td>No rust, coastal-proof</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Filtration</strong></td>
+                        <td>Basic mesh</td>
+                        <td class="apex better">Automotive-grade pleated</td>
+                        <td>10x finer dust capture</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pressure Design</strong></td>
+                        <td>Neutral</td>
+                        <td class="apex better">Positive pressure</td>
+                        <td>Dust cannot enter</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Failsafe</strong></td>
+                        <td>None</td>
+                        <td class="apex better">Thermal cutoff + alarm</td>
+                        <td>Protects TV investment</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Enclosure Depth</strong></td>
+                        <td>150mm</td>
+                        <td class="apex better">120mm</td>
+                        <td>20% slimmer profile</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Section 1: Scope -->
+        <section id="scope">
+            <h2>1. Scope & Design Priorities</h2>
+
+            <div class="callout callout-info">
+                <strong>Target Market:</strong> Luxury residential and premium hospitality in UAE, Saudi Arabia, Qatar, Kuwait. Must accommodate standard consumer TVs while maintaining reliability in extreme conditions.
+            </div>
+
+            <h3>Design Priorities (Ranked)</h3>
+            <ol>
+                <li><strong>Thermal reliability</strong> in 55°C ambient + solar load</li>
+                <li><strong>Low noise</strong> (&lt;28 dBA normal operation)</li>
+                <li><strong>Dust/sand ingress resistance</strong> (positive pressure design)</li>
+                <li><strong>Corrosion resistance</strong> (coastal UAE specification)</li>
+                <li><strong>Premium fit/finish</strong> (luxury market positioning)</li>
+                <li><strong>Slim profile</strong> (120mm depth vs 150mm competitors)</li>
+            </ol>
+
+            <div class="callout callout-critical">
+                <strong>Non-Negotiable Requirements:</strong>
+                <ul>
+                    <li>NO on/off thermostats - PWM control only</li>
+                    <li>NO unfiltered intakes - automotive-grade filtration required</li>
+                    <li>NO consumer power strips - proper power distribution only</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 2: Environment -->
+        <section id="environment">
+            <h2>2. Environmental Requirements</h2>
+
+            <div class="spec-grid">
+                <div class="spec-card">
+                    <h4>Temperature</h4>
+                    <ul>
+                        <li>Operating: 0°C to <strong>55°C</strong> continuous</li>
+                        <li>Storage: -20°C to 70°C</li>
+                        <li>Internal target: &lt;45°C at 55°C ambient</li>
+                    </ul>
+                </div>
+                <div class="spec-card">
+                    <h4>Moisture & Humidity</h4>
+                    <ul>
+                        <li>Humidity: up to 95% RH non-condensing</li>
+                        <li>Rain: heavy/wind-driven (not submersible)</li>
+                        <li>Optional: ePTFE breather membrane</li>
+                    </ul>
+                </div>
+                <div class="spec-card">
+                    <h4>Dust & Sand</h4>
+                    <ul>
+                        <li>Designed for sandstorms</li>
+                        <li>Positive pressure design</li>
+                        <li>Replaceable automotive-grade filters</li>
+                    </ul>
+                </div>
+                <div class="spec-card">
+                    <h4>Corrosion</h4>
+                    <ul>
+                        <li>Salt fog: &gt;500 hours</li>
+                        <li>UV stability: 5+ years</li>
+                        <li>316 stainless hardware</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>IP Rating Target</h3>
+            <p><strong>IP54 minimum</strong> functional performance (dust protected + splashing water). Formal IP testing available on request.</p>
+        </section>
+
+        <!-- Section 3: Size Schedule -->
+        <section id="sizes">
+            <h2>3. Size Schedule</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Fits TV</th>
+                        <th>Internal (W×H×D)</th>
+                        <th>External (W×H×D)</th>
+                        <th>VESA Support</th>
+                        <th>Fan Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>ATE-43</strong></td>
+                        <td>39" - 43"</td>
+                        <td>1000 × 600 × 80mm</td>
+                        <td>1060 × 660 × 120mm</td>
+                        <td>200×200, 300×300</td>
+                        <td>2 × 120mm</td>
+                    </tr>
+                    <tr class="highlight">
+                        <td><strong>ATE-55</strong></td>
+                        <td>49" - 55"</td>
+                        <td>1260 × 740 × 80mm</td>
+                        <td>1320 × 800 × 120mm</td>
+                        <td>200-400×400</td>
+                        <td>2 × 140mm</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ATE-65</strong></td>
+                        <td>60" - 65"</td>
+                        <td>1480 × 860 × 80mm</td>
+                        <td>1540 × 920 × 120mm</td>
+                        <td>300-600×400</td>
+                        <td>3 × 140mm</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ATE-75</strong></td>
+                        <td>70" - 75"</td>
+                        <td>1700 × 980 × 90mm</td>
+                        <td>1760 × 1040 × 130mm</td>
+                        <td>400-600×400</td>
+                        <td>3 × 140mm</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ATE-86</strong></td>
+                        <td>82" - 86"</td>
+                        <td>1940 × 1120 × 100mm</td>
+                        <td>2000 × 1180 × 140mm</td>
+                        <td>600×400</td>
+                        <td>4 × 140mm</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout callout-info">
+                <strong>Note:</strong> External depth of 120-140mm is 20-30mm slimmer than Apollo's 150-170mm. Achieved through optimized internal layout and slimmer 140mm fans (vs stacked 80mm).
+            </div>
+
+            <!-- Dimension Drawing -->
+            <div class="drawing-container">
+                <div class="drawing-title">Figure 1: Enclosure Dimensions (ATE-55 shown)</div>
+                <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Main enclosure - front view -->
+                    <rect x="50" y="50" width="350" height="220" fill="none" stroke="#1428a0" stroke-width="2"/>
+                    <rect x="60" y="60" width="330" height="200" fill="#f0f4ff" stroke="#1428a0" stroke-width="1"/>
+
+                    <!-- Glass area -->
+                    <rect x="70" y="70" width="310" height="180" fill="#e8f4ff" stroke="#64748b" stroke-width="1" stroke-dasharray="4"/>
+                    <text x="225" y="165" text-anchor="middle" font-size="12" fill="#64748b">TV Display Area</text>
+
+                    <!-- Dimension lines - width -->
+                    <line x1="50" y1="290" x2="400" y2="290" stroke="#333" stroke-width="1"/>
+                    <line x1="50" y1="285" x2="50" y2="295" stroke="#333" stroke-width="1"/>
+                    <line x1="400" y1="285" x2="400" y2="295" stroke="#333" stroke-width="1"/>
+                    <text x="225" y="310" text-anchor="middle" font-size="11" fill="#333">1320mm External Width</text>
+
+                    <!-- Dimension lines - height -->
+                    <line x1="420" y1="50" x2="420" y2="270" stroke="#333" stroke-width="1"/>
+                    <line x1="415" y1="50" x2="425" y2="50" stroke="#333" stroke-width="1"/>
+                    <line x1="415" y1="270" x2="425" y2="270" stroke="#333" stroke-width="1"/>
+                    <text x="450" y="165" font-size="11" fill="#333" transform="rotate(90,450,165)">800mm Height</text>
+
+                    <!-- Side view -->
+                    <rect x="520" y="50" width="40" height="220" fill="none" stroke="#1428a0" stroke-width="2"/>
+                    <rect x="525" y="55" width="30" height="210" fill="#f0f4ff" stroke="#1428a0" stroke-width="1"/>
+
+                    <!-- Side view labels -->
+                    <text x="540" y="40" text-anchor="middle" font-size="10" fill="#64748b">Side View</text>
+
+                    <!-- Depth dimension -->
+                    <line x1="520" y1="290" x2="560" y2="290" stroke="#333" stroke-width="1"/>
+                    <line x1="520" y1="285" x2="520" y2="295" stroke="#333" stroke-width="1"/>
+                    <line x1="560" y1="285" x2="560" y2="295" stroke="#333" stroke-width="1"/>
+                    <text x="540" y="310" text-anchor="middle" font-size="11" fill="#333">120mm</text>
+
+                    <!-- Fan positions in side view -->
+                    <circle cx="540" cy="80" r="12" fill="none" stroke="#059669" stroke-width="2"/>
+                    <text x="580" y="85" font-size="9" fill="#059669">Exhaust</text>
+                    <circle cx="540" cy="230" r="12" fill="none" stroke="#2563eb" stroke-width="2"/>
+                    <text x="580" y="235" font-size="9" fill="#2563eb">Intake</text>
+
+                    <!-- Airflow arrows -->
+                    <path d="M540 215 L540 95" stroke="#059669" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+                    <!-- Arrow marker -->
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#059669"/>
+                        </marker>
+                    </defs>
+
+                    <!-- Comparison box -->
+                    <rect x="620" y="50" width="160" height="120" fill="#fef2f2" stroke="#dc2626" stroke-width="1" rx="4"/>
+                    <text x="700" y="75" text-anchor="middle" font-size="11" font-weight="600" fill="#dc2626">Apollo Depth</text>
+                    <text x="700" y="95" text-anchor="middle" font-size="24" font-weight="700" fill="#dc2626">150mm</text>
+                    <text x="700" y="115" text-anchor="middle" font-size="10" fill="#991b1b">30mm thicker</text>
+
+                    <rect x="620" y="180" width="160" height="120" fill="#e8f5e9" stroke="#059669" stroke-width="1" rx="4"/>
+                    <text x="700" y="205" text-anchor="middle" font-size="11" font-weight="600" fill="#059669">Apex Depth</text>
+                    <text x="700" y="225" text-anchor="middle" font-size="24" font-weight="700" fill="#059669">120mm</text>
+                    <text x="700" y="245" text-anchor="middle" font-size="10" fill="#166534">20% slimmer</text>
+
+                    <!-- Labels -->
+                    <text x="225" y="40" text-anchor="middle" font-size="10" fill="#64748b">Front View</text>
+                </svg>
+                <div class="drawing-caption">All dimensions in millimeters. Internal clearance 20mm minimum on all sides.</div>
+            </div>
+        </section>
+
+        <!-- Section 4: Construction -->
+        <section id="construction">
+            <h2>4. Mechanical Construction</h2>
+
+            <h3>4.1 Enclosure Body</h3>
+            <div class="spec-grid">
+                <div class="spec-card">
+                    <h4>Material <span class="badge badge-premium">Premium</span></h4>
+                    <ul>
+                        <li><strong>Primary:</strong> Aluminum 5052-H32</li>
+                        <li><strong>Alternative:</strong> 6061-T6</li>
+                        <li>Superior corrosion resistance vs 6063-T5</li>
+                    </ul>
+                </div>
+                <div class="spec-card">
+                    <h4>Thickness</h4>
+                    <ul>
+                        <li>Main shell: <strong>2.0mm</strong></li>
+                        <li>Door/rear panel: <strong>2.0mm</strong></li>
+                        <li>Mounting rails: <strong>3.0mm</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>4.2 Fabrication</h3>
+            <ul>
+                <li>CNC laser cut + CNC press brake</li>
+                <li>TIG welding where needed</li>
+                <li>Integrated stiffening ribs (no oil-canning)</li>
+                <li>All edges deburred, no sharp edges</li>
+            </ul>
+
+            <h3>4.3 Fasteners & Hardware <span class="badge badge-premium">Premium</span></h3>
+            <table>
+                <tr>
+                    <th>Location</th>
+                    <th>Specification</th>
+                </tr>
+                <tr>
+                    <td>External fasteners</td>
+                    <td><strong>A4 / 316 Stainless Steel</strong> (coastal grade)</td>
+                </tr>
+                <tr>
+                    <td>Internal fasteners</td>
+                    <td>A2 / 304 Stainless minimum</td>
+                </tr>
+                <tr>
+                    <td>Thread treatment</td>
+                    <td>Anti-galling compound or coated</td>
+                </tr>
+                <tr>
+                    <td>Dissimilar metals</td>
+                    <td>Nylon isolation washers required</td>
+                </tr>
+            </table>
+
+            <h3>4.4 Seals & Gasketing</h3>
+            <ul>
+                <li><strong>Door seal:</strong> EPDM closed-cell gasket, UV-stable</li>
+                <li><strong>Compression:</strong> Consistent around full perimeter</li>
+                <li><strong>Cable entry:</strong> IP68-rated cable glands (M16/M20)</li>
+            </ul>
+
+            <!-- Exploded View Drawing -->
+            <div class="drawing-container">
+                <div class="drawing-title">Figure 2: Exploded Assembly View</div>
+                <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Back panel -->
+                    <rect x="50" y="50" width="280" height="180" fill="#d1d5db" stroke="#374151" stroke-width="2" transform="skewY(-5)"/>
+                    <text x="190" y="145" text-anchor="middle" font-size="11" fill="#374151">Back Panel (2.0mm Al)</text>
+
+                    <!-- Fan mounting holes -->
+                    <circle cx="100" cy="90" r="20" fill="none" stroke="#059669" stroke-width="2" stroke-dasharray="4"/>
+                    <circle cx="280" cy="90" r="20" fill="none" stroke="#059669" stroke-width="2" stroke-dasharray="4"/>
+                    <text x="190" y="100" text-anchor="middle" font-size="9" fill="#059669">140mm Fan Mounts</text>
+
+                    <!-- VESA plate -->
+                    <rect x="130" y="110" width="120" height="80" fill="#9ca3af" stroke="#374151" stroke-width="1"/>
+                    <text x="190" y="155" text-anchor="middle" font-size="9" fill="#374151">VESA Plate</text>
+
+                    <!-- Main frame -->
+                    <rect x="100" y="180" width="280" height="180" fill="none" stroke="#1428a0" stroke-width="3"/>
+                    <rect x="110" y="190" width="260" height="160" fill="#f0f4ff" stroke="#1428a0" stroke-width="1"/>
+                    <text x="240" y="280" text-anchor="middle" font-size="11" fill="#1428a0">Main Frame (2.0mm Al)</text>
+
+                    <!-- Gasket indication -->
+                    <rect x="100" y="180" width="280" height="180" fill="none" stroke="#f59e0b" stroke-width="4" stroke-dasharray="8,4"/>
+                    <text x="240" y="380" text-anchor="middle" font-size="9" fill="#f59e0b">EPDM Gasket (continuous)</text>
+
+                    <!-- Glass assembly -->
+                    <rect x="150" y="320" width="280" height="180" fill="#bfdbfe" stroke="#1e40af" stroke-width="2" opacity="0.8"/>
+                    <rect x="155" y="325" width="270" height="170" fill="#dbeafe" stroke="#1e40af" stroke-width="1"/>
+                    <text x="290" y="415" text-anchor="middle" font-size="11" fill="#1e40af">Laminated Glass (4+4mm)</text>
+                    <text x="290" y="430" text-anchor="middle" font-size="9" fill="#3b82f6">AR + IR + UV Coatings</text>
+
+                    <!-- Exploded lines -->
+                    <line x1="190" y1="230" x2="190" y2="170" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4"/>
+                    <line x1="290" y1="360" x2="290" y2="320" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4"/>
+
+                    <!-- Components callouts on right side -->
+                    <g transform="translate(450, 50)">
+                        <!-- Fan -->
+                        <rect x="0" y="0" width="80" height="80" fill="#e5e7eb" stroke="#374151" stroke-width="2" rx="4"/>
+                        <circle cx="40" cy="40" r="30" fill="none" stroke="#374151" stroke-width="2"/>
+                        <text x="40" y="100" text-anchor="middle" font-size="10" fill="#374151">140mm PWM Fan</text>
+                        <text x="40" y="115" text-anchor="middle" font-size="9" fill="#059669">Noctua Industrial</text>
+
+                        <!-- Filter -->
+                        <rect x="120" y="0" width="80" height="60" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="4"/>
+                        <line x1="130" y1="10" x2="190" y2="50" stroke="#d97706" stroke-width="1"/>
+                        <line x1="130" y1="20" x2="190" y2="50" stroke="#d97706" stroke-width="1"/>
+                        <line x1="130" y1="30" x2="190" y2="50" stroke="#d97706" stroke-width="1"/>
+                        <text x="160" y="80" text-anchor="middle" font-size="10" fill="#d97706">Pleated Filter</text>
+                        <text x="160" y="95" text-anchor="middle" font-size="9" fill="#92400e">Automotive Grade</text>
+
+                        <!-- Controller -->
+                        <rect x="220" y="0" width="100" height="60" fill="#dbeafe" stroke="#1e40af" stroke-width="2" rx="4"/>
+                        <rect x="230" y="10" width="20" height="15" fill="#1e40af"/>
+                        <circle cx="290" cy="30" r="8" fill="#22c55e"/>
+                        <text x="270" y="80" text-anchor="middle" font-size="10" fill="#1e40af">PWM Controller</text>
+                        <text x="270" y="95" text-anchor="middle" font-size="9" fill="#3b82f6">MCU + Sensors</text>
+                    </g>
+
+                    <!-- Layer labels -->
+                    <g transform="translate(460, 200)">
+                        <text x="0" y="0" font-size="12" font-weight="600" fill="#374151">Assembly Layers:</text>
+                        <text x="0" y="25" font-size="11" fill="#374151">1. Back Panel + Fans</text>
+                        <text x="0" y="45" font-size="11" fill="#374151">2. VESA Mount Plate</text>
+                        <text x="0" y="65" font-size="11" fill="#374151">3. Main Frame + Gasket</text>
+                        <text x="0" y="85" font-size="11" fill="#374151">4. Glass Assembly</text>
+                        <text x="0" y="105" font-size="11" fill="#374151">5. Front Bezel</text>
+                    </g>
+
+                    <!-- Hardware callout -->
+                    <g transform="translate(460, 350)">
+                        <rect x="0" y="0" width="200" height="100" fill="#f0fdf4" stroke="#059669" stroke-width="1" rx="4"/>
+                        <text x="100" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#059669">Hardware Spec</text>
+                        <text x="10" y="45" font-size="10" fill="#166534">External: A4/316 SS</text>
+                        <text x="10" y="60" font-size="10" fill="#166534">Internal: A2/304 SS</text>
+                        <text x="10" y="75" font-size="10" fill="#166534">Cable glands: IP68 M20</text>
+                        <text x="10" y="90" font-size="10" fill="#166534">Isolation: Nylon washers</text>
+                    </g>
+                </svg>
+                <div class="drawing-caption">Exploded view showing main components and assembly sequence.</div>
+            </div>
+        </section>
+
+        <!-- Section 5: Glass -->
+        <section id="glass">
+            <h2>5. Front Glass / Optical Stack <span class="badge badge-premium">Premium</span></h2>
+
+            <div class="callout callout-important">
+                <strong>Key Differentiator:</strong> Laminated glass with IR rejection reduces solar heat gain by up to 40%, significantly reducing cooling requirements and fan noise.
+            </div>
+
+            <h3>5.1 Glass Construction</h3>
+            <table>
+                <tr>
+                    <th>Layer</th>
+                    <th>Specification</th>
+                </tr>
+                <tr>
+                    <td>Outer pane</td>
+                    <td><strong>4mm low-iron tempered glass</strong></td>
+                </tr>
+                <tr>
+                    <td>Interlayer</td>
+                    <td><strong>PVB (polyvinyl butyral)</strong> - shatter retention</td>
+                </tr>
+                <tr>
+                    <td>Inner pane</td>
+                    <td><strong>4mm low-iron tempered glass</strong></td>
+                </tr>
+                <tr>
+                    <td>Total thickness</td>
+                    <td>~8.8mm (vs Apollo 4mm single)</td>
+                </tr>
+            </table>
+
+            <h3>5.2 Coatings & Films</h3>
+            <table>
+                <tr>
+                    <th>Coating</th>
+                    <th>Purpose</th>
+                    <th>Performance</th>
+                </tr>
+                <tr>
+                    <td><strong>AR Coating</strong> (both sides)</td>
+                    <td>Reduce reflections</td>
+                    <td>&lt;1% reflection</td>
+                </tr>
+                <tr>
+                    <td><strong>IR Rejection Film</strong></td>
+                    <td>Block infrared heat</td>
+                    <td>60-70% IR rejection</td>
+                </tr>
+                <tr>
+                    <td><strong>UV Block</strong></td>
+                    <td>Protect TV from UV</td>
+                    <td>≥99% UV rejection</td>
+                </tr>
+            </table>
+
+            <h3>5.3 Optical Requirements</h3>
+            <ul>
+                <li>Visible light transmission: manufacturer standard (provide measured values)</li>
+                <li>Haze: low - no distortion, no waves</li>
+                <li>Edge finish: polished</li>
+                <li>Glass retention: mechanical frame + gasket (not adhesive-only)</li>
+            </ul>
+        </section>
+
+        <!-- Section 6: Thermal -->
+        <section id="thermal">
+            <h2>6. Thermal Management System <span class="badge badge-critical">Critical</span></h2>
+
+            <h3>6.1 Architecture - Zoned Airflow</h3>
+
+            <div class="drawing-container">
+                <div class="drawing-title">Figure 3: Thermal Airflow Design</div>
+                <svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Enclosure outline -->
+                    <rect x="100" y="50" width="400" height="350" fill="#f8fafc" stroke="#1428a0" stroke-width="3" rx="8"/>
+
+                    <!-- TV representation -->
+                    <rect x="130" y="80" width="340" height="200" fill="#1e293b" stroke="#0f172a" stroke-width="2" rx="4"/>
+                    <rect x="140" y="90" width="320" height="180" fill="#334155"/>
+                    <text x="300" y="185" text-anchor="middle" font-size="14" fill="#94a3b8">TV Display</text>
+
+                    <!-- Hot zone indicator -->
+                    <rect x="350" y="85" width="100" height="60" fill="#fecaca" stroke="#dc2626" stroke-width="1" stroke-dasharray="4" rx="4"/>
+                    <text x="400" y="120" text-anchor="middle" font-size="9" fill="#dc2626">Hot Zone</text>
+                    <text x="400" y="135" text-anchor="middle" font-size="9" fill="#dc2626">(PSU area)</text>
+
+                    <!-- Intake fans at bottom -->
+                    <g transform="translate(150, 320)">
+                        <rect x="0" y="0" width="60" height="60" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="4"/>
+                        <circle cx="30" cy="30" r="22" fill="none" stroke="#2563eb" stroke-width="2"/>
+                        <text x="30" y="75" text-anchor="middle" font-size="9" fill="#2563eb">Intake 1</text>
+                    </g>
+                    <g transform="translate(350, 320)">
+                        <rect x="0" y="0" width="60" height="60" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="4"/>
+                        <circle cx="30" cy="30" r="22" fill="none" stroke="#2563eb" stroke-width="2"/>
+                        <text x="30" y="75" text-anchor="middle" font-size="9" fill="#2563eb">Intake 2</text>
+                    </g>
+
+                    <!-- Exhaust fans at top -->
+                    <g transform="translate(250, 10)">
+                        <rect x="0" y="0" width="60" height="40" fill="#dcfce7" stroke="#16a34a" stroke-width="2" rx="4"/>
+                        <text x="30" y="25" text-anchor="middle" font-size="9" fill="#16a34a">Exhaust</text>
+                    </g>
+
+                    <!-- Airflow arrows -->
+                    <defs>
+                        <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+                        </marker>
+                        <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#16a34a"/>
+                        </marker>
+                    </defs>
+
+                    <!-- Intake arrows -->
+                    <path d="M180 380 L180 420 L180 450" stroke="#2563eb" stroke-width="3" fill="none" marker-end="url(#arrow-blue)" transform="rotate(180, 180, 415)"/>
+                    <path d="M380 380 L380 420 L380 450" stroke="#2563eb" stroke-width="3" fill="none" marker-end="url(#arrow-blue)" transform="rotate(180, 380, 415)"/>
+
+                    <!-- Internal flow paths -->
+                    <path d="M180 310 C180 250, 280 200, 280 100" stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="6" marker-end="url(#arrow-green)"/>
+                    <path d="M380 310 C380 250, 320 200, 320 100" stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="6" marker-end="url(#arrow-green)"/>
+
+                    <!-- Exhaust arrow -->
+                    <path d="M280 50 L280 0" stroke="#16a34a" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
+
+                    <!-- Baffle -->
+                    <rect x="120" y="290" width="360" height="5" fill="#64748b"/>
+                    <text x="300" y="305" text-anchor="middle" font-size="9" fill="#64748b">Internal Baffle - Forces airflow across TV</text>
+
+                    <!-- Filter indication -->
+                    <rect x="140" y="380" width="80" height="15" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+                    <rect x="340" y="380" width="80" height="15" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+                    <text x="180" y="410" text-anchor="middle" font-size="8" fill="#d97706">Filter</text>
+                    <text x="380" y="410" text-anchor="middle" font-size="8" fill="#d97706">Filter</text>
+
+                    <!-- Legend -->
+                    <g transform="translate(550, 80)">
+                        <rect x="0" y="0" width="200" height="180" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" rx="4"/>
+                        <text x="100" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">Airflow Legend</text>
+
+                        <rect x="15" y="40" width="20" height="20" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <text x="45" y="55" font-size="10" fill="#1e293b">Filtered Intake</text>
+
+                        <rect x="15" y="70" width="20" height="20" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+                        <text x="45" y="85" font-size="10" fill="#1e293b">Exhaust (chimney)</text>
+
+                        <line x1="15" y1="110" x2="35" y2="110" stroke="#3b82f6" stroke-width="2" stroke-dasharray="6"/>
+                        <text x="45" y="115" font-size="10" fill="#1e293b">Airflow path</text>
+
+                        <rect x="15" y="130" width="20" height="10" fill="#64748b"/>
+                        <text x="45" y="140" font-size="10" fill="#1e293b">Baffle</text>
+
+                        <rect x="15" y="155" width="20" height="10" fill="#fef3c7" stroke="#d97706"/>
+                        <text x="45" y="165" font-size="10" fill="#1e293b">Replaceable Filter</text>
+                    </g>
+
+                    <!-- Pressure indicator -->
+                    <g transform="translate(550, 280)">
+                        <rect x="0" y="0" width="200" height="80" fill="#f0fdf4" stroke="#16a34a" stroke-width="1" rx="4"/>
+                        <text x="100" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">Positive Pressure</text>
+                        <text x="100" y="45" text-anchor="middle" font-size="10" fill="#166534">Intake CFM > Exhaust CFM</text>
+                        <text x="100" y="65" text-anchor="middle" font-size="10" fill="#166534">Dust cannot enter gaps</text>
+                    </g>
+                </svg>
+                <div class="drawing-caption">Cross-section showing zoned airflow with positive pressure design. Airflow forced across TV hot zones.</div>
+            </div>
+
+            <h3>6.2 Fan Specification <span class="badge badge-premium">Premium</span></h3>
+            <table>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Apollo (Standard)</th>
+                    <th>Apex (Premium)</th>
+                </tr>
+                <tr>
+                    <td>Fan Size</td>
+                    <td>80mm × 80mm × 25mm</td>
+                    <td class="apex"><strong>140mm × 140mm × 25mm</strong></td>
+                </tr>
+                <tr>
+                    <td>Fan Type</td>
+                    <td>Generic DC, 2-wire</td>
+                    <td class="apex"><strong>Noctua Industrial PPC / Sunon MagLev</strong></td>
+                </tr>
+                <tr>
+                    <td>Control</td>
+                    <td>On/Off thermostat</td>
+                    <td class="apex"><strong>PWM (4-wire)</strong></td>
+                </tr>
+                <tr>
+                    <td>Bearing</td>
+                    <td>Sleeve bearing</td>
+                    <td class="apex"><strong>SSO2 / Fluid Dynamic</strong></td>
+                </tr>
+                <tr>
+                    <td>MTBF</td>
+                    <td>~30,000 hours</td>
+                    <td class="apex"><strong>&gt;150,000 hours</strong></td>
+                </tr>
+                <tr>
+                    <td>IP Rating</td>
+                    <td>None</td>
+                    <td class="apex"><strong>IP67 rated</strong></td>
+                </tr>
+                <tr>
+                    <td>Mounting</td>
+                    <td>Direct screw</td>
+                    <td class="apex"><strong>Rubber isolators + anti-vibe grommets</strong></td>
+                </tr>
+            </table>
+
+            <h3>6.3 Noise Targets</h3>
+            <table>
+                <tr>
+                    <th>Mode</th>
+                    <th>PWM Duty</th>
+                    <th>Noise Target (1m)</th>
+                </tr>
+                <tr>
+                    <td>Normal operation</td>
+                    <td>≤40%</td>
+                    <td><strong>≤28 dBA</strong> (near silent)</td>
+                </tr>
+                <tr>
+                    <td>High cooling</td>
+                    <td>≤70%</td>
+                    <td><strong>≤35 dBA</strong></td>
+                </tr>
+                <tr>
+                    <td>Emergency</td>
+                    <td>100%</td>
+                    <td>Higher allowed, time-limited</td>
+                </tr>
+            </table>
+
+            <h3>6.4 Control System <span class="badge badge-new">New</span></h3>
+            <div class="callout callout-critical">
+                <strong>NO on/off thermostats.</strong> PWM microcontroller control is mandatory.
+            </div>
+
+            <div class="spec-grid">
+                <div class="spec-card">
+                    <h4>Controller</h4>
+                    <ul>
+                        <li>MCU-based PWM fan controller</li>
+                        <li>Smooth fan ramp (no sudden start)</li>
+                        <li>Pre-cool option (user selectable)</li>
+                        <li>Post-run cooldown after TV power-off</li>
+                    </ul>
+                </div>
+                <div class="spec-card">
+                    <h4>Sensors</h4>
+                    <ul>
+                        <li>Internal air temp (NTC/DS18B20)</li>
+                        <li>Exhaust air temp</li>
+                        <li>Optional: TV rear panel probe</li>
+                        <li>Optional: Ambient intake sensor</li>
+                    </ul>
+                </div>
+                <div class="spec-card">
+                    <h4>Failsafe <span class="badge badge-critical">Required</span></h4>
+                    <ul>
+                        <li>If internal &gt;65°C for &gt;5 min:</li>
+                        <li>→ Alarm output trigger</li>
+                        <li>→ Full fan speed</li>
+                        <li>→ Optional: TV power cut</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>6.5 Filtration</h3>
+            <ul>
+                <li><strong>Media:</strong> Automotive-grade pleated synthetic or foam</li>
+                <li><strong>Access:</strong> Tool-less serviceable</li>
+                <li><strong>Spares:</strong> 1 extra filter included per unit</li>
+                <li><strong>Design:</strong> Slight positive pressure to prevent dust ingress</li>
+            </ul>
+        </section>
+
+        <!-- Section 7: Electrical -->
+        <section id="electrical">
+            <h2>7. Electrical System</h2>
+
+            <div class="callout callout-critical">
+                <strong>Do NOT use consumer power strips.</strong> Purpose-built power distribution module required.
+            </div>
+
+            <h3>7.1 Power Input</h3>
+            <table>
+                <tr><th>Parameter</th><th>Specification</th></tr>
+                <tr><td>Voltage</td><td>220-240V AC, 50Hz (Gulf standard)</td></tr>
+                <tr><td>Entry</td><td>IEC inlet OR hardwired gland + terminal block</td></tr>
+                <tr><td>Protection</td><td>Fused + MOV/TVS surge protection</td></tr>
+                <tr><td>Earth bonding</td><td>Proper bonding to enclosure required</td></tr>
+            </table>
+
+            <h3>7.2 Internal Distribution</h3>
+            <ul>
+                <li>Fused distribution: TV + fans + accessory circuits</li>
+                <li>1-2 accessory outlets (UK/GCC type or IEC)</li>
+                <li>All cabling: heat-rated, neatly loomed</li>
+                <li>Cable management: high-temp 3M VHB adhesive mounts</li>
+            </ul>
+
+            <h3>7.3 Compliance</h3>
+            <ul>
+                <li>Build to IEC/UL 62368-1 principles</li>
+                <li>Hi-pot / earth continuity test per batch</li>
+                <li>CE marking required</li>
+                <li>RoHS compliant</li>
+            </ul>
+        </section>
+
+        <!-- Section 8: Finish -->
+        <section id="finish">
+            <h2>8. Finish & Cosmetics</h2>
+
+            <h3>8.1 Powder Coating</h3>
+            <table>
+                <tr><th>Parameter</th><th>Specification</th></tr>
+                <tr><td>Type</td><td>Architectural-grade polyester</td></tr>
+                <tr><td>Thickness</td><td><strong>70-100 µm</strong> (vs Apollo 60-80µm)</td></tr>
+                <tr><td>Finish</td><td>Semi-gloss, 30-50 gloss units</td></tr>
+                <tr><td>UV Resistance</td><td>5+ years outdoor stability</td></tr>
+                <tr><td>Salt Spray</td><td><strong>&gt;500 hours</strong></td></tr>
+            </table>
+
+            <h3>8.2 Color Options</h3>
+            <table>
+                <tr><th>Color</th><th>RAL Code</th><th>Notes</th></tr>
+                <tr><td>Sand/Off-White</td><td>RAL 1013</td><td><strong>Recommended</strong> - reduces solar heat</td></tr>
+                <tr><td>Anthracite Grey</td><td>RAL 7016</td><td>Premium option</td></tr>
+                <tr><td>Jet Black</td><td>RAL 9005</td><td>On request (higher heat absorption)</td></tr>
+            </table>
+
+            <h3>8.3 Internal Surfaces</h3>
+            <ul>
+                <li>Matte black or dark neutral (reduce reflections)</li>
+                <li>Avoid heat traps near electronics</li>
+                <li>OEM to propose balanced approach</li>
+            </ul>
+        </section>
+
+        <!-- Section 9: Testing -->
+        <section id="testing">
+            <h2>9. Testing & QA Requirements</h2>
+
+            <p>Manufacturer must propose and price the following tests:</p>
+
+            <table>
+                <tr>
+                    <th>Test</th>
+                    <th>Method</th>
+                    <th>Pass Criteria</th>
+                </tr>
+                <tr>
+                    <td><strong>Thermal Chamber</strong></td>
+                    <td>55°C ambient, TV running, sealed</td>
+                    <td>Internal air &lt;45°C, TV back &lt;50°C</td>
+                </tr>
+                <tr>
+                    <td><strong>Dust Ingress</strong></td>
+                    <td>Dust exposure + filter evaluation</td>
+                    <td>No dust penetration past filter</td>
+                </tr>
+                <tr>
+                    <td><strong>Water Spray</strong></td>
+                    <td>Wind-driven rain simulation</td>
+                    <td>No water ingress</td>
+                </tr>
+                <tr>
+                    <td><strong>Noise Test</strong></td>
+                    <td>dBA at 1m at 40/70/100% PWM</td>
+                    <td>28/35/45 dBA max</td>
+                </tr>
+                <tr>
+                    <td><strong>Salt Spray</strong></td>
+                    <td>ASTM B117</td>
+                    <td>&gt;500 hours, no corrosion</td>
+                </tr>
+                <tr>
+                    <td><strong>Burn-in</strong></td>
+                    <td>24-hour electronics run</td>
+                    <td>No failures</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Section 10: BOM -->
+        <section id="bom">
+            <h2>10. Bill of Materials (ATE-55)</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Description</th>
+                        <th>Qty</th>
+                        <th>Est. Cost (USD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Frame Assembly</td>
+                        <td>5052-H32 Al, 2.0mm, powder coated</td>
+                        <td>1 set</td>
+                        <td>$55</td>
+                    </tr>
+                    <tr>
+                        <td>Back Panel</td>
+                        <td>2.0mm aluminum, powder coated</td>
+                        <td>1</td>
+                        <td>$30</td>
+                    </tr>
+                    <tr>
+                        <td>Front Glass</td>
+                        <td>4+4mm laminated, AR+IR+UV</td>
+                        <td>1</td>
+                        <td>$85</td>
+                    </tr>
+                    <tr>
+                        <td>Gaskets</td>
+                        <td>EPDM closed-cell seal kit</td>
+                        <td>1 set</td>
+                        <td>$12</td>
+                    </tr>
+                    <tr>
+                        <td>Fans</td>
+                        <td>140mm PWM industrial (Noctua/equiv)</td>
+                        <td>2</td>
+                        <td>$45</td>
+                    </tr>
+                    <tr>
+                        <td>Fan Controller</td>
+                        <td>MCU PWM board + sensors</td>
+                        <td>1</td>
+                        <td>$25</td>
+                    </tr>
+                    <tr>
+                        <td>Power Module</td>
+                        <td>Fused distribution + surge</td>
+                        <td>1</td>
+                        <td>$18</td>
+                    </tr>
+                    <tr>
+                        <td>Cable Glands</td>
+                        <td>IP68 M20, 316 SS</td>
+                        <td>3</td>
+                        <td>$8</td>
+                    </tr>
+                    <tr>
+                        <td>Filters</td>
+                        <td>Automotive pleated (+ 1 spare)</td>
+                        <td>2</td>
+                        <td>$8</td>
+                    </tr>
+                    <tr>
+                        <td>Hardware</td>
+                        <td>316 SS fasteners, brackets, clips</td>
+                        <td>1 set</td>
+                        <td>$18</td>
+                    </tr>
+                    <tr>
+                        <td>VESA Mount</td>
+                        <td>Universal adjustable plate</td>
+                        <td>1</td>
+                        <td>$18</td>
+                    </tr>
+                    <tr>
+                        <td>Packaging</td>
+                        <td>Engineered foam, manual, gauge</td>
+                        <td>1 set</td>
+                        <td>$15</td>
+                    </tr>
+                    <tr class="highlight">
+                        <td colspan="3"><strong>TOTAL ESTIMATED</strong></td>
+                        <td><strong>~$337</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout callout-info">
+                <strong>Target Pricing:</strong>
+                <ul>
+                    <li>FOB Price (55"): $380-450 per unit</li>
+                    <li>Quote requested at: 100 / 500 / 1,000 quantity</li>
+                    <li>Premium positioning justifies higher cost vs Apollo ($250-300)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- RFQ Section -->
+        <section>
+            <h2>11. RFQ Response Requirements</h2>
+
+            <p>Factory must respond with:</p>
+            <ol>
+                <li>Proposed fan model + datasheet + noise curve</li>
+                <li>Proposed controller design + failsafe behaviour</li>
+                <li>Aluminium grade certification and thickness proof</li>
+                <li>Glass supplier + coating spec + IR/UV performance sheet</li>
+                <li>Estimated unit cost at 100 / 500 / 1,000 qty</li>
+                <li>Lead time for EVT/DVT/PVT builds</li>
+            </ol>
+
+            <h3>Documentation Deliverables</h3>
+            <ul>
+                <li>2D drawings (DXF/PDF) + 3D CAD (STEP)</li>
+                <li>BOM with part numbers and supplier info</li>
+                <li>Wiring diagram</li>
+                <li>Firmware/control logic description</li>
+                <li>QC checklist and test report template</li>
+            </ul>
+        </section>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 2rem; border-top: 1px solid var(--border); margin-top: 2rem; color: var(--text-muted);">
+            <p><strong>Apex TV Enclosures</strong><br>
+            Dubai, United Arab Emirates<br>
+            <em>Premium Outdoor TV Protection</em></p>
+            <p style="font-size: 0.85rem; margin-top: 1rem;">Version 2.0 | December 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
