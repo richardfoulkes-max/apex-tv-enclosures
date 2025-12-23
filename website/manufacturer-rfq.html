@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFQ - Outdoor TV Enclosure - Apex TV Enclosures</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            color: #1a1a1a;
+            background: white;
+        }
+        .page { page-break-after: always; padding: 10mm 0; }
+        .page:last-child { page-break-after: avoid; }
+
+        /* Cover Page */
+        .cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
+            text-align: center;
+        }
+        .cover h1 {
+            font-size: 28pt;
+            color: #1428a0;
+            margin-bottom: 10mm;
+        }
+        .cover .subtitle {
+            font-size: 16pt;
+            color: #374151;
+            margin-bottom: 15mm;
+        }
+        .cover .badge {
+            display: inline-block;
+            background: #dc2626;
+            color: white;
+            padding: 3mm 8mm;
+            border-radius: 4px;
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 15mm;
+        }
+        .cover-details {
+            text-align: left;
+            background: #f8f9fa;
+            padding: 8mm;
+            border-radius: 4px;
+            margin-top: 10mm;
+        }
+        .cover-details h3 {
+            color: #1428a0;
+            margin-bottom: 5mm;
+        }
+        .cover-details table {
+            width: 100%;
+        }
+        .cover-details td {
+            padding: 2mm 0;
+            vertical-align: top;
+        }
+        .cover-details td:first-child {
+            font-weight: bold;
+            width: 40%;
+        }
+
+        /* Section Headers */
+        h2 {
+            color: #1428a0;
+            font-size: 14pt;
+            border-bottom: 2px solid #1428a0;
+            padding-bottom: 2mm;
+            margin: 8mm 0 5mm;
+        }
+        h3 {
+            font-size: 12pt;
+            color: #374151;
+            margin: 5mm 0 3mm;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 3mm 0;
+            font-size: 10pt;
+        }
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 2mm 3mm;
+            text-align: left;
+        }
+        th {
+            background: #f3f4f6;
+            font-weight: bold;
+        }
+        .highlight { background: #fef3c7; }
+
+        /* Spec Grid */
+        .spec-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5mm;
+            margin: 5mm 0;
+        }
+        .spec-box {
+            border: 1px solid #d1d5db;
+            padding: 4mm;
+            border-radius: 4px;
+        }
+        .spec-box h4 {
+            font-size: 10pt;
+            color: #1428a0;
+            margin-bottom: 2mm;
+        }
+        .spec-box ul {
+            margin-left: 5mm;
+            font-size: 9pt;
+        }
+
+        /* Critical Requirements */
+        .critical {
+            background: #fef2f2;
+            border: 2px solid #dc2626;
+            padding: 5mm;
+            border-radius: 4px;
+            margin: 5mm 0;
+        }
+        .critical h3 {
+            color: #dc2626;
+            margin-top: 0;
+        }
+
+        /* Drawings */
+        .drawing {
+            margin: 5mm 0;
+            text-align: center;
+        }
+        .drawing svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .drawing-caption {
+            font-size: 9pt;
+            color: #6b7280;
+            margin-top: 2mm;
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 5mm;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 8pt;
+            color: #9ca3af;
+        }
+
+        /* Print styles */
+        @media print {
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1: Cover -->
+    <div class="page cover">
+        <div class="badge">REQUEST FOR QUOTATION</div>
+        <h1>Outdoor TV Enclosure</h1>
+        <div class="subtitle">Custom Manufacturing Specification</div>
+        <p style="font-size: 12pt; margin-bottom: 10mm;">75" Premium Weatherproof Enclosure for Middle East Market</p>
+
+        <div style="font-size: 48pt; margin: 10mm 0;">APEX</div>
+        <p style="color: #6b7280;">TV ENCLOSURES</p>
+
+        <div class="cover-details">
+            <h3>Project Details</h3>
+            <table>
+                <tr>
+                    <td>Product:</td>
+                    <td>Outdoor TV Enclosure (75" model)</td>
+                </tr>
+                <tr>
+                    <td>Target Market:</td>
+                    <td>UAE / Saudi Arabia (Gulf Region)</td>
+                </tr>
+                <tr>
+                    <td>IP Rating Required:</td>
+                    <td><strong>IP66</strong> (dust tight + powerful water jets)</td>
+                </tr>
+                <tr>
+                    <td>Initial Order:</td>
+                    <td>2-3 prototype samples for evaluation</td>
+                </tr>
+                <tr>
+                    <td>Date:</td>
+                    <td>December 2025</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Page 2: Executive Summary -->
+    <div class="page">
+        <h2>1. Executive Summary</h2>
+
+        <p>We are seeking a contract manufacturer to produce premium outdoor TV enclosures designed specifically for extreme Gulf climate conditions (55°C ambient, high UV, dust storms, heavy rain).</p>
+
+        <div class="critical">
+            <h3>Critical Requirements</h3>
+            <ul>
+                <li><strong>IP66 Rating:</strong> Must pass IEC 60529 water jet test (100L/min, 12.5mm nozzle, 3m distance)</li>
+                <li><strong>Material:</strong> 5052-H32 aluminum (NOT 6063) for superior corrosion resistance</li>
+                <li><strong>PWM Fan Control:</strong> Variable speed fans, NOT on/off thermostat</li>
+                <li><strong>Temperature Rating:</strong> Operate in 55°C ambient without TV damage</li>
+                <li><strong>Build to Spec:</strong> Manufacture to our design only - this is confidential</li>
+            </ul>
+        </div>
+
+        <h2>2. Product Overview (75" Model - ATE-75)</h2>
+
+        <div class="spec-grid">
+            <div class="spec-box">
+                <h4>External Dimensions</h4>
+                <ul>
+                    <li>Width: 1720mm</li>
+                    <li>Height: 1020mm</li>
+                    <li>Depth: 120mm</li>
+                    <li>Weight: ~32kg (empty)</li>
+                </ul>
+            </div>
+            <div class="spec-box">
+                <h4>Construction</h4>
+                <ul>
+                    <li>Material: 5052-H32 aluminum</li>
+                    <li>Thickness: 2mm walls, 3mm frame</li>
+                    <li>Finish: Powder coat RAL 7016</li>
+                    <li>Hardware: 316 stainless steel</li>
+                </ul>
+            </div>
+            <div class="spec-box">
+                <h4>Weatherproofing</h4>
+                <ul>
+                    <li>Rating: IP66 certified</li>
+                    <li>Gaskets: EPDM continuous channel</li>
+                    <li>Vents: IP66 labyrinth grilles</li>
+                    <li>Cable glands: IP68 rated</li>
+                </ul>
+            </div>
+            <div class="spec-box">
+                <h4>Thermal System</h4>
+                <ul>
+                    <li>Fans: 3× 140mm PWM (Noctua or equiv)</li>
+                    <li>Control: 30°C start, 50°C full speed</li>
+                    <li>Sensors: 2× NTC thermistors</li>
+                    <li>Airflow: Bottom intake, top exhaust</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>3. Key Design Features</h2>
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>Apex Specification</th>
+                <th>Why This Matters</th>
+            </tr>
+            <tr>
+                <td>Fan Control</td>
+                <td class="highlight"><strong>PWM ramping 30-50°C</strong></td>
+                <td>Quieter operation, longer fan life, better thermal control</td>
+            </tr>
+            <tr>
+                <td>IP Rating</td>
+                <td class="highlight"><strong>IP66 (powerful jets)</strong></td>
+                <td>Withstands heavy rain, hose-down cleaning, dust storms</td>
+            </tr>
+            <tr>
+                <td>Ambient Rating</td>
+                <td class="highlight"><strong>55°C continuous</strong></td>
+                <td>Designed for Gulf summer conditions</td>
+            </tr>
+            <tr>
+                <td>Aluminum Grade</td>
+                <td class="highlight"><strong>5052-H32</strong></td>
+                <td>Superior corrosion resistance for coastal/humid environments</td>
+            </tr>
+            <tr>
+                <td>Full Motion Mount</td>
+                <td class="highlight"><strong>Included</strong></td>
+                <td>Complete solution, no additional purchases needed</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Page 3: Technical Drawing - Rear Panel -->
+    <div class="page">
+        <h2>4. Technical Drawings</h2>
+
+        <h3>4.1 Rear Panel Internal Layout</h3>
+        <div class="drawing">
+            <svg viewBox="0 0 800 550" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background - Rear Panel -->
+                <rect x="50" y="30" width="600" height="440" fill="#f3f4f6" stroke="#374151" stroke-width="2" rx="6"/>
+                <text x="350" y="20" text-anchor="middle" font-size="10" fill="#374151">REAR PANEL - 1720 × 1020mm (view from inside)</text>
+
+                <!-- Top exhaust area -->
+                <rect x="60" y="40" width="580" height="60" fill="#dcfce7" stroke="#16a34a" stroke-width="1" stroke-dasharray="4" rx="4"/>
+                <text x="350" y="65" text-anchor="middle" font-size="9" fill="#16a34a">EXHAUST ZONE - IP66 Rain Cowl</text>
+
+                <!-- Exhaust Fan Cutout -->
+                <circle cx="350" cy="80" r="50" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="350" y="85" text-anchor="middle" font-size="8" fill="#16a34a">140mm Exhaust</text>
+
+                <!-- TV Mounting Area -->
+                <rect x="150" y="140" width="400" height="220" fill="#f8fafc" stroke="#64748b" stroke-width="1" stroke-dasharray="4"/>
+                <text x="350" y="250" text-anchor="middle" font-size="11" fill="#64748b">TV MOUNTING ZONE</text>
+
+                <!-- VESA Mount Plate -->
+                <rect x="260" y="200" width="180" height="120" fill="#cbd5e1" stroke="#475569" stroke-width="1" rx="4"/>
+                <text x="350" y="260" text-anchor="middle" font-size="9" fill="#475569">VESA 200-400</text>
+
+                <!-- Bottom intake area -->
+                <rect x="60" y="380" width="580" height="50" fill="#dbeafe" stroke="#2563eb" stroke-width="1" stroke-dasharray="4" rx="4"/>
+                <text x="350" y="410" text-anchor="middle" font-size="9" fill="#2563eb">INTAKE ZONE - IP66 Labyrinth Grilles + Filters</text>
+
+                <!-- Intake Fan 1 -->
+                <circle cx="180" cy="405" r="40" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="180" y="408" text-anchor="middle" font-size="8" fill="#2563eb">Intake 1</text>
+
+                <!-- Intake Fan 2 -->
+                <circle cx="520" cy="405" r="40" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="520" y="408" text-anchor="middle" font-size="8" fill="#2563eb">Intake 2</text>
+
+                <!-- Electronics Zone - Left Side -->
+                <rect x="60" y="140" width="70" height="220" fill="#fef3c7" stroke="#d97706" stroke-width="1" rx="4"/>
+                <text x="95" y="160" text-anchor="middle" font-size="8" font-weight="bold" fill="#92400e">ELECTRONICS</text>
+
+                <!-- Power Supply -->
+                <rect x="68" y="180" width="54" height="35" fill="#fff" stroke="#d97706" stroke-width="1" rx="2"/>
+                <text x="95" y="200" text-anchor="middle" font-size="7" fill="#92400e">12V PSU</text>
+
+                <!-- PWM Controller -->
+                <rect x="68" y="225" width="54" height="40" fill="#dbeafe" stroke="#1e40af" stroke-width="1" rx="2"/>
+                <text x="95" y="245" text-anchor="middle" font-size="7" fill="#1e40af">PWM</text>
+                <text x="95" y="255" text-anchor="middle" font-size="7" fill="#1e40af">Controller</text>
+
+                <!-- Terminal Block -->
+                <rect x="68" y="275" width="54" height="25" fill="#e5e7eb" stroke="#374151" stroke-width="1" rx="2"/>
+                <text x="95" y="291" text-anchor="middle" font-size="7" fill="#374151">Terminals</text>
+
+                <!-- Fuse/Surge -->
+                <rect x="68" y="310" width="54" height="40" fill="#fee2e2" stroke="#dc2626" stroke-width="1" rx="2"/>
+                <text x="95" y="330" text-anchor="middle" font-size="7" fill="#dc2626">Fuse +</text>
+                <text x="95" y="340" text-anchor="middle" font-size="7" fill="#dc2626">Surge</text>
+
+                <!-- Cable Entry Points -->
+                <rect x="570" y="140" width="70" height="220" fill="#f0fdf4" stroke="#059669" stroke-width="1" rx="4"/>
+                <text x="605" y="160" text-anchor="middle" font-size="8" font-weight="bold" fill="#166534">CABLE</text>
+                <text x="605" y="172" text-anchor="middle" font-size="8" font-weight="bold" fill="#166534">ENTRY</text>
+
+                <!-- Cable Glands -->
+                <circle cx="605" cy="210" r="12" fill="#bbf7d0" stroke="#166534" stroke-width="1"/>
+                <text x="605" y="213" text-anchor="middle" font-size="6" fill="#166534">M20</text>
+                <text x="605" y="235" text-anchor="middle" font-size="6" fill="#166534">Mains</text>
+
+                <circle cx="605" cy="270" r="12" fill="#bbf7d0" stroke="#166534" stroke-width="1"/>
+                <text x="605" y="273" text-anchor="middle" font-size="6" fill="#166534">M20</text>
+                <text x="605" y="295" text-anchor="middle" font-size="6" fill="#166534">HDMI</text>
+
+                <circle cx="605" cy="330" r="10" fill="#bbf7d0" stroke="#166534" stroke-width="1"/>
+                <text x="605" y="333" text-anchor="middle" font-size="6" fill="#166534">M16</text>
+                <text x="605" y="352" text-anchor="middle" font-size="6" fill="#166534">Spare</text>
+
+                <!-- Dimensions -->
+                <line x1="50" y1="490" x2="650" y2="490" stroke="#374151" stroke-width="1"/>
+                <line x1="50" y1="485" x2="50" y2="495" stroke="#374151" stroke-width="1"/>
+                <line x1="650" y1="485" x2="650" y2="495" stroke="#374151" stroke-width="1"/>
+                <text x="350" y="505" text-anchor="middle" font-size="9" fill="#374151">1720mm</text>
+
+                <line x1="670" y1="30" x2="670" y2="470" stroke="#374151" stroke-width="1"/>
+                <line x1="665" y1="30" x2="675" y2="30" stroke="#374151" stroke-width="1"/>
+                <line x1="665" y1="470" x2="675" y2="470" stroke="#374151" stroke-width="1"/>
+                <text x="690" y="250" text-anchor="middle" font-size="9" fill="#374151" transform="rotate(90,690,250)">1020mm</text>
+
+                <!-- Legend -->
+                <g transform="translate(700, 50)">
+                    <rect x="0" y="0" width="90" height="130" fill="#f8fafc" stroke="#e5e7eb" stroke-width="1" rx="4"/>
+                    <text x="45" y="15" text-anchor="middle" font-size="8" font-weight="bold" fill="#374151">Legend</text>
+                    <rect x="8" y="25" width="12" height="8" fill="#dcfce7" stroke="#16a34a"/>
+                    <text x="25" y="32" font-size="7" fill="#374151">Exhaust</text>
+                    <rect x="8" y="40" width="12" height="8" fill="#dbeafe" stroke="#2563eb"/>
+                    <text x="25" y="47" font-size="7" fill="#374151">Intake</text>
+                    <rect x="8" y="55" width="12" height="8" fill="#fef3c7" stroke="#d97706"/>
+                    <text x="25" y="62" font-size="7" fill="#374151">Electronics</text>
+                    <rect x="8" y="70" width="12" height="8" fill="#f0fdf4" stroke="#059669"/>
+                    <text x="25" y="77" font-size="7" fill="#374151">Cable Entry</text>
+                    <rect x="8" y="85" width="12" height="8" fill="#cbd5e1" stroke="#475569"/>
+                    <text x="25" y="92" font-size="7" fill="#374151">VESA Mount</text>
+                </g>
+            </svg>
+            <div class="drawing-caption">Figure 1: Rear panel internal layout showing component zones</div>
+        </div>
+    </div>
+
+    <!-- Page 4: Side Cross Section -->
+    <div class="page">
+        <h3>4.2 Side Cross-Section - Airflow Design</h3>
+        <div class="drawing">
+            <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg">
+                <!-- Enclosure outline -->
+                <rect x="100" y="40" width="100" height="320" fill="#f8fafc" stroke="#374151" stroke-width="2" rx="4"/>
+                <text x="150" y="30" text-anchor="middle" font-size="9" fill="#374151">120mm Depth</text>
+
+                <!-- Wall -->
+                <rect x="210" y="40" width="15" height="320" fill="#9ca3af" stroke="#374151" stroke-width="1"/>
+                <text x="217" y="380" text-anchor="middle" font-size="8" fill="#374151">Wall</text>
+
+                <!-- Front glass -->
+                <rect x="100" y="40" width="8" height="320" fill="#bfdbfe" stroke="#1e40af" stroke-width="1"/>
+                <text x="85" y="200" text-anchor="middle" font-size="7" fill="#1e40af" transform="rotate(-90, 85, 200)">Glass 8mm</text>
+
+                <!-- Back panel -->
+                <rect x="192" y="40" width="8" height="320" fill="#d1d5db" stroke="#374151" stroke-width="1"/>
+
+                <!-- TV -->
+                <rect x="115" y="90" width="50" height="200" fill="#1e293b" stroke="#0f172a" stroke-width="1" rx="2"/>
+                <text x="140" y="190" text-anchor="middle" font-size="8" fill="#94a3b8" transform="rotate(-90, 140, 190)">TV Display</text>
+
+                <!-- Top exhaust fan -->
+                <rect x="135" y="45" width="45" height="30" fill="#dcfce7" stroke="#16a34a" stroke-width="1" rx="4"/>
+                <text x="157" y="62" text-anchor="middle" font-size="7" fill="#16a34a">Exhaust</text>
+
+                <!-- Rain cowl -->
+                <rect x="130" y="25" width="55" height="12" fill="#bbf7d0" stroke="#16a34a" stroke-width="1" rx="2"/>
+                <text x="157" y="18" text-anchor="middle" font-size="7" fill="#16a34a">IP66 Rain Cowl</text>
+
+                <!-- Bottom intake fan -->
+                <rect x="135" y="325" width="45" height="30" fill="#dbeafe" stroke="#2563eb" stroke-width="1" rx="4"/>
+                <text x="157" y="342" text-anchor="middle" font-size="7" fill="#2563eb">Intake</text>
+
+                <!-- Labyrinth grille -->
+                <rect x="130" y="360" width="55" height="15" fill="#bfdbfe" stroke="#2563eb" stroke-width="1" rx="2"/>
+                <path d="M135 365 L135 372 L143 365 L143 372 L151 365 L151 372 L159 365 L159 372 L167 365 L167 372 L175 365 L175 372 L183 365" stroke="#2563eb" stroke-width="1" fill="none"/>
+                <text x="157" y="388" text-anchor="middle" font-size="7" fill="#2563eb">IP66 Labyrinth Grille</text>
+
+                <!-- Filter -->
+                <rect x="130" y="315" width="55" height="8" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+                <text x="220" y="322" font-size="7" fill="#d97706">Filter</text>
+
+                <!-- Airflow arrows -->
+                <defs>
+                    <marker id="arr-blue" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto">
+                        <polygon points="0 0, 6 2.5, 0 5" fill="#3b82f6"/>
+                    </marker>
+                    <marker id="arr-green" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto">
+                        <polygon points="0 0, 6 2.5, 0 5" fill="#16a34a"/>
+                    </marker>
+                </defs>
+
+                <!-- Intake arrows -->
+                <path d="M157 400 L157 380" stroke="#3b82f6" stroke-width="2" marker-end="url(#arr-blue)"/>
+                <path d="M157 310 L157 280" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arr-blue)"/>
+                <path d="M125 280 L125 150" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arr-blue)"/>
+                <path d="M175 280 L175 150" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arr-blue)"/>
+
+                <!-- Exhaust arrows -->
+                <path d="M157 45 L157 10" stroke="#16a34a" stroke-width="2" marker-end="url(#arr-green)"/>
+
+                <!-- Temperature zones -->
+                <g transform="translate(260, 40)">
+                    <rect x="0" y="0" width="150" height="320" fill="none" stroke="#e5e7eb" stroke-width="1" rx="4"/>
+                    <text x="75" y="20" text-anchor="middle" font-size="10" font-weight="bold" fill="#374151">Temperature Zones</text>
+
+                    <rect x="15" y="35" width="120" height="50" fill="#dcfce7" stroke="#16a34a" stroke-width="1" rx="4"/>
+                    <text x="75" y="55" text-anchor="middle" font-size="9" fill="#16a34a">EXHAUST ZONE</text>
+                    <text x="75" y="68" text-anchor="middle" font-size="8" fill="#166534">40-50°C (warmest)</text>
+
+                    <rect x="15" y="95" width="120" height="60" fill="#fef3c7" stroke="#d97706" stroke-width="1" rx="4"/>
+                    <text x="75" y="115" text-anchor="middle" font-size="9" fill="#d97706">TV HOT ZONE</text>
+                    <text x="75" y="128" text-anchor="middle" font-size="8" fill="#92400e">PSU/Board area</text>
+                    <text x="75" y="141" text-anchor="middle" font-size="8" fill="#92400e">Target: &lt;45°C</text>
+
+                    <rect x="15" y="165" width="120" height="60" fill="#e0f2fe" stroke="#0284c7" stroke-width="1" rx="4"/>
+                    <text x="75" y="185" text-anchor="middle" font-size="9" fill="#0284c7">DISPLAY ZONE</text>
+                    <text x="75" y="198" text-anchor="middle" font-size="8" fill="#0369a1">Active cooling</text>
+                    <text x="75" y="211" text-anchor="middle" font-size="8" fill="#0369a1">Maintains &lt;40°C</text>
+
+                    <rect x="15" y="235" width="120" height="50" fill="#dbeafe" stroke="#2563eb" stroke-width="1" rx="4"/>
+                    <text x="75" y="255" text-anchor="middle" font-size="9" fill="#2563eb">INTAKE ZONE</text>
+                    <text x="75" y="268" text-anchor="middle" font-size="8" fill="#1d4ed8">Coolest: Ambient</text>
+
+                    <rect x="10" y="295" width="130" height="20" fill="#f0fdf4" stroke="#059669" stroke-width="1" rx="4"/>
+                    <text x="75" y="308" text-anchor="middle" font-size="7" font-weight="bold" fill="#059669">POSITIVE PRESSURE DESIGN</text>
+                </g>
+
+                <!-- Airflow notes -->
+                <g transform="translate(440, 40)">
+                    <rect x="0" y="0" width="150" height="160" fill="#f8fafc" stroke="#e5e7eb" stroke-width="1" rx="4"/>
+                    <text x="75" y="18" text-anchor="middle" font-size="9" font-weight="bold" fill="#374151">Airflow Design</text>
+                    <text x="10" y="38" font-size="8" fill="#374151">• Bottom intake → Top exhaust</text>
+                    <text x="10" y="53" font-size="8" fill="#374151">• Natural convection assisted</text>
+                    <text x="10" y="68" font-size="8" fill="#374151">• Hot air rises to exhaust</text>
+                    <text x="10" y="83" font-size="8" fill="#374151">• Cool air from bottom</text>
+                    <text x="10" y="98" font-size="8" fill="#374151">• No dead spots</text>
+                    <text x="10" y="118" font-size="8" font-weight="bold" fill="#16a34a">• IP66 sealed vents</text>
+                    <text x="10" y="133" font-size="8" font-weight="bold" fill="#16a34a">• Rain cannot enter</text>
+                    <text x="10" y="148" font-size="8" font-weight="bold" fill="#16a34a">• Dust filtered at intake</text>
+                </g>
+
+                <!-- Labels -->
+                <text x="70" y="200" text-anchor="middle" font-size="9" fill="#374151">FRONT</text>
+                <text x="235" y="200" text-anchor="middle" font-size="9" fill="#374151">REAR</text>
+            </svg>
+            <div class="drawing-caption">Figure 2: Side cross-section showing vertical airflow path and temperature zones</div>
+        </div>
+    </div>
+
+    <!-- Page 5: BOM Summary -->
+    <div class="page">
+        <h2>5. Bill of Materials Summary</h2>
+
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Key Specifications</th>
+            </tr>
+            <tr>
+                <td><strong>Enclosure Frame</strong></td>
+                <td>Main housing, back panel, bezel</td>
+                <td>5052-H32 aluminum, 2-3mm thickness, powder coated RAL 7016</td>
+            </tr>
+            <tr>
+                <td><strong>Front Glass</strong></td>
+                <td>Laminated safety glass with AR coating</td>
+                <td>4mm low-iron tempered + PVB + 4mm clear, anti-reflective</td>
+            </tr>
+            <tr>
+                <td><strong>Seals & Gaskets</strong></td>
+                <td>EPDM continuous channel gasket</td>
+                <td>12×15mm profile, UV stable, closed-cell, IP66 rated</td>
+            </tr>
+            <tr>
+                <td><strong>Fans (×3)</strong></td>
+                <td>140mm PWM DC fans</td>
+                <td>Noctua NF-A14 or equivalent, IP67, 4-pin PWM, ball bearing</td>
+            </tr>
+            <tr>
+                <td><strong>IP66 Intake Grilles (×2)</strong></td>
+                <td>Labyrinth vent with internal baffles</td>
+                <td>UV-stable ABS or 316 SS, downward louvers, 150×150mm</td>
+            </tr>
+            <tr>
+                <td><strong>IP66 Rain Cowl</strong></td>
+                <td>Exhaust hood with labyrinth exit</td>
+                <td>Powder-coated aluminum, 40mm overhang, 316 SS mesh</td>
+            </tr>
+            <tr>
+                <td><strong>PWM Controller</strong></td>
+                <td>Custom PCB with MCU</td>
+                <td>2× NTC inputs, 3× PWM outputs, status LED, alarm buzzer</td>
+            </tr>
+            <tr>
+                <td><strong>Power Supply</strong></td>
+                <td>12V DC, 3A enclosed PSU</td>
+                <td>Mean Well LRS-35-12 or equivalent, 85-264VAC input</td>
+            </tr>
+            <tr>
+                <td><strong>Cable Glands</strong></td>
+                <td>IP68 compression glands</td>
+                <td>2× M20, 1× M16, 1× M12 breather, 316 stainless steel</td>
+            </tr>
+            <tr>
+                <td><strong>Door Hardware</strong></td>
+                <td>Hinges, gas struts, latches</td>
+                <td>3× concealed hinges, 2× gas struts, 4× compression latches</td>
+            </tr>
+            <tr>
+                <td><strong>Security</strong></td>
+                <td>Cam locks, padlock hasps</td>
+                <td>2× tubular cam locks (keyed alike), 2× padlock hasps</td>
+            </tr>
+            <tr>
+                <td><strong>TV Mount</strong></td>
+                <td>Full-motion articulating arm</td>
+                <td>VESA 200-400, ±90° swivel, +15°/-5° tilt, 500mm extension</td>
+            </tr>
+        </table>
+
+        <h3 style="margin-top: 6mm;">What We Need From You</h3>
+        <div style="display: flex; gap: 5mm; margin-top: 3mm;">
+            <div class="critical" style="flex: 1; margin: 0; padding: 4mm;">
+                <ol style="margin: 0 0 0 4mm; font-size: 9pt;">
+                    <li>Sample quotation for 75" prototype</li>
+                    <li>Production pricing with volume breaks</li>
+                    <li>Prototype + production lead times</li>
+                    <li>Confirm IP66, PWM, material capabilities</li>
+                    <li>Willingness to sign NDA</li>
+                </ol>
+            </div>
+            <div style="flex: 1; background: #f8f9fa; padding: 4mm; border-radius: 4px;">
+                <h4 style="margin: 0 0 2mm 0; font-size: 10pt; color: #1428a0;">Contact Us</h4>
+                <p style="margin: 1mm 0; font-size: 9pt;"><strong>Apex TV Enclosures</strong></p>
+                <p style="margin: 1mm 0; font-size: 9pt;">Dubai, UAE</p>
+                <p style="margin: 1mm 0; font-size: 9pt;">apexenclosures@icloud.com</p>
+                <p style="margin: 1mm 0; font-size: 9pt;">+971 50 559 8675 (WhatsApp)</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 6mm; padding: 6mm; background: #1428a0; color: white; border-radius: 4px;">
+            <p style="font-size: 12pt; margin: 0;">Thank you for your interest — We look forward to working with you</p>
+        </div>
+    </div>
+
+    <div class="no-print" style="padding: 20px; background: #fef3c7; margin: 20px; border-radius: 8px;">
+        <h3>How to Save as PDF:</h3>
+        <ol>
+            <li>Press <strong>Cmd + P</strong> (Mac) or <strong>Ctrl + P</strong> (Windows)</li>
+            <li>Select <strong>"Save as PDF"</strong> from the destination dropdown</li>
+            <li>Click <strong>Save</strong></li>
+        </ol>
+        <p style="margin-top: 10px;"><strong>Tip:</strong> Fill in your contact details on page 6 before saving!</p>
+    </div>
+</body>
+</html>
