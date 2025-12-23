@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex TV Enclosures | Outdoor TV Protection for UAE & Saudi Arabia</title>
+    <meta name="description" content="Premium outdoor TV enclosures engineered for Gulf climate. Protect your TV from extreme heat, dust, and humidity. Serving UAE and Saudi Arabia.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --primary-light: #1a1a1a;
+            --accent: #d4af37;
+            --accent-light: #e5c868;
+            --text: #ffffff;
+            --text-muted: #a0a0a0;
+            --bg-dark: #0a0a0a;
+            --bg-section: #111111;
+            --border: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 2rem 80px;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--primary-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('images/IMG_0118.jpeg') center/cover;
+            opacity: 0.15;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 550px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat {
+            text-align: left;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Products Section */
+        .products {
+            background: var(--bg-section);
+        }
+
+        .product-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--primary-light);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .product-size {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .product-fits {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-features li {
+            padding: 0.5rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .product-features li::before {
+            content: '✓';
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .product-price span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* Features Section */
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            background: var(--primary-light);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background: var(--bg-section);
+        }
+
+        .gallery-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 4/3;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+        }
+
+        .gallery-overlay h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Why Apex Section */
+        .why-apex {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .why-apex-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .why-apex-content p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .why-list {
+            list-style: none;
+        }
+
+        .why-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .why-number {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .why-text h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .why-text p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .why-apex-image {
+            position: relative;
+        }
+
+        .why-apex-image img {
+            width: 100%;
+            border-radius: 16px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--bg-section);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info > p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-method-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .contact-method-text h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-method-text p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .contact-method-text a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .contact-form {
+            background: var(--primary-light);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-light);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-column h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .why-apex,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stats {
+                flex-wrap: wrap;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 100px 1.5rem 60px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">A</div>
+                Apex TV Enclosures
+            </a>
+            <ul class="nav-links">
+                <li><a href="#products">Products</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="nav-cta">Get Quote</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">Engineered for Gulf Climate</span>
+            <h1>Protect Your Outdoor TV from <span>Extreme Heat</span></h1>
+            <p>Premium weatherproof enclosures designed specifically for UAE and Saudi Arabia. Keep your TV safe from 50°C+ temperatures, dust storms, and humidity.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">
+                    Request Quote
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#products" class="btn btn-secondary">View Products</a>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">50°C+</div>
+                    <div class="stat-label">Heat Protection</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">IP55</div>
+                    <div class="stat-label">Weather Rating</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">5 Year</div>
+                    <div class="stat-label">Warranty</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-header">
+            <h2>Choose Your Size</h2>
+            <p>We protect YOUR screen. Bring any TV brand - we provide the protection.</p>
+        </div>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-size">43"</div>
+                <div class="product-name">Compact Series</div>
+                <div class="product-fits">Fits 39" - 43" TVs</div>
+                <ul class="product-features">
+                    <li>3-fan cooling system</li>
+                    <li>Anti-reflective glass</li>
+                    <li>Weatherproof cable entry</li>
+                    <li>VESA universal mount</li>
+                </ul>
+                <div class="product-price">AED 5,500 <span>excl. VAT</span></div>
+                <a href="#contact" class="btn btn-primary" style="width: 100%;">Get Quote</a>
+            </div>
+            <div class="product-card" style="border-color: var(--accent);">
+                <div class="product-size">55"</div>
+                <div class="product-name">Standard Series</div>
+                <div class="product-fits">Fits 49" - 55" TVs</div>
+                <ul class="product-features">
+                    <li>4-fan cooling system</li>
+                    <li>Anti-reflective glass</li>
+                    <li>Thermostat controlled</li>
+                    <li>Sound port design</li>
+                </ul>
+                <div class="product-price">AED 7,000 <span>excl. VAT</span></div>
+                <a href="#contact" class="btn btn-primary" style="width: 100%;">Get Quote</a>
+            </div>
+            <div class="product-card">
+                <div class="product-size">65"</div>
+                <div class="product-name">Professional Series</div>
+                <div class="product-fits">Fits 60" - 65" TVs</div>
+                <ul class="product-features">
+                    <li>5-fan cooling system</li>
+                    <li>Anti-reflective glass</li>
+                    <li>Commercial grade build</li>
+                    <li>Extended warranty option</li>
+                </ul>
+                <div class="product-price">AED 9,000 <span>excl. VAT</span></div>
+                <a href="#contact" class="btn btn-primary" style="width: 100%;">Get Quote</a>
+            </div>
+            <div class="product-card">
+                <div class="product-size">75"</div>
+                <div class="product-name">Premium Series</div>
+                <div class="product-fits">Fits 70" - 75" TVs</div>
+                <ul class="product-features">
+                    <li>6-fan cooling system</li>
+                    <li>Anti-reflective glass</li>
+                    <li>Heavy-duty construction</li>
+                    <li>Professional installation</li>
+                </ul>
+                <div class="product-price">AED 12,000 <span>excl. VAT</span></div>
+                <a href="#contact" class="btn btn-primary" style="width: 100%;">Get Quote</a>
+            </div>
+            <div class="product-card">
+                <div class="product-size">86"</div>
+                <div class="product-name">Commercial Series</div>
+                <div class="product-fits">Fits 82" - 86" TVs</div>
+                <ul class="product-features">
+                    <li>7-fan cooling system</li>
+                    <li>Anti-reflective glass</li>
+                    <li>Hospitality grade</li>
+                    <li>Volume discounts available</li>
+                </ul>
+                <div class="product-price">AED 16,000 <span>excl. VAT</span></div>
+                <a href="#contact" class="btn btn-primary" style="width: 100%;">Get Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>Engineered for Excellence</h2>
+            <p>Every detail designed to protect your investment in the harshest conditions.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🌡️</div>
+                <h3>Active Cooling System</h3>
+                <p>Thermostatically controlled multi-fan system maintains optimal temperature even at 50°C+ ambient. Ball-bearing fans rated for 50,000 hours.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌧️</div>
+                <h3>IP55 Weatherproof</h3>
+                <p>Sealed against dust storms, rain, and humidity. EPDM gaskets and weatherproof cable glands protect every entry point.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">☀️</div>
+                <h3>Anti-Reflective Glass</h3>
+                <p>4mm tempered safety glass with AR coating reduces glare by up to 90%. Crystal clear viewing even in bright sunlight.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔧</div>
+                <h3>Easy Maintenance</h3>
+                <p>Tool-free filter access for cleaning. Hinged back panel with gas struts for full TV access when needed.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔊</div>
+                <h3>Audio Optimized</h3>
+                <p>Engineered sound ports direct TV speaker audio outward. No muffled sound - full audio quality preserved.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3>5 Year Warranty</h3>
+                <p>Built to last with powder-coated aluminum construction. Backed by comprehensive warranty and local support.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="section-header">
+            <h2>Installation Gallery</h2>
+            <p>See our enclosures protecting TVs across UAE and Saudi Arabia.</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="images/IMG_0118.jpeg" alt="Professional installation showing cooling system">
+                <div class="gallery-overlay">
+                    <h4>Cooling System Detail</h4>
+                    <p>Multi-fan thermal management</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/IMG_0119.jpeg" alt="80mm cooling fans">
+                <div class="gallery-overlay">
+                    <h4>Ball-Bearing Fans</h4>
+                    <p>Rated for 50,000+ hours</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/IMG_0120.jpeg" alt="Professional installation">
+                <div class="gallery-overlay">
+                    <h4>Professional Installation</h4>
+                    <p>Clean, organized wiring</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/IMG_0121.jpeg" alt="Cable management">
+                <div class="gallery-overlay">
+                    <h4>Cable Management</h4>
+                    <p>Integrated power and connectivity</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Apex Section -->
+    <section id="about">
+        <div class="why-apex">
+            <div class="why-apex-content">
+                <h2>Why Choose Apex?</h2>
+                <p>We don't sell TVs. We protect the TV you already love - engineered specifically for Gulf region conditions.</p>
+                <ul class="why-list">
+                    <li>
+                        <span class="why-number">1</span>
+                        <div class="why-text">
+                            <h4>Gulf-Specific Engineering</h4>
+                            <p>Designed and tested for 50°C+ temperatures, sandstorms, and high humidity.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="why-number">2</span>
+                        <div class="why-text">
+                            <h4>Use Your Own TV</h4>
+                            <p>Keep your Samsung, LG, Sony - any brand fits. No need to buy a special outdoor TV.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="why-number">3</span>
+                        <div class="why-text">
+                            <h4>Professional Installation</h4>
+                            <p>Optional expert installation across UAE and Saudi Arabia.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="why-number">4</span>
+                        <div class="why-text">
+                            <h4>Local Support</h4>
+                            <p>Dubai-based support team. Quick response, genuine parts, real warranty.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="why-apex-image">
+                <img src="images/IMG_0118.jpeg" alt="Apex TV Enclosure">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Get Your Quote</h2>
+                <p>Ready to protect your outdoor TV? Contact us for a personalized quote including installation.</p>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="contact-method-icon">📱</div>
+                        <div class="contact-method-text">
+                            <h4>WhatsApp</h4>
+                            <p><a href="https://wa.me/971XXXXXXXXX">+971 XX XXX XXXX</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-method-icon">📧</div>
+                        <div class="contact-method-text">
+                            <h4>Email</h4>
+                            <p><a href="mailto:info@apextvenclosures.com">info@apextvenclosures.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-method-icon">📍</div>
+                        <div class="contact-method-text">
+                            <h4>Location</h4>
+                            <p>Dubai, United Arab Emirates</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" id="quoteForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" name="lastName" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone / WhatsApp</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>TV Size</label>
+                        <select name="tvSize" required>
+                            <option value="">Select size...</option>
+                            <option value="43">43" (39-43")</option>
+                            <option value="55">55" (49-55")</option>
+                            <option value="65">65" (60-65")</option>
+                            <option value="75">75" (70-75")</option>
+                            <option value="86">86" (82-86")</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <select name="location" required>
+                            <option value="">Select location...</option>
+                            <option value="dubai">Dubai</option>
+                            <option value="abudhabi">Abu Dhabi</option>
+                            <option value="sharjah">Sharjah</option>
+                            <option value="riyadh">Riyadh</option>
+                            <option value="jeddah">Jeddah</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Installation Type</label>
+                    <select name="installation">
+                        <option value="residential">Residential - Villa/Home</option>
+                        <option value="commercial">Commercial - Hotel/Restaurant</option>
+                        <option value="pool">Pool Area</option>
+                        <option value="garden">Garden/Outdoor Living</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Message (Optional)</label>
+                    <textarea name="message" placeholder="Tell us about your project..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Request Quote</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">A</div>
+                        Apex TV Enclosures
+                    </a>
+                    <p>Premium outdoor TV protection engineered for Gulf region climate. Serving UAE and Saudi Arabia.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="#products">43" Enclosure</a></li>
+                        <li><a href="#products">55" Enclosure</a></li>
+                        <li><a href="#products">65" Enclosure</a></li>
+                        <li><a href="#products">75" Enclosure</a></li>
+                        <li><a href="#products">86" Enclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Warranty</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Installation Guide</a></li>
+                        <li><a href="#">Maintenance Tips</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Spare Parts</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Apex TV Enclosures. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                    <a href="#" aria-label="YouTube">▶️</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/971XXXXXXXXX" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <script>
+        // Form submission
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            // Build WhatsApp message
+            const message = `Hi, I'm interested in an Apex TV Enclosure.
+
+Name: ${data.firstName} ${data.lastName}
+Email: ${data.email}
+Phone: ${data.phone}
+TV Size: ${data.tvSize}"
+Location: ${data.location}
+Installation: ${data.installation}
+${data.message ? `Message: ${data.message}` : ''}`;
+
+            // Open WhatsApp with pre-filled message
+            const whatsappUrl = `https://wa.me/971XXXXXXXXX?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
