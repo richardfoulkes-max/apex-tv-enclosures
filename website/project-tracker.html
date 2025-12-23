@@ -429,12 +429,12 @@
         <!-- Quick Stats -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-number" style="color: #b91c1c;">5</div>
-                <div class="stat-label">Emails Bounced</div>
+                <div class="stat-number" style="color: #1e40af;">3</div>
+                <div class="stat-label">RFQs Sent</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" style="color: #166534;">5</div>
-                <div class="stat-label">Verified Contacts</div>
+                <div class="stat-number">0</div>
+                <div class="stat-label">Responses</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">0</div>
@@ -516,11 +516,11 @@
             </table>
         </div>
 
-        <!-- Verified Manufacturers -->
+        <!-- Active Outreach - Pure OEM Fabricators -->
         <div class="card">
-            <h2>Verified Manufacturer Contacts</h2>
-            <p style="margin-bottom: 1rem; padding: 0.75rem; background: #f0fdf4; border-radius: 8px; color: #166534;">
-                <strong>Real contacts verified from company websites</strong> - Ready to send RFQ
+            <h2>Active Outreach - Pure OEM Fabricators</h2>
+            <p style="margin-bottom: 1rem; padding: 0.75rem; background: #dbeafe; border-radius: 8px; color: #1e40af;">
+                <strong>3 RFQs sent to UAE contract manufacturers</strong> - No competing products, pure fabrication only
             </p>
             <table class="manufacturer-table">
                 <thead>
@@ -528,51 +528,67 @@
                         <th>Manufacturer</th>
                         <th>Region</th>
                         <th>Email / Phone</th>
+                        <th>Date Sent</th>
                         <th>Status</th>
                         <th>Specialty</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>SKYT (Hebei Shouke Yuantuo)</strong></td>
-                        <td><span class="region-tag">China - Hebei</span></td>
-                        <td>Wendy@hbskyt.com<br><small>+86-15832266315</small></td>
-                        <td><span class="status-pill verified">Verified</span></td>
-                        <td>Outdoor enclosures, custom fabrication</td>
-                    </tr>
-                    <tr>
-                        <td><strong>DeerTV / Kinytech</strong></td>
-                        <td><span class="region-tag">China - Dongguan</span></td>
-                        <td>Contact: Ms. Lily<br><small>deer.tv (use form)</small></td>
-                        <td><span class="status-pill verified">Verified</span></td>
-                        <td>Outdoor TV enclosures since 2010</td>
-                    </tr>
-                    <tr>
                         <td><strong>Eurotech FZCO</strong></td>
                         <td><span class="region-tag">UAE - JAFZA Dubai</span></td>
                         <td>general@eurotech-metal.com<br><small>+971 4 883 0333</small></td>
-                        <td><span class="status-pill verified">Verified</span></td>
-                        <td>Sheet metal, powder coating, enclosures</td>
+                        <td>24 Dec 2025</td>
+                        <td><span class="status-pill sent">Sent</span></td>
+                        <td>Sheet metal, powder coating, panels</td>
                     </tr>
                     <tr>
                         <td><strong>EmirFab</strong></td>
                         <td><span class="region-tag">UAE - Dubai</span></td>
                         <td>sales@emirfab.com<br><small>+971 52 905 5245</small></td>
-                        <td><span class="status-pill verified">Verified</span></td>
+                        <td>24 Dec 2025</td>
+                        <td><span class="status-pill sent">Sent</span></td>
                         <td>Custom metal fabrication, aluminum</td>
                     </tr>
                     <tr>
                         <td><strong>Al Shurooq</strong></td>
                         <td><span class="region-tag">UAE - Dubai</span></td>
                         <td>info@alshurooq.ae<br><small>+971 4 42 55988</small></td>
-                        <td><span class="status-pill verified">Verified</span></td>
+                        <td>24 Dec 2025</td>
+                        <td><span class="status-pill sent">Sent</span></td>
                         <td>Sheet metal parts, enclosures</td>
                     </tr>
                 </tbody>
             </table>
             <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
-                <strong>Next step:</strong> Send RFQ to verified manufacturers above.
+                <strong>Follow-up:</strong> If no response within 3-5 business days, send follow-up email.
             </p>
+        </div>
+
+        <!-- Excluded - Competitors -->
+        <div class="card" style="opacity: 0.7;">
+            <h2>Excluded - Have Competing Products</h2>
+            <table class="manufacturer-table">
+                <thead>
+                    <tr>
+                        <th>Manufacturer</th>
+                        <th>Region</th>
+                        <th>Reason Excluded</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><s>SKYT (Hebei Shouke Yuantuo)</s></td>
+                        <td><span class="region-tag">China</span></td>
+                        <td>Makes outdoor enclosures - potential competitor</td>
+                    </tr>
+                    <tr>
+                        <td><s>DeerTV / Kinytech</s></td>
+                        <td><span class="region-tag">China</span></td>
+                        <td>Sells own outdoor TV enclosures since 2010</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <!-- Project Timeline -->
