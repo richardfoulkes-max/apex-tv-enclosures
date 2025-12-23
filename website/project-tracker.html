@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Tracker - Apex TV Enclosures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1428a0;
+            --primary-light: #e8ebf7;
+            --text: #1a1a1a;
+            --text-muted: #6b7280;
+            --bg: #ffffff;
+            --bg-alt: #f8f9fa;
+            --border: #e5e7eb;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --info: #0284c7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-alt);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .doc-nav {
+            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .doc-nav h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 0.75rem;
+        }
+        .doc-nav-grid {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .doc-card {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .doc-card:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .doc-card.active {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            font-size: 1.75rem;
+            color: var(--primary);
+        }
+        header .subtitle {
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .status-badge.active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Progress Section */
+        .progress-bar {
+            background: var(--bg-alt);
+            border-radius: 10px;
+            height: 12px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--info));
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        .milestones {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .milestone {
+            text-align: center;
+        }
+        .milestone.completed {
+            color: var(--success);
+            font-weight: 600;
+        }
+        .milestone.current {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Manufacturer Table */
+        .manufacturer-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .manufacturer-table th,
+        .manufacturer-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .manufacturer-table th {
+            background: var(--bg-alt);
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .manufacturer-table tr:hover {
+            background: #fafafa;
+        }
+        .status-pill {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .status-pill.sent {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .status-pill.responded {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .status-pill.quoted {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .status-pill.selected {
+            background: #d1fae5;
+            color: #047857;
+        }
+        .status-pill.declined {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .status-pill.pending {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+        .region-tag {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* File Links */
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .file-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--bg-alt);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        .file-link:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        .file-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.15rem;
+        }
+        .file-info span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--border);
+        }
+        .timeline-item.completed .timeline-dot {
+            background: var(--success);
+            border-color: var(--success);
+        }
+        .timeline-item.current .timeline-dot {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(20, 40, 160, 0.2);
+        }
+        .timeline-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Notes */
+        .notes-area {
+            width: 100%;
+            min-height: 150px;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+        .notes-area:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Actions */
+        .action-buttons {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #0f1f7a;
+        }
+        .btn-secondary {
+            background: var(--bg-alt);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        /* Quick Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .stat-card {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="doc-nav">
+        <h3>Project Documents</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">Website</a>
+            <a href="specification.html" class="doc-card">Specification</a>
+            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
+            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
+            <a href="control-logic.html" class="doc-card">Control Logic</a>
+            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
+            <a href="market-research.html" class="doc-card">Market Research</a>
+            <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
+            <a href="project-tracker.html" class="doc-card active">Project Tracker</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div>
+                <h1>Apex TV Enclosures - Project Tracker</h1>
+                <p class="subtitle">75" Outdoor TV Enclosure for Gulf Region</p>
+            </div>
+            <div class="status-badge active">Phase: Manufacturer Selection</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Quick Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div class="stat-label">RFQs Sent</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Responses</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Quotes Received</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">75"</div>
+                <div class="stat-label">Prototype Size</div>
+            </div>
+        </div>
+
+        <!-- Manufacturer Outreach -->
+        <div class="card">
+            <h2>Manufacturer Outreach</h2>
+            <table class="manufacturer-table">
+                <thead>
+                    <tr>
+                        <th>Manufacturer</th>
+                        <th>Region</th>
+                        <th>Email</th>
+                        <th>Date Sent</th>
+                        <th>Status</th>
+                        <th>Quote</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Runze Hardware</strong></td>
+                        <td><span class="region-tag">China - Shenzhen</span></td>
+                        <td>sales@runzehardware.com</td>
+                        <td>24 Dec 2025</td>
+                        <td><span class="status-pill sent">Sent</span></td>
+                        <td>-</td>
+                        <td>Pure OEM fabricator</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fortuna Metal</strong></td>
+                        <td><span class="region-tag">China - Dongguan</span></td>
+                        <td>info@fortunametal.com</td>
+                        <td>24 Dec 2025</td>
+                        <td><span class="status-pill sent">Sent</span></td>
+                        <td>-</td>
+                        <td>20+ years, IATF certified</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ningbo OEM</strong></td>
+                        <td><span class="region-tag">China - Ningbo</span></td>
+                        <td>sales@ningbo-oem.com</td>
+                        <td>24 Dec 2025</td>
+                        <td><span class="status-pill sent">Sent</span></td>
+                        <td>-</td>
+                        <td>IP65/66 capable</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Al Maha Metal</strong></td>
+                        <td><span class="region-tag">UAE - Dubai</span></td>
+                        <td>info@almahametalindustries.com</td>
+                        <td>24 Dec 2025</td>
+                        <td><span class="status-pill sent">Sent</span></td>
+                        <td>-</td>
+                        <td>Local, ISO 9001</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Precision Metal</strong></td>
+                        <td><span class="region-tag">UAE - JAFZA</span></td>
+                        <td>sales@precisionmetal.ae</td>
+                        <td>24 Dec 2025</td>
+                        <td><span class="status-pill sent">Sent</span></td>
+                        <td>-</td>
+                        <td>CNC, laser cutting</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Saudi Modern Factory</strong></td>
+                        <td><span class="region-tag">Saudi - Riyadh</span></td>
+                        <td>info@smf.com.sa</td>
+                        <td>24 Dec 2025</td>
+                        <td><span class="status-pill sent">Sent</span></td>
+                        <td>-</td>
+                        <td>IP65/66, Saudi based</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+                <strong>Follow-up:</strong> If no response within 3-5 business days, send follow-up email.
+            </p>
+        </div>
+
+        <!-- Project Timeline -->
+        <div class="card">
+            <h2>Project Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item completed">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">23 Dec 2025</div>
+                    <div class="timeline-title">Project Setup</div>
+                    <div class="timeline-desc">Created GitHub repo, initial website, design specification</div>
+                </div>
+                <div class="timeline-item completed">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">23 Dec 2025</div>
+                    <div class="timeline-title">Complete Documentation</div>
+                    <div class="timeline-desc">BOM, wiring diagram, control logic, QC checklist, market research</div>
+                </div>
+                <div class="timeline-item completed">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">24 Dec 2025</div>
+                    <div class="timeline-title">IP66 Upgrade + Technical Drawings</div>
+                    <div class="timeline-desc">Upgraded from IP54 to IP66, added SVG technical drawings</div>
+                </div>
+                <div class="timeline-item completed">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">24 Dec 2025</div>
+                    <div class="timeline-title">RFQ Package Created</div>
+                    <div class="timeline-desc">5-page PDF for 75" prototype, manufacturer contact list</div>
+                </div>
+                <div class="timeline-item current">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">24 Dec 2025</div>
+                    <div class="timeline-title">RFQs Sent to Manufacturers</div>
+                    <div class="timeline-desc">Sent to 6 manufacturers (3 China, 3 UAE/Saudi)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Pending</div>
+                    <div class="timeline-title">Receive & Evaluate Quotes</div>
+                    <div class="timeline-desc">Compare pricing, lead times, capabilities</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Pending</div>
+                    <div class="timeline-title">Select Manufacturer & Sign NDA</div>
+                    <div class="timeline-desc">Choose partner, sign confidentiality agreement</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Pending</div>
+                    <div class="timeline-title">Order Prototypes</div>
+                    <div class="timeline-desc">Order 2-3 prototype units for evaluation</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Pending</div>
+                    <div class="timeline-title">Prototype Testing & Approval</div>
+                    <div class="timeline-desc">Test IP66 rating, thermal performance, quality</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Pending</div>
+                    <div class="timeline-title">Production Order</div>
+                    <div class="timeline-desc">Place first production order</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Files -->
+        <div class="card">
+            <h2>Project Files</h2>
+            <div class="file-grid">
+                <a href="specification.html" class="file-link">
+                    <div class="file-icon">S</div>
+                    <div class="file-info">
+                        <h4>Manufacturing Specification</h4>
+                        <span>Full technical spec with drawings</span>
+                    </div>
+                </a>
+                <a href="bom-detailed.html" class="file-link">
+                    <div class="file-icon">B</div>
+                    <div class="file-info">
+                        <h4>Bill of Materials</h4>
+                        <span>$461.98 BOM total</span>
+                    </div>
+                </a>
+                <a href="manufacturer-rfq.html" class="file-link">
+                    <div class="file-icon">R</div>
+                    <div class="file-info">
+                        <h4>RFQ Document</h4>
+                        <span>5-page PDF for manufacturers</span>
+                    </div>
+                </a>
+                <a href="market-research.html" class="file-link">
+                    <div class="file-icon">M</div>
+                    <div class="file-info">
+                        <h4>Market Research</h4>
+                        <span>Competitors & manufacturers</span>
+                    </div>
+                </a>
+                <a href="wiring-diagram.html" class="file-link">
+                    <div class="file-icon">W</div>
+                    <div class="file-info">
+                        <h4>Wiring Diagram</h4>
+                        <span>Electrical connections</span>
+                    </div>
+                </a>
+                <a href="control-logic.html" class="file-link">
+                    <div class="file-icon">C</div>
+                    <div class="file-info">
+                        <h4>Control Logic</h4>
+                        <span>PWM fan control firmware</span>
+                    </div>
+                </a>
+                <a href="qc-checklist.html" class="file-link">
+                    <div class="file-icon">Q</div>
+                    <div class="file-info">
+                        <h4>QC Checklist</h4>
+                        <span>IP66 test requirements</span>
+                    </div>
+                </a>
+                <a href="index.html" class="file-link">
+                    <div class="file-icon">W</div>
+                    <div class="file-info">
+                        <h4>Website</h4>
+                        <span>Product landing page</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="card">
+            <h2>Notes & Next Actions</h2>
+            <textarea class="notes-area" placeholder="Add notes here...">
+Next Actions:
+- Wait for manufacturer responses (expect 3-5 business days)
+- Follow up with non-responders after 1 week
+- Compare quotes on: unit price, lead time, MOQ, shipping
+- Verify each manufacturer can meet IP66 spec
+- Request NDA before sharing full CAD files
+
+Key Decision Criteria:
+1. IP66 capability (must have)
+2. Prototype lead time
+3. Unit price for prototype
+4. Production pricing at 50/100/500 units
+5. Communication quality
+            </textarea>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="card" style="background: var(--primary); color: white;">
+            <h2 style="color: white;">Project Contact</h2>
+            <p><strong>Richard</strong></p>
+            <p>Apex TV Enclosures</p>
+            <p>Dubai, UAE</p>
+            <p style="margin-top: 0.5rem;">
+                Email: apexenclosures@icloud.com<br>
+                WhatsApp: +971 50 559 8675
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Auto-save notes to localStorage
+        const notesArea = document.querySelector('.notes-area');
+        const savedNotes = localStorage.getItem('apex-project-notes');
+        if (savedNotes) {
+            notesArea.value = savedNotes;
+        }
+        notesArea.addEventListener('input', () => {
+            localStorage.setItem('apex-project-notes', notesArea.value);
+        });
+    </script>
+</body>
+</html>
