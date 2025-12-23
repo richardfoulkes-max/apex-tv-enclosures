@@ -170,9 +170,66 @@
             body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .no-print { display: none; }
         }
+    
+/* Document Navigation */
+.doc-nav {
+    background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+.doc-nav h3 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 0.75rem;
+}
+.doc-nav-grid {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+.doc-nav .doc-card {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+.doc-nav .doc-card:hover {
+    background: rgba(255,255,255,0.2);
+}
+.doc-nav .doc-card.active {
+    background: white;
+    color: #1428a0;
+}
+@media print {
+    .doc-nav { display: none; }
+}
+
     </style>
 </head>
 <body>
+    <nav class="doc-nav">
+        <h3>Project Documents</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">Website</a>
+            <a href="specification.html" class="doc-card">Specification</a>
+            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
+            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
+            <a href="control-logic.html" class="doc-card">Control Logic</a>
+            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
+            <a href="market-research.html" class="doc-card">Market Research</a>
+            <a href="manufacturer-rfq.html" class="doc-card active">RFQ Document</a>
+            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
+        </div>
+    </nav>
+
+
     <!-- Page 1: Cover -->
     <div class="page cover">
         <div class="badge">REQUEST FOR QUOTATION</div>
