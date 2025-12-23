@@ -1,0 +1,15 @@
+# Claude Code
+CLAUDE.md
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+*.log
+
+# Environment
+.env
+.env.local
