@@ -206,6 +206,14 @@
             background: #f3f4f6;
             color: #6b7280;
         }
+        .status-pill.bounced {
+            background: #fecaca;
+            color: #b91c1c;
+        }
+        .status-pill.verified {
+            background: #bbf7d0;
+            color: #166534;
+        }
         .region-tag {
             font-size: 0.75rem;
             color: var(--text-muted);
@@ -421,12 +429,12 @@
         <!-- Quick Stats -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-number">6</div>
-                <div class="stat-label">RFQs Sent</div>
+                <div class="stat-number" style="color: #b91c1c;">5</div>
+                <div class="stat-label">Emails Bounced</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">0</div>
-                <div class="stat-label">Responses</div>
+                <div class="stat-number" style="color: #166534;">5</div>
+                <div class="stat-label">Verified Contacts</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">0</div>
@@ -440,7 +448,10 @@
 
         <!-- Manufacturer Outreach -->
         <div class="card">
-            <h2>Manufacturer Outreach</h2>
+            <h2>Manufacturer Outreach - Bounced Emails</h2>
+            <p style="margin-bottom: 1rem; padding: 0.75rem; background: #fef2f2; border-radius: 8px; color: #991b1b;">
+                <strong>5 of 6 emails bounced</strong> - Original contact emails were invalid. See verified contacts below.
+            </p>
             <table class="manufacturer-table">
                 <thead>
                     <tr>
@@ -449,55 +460,49 @@
                         <th>Email</th>
                         <th>Date Sent</th>
                         <th>Status</th>
-                        <th>Quote</th>
                         <th>Notes</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><strong>Runze Hardware</strong></td>
-                        <td><span class="region-tag">China - Shenzhen</span></td>
-                        <td>sales@runzehardware.com</td>
+                    <tr style="opacity: 0.6;">
+                        <td><s>Runze Hardware</s></td>
+                        <td><span class="region-tag">China</span></td>
+                        <td><s>sales@runzehardware.com</s></td>
                         <td>24 Dec 2025</td>
-                        <td><span class="status-pill sent">Sent</span></td>
-                        <td>-</td>
-                        <td>Pure OEM fabricator</td>
+                        <td><span class="status-pill bounced">Bounced</span></td>
+                        <td>Invalid email</td>
                     </tr>
-                    <tr>
-                        <td><strong>Fortuna Metal</strong></td>
-                        <td><span class="region-tag">China - Dongguan</span></td>
-                        <td>info@fortunametal.com</td>
+                    <tr style="opacity: 0.6;">
+                        <td><s>Fortuna Metal</s></td>
+                        <td><span class="region-tag">China</span></td>
+                        <td><s>info@fortunametal.com</s></td>
                         <td>24 Dec 2025</td>
-                        <td><span class="status-pill sent">Sent</span></td>
-                        <td>-</td>
-                        <td>20+ years, IATF certified</td>
+                        <td><span class="status-pill bounced">Bounced</span></td>
+                        <td>Invalid email</td>
                     </tr>
-                    <tr>
-                        <td><strong>Ningbo OEM</strong></td>
-                        <td><span class="region-tag">China - Ningbo</span></td>
-                        <td>sales@ningbo-oem.com</td>
+                    <tr style="opacity: 0.6;">
+                        <td><s>Ningbo OEM</s></td>
+                        <td><span class="region-tag">China</span></td>
+                        <td><s>sales@ningbo-oem.com</s></td>
                         <td>24 Dec 2025</td>
-                        <td><span class="status-pill sent">Sent</span></td>
-                        <td>-</td>
-                        <td>IP65/66 capable</td>
+                        <td><span class="status-pill bounced">Bounced</span></td>
+                        <td>Invalid email</td>
                     </tr>
-                    <tr>
-                        <td><strong>Al Maha Metal</strong></td>
-                        <td><span class="region-tag">UAE - Dubai</span></td>
-                        <td>info@almahametalindustries.com</td>
+                    <tr style="opacity: 0.6;">
+                        <td><s>Al Maha Metal</s></td>
+                        <td><span class="region-tag">UAE</span></td>
+                        <td><s>info@almahametalindustries.com</s></td>
                         <td>24 Dec 2025</td>
-                        <td><span class="status-pill sent">Sent</span></td>
-                        <td>-</td>
-                        <td>Local, ISO 9001</td>
+                        <td><span class="status-pill bounced">Bounced</span></td>
+                        <td>Invalid email</td>
                     </tr>
-                    <tr>
-                        <td><strong>Precision Metal</strong></td>
-                        <td><span class="region-tag">UAE - JAFZA</span></td>
-                        <td>sales@precisionmetal.ae</td>
+                    <tr style="opacity: 0.6;">
+                        <td><s>Precision Metal</s></td>
+                        <td><span class="region-tag">UAE</span></td>
+                        <td><s>sales@precisionmetal.ae</s></td>
                         <td>24 Dec 2025</td>
-                        <td><span class="status-pill sent">Sent</span></td>
-                        <td>-</td>
-                        <td>CNC, laser cutting</td>
+                        <td><span class="status-pill bounced">Bounced</span></td>
+                        <td>Invalid email</td>
                     </tr>
                     <tr>
                         <td><strong>Saudi Modern Factory</strong></td>
@@ -505,13 +510,68 @@
                         <td>info@smf.com.sa</td>
                         <td>24 Dec 2025</td>
                         <td><span class="status-pill sent">Sent</span></td>
-                        <td>-</td>
-                        <td>IP65/66, Saudi based</td>
+                        <td>Possibly delivered</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Verified Manufacturers -->
+        <div class="card">
+            <h2>Verified Manufacturer Contacts</h2>
+            <p style="margin-bottom: 1rem; padding: 0.75rem; background: #f0fdf4; border-radius: 8px; color: #166534;">
+                <strong>Real contacts verified from company websites</strong> - Ready to send RFQ
+            </p>
+            <table class="manufacturer-table">
+                <thead>
+                    <tr>
+                        <th>Manufacturer</th>
+                        <th>Region</th>
+                        <th>Email / Phone</th>
+                        <th>Status</th>
+                        <th>Specialty</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>SKYT (Hebei Shouke Yuantuo)</strong></td>
+                        <td><span class="region-tag">China - Hebei</span></td>
+                        <td>Wendy@hbskyt.com<br><small>+86-15832266315</small></td>
+                        <td><span class="status-pill verified">Verified</span></td>
+                        <td>Outdoor enclosures, custom fabrication</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DeerTV / Kinytech</strong></td>
+                        <td><span class="region-tag">China - Dongguan</span></td>
+                        <td>Contact: Ms. Lily<br><small>deer.tv (use form)</small></td>
+                        <td><span class="status-pill verified">Verified</span></td>
+                        <td>Outdoor TV enclosures since 2010</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Eurotech FZCO</strong></td>
+                        <td><span class="region-tag">UAE - JAFZA Dubai</span></td>
+                        <td>general@eurotech-metal.com<br><small>+971 4 883 0333</small></td>
+                        <td><span class="status-pill verified">Verified</span></td>
+                        <td>Sheet metal, powder coating, enclosures</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EmirFab</strong></td>
+                        <td><span class="region-tag">UAE - Dubai</span></td>
+                        <td>sales@emirfab.com<br><small>+971 52 905 5245</small></td>
+                        <td><span class="status-pill verified">Verified</span></td>
+                        <td>Custom metal fabrication, aluminum</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Al Shurooq</strong></td>
+                        <td><span class="region-tag">UAE - Dubai</span></td>
+                        <td>info@alshurooq.ae<br><small>+971 4 42 55988</small></td>
+                        <td><span class="status-pill verified">Verified</span></td>
+                        <td>Sheet metal parts, enclosures</td>
                     </tr>
                 </tbody>
             </table>
             <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
-                <strong>Follow-up:</strong> If no response within 3-5 business days, send follow-up email.
+                <strong>Next step:</strong> Send RFQ to verified manufacturers above.
             </p>
         </div>
 
