@@ -234,6 +234,82 @@
         @media (max-width: 768px) {
             .toc ul { columns: 1; }
             .spec-grid { grid-template-columns: 1fr; }
+            .doc-nav-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* Document Navigation */
+        .doc-nav {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .doc-nav .container {
+            padding: 0;
+        }
+
+        .doc-nav h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .doc-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+        }
+
+        .doc-card {
+            background: white;
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .doc-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(20, 40, 160, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .doc-card.active {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .doc-card-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .doc-card-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .doc-card-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .doc-card-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     </style>
 </head>
@@ -245,6 +321,57 @@
             <div class="version">Version 2.0 | December 2025 | RFQ Ready</div>
         </div>
     </header>
+
+    <!-- Document Navigation -->
+    <nav class="doc-nav no-print">
+        <div class="container">
+            <h3>Manufacturing Documentation</h3>
+            <div class="doc-nav-grid">
+                <a href="index.html" class="doc-card">
+                    <span class="doc-card-icon">🏠</span>
+                    <div class="doc-card-text">
+                        <div class="doc-card-title">Website</div>
+                        <div class="doc-card-desc">Marketing page</div>
+                    </div>
+                </a>
+                <a href="specification.html" class="doc-card active">
+                    <span class="doc-card-icon">📋</span>
+                    <div class="doc-card-text">
+                        <div class="doc-card-title">Specification</div>
+                        <div class="doc-card-desc">RFQ technical spec</div>
+                    </div>
+                </a>
+                <a href="bom-detailed.html" class="doc-card">
+                    <span class="doc-card-icon">📦</span>
+                    <div class="doc-card-text">
+                        <div class="doc-card-title">Bill of Materials</div>
+                        <div class="doc-card-desc">Parts & suppliers</div>
+                    </div>
+                </a>
+                <a href="wiring-diagram.html" class="doc-card">
+                    <span class="doc-card-icon">⚡</span>
+                    <div class="doc-card-text">
+                        <div class="doc-card-title">Wiring Diagram</div>
+                        <div class="doc-card-desc">Electrical schematic</div>
+                    </div>
+                </a>
+                <a href="control-logic.html" class="doc-card">
+                    <span class="doc-card-icon">🔧</span>
+                    <div class="doc-card-text">
+                        <div class="doc-card-title">Control Logic</div>
+                        <div class="doc-card-desc">Firmware spec</div>
+                    </div>
+                </a>
+                <a href="qc-checklist.html" class="doc-card">
+                    <span class="doc-card-icon">✅</span>
+                    <div class="doc-card-text">
+                        <div class="doc-card-title">QC Checklist</div>
+                        <div class="doc-card-desc">Test & inspection</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </nav>
 
     <div class="container">
         <!-- Table of Contents -->
@@ -312,7 +439,7 @@
                     </tr>
                     <tr>
                         <td><strong>Fan Control</strong></td>
-                        <td>On/off thermostat</td>
+                        <td>On/off thermostat @ 30°C</td>
                         <td class="apex better">PWM microcontroller</td>
                         <td>Smooth, quiet, intelligent</td>
                     </tr>
@@ -357,6 +484,30 @@
                         <td>150mm</td>
                         <td class="apex better">120mm</td>
                         <td>20% slimmer profile</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Door System</strong></td>
+                        <td>Removable front panel</td>
+                        <td class="apex better">Hinged + gas struts</td>
+                        <td>One-hand opening, stays open</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Security</strong></td>
+                        <td>Padlock holes only</td>
+                        <td class="apex better">Dual cam locks + padlock hasps</td>
+                        <td>Integrated keyed security</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Latching</strong></td>
+                        <td>Basic friction latches</td>
+                        <td class="apex better">Compression draw latches (4×)</td>
+                        <td>Better seal, adjustable</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mount Included</strong></td>
+                        <td>VESA plate only</td>
+                        <td class="apex better">Full-motion articulating arm</td>
+                        <td>±90° swivel, 500mm extension</td>
                     </tr>
                 </tbody>
             </table>
@@ -630,6 +781,97 @@
                 <li><strong>Cable entry:</strong> IP68-rated cable glands (M16/M20)</li>
             </ul>
 
+            <h3>4.5 Door & Access System <span class="badge badge-premium">Premium</span></h3>
+            <div class="spec-grid">
+                <div class="spec-card">
+                    <h4>Hinged Front Frame</h4>
+                    <ul>
+                        <li><strong>Hinge type:</strong> Concealed 3-knuckle stainless steel</li>
+                        <li><strong>Quantity:</strong> 3 hinges (top edge)</li>
+                        <li><strong>Opening:</strong> 110° minimum</li>
+                        <li><strong>Material:</strong> 316 stainless steel</li>
+                    </ul>
+                </div>
+                <div class="spec-card">
+                    <h4>Gas Shock Struts</h4>
+                    <ul>
+                        <li><strong>Quantity:</strong> 2× gas struts per unit</li>
+                        <li><strong>Force:</strong> Sized to hold door open at 90°</li>
+                        <li><strong>Rating:</strong> Stainless steel, marine grade</li>
+                        <li><strong>Damping:</strong> Soft-close action</li>
+                    </ul>
+                </div>
+            </div>
+            <ul>
+                <li><strong>Door hold-open:</strong> Magnetic catch or hook system to secure door when accessing TV</li>
+                <li><strong>Front panel:</strong> Removable glass frame for TV installation/service</li>
+                <li><strong>Tool-free access:</strong> No tools required for routine TV access</li>
+            </ul>
+
+            <h3>4.6 Security & Locking <span class="badge badge-premium">Premium</span></h3>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>Specification</th>
+                </tr>
+                <tr>
+                    <td><strong>Primary Lock</strong></td>
+                    <td>Tubular cam lock, keyed alike option, 316 SS housing</td>
+                </tr>
+                <tr>
+                    <td><strong>Lock Quantity</strong></td>
+                    <td>2× locks standard (top and bottom of door)</td>
+                </tr>
+                <tr>
+                    <td><strong>Padlock Hasps</strong></td>
+                    <td>2× padlock holes (accepts up to 10mm shackle) for additional security</td>
+                </tr>
+                <tr>
+                    <td><strong>Keys</strong></td>
+                    <td>3× keys supplied per unit, keyed alike option for multi-unit installs</td>
+                </tr>
+                <tr>
+                    <td><strong>Anti-tamper</strong></td>
+                    <td>Security screws on external hinges (Torx or hex socket)</td>
+                </tr>
+            </table>
+
+            <h3>4.7 Latching System</h3>
+            <ul>
+                <li><strong>Latch type:</strong> Compression draw latches (not friction)</li>
+                <li><strong>Quantity:</strong> 4× latches (2 per side) for 55"+ models</li>
+                <li><strong>Material:</strong> 316 stainless steel body and keeper</li>
+                <li><strong>Action:</strong> Over-center compression for positive gasket seal</li>
+                <li><strong>Adjustment:</strong> Threaded keeper for seal adjustment</li>
+            </ul>
+
+            <h3>4.8 Mounting System</h3>
+            <div class="spec-grid">
+                <div class="spec-card">
+                    <h4>VESA Mount Plate (Included)</h4>
+                    <ul>
+                        <li><strong>Pattern:</strong> Universal 200×200 to 400×400mm</li>
+                        <li><strong>Material:</strong> 3mm steel, powder coated</li>
+                        <li><strong>Hardware:</strong> M6/M8 bolts included</li>
+                    </ul>
+                </div>
+                <div class="spec-card">
+                    <h4>Full-Motion Arm (Included)</h4>
+                    <ul>
+                        <li><strong>Type:</strong> Articulating dual-arm mount</li>
+                        <li><strong>Extension:</strong> Up to 500mm from wall</li>
+                        <li><strong>Swivel:</strong> ±90° horizontal</li>
+                        <li><strong>Tilt:</strong> +5° / -15°</li>
+                        <li><strong>Rating:</strong> 50kg capacity minimum</li>
+                    </ul>
+                </div>
+            </div>
+            <ul>
+                <li><strong>Wall bracket:</strong> Heavy-duty steel wall plate with 316 SS hardware</li>
+                <li><strong>Enclosure attachment:</strong> Secure mounting points on rear panel</li>
+                <li><strong>Cable routing:</strong> Arm includes cable management channel</li>
+            </ul>
+
             <!-- Exploded View Drawing -->
             <div class="drawing-container">
                 <div class="drawing-title">Figure 2: Exploded Assembly View</div>
@@ -901,8 +1143,8 @@
                 </tr>
                 <tr>
                     <td>Control</td>
-                    <td>On/Off thermostat</td>
-                    <td class="apex"><strong>PWM (4-wire)</strong></td>
+                    <td>On/Off thermostat @ 30°C</td>
+                    <td class="apex"><strong>PWM (4-wire), 30-50°C curve</strong></td>
                 </tr>
                 <tr>
                     <td>Bearing</td>

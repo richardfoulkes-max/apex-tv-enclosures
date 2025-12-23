@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex TV Enclosures - Wiring Diagram</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1428a0;
+            --text: #1a1a1a;
+            --text-muted: #6b7280;
+            --bg: #ffffff;
+            --bg-alt: #f8f9fa;
+            --border: #e5e7eb;
+            --live: #dc2626;
+            --neutral: #2563eb;
+            --earth: #16a34a;
+            --dc-pos: #dc2626;
+            --dc-neg: #1a1a1a;
+            --signal: #7c3aed;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+        }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .subtitle { opacity: 0.9; }
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .diagram-container {
+            background: var(--bg-alt);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        .diagram-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        svg { display: block; margin: 0 auto; }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--bg-alt);
+            border-radius: 8px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .legend-line {
+            width: 30px;
+            height: 4px;
+            border-radius: 2px;
+        }
+        .wire-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+        }
+        .wire-table th, .wire-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+        .wire-table th { background: var(--bg-alt); }
+        .note {
+            background: #fffbeb;
+            padding: 1rem;
+            border-left: 4px solid #d97706;
+            margin: 1rem 0;
+        }
+        .warning {
+            background: #fef2f2;
+            padding: 1rem;
+            border-left: 4px solid #dc2626;
+            margin: 1rem 0;
+        }
+        @media print {
+            header { -webkit-print-color-adjust: exact; }
+            .doc-nav { display: none; }
+        }
+
+        /* Document Navigation */
+        .doc-nav {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1rem 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .doc-nav h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+        .doc-nav-grid {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .doc-card {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        .doc-card:hover {
+            border-color: var(--primary);
+            background: #f0f4ff;
+        }
+        .doc-card.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Electrical Wiring Diagram</h1>
+        <div class="subtitle">Apex TV Enclosures | All Models | Version 2.0</div>
+    </header>
+
+    <nav class="doc-nav">
+        <h3>Manufacturing Documentation</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">🏠 Website</a>
+            <a href="specification.html" class="doc-card">📋 Specification</a>
+            <a href="bom-detailed.html" class="doc-card">📦 Bill of Materials</a>
+            <a href="wiring-diagram.html" class="doc-card active">⚡ Wiring Diagram</a>
+            <a href="control-logic.html" class="doc-card">🔧 Control Logic</a>
+            <a href="qc-checklist.html" class="doc-card">✅ QC Checklist</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="warning">
+            <strong>Safety Warning:</strong> All electrical work must be performed by qualified personnel.
+            Ensure mains power is disconnected before any wiring work. Unit must be properly earthed.
+        </div>
+
+        <h2>1. System Overview Diagram</h2>
+        <div class="diagram-container">
+            <div class="diagram-title">Figure 1: Complete Electrical System</div>
+            <svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background grid -->
+                <defs>
+                    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e5e7eb" stroke-width="0.5"/>
+                    </pattern>
+                </defs>
+                <rect width="1000" height="700" fill="url(#grid)"/>
+
+                <!-- Title -->
+                <text x="500" y="30" text-anchor="middle" font-size="16" font-weight="600" fill="#1a1a1a">APEX TV ENCLOSURE - ELECTRICAL SCHEMATIC</text>
+
+                <!-- Mains Input Section -->
+                <rect x="30" y="60" width="180" height="120" fill="#fef2f2" stroke="#dc2626" stroke-width="2" rx="4"/>
+                <text x="120" y="85" text-anchor="middle" font-size="12" font-weight="600" fill="#dc2626">MAINS INPUT</text>
+                <text x="120" y="105" text-anchor="middle" font-size="10" fill="#1a1a1a">220-240V AC 50Hz</text>
+
+                <!-- IEC Inlet symbol -->
+                <rect x="60" y="120" width="60" height="40" fill="white" stroke="#1a1a1a" stroke-width="2" rx="2"/>
+                <text x="90" y="145" text-anchor="middle" font-size="9" fill="#1a1a1a">IEC C14</text>
+                <circle cx="75" cy="135" r="4" fill="#dc2626"/>
+                <circle cx="90" cy="135" r="4" fill="#2563eb"/>
+                <circle cx="105" cy="135" r="4" fill="#16a34a"/>
+
+                <!-- Fuse -->
+                <rect x="140" y="125" width="50" height="25" fill="white" stroke="#1a1a1a" stroke-width="1"/>
+                <text x="165" y="142" text-anchor="middle" font-size="8" fill="#1a1a1a">3A FUSE</text>
+
+                <!-- MOV Surge Protection -->
+                <rect x="30" y="200" width="180" height="60" fill="#fff7ed" stroke="#d97706" stroke-width="1" rx="4"/>
+                <text x="120" y="220" text-anchor="middle" font-size="10" font-weight="600" fill="#d97706">SURGE PROTECTION</text>
+                <text x="120" y="240" text-anchor="middle" font-size="9" fill="#1a1a1a">MOV 275V (L-N, L-E)</text>
+
+                <!-- Terminal Block -->
+                <rect x="30" y="280" width="180" height="80" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="4"/>
+                <text x="120" y="305" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">TERMINAL BLOCK</text>
+                <rect x="50" y="320" width="30" height="25" fill="#dc2626" stroke="#1a1a1a" stroke-width="1"/>
+                <text x="65" y="337" text-anchor="middle" font-size="8" fill="white">L</text>
+                <rect x="90" y="320" width="30" height="25" fill="#2563eb" stroke="#1a1a1a" stroke-width="1"/>
+                <text x="105" y="337" text-anchor="middle" font-size="8" fill="white">N</text>
+                <rect x="130" y="320" width="30" height="25" fill="#16a34a" stroke="#1a1a1a" stroke-width="1"/>
+                <text x="145" y="337" text-anchor="middle" font-size="8" fill="white">E</text>
+
+                <!-- DC Power Supply -->
+                <rect x="250" y="200" width="160" height="140" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="4"/>
+                <text x="330" y="225" text-anchor="middle" font-size="11" font-weight="600" fill="#2563eb">DC POWER SUPPLY</text>
+                <text x="330" y="245" text-anchor="middle" font-size="10" fill="#1a1a1a">Mean Well LRS-35-12</text>
+                <text x="330" y="265" text-anchor="middle" font-size="9" fill="#6b7280">Input: 85-264VAC</text>
+                <text x="330" y="280" text-anchor="middle" font-size="9" fill="#6b7280">Output: 12V 3A</text>
+
+                <!-- DC Output terminals -->
+                <rect x="270" y="300" width="50" height="25" fill="#dc2626" stroke="#1a1a1a" stroke-width="1"/>
+                <text x="295" y="317" text-anchor="middle" font-size="8" fill="white">+12V</text>
+                <rect x="340" y="300" width="50" height="25" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="1"/>
+                <text x="365" y="317" text-anchor="middle" font-size="8" fill="white">GND</text>
+
+                <!-- Fan Controller -->
+                <rect x="450" y="150" width="200" height="200" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2" rx="4"/>
+                <text x="550" y="175" text-anchor="middle" font-size="11" font-weight="600" fill="#7c3aed">PWM FAN CONTROLLER</text>
+                <text x="550" y="195" text-anchor="middle" font-size="9" fill="#1a1a1a">APEX-CTRL-V1 (MCU)</text>
+
+                <!-- Controller inputs -->
+                <text x="470" y="220" font-size="9" fill="#1a1a1a">Power: 12V DC</text>
+                <text x="470" y="240" font-size="9" fill="#1a1a1a">Temp1: Internal</text>
+                <text x="470" y="260" font-size="9" fill="#1a1a1a">Temp2: Exhaust</text>
+                <text x="470" y="280" font-size="9" fill="#1a1a1a">Temp3: Optional</text>
+
+                <!-- Controller outputs -->
+                <text x="470" y="310" font-size="9" fill="#1a1a1a">PWM1: Fan 1</text>
+                <text x="470" y="330" font-size="9" fill="#1a1a1a">PWM2: Fan 2</text>
+                <text x="470" y="350" font-size="9" fill="#1a1a1a">Alarm: Buzzer</text>
+
+                <!-- Fans -->
+                <rect x="700" y="100" width="140" height="100" fill="#dcfce7" stroke="#16a34a" stroke-width="2" rx="4"/>
+                <text x="770" y="125" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">FAN 1 (INTAKE)</text>
+                <text x="770" y="145" text-anchor="middle" font-size="9" fill="#1a1a1a">140mm PWM</text>
+                <text x="770" y="165" text-anchor="middle" font-size="9" fill="#6b7280">Noctua NF-A14 iPPC</text>
+                <!-- Fan connector -->
+                <rect x="720" y="175" width="100" height="20" fill="white" stroke="#1a1a1a" stroke-width="1"/>
+                <text x="730" y="189" font-size="7" fill="#1a1a1a">+12V</text>
+                <text x="750" y="189" font-size="7" fill="#1a1a1a">GND</text>
+                <text x="770" y="189" font-size="7" fill="#1a1a1a">TACH</text>
+                <text x="795" y="189" font-size="7" fill="#1a1a1a">PWM</text>
+
+                <rect x="700" y="220" width="140" height="100" fill="#dcfce7" stroke="#16a34a" stroke-width="2" rx="4"/>
+                <text x="770" y="245" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">FAN 2 (EXHAUST)</text>
+                <text x="770" y="265" text-anchor="middle" font-size="9" fill="#1a1a1a">140mm PWM</text>
+                <text x="770" y="285" text-anchor="middle" font-size="9" fill="#6b7280">Noctua NF-A14 iPPC</text>
+                <rect x="720" y="295" width="100" height="20" fill="white" stroke="#1a1a1a" stroke-width="1"/>
+                <text x="730" y="309" font-size="7" fill="#1a1a1a">+12V</text>
+                <text x="750" y="309" font-size="7" fill="#1a1a1a">GND</text>
+                <text x="770" y="309" font-size="7" fill="#1a1a1a">TACH</text>
+                <text x="795" y="309" font-size="7" fill="#1a1a1a">PWM</text>
+
+                <!-- Temperature Sensors -->
+                <rect x="700" y="340" width="140" height="80" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="4"/>
+                <text x="770" y="365" text-anchor="middle" font-size="11" font-weight="600" fill="#d97706">TEMP SENSORS</text>
+                <text x="770" y="385" text-anchor="middle" font-size="9" fill="#1a1a1a">DS18B20 × 2</text>
+                <text x="770" y="405" text-anchor="middle" font-size="9" fill="#6b7280">1-Wire Digital</text>
+
+                <!-- Alarm Buzzer -->
+                <rect x="700" y="440" width="140" height="60" fill="#fee2e2" stroke="#dc2626" stroke-width="2" rx="4"/>
+                <text x="770" y="465" text-anchor="middle" font-size="11" font-weight="600" fill="#dc2626">ALARM BUZZER</text>
+                <text x="770" y="485" text-anchor="middle" font-size="9" fill="#1a1a1a">12V Piezo 85dB</text>
+
+                <!-- TV Accessory Outlet -->
+                <rect x="250" y="400" width="160" height="100" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="4"/>
+                <text x="330" y="425" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">ACCESSORY OUTLET</text>
+                <text x="330" y="445" text-anchor="middle" font-size="9" fill="#1a1a1a">UK 3-Pin Socket</text>
+                <text x="330" y="465" text-anchor="middle" font-size="9" fill="#6b7280">For TV / Media Player</text>
+                <text x="330" y="485" text-anchor="middle" font-size="9" fill="#6b7280">13A Max</text>
+
+                <!-- Earth Bonding -->
+                <rect x="30" y="400" width="180" height="80" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="4"/>
+                <text x="120" y="425" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">EARTH BONDING</text>
+                <text x="120" y="450" text-anchor="middle" font-size="9" fill="#1a1a1a">Frame bonded to mains earth</text>
+                <text x="120" y="470" text-anchor="middle" font-size="9" fill="#6b7280">Tinned copper braid</text>
+
+                <!-- Wiring Lines -->
+                <!-- Mains to Terminal Block -->
+                <line x1="120" y1="160" x2="120" y2="280" stroke="#dc2626" stroke-width="3"/>
+                <line x1="90" y1="160" x2="90" y2="200" stroke="#2563eb" stroke-width="3"/>
+                <line x1="90" y1="200" x2="105" y2="200" stroke="#2563eb" stroke-width="3"/>
+                <line x1="105" y1="200" x2="105" y2="280" stroke="#2563eb" stroke-width="3"/>
+
+                <!-- Terminal to DC PSU (AC) -->
+                <line x1="180" y1="330" x2="220" y2="330" stroke="#dc2626" stroke-width="3"/>
+                <line x1="220" y1="330" x2="220" y2="250" stroke="#dc2626" stroke-width="3"/>
+                <line x1="220" y1="250" x2="250" y2="250" stroke="#dc2626" stroke-width="3"/>
+                <line x1="160" y1="345" x2="235" y2="345" stroke="#2563eb" stroke-width="3"/>
+                <line x1="235" y1="345" x2="235" y2="270" stroke="#2563eb" stroke-width="3"/>
+                <line x1="235" y1="270" x2="250" y2="270" stroke="#2563eb" stroke-width="3"/>
+
+                <!-- Terminal to Accessory Outlet -->
+                <line x1="65" y1="360" x2="65" y2="430" stroke="#dc2626" stroke-width="3"/>
+                <line x1="65" y1="430" x2="250" y2="430" stroke="#dc2626" stroke-width="3"/>
+                <line x1="105" y1="360" x2="105" y2="450" stroke="#2563eb" stroke-width="3"/>
+                <line x1="105" y1="450" x2="250" y2="450" stroke="#2563eb" stroke-width="3"/>
+                <line x1="145" y1="360" x2="145" y2="470" stroke="#16a34a" stroke-width="3"/>
+                <line x1="145" y1="470" x2="250" y2="470" stroke="#16a34a" stroke-width="3"/>
+
+                <!-- DC PSU to Controller -->
+                <line x1="320" y1="312" x2="320" y2="380" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,3"/>
+                <line x1="320" y1="380" x2="480" y2="380" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,3"/>
+                <line x1="480" y1="380" x2="480" y2="350" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,3"/>
+                <line x1="365" y1="312" x2="365" y2="390" stroke="#1a1a1a" stroke-width="2" stroke-dasharray="5,3"/>
+                <line x1="365" y1="390" x2="490" y2="390" stroke="#1a1a1a" stroke-width="2" stroke-dasharray="5,3"/>
+                <line x1="490" y1="390" x2="490" y2="350" stroke="#1a1a1a" stroke-width="2" stroke-dasharray="5,3"/>
+
+                <!-- Controller to Fans -->
+                <line x1="650" y1="200" x2="700" y2="175" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,3"/>
+                <line x1="650" y1="210" x2="700" y2="295" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,3"/>
+                <line x1="650" y1="250" x2="680" y2="250" stroke="#7c3aed" stroke-width="2"/>
+                <line x1="680" y1="250" x2="680" y2="185" stroke="#7c3aed" stroke-width="2"/>
+                <line x1="680" y1="185" x2="720" y2="185" stroke="#7c3aed" stroke-width="2"/>
+                <line x1="650" y1="270" x2="690" y2="270" stroke="#7c3aed" stroke-width="2"/>
+                <line x1="690" y1="270" x2="690" y2="305" stroke="#7c3aed" stroke-width="2"/>
+                <line x1="690" y1="305" x2="720" y2="305" stroke="#7c3aed" stroke-width="2"/>
+
+                <!-- Controller to Sensors -->
+                <line x1="650" y1="300" x2="680" y2="300" stroke="#d97706" stroke-width="2"/>
+                <line x1="680" y1="300" x2="680" y2="380" stroke="#d97706" stroke-width="2"/>
+                <line x1="680" y1="380" x2="700" y2="380" stroke="#d97706" stroke-width="2"/>
+
+                <!-- Controller to Buzzer -->
+                <line x1="650" y1="320" x2="670" y2="320" stroke="#dc2626" stroke-width="2"/>
+                <line x1="670" y1="320" x2="670" y2="470" stroke="#dc2626" stroke-width="2"/>
+                <line x1="670" y1="470" x2="700" y2="470" stroke="#dc2626" stroke-width="2"/>
+
+                <!-- Earth bonding line -->
+                <line x1="145" y1="345" x2="145" y2="400" stroke="#16a34a" stroke-width="3"/>
+
+                <!-- Legend -->
+                <rect x="30" y="520" width="940" height="160" fill="white" stroke="#e5e7eb" stroke-width="1" rx="4"/>
+                <text x="500" y="545" text-anchor="middle" font-size="12" font-weight="600" fill="#1a1a1a">WIRING LEGEND</text>
+
+                <line x1="60" y1="570" x2="100" y2="570" stroke="#dc2626" stroke-width="4"/>
+                <text x="110" y="575" font-size="10" fill="#1a1a1a">Live (L) - Brown</text>
+
+                <line x1="60" y1="595" x2="100" y2="595" stroke="#2563eb" stroke-width="4"/>
+                <text x="110" y="600" font-size="10" fill="#1a1a1a">Neutral (N) - Blue</text>
+
+                <line x1="60" y1="620" x2="100" y2="620" stroke="#16a34a" stroke-width="4"/>
+                <text x="110" y="625" font-size="10" fill="#1a1a1a">Earth (E) - Green/Yellow</text>
+
+                <line x1="280" y1="570" x2="320" y2="570" stroke="#dc2626" stroke-width="3" stroke-dasharray="5,3"/>
+                <text x="330" y="575" font-size="10" fill="#1a1a1a">+12V DC - Red</text>
+
+                <line x1="280" y1="595" x2="320" y2="595" stroke="#1a1a1a" stroke-width="3" stroke-dasharray="5,3"/>
+                <text x="330" y="600" font-size="10" fill="#1a1a1a">DC Ground - Black</text>
+
+                <line x1="280" y1="620" x2="320" y2="620" stroke="#7c3aed" stroke-width="3"/>
+                <text x="330" y="625" font-size="10" fill="#1a1a1a">PWM Signal - Purple</text>
+
+                <line x1="500" y1="570" x2="540" y2="570" stroke="#d97706" stroke-width="3"/>
+                <text x="550" y="575" font-size="10" fill="#1a1a1a">Sensor (1-Wire) - Orange</text>
+
+                <text x="500" y="600" font-size="10" fill="#1a1a1a">All AC wiring: H05VV-F 3G1.0mm²</text>
+                <text x="500" y="620" font-size="10" fill="#1a1a1a">DC wiring: 22AWG stranded</text>
+                <text x="500" y="640" font-size="10" fill="#1a1a1a">Sensor wiring: 24AWG shielded</text>
+
+                <text x="750" y="575" font-size="9" fill="#6b7280">Drawing: APEX-WD-001</text>
+                <text x="750" y="595" font-size="9" fill="#6b7280">Rev: 2.0</text>
+                <text x="750" y="615" font-size="9" fill="#6b7280">Date: Dec 2025</text>
+            </svg>
+        </div>
+
+        <h2>2. Wire Schedule</h2>
+        <table class="wire-table">
+            <thead>
+                <tr>
+                    <th>Wire ID</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Type</th>
+                    <th>Color</th>
+                    <th>Size</th>
+                    <th>Length</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background: #fef2f2;">
+                    <td colspan="7"><strong>AC Mains (220-240V)</strong></td>
+                </tr>
+                <tr>
+                    <td>W-AC-L1</td>
+                    <td>IEC Inlet L</td>
+                    <td>Fuse</td>
+                    <td>H05VV-F</td>
+                    <td>Brown</td>
+                    <td>1.0mm²</td>
+                    <td>50mm</td>
+                </tr>
+                <tr>
+                    <td>W-AC-L2</td>
+                    <td>Fuse</td>
+                    <td>Terminal Block L</td>
+                    <td>H05VV-F</td>
+                    <td>Brown</td>
+                    <td>1.0mm²</td>
+                    <td>100mm</td>
+                </tr>
+                <tr>
+                    <td>W-AC-N1</td>
+                    <td>IEC Inlet N</td>
+                    <td>Terminal Block N</td>
+                    <td>H05VV-F</td>
+                    <td>Blue</td>
+                    <td>1.0mm²</td>
+                    <td>150mm</td>
+                </tr>
+                <tr>
+                    <td>W-AC-E1</td>
+                    <td>IEC Inlet E</td>
+                    <td>Terminal Block E</td>
+                    <td>H05VV-F</td>
+                    <td>Green/Yellow</td>
+                    <td>1.0mm²</td>
+                    <td>150mm</td>
+                </tr>
+                <tr>
+                    <td>W-AC-L3</td>
+                    <td>Terminal Block L</td>
+                    <td>DC PSU L</td>
+                    <td>H05VV-F</td>
+                    <td>Brown</td>
+                    <td>1.0mm²</td>
+                    <td>200mm</td>
+                </tr>
+                <tr>
+                    <td>W-AC-N2</td>
+                    <td>Terminal Block N</td>
+                    <td>DC PSU N</td>
+                    <td>H05VV-F</td>
+                    <td>Blue</td>
+                    <td>1.0mm²</td>
+                    <td>200mm</td>
+                </tr>
+                <tr>
+                    <td>W-AC-L4</td>
+                    <td>Terminal Block L</td>
+                    <td>Accessory Outlet L</td>
+                    <td>H05VV-F</td>
+                    <td>Brown</td>
+                    <td>1.0mm²</td>
+                    <td>300mm</td>
+                </tr>
+                <tr>
+                    <td>W-AC-N3</td>
+                    <td>Terminal Block N</td>
+                    <td>Accessory Outlet N</td>
+                    <td>H05VV-F</td>
+                    <td>Blue</td>
+                    <td>1.0mm²</td>
+                    <td>300mm</td>
+                </tr>
+                <tr>
+                    <td>W-AC-E2</td>
+                    <td>Terminal Block E</td>
+                    <td>Accessory Outlet E</td>
+                    <td>H05VV-F</td>
+                    <td>Green/Yellow</td>
+                    <td>1.0mm²</td>
+                    <td>300mm</td>
+                </tr>
+                <tr>
+                    <td>W-EB-1</td>
+                    <td>Terminal Block E</td>
+                    <td>Frame Bonding Point</td>
+                    <td>Tinned braid</td>
+                    <td>Bare</td>
+                    <td>10mm</td>
+                    <td>150mm</td>
+                </tr>
+                <tr style="background: #dbeafe;">
+                    <td colspan="7"><strong>DC Power (12V)</strong></td>
+                </tr>
+                <tr>
+                    <td>W-DC-P1</td>
+                    <td>DC PSU +12V</td>
+                    <td>Controller VIN+</td>
+                    <td>Stranded</td>
+                    <td>Red</td>
+                    <td>22AWG</td>
+                    <td>250mm</td>
+                </tr>
+                <tr>
+                    <td>W-DC-G1</td>
+                    <td>DC PSU GND</td>
+                    <td>Controller GND</td>
+                    <td>Stranded</td>
+                    <td>Black</td>
+                    <td>22AWG</td>
+                    <td>250mm</td>
+                </tr>
+                <tr style="background: #f5f3ff;">
+                    <td colspan="7"><strong>Fan Connections (4-wire PWM)</strong></td>
+                </tr>
+                <tr>
+                    <td>W-FAN1</td>
+                    <td>Controller FAN1</td>
+                    <td>Fan 1 (Intake)</td>
+                    <td>4-wire PWM</td>
+                    <td>Mixed</td>
+                    <td>22AWG</td>
+                    <td>400mm</td>
+                </tr>
+                <tr>
+                    <td>W-FAN2</td>
+                    <td>Controller FAN2</td>
+                    <td>Fan 2 (Exhaust)</td>
+                    <td>4-wire PWM</td>
+                    <td>Mixed</td>
+                    <td>22AWG</td>
+                    <td>500mm</td>
+                </tr>
+                <tr style="background: #fef3c7;">
+                    <td colspan="7"><strong>Sensor Connections</strong></td>
+                </tr>
+                <tr>
+                    <td>W-TEMP1</td>
+                    <td>Controller TEMP1</td>
+                    <td>Internal Sensor</td>
+                    <td>Shielded 3-wire</td>
+                    <td>Red/Black/Yellow</td>
+                    <td>24AWG</td>
+                    <td>300mm</td>
+                </tr>
+                <tr>
+                    <td>W-TEMP2</td>
+                    <td>Controller TEMP2</td>
+                    <td>Exhaust Sensor</td>
+                    <td>Shielded 3-wire</td>
+                    <td>Red/Black/Yellow</td>
+                    <td>24AWG</td>
+                    <td>400mm</td>
+                </tr>
+                <tr style="background: #fee2e2;">
+                    <td colspan="7"><strong>Alarm</strong></td>
+                </tr>
+                <tr>
+                    <td>W-ALM1</td>
+                    <td>Controller ALARM+</td>
+                    <td>Buzzer +</td>
+                    <td>Stranded</td>
+                    <td>Red</td>
+                    <td>24AWG</td>
+                    <td>200mm</td>
+                </tr>
+                <tr>
+                    <td>W-ALM2</td>
+                    <td>Controller ALARM-</td>
+                    <td>Buzzer -</td>
+                    <td>Stranded</td>
+                    <td>Black</td>
+                    <td>24AWG</td>
+                    <td>200mm</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Connector Pinouts</h2>
+
+        <h3>3.1 PWM Fan Connector (4-pin)</h3>
+        <table class="wire-table" style="max-width: 500px;">
+            <tr><th>Pin</th><th>Signal</th><th>Color</th><th>Description</th></tr>
+            <tr><td>1</td><td>GND</td><td>Black</td><td>Ground (0V)</td></tr>
+            <tr><td>2</td><td>+12V</td><td>Yellow</td><td>Power supply</td></tr>
+            <tr><td>3</td><td>TACH</td><td>Green</td><td>Tachometer output (RPM)</td></tr>
+            <tr><td>4</td><td>PWM</td><td>Blue</td><td>PWM control input</td></tr>
+        </table>
+
+        <h3>3.2 DS18B20 Temperature Sensor</h3>
+        <table class="wire-table" style="max-width: 500px;">
+            <tr><th>Wire</th><th>Signal</th><th>Color</th><th>Description</th></tr>
+            <tr><td>1</td><td>GND</td><td>Black</td><td>Ground</td></tr>
+            <tr><td>2</td><td>DQ</td><td>Yellow</td><td>Data (1-Wire)</td></tr>
+            <tr><td>3</td><td>VDD</td><td>Red</td><td>Power (3.3-5V)</td></tr>
+        </table>
+
+        <div class="note">
+            <strong>Note:</strong> DS18B20 sensors can be connected in parallel on the same 1-Wire bus.
+            Each sensor has a unique 64-bit address for identification.
+            Use 4.7kΩ pull-up resistor on data line.
+        </div>
+
+        <h2>4. Safety Requirements</h2>
+        <ul style="margin: 1rem 0; padding-left: 2rem;">
+            <li>All mains wiring must use heat-rated cable (105°C minimum)</li>
+            <li>Double insulation on all accessible parts</li>
+            <li>Earth continuity must be verified before power-on</li>
+            <li>Hi-pot test: 1500VAC for 1 minute between L/N and E</li>
+            <li>All crimped connections must be pull-tested</li>
+            <li>Cable routing must avoid sharp edges</li>
+            <li>Minimum 10mm clearance from hot surfaces</li>
+            <li>Strain relief required on all external cables</li>
+        </ul>
+
+        <footer style="text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid var(--border); color: var(--text-muted);">
+            <p>Apex TV Enclosures | Wiring Diagram v2.0 | December 2025</p>
+            <p style="font-size: 0.85rem;">Drawing: APEX-WD-001 | Rev: 2.0</p>
+        </footer>
+    </div>
+</body>
+</html>

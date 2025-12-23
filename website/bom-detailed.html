@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex TV Enclosures - Detailed Bill of Materials</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1428a0;
+            --text: #1a1a1a;
+            --text-muted: #6b7280;
+            --bg: #ffffff;
+            --bg-alt: #f8f9fa;
+            --border: #e5e7eb;
+            --success: #059669;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+        }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .subtitle { opacity: 0.9; }
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        h3 { margin: 1.5rem 0 1rem; color: var(--text); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--border);
+            vertical-align: top;
+        }
+        th { background: var(--bg-alt); font-weight: 600; }
+        .category { background: var(--primary); color: white; font-weight: 600; }
+        .subtotal { background: #e8f5e9; font-weight: 600; }
+        .total { background: var(--primary); color: white; font-weight: 700; font-size: 1rem; }
+        a { color: var(--primary); }
+        .part-number { font-family: monospace; font-size: 0.8rem; color: var(--text-muted); }
+        .supplier { font-size: 0.8rem; }
+        .note { background: #fffbeb; padding: 1rem; border-left: 4px solid #d97706; margin: 1rem 0; }
+        .specs { font-size: 0.8rem; color: var(--text-muted); }
+        @media print {
+            header { -webkit-print-color-adjust: exact; }
+            a { color: var(--text); text-decoration: none; }
+            .doc-nav { display: none; }
+        }
+
+        /* Document Navigation */
+        .doc-nav {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1rem 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .doc-nav h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+        .doc-nav-grid {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .doc-card {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        .doc-card:hover {
+            border-color: var(--primary);
+            background: #f0f4ff;
+        }
+        .doc-card.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Detailed Bill of Materials</h1>
+        <div class="subtitle">Apex TV Enclosures | Model ATE-55 (55") | Version 2.0</div>
+    </header>
+
+    <nav class="doc-nav">
+        <h3>Manufacturing Documentation</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">🏠 Website</a>
+            <a href="specification.html" class="doc-card">📋 Specification</a>
+            <a href="bom-detailed.html" class="doc-card active">📦 Bill of Materials</a>
+            <a href="wiring-diagram.html" class="doc-card">⚡ Wiring Diagram</a>
+            <a href="control-logic.html" class="doc-card">🔧 Control Logic</a>
+            <a href="qc-checklist.html" class="doc-card">✅ QC Checklist</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="note">
+            <strong>Note:</strong> This BOM is for the ATE-55 (55") model. Quantities and some components vary by size.
+            All prices are estimated FOB China and subject to volume negotiation.
+        </div>
+
+        <h2>1. Enclosure Structure</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:5%">#</th>
+                    <th style="width:20%">Component</th>
+                    <th style="width:25%">Specification</th>
+                    <th style="width:10%">Part Number</th>
+                    <th style="width:5%">Qty</th>
+                    <th style="width:10%">Unit Cost</th>
+                    <th style="width:10%">Total</th>
+                    <th style="width:15%">Supplier</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category">
+                    <td colspan="8">1.1 Frame & Panels</td>
+                </tr>
+                <tr>
+                    <td>1.1.1</td>
+                    <td>Main Frame Assembly</td>
+                    <td>5052-H32 Aluminum, 2.0mm, CNC bent, powder coated<br>
+                        <span class="specs">External: 1320 × 800 × 120mm</span></td>
+                    <td class="part-number">APEX-FR-55</td>
+                    <td>1</td>
+                    <td>$35.00</td>
+                    <td>$35.00</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/Custom-CNC-aluminum-enclosure_1600xxx.html" target="_blank">Shenzhen Runze Metal</a></td>
+                </tr>
+                <tr>
+                    <td>1.1.2</td>
+                    <td>Back Panel</td>
+                    <td>5052-H32 Aluminum, 2.0mm, with fan cutouts, hinged<br>
+                        <span class="specs">1280 × 760mm, pre-drilled VESA</span></td>
+                    <td class="part-number">APEX-BP-55</td>
+                    <td>1</td>
+                    <td>$22.00</td>
+                    <td>$22.00</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/Custom-sheet-metal-fabrication_1600xxx.html" target="_blank">Shenzhen Runze Metal</a></td>
+                </tr>
+                <tr>
+                    <td>1.1.3</td>
+                    <td>Front Bezel Frame</td>
+                    <td>6063-T5 Aluminum extrusion, 15mm face, powder coated<br>
+                        <span class="specs">Mitered corners, glass retention channel</span></td>
+                    <td class="part-number">APEX-BZ-55</td>
+                    <td>1</td>
+                    <td>$12.00</td>
+                    <td>$12.00</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/Aluminum-extrusion-profile_1600xxx.html" target="_blank">Guangdong Weiye Aluminum</a></td>
+                </tr>
+                <tr>
+                    <td>1.1.4</td>
+                    <td>Internal Baffle</td>
+                    <td>1.5mm Aluminum, directs airflow across TV<br>
+                        <span class="specs">Full width, 50mm height</span></td>
+                    <td class="part-number">APEX-BF-55</td>
+                    <td>1</td>
+                    <td>$4.00</td>
+                    <td>$4.00</td>
+                    <td class="supplier">Included with frame</td>
+                </tr>
+                <tr>
+                    <td>1.1.5</td>
+                    <td>VESA Mount Plate</td>
+                    <td>3.0mm Steel, powder coated, universal adjustable<br>
+                        <span class="specs">Supports 200×200 to 400×400</span></td>
+                    <td class="part-number">APEX-VESA-U</td>
+                    <td>1</td>
+                    <td>$8.00</td>
+                    <td>$8.00</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/Universal-VESA-mount-plate_1600xxx.html" target="_blank">Ningbo Highstar</a></td>
+                </tr>
+                <tr>
+                    <td>1.1.6</td>
+                    <td>Gas Struts (pair)</td>
+                    <td>100N force, 250mm stroke, stainless<br>
+                        <span class="specs">For rear panel hinged access</span></td>
+                    <td class="part-number">GS-100N-250</td>
+                    <td>2</td>
+                    <td>$3.50</td>
+                    <td>$7.00</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/Gas-spring-strut_1600xxx.html" target="_blank">Changzhou Juteng</a></td>
+                </tr>
+                <tr class="subtotal">
+                    <td colspan="6" style="text-align: right;">Subtotal - Frame & Panels</td>
+                    <td>$88.00</td>
+                    <td></td>
+                </tr>
+
+                <tr class="category">
+                    <td colspan="8">1.2 Glass Assembly</td>
+                </tr>
+                <tr>
+                    <td>1.2.1</td>
+                    <td>Laminated Glass Panel</td>
+                    <td>4mm + PVB + 4mm low-iron tempered<br>
+                        <span class="specs">1270 × 750mm, polished edges</span></td>
+                    <td class="part-number">APEX-GL-55</td>
+                    <td>1</td>
+                    <td>$55.00</td>
+                    <td>$55.00</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/Laminated-tempered-glass_1600xxx.html" target="_blank">Qingdao Tsing Glass</a></td>
+                </tr>
+                <tr>
+                    <td>1.2.2</td>
+                    <td>AR Coating</td>
+                    <td>Anti-reflective coating, both sides<br>
+                        <span class="specs">&lt;1% reflectance</span></td>
+                    <td class="part-number">AR-COAT-2S</td>
+                    <td>1</td>
+                    <td>$18.00</td>
+                    <td>$18.00</td>
+                    <td class="supplier">Applied by glass supplier</td>
+                </tr>
+                <tr>
+                    <td>1.2.3</td>
+                    <td>IR Rejection Film</td>
+                    <td>Infrared rejection window film<br>
+                        <span class="specs">60-70% IR block, applied to inner surface</span></td>
+                    <td class="part-number">3M-PR70</td>
+                    <td>1</td>
+                    <td>$15.00</td>
+                    <td>$15.00</td>
+                    <td class="supplier"><a href="https://www.3m.com/3M/en_US/window-film/" target="_blank">3M Prestige Series</a></td>
+                </tr>
+                <tr class="subtotal">
+                    <td colspan="6" style="text-align: right;">Subtotal - Glass Assembly</td>
+                    <td>$88.00</td>
+                    <td></td>
+                </tr>
+
+                <tr class="category">
+                    <td colspan="8">1.3 Seals & Gaskets</td>
+                </tr>
+                <tr>
+                    <td>1.3.1</td>
+                    <td>Main Door Gasket</td>
+                    <td>EPDM closed-cell, UV stable, continuous<br>
+                        <span class="specs">10 × 15mm profile, ~4.2m length</span></td>
+                    <td class="part-number">EPDM-1015-BK</td>
+                    <td>5m</td>
+                    <td>$1.20/m</td>
+                    <td>$6.00</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/EPDM-rubber-gasket_1600xxx.html" target="_blank">Hebei Shengtong Rubber</a></td>
+                </tr>
+                <tr>
+                    <td>1.3.2</td>
+                    <td>Glass Seal Gasket</td>
+                    <td>Silicone U-channel, for glass edge<br>
+                        <span class="specs">8mm glass channel, ~4m length</span></td>
+                    <td class="part-number">SIL-U8-BK</td>
+                    <td>5m</td>
+                    <td>$0.80/m</td>
+                    <td>$4.00</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/Silicone-U-channel_1600xxx.html" target="_blank">Hebei Shengtong Rubber</a></td>
+                </tr>
+                <tr>
+                    <td>1.3.3</td>
+                    <td>Cable Glands IP68</td>
+                    <td>M20 thread, 316 stainless body<br>
+                        <span class="specs">6-12mm cable range</span></td>
+                    <td class="part-number">CG-M20-SS316</td>
+                    <td>3</td>
+                    <td>$2.50</td>
+                    <td>$7.50</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/IP68-cable-gland-stainless_1600xxx.html" target="_blank">Yueqing Langir Electric</a></td>
+                </tr>
+                <tr>
+                    <td>1.3.4</td>
+                    <td>ePTFE Breather Vent</td>
+                    <td>Pressure equalization membrane<br>
+                        <span class="specs">M12, IP68, prevents condensation</span></td>
+                    <td class="part-number">GORE-PMF100</td>
+                    <td>2</td>
+                    <td>$4.00</td>
+                    <td>$8.00</td>
+                    <td class="supplier"><a href="https://www.gore.com/products/protective-vents" target="_blank">Gore Protective Vents</a></td>
+                </tr>
+                <tr class="subtotal">
+                    <td colspan="6" style="text-align: right;">Subtotal - Seals & Gaskets</td>
+                    <td>$25.50</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Thermal Management System</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:5%">#</th>
+                    <th style="width:20%">Component</th>
+                    <th style="width:25%">Specification</th>
+                    <th style="width:10%">Part Number</th>
+                    <th style="width:5%">Qty</th>
+                    <th style="width:10%">Unit Cost</th>
+                    <th style="width:10%">Total</th>
+                    <th style="width:15%">Supplier</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category">
+                    <td colspan="8">2.1 Fans</td>
+                </tr>
+                <tr>
+                    <td>2.1.1</td>
+                    <td>Main Cooling Fan</td>
+                    <td>140mm × 140mm × 25mm, PWM, IP67<br>
+                        <span class="specs">12V, 0.15A, 140CFM, &lt;25dBA, SSO2 bearing</span></td>
+                    <td class="part-number">NF-A14-iPPC-3000</td>
+                    <td>2</td>
+                    <td>$28.00</td>
+                    <td>$56.00</td>
+                    <td class="supplier"><a href="https://noctua.at/en/nf-a14-industrialppc-3000-pwm" target="_blank">Noctua</a></td>
+                </tr>
+                <tr>
+                    <td>2.1.2</td>
+                    <td>Alternative: Sunon Fan</td>
+                    <td>140mm MagLev, PWM, IP68<br>
+                        <span class="specs">12V, 0.18A, 130CFM, &lt;28dBA</span></td>
+                    <td class="part-number">MF14025V1-1000U-A99</td>
+                    <td>2</td>
+                    <td>$18.00</td>
+                    <td>$36.00</td>
+                    <td class="supplier"><a href="https://www.sunon.com" target="_blank">Sunon</a></td>
+                </tr>
+                <tr>
+                    <td>2.1.3</td>
+                    <td>Fan Mounting Grommets</td>
+                    <td>Silicone anti-vibration, for 140mm<br>
+                        <span class="specs">Reduces noise transmission</span></td>
+                    <td class="part-number">NA-SAV4</td>
+                    <td>8</td>
+                    <td>$0.50</td>
+                    <td>$4.00</td>
+                    <td class="supplier"><a href="https://noctua.at" target="_blank">Noctua</a></td>
+                </tr>
+                <tr>
+                    <td>2.1.4</td>
+                    <td>Fan Guard Grill</td>
+                    <td>140mm stainless steel mesh<br>
+                        <span class="specs">Finger protection + debris guard</span></td>
+                    <td class="part-number">FG-140-SS</td>
+                    <td>2</td>
+                    <td>$2.00</td>
+                    <td>$4.00</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/Fan-guard-grill_1600xxx.html" target="_blank">Shenzhen Anping Metal</a></td>
+                </tr>
+                <tr>
+                    <td>2.1.5</td>
+                    <td>Rain Cowl / Hood</td>
+                    <td>Aluminum exhaust cowl, prevents water ingress<br>
+                        <span class="specs">For top exhaust fans</span></td>
+                    <td class="part-number">APEX-COWL-140</td>
+                    <td>1</td>
+                    <td>$6.00</td>
+                    <td>$6.00</td>
+                    <td class="supplier">Custom fabrication</td>
+                </tr>
+                <tr class="subtotal">
+                    <td colspan="6" style="text-align: right;">Subtotal - Fans (Noctua option)</td>
+                    <td>$70.00</td>
+                    <td></td>
+                </tr>
+
+                <tr class="category">
+                    <td colspan="8">2.2 Filtration</td>
+                </tr>
+                <tr>
+                    <td>2.2.1</td>
+                    <td>Intake Filter Frame</td>
+                    <td>ABS plastic, magnetic or clip-in<br>
+                        <span class="specs">Tool-free removal</span></td>
+                    <td class="part-number">APEX-FILT-FR</td>
+                    <td>2</td>
+                    <td>$3.00</td>
+                    <td>$6.00</td>
+                    <td class="supplier">Custom molding</td>
+                </tr>
+                <tr>
+                    <td>2.2.2</td>
+                    <td>Filter Media</td>
+                    <td>Automotive-grade pleated polyester<br>
+                        <span class="specs">40PPI, washable, 150×150×10mm</span></td>
+                    <td class="part-number">AF-150-40PPI</td>
+                    <td>4</td>
+                    <td>$2.00</td>
+                    <td>$8.00</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/Air-filter-foam_1600xxx.html" target="_blank">Dongguan Filter Tech</a></td>
+                </tr>
+                <tr class="subtotal">
+                    <td colspan="6" style="text-align: right;">Subtotal - Filtration</td>
+                    <td>$14.00</td>
+                    <td></td>
+                </tr>
+
+                <tr class="category">
+                    <td colspan="8">2.3 Control System</td>
+                </tr>
+                <tr>
+                    <td>2.3.1</td>
+                    <td>PWM Fan Controller Board</td>
+                    <td>MCU-based, 4-channel PWM output<br>
+                        <span class="specs">12V input, temp sensor inputs, failsafe logic</span></td>
+                    <td class="part-number">APEX-CTRL-V1</td>
+                    <td>1</td>
+                    <td>$15.00</td>
+                    <td>$15.00</td>
+                    <td class="supplier">Custom PCB (see control spec)</td>
+                </tr>
+                <tr>
+                    <td>2.3.2</td>
+                    <td>Temperature Sensor - Internal</td>
+                    <td>DS18B20 digital, waterproof probe<br>
+                        <span class="specs">-55°C to +125°C, ±0.5°C accuracy</span></td>
+                    <td class="part-number">DS18B20-WP</td>
+                    <td>2</td>
+                    <td>$1.50</td>
+                    <td>$3.00</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/DS18B20-waterproof_1600xxx.html" target="_blank">Maxim / Generic</a></td>
+                </tr>
+                <tr>
+                    <td>2.3.3</td>
+                    <td>Temperature Sensor - Exhaust</td>
+                    <td>NTC 10K thermistor, ring terminal<br>
+                        <span class="specs">For exhaust air monitoring</span></td>
+                    <td class="part-number">NTC-10K-3950</td>
+                    <td>1</td>
+                    <td>$0.80</td>
+                    <td>$0.80</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/NTC-thermistor_1600xxx.html" target="_blank">Shenzhen Ampron</a></td>
+                </tr>
+                <tr>
+                    <td>2.3.4</td>
+                    <td>Alarm Buzzer</td>
+                    <td>12V piezo buzzer, 85dB<br>
+                        <span class="specs">For thermal alarm</span></td>
+                    <td class="part-number">BZ-12V-85DB</td>
+                    <td>1</td>
+                    <td>$0.50</td>
+                    <td>$0.50</td>
+                    <td class="supplier">Generic</td>
+                </tr>
+                <tr class="subtotal">
+                    <td colspan="6" style="text-align: right;">Subtotal - Control System</td>
+                    <td>$19.30</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Electrical System</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:5%">#</th>
+                    <th style="width:20%">Component</th>
+                    <th style="width:25%">Specification</th>
+                    <th style="width:10%">Part Number</th>
+                    <th style="width:5%">Qty</th>
+                    <th style="width:10%">Unit Cost</th>
+                    <th style="width:10%">Total</th>
+                    <th style="width:15%">Supplier</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category">
+                    <td colspan="8">3.1 Power Distribution</td>
+                </tr>
+                <tr>
+                    <td>3.1.1</td>
+                    <td>IEC Power Inlet</td>
+                    <td>C14 inlet with fuse holder, 10A<br>
+                        <span class="specs">Panel mount, with switch</span></td>
+                    <td class="part-number">IEC-C14-FS</td>
+                    <td>1</td>
+                    <td>$3.50</td>
+                    <td>$3.50</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/IEC-C14-inlet_1600xxx.html" target="_blank">Yueqing Daier</a></td>
+                </tr>
+                <tr>
+                    <td>3.1.2</td>
+                    <td>Fuse</td>
+                    <td>5×20mm glass, 3A slow-blow<br>
+                        <span class="specs">Spare included</span></td>
+                    <td class="part-number">F-3A-250V-SB</td>
+                    <td>2</td>
+                    <td>$0.10</td>
+                    <td>$0.20</td>
+                    <td class="supplier">Generic</td>
+                </tr>
+                <tr>
+                    <td>3.1.3</td>
+                    <td>Surge Protector MOV</td>
+                    <td>275V MOV varistor<br>
+                        <span class="specs">Line-neutral, line-earth</span></td>
+                    <td class="part-number">MOV-275V-14D</td>
+                    <td>2</td>
+                    <td>$0.50</td>
+                    <td>$1.00</td>
+                    <td class="supplier">Generic</td>
+                </tr>
+                <tr>
+                    <td>3.1.4</td>
+                    <td>Terminal Block</td>
+                    <td>DIN rail, 3-position, 10A<br>
+                        <span class="specs">L, N, E distribution</span></td>
+                    <td class="part-number">TB-3P-10A</td>
+                    <td>1</td>
+                    <td>$2.00</td>
+                    <td>$2.00</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/DIN-terminal-block_1600xxx.html" target="_blank">Phoenix Contact / Generic</a></td>
+                </tr>
+                <tr>
+                    <td>3.1.5</td>
+                    <td>DC Power Supply</td>
+                    <td>Mean Well or equiv, 12V 3A, enclosed<br>
+                        <span class="specs">85-264VAC input, Class II</span></td>
+                    <td class="part-number">LRS-35-12</td>
+                    <td>1</td>
+                    <td>$8.00</td>
+                    <td>$8.00</td>
+                    <td class="supplier"><a href="https://www.meanwell.com/productPdf.aspx?i=459" target="_blank">Mean Well</a></td>
+                </tr>
+                <tr>
+                    <td>3.1.6</td>
+                    <td>Accessory Outlet</td>
+                    <td>UK 3-pin socket (Type G), 13A<br>
+                        <span class="specs">Panel mount, for media player etc.</span></td>
+                    <td class="part-number">UK-13A-PM</td>
+                    <td>1</td>
+                    <td>$3.00</td>
+                    <td>$3.00</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/UK-socket-panel-mount_1600xxx.html" target="_blank">Generic</a></td>
+                </tr>
+                <tr class="subtotal">
+                    <td colspan="6" style="text-align: right;">Subtotal - Power Distribution</td>
+                    <td>$17.70</td>
+                    <td></td>
+                </tr>
+
+                <tr class="category">
+                    <td colspan="8">3.2 Wiring & Connectors</td>
+                </tr>
+                <tr>
+                    <td>3.2.1</td>
+                    <td>Mains Cable</td>
+                    <td>3G1.0mm², heat resistant (105°C)<br>
+                        <span class="specs">Black, ~2m per unit</span></td>
+                    <td class="part-number">H05VV-F-3G1.0</td>
+                    <td>2m</td>
+                    <td>$0.80/m</td>
+                    <td>$1.60</td>
+                    <td class="supplier">Generic</td>
+                </tr>
+                <tr>
+                    <td>3.2.2</td>
+                    <td>DC Fan Cable</td>
+                    <td>4-wire PWM, 22AWG, shielded<br>
+                        <span class="specs">~1m per fan</span></td>
+                    <td class="part-number">PWM-4W-22AWG</td>
+                    <td>3m</td>
+                    <td>$0.50/m</td>
+                    <td>$1.50</td>
+                    <td class="supplier">Generic</td>
+                </tr>
+                <tr>
+                    <td>3.2.3</td>
+                    <td>Fan Connector</td>
+                    <td>4-pin PWM header, male + female<br>
+                        <span class="specs">Standard PC fan connector</span></td>
+                    <td class="part-number">FAN-4P-MF</td>
+                    <td>4</td>
+                    <td>$0.30</td>
+                    <td>$1.20</td>
+                    <td class="supplier">Generic</td>
+                </tr>
+                <tr>
+                    <td>3.2.4</td>
+                    <td>Cable Ties</td>
+                    <td>Nylon, UV resistant, 150mm<br>
+                        <span class="specs">Black</span></td>
+                    <td class="part-number">CT-150-UV</td>
+                    <td>20</td>
+                    <td>$0.02</td>
+                    <td>$0.40</td>
+                    <td class="supplier">Generic</td>
+                </tr>
+                <tr>
+                    <td>3.2.5</td>
+                    <td>Adhesive Cable Mounts</td>
+                    <td>3M VHB high-temp<br>
+                        <span class="specs">For cable management</span></td>
+                    <td class="part-number">3M-VHB-CM</td>
+                    <td>10</td>
+                    <td>$0.15</td>
+                    <td>$1.50</td>
+                    <td class="supplier"><a href="https://www.3m.com" target="_blank">3M</a></td>
+                </tr>
+                <tr>
+                    <td>3.2.6</td>
+                    <td>Earth Bonding Strap</td>
+                    <td>Tinned copper braid, 10mm<br>
+                        <span class="specs">Panel to frame bonding</span></td>
+                    <td class="part-number">EB-10-TC</td>
+                    <td>2</td>
+                    <td>$0.50</td>
+                    <td>$1.00</td>
+                    <td class="supplier">Generic</td>
+                </tr>
+                <tr class="subtotal">
+                    <td colspan="6" style="text-align: right;">Subtotal - Wiring & Connectors</td>
+                    <td>$7.20</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>4. Hardware & Fasteners</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:5%">#</th>
+                    <th style="width:20%">Component</th>
+                    <th style="width:25%">Specification</th>
+                    <th style="width:10%">Part Number</th>
+                    <th style="width:5%">Qty</th>
+                    <th style="width:10%">Unit Cost</th>
+                    <th style="width:10%">Total</th>
+                    <th style="width:15%">Supplier</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category">
+                    <td colspan="8">4.1 Fasteners (316 Stainless)</td>
+                </tr>
+                <tr>
+                    <td>4.1.1</td>
+                    <td>Frame Screws</td>
+                    <td>M4 × 10mm pan head, A4-316<br>
+                        <span class="specs">External frame assembly</span></td>
+                    <td class="part-number">M4-10-PH-A4</td>
+                    <td>40</td>
+                    <td>$0.08</td>
+                    <td>$3.20</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/316-stainless-screw_1600xxx.html" target="_blank">Jiaxing Haina Fastener</a></td>
+                </tr>
+                <tr>
+                    <td>4.1.2</td>
+                    <td>Back Panel Screws</td>
+                    <td>M5 × 12mm cap head, A4-316<br>
+                        <span class="specs">Captive screws preferred</span></td>
+                    <td class="part-number">M5-12-CH-A4</td>
+                    <td>12</td>
+                    <td>$0.12</td>
+                    <td>$1.44</td>
+                    <td class="supplier">Jiaxing Haina Fastener</td>
+                </tr>
+                <tr>
+                    <td>4.1.3</td>
+                    <td>VESA Screws</td>
+                    <td>M6 × 15mm, A4-316 with washers<br>
+                        <span class="specs">TV mounting</span></td>
+                    <td class="part-number">M6-15-A4-KIT</td>
+                    <td>8</td>
+                    <td>$0.25</td>
+                    <td>$2.00</td>
+                    <td class="supplier">Jiaxing Haina Fastener</td>
+                </tr>
+                <tr>
+                    <td>4.1.4</td>
+                    <td>Hinge Screws</td>
+                    <td>M4 × 8mm countersunk, A4-316</td>
+                    <td class="part-number">M4-8-CS-A4</td>
+                    <td>8</td>
+                    <td>$0.08</td>
+                    <td>$0.64</td>
+                    <td class="supplier">Jiaxing Haina Fastener</td>
+                </tr>
+                <tr>
+                    <td>4.1.5</td>
+                    <td>Nylon Isolation Washers</td>
+                    <td>M4 and M5, for dissimilar metals</td>
+                    <td class="part-number">NYL-M4M5-KIT</td>
+                    <td>50</td>
+                    <td>$0.02</td>
+                    <td>$1.00</td>
+                    <td class="supplier">Generic</td>
+                </tr>
+                <tr>
+                    <td>4.1.6</td>
+                    <td>Threaded Inserts</td>
+                    <td>M4 press-fit for aluminum</td>
+                    <td class="part-number">TI-M4-AL</td>
+                    <td>20</td>
+                    <td>$0.10</td>
+                    <td>$2.00</td>
+                    <td class="supplier">Generic</td>
+                </tr>
+                <tr class="subtotal">
+                    <td colspan="6" style="text-align: right;">Subtotal - Fasteners</td>
+                    <td>$10.28</td>
+                    <td></td>
+                </tr>
+
+                <tr class="category">
+                    <td colspan="8">4.2 Door Hardware & Security</td>
+                </tr>
+                <tr>
+                    <td>4.2.1</td>
+                    <td>Concealed Hinges</td>
+                    <td>3-knuckle concealed hinge, 316 SS<br>
+                        <span class="specs">110° opening, soft-close</span></td>
+                    <td class="part-number">HINGE-316-CC</td>
+                    <td>3</td>
+                    <td>$4.50</td>
+                    <td>$13.50</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/316-stainless-concealed-hinge_1600xxx.html" target="_blank">Foshan Lelang Hardware</a></td>
+                </tr>
+                <tr>
+                    <td>4.2.2</td>
+                    <td>Compression Latches</td>
+                    <td>Over-center draw latch, 316 SS<br>
+                        <span class="specs">Adjustable keeper, 200N holding force</span></td>
+                    <td class="part-number">LATCH-316-ADJ</td>
+                    <td>4</td>
+                    <td>$3.80</td>
+                    <td>$15.20</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/Stainless-draw-latch_1600xxx.html" target="_blank">Ningbo Haishu Xincheng</a></td>
+                </tr>
+                <tr>
+                    <td>4.2.3</td>
+                    <td>Tubular Cam Locks</td>
+                    <td>19mm diameter, 316 SS body<br>
+                        <span class="specs">Keyed alike, 3 keys each</span></td>
+                    <td class="part-number">LOCK-TUB-316</td>
+                    <td>2</td>
+                    <td>$5.50</td>
+                    <td>$11.00</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/Stainless-tubular-cam-lock_1600xxx.html" target="_blank">Ningbo Make Security</a></td>
+                </tr>
+                <tr>
+                    <td>4.2.4</td>
+                    <td>Padlock Hasps</td>
+                    <td>Weldable hasp plate, 316 SS<br>
+                        <span class="specs">10mm shackle hole</span></td>
+                    <td class="part-number">HASP-316-10</td>
+                    <td>2</td>
+                    <td>$1.50</td>
+                    <td>$3.00</td>
+                    <td class="supplier">Generic</td>
+                </tr>
+                <tr>
+                    <td>4.2.5</td>
+                    <td>Magnetic Door Catch</td>
+                    <td>Heavy duty magnetic catch, 316 SS<br>
+                        <span class="specs">Hold-open when servicing TV</span></td>
+                    <td class="part-number">MAG-CATCH-SS</td>
+                    <td>1</td>
+                    <td>$2.50</td>
+                    <td>$2.50</td>
+                    <td class="supplier">Generic</td>
+                </tr>
+                <tr class="subtotal">
+                    <td colspan="6" style="text-align: right;">Subtotal - Door Hardware</td>
+                    <td>$45.20</td>
+                    <td></td>
+                </tr>
+
+                <tr class="category">
+                    <td colspan="8">4.3 Mounting System</td>
+                </tr>
+                <tr>
+                    <td>4.3.1</td>
+                    <td>Full-Motion Articulating Arm</td>
+                    <td>Dual-arm mount, 500mm extension<br>
+                        <span class="specs">±90° swivel, +5°/-15° tilt, 50kg rated</span></td>
+                    <td class="part-number">MOUNT-FM-50KG</td>
+                    <td>1</td>
+                    <td>$28.00</td>
+                    <td>$28.00</td>
+                    <td class="supplier"><a href="https://www.alibaba.com/product-detail/Full-motion-TV-mount_1600xxx.html" target="_blank">Ningbo Highstar</a></td>
+                </tr>
+                <tr>
+                    <td>4.3.2</td>
+                    <td>Wall Plate</td>
+                    <td>Heavy-duty steel wall plate<br>
+                        <span class="specs">4mm steel, powder coated</span></td>
+                    <td class="part-number">APEX-WP-55</td>
+                    <td>1</td>
+                    <td>$6.00</td>
+                    <td>$6.00</td>
+                    <td class="supplier">Custom fabrication</td>
+                </tr>
+                <tr>
+                    <td>4.3.3</td>
+                    <td>Wall Anchors</td>
+                    <td>M10 concrete anchors, 316 SS<br>
+                        <span class="specs">For masonry mounting, 50kg each</span></td>
+                    <td class="part-number">M10-CONC-SS</td>
+                    <td>6</td>
+                    <td>$0.80</td>
+                    <td>$4.80</td>
+                    <td class="supplier">Generic</td>
+                </tr>
+                <tr class="subtotal">
+                    <td colspan="6" style="text-align: right;">Subtotal - Mounting System</td>
+                    <td>$38.80</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>5. Packaging & Documentation</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:5%">#</th>
+                    <th style="width:20%">Component</th>
+                    <th style="width:25%">Specification</th>
+                    <th style="width:10%">Part Number</th>
+                    <th style="width:5%">Qty</th>
+                    <th style="width:10%">Unit Cost</th>
+                    <th style="width:10%">Total</th>
+                    <th style="width:15%">Supplier</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>5.1</td>
+                    <td>Carton Box</td>
+                    <td>Double-wall corrugated, custom size<br>
+                        <span class="specs">1400 × 900 × 200mm</span></td>
+                    <td class="part-number">BOX-55-DW</td>
+                    <td>1</td>
+                    <td>$5.00</td>
+                    <td>$5.00</td>
+                    <td class="supplier">Local packaging supplier</td>
+                </tr>
+                <tr>
+                    <td>5.2</td>
+                    <td>Foam Corners</td>
+                    <td>EPE foam corner protectors<br>
+                        <span class="specs">Custom molded, set of 4</span></td>
+                    <td class="part-number">FOAM-55-SET</td>
+                    <td>1</td>
+                    <td>$4.00</td>
+                    <td>$4.00</td>
+                    <td class="supplier">Local packaging supplier</td>
+                </tr>
+                <tr>
+                    <td>5.3</td>
+                    <td>Glass Protection</td>
+                    <td>Foam frame + cardboard sheet<br>
+                        <span class="specs">Front face protection</span></td>
+                    <td class="part-number">GP-55</td>
+                    <td>1</td>
+                    <td>$2.00</td>
+                    <td>$2.00</td>
+                    <td class="supplier">Local packaging supplier</td>
+                </tr>
+                <tr>
+                    <td>5.4</td>
+                    <td>Accessories Box</td>
+                    <td>Small box for hardware kit<br>
+                        <span class="specs">Contains screws, anchors, manual</span></td>
+                    <td class="part-number">ACCBOX-55</td>
+                    <td>1</td>
+                    <td>$1.00</td>
+                    <td>$1.00</td>
+                    <td class="supplier">Local packaging supplier</td>
+                </tr>
+                <tr>
+                    <td>5.5</td>
+                    <td>Installation Manual</td>
+                    <td>Printed, full color, multi-language<br>
+                        <span class="specs">EN/AR</span></td>
+                    <td class="part-number">MAN-APEX-55</td>
+                    <td>1</td>
+                    <td>$0.50</td>
+                    <td>$0.50</td>
+                    <td class="supplier">Local printing</td>
+                </tr>
+                <tr>
+                    <td>5.6</td>
+                    <td>Clearance Gauge</td>
+                    <td>Plastic template for recess installation<br>
+                        <span class="specs">Shows minimum clearances</span></td>
+                    <td class="part-number">GAUGE-55</td>
+                    <td>1</td>
+                    <td>$0.50</td>
+                    <td>$0.50</td>
+                    <td class="supplier">Custom molding</td>
+                </tr>
+                <tr>
+                    <td>5.7</td>
+                    <td>Spare Filter</td>
+                    <td>Extra filter included</td>
+                    <td class="part-number">AF-150-40PPI</td>
+                    <td>2</td>
+                    <td>$2.00</td>
+                    <td>$4.00</td>
+                    <td class="supplier">See 2.2.2</td>
+                </tr>
+                <tr class="subtotal">
+                    <td colspan="6" style="text-align: right;">Subtotal - Packaging</td>
+                    <td>$17.00</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Cost Summary - ATE-55</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Subtotal (USD)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1.1 Frame & Panels</td>
+                    <td>$88.00</td>
+                </tr>
+                <tr>
+                    <td>1.2 Glass Assembly</td>
+                    <td>$88.00</td>
+                </tr>
+                <tr>
+                    <td>1.3 Seals & Gaskets</td>
+                    <td>$25.50</td>
+                </tr>
+                <tr>
+                    <td>2.1 Fans (Noctua)</td>
+                    <td>$70.00</td>
+                </tr>
+                <tr>
+                    <td>2.2 Filtration</td>
+                    <td>$14.00</td>
+                </tr>
+                <tr>
+                    <td>2.3 Control System</td>
+                    <td>$19.30</td>
+                </tr>
+                <tr>
+                    <td>3.1 Power Distribution</td>
+                    <td>$17.70</td>
+                </tr>
+                <tr>
+                    <td>3.2 Wiring & Connectors</td>
+                    <td>$7.20</td>
+                </tr>
+                <tr>
+                    <td>4.1 Fasteners</td>
+                    <td>$10.28</td>
+                </tr>
+                <tr>
+                    <td>4.2 Door Hardware & Security</td>
+                    <td>$45.20</td>
+                </tr>
+                <tr>
+                    <td>4.3 Mounting System</td>
+                    <td>$38.80</td>
+                </tr>
+                <tr>
+                    <td>5. Packaging & Docs</td>
+                    <td>$17.00</td>
+                </tr>
+                <tr class="subtotal">
+                    <td><strong>BOM Total</strong></td>
+                    <td><strong>$440.98</strong></td>
+                </tr>
+                <tr>
+                    <td>Assembly Labor (est.)</td>
+                    <td>$30.00</td>
+                </tr>
+                <tr>
+                    <td>QC / Testing</td>
+                    <td>$10.00</td>
+                </tr>
+                <tr class="total">
+                    <td>Estimated Unit Cost</td>
+                    <td>$480.98</td>
+                </tr>
+                <tr class="total">
+                    <td>Target FOB Price</td>
+                    <td>$500 - $550</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note" style="margin-top: 2rem;">
+            <strong>Volume Pricing Notes:</strong>
+            <ul>
+                <li>100 units: ~$450/unit</li>
+                <li>500 units: ~$420/unit (7% reduction)</li>
+                <li>1,000 units: ~$380/unit (15% reduction)</li>
+            </ul>
+            <p style="margin-top: 1rem;">Pricing subject to component availability and exchange rates. Request formal quotes from suppliers.</p>
+        </div>
+
+        <footer style="text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid var(--border); color: var(--text-muted);">
+            <p>Apex TV Enclosures | Detailed BOM v2.0 | December 2025</p>
+        </footer>
+    </div>
+</body>
+</html>

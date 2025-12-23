@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex TV Enclosures - Fan Control Logic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1428a0;
+            --text: #1a1a1a;
+            --text-muted: #6b7280;
+            --bg: #ffffff;
+            --bg-alt: #f8f9fa;
+            --border: #e5e7eb;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+        }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .subtitle { opacity: 0.9; }
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        h3 { margin: 1.5rem 0 1rem; }
+        .diagram-container {
+            background: var(--bg-alt);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        .diagram-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        code {
+            font-family: 'Fira Code', monospace;
+            background: var(--bg-alt);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        .comment { color: #94a3b8; }
+        .keyword { color: #c084fc; }
+        .function { color: #38bdf8; }
+        .number { color: #fbbf24; }
+        .string { color: #4ade80; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+        th { background: var(--bg-alt); }
+        .note {
+            background: #dbeafe;
+            padding: 1rem;
+            border-left: 4px solid var(--primary);
+            margin: 1rem 0;
+        }
+        .warning {
+            background: #fef3c7;
+            padding: 1rem;
+            border-left: 4px solid var(--warning);
+            margin: 1rem 0;
+        }
+        .critical {
+            background: #fee2e2;
+            padding: 1rem;
+            border-left: 4px solid var(--danger);
+            margin: 1rem 0;
+        }
+        .state-diagram rect { cursor: pointer; }
+        .state-diagram rect:hover { opacity: 0.8; }
+
+        @media print {
+            .doc-nav { display: none; }
+        }
+
+        /* Document Navigation */
+        .doc-nav {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1rem 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .doc-nav h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+        .doc-nav-grid {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .doc-card {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        .doc-card:hover {
+            border-color: var(--primary);
+            background: #f0f4ff;
+        }
+        .doc-card.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PWM Fan Control Logic</h1>
+        <div class="subtitle">Apex TV Enclosures | Firmware Specification | Version 2.0</div>
+    </header>
+
+    <nav class="doc-nav">
+        <h3>Manufacturing Documentation</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">🏠 Website</a>
+            <a href="specification.html" class="doc-card">📋 Specification</a>
+            <a href="bom-detailed.html" class="doc-card">📦 Bill of Materials</a>
+            <a href="wiring-diagram.html" class="doc-card">⚡ Wiring Diagram</a>
+            <a href="control-logic.html" class="doc-card active">🔧 Control Logic</a>
+            <a href="qc-checklist.html" class="doc-card">✅ QC Checklist</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>1. Control System Overview</h2>
+        <p>The Apex thermal management system uses a microcontroller-based PWM fan controller to maintain optimal internal temperature while minimizing noise. Unlike simple on/off thermostat control, this system provides smooth, proportional fan speed adjustment.</p>
+
+        <div class="warning">
+            <strong>Competitor Limitation:</strong> Nearest competitor uses a simple on/off thermostat at 30°C. This causes:
+            <ul style="margin: 0.5rem 0 0 1.5rem;">
+                <li>Sudden fan noise when threshold is crossed (0% → 100% instantly)</li>
+                <li>Constant on/off cycling near the setpoint</li>
+                <li>Full-speed fans even when 20% would suffice</li>
+                <li>No proportional control - binary only</li>
+            </ul>
+        </div>
+
+        <div class="note">
+            <strong>Apex PWM Advantages:</strong> Same 30°C start point, but with intelligent ramping:
+            <ul style="margin: 0.5rem 0 0 1.5rem;">
+                <li>Fans start at 30°C at <strong>20% PWM</strong> (near-silent)</li>
+                <li>Gradual ramp: 50% at 40°C, 100% at 50°C</li>
+                <li>Protects TV (rated 0-40°C) with headroom</li>
+                <li>No sudden speed changes - smooth adjustment</li>
+                <li>Post-cooling after TV power-off</li>
+            </ul>
+        </div>
+
+        <h2>2. System Parameters</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                    <th>Description</th>
+                    <th>vs Competitor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>TEMP_START</code></td>
+                    <td>30°C</td>
+                    <td>Fans begin at 20% PWM (near-silent)</td>
+                    <td style="color: #059669;">Same threshold, but 20% vs 100%</td>
+                </tr>
+                <tr>
+                    <td><code>TEMP_MID</code></td>
+                    <td>40°C</td>
+                    <td>Fans at 50% PWM</td>
+                    <td style="color: #059669;">TV's max rated ambient temp</td>
+                </tr>
+                <tr>
+                    <td><code>TEMP_FULL</code></td>
+                    <td>50°C</td>
+                    <td>Fans reach 100% PWM</td>
+                    <td style="color: #059669;">Linear ramp 30-50°C</td>
+                </tr>
+                <tr>
+                    <td><code>TEMP_ALARM</code></td>
+                    <td>55°C</td>
+                    <td>Warning LED, maintain 100% fans</td>
+                    <td style="color: #d97706;">TV at risk - alert user</td>
+                </tr>
+                <tr>
+                    <td><code>TEMP_CRITICAL</code></td>
+                    <td>65°C</td>
+                    <td>Emergency - signal TV shutdown</td>
+                    <td style="color: #dc2626;">Protect TV from damage</td>
+                </tr>
+                <tr>
+                    <td><code>PWM_MIN</code></td>
+                    <td>20%</td>
+                    <td>Minimum fan speed (quiet operation)</td>
+                </tr>
+                <tr>
+                    <td><code>PWM_MAX</code></td>
+                    <td>100%</td>
+                    <td>Maximum fan speed</td>
+                </tr>
+                <tr>
+                    <td><code>RAMP_RATE</code></td>
+                    <td>5%/sec</td>
+                    <td>Maximum PWM change per second</td>
+                </tr>
+                <tr>
+                    <td><code>SAMPLE_INTERVAL</code></td>
+                    <td>1000ms</td>
+                    <td>Temperature sampling rate</td>
+                </tr>
+                <tr>
+                    <td><code>POST_COOL_TIME</code></td>
+                    <td>300 sec</td>
+                    <td>Cooling time after TV off</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. State Machine</h2>
+        <div class="diagram-container">
+            <div class="diagram-title">Figure 1: Controller State Machine</div>
+            <svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg" class="state-diagram">
+                <!-- IDLE State -->
+                <rect x="50" y="200" width="120" height="60" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="8"/>
+                <text x="110" y="225" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">IDLE</text>
+                <text x="110" y="245" text-anchor="middle" font-size="9" fill="#3b82f6">Fans at minimum</text>
+
+                <!-- NORMAL State -->
+                <rect x="250" y="200" width="120" height="60" fill="#dcfce7" stroke="#16a34a" stroke-width="2" rx="8"/>
+                <text x="310" y="225" text-anchor="middle" font-size="12" font-weight="600" fill="#166534">NORMAL</text>
+                <text x="310" y="245" text-anchor="middle" font-size="9" fill="#22c55e">Proportional control</text>
+
+                <!-- BOOST State -->
+                <rect x="450" y="200" width="120" height="60" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="8"/>
+                <text x="510" y="225" text-anchor="middle" font-size="12" font-weight="600" fill="#92400e">BOOST</text>
+                <text x="510" y="245" text-anchor="middle" font-size="9" fill="#d97706">High speed cooling</text>
+
+                <!-- ALARM State -->
+                <rect x="650" y="200" width="120" height="60" fill="#fee2e2" stroke="#dc2626" stroke-width="2" rx="8"/>
+                <text x="710" y="225" text-anchor="middle" font-size="12" font-weight="600" fill="#991b1b">ALARM</text>
+                <text x="710" y="245" text-anchor="middle" font-size="9" fill="#dc2626">Max speed + buzzer</text>
+
+                <!-- CRITICAL State -->
+                <rect x="650" y="350" width="120" height="60" fill="#7f1d1d" stroke="#dc2626" stroke-width="3" rx="8"/>
+                <text x="710" y="375" text-anchor="middle" font-size="12" font-weight="600" fill="white">CRITICAL</text>
+                <text x="710" y="395" text-anchor="middle" font-size="9" fill="#fecaca">Shutdown!</text>
+
+                <!-- POST_COOL State -->
+                <rect x="250" y="350" width="120" height="60" fill="#e0e7ff" stroke="#6366f1" stroke-width="2" rx="8"/>
+                <text x="310" y="375" text-anchor="middle" font-size="12" font-weight="600" fill="#4338ca">POST_COOL</text>
+                <text x="310" y="395" text-anchor="middle" font-size="9" fill="#6366f1">Cooldown period</text>
+
+                <!-- START -->
+                <circle cx="110" cy="100" r="20" fill="#1e293b" stroke="#1e293b" stroke-width="2"/>
+                <text x="110" y="105" text-anchor="middle" font-size="10" fill="white">START</text>
+                <line x1="110" y1="120" x2="110" y2="200" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)"/>
+
+                <!-- Transitions -->
+                <defs>
+                    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+                    </marker>
+                </defs>
+
+                <!-- IDLE -> NORMAL -->
+                <path d="M170 220 Q210 220 250 220" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+                <text x="210" y="210" text-anchor="middle" font-size="8" fill="#64748b">T > 28°C</text>
+
+                <!-- NORMAL -> IDLE -->
+                <path d="M250 250 Q210 270 170 250" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+                <text x="210" y="280" text-anchor="middle" font-size="8" fill="#64748b">T < 25°C</text>
+
+                <!-- NORMAL -> BOOST -->
+                <path d="M370 220 Q410 220 450 220" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+                <text x="410" y="210" text-anchor="middle" font-size="8" fill="#64748b">T > 45°C</text>
+
+                <!-- BOOST -> NORMAL -->
+                <path d="M450 250 Q410 270 370 250" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+                <text x="410" y="280" text-anchor="middle" font-size="8" fill="#64748b">T < 42°C</text>
+
+                <!-- BOOST -> ALARM -->
+                <path d="M570 220 Q610 220 650 220" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+                <text x="610" y="210" text-anchor="middle" font-size="8" fill="#64748b">T > 55°C</text>
+
+                <!-- ALARM -> BOOST -->
+                <path d="M650 250 Q610 270 570 250" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+                <text x="610" y="280" text-anchor="middle" font-size="8" fill="#64748b">T < 50°C</text>
+
+                <!-- ALARM -> CRITICAL -->
+                <path d="M710 260 L710 350" stroke="#dc2626" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+                <text x="730" y="310" font-size="8" fill="#dc2626">T > 65°C</text>
+                <text x="730" y="322" font-size="8" fill="#dc2626">for 60s</text>
+
+                <!-- NORMAL -> POST_COOL -->
+                <path d="M310 260 L310 350" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+                <text x="320" y="310" font-size="8" fill="#64748b">TV power off</text>
+
+                <!-- POST_COOL -> IDLE -->
+                <path d="M250 380 Q180 380 110 280" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+                <text x="150" y="340" font-size="8" fill="#64748b">Timer expired</text>
+
+                <!-- Legend -->
+                <rect x="50" y="430" width="400" height="50" fill="#f8fafc" stroke="#e5e7eb" stroke-width="1" rx="4"/>
+                <text x="70" y="455" font-size="10" fill="#64748b">Transition conditions include 3°C hysteresis to prevent oscillation</text>
+            </svg>
+        </div>
+
+        <h2>4. PWM Calculation Algorithm</h2>
+        <div class="diagram-container">
+            <div class="diagram-title">Figure 2: PWM vs Temperature Curve</div>
+            <svg viewBox="0 0 600 350" xmlns="http://www.w3.org/2000/svg">
+                <!-- Grid -->
+                <defs>
+                    <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e5e7eb" stroke-width="0.5"/>
+                    </pattern>
+                </defs>
+                <rect x="80" y="30" width="480" height="240" fill="url(#smallGrid)"/>
+
+                <!-- Axes -->
+                <line x1="80" y1="270" x2="560" y2="270" stroke="#1e293b" stroke-width="2"/>
+                <line x1="80" y1="30" x2="80" y2="270" stroke="#1e293b" stroke-width="2"/>
+
+                <!-- Y-axis labels (PWM) -->
+                <text x="70" y="275" text-anchor="end" font-size="10" fill="#64748b">0%</text>
+                <text x="70" y="230" text-anchor="end" font-size="10" fill="#64748b">20%</text>
+                <text x="70" y="150" text-anchor="end" font-size="10" fill="#64748b">60%</text>
+                <text x="70" y="70" text-anchor="end" font-size="10" fill="#64748b">100%</text>
+                <text x="40" y="150" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b" transform="rotate(-90, 40, 150)">PWM Duty Cycle</text>
+
+                <!-- X-axis labels (Temperature) -->
+                <text x="80" y="290" text-anchor="middle" font-size="10" fill="#64748b">20°C</text>
+                <text x="180" y="290" text-anchor="middle" font-size="10" fill="#64748b">28°C</text>
+                <text x="280" y="290" text-anchor="middle" font-size="10" fill="#64748b">38°C</text>
+                <text x="380" y="290" text-anchor="middle" font-size="10" fill="#64748b">45°C</text>
+                <text x="460" y="290" text-anchor="middle" font-size="10" fill="#64748b">55°C</text>
+                <text x="540" y="290" text-anchor="middle" font-size="10" fill="#64748b">65°C</text>
+                <text x="320" y="320" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">Internal Temperature</text>
+
+                <!-- PWM curve -->
+                <path d="M80 230 L180 230 L380 70 L560 70" stroke="#2563eb" stroke-width="3" fill="none"/>
+
+                <!-- Zone fills -->
+                <rect x="80" y="30" width="100" height="240" fill="#dbeafe" opacity="0.3"/>
+                <rect x="180" y="30" width="200" height="240" fill="#dcfce7" opacity="0.3"/>
+                <rect x="380" y="30" width="80" height="240" fill="#fef3c7" opacity="0.3"/>
+                <rect x="460" y="30" width="80" height="240" fill="#fee2e2" opacity="0.3"/>
+                <rect x="540" y="30" width="20" height="240" fill="#7f1d1d" opacity="0.3"/>
+
+                <!-- Zone labels -->
+                <text x="130" y="50" text-anchor="middle" font-size="10" font-weight="600" fill="#2563eb">IDLE</text>
+                <text x="280" y="50" text-anchor="middle" font-size="10" font-weight="600" fill="#16a34a">NORMAL</text>
+                <text x="420" y="50" text-anchor="middle" font-size="10" font-weight="600" fill="#d97706">BOOST</text>
+                <text x="500" y="50" text-anchor="middle" font-size="10" font-weight="600" fill="#dc2626">ALARM</text>
+
+                <!-- Key points -->
+                <circle cx="180" cy="230" r="5" fill="#2563eb"/>
+                <text x="180" y="250" text-anchor="middle" font-size="9" fill="#2563eb">20%</text>
+
+                <circle cx="380" cy="70" r="5" fill="#16a34a"/>
+                <text x="395" y="90" font-size="9" fill="#16a34a">100%</text>
+            </svg>
+        </div>
+
+        <h3>PWM Calculation Formula</h3>
+        <pre><code><span class="comment">// Calculate PWM duty cycle based on temperature</span>
+<span class="keyword">function</span> <span class="function">calculatePWM</span>(temp) {
+    <span class="keyword">if</span> (temp <= TEMP_MIN) {
+        <span class="keyword">return</span> PWM_MIN;  <span class="comment">// 20%</span>
+    }
+    <span class="keyword">else if</span> (temp >= TEMP_MAX) {
+        <span class="keyword">return</span> PWM_MAX;  <span class="comment">// 100%</span>
+    }
+    <span class="keyword">else</span> {
+        <span class="comment">// Linear interpolation between MIN and MAX</span>
+        <span class="keyword">let</span> range = TEMP_MAX - TEMP_MIN;  <span class="comment">// 45 - 28 = 17°C</span>
+        <span class="keyword">let</span> offset = temp - TEMP_MIN;
+        <span class="keyword">let</span> pwm = PWM_MIN + (offset / range) * (PWM_MAX - PWM_MIN);
+        <span class="keyword">return</span> pwm;
+    }
+}</code></pre>
+
+        <h2>5. Main Control Loop</h2>
+        <pre><code><span class="comment">// Main control loop - runs every SAMPLE_INTERVAL (1000ms)</span>
+<span class="keyword">function</span> <span class="function">controlLoop</span>() {
+    <span class="comment">// 1. Read temperature sensors</span>
+    <span class="keyword">let</span> tempInternal = <span class="function">readSensor</span>(SENSOR_INTERNAL);
+    <span class="keyword">let</span> tempExhaust = <span class="function">readSensor</span>(SENSOR_EXHAUST);
+
+    <span class="comment">// 2. Use highest temperature for control</span>
+    <span class="keyword">let</span> tempControl = <span class="function">max</span>(tempInternal, tempExhaust);
+
+    <span class="comment">// 3. Check for critical condition</span>
+    <span class="keyword">if</span> (tempControl >= TEMP_CRITICAL) {
+        criticalCounter++;
+        <span class="keyword">if</span> (criticalCounter >= <span class="number">60</span>) {  <span class="comment">// 60 seconds at critical</span>
+            <span class="function">enterCriticalState</span>();
+            <span class="keyword">return</span>;
+        }
+    } <span class="keyword">else</span> {
+        criticalCounter = <span class="number">0</span>;
+    }
+
+    <span class="comment">// 4. Update state machine</span>
+    <span class="function">updateState</span>(tempControl);
+
+    <span class="comment">// 5. Calculate target PWM based on state</span>
+    <span class="keyword">let</span> targetPWM;
+    <span class="keyword">switch</span> (currentState) {
+        <span class="keyword">case</span> STATE_IDLE:
+            targetPWM = PWM_MIN;
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> STATE_NORMAL:
+            targetPWM = <span class="function">calculatePWM</span>(tempControl);
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> STATE_BOOST:
+        <span class="keyword">case</span> STATE_ALARM:
+            targetPWM = PWM_MAX;
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> STATE_POST_COOL:
+            targetPWM = <span class="number">50</span>;  <span class="comment">// Medium speed cooldown</span>
+            <span class="keyword">break</span>;
+    }
+
+    <span class="comment">// 6. Apply smooth ramping</span>
+    currentPWM = <span class="function">rampTo</span>(currentPWM, targetPWM, RAMP_RATE);
+
+    <span class="comment">// 7. Set fan speed</span>
+    <span class="function">setFanPWM</span>(FAN1, currentPWM);
+    <span class="function">setFanPWM</span>(FAN2, currentPWM);
+
+    <span class="comment">// 8. Handle alarm</span>
+    <span class="keyword">if</span> (currentState == STATE_ALARM) {
+        <span class="function">activateBuzzer</span>(<span class="keyword">true</span>);
+    } <span class="keyword">else</span> {
+        <span class="function">activateBuzzer</span>(<span class="keyword">false</span>);
+    }
+}
+
+<span class="comment">// Smooth ramping function - prevents sudden speed changes</span>
+<span class="keyword">function</span> <span class="function">rampTo</span>(current, target, rate) {
+    <span class="keyword">let</span> diff = target - current;
+    <span class="keyword">if</span> (<span class="function">abs</span>(diff) <= rate) {
+        <span class="keyword">return</span> target;
+    }
+    <span class="keyword">return</span> current + <span class="function">sign</span>(diff) * rate;
+}</code></pre>
+
+        <h2>6. Failsafe Behavior</h2>
+        <div class="critical">
+            <strong>Critical Safety Feature:</strong> The controller includes hardware watchdog and failsafe logic.
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Condition</th>
+                    <th>Detection</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Sensor failure</td>
+                    <td>Reading out of range (-40 to +85°C)</td>
+                    <td>Set fans to 100%, activate alarm</td>
+                </tr>
+                <tr>
+                    <td>Fan failure</td>
+                    <td>Tachometer reads 0 RPM when PWM > 30%</td>
+                    <td>Activate alarm, log error</td>
+                </tr>
+                <tr>
+                    <td>Over-temperature</td>
+                    <td>Internal temp > 65°C for 60 seconds</td>
+                    <td>Optional: Cut TV power relay</td>
+                </tr>
+                <tr>
+                    <td>MCU crash</td>
+                    <td>Watchdog timer expires (2 seconds)</td>
+                    <td>Hardware reset, fans default to 100%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>7. Hardware Requirements</h2>
+        <h3>7.1 Microcontroller</h3>
+        <ul style="margin: 1rem 0; padding-left: 2rem;">
+            <li><strong>Recommended:</strong> ATmega328P or ESP32-C3</li>
+            <li>2+ PWM outputs (25kHz capable for silent operation)</li>
+            <li>1-Wire interface for DS18B20 sensors</li>
+            <li>Digital I/O for alarm output</li>
+            <li>Optional: WiFi/BLE for remote monitoring (ESP32)</li>
+        </ul>
+
+        <h3>7.2 PWM Frequency</h3>
+        <div class="warning">
+            <strong>Important:</strong> Use 25kHz PWM frequency for silent fan operation.
+            Lower frequencies (e.g., 490Hz Arduino default) cause audible whine.
+        </div>
+
+        <h3>7.3 Suggested Components</h3>
+        <table>
+            <tr><th>Component</th><th>Part Number</th><th>Notes</th></tr>
+            <tr><td>MCU</td><td>ATmega328P-AU</td><td>Arduino compatible</td></tr>
+            <tr><td>Voltage Regulator</td><td>AMS1117-3.3</td><td>3.3V for sensors</td></tr>
+            <tr><td>MOSFET Driver</td><td>IRLZ44N</td><td>For PWM output (if needed)</td></tr>
+            <tr><td>Pull-up Resistor</td><td>4.7kΩ</td><td>For 1-Wire bus</td></tr>
+            <tr><td>Decoupling Caps</td><td>100nF + 10µF</td><td>Per IC</td></tr>
+        </table>
+
+        <h2>8. Testing Requirements</h2>
+        <ol style="margin: 1rem 0; padding-left: 2rem;">
+            <li>Verify PWM output at 25kHz ±5%</li>
+            <li>Test temperature reading accuracy ±1°C</li>
+            <li>Verify smooth fan ramp (no audible steps)</li>
+            <li>Test all state transitions</li>
+            <li>Verify failsafe activates on sensor disconnect</li>
+            <li>Test watchdog reset functionality</li>
+            <li>Measure noise at each PWM level</li>
+            <li>48-hour burn-in test</li>
+        </ol>
+
+        <footer style="text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid var(--border); color: var(--text-muted);">
+            <p>Apex TV Enclosures | Control Logic Specification v2.0 | December 2025</p>
+            <p style="font-size: 0.85rem;">Document: APEX-FW-001</p>
+        </footer>
+    </div>
+</body>
+</html>

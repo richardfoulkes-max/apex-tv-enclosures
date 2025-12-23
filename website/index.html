@@ -739,9 +739,52 @@
                 text-align: center;
             }
         }
+        /* Document Navigation Bar */
+        .doc-nav-bar {
+            background: #1e293b;
+            padding: 0.5rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .doc-nav-bar a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: color 0.2s;
+        }
+        .doc-nav-bar a:hover {
+            color: white;
+        }
+        .doc-nav-bar a.active {
+            color: #60a5fa;
+        }
+        .doc-nav-bar .sep {
+            color: #475569;
+        }
     </style>
 </head>
 <body>
+    <!-- Document Navigation -->
+    <div class="doc-nav-bar">
+        <span style="color: #64748b; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;">Docs:</span>
+        <a href="index.html" class="active">🏠 Website</a>
+        <span class="sep">|</span>
+        <a href="specification.html">📋 Specification</a>
+        <span class="sep">|</span>
+        <a href="bom-detailed.html">📦 BOM</a>
+        <span class="sep">|</span>
+        <a href="wiring-diagram.html">⚡ Wiring</a>
+        <span class="sep">|</span>
+        <a href="control-logic.html">🔧 Control Logic</a>
+        <span class="sep">|</span>
+        <a href="qc-checklist.html">✅ QC Checklist</a>
+    </div>
+
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">

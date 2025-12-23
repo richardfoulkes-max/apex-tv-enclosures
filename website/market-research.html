@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Research Report - Outdoor TV Enclosures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1428a0;
+            --primary-light: #e8ebf7;
+            --text: #1a1a1a;
+            --text-muted: #6b7280;
+            --bg: #ffffff;
+            --bg-alt: #f8f9fa;
+            --border: #e5e7eb;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+        header {
+            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+            color: white;
+            padding: 3rem 2rem;
+        }
+        header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        header .subtitle { opacity: 0.9; font-size: 1.1rem; }
+        header .date {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        .executive-summary {
+            background: var(--primary-light);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+        .executive-summary h2 { color: var(--primary); margin-bottom: 1rem; }
+        .key-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .stat-card .label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.75rem;
+            margin: 2.5rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary);
+        }
+        h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--text);
+        }
+
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .competitor-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: box-shadow 0.2s;
+        }
+        .competitor-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .competitor-card.featured {
+            border-color: var(--primary);
+            border-width: 2px;
+        }
+        .competitor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        .competitor-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        .competitor-tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            background: var(--bg-alt);
+            color: var(--text-muted);
+        }
+        .competitor-tag.leader { background: #dbeafe; color: #1d4ed8; }
+        .competitor-tag.direct { background: #fef3c7; color: #b45309; }
+        .competitor-tag.budget { background: #d1fae5; color: #047857; }
+
+        .competitor-details {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+        .competitor-price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--success);
+            margin-bottom: 0.5rem;
+        }
+        .competitor-features {
+            list-style: none;
+            font-size: 0.85rem;
+        }
+        .competitor-features li {
+            padding: 0.35rem 0;
+            border-bottom: 1px dashed var(--border);
+        }
+        .competitor-features li:last-child { border: none; }
+        .competitor-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary);
+            font-size: 0.85rem;
+            text-decoration: none;
+        }
+        .competitor-link:hover { text-decoration: underline; }
+
+        .market-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        .market-table th, .market-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .market-table th {
+            background: var(--bg-alt);
+            font-weight: 600;
+            color: var(--text);
+        }
+        .market-table tr:hover { background: #fafafa; }
+        .market-table .price { color: var(--success); font-weight: 600; }
+        .market-table .highlight { background: #fffbeb; }
+
+        .region-section {
+            background: var(--bg-alt);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .region-section h3 {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .manufacturer-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .manufacturer-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .manufacturer-card .location {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+        }
+        .manufacturer-card .capabilities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0.75rem 0;
+        }
+        .manufacturer-card .capability {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+        .manufacturer-card .moq {
+            background: #fef3c7;
+            color: #b45309;
+        }
+        .manufacturer-card .price-range {
+            font-weight: 600;
+            color: var(--success);
+            margin: 0.5rem 0;
+        }
+        .manufacturer-card a {
+            color: var(--primary);
+            font-size: 0.85rem;
+        }
+
+        .recommendation {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid var(--success);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        .recommendation h3 {
+            color: var(--success);
+            margin-top: 0;
+        }
+
+        .swot-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .swot-card {
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        .swot-card.strength { background: #d1fae5; }
+        .swot-card.weakness { background: #fee2e2; }
+        .swot-card.opportunity { background: #dbeafe; }
+        .swot-card.threat { background: #fef3c7; }
+        .swot-card h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .swot-card ul {
+            margin-left: 1.25rem;
+            font-size: 0.9rem;
+        }
+
+        .sources {
+            background: var(--bg-alt);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 3rem;
+        }
+        .sources h3 { margin-top: 0; font-size: 1rem; }
+        .sources ul {
+            list-style: none;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .sources a { color: var(--primary); }
+
+        /* Document Navigation */
+        .doc-nav {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .doc-nav h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+        .doc-nav-grid {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .doc-card {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        .doc-card:hover {
+            border-color: var(--primary);
+            background: #f0f4ff;
+        }
+        .doc-card.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+
+        @media print {
+            .doc-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="doc-nav">
+        <h3>Manufacturing Documentation</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">Website</a>
+            <a href="specification.html" class="doc-card">Specification</a>
+            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
+            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
+            <a href="control-logic.html" class="doc-card">Control Logic</a>
+            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
+            <a href="market-research.html" class="doc-card active">Market Research</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Outdoor TV Enclosure Market Research</h1>
+        <div class="subtitle">Competitive Analysis: US & Middle East Markets + China Manufacturing Partners</div>
+        <div class="date">December 2025 | Apex TV Enclosures</div>
+    </header>
+
+    <div class="container">
+        <!-- Executive Summary -->
+        <div class="executive-summary">
+            <h2>Executive Summary</h2>
+            <p>The outdoor TV enclosure market is projected to reach <strong>$1.23 billion by 2031</strong>, growing at 5% CAGR. North America dominates with 70% market share, followed by Europe at 24%. The Middle East represents an emerging opportunity with limited local competitors and extreme climate requirements that favor premium products.</p>
+
+            <div class="key-stats">
+                <div class="stat-card">
+                    <div class="number">$443M</div>
+                    <div class="label">Market Size 2025</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">$1.16B</div>
+                    <div class="label">Projected 2035</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">10.1%</div>
+                    <div class="label">CAGR Growth</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">70%</div>
+                    <div class="label">North America Share</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- US Market Competitors -->
+        <h2>US Market Competitors</h2>
+        <p>The US market is mature with established players. Apollo Enclosures is one of several major competitors, not the dominant leader. Key players include:</p>
+
+        <div class="competitor-grid">
+            <div class="competitor-card featured">
+                <div class="competitor-header">
+                    <div class="competitor-name">Apollo Enclosures</div>
+                    <div class="competitor-tag direct">Direct Competitor</div>
+                </div>
+                <div class="competitor-details">Phoenix, AZ | Founded ~2010</div>
+                <div class="competitor-price">$1,095 - $2,095 (43" - 75")</div>
+                <ul class="competitor-features">
+                    <li>Powder-coated aluminum construction</li>
+                    <li>Anti-reflective safety glass front</li>
+                    <li>Thermostat-controlled fans @ 30°C (95°F)</li>
+                    <li>Tight-Seal technology (dust/rain/insects)</li>
+                    <li>Sizes: 43" to 98"</li>
+                </ul>
+                <a href="https://www.apolloenc.com" class="competitor-link" target="_blank">apolloenc.com &rarr;</a>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <div class="competitor-name">The TV Shield</div>
+                    <div class="competitor-tag leader">Market Leader</div>
+                </div>
+                <div class="competitor-details">Protective Enclosures Company | 47,500+ installations in 58 countries</div>
+                <div class="competitor-price">$600 - $2,500+ (varies by model)</div>
+                <ul class="competitor-features">
+                    <li>HMWPE (High Molecular Weight Polyethylene)</li>
+                    <li>Polycarbonate front - virtually unbreakable</li>
+                    <li>Lifetime warranty on housing</li>
+                    <li>Pro, Pro Lite, E-Series product lines</li>
+                    <li>Commercial & residential focus</li>
+                </ul>
+                <a href="https://www.thetvshield.com" class="competitor-link" target="_blank">thetvshield.com &rarr;</a>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <div class="competitor-name">Storm Shell</div>
+                    <div class="competitor-tag budget">Budget Option</div>
+                </div>
+                <div class="competitor-details">Entry-level market | Available at Best Buy, Home Depot, Walmart</div>
+                <div class="competitor-price">$268 - $600 (44" - 65")</div>
+                <ul class="competitor-features">
+                    <li>Powder-coated steel construction</li>
+                    <li>Full-motion articulating mount included</li>
+                    <li>Removable hard shell front cover</li>
+                    <li>Impact & UV resistant</li>
+                    <li>Strong retail distribution</li>
+                </ul>
+                <a href="https://stormshelltv.com" class="competitor-link" target="_blank">stormshelltv.com &rarr;</a>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <div class="competitor-name">Sealoc</div>
+                    <div class="competitor-tag">Premium</div>
+                </div>
+                <div class="competitor-details">Full weatherproof TVs (not enclosures) | IP65/IP68</div>
+                <div class="competitor-price">$1,699 - $10,000+ (weatherproof TVs)</div>
+                <ul class="competitor-features">
+                    <li>Nano-coating technology (military/aerospace)</li>
+                    <li>1,000 - 5,000 nits brightness</li>
+                    <li>IP65 + IK10+ protection</li>
+                    <li>Operating range: -24°F to 104°F</li>
+                    <li>Different market segment (full TV, not enclosure)</li>
+                </ul>
+                <a href="https://www.sealoctvs.com" class="competitor-link" target="_blank">sealoctvs.com &rarr;</a>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <div class="competitor-name">AcrtMatic</div>
+                    <div class="competitor-tag">Emerging</div>
+                </div>
+                <div class="competitor-details">Newcomer | Blend of features & affordability</div>
+                <div class="competitor-price">~$500 - $900</div>
+                <ul class="competitor-features">
+                    <li>IP54 rated weatherproof</li>
+                    <li>Built-in cooling fan</li>
+                    <li>Sizes up to 85"</li>
+                    <li>Growing popularity</li>
+                    <li>Direct-to-consumer model</li>
+                </ul>
+                <a href="https://www.acrtmatic.com" class="competitor-link" target="_blank">acrtmatic.com &rarr;</a>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <div class="competitor-name">Seasonne Outdoors</div>
+                    <div class="competitor-tag">DIY Market</div>
+                </div>
+                <div class="competitor-details">18% of US DIY market | 45% growth in 2023</div>
+                <div class="competitor-price">30% below premium competitors</div>
+                <ul class="competitor-features">
+                    <li>FlexFrame modular system</li>
+                    <li>Tool-free installation</li>
+                    <li>Adjustable mounts</li>
+                    <li>UL certified</li>
+                    <li>Direct-to-consumer</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Pricing Comparison Table -->
+        <h3>US Market Pricing Comparison (55" Size)</h3>
+        <table class="market-table">
+            <thead>
+                <tr>
+                    <th>Brand</th>
+                    <th>Model/Size</th>
+                    <th>Price</th>
+                    <th>Material</th>
+                    <th>Cooling</th>
+                    <th>Mount Included</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Apollo Enclosures</strong></td>
+                    <td>AE5550 (50-55")</td>
+                    <td class="price">$1,295</td>
+                    <td>Aluminum</td>
+                    <td>Thermostat 30°C</td>
+                    <td>No (+$200)</td>
+                </tr>
+                <tr>
+                    <td><strong>The TV Shield Pro</strong></td>
+                    <td>55" Pro</td>
+                    <td class="price">$1,200-1,500</td>
+                    <td>HMWPE</td>
+                    <td>Optional fan kit</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td><strong>Storm Shell</strong></td>
+                    <td>SS-55 Deluxe</td>
+                    <td class="price">$600</td>
+                    <td>Steel</td>
+                    <td>None</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td><strong>AcrtMatic</strong></td>
+                    <td>55" Enclosure</td>
+                    <td class="price">$600-700</td>
+                    <td>Aluminum</td>
+                    <td>Built-in fan</td>
+                    <td>Yes</td>
+                </tr>
+                <tr class="highlight">
+                    <td><strong>Apex (Target)</strong></td>
+                    <td>ATE-55</td>
+                    <td class="price">$1,800-2,500 retail</td>
+                    <td>5052 Aluminum</td>
+                    <td>PWM 30-50°C</td>
+                    <td>Yes</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Middle East Market -->
+        <h2>Middle East Market (UAE, Saudi Arabia, Gulf States)</h2>
+
+        <div class="region-section">
+            <h3>Market Characteristics</h3>
+            <ul>
+                <li><strong>Climate:</strong> Extreme heat (45-55°C ambient), high humidity, dust/sand, intense UV</li>
+                <li><strong>Competition:</strong> Very limited - mostly importers of US/EU brands</li>
+                <li><strong>Opportunity:</strong> No dominant local manufacturer for premium enclosures</li>
+                <li><strong>Distribution:</strong> Through AV integrators, hospitality suppliers, luxury home builders</li>
+            </ul>
+        </div>
+
+        <div class="competitor-grid">
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <div class="competitor-name">Aqualite Outdoor / Outdoor Screen Company</div>
+                    <div class="competitor-tag">Regional Distributor</div>
+                </div>
+                <div class="competitor-details">UK-based | Seeking GCC distributors</div>
+                <ul class="competitor-features">
+                    <li>IP66 weatherproof rating</li>
+                    <li>"Desert-proof" technology</li>
+                    <li>Anti-glare screens</li>
+                    <li>Internal temperature control</li>
+                    <li>Covers UAE, Bahrain, Oman, Saudi, Qatar, Kuwait</li>
+                </ul>
+                <a href="https://aqualiteoutdoor.com" class="competitor-link" target="_blank">aqualiteoutdoor.com &rarr;</a>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <div class="competitor-name">Evervue Gulf FZCO</div>
+                    <div class="competitor-tag">UAE Local</div>
+                </div>
+                <div class="competitor-details">Dubai, UAE | Outdoor & specialty TVs</div>
+                <ul class="competitor-features">
+                    <li>Outdoor TV specialists</li>
+                    <li>Mirror TV, bathroom TV, kitchen TV</li>
+                    <li>Local showroom presence</li>
+                    <li>Premium positioning</li>
+                </ul>
+                <a href="https://www.evervue.ae" class="competitor-link" target="_blank">evervue.ae &rarr;</a>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <div class="competitor-name">Global Fiberglass FZC</div>
+                    <div class="competitor-tag">Industrial</div>
+                </div>
+                <div class="competitor-details">UAE manufacturer | GRP enclosures</div>
+                <ul class="competitor-features">
+                    <li>Custom GRP enclosures</li>
+                    <li>CCTV & control panel cabinets</li>
+                    <li>Local manufacturing</li>
+                    <li>Not TV-specific but could be competitor</li>
+                </ul>
+                <a href="https://globalfiberglassfzc.com" class="competitor-link" target="_blank">globalfiberglassfzc.com &rarr;</a>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <div class="competitor-name">digiscreens.ae</div>
+                    <div class="competitor-tag direct">Direct Competitor</div>
+                </div>
+                <div class="competitor-details">UAE-based | Apollo reseller</div>
+                <ul class="competitor-features">
+                    <li>Imports Apollo Enclosures</li>
+                    <li>~AED 7,000 retail price point</li>
+                    <li>Limited local competition</li>
+                    <li>Distribution + markup model</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="recommendation">
+            <h3>Middle East Market Opportunity</h3>
+            <p><strong>Key Insight:</strong> The Middle East market is underserved. Most competitors are importers/resellers of US brands (like digiscreens.ae reselling Apollo). There is no dominant local manufacturer offering Gulf-specific engineering.</p>
+            <p><strong>Apex Advantage:</strong> By designing specifically for 55°C ambient, positive pressure dust control, and IR-rejection glass, Apex can differentiate as "Engineered for Gulf Climate" vs imported products designed for US conditions.</p>
+        </div>
+
+        <!-- SWOT Analysis -->
+        <h2>Competitive SWOT Analysis (Apex vs Apollo)</h2>
+        <div class="swot-grid">
+            <div class="swot-card strength">
+                <h4>Strengths</h4>
+                <ul>
+                    <li>PWM fan control vs on/off thermostat</li>
+                    <li>55°C ambient rating vs 50°C</li>
+                    <li>IR rejection glass reduces heat load</li>
+                    <li>140mm premium fans vs 80mm generic</li>
+                    <li>316 stainless hardware (coastal grade)</li>
+                    <li>Local Gulf market presence</li>
+                </ul>
+            </div>
+            <div class="swot-card weakness">
+                <h4>Weaknesses</h4>
+                <ul>
+                    <li>No brand recognition yet</li>
+                    <li>No established distribution</li>
+                    <li>Higher BOM cost ($400+ vs ~$300)</li>
+                    <li>No US market presence</li>
+                    <li>Unproven warranty/support</li>
+                </ul>
+            </div>
+            <div class="swot-card opportunity">
+                <h4>Opportunities</h4>
+                <ul>
+                    <li>Gulf market has no local champion</li>
+                    <li>Premium hospitality segment growing</li>
+                    <li>Saudi Vision 2030 construction boom</li>
+                    <li>Partner with AV integrators</li>
+                    <li>B2B hotel/resort sales</li>
+                </ul>
+            </div>
+            <div class="swot-card threat">
+                <h4>Threats</h4>
+                <ul>
+                    <li>Apollo could improve thermal design</li>
+                    <li>Chinese clones at lower price</li>
+                    <li>Outdoor TVs (Sealoc) gaining share</li>
+                    <li>Economic downturn in Gulf</li>
+                    <li>Shipping costs from China</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chinese Manufacturers -->
+        <h2>China Manufacturing Partners (OEM/ODM)</h2>
+        <p>For prototype development and production, these Chinese manufacturers specialize in outdoor TV enclosures with OEM capabilities:</p>
+
+        <div class="competitor-grid">
+            <div class="manufacturer-card">
+                <h4>Kinytech Industries Ltd.</h4>
+                <div class="location">Dongguan, Guangdong | Est. 2007</div>
+                <p>Established manufacturer with 15+ years experience in outdoor TV enclosures. Factory supplies OEM & ODM services.</p>
+                <div class="capabilities">
+                    <span class="capability">OEM</span>
+                    <span class="capability">ODM</span>
+                    <span class="capability">IP66</span>
+                    <span class="capability">12" - 82"</span>
+                    <span class="capability moq">MOQ: 50 units</span>
+                </div>
+                <div class="price-range">$200 - $480/unit (depending on size)</div>
+                <a href="https://www.kinytech.com" target="_blank">kinytech.com</a> |
+                <a href="https://www.tradeindia.com/products/outdoor-lcd-tv-enclosure-1412704.html" target="_blank">TradeIndia Profile</a>
+            </div>
+
+            <div class="manufacturer-card">
+                <h4>KDM Steel</h4>
+                <div class="location">China (Sheet Metal Specialist)</div>
+                <p>Professional sheet metal fabricator with custom outdoor TV enclosure capabilities. Heavy-duty glass fronts, sealed construction.</p>
+                <div class="capabilities">
+                    <span class="capability">Sheet Metal</span>
+                    <span class="capability">Custom Sizes</span>
+                    <span class="capability">32" - 98"</span>
+                    <span class="capability">Powder Coating</span>
+                    <span class="capability moq">MOQ: 10 units</span>
+                </div>
+                <div class="price-range">Custom quote based on specs</div>
+                <a href="https://www.kdmsteel.com/outdoor-tv-enclosure/" target="_blank">kdmsteel.com</a>
+            </div>
+
+            <div class="manufacturer-card">
+                <h4>Shenzhen Kunlytech Co., Ltd.</h4>
+                <div class="location">Shenzhen, Guangdong</div>
+                <p>Industrial-grade enclosure specialist. IP65+ solutions with bulk discount potential exceeding 20% for 500+ units.</p>
+                <div class="capabilities">
+                    <span class="capability">IP65+</span>
+                    <span class="capability">Industrial Grade</span>
+                    <span class="capability">Bulk Discounts</span>
+                    <span class="capability moq">MOQ: 100 units</span>
+                </div>
+                <div class="price-range">$200 - $480/unit</div>
+            </div>
+
+            <div class="manufacturer-card">
+                <h4>Yantai Dayuan Mechanical Equipment Co.</h4>
+                <div class="location">Yantai, Shandong</div>
+                <p>Sheet metal fabrication with punching, bending, cutting, welding capabilities. Custom enclosure manufacturing.</p>
+                <div class="capabilities">
+                    <span class="capability">Sheet Metal</span>
+                    <span class="capability">Welding</span>
+                    <span class="capability">Powder Coat</span>
+                    <span class="capability moq">MOQ: 50 units</span>
+                </div>
+                <div class="price-range">$10 - $40/unit (housing only, no glass/fans)</div>
+                <a href="https://www.alibaba.com/countrysearch/CN/tv-enclosure.html" target="_blank">Alibaba Profile</a>
+            </div>
+
+            <div class="manufacturer-card">
+                <h4>Shenzhen Dianjitong Network Technology</h4>
+                <div class="location">Shenzhen (HQ) / Dongguan (Factory) | Est. 2017</div>
+                <p>Outdoor weatherproof enclosure specialist. IP55/IP56/IP66 electrical cabinets with custom options.</p>
+                <div class="capabilities">
+                    <span class="capability">IP55-IP66</span>
+                    <span class="capability">Telecom/Industrial</span>
+                    <span class="capability">Custom Cooling</span>
+                    <span class="capability moq">MOQ: 20 units</span>
+                </div>
+                <div class="price-range">Contact for quote</div>
+            </div>
+
+            <div class="manufacturer-card">
+                <h4>Foshan Shunde Baifuli Industrial Co.</h4>
+                <div class="location">Foshan, Guangdong</div>
+                <p>Alibaba verified supplier for outdoor TV enclosures with thermostat control systems.</p>
+                <div class="capabilities">
+                    <span class="capability">OEM</span>
+                    <span class="capability">Thermostat</span>
+                    <span class="capability">50"+ Sizes</span>
+                    <span class="capability moq">MOQ: 10 units</span>
+                </div>
+                <div class="price-range">$220 - $440/unit (50" LED enclosure)</div>
+                <a href="https://www.alibaba.com/showroom/outdoor-tv-enclosure.html" target="_blank">Alibaba Listing</a>
+            </div>
+        </div>
+
+        <div class="recommendation">
+            <h3>Recommended Approach for Prototyping</h3>
+            <ol style="margin-left: 1.5rem; margin-top: 1rem;">
+                <li><strong>Kinytech Industries</strong> - Best for first prototype. Established, experienced with outdoor TV enclosures, reasonable MOQ (50 units), full ODM capability.</li>
+                <li><strong>KDM Steel</strong> - Alternative for custom sheet metal work. Lower MOQ (10 units) good for initial samples.</li>
+                <li>Request quotes from 3-4 manufacturers with your specification document</li>
+                <li>Order 2-3 sample units before committing to production run</li>
+                <li>Specify PWM fan requirement (most use on/off thermostat by default)</li>
+                <li>Budget $400-500/unit FOB for 55" with premium specs</li>
+            </ol>
+        </div>
+
+        <!-- Sources -->
+        <div class="sources">
+            <h3>Sources</h3>
+            <ul>
+                <li><a href="https://reports.valuates.com/market-reports/QYRE-Auto-16J18809/global-outdoor-tv-enclosure" target="_blank">Valuates Reports - Outdoor TV Enclosure Market 2025-2031</a></li>
+                <li><a href="https://www.thetvshield.com/about-us/" target="_blank">The TV Shield - About Us</a></li>
+                <li><a href="https://www.apolloenc.com" target="_blank">Apollo Enclosures Official Site</a></li>
+                <li><a href="https://stormshelltv.com" target="_blank">Storm Shell TV Official Site</a></li>
+                <li><a href="https://www.sealoctvs.com" target="_blank">Sealoc TVs Official Site</a></li>
+                <li><a href="https://aqualiteoutdoor.com/tv-screens-middle-east-north-africa/" target="_blank">Aqualite Outdoor - Middle East</a></li>
+                <li><a href="https://www.kinytech.com" target="_blank">Kinytech Industries - China Manufacturer</a></li>
+                <li><a href="https://www.kdmsteel.com/outdoor-tv-enclosure/" target="_blank">KDM Steel - Outdoor TV Enclosure</a></li>
+                <li><a href="https://www.alibaba.com/showroom/outdoor-tv-enclosure.html" target="_blank">Alibaba - Outdoor TV Enclosure Suppliers</a></li>
+                <li><a href="https://dataintelo.com/report/outdoor-tv-enclosure-weatherproof-market/" target="_blank">Dataintelo - Outdoor TV Enclosure Market Report 2033</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
