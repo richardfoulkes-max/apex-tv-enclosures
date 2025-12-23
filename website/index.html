@@ -127,8 +127,8 @@
             right: 0;
             width: 50%;
             height: 100%;
-            background: url('images/IMG_0118.jpeg') center/cover;
-            opacity: 0.15;
+            background: linear-gradient(45deg, var(--accent) 0%, transparent 70%);
+            opacity: 0.1;
         }
 
         .hero-content {
@@ -371,64 +371,10 @@
             font-size: 0.95rem;
         }
 
-        /* Gallery Section */
-        .gallery {
-            background: var(--bg-section);
-        }
-
-        .gallery-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .gallery-item {
-            aspect-ratio: 4/3;
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-        }
-
-        .gallery-overlay h4 {
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .gallery-overlay p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
         /* Why Apex Section */
         .why-apex {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
         }
 
         .why-apex-content h2 {
@@ -478,15 +424,6 @@
             color: var(--text-muted);
             font-size: 0.9rem;
             margin: 0;
-        }
-
-        .why-apex-image {
-            position: relative;
-        }
-
-        .why-apex-image img {
-            width: 100%;
-            border-radius: 16px;
         }
 
         /* Contact Section */
@@ -782,7 +719,6 @@
             <ul class="nav-links">
                 <li><a href="#products">Products</a></li>
                 <li><a href="#features">Features</a></li>
-                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -937,44 +873,6 @@
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section class="gallery" id="gallery">
-        <div class="section-header">
-            <h2>Installation Gallery</h2>
-            <p>See our enclosures protecting TVs across UAE and Saudi Arabia.</p>
-        </div>
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="images/IMG_0118.jpeg" alt="Professional installation showing cooling system">
-                <div class="gallery-overlay">
-                    <h4>Cooling System Detail</h4>
-                    <p>Multi-fan thermal management</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="images/IMG_0119.jpeg" alt="80mm cooling fans">
-                <div class="gallery-overlay">
-                    <h4>Ball-Bearing Fans</h4>
-                    <p>Rated for 50,000+ hours</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="images/IMG_0120.jpeg" alt="Professional installation">
-                <div class="gallery-overlay">
-                    <h4>Professional Installation</h4>
-                    <p>Clean, organized wiring</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="images/IMG_0121.jpeg" alt="Cable management">
-                <div class="gallery-overlay">
-                    <h4>Cable Management</h4>
-                    <p>Integrated power and connectivity</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Why Apex Section -->
     <section id="about">
         <div class="why-apex">
@@ -1011,9 +909,6 @@
                         </div>
                     </li>
                 </ul>
-            </div>
-            <div class="why-apex-image">
-                <img src="images/IMG_0118.jpeg" alt="Apex TV Enclosure">
             </div>
         </div>
     </section>
@@ -1135,7 +1030,6 @@
                     <h4>Company</h4>
                     <ul>
                         <li><a href="#about">About Us</a></li>
-                        <li><a href="#gallery">Gallery</a></li>
                         <li><a href="#contact">Contact</a></li>
                         <li><a href="#">Warranty</a></li>
                     </ul>
