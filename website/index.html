@@ -40,7 +40,7 @@
         /* Navigation */
         .nav {
             position: fixed;
-            top: 0;
+            top: 70px;
             left: 0;
             right: 0;
             z-index: 1000;
@@ -117,7 +117,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 120px 2rem 80px;
+            padding: 180px 2rem 80px;
             background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-white) 100%);
             position: relative;
             overflow: hidden;
@@ -722,7 +722,7 @@
 
         @media (max-width: 640px) {
             .hero {
-                padding: 100px 1.5rem 60px;
+                padding: 160px 1.5rem 60px;
             }
 
             .form-row {
@@ -744,6 +744,11 @@
             background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
             padding: 1rem 2rem;
             border-bottom: 1px solid #e5e7eb;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
         }
         .doc-nav h3 {
             font-size: 0.75rem;
