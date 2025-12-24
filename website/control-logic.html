@@ -200,8 +200,8 @@
             <strong>Apex PWM Advantages:</strong> Same 30°C start point, but with intelligent ramping:
             <ul style="margin: 0.5rem 0 0 1.5rem;">
                 <li>Fans start at 30°C at <strong>20% PWM</strong> (near-silent)</li>
-                <li>Gradual ramp: 50% at 40°C, 100% at 50°C</li>
-                <li>Protects TV (rated 0-40°C) with headroom</li>
+                <li>Gradual ramp: 50% at 35°C, 100% at 45°C</li>
+                <li>Protects TV (rated 0-35°C) with headroom</li>
                 <li>No sudden speed changes - smooth adjustment</li>
                 <li>Post-cooling after TV power-off</li>
             </ul>
@@ -226,25 +226,25 @@
                 </tr>
                 <tr>
                     <td><code>TEMP_MID</code></td>
-                    <td>40°C</td>
+                    <td>35°C</td>
                     <td>Fans at 50% PWM</td>
                     <td style="color: #059669;">TV's max rated ambient temp</td>
                 </tr>
                 <tr>
                     <td><code>TEMP_FULL</code></td>
-                    <td>50°C</td>
+                    <td>45°C</td>
                     <td>Fans reach 100% PWM</td>
-                    <td style="color: #059669;">Linear ramp 30-50°C</td>
+                    <td style="color: #059669;">Linear ramp 30-45°C</td>
                 </tr>
                 <tr>
                     <td><code>TEMP_ALARM</code></td>
-                    <td>55°C</td>
+                    <td>50°C</td>
                     <td>Warning LED, maintain 100% fans</td>
                     <td style="color: #d97706;">TV at risk - alert user</td>
                 </tr>
                 <tr>
                     <td><code>TEMP_CRITICAL</code></td>
-                    <td>65°C</td>
+                    <td>55°C</td>
                     <td>Emergency - signal TV shutdown</td>
                     <td style="color: #dc2626;">Protect TV from damage</td>
                 </tr>
@@ -332,23 +332,23 @@
 
                 <!-- NORMAL -> BOOST -->
                 <path d="M370 220 Q410 220 450 220" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
-                <text x="410" y="210" text-anchor="middle" font-size="8" fill="#64748b">T > 45°C</text>
+                <text x="410" y="210" text-anchor="middle" font-size="8" fill="#64748b">T > 40°C</text>
 
                 <!-- BOOST -> NORMAL -->
                 <path d="M450 250 Q410 270 370 250" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
-                <text x="410" y="280" text-anchor="middle" font-size="8" fill="#64748b">T < 42°C</text>
+                <text x="410" y="280" text-anchor="middle" font-size="8" fill="#64748b">T < 38°C</text>
 
                 <!-- BOOST -> ALARM -->
                 <path d="M570 220 Q610 220 650 220" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
-                <text x="610" y="210" text-anchor="middle" font-size="8" fill="#64748b">T > 55°C</text>
+                <text x="610" y="210" text-anchor="middle" font-size="8" fill="#64748b">T > 50°C</text>
 
                 <!-- ALARM -> BOOST -->
                 <path d="M650 250 Q610 270 570 250" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
-                <text x="610" y="280" text-anchor="middle" font-size="8" fill="#64748b">T < 50°C</text>
+                <text x="610" y="280" text-anchor="middle" font-size="8" fill="#64748b">T < 45°C</text>
 
                 <!-- ALARM -> CRITICAL -->
                 <path d="M710 260 L710 350" stroke="#dc2626" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
-                <text x="730" y="310" font-size="8" fill="#dc2626">T > 65°C</text>
+                <text x="730" y="310" font-size="8" fill="#dc2626">T > 55°C</text>
                 <text x="730" y="322" font-size="8" fill="#dc2626">for 60s</text>
 
                 <!-- NORMAL -> POST_COOL -->
@@ -390,11 +390,11 @@
 
                 <!-- X-axis labels (Temperature) -->
                 <text x="80" y="290" text-anchor="middle" font-size="10" fill="#64748b">20°C</text>
-                <text x="180" y="290" text-anchor="middle" font-size="10" fill="#64748b">28°C</text>
-                <text x="280" y="290" text-anchor="middle" font-size="10" fill="#64748b">38°C</text>
+                <text x="180" y="290" text-anchor="middle" font-size="10" fill="#64748b">30°C</text>
+                <text x="280" y="290" text-anchor="middle" font-size="10" fill="#64748b">35°C</text>
                 <text x="380" y="290" text-anchor="middle" font-size="10" fill="#64748b">45°C</text>
-                <text x="460" y="290" text-anchor="middle" font-size="10" fill="#64748b">55°C</text>
-                <text x="540" y="290" text-anchor="middle" font-size="10" fill="#64748b">65°C</text>
+                <text x="460" y="290" text-anchor="middle" font-size="10" fill="#64748b">50°C</text>
+                <text x="540" y="290" text-anchor="middle" font-size="10" fill="#64748b">55°C</text>
                 <text x="320" y="320" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">Internal Temperature</text>
 
                 <!-- PWM curve -->
@@ -532,7 +532,7 @@
                 </tr>
                 <tr>
                     <td>Over-temperature</td>
-                    <td>Internal temp > 65°C for 60 seconds</td>
+                    <td>Internal temp > 55°C for 60 seconds</td>
                     <td>Optional: Cut TV power relay</td>
                 </tr>
                 <tr>
