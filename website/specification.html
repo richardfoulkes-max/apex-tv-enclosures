@@ -239,77 +239,42 @@
 
         /* Document Navigation */
         .doc-nav {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid var(--border);
+            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e5e7eb;
         }
-
-        .doc-nav .container {
-            padding: 0;
-        }
-
         .doc-nav h3 {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 0.75rem;
         }
-
         .doc-nav-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1rem;
-        }
-
-        .doc-card {
-            background: white;
-            padding: 1rem 1.25rem;
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--text);
-            border: 1px solid var(--border);
-            transition: all 0.2s ease;
             display: flex;
-            align-items: center;
             gap: 0.75rem;
+            flex-wrap: wrap;
         }
-
-        .doc-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 4px 12px rgba(20, 40, 160, 0.15);
-            transform: translateY(-2px);
+        .doc-nav .doc-card {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
         }
-
-        .doc-card.active {
-            border-color: var(--primary);
-            background: var(--primary-light);
+        .doc-nav .doc-card:hover {
+            background: rgba(255,255,255,0.2);
         }
-
-        .doc-card-icon {
-            font-size: 1.5rem;
-            flex-shrink: 0;
+        .doc-nav .doc-card.active {
+            background: white;
+            color: #1428a0;
         }
-
-        .doc-card-text {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .doc-card-title {
-            font-weight: 600;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .doc-card-desc {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        @media print {
+            .doc-nav { display: none; }
         }
     </style>
 </head>
@@ -337,64 +302,6 @@
             <div class="version">Version 2.0 | December 2025 | RFQ Ready</div>
         </div>
     </header>
-
-    <!-- Document Navigation -->
-    <nav class="doc-nav no-print">
-        <div class="container">
-            <h3>Manufacturing Documentation</h3>
-            <div class="doc-nav-grid">
-                <a href="index.html" class="doc-card">
-                    <span class="doc-card-icon">🏠</span>
-                    <div class="doc-card-text">
-                        <div class="doc-card-title">Website</div>
-                        <div class="doc-card-desc">Marketing page</div>
-                    </div>
-                </a>
-                <a href="specification.html" class="doc-card active">
-                    <span class="doc-card-icon">📋</span>
-                    <div class="doc-card-text">
-                        <div class="doc-card-title">Specification</div>
-                        <div class="doc-card-desc">RFQ technical spec</div>
-                    </div>
-                </a>
-                <a href="bom-detailed.html" class="doc-card">
-                    <span class="doc-card-icon">📦</span>
-                    <div class="doc-card-text">
-                        <div class="doc-card-title">Bill of Materials</div>
-                        <div class="doc-card-desc">Parts & suppliers</div>
-                    </div>
-                </a>
-                <a href="wiring-diagram.html" class="doc-card">
-                    <span class="doc-card-icon">⚡</span>
-                    <div class="doc-card-text">
-                        <div class="doc-card-title">Wiring Diagram</div>
-                        <div class="doc-card-desc">Electrical schematic</div>
-                    </div>
-                </a>
-                <a href="control-logic.html" class="doc-card">
-                    <span class="doc-card-icon">🔧</span>
-                    <div class="doc-card-text">
-                        <div class="doc-card-title">Control Logic</div>
-                        <div class="doc-card-desc">Firmware spec</div>
-                    </div>
-                </a>
-                <a href="qc-checklist.html" class="doc-card">
-                    <span class="doc-card-icon">✅</span>
-                    <div class="doc-card-text">
-                        <div class="doc-card-title">QC Checklist</div>
-                        <div class="doc-card-desc">Test & inspection</div>
-                    </div>
-                </a>
-                <a href="market-research.html" class="doc-card">
-                    <span class="doc-card-icon">📊</span>
-                    <div class="doc-card-text">
-                        <div class="doc-card-title">Market Research</div>
-                        <div class="doc-card-desc">Manufacturers</div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </nav>
 
     <div class="container">
         <!-- Table of Contents -->

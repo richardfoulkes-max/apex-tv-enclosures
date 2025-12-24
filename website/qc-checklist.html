@@ -341,16 +341,15 @@
 
         /* Document Navigation */
         .doc-nav {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
             padding: 1rem 2rem;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
         }
         .doc-nav h3 {
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: #666;
+            color: rgba(255,255,255,0.7);
             margin-bottom: 0.75rem;
         }
         .doc-nav-grid {
@@ -358,28 +357,26 @@
             gap: 0.75rem;
             flex-wrap: wrap;
         }
-        .doc-card {
-            background: white;
+        .doc-nav .doc-card {
+            background: rgba(255,255,255,0.1);
             padding: 0.5rem 1rem;
             border-radius: 6px;
             text-decoration: none;
-            color: var(--text-dark);
-            border: 1px solid var(--border);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
             font-size: 0.85rem;
             font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
             transition: all 0.2s ease;
         }
-        .doc-card:hover {
-            border-color: var(--primary);
-            background: #f0f4ff;
+        .doc-nav .doc-card:hover {
+            background: rgba(255,255,255,0.2);
         }
-        .doc-card.active {
-            border-color: var(--primary);
-            background: var(--primary);
-            color: white;
+        .doc-nav .doc-card.active {
+            background: white;
+            color: #1428a0;
+        }
+        @media print {
+            .doc-nav { display: none; }
         }
     </style>
 </head>
@@ -396,20 +393,6 @@
             <a href="market-research.html" class="doc-card">Market Research</a>
             <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
             <a href="project-tracker.html" class="doc-card">Project Tracker</a>
-        </div>
-    </nav>
-
-
-    <nav class="doc-nav no-print">
-        <h3>Manufacturing Documentation</h3>
-        <div class="doc-nav-grid">
-            <a href="index.html" class="doc-card">🏠 Website</a>
-            <a href="specification.html" class="doc-card">📋 Specification</a>
-            <a href="bom-detailed.html" class="doc-card">📦 Bill of Materials</a>
-            <a href="wiring-diagram.html" class="doc-card">⚡ Wiring Diagram</a>
-            <a href="control-logic.html" class="doc-card">🔧 Control Logic</a>
-            <a href="market-research.html" class="doc-card">📊 Market Research</a>
-            <a href="qc-checklist.html" class="doc-card active">✅ QC Checklist</a>
         </div>
     </nav>
 
