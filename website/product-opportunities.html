@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Opportunities - Gulf Region Manufacturing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1428a0;
+            --primary-light: #e8ebf7;
+            --text: #1a1a1a;
+            --text-muted: #6b7280;
+            --bg: #ffffff;
+            --bg-alt: #f8f9fa;
+            --border: #e5e7eb;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --info: #0284c7;
+            --gold: #b8860b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-alt);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .doc-nav {
+            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .doc-nav h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 0.75rem;
+        }
+        .doc-nav-grid {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .doc-card {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .doc-card:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .doc-card.active {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        header .subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Framework Box */
+        .framework-box {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--primary);
+        }
+        .framework-box h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .criteria-item {
+            background: var(--bg-alt);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .criteria-item .icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .criteria-item h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        .criteria-item p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Opportunity Cards */
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .section-title.gold { color: var(--gold); border-color: var(--gold); }
+        .section-title.success { color: var(--success); border-color: var(--success); }
+        .section-title.warning { color: var(--warning); border-color: var(--warning); }
+
+        .opportunity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .opportunity-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .opportunity-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        .opportunity-card.tier-1 { border-top: 4px solid var(--gold); }
+        .opportunity-card.tier-2 { border-top: 4px solid var(--success); }
+        .opportunity-card.tier-3 { border-top: 4px solid var(--warning); }
+
+        .card-header {
+            padding: 1.5rem;
+            background: var(--bg-alt);
+        }
+        .card-header h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .card-header .tagline {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .score-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .score-item {
+            text-align: center;
+        }
+        .score-item .label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .score-item .value {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        .score-item .value.high { color: var(--success); }
+        .score-item .value.medium { color: var(--warning); }
+        .score-item .value.low { color: var(--danger); }
+
+        .detail-section {
+            margin-bottom: 1rem;
+        }
+        .detail-section h4 {
+            font-size: 0.85rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .detail-section p, .detail-section ul {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .detail-section ul {
+            margin-left: 1.25rem;
+        }
+        .detail-section li {
+            margin-bottom: 0.25rem;
+        }
+
+        .market-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+        .stat-box {
+            background: var(--bg-alt);
+            padding: 0.75rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .stat-box .number {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .stat-box .label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .verdict {
+            background: var(--primary-light);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        .verdict.gold { background: #fef3c7; }
+        .verdict.green { background: #dcfce7; }
+        .verdict.orange { background: #ffedd5; }
+        .verdict h4 {
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+        .verdict p {
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .comparison-table tr:hover {
+            background: var(--bg-alt);
+        }
+        .comparison-table .product-name {
+            font-weight: 600;
+        }
+        .rating {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .rating.excellent { background: #dcfce7; color: #166534; }
+        .rating.good { background: #dbeafe; color: #1e40af; }
+        .rating.moderate { background: #fef3c7; color: #92400e; }
+        .rating.poor { background: #fee2e2; color: #991b1b; }
+
+        /* Action Plan */
+        .action-plan {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .action-plan h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        .action-steps {
+            display: grid;
+            gap: 1rem;
+        }
+        .action-step {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-alt);
+            border-radius: 8px;
+        }
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .step-content h4 {
+            margin-bottom: 0.25rem;
+        }
+        .step-content p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Sources */
+        .sources {
+            background: var(--bg-alt);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        .sources h4 {
+            margin-bottom: 0.75rem;
+            color: var(--text-muted);
+        }
+        .sources a {
+            display: block;
+            color: var(--info);
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .opportunity-grid {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="doc-nav">
+        <h3>Apex TV Enclosures - Project Documents</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">Website</a>
+            <a href="specification.html" class="doc-card">Specification</a>
+            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
+            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
+            <a href="engineering-analysis.html" class="doc-card">Engineering Analysis</a>
+            <a href="product-opportunities.html" class="doc-card active">New Opportunities</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Product Opportunities Analysis</h1>
+        <p class="subtitle">Replicating the TV Enclosure Model in Gulf Markets</p>
+    </header>
+
+    <div class="container">
+        <!-- Success Framework -->
+        <div class="framework-box">
+            <h2>The TV Enclosure Success Framework</h2>
+            <p>What made outdoor TV enclosures a good opportunity? Apply these same criteria to find new products:</p>
+            <div class="criteria-grid">
+                <div class="criteria-item">
+                    <div class="icon">1</div>
+                    <h4>Low Technical Complexity</h4>
+                    <p>Sheet metal + basic electronics. No chips, software, or precision manufacturing.</p>
+                </div>
+                <div class="criteria-item">
+                    <div class="icon">2</div>
+                    <h4>No Major Brand Competition</h4>
+                    <p>No Samsung, LG, or Sony equivalent. Fragmented market with small players.</p>
+                </div>
+                <div class="criteria-item">
+                    <div class="icon">3</div>
+                    <h4>Local Manufacturing Possible</h4>
+                    <p>Can be made in UAE/Saudi with existing fabrication capabilities.</p>
+                </div>
+                <div class="criteria-item">
+                    <div class="icon">4</div>
+                    <h4>Climate-Driven Demand</h4>
+                    <p>Gulf heat (50C+), dust, and humidity create unique local needs.</p>
+                </div>
+                <div class="criteria-item">
+                    <div class="icon">5</div>
+                    <h4>B2B + Premium Residential</h4>
+                    <p>Commercial customers pay more, less price sensitive than consumer.</p>
+                </div>
+                <div class="criteria-item">
+                    <div class="icon">6</div>
+                    <h4>Healthy Margins</h4>
+                    <p>Target 40-60% gross margin. Avoid commodity/race-to-bottom products.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tier 1: Best Opportunities -->
+        <h2 class="section-title gold">Tier 1: Best Opportunities (Start Here)</h2>
+        <div class="opportunity-grid">
+            <!-- EV Charging Enclosures -->
+            <div class="opportunity-card tier-1">
+                <div class="card-header">
+                    <h3>EV Charging Station Enclosures</h3>
+                    <p class="tagline">Weatherproof housings for outdoor EV chargers</p>
+                </div>
+                <div class="card-body">
+                    <div class="score-row">
+                        <div class="score-item">
+                            <div class="label">Competition</div>
+                            <div class="value high">Low</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Complexity</div>
+                            <div class="value high">Low</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Demand</div>
+                            <div class="value high">High</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Margins</div>
+                            <div class="value high">50%+</div>
+                        </div>
+                    </div>
+
+                    <div class="market-stats">
+                        <div class="stat-box">
+                            <div class="number">$1.43B</div>
+                            <div class="label">UAE EV Market by 2032</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">250+</div>
+                            <div class="label">New Dubai stations 2025</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">70,000</div>
+                            <div class="label">Abu Dhabi target by 2030</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">40,600</div>
+                            <div class="label">EVs in Dubai H1 2025</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>What You'd Build</h4>
+                        <ul>
+                            <li>IP66 aluminum enclosures for outdoor chargers</li>
+                            <li>Integrated sunshade (critical for Gulf heat)</li>
+                            <li>Ventilation + optional AC for electronics cooling</li>
+                            <li>Anti-vandal construction for public spaces</li>
+                            <li>Cable management and safety signage</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Why It's Perfect</h4>
+                        <p>DEWA, ADNOC, and Parkin are installing thousands of chargers but buying generic enclosures. No dominant enclosure brand exists. Same fabrication skills as TV enclosures. Government contracts = reliable payment.</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Target Customers</h4>
+                        <ul>
+                            <li>DEWA / ADNOC Distribution</li>
+                            <li>Shopping malls (MOE, Dubai Mall)</li>
+                            <li>Hotels and resorts</li>
+                            <li>Corporate office buildings</li>
+                            <li>EV charging companies (E2GO, Ucharge)</li>
+                        </ul>
+                    </div>
+
+                    <div class="verdict gold">
+                        <h4>Verdict: EXCELLENT FIT</h4>
+                        <p>Massive growth market, same manufacturing skills, no brand competition. Could approach DEWA/ADNOC as "local manufacturer" advantage for government contracts. Start with 1-2 prototypes for mall parking lots.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pool Equipment Enclosures -->
+            <div class="opportunity-card tier-1">
+                <div class="card-header">
+                    <h3>Pool Equipment Enclosures</h3>
+                    <p class="tagline">Weatherproof + soundproof housing for pumps & filters</p>
+                </div>
+                <div class="card-body">
+                    <div class="score-row">
+                        <div class="score-item">
+                            <div class="label">Competition</div>
+                            <div class="value high">Low</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Complexity</div>
+                            <div class="value high">Very Low</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Demand</div>
+                            <div class="value high">High</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Margins</div>
+                            <div class="value high">60%+</div>
+                        </div>
+                    </div>
+
+                    <div class="market-stats">
+                        <div class="stat-box">
+                            <div class="number">200K+</div>
+                            <div class="label">Private pools UAE</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">500+</div>
+                            <div class="label">Hotels with pools</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">$800-2000</div>
+                            <div class="label">Price per enclosure</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">80%</div>
+                            <div class="label">Noise reduction possible</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>What You'd Build</h4>
+                        <ul>
+                            <li>Powder-coated aluminum housing (matches pool aesthetic)</li>
+                            <li>Acoustic insulation (reduces pump noise 80%)</li>
+                            <li>Louvered ventilation for heat dissipation</li>
+                            <li>Lockable access panels</li>
+                            <li>Sizes: small (pump only) to large (full equipment room)</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Why It's Perfect</h4>
+                        <p>Every villa in Emirates Hills, Palm Jumeirah has a pool with ugly exposed equipment. Noise complaints are common. No local brand - all imports from Australia/US. Villa owners are wealthy and want premium aesthetics.</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Target Customers</h4>
+                        <ul>
+                            <li>Villa owners (Palm, Emirates Hills, Al Barari)</li>
+                            <li>Pool contractors (Medley Pool, Astralux)</li>
+                            <li>Hotels and resorts</li>
+                            <li>Property developers</li>
+                            <li>Community pool managers</li>
+                        </ul>
+                    </div>
+
+                    <div class="verdict gold">
+                        <h4>Verdict: EXCELLENT FIT</h4>
+                        <p>Simpler than TV enclosures (no electronics). High-margin luxury product. Partner with pool contractors for distribution. "Silence your pool" marketing angle. Could launch in 60 days.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Outdoor Kitchen Islands -->
+            <div class="opportunity-card tier-1">
+                <div class="card-header">
+                    <h3>Outdoor Kitchen / BBQ Islands</h3>
+                    <p class="tagline">Modular outdoor cooking stations for Gulf climate</p>
+                </div>
+                <div class="card-body">
+                    <div class="score-row">
+                        <div class="score-item">
+                            <div class="label">Competition</div>
+                            <div class="value medium">Medium</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Complexity</div>
+                            <div class="value high">Low</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Demand</div>
+                            <div class="value high">High</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Margins</div>
+                            <div class="value high">50%+</div>
+                        </div>
+                    </div>
+
+                    <div class="market-stats">
+                        <div class="stat-box">
+                            <div class="number">$52.75B</div>
+                            <div class="label">Global market 2033</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">9.1%</div>
+                            <div class="label">CAGR growth</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">$5K-25K</div>
+                            <div class="label">Price per island</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">6 mo</div>
+                            <div class="label">BBQ season (Oct-Mar)</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>What You'd Build</h4>
+                        <ul>
+                            <li>Modular stainless steel + stone countertop islands</li>
+                            <li>Built-in grill, sink, storage, fridge cutout</li>
+                            <li>Weather covers for summer months</li>
+                            <li>Optional: pizza oven, teppanyaki, smoker modules</li>
+                            <li>Designed for Gulf climate (corrosion resistant)</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Why It's Good</h4>
+                        <p>Dubai's outdoor living culture is growing. BBQ is popular with locals and expats. No local premium brand - mostly cheap imports or expensive custom builds. Modular = lower inventory, flexible configs.</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Target Customers</h4>
+                        <ul>
+                            <li>Villa owners (rooftop terraces, gardens)</li>
+                            <li>Landscaping companies</li>
+                            <li>Hotels and restaurants (outdoor dining)</li>
+                            <li>Showrooms (ACE, Home Centre partnerships)</li>
+                        </ul>
+                    </div>
+
+                    <div class="verdict gold">
+                        <h4>Verdict: STRONG FIT</h4>
+                        <p>Higher complexity than enclosures but good margins. Seasonal demand (winter). Could start with 2-3 modular configs. Partner with landscapers for installation. Brand as "Gulf-engineered" vs US imports.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tier 2: Good Opportunities -->
+        <h2 class="section-title success">Tier 2: Good Opportunities (Secondary Focus)</h2>
+        <div class="opportunity-grid">
+            <!-- Smart Street Furniture -->
+            <div class="opportunity-card tier-2">
+                <div class="card-header">
+                    <h3>Smart Street Furniture</h3>
+                    <p class="tagline">Solar benches, smart bins, charging stations</p>
+                </div>
+                <div class="card-body">
+                    <div class="score-row">
+                        <div class="score-item">
+                            <div class="label">Competition</div>
+                            <div class="value medium">Medium</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Complexity</div>
+                            <div class="value medium">Medium</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Demand</div>
+                            <div class="value high">High</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Margins</div>
+                            <div class="value medium">40%</div>
+                        </div>
+                    </div>
+
+                    <div class="market-stats">
+                        <div class="stat-box">
+                            <div class="number">$15.12B</div>
+                            <div class="label">Global market 2033</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">17.8%</div>
+                            <div class="label">CAGR growth</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>What You'd Build</h4>
+                        <ul>
+                            <li>Solar-powered benches with USB charging</li>
+                            <li>Smart waste bins with fill sensors</li>
+                            <li>Outdoor charging stations for phones/e-scooters</li>
+                            <li>Digital wayfinding kiosks (simpler models)</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Considerations</h4>
+                        <p>Requires IoT/electronics integration (more complex). Government contracts have long sales cycles. But Dubai's smart city initiatives create strong demand. "Local manufacturer" advantage for tenders.</p>
+                    </div>
+
+                    <div class="verdict green">
+                        <h4>Verdict: GOOD - GOVERNMENT FOCUS</h4>
+                        <p>Higher complexity but large contracts. Start with solar benches (simplest). Target Dubai Municipality, RTA, Expo City. Longer sales cycle but sticky customers.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edge Computing Enclosures -->
+            <div class="opportunity-card tier-2">
+                <div class="card-header">
+                    <h3>Edge Computing / Micro Data Center Enclosures</h3>
+                    <p class="tagline">Outdoor server racks with cooling for 5G/IoT</p>
+                </div>
+                <div class="card-body">
+                    <div class="score-row">
+                        <div class="score-item">
+                            <div class="label">Competition</div>
+                            <div class="value high">Low</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Complexity</div>
+                            <div class="value low">High</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Demand</div>
+                            <div class="value high">Growing</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Margins</div>
+                            <div class="value high">High</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>What You'd Build</h4>
+                        <ul>
+                            <li>IP-rated outdoor server cabinets</li>
+                            <li>Integrated cooling (critical for Gulf heat)</li>
+                            <li>Power distribution and monitoring</li>
+                            <li>Sizes: single rack to small container</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Considerations</h4>
+                        <p>5G rollout driving edge computing needs. Telecom companies (Etisalat, Du) are customers. More technical (thermal management critical). But very high margins and sticky relationships.</p>
+                    </div>
+
+                    <div class="verdict green">
+                        <h4>Verdict: GOOD - TECHNICAL NICHE</h4>
+                        <p>Requires thermal engineering expertise but rewards are high. Target telecom companies, data center operators. Longer development cycle. Consider partnership with cooling company.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marine Electronics Enclosures -->
+            <div class="opportunity-card tier-2">
+                <div class="card-header">
+                    <h3>Marine Electronics Enclosures</h3>
+                    <p class="tagline">Waterproof housings for boat electronics</p>
+                </div>
+                <div class="card-body">
+                    <div class="score-row">
+                        <div class="score-item">
+                            <div class="label">Competition</div>
+                            <div class="value high">Low (local)</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Complexity</div>
+                            <div class="value medium">Medium</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Demand</div>
+                            <div class="value medium">Niche</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Margins</div>
+                            <div class="value high">60%+</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>What You'd Build</h4>
+                        <ul>
+                            <li>IP68 marine-grade aluminum enclosures</li>
+                            <li>Housings for radios, chart plotters, switches</li>
+                            <li>Custom mounting solutions</li>
+                            <li>Junction boxes and cable glands</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Considerations</h4>
+                        <p>UAE has large yacht/boat market. No local manufacturers - all imports from UK/US. Requires marine-grade materials (5052 aluminum, AISI 316 SS). Niche but loyal customer base.</p>
+                    </div>
+
+                    <div class="verdict green">
+                        <h4>Verdict: GOOD - NICHE PREMIUM</h4>
+                        <p>Smaller market but high margins and no local competition. Target marine chandleries, boat builders, yacht clubs. "Made in UAE" angle for local boat owners.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tier 3: Lower Priority -->
+        <h2 class="section-title warning">Tier 3: Lower Priority (Avoid for Now)</h2>
+        <div class="opportunity-grid">
+            <!-- AC Covers -->
+            <div class="opportunity-card tier-3">
+                <div class="card-header">
+                    <h3>AC Unit Covers</h3>
+                    <p class="tagline">Decorative covers for outdoor AC condensers</p>
+                </div>
+                <div class="card-body">
+                    <div class="score-row">
+                        <div class="score-item">
+                            <div class="label">Competition</div>
+                            <div class="value low">High</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Complexity</div>
+                            <div class="value high">Very Low</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Demand</div>
+                            <div class="value high">High</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Margins</div>
+                            <div class="value low">Low</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Why Avoid</h4>
+                        <ul>
+                            <li>Commodity product - heavy price competition</li>
+                            <li>Cheap imports from China flood market</li>
+                            <li>Amazon.ae already has dozens of options</li>
+                            <li>Technical issues: can trap heat, void AC warranty</li>
+                            <li>Low margins (under 30%)</li>
+                        </ul>
+                    </div>
+
+                    <div class="verdict orange">
+                        <h4>Verdict: AVOID</h4>
+                        <p>Race to bottom on price. Too simple to differentiate. Focus on higher-value enclosures instead.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Solar Mounting -->
+            <div class="opportunity-card tier-3">
+                <div class="card-header">
+                    <h3>Solar Panel Mounting Systems</h3>
+                    <p class="tagline">Rooftop and ground mount structures</p>
+                </div>
+                <div class="card-body">
+                    <div class="score-row">
+                        <div class="score-item">
+                            <div class="label">Competition</div>
+                            <div class="value low">High</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Complexity</div>
+                            <div class="value medium">Medium</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Demand</div>
+                            <div class="value high">High</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Margins</div>
+                            <div class="value medium">Moderate</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Why Avoid</h4>
+                        <ul>
+                            <li>Established local players: PSI, Invention Steel</li>
+                            <li>TUV certification required (expensive)</li>
+                            <li>Solar companies have existing supplier relationships</li>
+                            <li>Price competition from China is intense</li>
+                            <li>Requires structural engineering expertise</li>
+                        </ul>
+                    </div>
+
+                    <div class="verdict orange">
+                        <h4>Verdict: CROWDED MARKET</h4>
+                        <p>Good market but established local competition. Would need to compete on price or specialize heavily. Not a good first product.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GRP Kiosks -->
+            <div class="opportunity-card tier-3">
+                <div class="card-header">
+                    <h3>Retail/Food Kiosks</h3>
+                    <p class="tagline">Mall kiosks and food carts</p>
+                </div>
+                <div class="card-body">
+                    <div class="score-row">
+                        <div class="score-item">
+                            <div class="label">Competition</div>
+                            <div class="value low">Very High</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Complexity</div>
+                            <div class="value medium">Medium</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Demand</div>
+                            <div class="value high">High</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="label">Margins</div>
+                            <div class="value medium">Moderate</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Why Avoid</h4>
+                        <ul>
+                            <li>Saturated market: HAS Engineering, Melody, Al Huthaib, Naam</li>
+                            <li>Each mall has preferred vendors</li>
+                            <li>Highly customized = no economies of scale</li>
+                            <li>Long project timelines</li>
+                            <li>Relationship-driven sales (hard to break in)</li>
+                        </ul>
+                    </div>
+
+                    <div class="verdict orange">
+                        <h4>Verdict: TOO CROWDED</h4>
+                        <p>Established players with mall relationships. Hard to compete without connections. Not a good entry point.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <h2 class="section-title">Quick Comparison</h2>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Competition</th>
+                    <th>Complexity</th>
+                    <th>Market Size</th>
+                    <th>Margins</th>
+                    <th>Time to Launch</th>
+                    <th>Recommendation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="product-name">TV Enclosures (current)</td>
+                    <td><span class="rating excellent">Low</span></td>
+                    <td><span class="rating excellent">Low</span></td>
+                    <td><span class="rating good">Medium</span></td>
+                    <td><span class="rating excellent">50-60%</span></td>
+                    <td>In Progress</td>
+                    <td><span class="rating excellent">Continue</span></td>
+                </tr>
+                <tr>
+                    <td class="product-name">EV Charging Enclosures</td>
+                    <td><span class="rating excellent">Low</span></td>
+                    <td><span class="rating excellent">Low</span></td>
+                    <td><span class="rating excellent">Very High</span></td>
+                    <td><span class="rating excellent">50%+</span></td>
+                    <td>90 days</td>
+                    <td><span class="rating excellent">Start Next</span></td>
+                </tr>
+                <tr>
+                    <td class="product-name">Pool Equipment Enclosures</td>
+                    <td><span class="rating excellent">Low</span></td>
+                    <td><span class="rating excellent">Very Low</span></td>
+                    <td><span class="rating good">Medium</span></td>
+                    <td><span class="rating excellent">60%+</span></td>
+                    <td>60 days</td>
+                    <td><span class="rating excellent">Quick Win</span></td>
+                </tr>
+                <tr>
+                    <td class="product-name">Outdoor Kitchen Islands</td>
+                    <td><span class="rating good">Medium</span></td>
+                    <td><span class="rating good">Medium</span></td>
+                    <td><span class="rating excellent">High</span></td>
+                    <td><span class="rating excellent">50%+</span></td>
+                    <td>120 days</td>
+                    <td><span class="rating good">Good Add-On</span></td>
+                </tr>
+                <tr>
+                    <td class="product-name">Smart Street Furniture</td>
+                    <td><span class="rating good">Medium</span></td>
+                    <td><span class="rating moderate">Medium-High</span></td>
+                    <td><span class="rating excellent">Very High</span></td>
+                    <td><span class="rating good">40%</span></td>
+                    <td>180+ days</td>
+                    <td><span class="rating good">Gov't Contracts</span></td>
+                </tr>
+                <tr>
+                    <td class="product-name">Marine Electronics</td>
+                    <td><span class="rating excellent">Low (local)</span></td>
+                    <td><span class="rating good">Medium</span></td>
+                    <td><span class="rating moderate">Niche</span></td>
+                    <td><span class="rating excellent">60%+</span></td>
+                    <td>90 days</td>
+                    <td><span class="rating good">Premium Niche</span></td>
+                </tr>
+                <tr>
+                    <td class="product-name">AC Covers</td>
+                    <td><span class="rating poor">Very High</span></td>
+                    <td><span class="rating excellent">Very Low</span></td>
+                    <td><span class="rating excellent">High</span></td>
+                    <td><span class="rating poor">20-30%</span></td>
+                    <td>30 days</td>
+                    <td><span class="rating poor">Avoid</span></td>
+                </tr>
+                <tr>
+                    <td class="product-name">Solar Mounting</td>
+                    <td><span class="rating poor">High</span></td>
+                    <td><span class="rating moderate">Medium</span></td>
+                    <td><span class="rating excellent">High</span></td>
+                    <td><span class="rating moderate">30-40%</span></td>
+                    <td>180+ days</td>
+                    <td><span class="rating poor">Crowded</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Recommended Action Plan -->
+        <div class="action-plan">
+            <h2>Recommended Product Roadmap</h2>
+            <div class="action-steps">
+                <div class="action-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Complete TV Enclosures Launch (Current)</h4>
+                        <p>Finish manufacturer selection, get prototypes, validate product-market fit. This proves the model works.</p>
+                    </div>
+                </div>
+                <div class="action-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Add Pool Equipment Enclosures (Quick Win)</h4>
+                        <p>Same manufacturer, same materials, simpler product. Can launch within 60 days of TV enclosures. Partner with pool contractors for distribution.</p>
+                    </div>
+                </div>
+                <div class="action-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Develop EV Charging Enclosures (Big Opportunity)</h4>
+                        <p>Approach DEWA/ADNOC with "local manufacturer" pitch. Government contracts = large orders, reliable payment. Build on TV enclosure thermal management expertise.</p>
+                    </div>
+                </div>
+                <div class="action-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Evaluate Outdoor Kitchens (Seasonal)</h4>
+                        <p>Launch before October 2026 BBQ season. Higher complexity but good margins. Could be separate brand targeting luxury market.</p>
+                    </div>
+                </div>
+                <div class="action-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Explore Government Contracts (Long-term)</h4>
+                        <p>Smart street furniture, micro data centers = larger contracts but longer sales cycles. Build capability and relationships over time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Brand Strategy -->
+        <div class="framework-box" style="border-left-color: var(--gold); margin-top: 2rem;">
+            <h2>Multi-Product Brand Strategy</h2>
+            <p>Consider how to structure multiple product lines:</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+                <div style="background: var(--bg-alt); padding: 1.25rem; border-radius: 8px;">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Option A: Single Brand</h4>
+                    <p style="font-size: 0.9rem;"><strong>"Apex Enclosures"</strong> - TV, pool, EV, all under one roof. Simpler, builds brand recognition faster.</p>
+                </div>
+                <div style="background: var(--bg-alt); padding: 1.25rem; border-radius: 8px;">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Option B: Category Brands</h4>
+                    <p style="font-size: 0.9rem;"><strong>"Apex TV"</strong> for entertainment, <strong>"Apex Pool"</strong> for pool equipment, <strong>"Apex Charge"</strong> for EV. Better if categories grow large.</p>
+                </div>
+                <div style="background: var(--bg-alt); padding: 1.25rem; border-radius: 8px;">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Option C: Premium + Standard</h4>
+                    <p style="font-size: 0.9rem;"><strong>"Apex"</strong> for commercial/premium, <strong>"Shield"</strong> for budget/residential. Price differentiation strategy.</p>
+                </div>
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);"><strong>Recommendation:</strong> Start with Option A (single brand) to build recognition. Split into category brands later if any category becomes dominant.</p>
+        </div>
+
+        <!-- Sources -->
+        <div class="sources">
+            <h4>Sources</h4>
+            <a href="https://fastcompanyme.com/news/dubai-expands-ev-network-with-over-250-new-charging-stations-in-2025/" target="_blank">Dubai EV Expansion 2025 - Fast Company ME</a>
+            <a href="https://www.marketresearch.com/Ken-Research-v3771/UAE-EV-Charging-Stations-Size-42969160/" target="_blank">UAE EV Charging Market Report</a>
+            <a href="https://www.grandviewresearch.com/industry-analysis/outdoor-kitchen-market-report" target="_blank">Global Outdoor Kitchen Market Report</a>
+            <a href="https://growthmarketreports.com/report/smart-street-furniture-market" target="_blank">Smart Street Furniture Market 2033</a>
+            <a href="https://www.mordorintelligence.com/industry-reports/uae-smart-furniture-market" target="_blank">UAE Smart Furniture Market</a>
+            <a href="https://www.grpindustries.com/" target="_blank">GRP Industries UAE - Enclosures</a>
+            <a href="https://medleypool.com/" target="_blank">Medley Pool UAE</a>
+            <a href="https://www.powersolutionme.com/product/solar-mounting-systems" target="_blank">PSI Solar Mounting UAE</a>
+        </div>
+    </div>
+</body>
+</html>

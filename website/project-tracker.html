@@ -438,8 +438,8 @@
                 <div class="stat-label">Bounced</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" style="color: #059669;">9</div>
-                <div class="stat-label">Delivered</div>
+                <div class="stat-number" style="color: #059669;">1</div>
+                <div class="stat-label">Responded</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">75"</div>
@@ -551,19 +551,61 @@
                         <td><span class="status-pill sent">Sent</span></td>
                         <td>Custom metal fabrication, aluminum</td>
                     </tr>
-                    <tr>
+                    <tr style="background: #f0fdf4;">
                         <td><strong>Al Shurooq</strong></td>
                         <td><span class="region-tag">UAE - Dubai</span></td>
                         <td>info@alshurooq.ae<br><small>+971 4 42 55988</small></td>
                         <td>24 Dec 2025</td>
-                        <td><span class="status-pill sent">Sent</span></td>
-                        <td>Sheet metal parts, enclosures</td>
+                        <td><span class="status-pill responded">Responded</span></td>
+                        <td><strong style="color: #d97706;">Partial fit:</strong> Can fabricate to drawings but <strong>cannot meet IP66 spec</strong>. Asking if IP66 can be excluded.</td>
                     </tr>
                 </tbody>
             </table>
             <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
                 <strong>Follow-up:</strong> If no response within 3-5 business days, send follow-up email.
             </p>
+        </div>
+
+        <!-- Manufacturer Responses -->
+        <div class="card" style="border-left: 4px solid #059669;">
+            <h2 style="color: #059669;">Manufacturer Responses</h2>
+
+            <div style="background: #f0fdf4; padding: 1.25rem; border-radius: 8px; margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div>
+                        <h3 style="margin: 0 0 0.5rem; font-size: 1.1rem;">Al Shurooq</h3>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">UAE - Dubai | Responded 24 Dec 2025 5:00pm</p>
+                    </div>
+                    <span class="status-pill" style="background: #fef3c7; color: #92400e;">Partial Fit</span>
+                </div>
+
+                <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 6px; border-left: 3px solid #d97706;">
+                    <p style="margin: 0 0 0.75rem; font-style: italic; color: var(--text);">
+                        "While we are currently not authorized to fully meet the IP66 specification, we are confident that we can manufacture the enclosure according to your provided drawings."
+                    </p>
+                    <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted);">
+                        — Danica Sison, Customer Service
+                    </p>
+                </div>
+
+                <div style="margin-top: 1rem;">
+                    <strong>Analysis:</strong>
+                    <ul style="margin: 0.5rem 0 0 1.25rem; font-size: 0.9rem;">
+                        <li><strong style="color: #059669;">Can do:</strong> Fabricate aluminum enclosure to drawings</li>
+                        <li><strong style="color: #dc2626;">Cannot do:</strong> IP66 weatherproofing certification</li>
+                        <li><strong style="color: #d97706;">Asking:</strong> If IP66 requirement can be excluded</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 1rem; padding: 0.75rem; background: #fffbeb; border-radius: 6px;">
+                    <strong style="color: #92400e;">Options:</strong>
+                    <ol style="margin: 0.5rem 0 0 1.25rem; font-size: 0.9rem; color: #78350f;">
+                        <li>Use them for fabrication only, source IP66 sealing separately (gaskets, glands, vents)</li>
+                        <li>Ask them to partner with a sealing specialist</li>
+                        <li>Wait for responses from other manufacturers with IP66 capability</li>
+                    </ol>
+                </div>
+            </div>
         </div>
 
         <!-- Email Status Summary -->
@@ -1088,17 +1130,23 @@
                     <div class="timeline-title">RFQ Package Created</div>
                     <div class="timeline-desc">5-page PDF for 75" prototype, manufacturer contact list</div>
                 </div>
-                <div class="timeline-item current">
+                <div class="timeline-item completed">
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">24 Dec 2025</div>
                     <div class="timeline-title">RFQs Sent to Manufacturers</div>
                     <div class="timeline-desc">14 manufacturers contacted (5 bounced, 9 delivered). UAE: Eurotech, EmirFab, Al Shurooq, Al Amazon, Rainbow. Saudi: SMF, Flezco, Lucky, Prisma.</div>
                 </div>
+                <div class="timeline-item current">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">24 Dec 2025</div>
+                    <div class="timeline-title">First Response Received</div>
+                    <div class="timeline-desc">Al Shurooq (UAE) responded: Can fabricate but cannot meet IP66 spec. Partial fit - awaiting other responses.</div>
+                </div>
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-date">Pending</div>
+                    <div class="timeline-date">In Progress</div>
                     <div class="timeline-title">Receive & Evaluate Quotes</div>
-                    <div class="timeline-desc">Compare pricing, lead times, capabilities</div>
+                    <div class="timeline-desc">Compare pricing, lead times, capabilities. 1 of 9 responded so far.</div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
