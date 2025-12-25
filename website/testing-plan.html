@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex TV Enclosures - Prototype Testing Plan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1428a0;
+            --text: #1a1a1a;
+            --text-muted: #6b7280;
+            --bg: #ffffff;
+            --bg-alt: #f8f9fa;
+            --border: #e5e7eb;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        header {
+            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+            color: white;
+            padding: 3rem 2rem;
+        }
+        header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        header .subtitle { opacity: 0.9; }
+        header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+        header .badge.warning {
+            background: rgba(217, 119, 6, 0.3);
+            border: 1px solid rgba(217, 119, 6, 0.5);
+        }
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary);
+        }
+        h3 { margin: 1.5rem 0 1rem; color: var(--text); }
+        h4 { margin: 1rem 0 0.5rem; color: var(--text-muted); font-size: 0.95rem; }
+
+        .alert-box {
+            background: #fef3c7;
+            border: 2px solid #d97706;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .alert-box h3 {
+            color: #92400e;
+            margin: 0 0 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .alert-box p { color: #92400e; margin: 0; }
+
+        .phase-card {
+            background: var(--bg-alt);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 5px solid var(--primary);
+        }
+        .phase-card.critical { border-left-color: var(--danger); }
+        .phase-card.important { border-left-color: var(--warning); }
+        .phase-card h3 {
+            margin: 0 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .phase-number {
+            background: var(--primary);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .phase-card.critical .phase-number { background: var(--danger); }
+        .phase-card.important .phase-number { background: var(--warning); }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+        th { background: var(--bg-alt); font-weight: 600; }
+        tr:nth-child(even) { background: var(--bg-alt); }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        .checklist li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .checklist li:last-child { border-bottom: none; }
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .equipment-item {
+            background: var(--bg-alt);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .equipment-item .name { font-weight: 500; }
+        .equipment-item .cost { color: var(--text-muted); font-size: 0.9rem; }
+        .equipment-item .source { font-size: 0.8rem; color: var(--text-muted); }
+
+        .pass-fail {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .pass-fail.pass { background: #dcfce7; color: #166534; }
+        .pass-fail.fail { background: #fee2e2; color: #991b1b; }
+        .pass-fail.warning { background: #fef3c7; color: #92400e; }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .metric-card {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .metric-card .label { font-size: 0.85rem; color: var(--text-muted); }
+        .metric-card .target { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .metric-card .actual { font-size: 0.9rem; margin-top: 0.25rem; }
+
+        .log-table {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+        }
+        .log-table td { padding: 0.5rem; }
+
+        .note {
+            background: #dbeafe;
+            padding: 1rem;
+            border-left: 4px solid var(--primary);
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        .note.warning {
+            background: #fef3c7;
+            border-left-color: var(--warning);
+        }
+        .note.danger {
+            background: #fee2e2;
+            border-left-color: var(--danger);
+        }
+
+        /* Document Navigation */
+        .doc-nav {
+            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .doc-nav h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.75rem;
+        }
+        .doc-nav-grid {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .doc-card {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .doc-card:hover {
+            border-color: var(--primary);
+            background: #f0f4ff;
+        }
+        .doc-card.active {
+            background: white;
+            color: #1428a0;
+        }
+        @media print {
+            .doc-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="doc-nav">
+        <h3>Manufacturing Documentation</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">Website</a>
+            <a href="specification.html" class="doc-card">Specification</a>
+            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
+            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
+            <a href="control-logic.html" class="doc-card">Control Logic</a>
+            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
+            <a href="market-research.html" class="doc-card">Market Research</a>
+            <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
+            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
+            <a href="engineering-analysis.html" class="doc-card">Engineering Analysis</a>
+            <a href="testing-plan.html" class="doc-card active">Testing Plan</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1>Prototype Testing Plan</h1>
+            <div class="subtitle">Validation Protocol for ATE-75 Outdoor TV Enclosure</div>
+            <div class="badge warning">STATUS: Pre-Production Validation Required</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Critical Warning -->
+        <div class="alert-box">
+            <h3>Important: Design Not Yet Validated</h3>
+            <p>The engineering specifications are based on theoretical calculations and component datasheets. Real-world performance MUST be verified through physical prototype testing before production or customer deployment. This document outlines the required validation steps.</p>
+        </div>
+
+        <!-- Overview -->
+        <h2>1. Testing Overview</h2>
+        <p>This plan validates that the ATE-75 prototype meets all design requirements under real Gulf climate conditions. Testing will confirm thermal management, weatherproofing, and durability before committing to production.</p>
+
+        <div class="metric-grid">
+            <div class="metric-card">
+                <div class="label">Test Duration</div>
+                <div class="target">14 Days</div>
+                <div class="actual">Minimum outdoor exposure</div>
+            </div>
+            <div class="metric-card">
+                <div class="label">Critical Metric</div>
+                <div class="target">&lt; 35&deg;C</div>
+                <div class="actual">Internal temp at TV</div>
+            </div>
+            <div class="metric-card">
+                <div class="label">Test Location</div>
+                <div class="target">Dubai</div>
+                <div class="actual">Outdoor, south-facing</div>
+            </div>
+            <div class="metric-card">
+                <div class="label">Test TV</div>
+                <div class="target">Budget 75"</div>
+                <div class="actual">Expendable unit</div>
+            </div>
+        </div>
+
+        <!-- Equipment Required -->
+        <h2>2. Test Equipment Required</h2>
+        <p>Before testing begins, acquire the following equipment. Total investment: approximately AED 500-800.</p>
+
+        <div class="equipment-grid">
+            <div class="equipment-item">
+                <div>
+                    <div class="name">Digital Temperature Logger (4-channel)</div>
+                    <div class="source">Amazon.ae / Noon</div>
+                </div>
+                <div class="cost">~AED 150</div>
+            </div>
+            <div class="equipment-item">
+                <div>
+                    <div class="name">K-Type Thermocouples (4x)</div>
+                    <div class="source">With logger or separate</div>
+                </div>
+                <div class="cost">~AED 50</div>
+            </div>
+            <div class="equipment-item">
+                <div>
+                    <div class="name">Humidity Sensor (data logging)</div>
+                    <div class="source">Xiaomi / SwitchBot</div>
+                </div>
+                <div class="cost">~AED 80</div>
+            </div>
+            <div class="equipment-item">
+                <div>
+                    <div class="name">IR Thermometer Gun</div>
+                    <div class="source">Any hardware store</div>
+                </div>
+                <div class="cost">~AED 60</div>
+            </div>
+            <div class="equipment-item">
+                <div>
+                    <div class="name">Budget 75" TV (test unit)</div>
+                    <div class="source">Cheapest available - will be sacrificed</div>
+                </div>
+                <div class="cost">~AED 1,500</div>
+            </div>
+            <div class="equipment-item">
+                <div>
+                    <div class="name">Power Meter (plug-in type)</div>
+                    <div class="source">Measures actual power consumption</div>
+                </div>
+                <div class="cost">~AED 40</div>
+            </div>
+            <div class="equipment-item">
+                <div>
+                    <div class="name">Anemometer (optional)</div>
+                    <div class="source">Measure fan airflow CFM</div>
+                </div>
+                <div class="cost">~AED 100</div>
+            </div>
+            <div class="equipment-item">
+                <div>
+                    <div class="name">Garden Hose + Spray Nozzle</div>
+                    <div class="source">For IP66 water jet test</div>
+                </div>
+                <div class="cost">~AED 50</div>
+            </div>
+        </div>
+
+        <!-- Phase 1: Bench Testing -->
+        <h2>3. Test Phases</h2>
+
+        <div class="phase-card critical">
+            <h3><span class="phase-number">1</span> Pre-Installation Inspection (Day 0)</h3>
+            <p>Before installing the TV, verify enclosure build quality.</p>
+
+            <ul class="checklist">
+                <li><span class="checkbox"></span> <div><strong>Dimensional check:</strong> Verify internal dimensions match spec (within &plusmn;3mm)</div></li>
+                <li><span class="checkbox"></span> <div><strong>Gasket inspection:</strong> EPDM gasket continuous, no gaps, properly seated</div></li>
+                <li><span class="checkbox"></span> <div><strong>Door operation:</strong> Hinges smooth, gas struts hold door open, latches engage fully</div></li>
+                <li><span class="checkbox"></span> <div><strong>Cable gland check:</strong> IP66 glands installed, threads sealed</div></li>
+                <li><span class="checkbox"></span> <div><strong>Fan operation:</strong> Power on, verify all fans spin, no rattling or grinding</div></li>
+                <li><span class="checkbox"></span> <div><strong>Controller test:</strong> Verify PWM responds to temperature input (use heat gun briefly)</div></li>
+                <li><span class="checkbox"></span> <div><strong>Powder coat quality:</strong> No chips, scratches, or thin spots</div></li>
+                <li><span class="checkbox"></span> <div><strong>Drainage holes:</strong> Verify drain holes are clear (bottom of enclosure)</div></li>
+            </ul>
+        </div>
+
+        <div class="phase-card critical">
+            <h3><span class="phase-number">2</span> Thermal Validation - Indoor (Days 1-2)</h3>
+            <p>Establish baseline thermal performance in controlled environment before outdoor exposure.</p>
+
+            <h4>Sensor Placement</h4>
+            <table>
+                <tr>
+                    <th>Channel</th>
+                    <th>Location</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>T1</td>
+                    <td>TV back panel center</td>
+                    <td>Critical - TV operating temp</td>
+                </tr>
+                <tr>
+                    <td>T2</td>
+                    <td>Internal air (mid-height)</td>
+                    <td>Enclosure air temperature</td>
+                </tr>
+                <tr>
+                    <td>T3</td>
+                    <td>Intake air (at filter)</td>
+                    <td>Ambient reference</td>
+                </tr>
+                <tr>
+                    <td>T4</td>
+                    <td>Exhaust air (at fan outlet)</td>
+                    <td>Delta-T calculation</td>
+                </tr>
+            </table>
+
+            <h4>Indoor Test Protocol</h4>
+            <ul class="checklist">
+                <li><span class="checkbox"></span> <div><strong>Install TV and sensors</strong> - Route sensor wires through cable glands</div></li>
+                <li><span class="checkbox"></span> <div><strong>Power on TV</strong> - Display bright content (white screen or video loop)</div></li>
+                <li><span class="checkbox"></span> <div><strong>Log temperatures every 5 minutes for 4 hours</strong></div></li>
+                <li><span class="checkbox"></span> <div><strong>Record steady-state temps</strong> (after ~2 hours when stable)</div></li>
+                <li><span class="checkbox"></span> <div><strong>Calculate delta-T:</strong> T4 - T3 should be 2-5&deg;C (validates airflow)</div></li>
+                <li><span class="checkbox"></span> <div><strong>Verify fan speed increases</strong> as T2 rises above 30&deg;C</div></li>
+            </ul>
+
+            <div class="note">
+                <strong>Pass Criteria (Indoor @ 25&deg;C ambient):</strong><br>
+                T1 (TV back) &lt; 40&deg;C | T2 (internal air) &lt; 35&deg;C | Delta-T (T4-T3) = 2-5&deg;C
+            </div>
+        </div>
+
+        <div class="phase-card critical">
+            <h3><span class="phase-number">3</span> Thermal Validation - Outdoor (Days 3-14)</h3>
+            <p>The critical test: real Gulf climate conditions with solar load.</p>
+
+            <h4>Installation Requirements</h4>
+            <ul class="checklist">
+                <li><span class="checkbox"></span> <div><strong>Location:</strong> Outdoor, south-facing (maximum sun exposure)</div></li>
+                <li><span class="checkbox"></span> <div><strong>Mounting:</strong> Secure to wall or sturdy frame at viewing height</div></li>
+                <li><span class="checkbox"></span> <div><strong>Power:</strong> Outdoor-rated extension or dedicated circuit with GFCI</div></li>
+                <li><span class="checkbox"></span> <div><strong>Data logging:</strong> Configure logger for 5-minute intervals, 24/7</div></li>
+                <li><span class="checkbox"></span> <div><strong>TV operation:</strong> Run 8+ hours daily (peak sun hours mandatory)</div></li>
+            </ul>
+
+            <h4>Daily Monitoring Checklist</h4>
+            <table>
+                <tr>
+                    <th>Time</th>
+                    <th>Action</th>
+                    <th>Record</th>
+                </tr>
+                <tr>
+                    <td>08:00</td>
+                    <td>Power on TV, start video loop</td>
+                    <td>Ambient temp, weather conditions</td>
+                </tr>
+                <tr>
+                    <td>12:00-14:00</td>
+                    <td>Peak sun observation</td>
+                    <td>Max temps, fan speed (audible check)</td>
+                </tr>
+                <tr>
+                    <td>14:00</td>
+                    <td>Photo of display (check for dimming/artifacts)</td>
+                    <td>Any visual anomalies</td>
+                </tr>
+                <tr>
+                    <td>18:00</td>
+                    <td>End of day check</td>
+                    <td>Download data, check for condensation</td>
+                </tr>
+            </table>
+
+            <div class="note danger">
+                <strong>STOP TEST IMMEDIATELY IF:</strong><br>
+                - T1 (TV back) exceeds 50&deg;C<br>
+                - TV displays thermal warning or shuts down<br>
+                - Visible smoke, burning smell, or component damage<br>
+                - Any water ingress detected inside enclosure
+            </div>
+
+            <h4>Pass/Fail Criteria</h4>
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Target</th>
+                    <th>Acceptable</th>
+                    <th>Fail</th>
+                </tr>
+                <tr>
+                    <td>T1 (TV back panel)</td>
+                    <td>&lt; 40&deg;C</td>
+                    <td>&lt; 45&deg;C</td>
+                    <td>&gt; 50&deg;C</td>
+                </tr>
+                <tr>
+                    <td>T2 (internal air)</td>
+                    <td>&lt; 35&deg;C</td>
+                    <td>&lt; 42&deg;C</td>
+                    <td>&gt; 48&deg;C</td>
+                </tr>
+                <tr>
+                    <td>TV operation</td>
+                    <td>No issues</td>
+                    <td>Minor dimming OK</td>
+                    <td>Shutdown / artifacts</td>
+                </tr>
+                <tr>
+                    <td>Fan noise @ 100%</td>
+                    <td>&lt; 45 dB</td>
+                    <td>&lt; 55 dB</td>
+                    <td>&gt; 60 dB</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="phase-card important">
+            <h3><span class="phase-number">4</span> IP66 Water Ingress Test (Day 10)</h3>
+            <p>Verify weatherproofing under simulated rain conditions.</p>
+
+            <h4>Test Protocol (IEC 60529 Simplified)</h4>
+            <ul class="checklist">
+                <li><span class="checkbox"></span> <div><strong>Power off TV</strong> - Remove from enclosure if concerned about damage</div></li>
+                <li><span class="checkbox"></span> <div><strong>Place absorbent paper</strong> inside enclosure floor and on all electronics</div></li>
+                <li><span class="checkbox"></span> <div><strong>Seal door completely</strong> - All latches engaged</div></li>
+                <li><span class="checkbox"></span> <div><strong>Spray test:</strong> Garden hose at 3m distance, medium pressure, 3 minutes per face</div></li>
+                <li><span class="checkbox"></span> <div><strong>Test all faces:</strong> Front glass, top, both sides, door seams, cable entry</div></li>
+                <li><span class="checkbox"></span> <div><strong>Wait 10 minutes</strong> after spray test</div></li>
+                <li><span class="checkbox"></span> <div><strong>Open and inspect:</strong> Check all absorbent paper for moisture</div></li>
+            </ul>
+
+            <div class="note">
+                <strong>Pass Criteria:</strong> No water penetration beyond drain channels. Paper remains dry. Electronics show no moisture.
+            </div>
+
+            <h4>Dust Ingress (Visual)</h4>
+            <p>After 14 days outdoor exposure, inspect filter and interior:</p>
+            <ul class="checklist">
+                <li><span class="checkbox"></span> <div>Filter shows dust accumulation (expected - means it's working)</div></li>
+                <li><span class="checkbox"></span> <div>Interior surfaces clean (no dust bypassing filter)</div></li>
+                <li><span class="checkbox"></span> <div>Fan blades show minimal dust</div></li>
+                <li><span class="checkbox"></span> <div>Electronics compartment dust-free</div></li>
+            </ul>
+        </div>
+
+        <div class="phase-card">
+            <h3><span class="phase-number">5</span> Electrical Safety Verification (Day 1 & 14)</h3>
+
+            <h4>Initial Checks</h4>
+            <ul class="checklist">
+                <li><span class="checkbox"></span> <div><strong>Wiring inspection:</strong> All connections secure, no exposed copper</div></li>
+                <li><span class="checkbox"></span> <div><strong>Grounding:</strong> Enclosure bonded to earth ground</div></li>
+                <li><span class="checkbox"></span> <div><strong>Fuse rating:</strong> Correct fuse installed per spec (5A for fans/controller)</div></li>
+                <li><span class="checkbox"></span> <div><strong>Power consumption:</strong> Measure with power meter, compare to calculated</div></li>
+            </ul>
+
+            <h4>End-of-Test Checks</h4>
+            <ul class="checklist">
+                <li><span class="checkbox"></span> <div><strong>No tripped breakers</strong> during 14-day test</div></li>
+                <li><span class="checkbox"></span> <div><strong>No burned/melted wires</strong> or connectors</div></li>
+                <li><span class="checkbox"></span> <div><strong>Surge protection:</strong> SPD indicator shows normal</div></li>
+                <li><span class="checkbox"></span> <div><strong>Cable gland integrity:</strong> No heat damage to glands</div></li>
+            </ul>
+        </div>
+
+        <div class="phase-card">
+            <h3><span class="phase-number">6</span> Durability & Usability (Days 7-14)</h3>
+
+            <h4>Mechanical Durability</h4>
+            <ul class="checklist">
+                <li><span class="checkbox"></span> <div><strong>Door cycle test:</strong> Open/close door 50 times, check hinge wear</div></li>
+                <li><span class="checkbox"></span> <div><strong>Latch engagement:</strong> All latches still engage properly after cycling</div></li>
+                <li><span class="checkbox"></span> <div><strong>Gas strut function:</strong> Door stays open at all positions</div></li>
+                <li><span class="checkbox"></span> <div><strong>Lock function:</strong> Cam locks and padlock hasps work correctly</div></li>
+            </ul>
+
+            <h4>Usability Assessment</h4>
+            <ul class="checklist">
+                <li><span class="checkbox"></span> <div>TV visible in direct sunlight? (note: may need brightness boost)</div></li>
+                <li><span class="checkbox"></span> <div>Can one person service the unit (replace filter, access TV)?</div></li>
+                <li><span class="checkbox"></span> <div>IR remote works through glass?</div></li>
+                <li><span class="checkbox"></span> <div>Any annoying rattles or vibrations from fans?</div></li>
+            </ul>
+        </div>
+
+        <!-- Data Recording Template -->
+        <h2>4. Data Recording Template</h2>
+        <p>Use this format to log daily observations. Export temperature logger data separately.</p>
+
+        <table class="log-table">
+            <tr>
+                <th style="width: 100px;">Date</th>
+                <th style="width: 60px;">Day #</th>
+                <th>Weather</th>
+                <th>Max Ambient</th>
+                <th>Max T1</th>
+                <th>Max T2</th>
+                <th>Issues / Notes</th>
+            </tr>
+            <tr>
+                <td>____/____/____</td>
+                <td style="text-align: center;">1</td>
+                <td>______________________</td>
+                <td>______&deg;C</td>
+                <td>______&deg;C</td>
+                <td>______&deg;C</td>
+                <td>_________________________________</td>
+            </tr>
+            <tr>
+                <td>____/____/____</td>
+                <td style="text-align: center;">2</td>
+                <td>______________________</td>
+                <td>______&deg;C</td>
+                <td>______&deg;C</td>
+                <td>______&deg;C</td>
+                <td>_________________________________</td>
+            </tr>
+            <tr>
+                <td colspan="7" style="text-align: center; color: var(--text-muted);">... continue for all 14 days ...</td>
+            </tr>
+        </table>
+
+        <!-- Failure Response -->
+        <h2>5. If Tests Fail: Remediation Options</h2>
+
+        <table>
+            <tr>
+                <th>Failure Mode</th>
+                <th>Likely Cause</th>
+                <th>Remediation</th>
+            </tr>
+            <tr>
+                <td>T1 &gt; 50&deg;C (TV overheating)</td>
+                <td>Insufficient airflow or solar load higher than calculated</td>
+                <td>
+                    1. Add 4th fan (upgrade to 4x 140mm)<br>
+                    2. Upgrade to 92% IR rejection film<br>
+                    3. Add shade/awning above enclosure<br>
+                    4. Limit operation to non-peak hours
+                </td>
+            </tr>
+            <tr>
+                <td>Water ingress</td>
+                <td>Gasket failure, unsealed penetrations</td>
+                <td>
+                    1. Replace gasket with thicker EPDM<br>
+                    2. Add silicone sealant at corners<br>
+                    3. Upgrade cable glands to IP68<br>
+                    4. Add drip edge above door
+                </td>
+            </tr>
+            <tr>
+                <td>Fan failure / noise</td>
+                <td>Poor quality fans, dust ingress</td>
+                <td>
+                    1. Upgrade to industrial IP68 fans<br>
+                    2. Improve filter (finer mesh)<br>
+                    3. Add fan guards<br>
+                    4. Use vibration dampening mounts
+                </td>
+            </tr>
+            <tr>
+                <td>Condensation inside</td>
+                <td>Humid air entering during cool cycle</td>
+                <td>
+                    1. Add silica gel desiccant packs<br>
+                    2. Add anti-condensation heater<br>
+                    3. Improve ventilation seal during off-hours
+                </td>
+            </tr>
+            <tr>
+                <td>TV dimming/thermal throttle</td>
+                <td>TV entering protection mode</td>
+                <td>
+                    1. All above cooling improvements<br>
+                    2. Consider outdoor-rated TV (higher temp tolerance)<br>
+                    3. Accept limitation or market as "shaded only"
+                </td>
+            </tr>
+        </table>
+
+        <!-- Sign-Off -->
+        <h2>6. Test Completion Sign-Off</h2>
+
+        <div class="phase-card">
+            <h3>Final Assessment</h3>
+            <table>
+                <tr>
+                    <th style="width: 200px;">Test Category</th>
+                    <th style="width: 100px;">Result</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td>Thermal Management</td>
+                    <td><span class="pass-fail">____</span></td>
+                    <td>Max T1: ____&deg;C | Max T2: ____&deg;C</td>
+                </tr>
+                <tr>
+                    <td>Water Ingress (IP66)</td>
+                    <td><span class="pass-fail">____</span></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Dust Protection</td>
+                    <td><span class="pass-fail">____</span></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Electrical Safety</td>
+                    <td><span class="pass-fail">____</span></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Mechanical Durability</td>
+                    <td><span class="pass-fail">____</span></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Usability</td>
+                    <td><span class="pass-fail">____</span></td>
+                    <td></td>
+                </tr>
+            </table>
+
+            <div style="margin-top: 2rem; padding-top: 1rem; border-top: 2px solid var(--border);">
+                <p><strong>Overall Result:</strong> <span class="pass-fail" style="font-size: 1.1rem;">____________</span></p>
+                <p style="margin-top: 1rem;"><strong>Tested by:</strong> ________________________________</p>
+                <p><strong>Date:</strong> ____/____/________</p>
+                <p style="margin-top: 1rem;"><strong>Recommendations before production:</strong></p>
+                <p style="border: 1px solid var(--border); min-height: 100px; padding: 1rem; margin-top: 0.5rem; border-radius: 4px;"></p>
+            </div>
+        </div>
+
+        <div class="note" style="margin-top: 2rem;">
+            <strong>Next Steps After Successful Testing:</strong><br>
+            1. Document all test results with photos and data logs<br>
+            2. Update specifications if any changes were made<br>
+            3. Provide test report to manufacturer for production approval<br>
+            4. Order initial production batch (recommend 5-10 units)<br>
+            5. Test one production unit before full deployment
+        </div>
+
+    </div>
+</body>
+</html>
