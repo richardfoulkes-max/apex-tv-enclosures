@@ -183,7 +183,6 @@
             <a href="designs.html" class="doc-card">Designs</a>
             <a href="contractors.html" class="doc-card">Contractors</a>
             <a href="design-detailed.html" class="doc-card">Detailed Design</a>
-            <a href="competitor-comparison.html" class="doc-card">Competitor Analysis</a>
             <a href="contractors.html" class="doc-card">Contractors</a>
             <a href="compliance-guide.html" class="doc-card">Compliance Guide</a>
         </div>
@@ -193,18 +192,8 @@
         <h2>1. Control System Overview</h2>
         <p>The Apex thermal management system uses a microcontroller-based PWM fan controller to maintain optimal internal temperature while minimizing noise. Unlike simple on/off thermostat control, this system provides smooth, proportional fan speed adjustment.</p>
 
-        <div class="warning">
-            <strong>Competitor Limitation:</strong> Nearest competitor uses a simple on/off thermostat at 30°C. This causes:
-            <ul style="margin: 0.5rem 0 0 1.5rem;">
-                <li>Sudden fan noise when threshold is crossed (0% → 100% instantly)</li>
-                <li>Constant on/off cycling near the setpoint</li>
-                <li>Full-speed fans even when 20% would suffice</li>
-                <li>No proportional control - binary only</li>
-            </ul>
-        </div>
-
         <div class="note">
-            <strong>Apex PWM Advantages:</strong> Same 30°C start point, but with intelligent ramping:
+            <strong>Apex PWM Advantages:</strong>
             <ul style="margin: 0.5rem 0 0 1.5rem;">
                 <li>Fans start at 30°C at <strong>20% PWM</strong> (near-silent)</li>
                 <li>Gradual ramp: 50% at 35°C, 100% at 45°C</li>
@@ -221,7 +210,6 @@
                     <th>Parameter</th>
                     <th>Value</th>
                     <th>Description</th>
-                    <th>vs Competitor</th>
                 </tr>
             </thead>
             <tbody>
@@ -229,25 +217,21 @@
                     <td><code>TEMP_START</code></td>
                     <td>30°C</td>
                     <td>Fans begin at 20% PWM (near-silent)</td>
-                    <td style="color: #059669;">Same threshold, but 20% vs 100%</td>
                 </tr>
                 <tr>
                     <td><code>TEMP_MID</code></td>
                     <td>35°C</td>
-                    <td>Fans at 50% PWM</td>
-                    <td style="color: #059669;">TV's max rated ambient temp</td>
+                    <td>Fans at 50% PWM (TV's max rated ambient)</td>
                 </tr>
                 <tr>
                     <td><code>TEMP_FULL</code></td>
                     <td>45°C</td>
-                    <td>Fans reach 100% PWM</td>
-                    <td style="color: #059669;">Linear ramp 30-45°C</td>
+                    <td>Fans reach 100% PWM (linear ramp 30-45°C)</td>
                 </tr>
                 <tr>
                     <td><code>TEMP_ALARM</code></td>
                     <td>50°C</td>
-                    <td>Warning LED, maintain 100% fans</td>
-                    <td style="color: #d97706;">TV at risk - alert user</td>
+                    <td>Warning LED, maintain 100% fans - TV at risk</td>
                 </tr>
                 <tr>
                     <td><code>TEMP_CRITICAL</code></td>
