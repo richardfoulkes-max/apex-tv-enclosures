@@ -99,4 +99,3 @@ WhatsApp: +971 50 559 8675
 - Apex-BOM.pdf
 - Apex-Wiring.pdf
 - Apex-Control-Logic.pdf
-- Apex-QC-Checklist.pdf
