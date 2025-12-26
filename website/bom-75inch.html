@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATE-75 Bill of Materials - Apex TV Enclosures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1428a0;
+            --primary-light: #e8ebf7;
+            --text: #1a1a1a;
+            --text-muted: #6b7280;
+            --bg: #ffffff;
+            --bg-alt: #f8f9fa;
+            --border: #e5e7eb;
+            --success: #059669;
+            --warning: #d97706;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-alt); color: var(--text); line-height: 1.6; }
+
+        .doc-nav { background: #1a1a2e; padding: 1rem 2rem; position: sticky; top: 0; z-index: 100; }
+        .doc-nav h3 { color: white; font-size: 0.85rem; margin-bottom: 0.75rem; opacity: 0.7; }
+        .doc-nav-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .doc-card { background: rgba(255,255,255,0.1); color: white; padding: 0.4rem 0.75rem; border-radius: 4px; text-decoration: none; font-size: 0.8rem; transition: background 0.2s; }
+        .doc-card:hover { background: rgba(255,255,255,0.2); }
+        .doc-card.active { background: #1428a0; }
+
+        header { background: var(--primary); color: white; padding: 2rem; text-align: center; }
+        header h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+        header .subtitle { opacity: 0.9; }
+        header .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.85rem; margin-top: 0.75rem; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+
+        .summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .summary-card { background: white; border-radius: 12px; padding: 1.25rem; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .summary-card .value { font-size: 1.75rem; font-weight: 700; color: var(--primary); }
+        .summary-card .label { font-size: 0.85rem; color: var(--text-muted); }
+
+        .section { background: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .section h2 { font-size: 1.1rem; color: var(--primary); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary-light); }
+
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: var(--bg-alt); font-weight: 600; }
+        .subtotal-row { background: var(--primary-light); font-weight: 600; }
+        .total-row { background: var(--primary); color: white; font-weight: 700; }
+        .total-row td { border: none; }
+        td:nth-child(3), td:nth-child(4), td:nth-child(5), th:nth-child(3), th:nth-child(4), th:nth-child(5) { text-align: right; }
+
+        .note { background: #fffbeb; border-left: 4px solid var(--warning); padding: 1rem; border-radius: 0 8px 8px 0; margin: 1rem 0; font-size: 0.9rem; }
+
+        .comparison { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0; }
+        .comparison-card { background: var(--bg-alt); border-radius: 8px; padding: 1rem; text-align: center; }
+        .comparison-card.highlight { background: var(--primary-light); border: 2px solid var(--primary); }
+        .comparison-card h4 { font-size: 0.9rem; color: var(--text-muted); }
+        .comparison-card .price { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin: 0.5rem 0; }
+        .comparison-card .size { font-size: 0.8rem; color: var(--text-muted); }
+
+        @media print { .doc-nav { display: none; } }
+    </style>
+</head>
+<body>
+    <nav class="doc-nav">
+        <h3>Project Documents</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">Website</a>
+            <a href="specification.html" class="doc-card">Specification</a>
+            <a href="bom-detailed.html" class="doc-card">BOM (55")</a>
+            <a href="bom-75inch.html" class="doc-card active">BOM (75")</a>
+            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
+            <a href="control-logic.html" class="doc-card">Control Logic</a>
+            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
+            <a href="market-research.html" class="doc-card">Market Research</a>
+            <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
+            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
+            <a href="engineering-analysis.html" class="doc-card">Engineering Analysis</a>
+            <a href="testing-plan.html" class="doc-card">Testing Plan</a>
+            <a href="designs.html" class="doc-card">Designs</a>
+            <a href="design-detailed.html" class="doc-card">Detailed Design</a>
+            <a href="competitor-comparison.html" class="doc-card">Competitor Analysis</a>
+            <a href="contractors.html" class="doc-card">Contractors</a>
+            <a href="compliance-guide.html" class="doc-card">Compliance Guide</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>ATE-75 Bill of Materials</h1>
+        <div class="subtitle">75" Outdoor TV Enclosure - Prototype Costing</div>
+        <div class="badge">External: 1760 × 1040 × 130mm | Internal: 1700 × 1000 × 90mm</div>
+    </header>
+
+    <div class="container">
+        <!-- Summary Cards -->
+        <div class="summary-cards">
+            <div class="summary-card">
+                <div class="value">$798</div>
+                <div class="label">BOM Total</div>
+            </div>
+            <div class="summary-card">
+                <div class="value">$858</div>
+                <div class="label">Unit Cost (incl labor)</div>
+            </div>
+            <div class="summary-card">
+                <div class="value">$1,430</div>
+                <div class="label">Target FOB (40% margin)</div>
+            </div>
+            <div class="summary-card">
+                <div class="value">$2,860</div>
+                <div class="label">Target Retail (2x)</div>
+            </div>
+        </div>
+
+        <!-- Size Comparison -->
+        <div class="section">
+            <h2>Size Comparison</h2>
+            <div class="comparison">
+                <div class="comparison-card">
+                    <h4>ATE-55</h4>
+                    <div class="price">$633</div>
+                    <div class="size">1320 × 800mm</div>
+                </div>
+                <div class="comparison-card highlight">
+                    <h4>ATE-75 (This BOM)</h4>
+                    <div class="price">$858</div>
+                    <div class="size">1760 × 1040mm</div>
+                </div>
+                <div class="comparison-card">
+                    <h4>ATE-86</h4>
+                    <div class="price">$1,092</div>
+                    <div class="size">2000 × 1180mm</div>
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem;">
+                ATE-75 is 1.73× the area of ATE-55 | Costs scale primarily with glass and frame size
+            </p>
+        </div>
+
+        <!-- BOM Section 1: Enclosure Structure -->
+        <div class="section">
+            <h2>1. Enclosure Structure</h2>
+
+            <h3 style="font-size: 0.95rem; margin: 1rem 0 0.5rem; color: var(--text-muted);">1.1 Frame & Panels</h3>
+            <table>
+                <tr><th>Component</th><th>Qty</th><th>Unit Cost</th><th>Total</th><th>Part #</th></tr>
+                <tr><td>Main Frame Assembly</td><td>1</td><td>$52.00</td><td>$52.00</td><td>APEX-FR-75</td></tr>
+                <tr><td>Back Panel</td><td>1</td><td>$35.00</td><td>$35.00</td><td>APEX-BP-75</td></tr>
+                <tr><td>Front Bezel Frame</td><td>1</td><td>$18.00</td><td>$18.00</td><td>APEX-BZ-75</td></tr>
+                <tr><td>Internal Baffle</td><td>1</td><td>$6.00</td><td>$6.00</td><td>APEX-BF-75</td></tr>
+                <tr><td>VESA Mount Plate</td><td>1</td><td>$10.00</td><td>$10.00</td><td>APEX-VESA-75</td></tr>
+                <tr><td>Gas Struts (pair)</td><td>2</td><td>$4.50</td><td>$9.00</td><td>GS-150N-300</td></tr>
+                <tr class="subtotal-row"><td colspan="3"><strong>Subtotal - Frame & Panels</strong></td><td><strong>$130.00</strong></td><td></td></tr>
+            </table>
+
+            <h3 style="font-size: 0.95rem; margin: 1.5rem 0 0.5rem; color: var(--text-muted);">1.2 Glass Assembly</h3>
+            <table>
+                <tr><th>Component</th><th>Qty</th><th>Unit Cost</th><th>Total</th><th>Part #</th></tr>
+                <tr><td>Laminated Glass Panel (4mm+4mm)</td><td>1</td><td>$88.00</td><td>$88.00</td><td>APEX-GL-75</td></tr>
+                <tr><td>AR Coating (both sides)</td><td>1</td><td>$28.00</td><td>$28.00</td><td>AR-COAT-2S-75</td></tr>
+                <tr><td>IR Rejection Film</td><td>1</td><td>$100.00</td><td>$100.00</td><td>3M-PR90-75</td></tr>
+                <tr class="subtotal-row"><td colspan="3"><strong>Subtotal - Glass Assembly</strong></td><td><strong>$216.00</strong></td><td></td></tr>
+            </table>
+
+            <h3 style="font-size: 0.95rem; margin: 1.5rem 0 0.5rem; color: var(--text-muted);">1.3 Seals & Gaskets (IP66)</h3>
+            <table>
+                <tr><th>Component</th><th>Qty</th><th>Unit Cost</th><th>Total</th><th>Part #</th></tr>
+                <tr><td>Main Door Gasket</td><td>6m</td><td>$1.80/m</td><td>$10.80</td><td>EPDM-CH-1215-BK</td></tr>
+                <tr><td>Glass Seal Gasket</td><td>6m</td><td>$0.80/m</td><td>$4.80</td><td>SIL-U8-BK</td></tr>
+                <tr><td>Cable Glands IP68</td><td>3</td><td>$2.50</td><td>$7.50</td><td>CG-M20-SS316</td></tr>
+                <tr><td>ePTFE Breather Vent</td><td>2</td><td>$4.00</td><td>$8.00</td><td>GORE-PMF100</td></tr>
+                <tr class="subtotal-row"><td colspan="3"><strong>Subtotal - Seals & Gaskets</strong></td><td><strong>$31.10</strong></td><td></td></tr>
+            </table>
+        </div>
+
+        <!-- BOM Section 2: Thermal Management -->
+        <div class="section">
+            <h2>2. Thermal Management System</h2>
+
+            <h3 style="font-size: 0.95rem; margin: 1rem 0 0.5rem; color: var(--text-muted);">2.1 Fans & Ventilation</h3>
+            <table>
+                <tr><th>Component</th><th>Qty</th><th>Unit Cost</th><th>Total</th><th>Part #</th></tr>
+                <tr><td>Main Cooling Fan (Noctua 140mm)</td><td>4</td><td>$28.00</td><td>$112.00</td><td>NF-A14-iPPC-3000</td></tr>
+                <tr><td>Fan Mounting Grommets</td><td>16</td><td>$0.50</td><td>$8.00</td><td>NA-SAV4</td></tr>
+                <tr><td>IP66 Intake Labyrinth Grille</td><td>4</td><td>$8.00</td><td>$32.00</td><td>VENT-IP66-150</td></tr>
+                <tr><td>IP66 Rain Cowl/Hood</td><td>1</td><td>$15.00</td><td>$15.00</td><td>APEX-COWL-IP66</td></tr>
+                <tr class="subtotal-row"><td colspan="3"><strong>Subtotal - Fans & Ventilation</strong></td><td><strong>$167.00</strong></td><td></td></tr>
+            </table>
+
+            <h3 style="font-size: 0.95rem; margin: 1.5rem 0 0.5rem; color: var(--text-muted);">2.2 Filtration</h3>
+            <table>
+                <tr><th>Component</th><th>Qty</th><th>Unit Cost</th><th>Total</th><th>Part #</th></tr>
+                <tr><td>Intake Filter Frame</td><td>2</td><td>$3.00</td><td>$6.00</td><td>APEX-FILT-FR</td></tr>
+                <tr><td>Filter Media</td><td>4</td><td>$2.00</td><td>$8.00</td><td>AF-150-40PPI</td></tr>
+                <tr class="subtotal-row"><td colspan="3"><strong>Subtotal - Filtration</strong></td><td><strong>$14.00</strong></td><td></td></tr>
+            </table>
+
+            <h3 style="font-size: 0.95rem; margin: 1.5rem 0 0.5rem; color: var(--text-muted);">2.3 Control System</h3>
+            <table>
+                <tr><th>Component</th><th>Qty</th><th>Unit Cost</th><th>Total</th><th>Part #</th></tr>
+                <tr><td>PWM Fan Controller Board</td><td>1</td><td>$15.00</td><td>$15.00</td><td>APEX-CTRL-V1</td></tr>
+                <tr><td>Temperature Sensor - Internal</td><td>2</td><td>$1.50</td><td>$3.00</td><td>DS18B20-WP</td></tr>
+                <tr><td>Temperature Sensor - Exhaust</td><td>1</td><td>$0.80</td><td>$0.80</td><td>NTC-10K-3950</td></tr>
+                <tr><td>Alarm Buzzer</td><td>1</td><td>$0.50</td><td>$0.50</td><td>BZ-12V-85DB</td></tr>
+                <tr class="subtotal-row"><td colspan="3"><strong>Subtotal - Control System</strong></td><td><strong>$19.30</strong></td><td></td></tr>
+            </table>
+        </div>
+
+        <!-- BOM Section 3: Electrical -->
+        <div class="section">
+            <h2>3. Electrical System</h2>
+
+            <h3 style="font-size: 0.95rem; margin: 1rem 0 0.5rem; color: var(--text-muted);">3.1 Power Distribution</h3>
+            <table>
+                <tr><th>Component</th><th>Qty</th><th>Unit Cost</th><th>Total</th><th>Part #</th></tr>
+                <tr><td>IEC Power Inlet</td><td>1</td><td>$3.50</td><td>$3.50</td><td>IEC-C14-FS</td></tr>
+                <tr><td>Fuse</td><td>2</td><td>$0.10</td><td>$0.20</td><td>F-3A-250V-SB</td></tr>
+                <tr><td>Surge Protector MOV</td><td>2</td><td>$0.50</td><td>$1.00</td><td>MOV-275V-14D</td></tr>
+                <tr><td>Terminal Block</td><td>1</td><td>$2.00</td><td>$2.00</td><td>TB-3P-10A</td></tr>
+                <tr><td>DC Power Supply (12V 3A)</td><td>1</td><td>$8.00</td><td>$8.00</td><td>LRS-35-12</td></tr>
+                <tr><td>Accessory Outlet</td><td>1</td><td>$3.00</td><td>$3.00</td><td>UK-13A-PM</td></tr>
+                <tr class="subtotal-row"><td colspan="3"><strong>Subtotal - Power Distribution</strong></td><td><strong>$17.70</strong></td><td></td></tr>
+            </table>
+
+            <h3 style="font-size: 0.95rem; margin: 1.5rem 0 0.5rem; color: var(--text-muted);">3.2 Wiring & Connectors</h3>
+            <table>
+                <tr><th>Component</th><th>Qty</th><th>Unit Cost</th><th>Total</th><th>Part #</th></tr>
+                <tr><td>Mains Cable</td><td>2.5m</td><td>$0.80/m</td><td>$2.00</td><td>H05VV-F-3G1.0</td></tr>
+                <tr><td>DC Fan Cable</td><td>4m</td><td>$0.50/m</td><td>$2.00</td><td>PWM-4W-22AWG</td></tr>
+                <tr><td>Fan Connector</td><td>4</td><td>$0.30</td><td>$1.20</td><td>FAN-4P-MF</td></tr>
+                <tr><td>Cable Ties</td><td>25</td><td>$0.02</td><td>$0.50</td><td>CT-150-UV</td></tr>
+                <tr><td>Adhesive Cable Mounts</td><td>12</td><td>$0.15</td><td>$1.80</td><td>3M-VHB-CM</td></tr>
+                <tr><td>Earth Bonding Strap</td><td>2</td><td>$0.50</td><td>$1.00</td><td>EB-10-TC</td></tr>
+                <tr class="subtotal-row"><td colspan="3"><strong>Subtotal - Wiring & Connectors</strong></td><td><strong>$8.50</strong></td><td></td></tr>
+            </table>
+        </div>
+
+        <!-- BOM Section 4: Hardware -->
+        <div class="section">
+            <h2>4. Hardware & Fasteners</h2>
+
+            <h3 style="font-size: 0.95rem; margin: 1rem 0 0.5rem; color: var(--text-muted);">4.1 Fasteners (316 Stainless)</h3>
+            <table>
+                <tr><th>Component</th><th>Qty</th><th>Unit Cost</th><th>Total</th><th>Part #</th></tr>
+                <tr><td>Frame Screws</td><td>50</td><td>$0.08</td><td>$4.00</td><td>M4-10-PH-A4</td></tr>
+                <tr><td>Back Panel Screws</td><td>15</td><td>$0.12</td><td>$1.80</td><td>M5-12-CH-A4</td></tr>
+                <tr><td>VESA Screws</td><td>8</td><td>$0.25</td><td>$2.00</td><td>M6-15-A4-KIT</td></tr>
+                <tr><td>Hinge Screws</td><td>10</td><td>$0.08</td><td>$0.80</td><td>M4-8-CS-A4</td></tr>
+                <tr><td>Nylon Isolation Washers</td><td>60</td><td>$0.02</td><td>$1.20</td><td>NYL-M4M5-KIT</td></tr>
+                <tr><td>Threaded Inserts</td><td>25</td><td>$0.10</td><td>$2.50</td><td>TI-M4-AL</td></tr>
+                <tr class="subtotal-row"><td colspan="3"><strong>Subtotal - Fasteners</strong></td><td><strong>$12.30</strong></td><td></td></tr>
+            </table>
+
+            <h3 style="font-size: 0.95rem; margin: 1.5rem 0 0.5rem; color: var(--text-muted);">4.2 Door Hardware & Security</h3>
+            <table>
+                <tr><th>Component</th><th>Qty</th><th>Unit Cost</th><th>Total</th><th>Part #</th></tr>
+                <tr><td>Concealed Hinges</td><td>3</td><td>$4.50</td><td>$13.50</td><td>HINGE-316-CC</td></tr>
+                <tr><td>Compression Latches</td><td>5</td><td>$3.80</td><td>$19.00</td><td>LATCH-316-ADJ</td></tr>
+                <tr><td>Tubular Cam Locks</td><td>2</td><td>$5.50</td><td>$11.00</td><td>LOCK-TUB-316</td></tr>
+                <tr><td>Padlock Hasps</td><td>2</td><td>$1.50</td><td>$3.00</td><td>HASP-316-10</td></tr>
+                <tr><td>Magnetic Door Catch</td><td>1</td><td>$2.50</td><td>$2.50</td><td>MAG-CATCH-SS</td></tr>
+                <tr class="subtotal-row"><td colspan="3"><strong>Subtotal - Door Hardware</strong></td><td><strong>$49.00</strong></td><td></td></tr>
+            </table>
+
+            <h3 style="font-size: 0.95rem; margin: 1.5rem 0 0.5rem; color: var(--text-muted);">4.3 Mounting System</h3>
+            <table>
+                <tr><th>Component</th><th>Qty</th><th>Unit Cost</th><th>Total</th><th>Part #</th></tr>
+                <tr><td>Full-Motion Articulating Arm</td><td>1</td><td>$38.00</td><td>$38.00</td><td>MOUNT-FM-60KG</td></tr>
+                <tr><td>Wall Plate</td><td>1</td><td>$8.00</td><td>$8.00</td><td>APEX-WP-75</td></tr>
+                <tr><td>Wall Anchors</td><td>6</td><td>$0.80</td><td>$4.80</td><td>M10-CONC-SS</td></tr>
+                <tr class="subtotal-row"><td colspan="3"><strong>Subtotal - Mounting System</strong></td><td><strong>$50.80</strong></td><td></td></tr>
+            </table>
+        </div>
+
+        <!-- BOM Section 5: Packaging -->
+        <div class="section">
+            <h2>5. Packaging & Documentation</h2>
+            <table>
+                <tr><th>Component</th><th>Qty</th><th>Unit Cost</th><th>Total</th><th>Part #</th></tr>
+                <tr><td>Carton Box</td><td>1</td><td>$8.00</td><td>$8.00</td><td>BOX-75-DW</td></tr>
+                <tr><td>Foam Corners</td><td>1</td><td>$6.00</td><td>$6.00</td><td>FOAM-75-SET</td></tr>
+                <tr><td>Glass Protection</td><td>1</td><td>$3.00</td><td>$3.00</td><td>GP-75</td></tr>
+                <tr><td>Accessories Box</td><td>1</td><td>$1.25</td><td>$1.25</td><td>ACCBOX-75</td></tr>
+                <tr><td>Installation Manual</td><td>1</td><td>$0.50</td><td>$0.50</td><td>MAN-APEX-75</td></tr>
+                <tr><td>Clearance Gauge</td><td>1</td><td>$0.50</td><td>$0.50</td><td>GAUGE-75</td></tr>
+                <tr><td>Spare Filter</td><td>2</td><td>$2.00</td><td>$4.00</td><td>AF-150-40PPI</td></tr>
+                <tr class="subtotal-row"><td colspan="3"><strong>Subtotal - Packaging & Docs</strong></td><td><strong>$23.25</strong></td><td></td></tr>
+            </table>
+        </div>
+
+        <!-- Cost Summary -->
+        <div class="section">
+            <h2>Cost Summary</h2>
+            <table>
+                <tr><th>Category</th><th colspan="3"></th><th>Total</th></tr>
+                <tr><td>1.1 Frame & Panels</td><td colspan="3"></td><td>$130.00</td></tr>
+                <tr><td>1.2 Glass Assembly</td><td colspan="3"></td><td>$216.00</td></tr>
+                <tr><td>1.3 Seals & Gaskets</td><td colspan="3"></td><td>$31.10</td></tr>
+                <tr><td>2.1 Fans + Ventilation</td><td colspan="3"></td><td>$167.00</td></tr>
+                <tr><td>2.2 Filtration</td><td colspan="3"></td><td>$14.00</td></tr>
+                <tr><td>2.3 Control System</td><td colspan="3"></td><td>$19.30</td></tr>
+                <tr><td>3.1 Power Distribution</td><td colspan="3"></td><td>$17.70</td></tr>
+                <tr><td>3.2 Wiring & Connectors</td><td colspan="3"></td><td>$8.50</td></tr>
+                <tr><td>4.1 Fasteners</td><td colspan="3"></td><td>$12.30</td></tr>
+                <tr><td>4.2 Door Hardware</td><td colspan="3"></td><td>$49.00</td></tr>
+                <tr><td>4.3 Mounting System</td><td colspan="3"></td><td>$50.80</td></tr>
+                <tr><td>5. Packaging & Docs</td><td colspan="3"></td><td>$23.25</td></tr>
+                <tr class="subtotal-row"><td><strong>BOM Total</strong></td><td colspan="3"></td><td><strong>$738.95</strong></td></tr>
+                <tr><td>Assembly Labor</td><td colspan="3"></td><td>$40.00</td></tr>
+                <tr><td>QC/Testing</td><td colspan="3"></td><td>$18.00</td></tr>
+                <tr class="total-row"><td><strong>Estimated Unit Cost</strong></td><td colspan="3"></td><td><strong>$796.95</strong></td></tr>
+            </table>
+        </div>
+
+        <!-- Pricing -->
+        <div class="section">
+            <h2>Pricing Guidance</h2>
+            <table>
+                <tr><th>Metric</th><th colspan="3"></th><th>Value</th></tr>
+                <tr><td>BOM Cost</td><td colspan="3"></td><td>$739</td></tr>
+                <tr><td>Unit Cost (incl labor)</td><td colspan="3"></td><td>$797</td></tr>
+                <tr><td>Target FOB (40% margin)</td><td colspan="3"></td><td>$1,328</td></tr>
+                <tr><td>Target Wholesale (to integrators)</td><td colspan="3"></td><td>$1,800-2,000</td></tr>
+                <tr><td>Target Retail (2x FOB)</td><td colspan="3"></td><td>$2,650-3,000</td></tr>
+            </table>
+
+            <div class="note">
+                <strong>Competitor Reference:</strong> Apollo 75" enclosures retail for $4,000-5,000 USD. Your target retail of $2,650-3,000 provides competitive pricing with 40%+ margins.
+            </div>
+        </div>
+
+        <!-- Volume Pricing -->
+        <div class="section">
+            <h2>Volume Pricing Estimates</h2>
+            <table>
+                <tr><th>Volume</th><th>Unit Cost</th><th>Savings</th><th>Notes</th><th></th></tr>
+                <tr><td>1-10 units (prototype)</td><td>$797</td><td>-</td><td>Current estimate</td><td></td></tr>
+                <tr><td>50 units</td><td>~$720</td><td>10%</td><td>Bulk component pricing</td><td></td></tr>
+                <tr><td>100 units</td><td>~$680</td><td>15%</td><td>Glass + frame volume discount</td><td></td></tr>
+                <tr><td>500 units</td><td>~$600</td><td>25%</td><td>Production tooling amortized</td><td></td></tr>
+            </table>
+        </div>
+
+    </div>
+
+    <footer style="text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem;">
+        ATE-75 Bill of Materials | Apex TV Enclosures | December 2025
+    </footer>
+</body>
+</html>
