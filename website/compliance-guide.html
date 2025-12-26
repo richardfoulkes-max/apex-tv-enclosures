@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance & Legal Protection Guide - Apex TV Enclosures</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #ed8936;
+            --success: #38a169;
+            --warning: #d69e2e;
+            --danger: #e53e3e;
+            --gray-50: #f7fafc;
+            --gray-100: #edf2f7;
+            --gray-200: #e2e8f0;
+            --gray-600: #718096;
+            --gray-800: #2d3748;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            line-height: 1.6;
+        }
+
+        /* Document Navigation */
+        .doc-nav {
+            background: #1a1a2e;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .doc-nav h3 {
+            color: white;
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+            opacity: 0.7;
+        }
+        .doc-nav-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .doc-card {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            padding: 0.4rem 0.75rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: background 0.2s;
+        }
+        .doc-card:hover { background: rgba(255,255,255,0.2); }
+        .doc-card.active { background: #1428a0; }
+        @media print {
+            .doc-nav { display: none; }
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+        header p { opacity: 0.9; font-size: 1rem; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .summary-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .summary-card .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .summary-card .label {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            margin-top: 0.25rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: var(--primary);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--gray-100);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section h3 {
+            font-size: 1rem;
+            color: var(--gray-800);
+            margin: 1.25rem 0 0.75rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        th {
+            background: var(--gray-50);
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        tr:hover { background: var(--gray-50); }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-success { background: #c6f6d5; color: #22543d; }
+        .badge-warning { background: #fefcbf; color: #744210; }
+        .badge-danger { background: #fed7d7; color: #742a2a; }
+        .badge-info { background: #bee3f8; color: #2a4365; }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+            border-left: 4px solid var(--primary-light);
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1rem 0;
+        }
+
+        .highlight-box.warning {
+            background: linear-gradient(135deg, #fffaf0 0%, #fefcbf 100%);
+            border-left-color: var(--warning);
+        }
+
+        .highlight-box.success {
+            background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+            border-left-color: var(--success);
+        }
+
+        .highlight-box strong {
+            color: var(--primary);
+        }
+
+        .checklist {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .checklist li:last-child { border-bottom: none; }
+
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            font-size: 1.1rem;
+        }
+
+        .checklist li.done::before {
+            content: "☑";
+            color: var(--success);
+        }
+
+        .option-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .option-card {
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            padding: 1.25rem;
+            position: relative;
+        }
+
+        .option-card.recommended {
+            border-color: var(--success);
+            background: #f0fff4;
+        }
+
+        .option-card.recommended::after {
+            content: "RECOMMENDED";
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            background: var(--success);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .option-card h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .option-card p {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            margin-bottom: 0.75rem;
+        }
+
+        .option-card .metrics {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+        }
+
+        .option-card .metrics span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gray-200);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -2rem;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .timeline-item.future::before {
+            background: white;
+            border-color: var(--gray-200);
+            box-shadow: 0 0 0 2px var(--gray-200);
+        }
+
+        .timeline-item h4 {
+            font-size: 0.95rem;
+            color: var(--gray-800);
+        }
+
+        .timeline-item p {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            margin-top: 0.25rem;
+        }
+
+        .cost-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .total-row {
+            background: var(--gray-50);
+            font-weight: 700;
+        }
+
+        .total-row td {
+            border-top: 2px solid var(--gray-800);
+        }
+
+        a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        a:hover { text-decoration: underline; }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .two-col { grid-template-columns: 1fr; }
+            .container { padding: 1rem; }
+            .section { padding: 1rem 1.25rem; }
+        }
+
+        .flag { font-size: 1.25rem; }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .status-dot.green { background: var(--success); }
+        .status-dot.yellow { background: var(--warning); }
+        .status-dot.red { background: var(--danger); }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray-600);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="doc-nav">
+        <h3>Project Documents</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">Website</a>
+            <a href="specification.html" class="doc-card">Specification</a>
+            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
+            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
+            <a href="control-logic.html" class="doc-card">Control Logic</a>
+            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
+            <a href="market-research.html" class="doc-card">Market Research</a>
+            <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
+            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
+            <a href="engineering-analysis.html" class="doc-card">Engineering Analysis</a>
+            <a href="testing-plan.html" class="doc-card">Testing Plan</a>
+            <a href="designs.html" class="doc-card">Designs</a>
+            <a href="design-detailed.html" class="doc-card">Detailed Design</a>
+            <a href="competitor-comparison.html" class="doc-card">Competitor Analysis</a>
+            <a href="contractors.html" class="doc-card">Contractors</a>
+            <a href="compliance-guide.html" class="doc-card active">Compliance Guide</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Compliance & Legal Protection Guide</h1>
+        <p>Apex TV Enclosures - UAE & Saudi Arabia Market Entry</p>
+    </header>
+
+    <div class="container">
+        <!-- Summary Bar -->
+        <div class="summary-bar">
+            <div class="summary-card">
+                <div class="number">2</div>
+                <div class="label">Markets (UAE + KSA)</div>
+            </div>
+            <div class="summary-card">
+                <div class="number">~$3K</div>
+                <div class="label">Est. Compliance Cost</div>
+            </div>
+            <div class="summary-card">
+                <div class="number">6</div>
+                <div class="label">Documents Required</div>
+            </div>
+            <div class="summary-card">
+                <div class="number">Low</div>
+                <div class="label">Product Risk Category</div>
+            </div>
+        </div>
+
+        <!-- Product Classification -->
+        <div class="section">
+            <h2>📦 Product Classification</h2>
+
+            <div class="highlight-box">
+                <strong>Key Insight:</strong> Your TV enclosure is a <strong>passive aluminum housing</strong> containing <strong>low-voltage electrical components</strong> (12V DC fans, PWM controller, CB-certified PSU). This puts you in a favorable position.
+            </div>
+
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>Voltage</th>
+                    <th>Classification</th>
+                    <th>Certification Status</th>
+                </tr>
+                <tr>
+                    <td>Enclosure Shell</td>
+                    <td>N/A (passive)</td>
+                    <td>Metal housing</td>
+                    <td><span class="badge badge-success">No cert required</span></td>
+                </tr>
+                <tr>
+                    <td>Mean Well LRS-35-12 PSU</td>
+                    <td>220V AC → 12V DC</td>
+                    <td>Low Voltage Equipment</td>
+                    <td><span class="badge badge-success">CB Certified</span></td>
+                </tr>
+                <tr>
+                    <td>Noctua Fans</td>
+                    <td>12V DC</td>
+                    <td>Below threshold</td>
+                    <td><span class="badge badge-success">CE Marked</span></td>
+                </tr>
+                <tr>
+                    <td>PWM Controller</td>
+                    <td>12V DC</td>
+                    <td>Below threshold</td>
+                    <td><span class="badge badge-warning">Document specs</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- UAE Compliance -->
+        <div class="section">
+            <h2><span class="flag">🇦🇪</span> UAE Compliance (ECAS/ESMA)</h2>
+
+            <p style="margin-bottom: 1rem; color: var(--gray-600);">
+                The Emirates Conformity Assessment Scheme (ECAS) is administered by <a href="https://www.esma.gov.ae" target="_blank">ESMA</a> and now falls under the Ministry of Industry and Advanced Technology (MoIAT).
+            </p>
+
+            <h3>Certification Requirement</h3>
+            <table>
+                <tr>
+                    <th>Category</th>
+                    <th>Voltage Range</th>
+                    <th>Your Product</th>
+                    <th>Required?</th>
+                </tr>
+                <tr>
+                    <td>Low Voltage Equipment (LVE)</td>
+                    <td>AC 50-1000V / DC 75-1500V</td>
+                    <td>220V AC input (mains)</td>
+                    <td><span class="badge badge-warning">Technically Yes</span></td>
+                </tr>
+            </table>
+
+            <h3>Your Options</h3>
+            <div class="option-cards">
+                <div class="option-card recommended">
+                    <h4>Option A: Pre-Certified Components</h4>
+                    <p>Use CB/CE certified components (Mean Well PSU already is). Document as "assembly of certified components". No additional testing needed.</p>
+                    <div class="metrics">
+                        <span><strong>Cost:</strong> $0</span>
+                        <span><strong>Time:</strong> None</span>
+                        <span><strong>Risk:</strong> Low</span>
+                    </div>
+                </div>
+                <div class="option-card">
+                    <h4>Option B: Full ECAS Certification</h4>
+                    <p>Test at approved lab (TÜV, Intertek). Get Certificate of Conformity. Required for retail sales.</p>
+                    <div class="metrics">
+                        <span><strong>Cost:</strong> $2-5K</span>
+                        <span><strong>Time:</strong> 4-8 weeks</span>
+                        <span><strong>Risk:</strong> None</span>
+                    </div>
+                </div>
+                <div class="option-card">
+                    <h4>Option C: Enclosure-Only Sales</h4>
+                    <p>Sell enclosure without PSU installed. Customer provides power. Avoids electrical classification entirely.</p>
+                    <div class="metrics">
+                        <span><strong>Cost:</strong> $0</span>
+                        <span><strong>Time:</strong> None</span>
+                        <span><strong>Risk:</strong> Medium</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box success">
+                <strong>Recommendation:</strong> Start with Option A for B2B sales. Your Mean Well PSU is CB certified (IEC 62368-1). Keep certificates on file. Move to Option B if you pursue retail or government contracts.
+            </div>
+        </div>
+
+        <!-- Saudi Arabia Compliance -->
+        <div class="section">
+            <h2><span class="flag">🇸🇦</span> Saudi Arabia Compliance (SASO/SALEEM)</h2>
+
+            <p style="margin-bottom: 1rem; color: var(--gray-600);">
+                The <a href="https://www.saber.sa" target="_blank">SABER platform</a> manages all product certifications for Saudi Arabia under the SALEEM program.
+            </p>
+
+            <h3>Two-Step Process</h3>
+            <table>
+                <tr>
+                    <th>Step</th>
+                    <th>Certificate</th>
+                    <th>Valid For</th>
+                    <th>Cost</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><strong>Product CoC (PCoC)</strong> - Register product on SABER</td>
+                    <td>1 year</td>
+                    <td>$500-1,500</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><strong>Shipment CoC (SCoC)</strong> - Per shipment clearance</td>
+                    <td>Per shipment</td>
+                    <td>$200-500</td>
+                </tr>
+            </table>
+
+            <h3>Required Documents</h3>
+            <ul class="checklist">
+                <li>Commercial Registration (CR) or Trade License</li>
+                <li>Product test reports (CB scheme accepted)</li>
+                <li>Technical specifications</li>
+                <li>Product photos and labels</li>
+                <li>Bill of materials</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Shortcut:</strong> If selling through a Saudi distributor, <strong>they handle SABER registration</strong> as the importer of record. You just provide the technical documentation.
+            </div>
+        </div>
+
+        <!-- Warranty & Liability -->
+        <div class="section">
+            <h2>🛡️ Warranty & Liability Protection</h2>
+
+            <div class="two-col">
+                <div>
+                    <h3>Standard Warranty Terms</h3>
+                    <table>
+                        <tr>
+                            <td><strong>Duration</strong></td>
+                            <td>2 years from delivery</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Coverage</strong></td>
+                            <td>Manufacturing defects only</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Remedy</strong></td>
+                            <td>Repair or replace at seller's option</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Liability Cap</strong></td>
+                            <td>Limited to product purchase price</td>
+                        </tr>
+                    </table>
+
+                    <h3>Exclusions (Standard)</h3>
+                    <ul class="checklist">
+                        <li class="done">Improper installation</li>
+                        <li class="done">Unauthorized modifications</li>
+                        <li class="done">Normal wear and tear</li>
+                        <li class="done">Environmental damage (lightning, flood)</li>
+                        <li class="done">Cosmetic damage</li>
+                        <li class="done">Consumables (filters)</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>Product Liability Insurance</h3>
+                    <p style="margin-bottom: 1rem; color: var(--gray-600);">Protects against claims of injury or property damage from product defects.</p>
+
+                    <table>
+                        <tr>
+                            <th>Provider</th>
+                            <th>Est. Cost/Year</th>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.howdengroup.com/ae-en/cover/product-liability-insurance" target="_blank">Howden UAE</a></td>
+                            <td>$500-1,500</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://coverb.ae/liability/product-liability-insurance/" target="_blank">CoverB Dubai</a></td>
+                            <td>$400-1,200</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://honorinsurance.ae/product-liability-insurance/" target="_blank">Honor Insurance</a></td>
+                            <td>$500-1,000</td>
+                        </tr>
+                    </table>
+
+                    <div class="highlight-box warning" style="margin-top: 1rem;">
+                        <strong>UAE Law:</strong> You must report product defects to authorities within <strong>4 hours</strong> if there's a safety risk, and within <strong>7 days</strong> for other issues.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Documentation Checklist -->
+        <div class="section">
+            <h2>📋 Documentation Checklist</h2>
+
+            <div class="two-col">
+                <div>
+                    <h3>Before First Sale</h3>
+                    <ul class="checklist">
+                        <li>Product liability insurance policy</li>
+                        <li>Written warranty terms (English + Arabic)</li>
+                        <li>CB/CE certificates for PSU</li>
+                        <li>CE certificates for fans</li>
+                        <li>IP66 test report (or manufacturer declaration)</li>
+                        <li>Installation manual with safety warnings</li>
+                        <li>Bill of materials with component sources</li>
+                        <li>Product photos (rating label visible)</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>Ongoing Records</h3>
+                    <ul class="checklist">
+                        <li>Serial number log (unit → customer)</li>
+                        <li>Warranty claim register</li>
+                        <li>Component batch traceability</li>
+                        <li>Customer installation sign-off forms</li>
+                        <li>Annual insurance renewal</li>
+                        <li>SABER certificate renewals (Saudi)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cost Summary -->
+        <div class="section">
+            <h2>💰 Compliance Cost Summary</h2>
+
+            <table class="cost-table">
+                <tr>
+                    <th>Item</th>
+                    <th>Frequency</th>
+                    <th>Cost</th>
+                </tr>
+                <tr>
+                    <td>Product Liability Insurance</td>
+                    <td>Annual</td>
+                    <td>$500-1,000</td>
+                </tr>
+                <tr>
+                    <td>UAE ECAS (if needed)</td>
+                    <td>One-time + annual renewal</td>
+                    <td>$2,000-5,000</td>
+                </tr>
+                <tr>
+                    <td>Saudi SABER PCoC</td>
+                    <td>Annual per product</td>
+                    <td>$500-1,500</td>
+                </tr>
+                <tr>
+                    <td>Saudi SABER SCoC</td>
+                    <td>Per shipment</td>
+                    <td>$200-500</td>
+                </tr>
+                <tr>
+                    <td>IP66 Testing (optional)</td>
+                    <td>One-time</td>
+                    <td>$1,000-2,000</td>
+                </tr>
+                <tr>
+                    <td>Arabic translation (warranty, manual)</td>
+                    <td>One-time</td>
+                    <td>$200-400</td>
+                </tr>
+                <tr class="total-row">
+                    <td><strong>Year 1 Total (Minimum Path)</strong></td>
+                    <td></td>
+                    <td><strong>$1,200-2,500</strong></td>
+                </tr>
+                <tr class="total-row">
+                    <td><strong>Year 1 Total (Full Certification)</strong></td>
+                    <td></td>
+                    <td><strong>$4,500-10,000</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Action Plan -->
+        <div class="section">
+            <h2>🎯 Recommended Action Plan</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Phase 1: Prototype & Early Sales (Now)</h4>
+                    <p>Get product liability insurance. Document component certifications. Sell B2B only in UAE. Use pre-certified components strategy.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Phase 2: Saudi Entry (When Ready)</h4>
+                    <p>Partner with Saudi distributor who handles SABER registration. Provide technical documentation. They import as importer of record.</p>
+                </div>
+                <div class="timeline-item future">
+                    <h4>Phase 3: Scale (Future)</h4>
+                    <p>Get full ECAS certification for UAE retail/government sales. Get independent IP66 testing for marketing credibility. Consider "Made in UAE" certification.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box success">
+                <strong>Bottom Line:</strong> For B2B sales with pre-certified components, you can legally sell in UAE today with just product liability insurance (~$500-1,000/year). Saudi requires SABER registration, but your distributor can handle that.
+            </div>
+        </div>
+
+        <!-- B2C Retail Section -->
+        <div class="section" style="border: 2px solid var(--warning);">
+            <h2>🛒 B2C Retail Sales (Direct to Consumer)</h2>
+
+            <div class="highlight-box warning">
+                <strong>Warning:</strong> Selling directly to retail consumers requires significantly more compliance than B2B. Expect <strong>5-6x higher costs</strong> and additional licensing.
+            </div>
+
+            <h3>B2B vs B2C Comparison</h3>
+            <table>
+                <tr>
+                    <th>Requirement</th>
+                    <th>B2B (Wholesale)</th>
+                    <th>B2C (Retail)</th>
+                </tr>
+                <tr>
+                    <td>ECAS Certification</td>
+                    <td><span class="badge badge-success">Optional</span></td>
+                    <td><span class="badge badge-danger">Mandatory</span></td>
+                </tr>
+                <tr>
+                    <td>Arabic Product Labels</td>
+                    <td><span class="badge badge-warning">Recommended</span></td>
+                    <td><span class="badge badge-danger">Required by law</span></td>
+                </tr>
+                <tr>
+                    <td>E-commerce License</td>
+                    <td><span class="badge badge-success">Trade license OK</span></td>
+                    <td><span class="badge badge-danger">DED e-commerce license</span></td>
+                </tr>
+                <tr>
+                    <td>Consumer Protection</td>
+                    <td><span class="badge badge-success">Negotiable terms</span></td>
+                    <td><span class="badge badge-danger">Strict rules apply</span></td>
+                </tr>
+                <tr>
+                    <td>Return Policy</td>
+                    <td><span class="badge badge-success">Contract terms</span></td>
+                    <td><span class="badge badge-danger">14-day minimum</span></td>
+                </tr>
+                <tr>
+                    <td>Customer Service</td>
+                    <td><span class="badge badge-success">Business hours</span></td>
+                    <td><span class="badge badge-warning">Consumer expectations</span></td>
+                </tr>
+            </table>
+
+            <h3>B2C Requirements Checklist</h3>
+            <div class="two-col">
+                <div>
+                    <h4>Licensing (~$2,000-8,000/year)</h4>
+                    <ul class="checklist">
+                        <li>DED e-commerce license (mainland), OR</li>
+                        <li>Free zone license + DED retail approval</li>
+                        <li>TDRA approval for e-commerce</li>
+                        <li>VAT registration (if >AED 375K revenue)</li>
+                    </ul>
+
+                    <h4>Product Certification (~$2,000-5,000)</h4>
+                    <ul class="checklist">
+                        <li>Full ECAS certification at approved lab</li>
+                        <li>ECAS mark affixed to product</li>
+                        <li>Annual renewal</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Arabic Requirements</h4>
+                    <ul class="checklist">
+                        <li>Product labels in Arabic</li>
+                        <li>User manual in Arabic</li>
+                        <li>Warranty terms in Arabic</li>
+                        <li>Website in Arabic (recommended)</li>
+                        <li>Safety warnings in Arabic</li>
+                    </ul>
+
+                    <h4>Consumer Protection (Law 15/2020)</h4>
+                    <ul class="checklist">
+                        <li>14-day return window</li>
+                        <li>Clear refund policy displayed</li>
+                        <li>No "all sales final" for defects</li>
+                        <li>Pricing transparency (no hidden fees)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>B2C Cost Summary</h3>
+            <table class="cost-table">
+                <tr>
+                    <th>Item</th>
+                    <th>Cost</th>
+                </tr>
+                <tr>
+                    <td>E-commerce License (DED)</td>
+                    <td>$2,000-8,000/year</td>
+                </tr>
+                <tr>
+                    <td>ECAS Certification</td>
+                    <td>$2,000-5,000</td>
+                </tr>
+                <tr>
+                    <td>Arabic Translations</td>
+                    <td>$500-1,000</td>
+                </tr>
+                <tr>
+                    <td>Product Liability Insurance</td>
+                    <td>$1,000-2,000/year</td>
+                </tr>
+                <tr>
+                    <td>Website / E-commerce Platform</td>
+                    <td>$1,000-5,000</td>
+                </tr>
+                <tr>
+                    <td>Payment Gateway Setup</td>
+                    <td>$500-1,000</td>
+                </tr>
+                <tr class="total-row">
+                    <td><strong>Year 1 Total (B2C)</strong></td>
+                    <td><strong>$8,000-15,000</strong></td>
+                </tr>
+                <tr class="total-row">
+                    <td><strong>Annual Ongoing</strong></td>
+                    <td><strong>$3,000-5,000</strong></td>
+                </tr>
+            </table>
+
+            <h3>B2C Alternatives (Easier Paths)</h3>
+            <div class="option-cards">
+                <div class="option-card recommended">
+                    <h4>Option 1: Sell Through Integrators</h4>
+                    <p>Sell B2B to AV integrators like Oxford Integration. They handle retail customer relationships, installation, and support. You stay wholesale.</p>
+                    <div class="metrics">
+                        <span><strong>Your compliance:</strong> B2B only</span>
+                    </div>
+                </div>
+                <div class="option-card">
+                    <h4>Option 2: Amazon.ae / Noon</h4>
+                    <p>List on marketplaces. They handle payment, returns, customer service. You need product certification but not e-commerce license.</p>
+                    <div class="metrics">
+                        <span><strong>Fee:</strong> 15-20% commission</span>
+                    </div>
+                </div>
+                <div class="option-card">
+                    <h4>Option 3: Direct B2C (Full Setup)</h4>
+                    <p>Own website, own compliance, own customer service. Maximum control but maximum complexity and cost.</p>
+                    <div class="metrics">
+                        <span><strong>Cost:</strong> $8-15K setup</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Distribution Channels -->
+        <div class="section">
+            <h2>🔄 Distribution Channels Explained</h2>
+
+            <p style="margin-bottom: 1rem; color: var(--gray-600);">
+                Understanding who handles what compliance responsibility in each channel.
+            </p>
+
+            <table>
+                <tr>
+                    <th>Channel</th>
+                    <th>How It Works</th>
+                    <th>Who Handles Retail Compliance</th>
+                    <th>Your Role</th>
+                </tr>
+                <tr>
+                    <td><strong>AV Integrators</strong><br><span style="font-size: 0.8rem; color: var(--gray-600);">(Oxford, Granteq, LuxSmart)</span></td>
+                    <td>You sell to integrator → They sell + install for end customer</td>
+                    <td><span class="badge badge-success">They do</span></td>
+                    <td>B2B supplier only</td>
+                </tr>
+                <tr>
+                    <td><strong>Distributors</strong><br><span style="font-size: 0.8rem; color: var(--gray-600);">(Saudi partners)</span></td>
+                    <td>You sell to distributor → They resell to integrators/retailers</td>
+                    <td><span class="badge badge-success">They do</span></td>
+                    <td>B2B supplier only</td>
+                </tr>
+                <tr>
+                    <td><strong>Marketplaces</strong><br><span style="font-size: 0.8rem; color: var(--gray-600);">(Amazon.ae, Noon)</span></td>
+                    <td>You list product → They handle transaction + fulfillment</td>
+                    <td><span class="badge badge-warning">Shared</span></td>
+                    <td>Need ECAS cert + fulfill orders</td>
+                </tr>
+                <tr>
+                    <td><strong>Direct B2C</strong><br><span style="font-size: 0.8rem; color: var(--gray-600);">(Your own website)</span></td>
+                    <td>Customer buys from you directly</td>
+                    <td><span class="badge badge-danger">You do</span></td>
+                    <td>Full compliance burden</td>
+                </tr>
+            </table>
+
+            <div class="highlight-box success" style="margin-top: 1.5rem;">
+                <strong>Can Oxford Sell Retail?</strong> Yes! Oxford Integration (and similar AV integrators) sell directly to end customers - homeowners, villas, businesses. When you sell to Oxford at wholesale, <strong>they become the retailer</strong>. They handle:
+                <ul style="margin: 0.5rem 0 0 1.5rem;">
+                    <li>Customer relationship and sales</li>
+                    <li>Installation service</li>
+                    <li>First-line warranty support</li>
+                    <li>Consumer protection compliance</li>
+                </ul>
+                <p style="margin-top: 0.75rem;">You just need to honor your <strong>B2B warranty to Oxford</strong> (replace defective units). This is the cleanest path to retail customers without retail compliance burden.</p>
+            </div>
+
+            <h3>Recommended Channel Strategy</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Now: AV Integrators (UAE)</h4>
+                    <p>Oxford Integration, Granteq, LuxSmart. They have the customer relationships. You supply product. B2B compliance only.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Next: Saudi Distributors</h4>
+                    <p>ADMS, Samir Group. They handle SABER registration and resell to Saudi integrators. You're still B2B.</p>
+                </div>
+                <div class="timeline-item future">
+                    <h4>Future: Amazon.ae (Optional)</h4>
+                    <p>If volume justifies ECAS certification, list on Amazon for direct consumer sales. They handle customer service.</p>
+                </div>
+                <div class="timeline-item future">
+                    <h4>Future: Direct B2C (Optional)</h4>
+                    <p>Only if brand awareness grows and you want maximum margin. Requires full retail compliance setup.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Direct B2C Setup Roadmap -->
+        <div class="section" style="border: 2px solid var(--primary);">
+            <h2>🚀 Direct B2C Setup Roadmap</h2>
+
+            <p style="margin-bottom: 1rem; color: var(--gray-600);">
+                Step-by-step guide to selling directly to consumers through your own website. This assumes you're starting with B2B and adding B2C as a second channel.
+            </p>
+
+            <h3>Phase 1: Foundation (Before B2C Launch)</h3>
+            <div class="highlight-box">
+                <strong>Do this while running B2B:</strong> Get these done before you flip the switch on retail sales.
+            </div>
+
+            <table>
+                <tr>
+                    <th style="width: 40px;">#</th>
+                    <th>Task</th>
+                    <th>Cost</th>
+                    <th>Time</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><strong>Get ECAS Certification</strong></td>
+                    <td>$2,000-5,000</td>
+                    <td>4-8 weeks</td>
+                    <td>Mandatory for retail. Contact TÜV or Intertek UAE.</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><strong>Arabic Translations</strong></td>
+                    <td>$500-1,000</td>
+                    <td>1-2 weeks</td>
+                    <td>Product labels, manual, warranty, website content.</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><strong>Product Labels Redesign</strong></td>
+                    <td>$200-500</td>
+                    <td>1 week</td>
+                    <td>Add ECAS mark, Arabic text, safety warnings.</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><strong>Upgrade Insurance</strong></td>
+                    <td>+$500-1,000/yr</td>
+                    <td>1 week</td>
+                    <td>Increase coverage for consumer sales exposure.</td>
+                </tr>
+            </table>
+
+            <h3>Phase 2: Business Setup</h3>
+            <table>
+                <tr>
+                    <th style="width: 40px;">#</th>
+                    <th>Task</th>
+                    <th>Cost</th>
+                    <th>Time</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><strong>E-commerce License (DED)</strong></td>
+                    <td>$2,000-5,000</td>
+                    <td>2-4 weeks</td>
+                    <td>Apply through Dubai DED. Need office address.</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><strong>TDRA Approval</strong></td>
+                    <td>Included</td>
+                    <td>1-2 weeks</td>
+                    <td>Required for e-commerce. Applied with license.</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td><strong>VAT Registration</strong></td>
+                    <td>Free</td>
+                    <td>1 week</td>
+                    <td>Required if revenue >AED 375K. Register with FTA.</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td><strong>Business Bank Account</strong></td>
+                    <td>Varies</td>
+                    <td>1-2 weeks</td>
+                    <td>If not already set up for B2B.</td>
+                </tr>
+            </table>
+
+            <h3>Phase 3: E-commerce Platform</h3>
+            <table>
+                <tr>
+                    <th style="width: 40px;">#</th>
+                    <th>Task</th>
+                    <th>Cost</th>
+                    <th>Time</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td><strong>Website / Store</strong></td>
+                    <td>$1,000-5,000</td>
+                    <td>2-4 weeks</td>
+                    <td>Shopify (~$30/mo) or WooCommerce. Bilingual (EN/AR).</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td><strong>Payment Gateway</strong></td>
+                    <td>$500-1,000 setup</td>
+                    <td>1-2 weeks</td>
+                    <td>Stripe UAE, Checkout.com, or Network International.</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td><strong>Shipping Integration</strong></td>
+                    <td>$0-500</td>
+                    <td>1 week</td>
+                    <td>Aramex, Fetchr, or own delivery for large items.</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td><strong>Legal Pages</strong></td>
+                    <td>$300-800</td>
+                    <td>1 week</td>
+                    <td>Terms, privacy policy, return policy, warranty (Arabic + English).</td>
+                </tr>
+            </table>
+
+            <h3>Phase 4: Operations Setup</h3>
+            <table>
+                <tr>
+                    <th style="width: 40px;">#</th>
+                    <th>Task</th>
+                    <th>Cost</th>
+                    <th>Time</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td><strong>Customer Service System</strong></td>
+                    <td>$0-50/mo</td>
+                    <td>1 week</td>
+                    <td>WhatsApp Business, Zendesk, or Freshdesk.</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td><strong>Returns Process</strong></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Define process for 14-day returns. Where do they ship?</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td><strong>Installation Network</strong></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Partner with installers or offer DIY with video guides.</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td><strong>Warranty Claims Process</strong></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>How do consumers report issues? Who handles repair/replace?</td>
+                </tr>
+            </table>
+
+            <h3>B2C Launch Checklist</h3>
+            <div class="two-col">
+                <div>
+                    <h4>Legal & Compliance</h4>
+                    <ul class="checklist">
+                        <li>ECAS certificate obtained</li>
+                        <li>ECAS mark on all products</li>
+                        <li>E-commerce license active</li>
+                        <li>VAT registered (if applicable)</li>
+                        <li>Product liability insurance upgraded</li>
+                        <li>Arabic labels on products</li>
+                        <li>Arabic manual available</li>
+                        <li>Return policy compliant (14+ days)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Website & Operations</h4>
+                    <ul class="checklist">
+                        <li>Website live (EN + AR)</li>
+                        <li>Payment gateway tested</li>
+                        <li>Shipping rates configured</li>
+                        <li>Terms & conditions published</li>
+                        <li>Privacy policy published</li>
+                        <li>Warranty terms published</li>
+                        <li>Customer service channel ready</li>
+                        <li>Returns process documented</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Total B2C Setup Budget</h3>
+            <table class="cost-table">
+                <tr>
+                    <th>Category</th>
+                    <th>Low</th>
+                    <th>High</th>
+                </tr>
+                <tr>
+                    <td>Certification (ECAS)</td>
+                    <td>$2,000</td>
+                    <td>$5,000</td>
+                </tr>
+                <tr>
+                    <td>Licensing (DED + TDRA)</td>
+                    <td>$2,000</td>
+                    <td>$5,000</td>
+                </tr>
+                <tr>
+                    <td>Translations</td>
+                    <td>$500</td>
+                    <td>$1,000</td>
+                </tr>
+                <tr>
+                    <td>Website + Payment</td>
+                    <td>$1,500</td>
+                    <td>$6,000</td>
+                </tr>
+                <tr>
+                    <td>Legal (policies, contracts)</td>
+                    <td>$300</td>
+                    <td>$800</td>
+                </tr>
+                <tr>
+                    <td>Insurance upgrade</td>
+                    <td>$500</td>
+                    <td>$1,000</td>
+                </tr>
+                <tr>
+                    <td>Label redesign</td>
+                    <td>$200</td>
+                    <td>$500</td>
+                </tr>
+                <tr class="total-row">
+                    <td><strong>Total Setup</strong></td>
+                    <td><strong>$7,000</strong></td>
+                    <td><strong>$19,300</strong></td>
+                </tr>
+            </table>
+
+            <h3>Realistic Timeline</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Weeks 1-2: Start ECAS Certification</h4>
+                    <p>Submit application to TÜV/Intertek. Send product samples. This is the longest lead item.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Weeks 2-4: Translations + License Application</h4>
+                    <p>Get Arabic translations done. Apply for DED e-commerce license. Start website development.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Weeks 4-6: Website + Payment Setup</h4>
+                    <p>Build e-commerce site. Integrate payment gateway. Set up shipping.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Weeks 6-8: ECAS Complete + Final Setup</h4>
+                    <p>Receive ECAS certificate. Update product labels. Final testing. Legal review.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Week 8+: Soft Launch</h4>
+                    <p>Go live with limited marketing. Test the full customer journey. Fix issues.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box success">
+                <strong>Pro Tip:</strong> Start ECAS certification immediately - it's the critical path (4-8 weeks). Everything else can happen in parallel. Your B2B sales through Oxford continue during this setup period.
+            </div>
+        </div>
+
+        <!-- Key Contacts -->
+        <div class="section">
+            <h2>📞 Key Contacts & Resources</h2>
+
+            <table>
+                <tr>
+                    <th>Organization</th>
+                    <th>Purpose</th>
+                    <th>Link</th>
+                </tr>
+                <tr>
+                    <td>ESMA (UAE)</td>
+                    <td>ECAS certification</td>
+                    <td><a href="https://www.esma.gov.ae" target="_blank">esma.gov.ae</a></td>
+                </tr>
+                <tr>
+                    <td>MoIAT (UAE)</td>
+                    <td>Conformity certificates</td>
+                    <td><a href="https://moiat.gov.ae" target="_blank">moiat.gov.ae</a></td>
+                </tr>
+                <tr>
+                    <td>SABER (Saudi)</td>
+                    <td>Product registration</td>
+                    <td><a href="https://www.saber.sa" target="_blank">saber.sa</a></td>
+                </tr>
+                <tr>
+                    <td>TÜV Rheinland</td>
+                    <td>Testing & certification</td>
+                    <td><a href="https://www.tuv.com" target="_blank">tuv.com</a></td>
+                </tr>
+                <tr>
+                    <td>Intertek UAE</td>
+                    <td>Testing & certification</td>
+                    <td><a href="https://www.intertek.com" target="_blank">intertek.com</a></td>
+                </tr>
+                <tr>
+                    <td>SGS UAE</td>
+                    <td>Testing & certification</td>
+                    <td><a href="https://www.sgs.com" target="_blank">sgs.com</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>Apex TV Enclosures - Compliance Guide | Last Updated: December 2025</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">This guide is for informational purposes. Consult a legal professional for specific compliance advice.</p>
+    </footer>
+</body>
+</html>
