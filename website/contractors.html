@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation Contractors - UAE AV Integrators</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1428a0;
+            --primary-light: #e8ebf7;
+            --text: #1a1a1a;
+            --text-muted: #6b7280;
+            --bg: #ffffff;
+            --bg-alt: #f8f9fa;
+            --border: #e5e7eb;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+        header {
+            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+            color: white;
+            padding: 3rem 2rem;
+        }
+        header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        header .subtitle { opacity: 0.9; font-size: 1.1rem; }
+        header .date {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        .executive-summary {
+            background: var(--primary-light);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+        .executive-summary h2 { color: var(--primary); margin-bottom: 1rem; }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.75rem;
+            margin: 2.5rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary);
+        }
+        h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--text);
+        }
+
+        .contractor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .contractor-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: box-shadow 0.2s;
+        }
+        .contractor-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .contractor-card.featured {
+            border-color: var(--success);
+            border-width: 2px;
+        }
+        .contractor-card.recommended {
+            border-color: var(--primary);
+            border-width: 2px;
+        }
+        .contractor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        .contractor-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        .contractor-tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            background: var(--bg-alt);
+            color: var(--text-muted);
+        }
+        .contractor-tag.recommended { background: #d1fae5; color: #047857; }
+        .contractor-tag.specialist { background: #dbeafe; color: #1d4ed8; }
+        .contractor-tag.budget { background: #fef3c7; color: #b45309; }
+        .contractor-tag.premium { background: #f3e8ff; color: #7c3aed; }
+
+        .contractor-details {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+        .contractor-contact {
+            background: var(--bg-alt);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        .contractor-contact a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .contractor-contact a:hover { text-decoration: underline; }
+        .contractor-services {
+            list-style: none;
+            font-size: 0.85rem;
+        }
+        .contractor-services li {
+            padding: 0.35rem 0;
+            border-bottom: 1px dashed var(--border);
+        }
+        .contractor-services li:last-child { border: none; }
+        .contractor-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary);
+            font-size: 0.85rem;
+            text-decoration: none;
+        }
+        .contractor-link:hover { text-decoration: underline; }
+
+        .info-box {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .info-box.success { background: #d1fae5; border-left: 4px solid var(--success); }
+        .info-box.warning { background: #fef3c7; border-left: 4px solid var(--warning); }
+        .info-box.info { background: #dbeafe; border-left: 4px solid #1d4ed8; }
+
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        .price-table th, .price-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .price-table th {
+            background: var(--bg-alt);
+            font-weight: 600;
+            color: var(--text);
+        }
+        .price-table tr:hover { background: #fafafa; }
+        .price-table .price { color: var(--success); font-weight: 600; }
+
+        .recommendation {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid var(--success);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        .recommendation h3 {
+            color: var(--success);
+            margin-top: 0;
+        }
+
+        /* Document Navigation */
+        .doc-nav {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .doc-nav h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+        .doc-nav-grid {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .doc-card {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        .doc-card:hover {
+            border-color: var(--primary);
+            background: #f0f4ff;
+        }
+        .doc-card.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+
+        .track-record {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .track-stat {
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg-alt);
+            border-radius: 8px;
+        }
+        .track-stat .number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .track-stat .label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        @media print {
+            .doc-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="doc-nav">
+        <h3>Manufacturing Documentation</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">Website</a>
+            <a href="specification.html" class="doc-card">Specification</a>
+            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
+            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
+            <a href="control-logic.html" class="doc-card">Control Logic</a>
+            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
+            <a href="market-research.html" class="doc-card">Market Research</a>
+            <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
+            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
+            <a href="engineering-analysis.html" class="doc-card">Engineering Analysis</a>
+            <a href="testing-plan.html" class="doc-card">Testing Plan</a>
+            <a href="designs.html" class="doc-card">Designs</a>
+            <a href="design-detailed.html" class="doc-card">Detailed Design</a>
+            <a href="contractors.html" class="doc-card active">Contractors</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Installation Contractors</h1>
+        <div class="subtitle">UAE AV Integrators & Installation Partners for TV Enclosure Fitting</div>
+        <div class="date">December 2025 | Apex TV Enclosures</div>
+    </header>
+
+    <div class="container">
+        <!-- Executive Summary -->
+        <div class="executive-summary">
+            <h2>Purpose</h2>
+            <p>This document lists potential installation partners in the UAE who can fit TV enclosures for end customers. These companies offer AV integration, outdoor display installation, and custom enclosure fitting services. They represent potential B2B sales channels and installation partners for Apex TV Enclosures.</p>
+
+            <div class="info-box info" style="margin-top: 1rem;">
+                <strong>Use Cases:</strong>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                    <li><strong>Sales Channel:</strong> Partner with these companies to sell Apex enclosures to their customers</li>
+                    <li><strong>Installation Network:</strong> Refer customers needing professional installation</li>
+                    <li><strong>Prototype Testing:</strong> Use for installing test units at demonstration sites</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Priority Contractors -->
+        <h2>Priority Contractors (Recommended)</h2>
+        <p>These companies have the strongest capabilities for outdoor TV enclosure installation and AV integration.</p>
+
+        <div class="contractor-grid">
+            <div class="contractor-card featured">
+                <div class="contractor-header">
+                    <div class="contractor-name">Smerk Technologies LLC</div>
+                    <div class="contractor-tag recommended">Top Recommendation</div>
+                </div>
+                <div class="contractor-details">Full-service AV integrator | Founded 2020 | Dubai & Abu Dhabi</div>
+
+                <div class="track-record">
+                    <div class="track-stat">
+                        <div class="number">700+</div>
+                        <div class="label">Projects</div>
+                    </div>
+                    <div class="track-stat">
+                        <div class="number">100+</div>
+                        <div class="label">Clients</div>
+                    </div>
+                    <div class="track-stat">
+                        <div class="number">7</div>
+                        <div class="label">Days/Week</div>
+                    </div>
+                </div>
+
+                <ul class="contractor-services">
+                    <li><strong>Outdoor Digital Signage</strong> - IP66 rated for harsh environments</li>
+                    <li><strong>Home Automation & AV</strong> - Full residential integration</li>
+                    <li><strong>LED Display Solutions</strong> - Commercial installations</li>
+                    <li><strong>Custom Installation Work</strong> - Bespoke projects</li>
+                </ul>
+
+                <div class="contractor-contact">
+                    <strong>Dubai Office:</strong><br>
+                    Office 318, RKM Building, Al Qiyadah, Dubai<br>
+                    📞 <a href="tel:+97142710050">+971 4 271 0050</a> / <a href="tel:+971553710175">+971 55 371 0175</a><br>
+                    📧 <a href="mailto:info@smerktech.com">info@smerktech.com</a><br><br>
+                    <strong>Abu Dhabi Office:</strong><br>
+                    Office 523, 5th Floor, Hanging Garden Tower, Hamdan Street<br>
+                    📞 <a href="tel:+97125856399">+971 2 585 6399</a><br><br>
+                    <strong>Hours:</strong> 9:00 AM - 5:00 PM, 7 days
+                </div>
+
+                <div class="info-box success">
+                    <strong>Notable Clients:</strong> DHA, RTA, Dubai Municipality, Dubai Police, American University Sharjah, Marriott Hotels, BMW
+                </div>
+
+                <a href="https://www.smerktech.com/" class="contractor-link" target="_blank">smerktech.com &rarr;</a>
+            </div>
+
+            <div class="contractor-card recommended">
+                <div class="contractor-header">
+                    <div class="contractor-name">Fix Hub</div>
+                    <div class="contractor-tag specialist">Outdoor Specialist</div>
+                </div>
+                <div class="contractor-details">TV installation specialists | Custom enclosure fitting</div>
+
+                <ul class="contractor-services">
+                    <li><strong>Outdoor TV Installation</strong> - Patios, decks, pool areas</li>
+                    <li><strong>Custom Enclosure Installation</strong> - Bespoke cabinet integration</li>
+                    <li><strong>Weatherproofing</strong> - Specialized outdoor setups</li>
+                    <li><strong>TV Panel Installation</strong> - All sizes and brands</li>
+                </ul>
+
+                <div class="contractor-contact">
+                    📧 Via website contact form<br>
+                    🌐 <a href="https://fixhub.ae/services/tv-panel-installation-dubai/" target="_blank">fixhub.ae</a>
+                </div>
+
+                <div class="info-box info">
+                    <strong>Why Contact:</strong> Explicitly advertise outdoor TV installation and custom enclosure work. Understand weatherproofing requirements for Gulf climate.
+                </div>
+
+                <a href="https://fixhub.ae/services/tv-panel-installation-dubai/" class="contractor-link" target="_blank">fixhub.ae &rarr;</a>
+            </div>
+
+            <div class="contractor-card recommended">
+                <div class="contractor-header">
+                    <div class="contractor-name">The Outdoor Screen Company</div>
+                    <div class="contractor-tag specialist">IP66 Specialist</div>
+                </div>
+                <div class="contractor-details">Outdoor display specialists | UAE, Middle East, Africa</div>
+
+                <ul class="contractor-services">
+                    <li><strong>IP66 Rated Screens</strong> - Harsh/marine environments</li>
+                    <li><strong>Outdoor TV Enclosures</strong> - Full range</li>
+                    <li><strong>Mountings & Brackets</strong> - Custom solutions</li>
+                    <li><strong>Anti-Glare Films</strong> - Screen optimization</li>
+                    <li><strong>Protective Coatings</strong> - Extended durability</li>
+                </ul>
+
+                <div class="contractor-contact">
+                    🌐 <a href="https://outdoorscreen.company/led-tv-screen-uae-middle-east-africa/" target="_blank">outdoorscreen.company</a>
+                </div>
+
+                <div class="info-box warning">
+                    <strong>Speciality:</strong> Designed for harsh, dusty, hot urban, desert or marine locations. IP66 rated solutions.
+                </div>
+
+                <a href="https://outdoorscreen.company/led-tv-screen-uae-middle-east-africa/" class="contractor-link" target="_blank">outdoorscreen.company &rarr;</a>
+            </div>
+        </div>
+
+        <!-- Premium Outdoor TV Provider -->
+        <h2>Premium Outdoor TV Solutions</h2>
+
+        <div class="contractor-grid">
+            <div class="contractor-card">
+                <div class="contractor-header">
+                    <div class="contractor-name">Evervue Gulf FZCO</div>
+                    <div class="contractor-tag premium">Premium</div>
+                </div>
+                <div class="contractor-details">Dubai, UAE | Outdoor & specialty TV specialists</div>
+
+                <ul class="contractor-services">
+                    <li><strong>Cosmos Outdoor TV Range</strong> - 32" to 110"</li>
+                    <li><strong>Mounting Solutions</strong> - Ceiling, desk, hot tub mounts</li>
+                    <li><strong>Mirror TVs</strong> - Bathroom and bedroom</li>
+                    <li><strong>Kitchen TVs</strong> - Splashproof solutions</li>
+                </ul>
+
+                <h4 style="margin-top: 1rem; font-size: 0.9rem;">Reference Pricing (AED)</h4>
+                <table class="price-table" style="margin-top: 0.5rem;">
+                    <tr><td>Cosmos Outdoor TV 32"</td><td class="price">8,500</td></tr>
+                    <tr><td>Cosmos Outdoor TV 55"</td><td class="price">~25,000</td></tr>
+                    <tr><td>Cosmos Outdoor TV 110"</td><td class="price">117,399</td></tr>
+                    <tr><td>Ceiling Mount</td><td class="price">1,300</td></tr>
+                    <tr><td>Desk Mount</td><td class="price">1,800</td></tr>
+                    <tr><td>Hot Tub Mount</td><td class="price">2,650</td></tr>
+                </table>
+
+                <div class="contractor-contact">
+                    🌐 <a href="https://www.evervue.ae/" target="_blank">evervue.ae</a>
+                </div>
+
+                <div class="info-box info">
+                    <strong>Note:</strong> Sells complete outdoor TVs (not enclosures). Useful for understanding premium market pricing and as potential competitor analysis.
+                </div>
+
+                <a href="https://www.evervue.ae/" class="contractor-link" target="_blank">evervue.ae &rarr;</a>
+            </div>
+        </div>
+
+        <!-- Full-Service AV Companies -->
+        <h2>Full-Service AV Integration Companies</h2>
+        <p>These companies can handle complex installations including outdoor AV setups.</p>
+
+        <div class="contractor-grid">
+            <div class="contractor-card">
+                <div class="contractor-header">
+                    <div class="contractor-name">ETS Smart</div>
+                    <div class="contractor-tag specialist">Indoor & Outdoor</div>
+                </div>
+                <div class="contractor-details">Dubai premier audiovisual company</div>
+
+                <ul class="contractor-services">
+                    <li>Indoor AND outdoor AV setups</li>
+                    <li>Full system integration</li>
+                    <li>Business communications solutions</li>
+                </ul>
+
+                <div class="contractor-contact">
+                    🌐 <a href="https://www.etssmart.com/audio-visual-solutions.html" target="_blank">etssmart.com</a>
+                </div>
+
+                <a href="https://www.etssmart.com/audio-visual-solutions.html" class="contractor-link" target="_blank">etssmart.com &rarr;</a>
+            </div>
+
+            <div class="contractor-card">
+                <div class="contractor-header">
+                    <div class="contractor-name">Purple Rock Dubai</div>
+                    <div class="contractor-tag">Full Service</div>
+                </div>
+                <div class="contractor-details">Established AV company with long-term support</div>
+
+                <ul class="contractor-services">
+                    <li>Complete AV solutions</li>
+                    <li>Long-term support after setup</li>
+                    <li>Skilled system designers</li>
+                    <li>Compatibility assurance</li>
+                </ul>
+
+                <div class="contractor-contact">
+                    🌐 <a href="https://www.purplerockdubai.com/audio-video-solution/" target="_blank">purplerockdubai.com</a>
+                </div>
+
+                <a href="https://www.purplerockdubai.com/audio-video-solution/" class="contractor-link" target="_blank">purplerockdubai.com &rarr;</a>
+            </div>
+
+            <div class="contractor-card">
+                <div class="contractor-header">
+                    <div class="contractor-name">Ace Vega Technologies</div>
+                    <div class="contractor-tag">Residential</div>
+                </div>
+                <div class="contractor-details">Residential and commercial AV integration</div>
+
+                <ul class="contractor-services">
+                    <li>Residential project experience</li>
+                    <li>Design consulting included</li>
+                    <li>Full integration services</li>
+                    <li>Auditoriums, conferences, homes</li>
+                </ul>
+
+                <div class="contractor-contact">
+                    🌐 <a href="https://acevegatechnologies.com/audio-visual-solutions-dubai-uae/" target="_blank">acevegatechnologies.com</a>
+                </div>
+
+                <a href="https://acevegatechnologies.com/audio-visual-solutions-dubai-uae/" class="contractor-link" target="_blank">acevegatechnologies.com &rarr;</a>
+            </div>
+
+            <div class="contractor-card">
+                <div class="contractor-header">
+                    <div class="contractor-name">Satin AVS</div>
+                    <div class="contractor-tag">Established</div>
+                </div>
+                <div class="contractor-details">Est. 2011 | Dubai, Abu Dhabi, all UAE</div>
+
+                <ul class="contractor-services">
+                    <li>Audio systems</li>
+                    <li>LED screens and video walls</li>
+                    <li>Digital signage</li>
+                    <li>CCTV and access control</li>
+                </ul>
+
+                <div class="contractor-contact">
+                    🌐 <a href="https://satinavs.ae/" target="_blank">satinavs.ae</a>
+                </div>
+
+                <a href="https://satinavs.ae/" class="contractor-link" target="_blank">satinavs.ae &rarr;</a>
+            </div>
+        </div>
+
+        <!-- Budget Installation Services -->
+        <h2>Budget TV Mounting Services</h2>
+        <p>For basic installation only. May not handle complex outdoor enclosure work but useful for simple wall mounts.</p>
+
+        <table class="price-table">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>TV Size</th>
+                    <th>Price (AED)</th>
+                    <th>Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>ServiceMarket</strong></td>
+                    <td>&lt;55"</td>
+                    <td class="price">79</td>
+                    <td><a href="https://servicemarket.com/en/dubai/tv-mounting" target="_blank">servicemarket.com</a></td>
+                </tr>
+                <tr>
+                    <td><strong>ServiceMarket</strong></td>
+                    <td>55-65"</td>
+                    <td class="price">149</td>
+                    <td><a href="https://servicemarket.com/en/dubai/tv-mounting" target="_blank">servicemarket.com</a></td>
+                </tr>
+                <tr>
+                    <td><strong>ServiceMarket</strong></td>
+                    <td>&gt;65"</td>
+                    <td class="price">199</td>
+                    <td><a href="https://servicemarket.com/en/dubai/tv-mounting" target="_blank">servicemarket.com</a></td>
+                </tr>
+                <tr>
+                    <td><strong>Urban Company</strong></td>
+                    <td>All sizes</td>
+                    <td class="price">Varies</td>
+                    <td><a href="https://www.urbancompany.com/dubai-electricians/tv-wall-mount-and-installation-service" target="_blank">urbancompany.com</a></td>
+                </tr>
+                <tr>
+                    <td><strong>Pro Electrician Dubai</strong></td>
+                    <td>All sizes</td>
+                    <td class="price">Quote-based</td>
+                    <td><a href="https://proelectriciandubai.com/tv-installation-in-dubai/" target="_blank">proelectriciandubai.com</a></td>
+                </tr>
+                <tr>
+                    <td><strong>Sharaf DG</strong></td>
+                    <td>All sizes</td>
+                    <td class="price">Quote-based</td>
+                    <td><a href="https://uae.sharafdg.com/tv-installation-services-uae/" target="_blank">sharafdg.com</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Industrial Enclosure Option -->
+        <h2>Custom Enclosure Manufacturing</h2>
+        <p>For bespoke enclosure fabrication if needed.</p>
+
+        <div class="contractor-grid">
+            <div class="contractor-card">
+                <div class="contractor-header">
+                    <div class="contractor-name">GRP Industries</div>
+                    <div class="contractor-tag">Industrial</div>
+                </div>
+                <div class="contractor-details">30+ years experience | Dubai, UAE, Oman, USA</div>
+
+                <ul class="contractor-services">
+                    <li><strong>Custom Weatherproof Enclosures</strong> - FRP/GRP</li>
+                    <li><strong>IP-Rated Solutions</strong> - Industrial grade</li>
+                    <li><strong>Corrosion Resistance</strong> - Marine environments</li>
+                    <li><strong>Thermal Insulation</strong> - Heat management</li>
+                    <li><strong>Fire Resistance</strong> - Safety compliance</li>
+                </ul>
+
+                <div class="contractor-contact">
+                    🌐 <a href="https://www.grpindustries.com/" target="_blank">grpindustries.com</a>
+                </div>
+
+                <div class="info-box warning">
+                    <strong>Use Case:</strong> Could manufacture custom enclosure shells if China/local metal fabricators don't meet requirements. Alternative material (fiberglass) option.
+                </div>
+
+                <a href="https://www.grpindustries.com/" class="contractor-link" target="_blank">grpindustries.com &rarr;</a>
+            </div>
+        </div>
+
+        <!-- Recommended Action Plan -->
+        <div class="recommendation">
+            <h3>Recommended Action Plan</h3>
+            <ol style="margin-left: 1.5rem; margin-top: 1rem;">
+                <li><strong>First Contact:</strong> Smerk Technologies - comprehensive capability, government/hospitality clients, free consultation. Good fit for B2B partnership.</li>
+                <li><strong>Second Contact:</strong> Fix Hub - specialist in custom enclosure installations, outdoor expertise.</li>
+                <li><strong>Specialist Option:</strong> The Outdoor Screen Company - if need full outdoor solution or IP66 expertise.</li>
+                <li><strong>Premium Market Reference:</strong> Evervue Gulf - understand premium pricing for outdoor TV market.</li>
+            </ol>
+
+            <h4 style="margin-top: 1.5rem;">Partnership Discussion Points</h4>
+            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                <li>Introduce Apex as UAE-manufactured alternative to imported Apollo enclosures</li>
+                <li>Offer installation partner margin (20-30% on enclosure sales)</li>
+                <li>Provide technical training on Apex products</li>
+                <li>Joint marketing to hospitality and residential developers</li>
+                <li>Demo unit for their showroom</li>
+            </ul>
+        </div>
+
+        <!-- Action Items -->
+        <h2>Action Items</h2>
+        <table class="price-table">
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Company</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Request consultation/meeting</td>
+                    <td>Smerk Technologies</td>
+                    <td>Pending</td>
+                </tr>
+                <tr>
+                    <td>Inquire about outdoor installation services</td>
+                    <td>Fix Hub</td>
+                    <td>Pending</td>
+                </tr>
+                <tr>
+                    <td>Research partnership terms</td>
+                    <td>Outdoor Screen Company</td>
+                    <td>Pending</td>
+                </tr>
+                <tr>
+                    <td>Get comparison quotes (3 companies)</td>
+                    <td>Multiple</td>
+                    <td>Pending</td>
+                </tr>
+                <tr>
+                    <td>Confirm outdoor/poolside experience</td>
+                    <td>All shortlisted</td>
+                    <td>Pending</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Sources -->
+        <div class="sources" style="background: var(--bg-alt); padding: 1.5rem; border-radius: 8px; margin-top: 3rem;">
+            <h3 style="margin-top: 0; font-size: 1rem;">Sources</h3>
+            <ul style="list-style: none; font-size: 0.8rem; color: var(--text-muted);">
+                <li><a href="https://www.smerktech.com/" target="_blank">Smerk Technologies - smerktech.com</a></li>
+                <li><a href="https://fixhub.ae/services/tv-panel-installation-dubai/" target="_blank">Fix Hub - fixhub.ae</a></li>
+                <li><a href="https://outdoorscreen.company/led-tv-screen-uae-middle-east-africa/" target="_blank">The Outdoor Screen Company - outdoorscreen.company</a></li>
+                <li><a href="https://www.evervue.ae/" target="_blank">Evervue Gulf - evervue.ae</a></li>
+                <li><a href="https://servicemarket.com/en/dubai/tv-mounting" target="_blank">ServiceMarket - servicemarket.com</a></li>
+                <li><a href="https://www.grpindustries.com/" target="_blank">GRP Industries - grpindustries.com</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
