@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitor Comparison - Apex vs Aqualite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1428a0;
+            --primary-light: #e8ebf7;
+            --text: #1a1a1a;
+            --text-muted: #6b7280;
+            --bg: #ffffff;
+            --bg-alt: #f8f9fa;
+            --border: #e5e7eb;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --apex: #1428a0;
+            --competitor: #dc2626;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-alt); color: var(--text); line-height: 1.6; }
+
+        .doc-nav { background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%); padding: 1rem 2rem; }
+        .doc-nav h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(255,255,255,0.7); margin-bottom: 0.75rem; }
+        .doc-nav-grid { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .doc-card { background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; color: white; border: 1px solid rgba(255,255,255,0.2); font-size: 0.85rem; font-weight: 500; }
+        .doc-card:hover { background: rgba(255,255,255,0.2); }
+        .doc-card.active { background: white; color: var(--primary); }
+
+        header { background: white; padding: 2rem; border-bottom: 1px solid var(--border); }
+        .header-content { max-width: 1400px; margin: 0 auto; }
+        header h1 { font-size: 1.75rem; color: var(--primary); }
+        header .subtitle { color: var(--text-muted); }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+
+        .section { background: white; border-radius: 12px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .section h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 1rem; border-bottom: 3px solid var(--primary); padding-bottom: 0.5rem; }
+        .section h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: var(--text); }
+
+        .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0; }
+        .summary-card { padding: 1.5rem; border-radius: 8px; }
+        .summary-card.apex { background: linear-gradient(135deg, #e8ebf7 0%, #dbeafe 100%); border: 2px solid var(--apex); }
+        .summary-card.competitor { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border: 2px solid var(--competitor); }
+        .summary-card h3 { margin: 0 0 1rem; font-size: 1.25rem; }
+        .summary-card .price { font-size: 1.5rem; font-weight: 700; margin: 0.5rem 0; }
+        .summary-card .price-note { font-size: 0.85rem; color: var(--text-muted); }
+
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        .comparison-table th, .comparison-table td { padding: 0.75rem 1rem; text-align: left; border: 1px solid var(--border); }
+        .comparison-table th { background: var(--bg-alt); font-weight: 600; }
+        .comparison-table th.apex-col { background: var(--primary); color: white; text-align: center; }
+        .comparison-table th.comp-col { background: var(--competitor); color: white; text-align: center; }
+        .comparison-table td.spec { font-weight: 500; background: #fafafa; width: 25%; }
+        .comparison-table td.apex { background: #f0f4ff; text-align: center; }
+        .comparison-table td.comp { background: #fff5f5; text-align: center; }
+        .comparison-table .winner { font-weight: 600; }
+        .comparison-table .apex.winner { background: #dcfce7; color: var(--success); }
+        .comparison-table .comp.winner { background: #fef3c7; color: var(--warning); }
+        .comparison-table .draw { background: #f3f4f6; }
+
+        .verdict { padding: 1rem; border-radius: 8px; margin: 0.5rem 0; font-size: 0.9rem; }
+        .verdict.apex-wins { background: #dcfce7; border-left: 4px solid var(--success); }
+        .verdict.comp-wins { background: #fef3c7; border-left: 4px solid var(--warning); }
+        .verdict.draw { background: #f3f4f6; border-left: 4px solid #9ca3af; }
+
+        .note-box { background: #fffbeb; border-left: 4px solid var(--warning); padding: 1rem; margin: 1rem 0; font-size: 0.9rem; }
+        .success-box { background: #dcfce7; border-left: 4px solid var(--success); padding: 1rem; margin: 1rem 0; font-size: 0.9rem; }
+        .danger-box { background: #fef2f2; border-left: 4px solid var(--danger); padding: 1rem; margin: 1rem 0; font-size: 0.9rem; }
+        .info-box { background: #eff6ff; border-left: 4px solid var(--primary); padding: 1rem; margin: 1rem 0; font-size: 0.9rem; }
+
+        .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+        .score-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center; }
+        .score-card .category { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .score-card .winner-name { font-weight: 600; margin: 0.5rem 0; }
+        .score-card .winner-name.apex { color: var(--apex); }
+        .score-card .winner-name.comp { color: var(--competitor); }
+        .score-card .winner-name.draw { color: #6b7280; }
+
+        code { font-family: 'JetBrains Mono', monospace; background: #f1f5f9; padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.85rem; }
+
+        @media (max-width: 768px) {
+            .summary-grid { grid-template-columns: 1fr; }
+        }
+        @media print { .doc-nav { display: none; } }
+    </style>
+</head>
+<body>
+    <nav class="doc-nav">
+        <h3>Project Documents</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">Website</a>
+            <a href="specification.html" class="doc-card">Specification</a>
+            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
+            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
+            <a href="control-logic.html" class="doc-card">Control Logic</a>
+            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
+            <a href="market-research.html" class="doc-card">Market Research</a>
+            <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
+            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
+            <a href="engineering-analysis.html" class="doc-card">Engineering Analysis</a>
+            <a href="testing-plan.html" class="doc-card">Testing Plan</a>
+            <a href="designs.html" class="doc-card">Designs</a>
+            <a href="design-detailed.html" class="doc-card">Detailed Design</a>
+            <a href="competitor-comparison.html" class="doc-card active">Competitor Analysis</a>
+            <a href="contractors.html" class="doc-card">Contractors</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <h1>Competitor Comparison: Apex ATE-75 vs Aqualite AQLH-65</h1>
+            <p class="subtitle">Head-to-head technical comparison for Gulf region outdoor TV solutions</p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Executive Summary -->
+        <div class="section">
+            <h2>Executive Summary</h2>
+
+            <div class="summary-grid">
+                <div class="summary-card apex">
+                    <h3>Apex ATE-75 (Enclosure + Consumer TV)</h3>
+                    <div class="price">~AED 7,000</div>
+                    <div class="price-note">Enclosure AED 2,500 + 75" TV AED 4,500</div>
+                    <ul style="margin-top: 1rem; margin-left: 1.25rem; font-size: 0.9rem;">
+                        <li>IP66 weatherproof enclosure</li>
+                        <li>Use ANY consumer 4K TV (upgradeable)</li>
+                        <li>PWM smart cooling (quiet operation)</li>
+                        <li>55°C ambient rated</li>
+                        <li>Aluminum construction (lighter)</li>
+                    </ul>
+                </div>
+                <div class="summary-card competitor">
+                    <h3>Aqualite AQLH-65 (Integrated Outdoor TV)</h3>
+                    <div class="price">~AED 25,500</div>
+                    <div class="price-note">£5,460 inc VAT (65" refurbished)</div>
+                    <ul style="margin-top: 1rem; margin-left: 1.25rem; font-size: 0.9rem;">
+                        <li>IP66 + IK10 integrated unit</li>
+                        <li>Fixed 1080p panel (no upgrade path)</li>
+                        <li>Thermostat fan control</li>
+                        <li>55°C ambient rated (same)</li>
+                        <li>Steel construction (heavier)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <strong>Bottom Line:</strong> Apex offers a 75" 4K solution for ~27% of Aqualite's 65" 1080p price. The enclosure approach allows TV upgrades without replacing the entire unit.
+            </div>
+        </div>
+
+        <!-- Temperature Clarification -->
+        <div class="section">
+            <h2>Temperature Rating Clarification</h2>
+
+            <div class="note-box">
+                <strong>About the "110°C" claim:</strong> Aqualite's marketing mentions "tested from -30°C to +110°C" on some pages. This is a <strong>test/storage extreme</strong>, not the operating range. The actual operating specifications are:
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="spec">Temperature Spec</th>
+                        <th class="apex-col">Apex ATE-75</th>
+                        <th class="comp-col">Aqualite AQLH-65</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="spec">Operating Range</td>
+                        <td class="apex">0°C to <strong>55°C</strong></td>
+                        <td class="comp">-20°C to <strong>55°C</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Tested Range</td>
+                        <td class="apex">-10°C to 65°C</td>
+                        <td class="comp">-30°C to 67°C (some claim 110°C)</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Target Internal Temp</td>
+                        <td class="apex winner">&lt;45°C at 55°C ambient</td>
+                        <td class="comp">Not specified</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Humidity Range</td>
+                        <td class="apex">10-95% RH</td>
+                        <td class="comp">10-90% RH</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="verdict draw">
+                <strong>Verdict:</strong> Both products have the same 55°C operating ceiling. Aqualite's extended cold range (-20°C) is irrelevant for Gulf markets where temperatures rarely drop below 10°C.
+            </div>
+        </div>
+
+        <!-- Full Specification Comparison -->
+        <div class="section">
+            <h2>Full Technical Comparison</h2>
+
+            <h3>1. Display & Image Quality</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="spec">Specification</th>
+                        <th class="apex-col">Apex ATE-75</th>
+                        <th class="comp-col">Aqualite AQLH-65</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="spec">Screen Size</td>
+                        <td class="apex winner"><strong>75"</strong> (or any size)</td>
+                        <td class="comp">65"</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Resolution</td>
+                        <td class="apex winner"><strong>4K UHD</strong> (TV dependent)</td>
+                        <td class="comp">1080p Full HD only</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Brightness</td>
+                        <td class="apex">Standard TV (~400-600 nits)</td>
+                        <td class="comp winner"><strong>1500-3000 nits</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Glass</td>
+                        <td class="apex winner">4mm low-iron tempered, anti-reflective</td>
+                        <td class="comp">6mm tempered, anti-reflective</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Smart TV Features</td>
+                        <td class="apex winner">Full smart TV (Netflix, etc.)</td>
+                        <td class="comp">Basic inputs only</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Upgradeable</td>
+                        <td class="apex winner"><strong>Yes</strong> - swap TV anytime</td>
+                        <td class="comp">No - integrated panel</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="verdict apex-wins">
+                <strong>Apex Wins Display:</strong> 4K resolution vs 1080p, larger screen, and future upgrade path. Aqualite wins on brightness (important for direct sunlight), but Apex's anti-reflective glass and shaded installations mitigate this.
+            </div>
+
+            <h3>2. Construction & Weatherproofing</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="spec">Specification</th>
+                        <th class="apex-col">Apex ATE-75</th>
+                        <th class="comp-col">Aqualite AQLH-65</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="spec">IP Rating</td>
+                        <td class="apex"><strong>IP66</strong></td>
+                        <td class="comp"><strong>IP66</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Impact Rating</td>
+                        <td class="apex">IK08 (5J impact)</td>
+                        <td class="comp winner"><strong>IK10</strong> (20J impact)</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Chassis Material</td>
+                        <td class="apex winner"><strong>5052-H32 Aluminum</strong></td>
+                        <td class="comp">Powder coated steel</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Weight (65" equiv)</td>
+                        <td class="apex winner">~35-40 kg (estimated)</td>
+                        <td class="comp">Not specified (steel = heavier)</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Hardware</td>
+                        <td class="apex winner"><strong>316 Stainless Steel</strong></td>
+                        <td class="comp">Not specified</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Sealing</td>
+                        <td class="apex">EPDM continuous channel gaskets</td>
+                        <td class="comp">Silicone sealed components</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Corrosion Resistance</td>
+                        <td class="apex winner"><strong>Marine-grade aluminum</strong></td>
+                        <td class="comp">Powder coating (chips over time)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="verdict apex-wins">
+                <strong>Apex Wins Construction:</strong> Aluminum is lighter and inherently corrosion-resistant (critical for Gulf coastal areas). Aqualite's steel chassis relies on powder coating which can chip and rust. Aqualite has better impact rating (IK10 vs IK08).
+            </div>
+
+            <h3>3. Thermal Management</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="spec">Specification</th>
+                        <th class="apex-col">Apex ATE-75</th>
+                        <th class="comp-col">Aqualite AQLH-65</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="spec">Fan Control</td>
+                        <td class="apex winner"><strong>PWM Microcontroller</strong><br>(30-50°C curve)</td>
+                        <td class="comp">Thermostat on/off</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Fan Type</td>
+                        <td class="apex winner"><strong>140mm PWM industrial</strong><br>(Noctua/Sunon)</td>
+                        <td class="comp">Internal fan array (unspecified)</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Noise @ Idle</td>
+                        <td class="apex winner"><strong>&lt;25 dBA</strong> (PWM low speed)</td>
+                        <td class="comp">Unknown (on/off = noisy)</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Air Filtration</td>
+                        <td class="apex">IP66 labyrinth grilles</td>
+                        <td class="comp">Built-in air filtration system</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Power Consumption</td>
+                        <td class="apex winner">~50-100W (enclosure + TV)</td>
+                        <td class="comp">700-750W (with fans)</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Positive Pressure</td>
+                        <td class="apex winner"><strong>Yes</strong> - keeps dust out</td>
+                        <td class="comp">Not specified</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="verdict apex-wins">
+                <strong>Apex Wins Thermal:</strong> PWM control means variable fan speed (quiet when cool, fast when hot). Aqualite's thermostat cycling is noisy and less efficient. Apex also uses 7-10x less power.
+            </div>
+
+            <h3>4. Connectivity & Features</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="spec">Specification</th>
+                        <th class="apex-col">Apex ATE-75</th>
+                        <th class="comp-col">Aqualite AQLH-65</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="spec">HDMI Ports</td>
+                        <td class="apex winner">3-4 (TV dependent)</td>
+                        <td class="comp">1-2</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">USB Ports</td>
+                        <td class="apex winner">2-3 (TV dependent)</td>
+                        <td class="comp">1 (SD card slot)</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">WiFi/Bluetooth</td>
+                        <td class="apex winner"><strong>Yes</strong> (smart TV)</td>
+                        <td class="comp">No</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Streaming Apps</td>
+                        <td class="apex winner"><strong>Netflix, YouTube, etc.</strong></td>
+                        <td class="comp">No</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">RS-232 Control</td>
+                        <td class="apex">Optional</td>
+                        <td class="comp winner"><strong>Yes</strong> (pro install)</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">IR Control</td>
+                        <td class="apex">Standard TV remote</td>
+                        <td class="comp">Yes (IR codes provided)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="verdict apex-wins">
+                <strong>Apex Wins Features:</strong> Modern smart TV capabilities vs basic monitor inputs. Aqualite has RS-232 for commercial automation, but most residential users prefer streaming apps.
+            </div>
+
+            <h3>5. Price & Value</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="spec">Cost Factor</th>
+                        <th class="apex-col">Apex ATE-75</th>
+                        <th class="comp-col">Aqualite AQLH-65</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="spec">Unit Price</td>
+                        <td class="apex winner"><strong>~AED 7,000</strong><br>(enclosure + TV)</td>
+                        <td class="comp">~AED 25,500<br>(£5,460 inc VAT, 65" refurb)</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Price per Inch</td>
+                        <td class="apex winner"><strong>AED 93/inch</strong></td>
+                        <td class="comp">AED 392/inch</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Warranty</td>
+                        <td class="apex">2 years (enclosure) + TV warranty</td>
+                        <td class="comp">1 year RTB (2yr refurb)</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Repair Cost</td>
+                        <td class="apex winner"><strong>Swap TV locally</strong></td>
+                        <td class="comp">Ship to UK for repair</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Upgrade Cost</td>
+                        <td class="apex winner"><strong>Buy new TV only</strong></td>
+                        <td class="comp">Buy entire new unit</td>
+                    </tr>
+                    <tr>
+                        <td class="spec">5-Year TCO</td>
+                        <td class="apex winner">AED 7,000 + potential TV upgrade</td>
+                        <td class="comp">AED 25,500 (or replace if outdated)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="verdict apex-wins">
+                <strong>Apex Wins Value:</strong> 3.6x lower price for a larger, higher-resolution, upgradeable solution. Aqualite's only advantage is the high-brightness panel for direct sunlight.
+            </div>
+        </div>
+
+        <!-- Category Scorecard -->
+        <div class="section">
+            <h2>Category Scorecard</h2>
+
+            <div class="score-grid">
+                <div class="score-card">
+                    <div class="category">Display Quality</div>
+                    <div class="winner-name apex">Apex Wins</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">4K + upgradeable</div>
+                </div>
+                <div class="score-card">
+                    <div class="category">Brightness</div>
+                    <div class="winner-name comp">Aqualite Wins</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">3000 nits</div>
+                </div>
+                <div class="score-card">
+                    <div class="category">Construction</div>
+                    <div class="winner-name apex">Apex Wins</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Aluminum + 316SS</div>
+                </div>
+                <div class="score-card">
+                    <div class="category">Impact Resistance</div>
+                    <div class="winner-name comp">Aqualite Wins</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">IK10 rating</div>
+                </div>
+                <div class="score-card">
+                    <div class="category">Thermal</div>
+                    <div class="winner-name apex">Apex Wins</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">PWM control</div>
+                </div>
+                <div class="score-card">
+                    <div class="category">Temperature Range</div>
+                    <div class="winner-name draw">Draw</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Both 55°C</div>
+                </div>
+                <div class="score-card">
+                    <div class="category">Smart Features</div>
+                    <div class="winner-name apex">Apex Wins</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Full smart TV</div>
+                </div>
+                <div class="score-card">
+                    <div class="category">Price</div>
+                    <div class="winner-name apex">Apex Wins</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">3.6x cheaper</div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <strong>Final Score:</strong> Apex wins 6 categories, Aqualite wins 2, with 1 draw. The primary Aqualite advantage (brightness) is only relevant for direct sunlight installations without shade.
+            </div>
+        </div>
+
+        <!-- Use Case Recommendations -->
+        <div class="section">
+            <h2>Which Product for Which Use Case?</h2>
+
+            <h3>Choose Apex ATE Series When:</h3>
+            <ul style="margin: 1rem 0 1rem 1.5rem;">
+                <li>Installation has ANY shade (covered patio, pergola, alcove)</li>
+                <li>Budget is a primary concern</li>
+                <li>4K resolution and smart TV features are desired</li>
+                <li>TV upgrades may be needed in future</li>
+                <li>Coastal or high-humidity location (aluminum resists corrosion)</li>
+                <li>Noise-sensitive environment (pool area near bedrooms)</li>
+                <li>Local service/repair is important</li>
+            </ul>
+
+            <h3>Choose Aqualite AQLH Series When:</h3>
+            <ul style="margin: 1rem 0 1rem 1.5rem;">
+                <li>Installation is in DIRECT sunlight with no shade</li>
+                <li>Budget is not a concern (commercial/hospitality)</li>
+                <li>High-impact environment (public areas, sports bars)</li>
+                <li>RS-232 automation integration required</li>
+                <li>EU/UK warranty support is acceptable</li>
+            </ul>
+
+            <div class="success-box">
+                <strong>Key Insight:</strong> For most Gulf residential installations (covered patios, pool areas with shade structures), Apex delivers superior value. Aqualite only makes sense for unshaded commercial signage where maximum brightness is critical.
+            </div>
+        </div>
+
+        <!-- Sources -->
+        <div class="section" style="background: var(--bg-alt);">
+            <h2>Sources</h2>
+            <ul style="margin-left: 1.5rem; font-size: 0.9rem;">
+                <li><a href="https://aqualiteoutdoor.com/" target="_blank">Aqualite Outdoor - Official Website</a></li>
+                <li><a href="https://aqualiteoutdoor.com/tv-display-screen/product-ranges/" target="_blank">Aqualite Product Ranges (AQLH/AQLS)</a></li>
+                <li><a href="https://aqualiteoutdoor.com/refurbished-outdoor-tv-screens-for-sale/" target="_blank">Aqualite Refurbished Stock & Pricing</a></li>
+                <li><a href="https://aqualiteoutdoor.com/extreme-temperature-proof-tv/" target="_blank">Aqualite Temperature Specifications</a></li>
+                <li><a href="https://centralav.co.uk/av_products/aqls-65-65-aqls-65-weatherproof-display/" target="_blank">Central AV - AQLS-65 Specifications</a></li>
+                <li><a href="https://outdoorscreen.company/" target="_blank">Outdoor Screen Company (Aqualite reseller)</a></li>
+                <li><a href="specification.html">Apex ATE-75 Manufacturing Specification</a></li>
+            </ul>
+        </div>
+
+    </div>
+</body>
+</html>
