@@ -4,6 +4,15 @@
 (function() {
     // Navigation structure
     const navStructure = {
+        websites: {
+            label: 'Websites',
+            icon: '🌐',
+            items: [
+                { href: 'retail/index.html', label: 'Retail (Consumers)' },
+                { href: 'partner/index.html', label: 'Partner Portal' },
+                { href: 'commercial/index.html', label: 'Commercial (B2B)' }
+            ]
+        },
         dashboard: {
             label: 'Dashboard',
             icon: '📊',
@@ -83,8 +92,9 @@
         }
     };
 
-    // Determine base path for links (handle /legal/ subdirectory)
-    const isInSubdir = window.location.pathname.includes('/legal/');
+    // Determine base path for links (handle subdirectories)
+    const pathname = window.location.pathname;
+    const isInSubdir = pathname.includes('/legal/') || pathname.includes('/retail/') || pathname.includes('/partner/') || pathname.includes('/commercial/');
     const basePath = isInSubdir ? '../' : '';
 
     // Get current page filename
@@ -270,10 +280,17 @@
         }
 
         /* Hide old navigation if present */
-        body > nav:first-of-type,
+        body > nav:not(.apex-sidebar),
         .nav,
-        nav[style*="background: #111"] {
+        .doc-nav,
+        nav[style*="background: #111"],
+        nav[style*="background:#111"] {
             display: none !important;
+        }
+
+        /* Fix container margins for pages with old styles */
+        .container {
+            margin-left: 0 !important;
         }
     `;
 
