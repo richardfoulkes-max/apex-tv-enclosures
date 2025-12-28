@@ -3,1320 +3,667 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Tracker - Apex TV Enclosures</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Project Command Center - Apex Enclosures</title>
     <style>
-        :root {
-            --primary: #1428a0;
-            --primary-light: #e8ebf7;
-            --text: #1a1a1a;
-            --text-muted: #6b7280;
-            --bg: #ffffff;
-            --bg-alt: #f8f9fa;
-            --border: #e5e7eb;
-            --success: #059669;
-            --warning: #d97706;
-            --danger: #dc2626;
-            --info: #0284c7;
-        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-alt);
-            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
             line-height: 1.6;
         }
 
-        /* Navigation */
-        .doc-nav {
-            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
-            padding: 1rem 2rem;
-            border-bottom: 1px solid var(--border);
-        }
-        .doc-nav h3 {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 0.75rem;
-        }
-        .doc-nav-grid {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-        .doc-card {
-            background: rgba(255,255,255,0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            text-decoration: none;
-            color: white;
-            border: 1px solid rgba(255,255,255,0.2);
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-        .doc-card:hover {
-            background: rgba(255,255,255,0.2);
-        }
-        .doc-card.active {
-            background: white;
-            color: var(--primary);
-        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
 
         /* Header */
-        header {
-            background: white;
+        .page-header {
+            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+            color: white;
             padding: 2rem;
-            border-bottom: 1px solid var(--border);
-        }
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
+            border-radius: 16px;
+            margin-bottom: 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        header h1 {
-            font-size: 1.75rem;
-            color: var(--primary);
-        }
-        header .subtitle {
-            color: var(--text-muted);
-            margin-top: 0.25rem;
-        }
-        .status-badge {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-        .status-badge.active {
-            background: #dcfce7;
-            color: #166534;
-        }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+        .page-header h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+        .page-header .subtitle { opacity: 0.9; font-size: 0.95rem; }
 
-        /* Cards */
-        .card {
-            background: white;
+        .current-phase {
+            background: rgba(255,255,255,0.2);
+            padding: 1rem 1.5rem;
             border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            text-align: center;
         }
-        .card h2 {
-            font-size: 1.25rem;
-            color: var(--primary);
+        .phase-label { font-size: 0.75rem; text-transform: uppercase; opacity: 0.8; }
+        .phase-name { font-size: 1.25rem; font-weight: 700; }
+
+        /* Priority Actions */
+        .priority-section {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 2px solid #0d9488;
+        }
+
+        .priority-section h2 {
+            color: #0d9488;
+            font-size: 1.1rem;
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        /* Progress Section */
-        .progress-bar {
-            background: var(--bg-alt);
-            border-radius: 10px;
-            height: 12px;
-            overflow: hidden;
-            margin: 1rem 0;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--info));
-            border-radius: 10px;
-            transition: width 0.3s ease;
-        }
-        .milestones {
+        .priority-list {
             display: flex;
-            justify-content: space-between;
-            margin-top: 0.5rem;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-        .milestone {
-            text-align: center;
-        }
-        .milestone.completed {
-            color: var(--success);
-            font-weight: 600;
-        }
-        .milestone.current {
-            color: var(--primary);
-            font-weight: 600;
+            flex-direction: column;
+            gap: 0.75rem;
         }
 
-        /* Manufacturer Table */
-        .manufacturer-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .manufacturer-table th,
-        .manufacturer-table td {
-            padding: 0.75rem 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-        .manufacturer-table th {
-            background: var(--bg-alt);
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .manufacturer-table tr:hover {
-            background: #fafafa;
-        }
-        .status-pill {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-        .status-pill.sent {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-        .status-pill.responded {
-            background: #dcfce7;
-            color: #166534;
-        }
-        .status-pill.quoted {
-            background: #fef3c7;
-            color: #92400e;
-        }
-        .status-pill.selected {
-            background: #d1fae5;
-            color: #047857;
-        }
-        .status-pill.declined {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-        .status-pill.pending {
-            background: #f3f4f6;
-            color: #6b7280;
-        }
-        .status-pill.bounced {
-            background: #fecaca;
-            color: #b91c1c;
-        }
-        .status-pill.verified {
-            background: #bbf7d0;
-            color: #166534;
-        }
-        .region-tag {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        /* File Links */
-        .file-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-        }
-        .file-link {
+        .priority-item {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 1rem;
             padding: 1rem;
-            background: var(--bg-alt);
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--text);
-            transition: all 0.2s;
-            border: 1px solid transparent;
+            background: #f0fdfa;
+            border-radius: 10px;
+            border-left: 4px solid #0d9488;
         }
-        .file-link:hover {
-            border-color: var(--primary);
-            background: var(--primary-light);
-        }
-        .file-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--primary);
+
+        .priority-item.urgent { border-left-color: #dc2626; background: #fef2f2; }
+        .priority-item.waiting { border-left-color: #f59e0b; background: #fffbeb; }
+
+        .priority-number {
+            width: 32px;
+            height: 32px;
+            background: #0d9488;
             color: white;
-            border-radius: 8px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
+            font-weight: 700;
+            flex-shrink: 0;
         }
-        .file-info h4 {
-            font-size: 0.9rem;
-            margin-bottom: 0.15rem;
+
+        .priority-item.urgent .priority-number { background: #dc2626; }
+        .priority-item.waiting .priority-number { background: #f59e0b; }
+
+        .priority-content { flex: 1; }
+        .priority-title { font-weight: 600; color: #0f172a; }
+        .priority-detail { font-size: 0.85rem; color: #64748b; }
+
+        .priority-link {
+            padding: 0.5rem 1rem;
+            background: #0d9488;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
         }
-        .file-info span {
-            font-size: 0.75rem;
-            color: var(--text-muted);
+
+        .priority-link:hover { background: #0f766e; }
+
+        /* Progress Grid */
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
+
+        .progress-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .progress-card h3 {
+            font-size: 1rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .progress-bar-container {
+            background: #e2e8f0;
+            border-radius: 10px;
+            height: 10px;
+            overflow: hidden;
+            margin-bottom: 0.75rem;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s;
+        }
+
+        .progress-bar-fill.engineering { background: linear-gradient(90deg, #0d9488, #14b8a6); }
+        .progress-bar-fill.manufacturing { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+        .progress-bar-fill.sales { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+        .progress-bar-fill.market { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+        .progress-bar-fill.financial { background: linear-gradient(90deg, #10b981, #34d399); }
+        .progress-bar-fill.legal { background: linear-gradient(90deg, #6366f1, #818cf8); }
+        .progress-bar-fill.websites { background: linear-gradient(90deg, #ec4899, #f472b6); }
+
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .progress-percent { font-weight: 700; color: #0f172a; }
+        .progress-detail { color: #64748b; }
+
+        .progress-items {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .progress-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0;
+            font-size: 0.85rem;
+        }
+
+        .progress-item.done { color: #10b981; }
+        .progress-item.pending { color: #64748b; }
+        .progress-item.blocked { color: #dc2626; }
+
+        .check-icon { font-size: 1rem; }
 
         /* Timeline */
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 7px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--border);
-        }
-        .timeline-item {
-            position: relative;
-            padding-bottom: 1.5rem;
-        }
-        .timeline-item:last-child {
-            padding-bottom: 0;
-        }
-        .timeline-dot {
-            position: absolute;
-            left: -2rem;
-            top: 0;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
+        .timeline-section {
             background: white;
-            border: 3px solid var(--border);
-        }
-        .timeline-item.completed .timeline-dot {
-            background: var(--success);
-            border-color: var(--success);
-        }
-        .timeline-item.current .timeline-dot {
-            background: var(--primary);
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(20, 40, 160, 0.2);
-        }
-        .timeline-date {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 0.25rem;
-        }
-        .timeline-title {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-        .timeline-desc {
-            font-size: 0.9rem;
-            color: var(--text-muted);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
         }
 
-        /* Notes */
-        .notes-area {
-            width: 100%;
-            min-height: 150px;
-            padding: 1rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 0.9rem;
-            resize: vertical;
-        }
-        .notes-area:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        /* Actions */
-        .action-buttons {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: 1rem;
-        }
-        .btn {
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s;
-        }
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-        .btn-primary:hover {
-            background: #0f1f7a;
-        }
-        .btn-secondary {
-            background: var(--bg-alt);
-            color: var(--text);
-            border: 1px solid var(--border);
-        }
-        .btn-secondary:hover {
-            background: #e5e7eb;
-        }
-
-        /* Quick Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
+        .timeline-section h2 {
+            color: #0d9488;
+            font-size: 1.1rem;
             margin-bottom: 1.5rem;
         }
-        .stat-card {
+
+        .timeline {
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+
+        .timeline-phase {
+            flex: 1;
+            min-width: 180px;
+            text-align: center;
+            position: relative;
+        }
+
+        .timeline-phase::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            right: -50%;
+            height: 4px;
+            background: #e2e8f0;
+        }
+
+        .timeline-phase:last-child::after { display: none; }
+
+        .timeline-phase.completed::after { background: #0d9488; }
+        .timeline-phase.current::after { background: linear-gradient(90deg, #0d9488 50%, #e2e8f0 50%); }
+
+        .timeline-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-phase.completed .timeline-dot { background: #0d9488; color: white; }
+        .timeline-phase.current .timeline-dot { background: #0d9488; color: white; box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.3); }
+
+        .timeline-label { font-weight: 600; color: #0f172a; font-size: 0.9rem; }
+        .timeline-date { font-size: 0.8rem; color: #64748b; margin-top: 0.25rem; }
+
+        /* Key Metrics */
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
             background: white;
-            padding: 1.25rem;
             border-radius: 12px;
+            padding: 1.25rem;
             text-align: center;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-        .stat-number {
-            font-size: 2rem;
+
+        .metric-value {
+            font-size: 1.75rem;
             font-weight: 700;
-            color: var(--primary);
+            color: #0d9488;
         }
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: #64748b;
             margin-top: 0.25rem;
         }
 
+        /* Quick Links */
+        .quick-links-section {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .quick-links-section h2 {
+            color: #0d9488;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #475569;
+            transition: all 0.2s;
+        }
+
+        .quick-link:hover {
+            background: #f0fdfa;
+            border-color: #0d9488;
+            color: #0f172a;
+        }
+
+        .quick-link .icon { font-size: 1.25rem; }
+
+        /* Notes Section */
+        .notes-section {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .notes-section h3 {
+            color: #b45309;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .notes-section ul {
+            margin-left: 1.5rem;
+            color: #92400e;
+        }
+
+        .notes-section li { margin-bottom: 0.5rem; }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .header-content {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
+            .page-header { flex-direction: column; gap: 1rem; text-align: center; }
+            .container { padding: 1rem; }
         }
     </style>
 </head>
 <body>
-    <nav class="doc-nav">
-        <h3>Manufacturing Documentation</h3>
-        <div class="doc-nav-grid">
-            <a href="index.html" class="doc-card">Website</a>
-            <a href="specification.html" class="doc-card">Specification</a>
-            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
-            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
-            <a href="control-logic.html" class="doc-card">Control Logic</a>
-            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
-            <a href="market-research.html" class="doc-card">Market Research</a>
-            <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
-            <a href="project-tracker.html" class="doc-card active">Project Tracker</a>
-            <a href="engineering-analysis.html" class="doc-card">Engineering Analysis</a>
-            <a href="testing-plan.html" class="doc-card">Testing Plan</a>
-            <a href="china-suppliers.html" class="doc-card">China Suppliers</a>
-            <a href="go-to-market.html" class="doc-card">Go-to-Market</a>
-            <a href="tv-compatibility.html" class="doc-card">TV Compatibility</a>
-            <a href="audio-noise-video.html" class="doc-card">Audio &amp; Video</a>
-            <a href="designs.html" class="doc-card">Designs</a>
-            <a href="contractors.html" class="doc-card">Contractors</a>
-            <a href="compliance-guide.html" class="doc-card">Compliance Guide</a>
-            <a href="global-pricing.html" class="doc-card">Global Pricing</a>
-            <a href="financial-forecast.html" class="doc-card">Financial Forecast</a>
-            <a href="competitor-analysis.html" class="doc-card">Competitors</a>
-            <a href="legal-risk.html" class="doc-card">Legal Risk</a>
-            <a href="retail/index.html" class="doc-card">Retail</a>
-            <a href="partner/index.html" class="doc-card">Partner</a>
-            <a href="commercial/index.html" class="doc-card">Commercial</a>
-            <a href="partner-crm.html" class="doc-card">Partner CRM</a>
-            <a href="quote-calculator.html" class="doc-card">Quote Calculator</a>
-        </div>
-    </nav>
-
-    <header>
-        <div class="header-content">
-            <div>
-                <h1>Apex TV Enclosures - Project Tracker</h1>
-                <p class="subtitle">75" Outdoor TV Enclosure for Gulf Region</p>
-            </div>
-            <div class="status-badge active">Phase: Manufacturer Selection</div>
-        </div>
-    </header>
-
     <div class="container">
-        <!-- Quick Stats -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number" style="color: #1e40af;">14</div>
-                <div class="stat-label">Manufacturers Contacted</div>
+        <div class="page-header">
+            <div>
+                <h1>Apex Enclosures Command Center</h1>
+                <p class="subtitle">75" Prototype Development - Project Dashboard</p>
             </div>
-            <div class="stat-card">
-                <div class="stat-number" style="color: #dc2626;">5</div>
-                <div class="stat-label">Bounced</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" style="color: #059669;">1</div>
-                <div class="stat-label">Responded</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">75"</div>
-                <div class="stat-label">Prototype Size</div>
+            <div class="current-phase">
+                <div class="phase-label">Current Phase</div>
+                <div class="phase-name">Manufacturing Quotes</div>
             </div>
         </div>
 
-        <!-- Manufacturer Outreach -->
-        <div class="card">
-            <h2>Manufacturer Outreach - Bounced Emails</h2>
-            <p style="margin-bottom: 1rem; padding: 0.75rem; background: #fef2f2; border-radius: 8px; color: #991b1b;">
-                <strong>5 of 6 emails bounced</strong> - Original contact emails were invalid. See verified contacts below.
-            </p>
-            <table class="manufacturer-table">
-                <thead>
-                    <tr>
-                        <th>Manufacturer</th>
-                        <th>Region</th>
-                        <th>Email</th>
-                        <th>Date Sent</th>
-                        <th>Status</th>
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr style="opacity: 0.6;">
-                        <td><s>Runze Hardware</s></td>
-                        <td><span class="region-tag">China</span></td>
-                        <td><s>sales@runzehardware.com</s></td>
-                        <td>24 Dec 2025</td>
-                        <td><span class="status-pill bounced">Bounced</span></td>
-                        <td>Invalid email</td>
-                    </tr>
-                    <tr style="opacity: 0.6;">
-                        <td><s>Fortuna Metal</s></td>
-                        <td><span class="region-tag">China</span></td>
-                        <td><s>info@fortunametal.com</s></td>
-                        <td>24 Dec 2025</td>
-                        <td><span class="status-pill bounced">Bounced</span></td>
-                        <td>Invalid email</td>
-                    </tr>
-                    <tr style="opacity: 0.6;">
-                        <td><s>Ningbo OEM</s></td>
-                        <td><span class="region-tag">China</span></td>
-                        <td><s>sales@ningbo-oem.com</s></td>
-                        <td>24 Dec 2025</td>
-                        <td><span class="status-pill bounced">Bounced</span></td>
-                        <td>Invalid email</td>
-                    </tr>
-                    <tr style="opacity: 0.6;">
-                        <td><s>Al Maha Metal</s></td>
-                        <td><span class="region-tag">UAE</span></td>
-                        <td><s>info@almahametalindustries.com</s></td>
-                        <td>24 Dec 2025</td>
-                        <td><span class="status-pill bounced">Bounced</span></td>
-                        <td>Invalid email</td>
-                    </tr>
-                    <tr style="opacity: 0.6;">
-                        <td><s>Precision Metal</s></td>
-                        <td><span class="region-tag">UAE</span></td>
-                        <td><s>sales@precisionmetal.ae</s></td>
-                        <td>24 Dec 2025</td>
-                        <td><span class="status-pill bounced">Bounced</span></td>
-                        <td>Invalid email</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Saudi Modern Factory</strong></td>
-                        <td><span class="region-tag">Saudi - Riyadh</span></td>
-                        <td>info@smf.com.sa</td>
-                        <td>24 Dec 2025</td>
-                        <td><span class="status-pill sent">Sent</span></td>
-                        <td>Possibly delivered</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Active Outreach - Pure OEM Fabricators -->
-        <div class="card">
-            <h2>Active Outreach - Pure OEM Fabricators</h2>
-            <p style="margin-bottom: 1rem; padding: 0.75rem; background: #dbeafe; border-radius: 8px; color: #1e40af;">
-                <strong>3 RFQs sent to UAE contract manufacturers</strong> - No competing products, pure fabrication only
-            </p>
-            <table class="manufacturer-table">
-                <thead>
-                    <tr>
-                        <th>Manufacturer</th>
-                        <th>Region</th>
-                        <th>Email / Phone</th>
-                        <th>Date Sent</th>
-                        <th>Status</th>
-                        <th>Specialty</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Eurotech FZCO</strong></td>
-                        <td><span class="region-tag">UAE - JAFZA Dubai</span></td>
-                        <td>general@eurotech-metal.com<br><small>+971 4 883 0333</small></td>
-                        <td>24 Dec 2025</td>
-                        <td><span class="status-pill sent">Sent</span></td>
-                        <td>Sheet metal, powder coating, panels</td>
-                    </tr>
-                    <tr>
-                        <td><strong>EmirFab</strong></td>
-                        <td><span class="region-tag">UAE - Dubai</span></td>
-                        <td>sales@emirfab.com<br><small>+971 52 905 5245</small></td>
-                        <td>24 Dec 2025</td>
-                        <td><span class="status-pill sent">Sent</span></td>
-                        <td>Custom metal fabrication, aluminum</td>
-                    </tr>
-                    <tr style="background: #f0fdf4;">
-                        <td><strong>Al Shurooq</strong></td>
-                        <td><span class="region-tag">UAE - Dubai</span></td>
-                        <td>info@alshurooq.ae<br><small>+971 4 42 55988</small></td>
-                        <td>24 Dec 2025</td>
-                        <td><span class="status-pill quoted">Quoting</span></td>
-                        <td><strong style="color: #059669;">Confirmed:</strong> Will prepare quote under individual name. Awaiting quotation.</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
-                <strong>Follow-up:</strong> If no response within 3-5 business days, send follow-up email.
-            </p>
-        </div>
-
-        <!-- Manufacturer Responses -->
-        <div class="card" style="border-left: 4px solid #059669;">
-            <h2 style="color: #059669;">Manufacturer Responses</h2>
-
-            <div style="background: #f0fdf4; padding: 1.25rem; border-radius: 8px; margin-bottom: 1rem;">
-                <div style="display: flex; justify-content: space-between; align-items: start;">
-                    <div>
-                        <h3 style="margin: 0 0 0.5rem; font-size: 1.1rem;">Al Shurooq</h3>
-                        <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">UAE - Dubai | Updated 26 Dec 2025 2:44pm</p>
+        <!-- Priority Actions -->
+        <div class="priority-section">
+            <h2>🎯 Priority Actions - Do These Next</h2>
+            <div class="priority-list">
+                <div class="priority-item waiting">
+                    <div class="priority-number">1</div>
+                    <div class="priority-content">
+                        <div class="priority-title">Await KDM Steel Response</div>
+                        <div class="priority-detail">RFQ sent 28 Dec via email + WhatsApp. Expected response 24-48 hours. Follow up 30 Dec if no reply.</div>
                     </div>
-                    <span class="status-pill" style="background: #fef3c7; color: #92400e;">Quoting</span>
+                    <a href="china-suppliers.html" class="priority-link">Suppliers</a>
                 </div>
-
-                <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 6px; border-left: 3px solid #059669;">
-                    <p style="margin: 0 0 0.75rem; font-style: italic; color: var(--text);">
-                        "Registering the quotation under your individual name works for us. We'll do the needful."
-                    </p>
-                    <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted);">
-                        — Danica Sison, Customer Service (26 Dec 2:44pm)
-                    </p>
-                </div>
-
-                <div style="margin-top: 1rem; padding: 0.75rem; background: #dcfce7; border-radius: 6px;">
-                    <strong style="color: #166534;">Status: Confirmed</strong> - They will prepare quote under individual name. Awaiting quotation.
-                </div>
-
-                <div style="margin-top: 1rem;">
-                    <strong>Analysis:</strong>
-                    <ul style="margin: 0.5rem 0 0 1.25rem; font-size: 0.9rem;">
-                        <li><strong style="color: #059669;">Can do:</strong> Fabricate aluminum enclosure to drawings</li>
-                        <li><strong style="color: #dc2626;">Cannot do:</strong> IP66 weatherproofing certification</li>
-                        <li><strong style="color: #d97706;">Asking:</strong> If IP66 requirement can be excluded</li>
-                    </ul>
-                </div>
-
-                <div style="margin-top: 1rem; padding: 0.75rem; background: #fffbeb; border-radius: 6px;">
-                    <strong style="color: #92400e;">Options:</strong>
-                    <ol style="margin: 0.5rem 0 0 1.25rem; font-size: 0.9rem; color: #78350f;">
-                        <li>Use them for fabrication only, source IP66 sealing separately (gaskets, glands, vents)</li>
-                        <li>Ask them to partner with a sealing specialist</li>
-                        <li>Wait for responses from other manufacturers with IP66 capability</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-
-        <!-- Email Status Summary -->
-        <div class="card" style="background: #fffbeb; border-left: 4px solid #f59e0b;">
-            <h2 style="color: #92400e;">Email Status Summary - 24 Dec 2025</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                <div>
-                    <strong>Batch 1 (23 Dec ~11pm):</strong>
-                    <ul style="margin: 0.5rem 0 0 1.25rem; font-size: 0.9rem;">
-                        <li>9 emails sent</li>
-                        <li>5 bounced (China/UAE invalid emails)</li>
-                        <li>4 delivered: SMF, Eurotech, EmirFab, Al Shurooq</li>
-                    </ul>
-                </div>
-                <div>
-                    <strong>Batch 2 (24 Dec 8am):</strong>
-                    <ul style="margin: 0.5rem 0 0 1.25rem; font-size: 0.9rem;">
-                        <li>5 new manufacturers contacted</li>
-                        <li>4 got duplicate emails (marked x2)</li>
-                        <li>Al Amazon sent once only</li>
-                    </ul>
-                </div>
-            </div>
-            <p style="margin-top: 1rem; font-size: 0.85rem; color: #78350f;">
-                <strong>Total:</strong> 14 manufacturers contacted, 9 with valid emails delivered, 5 bounced. 4 manufacturers received duplicate RFQs.
-            </p>
-        </div>
-
-        <!-- Additional Manufacturer Options -->
-        <div class="card">
-            <h2>Additional Manufacturer Options - UAE</h2>
-            <p style="margin-bottom: 1rem; padding: 0.75rem; background: #f0fdf4; border-radius: 8px; color: #166534;">
-                <strong>6 additional UAE manufacturers identified</strong> - All have relevant capabilities for TV enclosure production
-            </p>
-            <table class="manufacturer-table">
-                <thead>
-                    <tr>
-                        <th>Manufacturer</th>
-                        <th>Region</th>
-                        <th>Contact</th>
-                        <th>Status</th>
-                        <th>Why They Can Build It</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <strong>Al Amazon Industries</strong><br>
-                            <a href="https://www.alamazonuae.com/" target="_blank" style="font-size: 0.8rem;">alamazonuae.com</a>
-                        </td>
-                        <td><span class="region-tag">UAE - Sharjah</span></td>
-                        <td>alamazonuae@gmail.com<br><small>+971 6 535 5667</small></td>
-                        <td><span class="status-pill sent">Sent 24 Dec</span></td>
-                        <td style="font-size: 0.85rem;">
-                            <strong style="color: #166534;">HIGH FIT</strong><br>
-                            Already makes aluminum enclosures & electrical cabinets. Has own powder coating plant. Custom specs to DEWA/ADDC standards. Ideal for weatherproof enclosures.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>Scientechnic</strong><br>
-                            <a href="https://www.scientechnic.com/" target="_blank" style="font-size: 0.8rem;">scientechnic.com</a>
-                        </td>
-                        <td><span class="region-tag">UAE - JAFZA Dubai</span></td>
-                        <td>Via website<br><small>+971 4 203 5777</small></td>
-                        <td><span class="status-pill pending">To Contact</span></td>
-                        <td style="font-size: 0.85rem;">
-                            <strong style="color: #166534;">HIGH FIT</strong><br>
-                            "One-stop enclosure provider" - custom metal enclosures in any quantity. ISO 9001/14001 certified. Licensed Siemens panel maker = high quality standards.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>Rainbow Aluminium</strong><br>
-                            <a href="https://rainbowaluminium.com/" target="_blank" style="font-size: 0.8rem;">rainbowaluminium.com</a>
-                        </td>
-                        <td><span class="region-tag">UAE - Ajman</span></td>
-                        <td>info@rainbowaluminium.com<br><small>+971 6 743 6914</small></td>
-                        <td><span class="status-pill sent">Sent 24 Dec</span><br><small style="color: #d97706;">x2 (dup)</small></td>
-                        <td style="font-size: 0.85rem;">
-                            <strong style="color: #059669;">GOOD FIT</strong><br>
-                            Aluminum fabrication + own powder coating (200+ colors). 30+ years experience. Makes enclosures, doors, structural glazing. Could handle frame + finish in-house.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>Al Bahar MCEM</strong><br>
-                            <a href="https://albahar-mfg.com/" target="_blank" style="font-size: 0.8rem;">albahar-mfg.com</a>
-                        </td>
-                        <td><span class="region-tag">UAE - Dubai</span></td>
-                        <td>Via website<br><small>+971 4 459 7281</small></td>
-                        <td><span class="status-pill pending">To Contact</span></td>
-                        <td style="font-size: 0.85rem;">
-                            <strong style="color: #059669;">GOOD FIT</strong><br>
-                            Specializes in "purpose-built equipment modules" and enclosures. Makes acoustic containers for harsh environments. Understands weatherproofing for outdoor use.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>PTI Fabrication</strong><br>
-                            <a href="https://ptifabrication.com/" target="_blank" style="font-size: 0.8rem;">ptifabrication.com</a>
-                        </td>
-                        <td><span class="region-tag">UAE - Sharjah</span></td>
-                        <td>Via website<br><small>+971 55 801 0430</small></td>
-                        <td><span class="status-pill pending">To Contact</span></td>
-                        <td style="font-size: 0.85rem;">
-                            <strong style="color: #d97706;">POSSIBLE FIT</strong><br>
-                            Industrial steel/metal fabrication. Precision engineering focus. May need to outsource powder coating. Good for structural frame work.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>Abbas Metal</strong><br>
-                            <a href="https://abbasmetal.com/" target="_blank" style="font-size: 0.8rem;">abbasmetal.com</a>
-                        </td>
-                        <td><span class="region-tag">UAE - Dubai</span></td>
-                        <td>Via website contact form</td>
-                        <td><span class="status-pill pending">To Contact</span></td>
-                        <td style="font-size: 0.85rem;">
-                            <strong style="color: #059669;">GOOD FIT</strong><br>
-                            CNC cutting, laser welding, powder coating, anodizing. Makes electrical enclosures and utility boxes. Full in-house capability for aluminum work.
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Saudi Arabia Options -->
-        <div class="card">
-            <h2>Additional Manufacturer Options - Saudi Arabia</h2>
-            <p style="margin-bottom: 1rem; padding: 0.75rem; background: #fef3c7; border-radius: 8px; color: #92400e;">
-                <strong>3 Saudi manufacturers identified</strong> - Good for Saudi customer base / "Made in KSA" requirements
-            </p>
-            <table class="manufacturer-table">
-                <thead>
-                    <tr>
-                        <th>Manufacturer</th>
-                        <th>Region</th>
-                        <th>Contact</th>
-                        <th>Status</th>
-                        <th>Why They Can Build It</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <strong>Flezco</strong><br>
-                            <a href="https://www.flezco.com/" target="_blank" style="font-size: 0.8rem;">flezco.com</a>
-                        </td>
-                        <td><span class="region-tag">Saudi - Jeddah + nationwide</span></td>
-                        <td>hello@flezco.com<br><small>+966 50 830 4644</small></td>
-                        <td><span class="status-pill sent">Sent 24 Dec</span><br><small style="color: #d97706;">x2 (dup)</small></td>
-                        <td style="font-size: 0.85rem;">
-                            <strong style="color: #166534;">HIGH FIT</strong><br>
-                            Sheet metal for "enclosures, machinery panels" explicitly listed. Serves Riyadh, Dammam, all KSA. Modern company, good for Saudi market expansion.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>Lucky Fabricators</strong><br>
-                            <a href="https://luckyfabricators.sa/" target="_blank" style="font-size: 0.8rem;">luckyfabricators.sa</a>
-                        </td>
-                        <td><span class="region-tag">Saudi - Riyadh</span></td>
-                        <td>hamza@luckyfabricators.sa<br><small>+966 54 218 4642</small></td>
-                        <td><span class="status-pill sent">Sent 24 Dec</span><br><small style="color: #d97706;">x2 (dup)</small></td>
-                        <td style="font-size: 0.85rem;">
-                            <strong style="color: #166534;">HIGH FIT</strong><br>
-                            Precision aluminum work, laser/water jet cutting, anodizing. Works with aerospace & electronics industries = high quality tolerance. Custom components specialty.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>Prisma Metal Industry</strong><br>
-                            <a href="https://prisma-ksa.com/" target="_blank" style="font-size: 0.8rem;">prisma-ksa.com</a>
-                        </td>
-                        <td><span class="region-tag">Saudi - Dammam</span></td>
-                        <td>prisma@prismaksa.com<br><small>+966 13 890 1419</small></td>
-                        <td><span class="status-pill sent">Sent 24 Dec</span><br><small style="color: #d97706;">x2 (dup)</small></td>
-                        <td style="font-size: 0.85rem;">
-                            <strong style="color: #059669;">GOOD FIT</strong><br>
-                            35 years experience, 38,000m² factory. Steel + aluminum structures. 150+ projects across Middle East. May be oversized for initial volumes but good for scale.
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Capability Assessment -->
-        <div class="card">
-            <h2>Capability Assessment Summary</h2>
-            <p style="margin-bottom: 1rem;">Why these manufacturers can build the ATE-75 outdoor TV enclosure:</p>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
-                <div style="padding: 1rem; background: #f0fdf4; border-radius: 8px; border-left: 4px solid #16a34a;">
-                    <strong style="color: #166534;">Required Capabilities</strong>
-                    <ul style="margin: 0.5rem 0 0 1.25rem; font-size: 0.9rem;">
-                        <li>Aluminum sheet metal work (2mm 5052-H32)</li>
-                        <li>CNC cutting/bending for precision</li>
-                        <li>Welding (TIG for aluminum)</li>
-                        <li>Powder coating (outdoor grade)</li>
-                        <li>Custom enclosure experience</li>
-                    </ul>
-                </div>
-                <div style="padding: 1rem; background: #dbeafe; border-radius: 8px; border-left: 4px solid #2563eb;">
-                    <strong style="color: #1e40af;">Best Matches (In-House Powder Coating)</strong>
-                    <ul style="margin: 0.5rem 0 0 1.25rem; font-size: 0.9rem;">
-                        <li><strong>Al Amazon</strong> - Own powder coating plant</li>
-                        <li><strong>Rainbow Aluminium</strong> - 200+ color options</li>
-                        <li><strong>Abbas Metal</strong> - CNC + powder coating</li>
-                        <li><strong>Lucky Fabricators</strong> - Anodizing + coating</li>
-                    </ul>
-                </div>
-                <div style="padding: 1rem; background: #fef3c7; border-radius: 8px; border-left: 4px solid #d97706;">
-                    <strong style="color: #92400e;">Enclosure Specialists</strong>
-                    <ul style="margin: 0.5rem 0 0 1.25rem; font-size: 0.9rem;">
-                        <li><strong>Al Amazon</strong> - Electrical enclosures</li>
-                        <li><strong>Scientechnic</strong> - "One-stop enclosures"</li>
-                        <li><strong>Al Bahar</strong> - Equipment modules</li>
-                        <li><strong>Flezco</strong> - Enclosures & panels</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div style="margin-top: 1.5rem; padding: 1rem; background: #f8fafc; border-radius: 8px;">
-                <strong>Recommendation Priority:</strong>
-                <ol style="margin: 0.5rem 0 0 1.25rem;">
-                    <li><strong>Al Amazon Industries</strong> (UAE) - Best overall fit: enclosures + powder coating + custom specs</li>
-                    <li><strong>Scientechnic</strong> (UAE) - ISO certified, flexible quantities, JAFZA location</li>
-                    <li><strong>Lucky Fabricators</strong> (Saudi) - High precision, good for Saudi expansion</li>
-                    <li><strong>Flezco</strong> (Saudi) - Modern, nationwide KSA coverage</li>
-                </ol>
-            </div>
-        </div>
-
-        <!-- Excluded - Competitors -->
-        <div class="card" style="opacity: 0.7;">
-            <h2>Excluded - Have Competing Products</h2>
-            <table class="manufacturer-table">
-                <thead>
-                    <tr>
-                        <th>Manufacturer</th>
-                        <th>Region</th>
-                        <th>Reason Excluded</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><s>SKYT (Hebei Shouke Yuantuo)</s></td>
-                        <td><span class="region-tag">China</span></td>
-                        <td>Makes outdoor enclosures - potential competitor</td>
-                    </tr>
-                    <tr>
-                        <td><s>DeerTV / Kinytech</s></td>
-                        <td><span class="region-tag">China</span></td>
-                        <td>Sells own outdoor TV enclosures since 2010</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Logistics & Drop-Ship Strategy -->
-        <div class="card">
-            <h2>Logistics & Drop-Ship Strategy</h2>
-            <p style="margin-bottom: 1rem; padding: 0.75rem; background: #f0fdf4; border-radius: 8px; color: #166534;">
-                <strong>Drop-Ship Model:</strong> Ship directly from manufacturer to customer. No inventory holding costs.
-            </p>
-
-            <h3 style="margin: 1.5rem 0 1rem; font-size: 1rem;">Manufacturing Lead Times (ATE-75)</h3>
-            <table class="manufacturer-table">
-                <thead>
-                    <tr>
-                        <th>Phase</th>
-                        <th>China</th>
-                        <th>UAE</th>
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>RFQ & Negotiation</td>
-                        <td>1-2 weeks</td>
-                        <td>1-2 weeks</td>
-                        <td>Currently in progress</td>
-                    </tr>
-                    <tr>
-                        <td>Prototype Sample</td>
-                        <td>3-4 weeks</td>
-                        <td>2-3 weeks</td>
-                        <td>First unit for approval</td>
-                    </tr>
-                    <tr>
-                        <td>Tooling Setup</td>
-                        <td>2-3 weeks</td>
-                        <td>1-2 weeks</td>
-                        <td>Jigs, fixtures, CNC programs</td>
-                    </tr>
-                    <tr>
-                        <td>Production Run</td>
-                        <td>2-4 weeks</td>
-                        <td>2-3 weeks</td>
-                        <td>Depends on quantity</td>
-                    </tr>
-                    <tr>
-                        <td>QC & Packing</td>
-                        <td>3-5 days</td>
-                        <td>2-3 days</td>
-                        <td>IP66 testing included</td>
-                    </tr>
-                    <tr style="background: #f0f9ff;">
-                        <td><strong>Total to Ready-to-Ship</strong></td>
-                        <td><strong>8-12 weeks</strong></td>
-                        <td><strong>5-8 weeks</strong></td>
-                        <td>First order</td>
-                    </tr>
-                    <tr style="background: #f0fdf4;">
-                        <td><strong>Reorder Lead Time</strong></td>
-                        <td><strong>3-5 weeks</strong></td>
-                        <td><strong>2-3 weeks</strong></td>
-                        <td>After tooling complete</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3 style="margin: 1.5rem 0 1rem; font-size: 1rem;">Shipping Times (Drop-Ship to Customer)</h3>
-            <table class="manufacturer-table">
-                <thead>
-                    <tr>
-                        <th>Route</th>
-                        <th>Method</th>
-                        <th>Transit Time</th>
-                        <th>Est. Cost (75" unit)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td rowspan="3"><strong>China → UAE</strong></td>
-                        <td>Sea Freight (FCL)</td>
-                        <td>20-28 days</td>
-                        <td>$50-80/unit</td>
-                    </tr>
-                    <tr>
-                        <td>Sea Freight (LCL)</td>
-                        <td>25-35 days</td>
-                        <td>$100-150/unit</td>
-                    </tr>
-                    <tr>
-                        <td>Air Freight</td>
-                        <td>5-7 days</td>
-                        <td>$400-600/unit</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="2"><strong>China → Saudi</strong></td>
-                        <td>Sea Freight</td>
-                        <td>28-35 days</td>
-                        <td>$60-100/unit</td>
-                    </tr>
-                    <tr>
-                        <td>Air Freight</td>
-                        <td>5-7 days</td>
-                        <td>$450-650/unit</td>
-                    </tr>
-                    <tr style="background: #f0fdf4;">
-                        <td><strong>UAE → UAE Customer</strong></td>
-                        <td>Local courier</td>
-                        <td>1-2 days</td>
-                        <td>$30-50</td>
-                    </tr>
-                    <tr style="background: #f0fdf4;">
-                        <td><strong>UAE → Saudi</strong></td>
-                        <td>Road freight</td>
-                        <td>3-5 days</td>
-                        <td>$80-120</td>
-                    </tr>
-                    <tr style="background: #f0fdf4;">
-                        <td><strong>UAE → Qatar/Bahrain</strong></td>
-                        <td>Road freight</td>
-                        <td>2-4 days</td>
-                        <td>$60-100</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3 style="margin: 1.5rem 0 1rem; font-size: 1rem;">Total Order-to-Delivery Time (Drop-Ship)</h3>
-            <table class="manufacturer-table">
-                <thead>
-                    <tr>
-                        <th>Scenario</th>
-                        <th>From China</th>
-                        <th>From UAE</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>First Order (new customer)</strong></td>
-                        <td style="color: var(--warning);"><strong>11-16 weeks</strong><br><small>Production + Sea freight</small></td>
-                        <td style="color: var(--success);"><strong>5-9 weeks</strong><br><small>Production + Local delivery</small></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Reorder (tooling done)</strong></td>
-                        <td style="color: var(--info);"><strong>7-9 weeks</strong><br><small>Production + Sea freight</small></td>
-                        <td style="color: var(--success);"><strong>2-4 weeks</strong><br><small>Production + Local delivery</small></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Rush Order (air freight)</strong></td>
-                        <td style="color: var(--warning);"><strong>4-6 weeks</strong><br><small>Production + Air freight</small></td>
-                        <td style="color: var(--success);"><strong>2-4 weeks</strong><br><small>Production + Local delivery</small></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div style="margin-top: 1.5rem; padding: 1rem; background: #fffbeb; border-radius: 8px; border-left: 4px solid var(--warning);">
-                <strong style="color: #92400e;">Drop-Ship Recommendation:</strong>
-                <ul style="margin: 0.5rem 0 0 1.25rem; color: #78350f;">
-                    <li><strong>Prototype:</strong> UAE manufacturer (faster iteration, 5-8 weeks)</li>
-                    <li><strong>Production:</strong> China for cost, UAE for speed</li>
-                    <li><strong>Customer Promise:</strong> "4-6 weeks delivery" (covers UAE production + buffer)</li>
-                    <li><strong>Minimum Order:</strong> Consider requiring 30% deposit to cover manufacturing</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Cost Comparison -->
-        <div class="card">
-            <h2>Cost Comparison: China vs UAE Manufacturing</h2>
-            <table class="manufacturer-table">
-                <thead>
-                    <tr>
-                        <th>Cost Element</th>
-                        <th>China (Est.)</th>
-                        <th>UAE (Est.)</th>
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Unit Manufacturing Cost</td>
-                        <td style="color: var(--success);">$380-450</td>
-                        <td style="color: var(--warning);">$550-700</td>
-                        <td>FOB/Ex-works</td>
-                    </tr>
-                    <tr>
-                        <td>Shipping (sea to UAE)</td>
-                        <td>$50-80</td>
-                        <td>N/A</td>
-                        <td>Per unit FCL</td>
-                    </tr>
-                    <tr>
-                        <td>Import Duty (UAE)</td>
-                        <td>5%</td>
-                        <td>0%</td>
-                        <td>GCC common tariff</td>
-                    </tr>
-                    <tr>
-                        <td>Local Delivery</td>
-                        <td>$30-50</td>
-                        <td>$30-50</td>
-                        <td>Within UAE</td>
-                    </tr>
-                    <tr style="background: #f0f9ff; font-weight: 600;">
-                        <td><strong>Total Landed Cost</strong></td>
-                        <td style="color: var(--success);"><strong>$480-620</strong></td>
-                        <td style="color: var(--warning);"><strong>$580-750</strong></td>
-                        <td>Delivered to UAE customer</td>
-                    </tr>
-                    <tr>
-                        <td>Lead Time</td>
-                        <td style="color: var(--warning);">7-9 weeks (reorder)</td>
-                        <td style="color: var(--success);">2-4 weeks (reorder)</td>
-                        <td>After tooling</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div style="margin-top: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                <div style="padding: 1rem; background: #dbeafe; border-radius: 8px;">
-                    <strong style="color: #1e40af;">China Advantages:</strong>
-                    <ul style="margin: 0.5rem 0 0 1.25rem; font-size: 0.9rem; color: #1e3a8a;">
-                        <li>20-30% lower unit cost</li>
-                        <li>More specialized suppliers</li>
-                        <li>Higher volume capacity</li>
-                        <li>Established export processes</li>
-                    </ul>
-                </div>
-                <div style="padding: 1rem; background: #dcfce7; border-radius: 8px;">
-                    <strong style="color: #166534;">UAE Advantages:</strong>
-                    <ul style="margin: 0.5rem 0 0 1.25rem; font-size: 0.9rem; color: #14532d;">
-                        <li>2-3× faster delivery</li>
-                        <li>Easier QC visits</li>
-                        <li>No import duty in GCC</li>
-                        <li>"Made in UAE" for tenders</li>
-                        <li>Faster design iterations</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Project Timeline -->
-        <div class="card">
-            <h2>Project Timeline</h2>
-            <div class="timeline">
-                <div class="timeline-item completed">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">23 Dec 2025</div>
-                    <div class="timeline-title">Project Setup</div>
-                    <div class="timeline-desc">Created GitHub repo, initial website, design specification</div>
-                </div>
-                <div class="timeline-item completed">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">23 Dec 2025</div>
-                    <div class="timeline-title">Complete Documentation</div>
-                    <div class="timeline-desc">BOM, wiring diagram, control logic, QC checklist, market research</div>
-                </div>
-                <div class="timeline-item completed">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">24 Dec 2025</div>
-                    <div class="timeline-title">IP66 Upgrade + Technical Drawings</div>
-                    <div class="timeline-desc">Upgraded from IP54 to IP66, added SVG technical drawings</div>
-                </div>
-                <div class="timeline-item completed">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">24 Dec 2025</div>
-                    <div class="timeline-title">RFQ Package Created</div>
-                    <div class="timeline-desc">5-page PDF for 75" prototype, manufacturer contact list</div>
-                </div>
-                <div class="timeline-item completed">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">24 Dec 2025</div>
-                    <div class="timeline-title">RFQs Sent to Manufacturers</div>
-                    <div class="timeline-desc">14 manufacturers contacted (5 bounced, 9 delivered). UAE: Eurotech, EmirFab, Al Shurooq, Al Amazon, Rainbow. Saudi: SMF, Flezco, Lucky, Prisma.</div>
-                </div>
-                <div class="timeline-item completed">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">26 Dec 2025</div>
-                    <div class="timeline-title">Al Shurooq Confirmed</div>
-                    <div class="timeline-desc">Al Shurooq agreed to proceed with individual buyer arrangement. Preparing quotation now.</div>
-                </div>
-                <div class="timeline-item current">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">In Progress</div>
-                    <div class="timeline-title">Awaiting Quotation</div>
-                    <div class="timeline-desc">Al Shurooq preparing quote for 75" prototype. Other manufacturers pending response.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">In Progress</div>
-                    <div class="timeline-title">Receive & Evaluate Quotes</div>
-                    <div class="timeline-desc">Compare pricing, lead times, capabilities. 1 of 9 responded so far.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Pending</div>
-                    <div class="timeline-title">Select Manufacturer & Sign NDA</div>
-                    <div class="timeline-desc">Choose partner, sign confidentiality agreement</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Pending</div>
-                    <div class="timeline-title">Order Prototypes</div>
-                    <div class="timeline-desc">Order 2-3 prototype units for evaluation</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Pending</div>
-                    <div class="timeline-title">Prototype Testing & Approval</div>
-                    <div class="timeline-desc">Test IP66 rating, thermal performance, quality</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">Pending</div>
-                    <div class="timeline-title">Production Order</div>
-                    <div class="timeline-desc">Place first production order</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Project Files -->
-        <div class="card">
-            <h2>Project Files</h2>
-            <div class="file-grid">
-                <a href="specification.html" class="file-link">
-                    <div class="file-icon">S</div>
-                    <div class="file-info">
-                        <h4>Manufacturing Specification</h4>
-                        <span>Full technical spec with drawings</span>
+                <div class="priority-item">
+                    <div class="priority-number">2</div>
+                    <div class="priority-content">
+                        <div class="priority-title">Send RFQ to Hofengfab (Backup Quote)</div>
+                        <div class="priority-detail">Get comparison quote from second China fabricator. Use same RFQ package as KDM.</div>
                     </div>
-                </a>
-                <a href="bom-detailed.html" class="file-link">
-                    <div class="file-icon">B</div>
-                    <div class="file-info">
-                        <h4>Bill of Materials</h4>
-                        <span>$461.98 BOM total</span>
+                    <a href="manufacturer-rfq.html" class="priority-link">RFQ Package</a>
+                </div>
+                <div class="priority-item">
+                    <div class="priority-number">3</div>
+                    <div class="priority-content">
+                        <div class="priority-title">Follow Up with Al Shurooq (UAE)</div>
+                        <div class="priority-detail">They responded 26 Dec requesting Trade License. Replied same day. Check for response.</div>
                     </div>
-                </a>
-                <a href="manufacturer-rfq.html" class="file-link">
-                    <div class="file-icon">R</div>
-                    <div class="file-info">
-                        <h4>RFQ Document</h4>
-                        <span>5-page PDF for manufacturers</span>
+                    <a href="contractors.html" class="priority-link">Contractors</a>
+                </div>
+                <div class="priority-item">
+                    <div class="priority-number">4</div>
+                    <div class="priority-content">
+                        <div class="priority-title">Prepare NDA Template for Manufacturer</div>
+                        <div class="priority-detail">Have NDA ready before sharing proprietary CAD details with selected manufacturer.</div>
                     </div>
-                </a>
-                <a href="market-research.html" class="file-link">
-                    <div class="file-icon">M</div>
-                    <div class="file-info">
-                        <h4>Market Research</h4>
-                        <span>Competitors & manufacturers</span>
+                    <a href="legal/nda-template.html" class="priority-link">NDA</a>
+                </div>
+                <div class="priority-item">
+                    <div class="priority-number">5</div>
+                    <div class="priority-content">
+                        <div class="priority-title">Finalize Partner Outreach List</div>
+                        <div class="priority-detail">Review target partners list. Prepare intro emails for top 10 UAE AV integrators.</div>
                     </div>
-                </a>
-                <a href="wiring-diagram.html" class="file-link">
-                    <div class="file-icon">W</div>
-                    <div class="file-info">
-                        <h4>Wiring Diagram</h4>
-                        <span>Electrical connections</span>
-                    </div>
-                </a>
-                <a href="control-logic.html" class="file-link">
-                    <div class="file-icon">C</div>
-                    <div class="file-info">
-                        <h4>Control Logic</h4>
-                        <span>PWM fan control firmware</span>
-                    </div>
-                </a>
-                <a href="qc-checklist.html" class="file-link">
-                    <div class="file-icon">Q</div>
-                    <div class="file-info">
-                        <h4>QC Checklist</h4>
-                        <span>IP66 test requirements</span>
-                    </div>
-                </a>
-                <a href="index.html" class="file-link">
-                    <div class="file-icon">W</div>
-                    <div class="file-info">
-                        <h4>Website</h4>
-                        <span>Product landing page</span>
-                    </div>
-                </a>
+                    <a href="target-partners.html" class="priority-link">Partners</a>
+                </div>
             </div>
         </div>
 
         <!-- Notes -->
-        <div class="card">
-            <h2>Notes & Next Actions</h2>
-            <textarea class="notes-area" placeholder="Add notes here...">
-Next Actions:
-- Wait for manufacturer responses (expect 3-5 business days)
-- Follow up with non-responders after 1 week
-- Compare quotes on: unit price, lead time, MOQ, shipping
-- Verify each manufacturer can meet IP66 spec
-- Request NDA before sharing full CAD files
-
-Al Shurooq Quote Follow-Up Questions:
-1. How will you achieve the 90% IR rejection spec on the glass?
-2. Will you source 3M Prestige 90 or use a local equivalent (LLumar, SunTek)?
-3. Can you provide the film/coating datasheet showing IR rejection %?
-4. Is the film applied to glass surface or laminated between layers?
-5. What is your source for the 4mm low-iron tempered glass?
-
-Key Decision Criteria:
-1. IP66 capability (must have)
-2. 90% IR rejection (CRITICAL for thermal - saves 627W heat load)
-3. Prototype lead time
-4. Unit price for prototype
-5. Production pricing at 50/100/500 units
-6. Communication quality
-            </textarea>
+        <div class="notes-section">
+            <h3>⚠️ Important Reminders</h3>
+            <ul>
+                <li><strong>Before sending any RFQ:</strong> Remove competitor names, pricing, margins. Check EMAIL_PROCEDURES.md</li>
+                <li><strong>CAD ownership:</strong> Ensure any production order includes clause for receiving all CAD/CAM files</li>
+                <li><strong>Al Shurooq:</strong> They want Trade License - we're proceeding as individual for prototype phase</li>
+                <li><strong>Target FOB:</strong> $520-580 (BOM is $461.98 after IP66 upgrade)</li>
+            </ul>
         </div>
 
-        <!-- Contact Info -->
-        <div class="card" style="background: var(--primary); color: white;">
-            <h2 style="color: white;">Project Contact</h2>
-            <p><strong>Richard</strong></p>
-            <p>Apex TV Enclosures</p>
-            <p>Dubai, UAE</p>
-            <p style="margin-top: 0.5rem;">
-                Email: apexenclosures@icloud.com<br>
-                WhatsApp: +971 50 559 8675
-            </p>
+        <!-- Key Metrics -->
+        <div class="metrics-row">
+            <div class="metric-card">
+                <div class="metric-value">75"</div>
+                <div class="metric-label">Prototype Size</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">IP66</div>
+                <div class="metric-label">Weather Rating</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">$462</div>
+                <div class="metric-label">BOM Cost</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">$520-580</div>
+                <div class="metric-label">FOB Target</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">14</div>
+                <div class="metric-label">Manufacturers Contacted</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">1</div>
+                <div class="metric-label">Active Quotes</div>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline-section">
+            <h2>Project Roadmap</h2>
+            <div class="timeline">
+                <div class="timeline-phase completed">
+                    <div class="timeline-dot">✓</div>
+                    <div class="timeline-label">Research</div>
+                    <div class="timeline-date">Dec 21-23</div>
+                </div>
+                <div class="timeline-phase completed">
+                    <div class="timeline-dot">✓</div>
+                    <div class="timeline-label">Engineering</div>
+                    <div class="timeline-date">Dec 23-24</div>
+                </div>
+                <div class="timeline-phase completed">
+                    <div class="timeline-dot">✓</div>
+                    <div class="timeline-label">Documentation</div>
+                    <div class="timeline-date">Dec 24-26</div>
+                </div>
+                <div class="timeline-phase current">
+                    <div class="timeline-dot">4</div>
+                    <div class="timeline-label">Manufacturer Quotes</div>
+                    <div class="timeline-date">Dec 26 - Now</div>
+                </div>
+                <div class="timeline-phase">
+                    <div class="timeline-dot">5</div>
+                    <div class="timeline-label">Select & Order</div>
+                    <div class="timeline-date">Jan</div>
+                </div>
+                <div class="timeline-phase">
+                    <div class="timeline-dot">6</div>
+                    <div class="timeline-label">Prototype Build</div>
+                    <div class="timeline-date">Jan-Feb</div>
+                </div>
+                <div class="timeline-phase">
+                    <div class="timeline-dot">7</div>
+                    <div class="timeline-label">Testing</div>
+                    <div class="timeline-date">Feb</div>
+                </div>
+                <div class="timeline-phase">
+                    <div class="timeline-dot">8</div>
+                    <div class="timeline-label">Launch</div>
+                    <div class="timeline-date">Mar</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress by Area -->
+        <div class="progress-grid">
+            <div class="progress-card">
+                <h3>⚙️ Engineering</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill engineering" style="width: 95%"></div>
+                </div>
+                <div class="progress-stats">
+                    <span class="progress-percent">95%</span>
+                    <span class="progress-detail">Nearly Complete</span>
+                </div>
+                <div class="progress-items">
+                    <div class="progress-item done"><span class="check-icon">✓</span> Full specification</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> Technical drawings</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> Bill of materials</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> IP66 upgrade</div>
+                    <div class="progress-item pending"><span class="check-icon">○</span> Final CAD files (from manufacturer)</div>
+                </div>
+            </div>
+
+            <div class="progress-card">
+                <h3>🏭 Manufacturing</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill manufacturing" style="width: 40%"></div>
+                </div>
+                <div class="progress-stats">
+                    <span class="progress-percent">40%</span>
+                    <span class="progress-detail">In Progress</span>
+                </div>
+                <div class="progress-items">
+                    <div class="progress-item done"><span class="check-icon">✓</span> RFQ package ready</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> China suppliers identified</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> KDM Steel RFQ sent</div>
+                    <div class="progress-item pending"><span class="check-icon">○</span> Receive quotes</div>
+                    <div class="progress-item pending"><span class="check-icon">○</span> Select manufacturer</div>
+                    <div class="progress-item pending"><span class="check-icon">○</span> Sign NDA & order</div>
+                </div>
+            </div>
+
+            <div class="progress-card">
+                <h3>🤝 Sales & Partners</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill sales" style="width: 60%"></div>
+                </div>
+                <div class="progress-stats">
+                    <span class="progress-percent">60%</span>
+                    <span class="progress-detail">Foundation Set</span>
+                </div>
+                <div class="progress-items">
+                    <div class="progress-item done"><span class="check-icon">✓</span> Partner program defined</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> Target partners identified</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> UAE contractors researched</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> Quote calculator built</div>
+                    <div class="progress-item pending"><span class="check-icon">○</span> Partner outreach</div>
+                    <div class="progress-item pending"><span class="check-icon">○</span> First partner signed</div>
+                </div>
+            </div>
+
+            <div class="progress-card">
+                <h3>📈 Market & Competition</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill market" style="width: 85%"></div>
+                </div>
+                <div class="progress-stats">
+                    <span class="progress-percent">85%</span>
+                    <span class="progress-detail">Well Researched</span>
+                </div>
+                <div class="progress-items">
+                    <div class="progress-item done"><span class="check-icon">✓</span> Competitor analysis</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> Feature comparison</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> Go-to-market strategy</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> Product opportunities</div>
+                    <div class="progress-item pending"><span class="check-icon">○</span> Validate with customers</div>
+                </div>
+            </div>
+
+            <div class="progress-card">
+                <h3>💰 Financial</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill financial" style="width: 70%"></div>
+                </div>
+                <div class="progress-stats">
+                    <span class="progress-percent">70%</span>
+                    <span class="progress-detail">Models Ready</span>
+                </div>
+                <div class="progress-items">
+                    <div class="progress-item done"><span class="check-icon">✓</span> Cost breakdown</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> Pricing strategy</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> Landed cost calculator</div>
+                    <div class="progress-item pending"><span class="check-icon">○</span> Actual manufacturer quotes</div>
+                    <div class="progress-item pending"><span class="check-icon">○</span> Final margin validation</div>
+                </div>
+            </div>
+
+            <div class="progress-card">
+                <h3>📋 Legal</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill legal" style="width: 80%"></div>
+                </div>
+                <div class="progress-stats">
+                    <span class="progress-percent">80%</span>
+                    <span class="progress-detail">Documents Ready</span>
+                </div>
+                <div class="progress-items">
+                    <div class="progress-item done"><span class="check-icon">✓</span> Terms & conditions</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> Warranty policy</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> NDA template</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> Partner agreement</div>
+                    <div class="progress-item pending"><span class="check-icon">○</span> Trade license (post-validation)</div>
+                </div>
+            </div>
+
+            <div class="progress-card">
+                <h3>🌐 Websites</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill websites" style="width: 50%"></div>
+                </div>
+                <div class="progress-stats">
+                    <span class="progress-percent">50%</span>
+                    <span class="progress-detail">Draft Stage</span>
+                </div>
+                <div class="progress-items">
+                    <div class="progress-item done"><span class="check-icon">✓</span> Retail site structure</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> Partner portal structure</div>
+                    <div class="progress-item done"><span class="check-icon">✓</span> Commercial site structure</div>
+                    <div class="progress-item pending"><span class="check-icon">○</span> Product photography</div>
+                    <div class="progress-item pending"><span class="check-icon">○</span> Domain & hosting</div>
+                    <div class="progress-item pending"><span class="check-icon">○</span> Go live</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="quick-links-section">
+            <h2>Quick Access</h2>
+            <div class="quick-links-grid">
+                <a href="specification.html" class="quick-link">
+                    <span class="icon">📐</span>
+                    Full Specification
+                </a>
+                <a href="bom-detailed.html" class="quick-link">
+                    <span class="icon">📦</span>
+                    Bill of Materials
+                </a>
+                <a href="manufacturer-rfq.html" class="quick-link">
+                    <span class="icon">📄</span>
+                    RFQ Package
+                </a>
+                <a href="china-suppliers.html" class="quick-link">
+                    <span class="icon">🏭</span>
+                    China Suppliers
+                </a>
+                <a href="partner-program.html" class="quick-link">
+                    <span class="icon">🤝</span>
+                    Partner Program
+                </a>
+                <a href="quote-calculator.html" class="quick-link">
+                    <span class="icon">🧮</span>
+                    Quote Calculator
+                </a>
+                <a href="competitor-comparison.html" class="quick-link">
+                    <span class="icon">📊</span>
+                    Competitor Comparison
+                </a>
+                <a href="go-to-market.html" class="quick-link">
+                    <span class="icon">🚀</span>
+                    Go-To-Market Plan
+                </a>
+            </div>
         </div>
     </div>
 
-    <script>
-        // Auto-save notes to localStorage
-        const notesArea = document.querySelector('.notes-area');
-        const savedNotes = localStorage.getItem('apex-project-notes');
-        if (savedNotes) {
-            notesArea.value = savedNotes;
-        }
-        notesArea.addEventListener('input', () => {
-            localStorage.setItem('apex-project-notes', notesArea.value);
-        });
-    </script>
-<script src="nav.js"></script>
+    <script src="nav.js"></script>
 </body>
 </html>
