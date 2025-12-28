@@ -132,6 +132,10 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
+        .apex-sidebar.restoring-scroll {
+            visibility: hidden;
+        }
+
         .apex-sidebar-header {
             padding: 1.25rem 1rem;
             border-bottom: 1px solid var(--nav-border);
@@ -394,9 +398,22 @@
         });
     });
 
-    // Restore sidebar scroll position on page load
+    // Restore sidebar scroll position after DOM is fully ready
     const savedScrollPos = localStorage.getItem('apexNavScrollPos');
     if (savedScrollPos && sidebar) {
-        sidebar.scrollTop = parseInt(savedScrollPos, 10);
+        const targetScroll = parseInt(savedScrollPos, 10);
+        // Hide sidebar while restoring scroll to prevent visual jump
+        sidebar.classList.add('restoring-scroll');
+
+        // Restore scroll position
+        sidebar.scrollTop = targetScroll;
+
+        // Show sidebar after scroll is set
+        requestAnimationFrame(() => {
+            sidebar.scrollTop = targetScroll;
+            requestAnimationFrame(() => {
+                sidebar.classList.remove('restoring-scroll');
+            });
+        });
     }
 })();
