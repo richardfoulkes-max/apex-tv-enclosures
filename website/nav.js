@@ -44,8 +44,7 @@
                 { href: 'qc-checklist.html', label: 'QC Checklist' },
                 { href: 'compliance-guide.html', label: 'Compliance Guide' },
                 { href: 'manufacturer-rfq.html', label: 'RFQ Package' },
-                { href: 'china-suppliers.html', label: 'China Suppliers' },
-                { href: 'contractors.html', label: 'UAE Contractors' }
+                { href: 'china-suppliers.html', label: 'China Suppliers' }
             ]
         },
         sales: {
@@ -54,6 +53,7 @@
             items: [
                 { href: 'partner-program.html', label: 'Partner Program' },
                 { href: 'target-partners.html', label: 'Target Partners' },
+                { href: 'contractors.html', label: 'UAE Contractors' },
                 { href: 'b2b-targets.html', label: 'B2B Targets' },
                 { href: 'partner-crm.html', label: 'Partner CRM' },
                 { href: 'quote-calculator.html', label: 'Quote Calculator' }
