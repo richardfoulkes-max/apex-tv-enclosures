@@ -8,19 +8,19 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0a0a;
-            color: #ffffff;
+            background: #ffffff;
+            color: #0f172a;
             line-height: 1.6;
         }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
 
-        h1 { color: #d4af37; font-size: 2rem; margin-bottom: 0.5rem; }
-        .subtitle { color: #888; margin-bottom: 2rem; }
+        h1 { color: #0d9488; font-size: 2rem; margin-bottom: 0.5rem; }
+        .subtitle { color: #64748b; margin-bottom: 2rem; }
 
         /* Website Cards */
         .websites-section { margin-bottom: 3rem; }
-        .websites-section h2 { color: #d4af37; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+        .websites-section h2 { color: #0d9488; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
 
         .website-grid {
             display: grid;
@@ -33,8 +33,8 @@
         }
 
         .website-card {
-            background: linear-gradient(135deg, #1a1a1a 0%, #111 100%);
-            border: 2px solid #333;
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
             border-radius: 16px;
             padding: 2rem;
             text-decoration: none;
@@ -45,9 +45,9 @@
         }
 
         .website-card:hover {
-            border-color: #d4af37;
+            border-color: #0d9488;
             transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(212, 175, 55, 0.15);
+            box-shadow: 0 12px 40px rgba(13, 148, 136, 0.15);
         }
 
         .website-card::before {
@@ -59,7 +59,7 @@
             height: 4px;
         }
 
-        .website-card.retail::before { background: linear-gradient(90deg, #22c55e, #16a34a); }
+        .website-card.retail::before { background: linear-gradient(90deg, #0d9488, #14b8a6); }
         .website-card.partner::before { background: linear-gradient(90deg, #3b82f6, #2563eb); }
         .website-card.commercial::before { background: linear-gradient(90deg, #f59e0b, #d97706); }
 
@@ -70,23 +70,23 @@
 
         .website-card h3 {
             font-size: 1.5rem;
-            color: #fff;
+            color: #0f172a;
             margin-bottom: 0.5rem;
         }
 
         .website-card p {
-            color: #888;
+            color: #64748b;
             font-size: 0.9rem;
             margin-bottom: 1rem;
         }
 
         .website-card .audience {
             display: inline-block;
-            background: rgba(255,255,255,0.1);
+            background: #f1f5f9;
             padding: 0.25rem 0.75rem;
             border-radius: 20px;
             font-size: 0.8rem;
-            color: #ccc;
+            color: #475569;
         }
 
         .website-card .status {
@@ -100,13 +100,13 @@
             text-transform: uppercase;
         }
 
-        .status.live { background: #22c55e20; color: #22c55e; }
-        .status.draft { background: #f59e0b20; color: #f59e0b; }
-        .status.coming { background: #3b82f620; color: #3b82f6; }
+        .status.live { background: #dcfce7; color: #16a34a; }
+        .status.draft { background: #fef3c7; color: #d97706; }
+        .status.coming { background: #dbeafe; color: #2563eb; }
 
         /* Quick Links Section */
         .quick-links { margin-bottom: 2rem; }
-        .quick-links h2 { color: #d4af37; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+        .quick-links h2 { color: #0d9488; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
 
         .links-grid {
             display: grid;
@@ -115,12 +115,12 @@
         }
 
         .link-card {
-            background: #1a1a1a;
-            border: 1px solid #333;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
             padding: 1rem 1.25rem;
             text-decoration: none;
-            color: #ccc;
+            color: #475569;
             transition: all 0.2s;
             display: flex;
             align-items: center;
@@ -128,9 +128,9 @@
         }
 
         .link-card:hover {
-            background: #222;
-            border-color: #d4af37;
-            color: #fff;
+            background: #f0fdfa;
+            border-color: #0d9488;
+            color: #0f172a;
         }
 
         .link-card .icon { font-size: 1.25rem; }
@@ -144,8 +144,8 @@
         }
 
         .stat-card {
-            background: #1a1a1a;
-            border: 1px solid #333;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
             padding: 1.25rem;
             text-align: center;
@@ -154,18 +154,18 @@
         .stat-card .value {
             font-size: 2rem;
             font-weight: 700;
-            color: #d4af37;
+            color: #0d9488;
         }
 
         .stat-card .label {
-            color: #888;
+            color: #64748b;
             font-size: 0.85rem;
         }
 
         /* Contact Info */
         .contact-bar {
-            background: #1a1a1a;
-            border: 1px solid #333;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
             padding: 1rem 1.5rem;
             display: flex;
@@ -179,12 +179,12 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            color: #888;
+            color: #64748b;
             font-size: 0.9rem;
         }
 
         .contact-bar a {
-            color: #d4af37;
+            color: #0d9488;
             text-decoration: none;
         }
 

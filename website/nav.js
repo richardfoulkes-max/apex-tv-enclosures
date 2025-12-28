@@ -107,12 +107,12 @@
         /* Sidebar Navigation Styles */
         :root {
             --nav-width: 260px;
-            --nav-bg: #111;
-            --nav-border: #333;
-            --nav-text: #888;
-            --nav-text-hover: #fff;
-            --nav-accent: #d4af37;
-            --nav-section-bg: #1a1a1a;
+            --nav-bg: #f8fafc;
+            --nav-border: #e2e8f0;
+            --nav-text: #64748b;
+            --nav-text-hover: #0f172a;
+            --nav-accent: #0d9488;
+            --nav-section-bg: #ffffff;
         }
 
         body {
@@ -135,11 +135,11 @@
         .apex-sidebar-header {
             padding: 1.25rem 1rem;
             border-bottom: 1px solid var(--nav-border);
-            background: linear-gradient(135deg, #1a1a0a 0%, #111 100%);
+            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
         }
 
         .apex-sidebar-logo {
-            color: var(--nav-accent);
+            color: #ffffff;
             font-size: 1.1rem;
             font-weight: 700;
             text-decoration: none;
@@ -151,12 +151,12 @@
         .apex-sidebar-logo-icon {
             width: 32px;
             height: 32px;
-            background: var(--nav-accent);
+            background: #ffffff;
             border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #000;
+            color: #0d9488;
             font-weight: 700;
             font-size: 0.9rem;
         }
@@ -225,7 +225,7 @@
 
         .apex-nav-item.active {
             color: var(--nav-accent);
-            background: rgba(212, 175, 55, 0.1);
+            background: rgba(13, 148, 136, 0.1);
             border-left-color: var(--nav-accent);
         }
 
@@ -236,12 +236,12 @@
             top: 1rem;
             left: 1rem;
             z-index: 1001;
-            background: var(--nav-bg);
-            border: 1px solid var(--nav-border);
+            background: #0d9488;
+            border: 1px solid #0f766e;
             border-radius: 8px;
             padding: 0.75rem;
             cursor: pointer;
-            color: var(--nav-accent);
+            color: #ffffff;
             font-size: 1.25rem;
         }
 
