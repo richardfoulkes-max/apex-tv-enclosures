@@ -486,9 +486,11 @@
     <span class="comment">// 6. Apply smooth ramping</span>
     currentPWM = <span class="function">rampTo</span>(currentPWM, targetPWM, RAMP_RATE);
 
-    <span class="comment">// 7. Set fan speed</span>
+    <span class="comment">// 7. Set fan speed (all 4 rear exhaust fans)</span>
     <span class="function">setFanPWM</span>(FAN1, currentPWM);
     <span class="function">setFanPWM</span>(FAN2, currentPWM);
+    <span class="function">setFanPWM</span>(FAN3, currentPWM);
+    <span class="function">setFanPWM</span>(FAN4, currentPWM);
 
     <span class="comment">// 8. Handle alarm</span>
     <span class="keyword">if</span> (currentState == STATE_ALARM) {

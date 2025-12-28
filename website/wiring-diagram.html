@@ -268,27 +268,24 @@
                 <text x="470" y="330" font-size="9" fill="#0f172a">PWM2: Fan 2</text>
                 <text x="470" y="350" font-size="9" fill="#0f172a">Alarm: Buzzer</text>
 
-                <!-- Fans -->
-                <rect x="700" y="100" width="140" height="100" fill="#dcfce7" stroke="#16a34a" stroke-width="2" rx="4"/>
-                <text x="770" y="125" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">FAN 1 (INTAKE)</text>
-                <text x="770" y="145" text-anchor="middle" font-size="9" fill="#0f172a">140mm PWM</text>
-                <text x="770" y="165" text-anchor="middle" font-size="9" fill="#64748b">Noctua NF-A14 iPPC</text>
-                <!-- Fan connector -->
-                <rect x="720" y="175" width="100" height="20" fill="white" stroke="#0f172a" stroke-width="1"/>
-                <text x="730" y="189" font-size="7" fill="#0f172a">+12V</text>
-                <text x="750" y="189" font-size="7" fill="#0f172a">GND</text>
-                <text x="770" y="189" font-size="7" fill="#0f172a">TACH</text>
-                <text x="795" y="189" font-size="7" fill="#0f172a">PWM</text>
+                <!-- Fans (4× 80mm rear exhaust) -->
+                <rect x="700" y="60" width="140" height="70" fill="#dcfce7" stroke="#16a34a" stroke-width="2" rx="4"/>
+                <text x="770" y="80" text-anchor="middle" font-size="10" font-weight="600" fill="#16a34a">FAN 1-2 (EXHAUST)</text>
+                <text x="770" y="95" text-anchor="middle" font-size="8" fill="#0f172a">2× 80mm PWM (rear)</text>
+                <text x="770" y="110" text-anchor="middle" font-size="8" fill="#64748b">Noctua NF-A8</text>
+                <rect x="720" y="115" width="100" height="15" fill="white" stroke="#0f172a" stroke-width="1"/>
+                <text x="770" y="126" text-anchor="middle" font-size="6" fill="#0f172a">+12V | GND | TACH | PWM</text>
 
-                <rect x="700" y="220" width="140" height="100" fill="#dcfce7" stroke="#16a34a" stroke-width="2" rx="4"/>
-                <text x="770" y="245" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">FAN 2 (EXHAUST)</text>
-                <text x="770" y="265" text-anchor="middle" font-size="9" fill="#0f172a">140mm PWM</text>
-                <text x="770" y="285" text-anchor="middle" font-size="9" fill="#64748b">Noctua NF-A14 iPPC</text>
-                <rect x="720" y="295" width="100" height="20" fill="white" stroke="#0f172a" stroke-width="1"/>
-                <text x="730" y="309" font-size="7" fill="#0f172a">+12V</text>
-                <text x="750" y="309" font-size="7" fill="#0f172a">GND</text>
-                <text x="770" y="309" font-size="7" fill="#0f172a">TACH</text>
-                <text x="795" y="309" font-size="7" fill="#0f172a">PWM</text>
+                <rect x="700" y="145" width="140" height="70" fill="#dcfce7" stroke="#16a34a" stroke-width="2" rx="4"/>
+                <text x="770" y="165" text-anchor="middle" font-size="10" font-weight="600" fill="#16a34a">FAN 3-4 (EXHAUST)</text>
+                <text x="770" y="180" text-anchor="middle" font-size="8" fill="#0f172a">2× 80mm PWM (rear)</text>
+                <text x="770" y="195" text-anchor="middle" font-size="8" fill="#64748b">Noctua NF-A8</text>
+                <rect x="720" y="200" width="100" height="15" fill="white" stroke="#0f172a" stroke-width="1"/>
+                <text x="770" y="211" text-anchor="middle" font-size="6" fill="#0f172a">+12V | GND | TACH | PWM</text>
+
+                <!-- Note about rear mounting -->
+                <rect x="700" y="225" width="140" height="30" fill="#dbeafe" stroke="#2563eb" stroke-width="1" rx="4"/>
+                <text x="770" y="245" text-anchor="middle" font-size="7" fill="#1e40af">All 4 fans rear-mounted</text>
 
                 <!-- Temperature Sensors -->
                 <rect x="700" y="340" width="140" height="80" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="4"/>
@@ -532,21 +529,39 @@
                     <td>250mm</td>
                 </tr>
                 <tr style="background: #f5f3ff;">
-                    <td colspan="7"><strong>Fan Connections (4-wire PWM)</strong></td>
+                    <td colspan="7"><strong>Fan Connections (4-wire PWM) - 4× 80mm Rear Exhaust</strong></td>
                 </tr>
                 <tr>
                     <td>W-FAN1</td>
                     <td>Controller FAN1</td>
-                    <td>Fan 1 (Intake)</td>
+                    <td>Fan 1 (Exhaust-L)</td>
+                    <td>4-wire PWM</td>
+                    <td>Mixed</td>
+                    <td>22AWG</td>
+                    <td>350mm</td>
+                </tr>
+                <tr>
+                    <td>W-FAN2</td>
+                    <td>Controller FAN2</td>
+                    <td>Fan 2 (Exhaust-LC)</td>
                     <td>4-wire PWM</td>
                     <td>Mixed</td>
                     <td>22AWG</td>
                     <td>400mm</td>
                 </tr>
                 <tr>
-                    <td>W-FAN2</td>
-                    <td>Controller FAN2</td>
-                    <td>Fan 2 (Exhaust)</td>
+                    <td>W-FAN3</td>
+                    <td>Controller FAN3</td>
+                    <td>Fan 3 (Exhaust-RC)</td>
+                    <td>4-wire PWM</td>
+                    <td>Mixed</td>
+                    <td>22AWG</td>
+                    <td>450mm</td>
+                </tr>
+                <tr>
+                    <td>W-FAN4</td>
+                    <td>Controller FAN4</td>
+                    <td>Fan 4 (Exhaust-R)</td>
                     <td>4-wire PWM</td>
                     <td>Mixed</td>
                     <td>22AWG</td>
