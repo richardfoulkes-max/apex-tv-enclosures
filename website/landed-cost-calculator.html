@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landed Cost Calculator - Apex Enclosures</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #ffffff; line-height: 1.6; }
+
+        /* Navigation */
+        nav { background: #111; padding: 1rem 2rem; border-bottom: 1px solid #333; display: flex; gap: 2rem; flex-wrap: wrap; align-items: center; }
+        nav a { color: #888; text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        nav a:hover, nav a.active { color: #d4af37; }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        h1 { color: #d4af37; font-size: 2rem; margin-bottom: 0.5rem; }
+        .subtitle { color: #888; margin-bottom: 2rem; }
+
+        .grid { display: grid; grid-template-columns: 350px 1fr; gap: 2rem; }
+        @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+        .card { background: #1a1a1a; border-radius: 12px; padding: 1.5rem; border: 1px solid #333; }
+        .card h2 { color: #d4af37; font-size: 1.1rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #333; }
+
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; color: #888; font-size: 0.85rem; margin-bottom: 0.25rem; }
+        select, input { width: 100%; padding: 0.75rem; background: #0a0a0a; border: 1px solid #444; border-radius: 6px; color: #fff; font-size: 1rem; }
+        select:focus, input:focus { outline: none; border-color: #d4af37; }
+
+        .toggle-group { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+        .toggle-btn { flex: 1; padding: 0.5rem; background: #0a0a0a; border: 1px solid #444; border-radius: 6px; color: #888; cursor: pointer; text-align: center; transition: all 0.3s; }
+        .toggle-btn.active { background: #d4af37; color: #000; border-color: #d4af37; }
+        .toggle-btn:hover:not(.active) { border-color: #d4af37; color: #d4af37; }
+
+        .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+
+        .result-card { background: #111; border-radius: 8px; padding: 1.25rem; border: 1px solid #333; }
+        .result-card.highlight { border-color: #d4af37; background: linear-gradient(135deg, #1a1a0a 0%, #111 100%); }
+        .result-card h3 { color: #d4af37; font-size: 0.9rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .result-card .flag { font-size: 1.2rem; }
+        .result-card .price { font-size: 1.75rem; font-weight: 700; color: #fff; margin: 0.5rem 0; }
+        .result-card .price small { font-size: 0.9rem; color: #888; font-weight: 400; }
+
+        .breakdown { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #333; }
+        .breakdown-row { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.25rem; color: #888; }
+        .breakdown-row.total { color: #fff; font-weight: 600; border-top: 1px solid #444; padding-top: 0.5rem; margin-top: 0.5rem; }
+        .breakdown-row .negative { color: #ef4444; }
+        .breakdown-row .positive { color: #22c55e; }
+
+        .margin-bar { height: 8px; background: #333; border-radius: 4px; margin-top: 0.5rem; overflow: hidden; }
+        .margin-fill { height: 100%; background: linear-gradient(90deg, #ef4444 0%, #eab308 30%, #22c55e 60%); border-radius: 4px; transition: width 0.3s; }
+
+        .assumptions { background: #111; border-radius: 8px; padding: 1rem; margin-top: 1rem; font-size: 0.8rem; color: #666; }
+        .assumptions h4 { color: #888; margin-bottom: 0.5rem; }
+
+        .comparison-table { width: 100%; margin-top: 1rem; border-collapse: collapse; font-size: 0.9rem; }
+        .comparison-table th, .comparison-table td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #333; }
+        .comparison-table th { color: #888; font-weight: 500; }
+        .comparison-table td { color: #fff; }
+        .comparison-table tr:hover { background: #222; }
+        .comparison-table .best { color: #22c55e; font-weight: 600; }
+        .comparison-table .flag { margin-right: 0.5rem; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="specification.html">Specs</a>
+        <a href="bom-detailed.html">BOM</a>
+        <a href="partner-program.html">Partners</a>
+        <a href="quote-calculator.html">Quote Calculator</a>
+        <a href="landed-cost-calculator.html" class="active">Landed Cost</a>
+        <a href="partner-crm.html">CRM</a>
+        <a href="financial-forecast.html">Financials</a>
+    </nav>
+
+    <div class="container">
+        <h1>Landed Cost Calculator</h1>
+        <p class="subtitle">Calculate total landed cost and profit margins by market</p>
+
+        <div class="grid">
+            <div>
+                <div class="card">
+                    <h2>Product Configuration</h2>
+
+                    <div class="form-group">
+                        <label>Enclosure Size</label>
+                        <select id="size">
+                            <option value="43">43" Compact</option>
+                            <option value="55">55" Standard</option>
+                            <option value="65">65" Large</option>
+                            <option value="75" selected>75" Premium</option>
+                            <option value="86">86" Commercial</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Manufacturing Source</label>
+                        <div class="toggle-group">
+                            <div class="toggle-btn active" data-source="china">China</div>
+                            <div class="toggle-btn" data-source="uae">UAE</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>FOB Cost (USD)</label>
+                        <input type="number" id="fobCost" value="550">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Order Quantity</label>
+                        <select id="quantity">
+                            <option value="1">1 unit (sample)</option>
+                            <option value="10">10 units</option>
+                            <option value="25">25 units</option>
+                            <option value="50" selected>50 units</option>
+                            <option value="100">100 units</option>
+                            <option value="500">500 units</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1rem;">
+                    <h2>Retail Pricing (USD)</h2>
+
+                    <div class="form-group">
+                        <label>Retail Price - USA</label>
+                        <input type="number" id="retailUSA" value="2495">
+                    </div>
+                    <div class="form-group">
+                        <label>Retail Price - UAE (AED converted)</label>
+                        <input type="number" id="retailUAE" value="1905">
+                    </div>
+                    <div class="form-group">
+                        <label>Retail Price - Saudi (SAR converted)</label>
+                        <input type="number" id="retailSaudi" value="1995">
+                    </div>
+                    <div class="form-group">
+                        <label>Retail Price - Australia (AUD converted)</label>
+                        <input type="number" id="retailAustralia" value="2295">
+                    </div>
+                </div>
+
+                <div class="assumptions">
+                    <h4>Shipping & Duty Assumptions</h4>
+                    <p>Product dimensions: 1800x1100x250mm (~0.5 CBM)</p>
+                    <p>Product weight: ~45 kg packed</p>
+                    <p>Sea freight rates based on Dec 2024 averages</p>
+                    <p>Duties/taxes based on HS Code 8538.90</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="card">
+                    <h2>Landed Cost by Market</h2>
+                    <div class="result-grid" id="results">
+                        <!-- Results populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1rem;">
+                    <h2>Market Comparison</h2>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Market</th>
+                                <th>Landed Cost</th>
+                                <th>Retail Price</th>
+                                <th>Gross Margin</th>
+                                <th>Profit/Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody id="comparisonTable">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Market data with shipping rates and duties
+        const markets = {
+            usa: {
+                name: 'United States',
+                flag: '🇺🇸',
+                currency: 'USD',
+                currencySymbol: '$',
+                exchangeRate: 1,
+                // Sea freight per CBM from China/UAE
+                seaFreightChina: 85, // per CBM (LCL)
+                seaFreightUAE: 120,
+                // Air freight per kg
+                airFreightChina: 4.5,
+                airFreightUAE: 5.5,
+                dutyRate: 0, // Most electronics enclosures duty-free
+                importFees: 25, // Customs clearance, handling
+                lastMile: 75, // Domestic delivery
+                insurance: 0.005, // 0.5% of value
+                minFreightCharge: 150
+            },
+            uae: {
+                name: 'UAE',
+                flag: '🇦🇪',
+                currency: 'AED',
+                currencySymbol: 'AED',
+                exchangeRate: 3.67,
+                seaFreightChina: 65,
+                seaFreightUAE: 0, // Local
+                airFreightChina: 3.5,
+                airFreightUAE: 0,
+                dutyRate: 0.05, // 5% customs
+                importFees: 20,
+                lastMile: 25,
+                insurance: 0.004,
+                minFreightCharge: 100
+            },
+            saudi: {
+                name: 'Saudi Arabia',
+                flag: '🇸🇦',
+                currency: 'SAR',
+                currencySymbol: 'SAR',
+                exchangeRate: 3.75,
+                seaFreightChina: 75,
+                seaFreightUAE: 35,
+                airFreightChina: 4.0,
+                airFreightUAE: 2.5,
+                dutyRate: 0.05, // 5% + VAT
+                importFees: 30,
+                lastMile: 50,
+                insurance: 0.004,
+                minFreightCharge: 120
+            },
+            australia: {
+                name: 'Australia',
+                flag: '🇦🇺',
+                currency: 'AUD',
+                currencySymbol: 'A$',
+                exchangeRate: 0.64, // AUD per USD
+                seaFreightChina: 95,
+                seaFreightUAE: 140,
+                airFreightChina: 5.0,
+                airFreightUAE: 6.5,
+                dutyRate: 0.05, // 5% customs
+                importFees: 45, // Biosecurity, clearance
+                lastMile: 85,
+                insurance: 0.005,
+                minFreightCharge: 180
+            }
+        };
+
+        // Product specs by size
+        const products = {
+            '43': { cbm: 0.35, weight: 32, fobBase: 420 },
+            '55': { cbm: 0.42, weight: 38, fobBase: 480 },
+            '65': { cbm: 0.48, weight: 42, fobBase: 520 },
+            '75': { cbm: 0.50, weight: 45, fobBase: 550 },
+            '86': { cbm: 0.58, weight: 52, fobBase: 620 }
+        };
+
+        // Volume discounts on shipping
+        const volumeDiscounts = {
+            1: 1.5,    // Sample premium
+            10: 1.2,   // Small order
+            25: 1.0,   // Base rate
+            50: 0.85,  // Volume discount
+            100: 0.7,  // FCL rates start
+            500: 0.55  // Full container
+        };
+
+        let source = 'china';
+
+        function calculateLandedCost(market, fob, quantity, product) {
+            const m = markets[market];
+            const volumeFactor = volumeDiscounts[quantity] || 1;
+
+            // Base shipping calculation
+            let seaFreight = source === 'china' ? m.seaFreightChina : m.seaFreightUAE;
+            seaFreight = Math.max(seaFreight * product.cbm * volumeFactor, m.minFreightCharge / quantity);
+
+            // Per unit costs
+            const insurance = fob * m.insurance;
+            const cifValue = fob + seaFreight + insurance;
+            const duty = cifValue * m.dutyRate;
+            const importFees = m.importFees / Math.min(quantity, 10); // Amortized
+            const lastMile = m.lastMile * volumeFactor;
+
+            const totalLanded = fob + seaFreight + insurance + duty + importFees + lastMile;
+
+            return {
+                fob,
+                seaFreight: Math.round(seaFreight * 100) / 100,
+                insurance: Math.round(insurance * 100) / 100,
+                cifValue: Math.round(cifValue * 100) / 100,
+                duty: Math.round(duty * 100) / 100,
+                importFees: Math.round(importFees * 100) / 100,
+                lastMile: Math.round(lastMile * 100) / 100,
+                totalLanded: Math.round(totalLanded * 100) / 100
+            };
+        }
+
+        function updateResults() {
+            const size = document.getElementById('size').value;
+            const fob = parseFloat(document.getElementById('fobCost').value) || products[size].fobBase;
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const product = products[size];
+
+            const retailPrices = {
+                usa: parseFloat(document.getElementById('retailUSA').value) || 2495,
+                uae: parseFloat(document.getElementById('retailUAE').value) || 1905,
+                saudi: parseFloat(document.getElementById('retailSaudi').value) || 1995,
+                australia: parseFloat(document.getElementById('retailAustralia').value) || 2295
+            };
+
+            let resultsHTML = '';
+            let comparisonHTML = '';
+            let bestMargin = 0;
+            let bestMarket = '';
+
+            Object.keys(markets).forEach(key => {
+                const m = markets[key];
+                const costs = calculateLandedCost(key, fob, quantity, product);
+                const retail = retailPrices[key];
+                const grossProfit = retail - costs.totalLanded;
+                const margin = (grossProfit / retail * 100);
+
+                if (margin > bestMargin) {
+                    bestMargin = margin;
+                    bestMarket = key;
+                }
+
+                const marginClass = margin > 50 ? 'positive' : margin > 30 ? '' : 'negative';
+
+                resultsHTML += `
+                    <div class="result-card ${key === bestMarket ? 'highlight' : ''}">
+                        <h3><span class="flag">${m.flag}</span> ${m.name}</h3>
+                        <div class="price">$${costs.totalLanded.toFixed(2)} <small>landed</small></div>
+
+                        <div class="breakdown">
+                            <div class="breakdown-row">
+                                <span>FOB Cost</span>
+                                <span>$${costs.fob.toFixed(2)}</span>
+                            </div>
+                            <div class="breakdown-row">
+                                <span>Sea Freight</span>
+                                <span>$${costs.seaFreight.toFixed(2)}</span>
+                            </div>
+                            <div class="breakdown-row">
+                                <span>Insurance</span>
+                                <span>$${costs.insurance.toFixed(2)}</span>
+                            </div>
+                            <div class="breakdown-row">
+                                <span>Duty (${(m.dutyRate * 100).toFixed(0)}%)</span>
+                                <span>$${costs.duty.toFixed(2)}</span>
+                            </div>
+                            <div class="breakdown-row">
+                                <span>Import Fees</span>
+                                <span>$${costs.importFees.toFixed(2)}</span>
+                            </div>
+                            <div class="breakdown-row">
+                                <span>Last Mile</span>
+                                <span>$${costs.lastMile.toFixed(2)}</span>
+                            </div>
+                            <div class="breakdown-row total">
+                                <span>Retail Price</span>
+                                <span>$${retail.toFixed(2)}</span>
+                            </div>
+                            <div class="breakdown-row total">
+                                <span>Gross Profit</span>
+                                <span class="${marginClass}">$${grossProfit.toFixed(2)} (${margin.toFixed(1)}%)</span>
+                            </div>
+                        </div>
+                        <div class="margin-bar">
+                            <div class="margin-fill" style="width: ${Math.min(margin, 100)}%"></div>
+                        </div>
+                    </div>
+                `;
+
+                const isBest = margin === bestMargin;
+                comparisonHTML += `
+                    <tr>
+                        <td><span class="flag">${m.flag}</span> ${m.name}</td>
+                        <td>$${costs.totalLanded.toFixed(2)}</td>
+                        <td>$${retail.toFixed(2)}</td>
+                        <td class="${isBest ? 'best' : ''}">${margin.toFixed(1)}%</td>
+                        <td class="${isBest ? 'best' : ''}">$${grossProfit.toFixed(2)}</td>
+                    </tr>
+                `;
+            });
+
+            document.getElementById('results').innerHTML = resultsHTML;
+            document.getElementById('comparisonTable').innerHTML = comparisonHTML;
+        }
+
+        // Event listeners
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                source = this.dataset.source;
+                updateResults();
+            });
+        });
+
+        document.getElementById('size').addEventListener('change', function() {
+            const product = products[this.value];
+            document.getElementById('fobCost').value = product.fobBase;
+            updateResults();
+        });
+
+        document.querySelectorAll('input, select').forEach(el => {
+            el.addEventListener('change', updateResults);
+            el.addEventListener('input', updateResults);
+        });
+
+        // Initial calculation
+        updateResults();
+    </script>
+</body>
+</html>

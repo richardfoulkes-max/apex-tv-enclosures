@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Target Partners - Apex Enclosures</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #ffffff; line-height: 1.6; }
+
+        nav { background: #111; padding: 1rem 2rem; border-bottom: 1px solid #333; display: flex; gap: 2rem; flex-wrap: wrap; align-items: center; }
+        nav a { color: #888; text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        nav a:hover, nav a.active { color: #d4af37; }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        h1 { color: #d4af37; font-size: 2rem; margin-bottom: 0.5rem; }
+        .subtitle { color: #888; margin-bottom: 2rem; }
+
+        .strategy-banner { background: linear-gradient(135deg, #1a1a0a 0%, #111 100%); border: 1px solid #d4af37; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; }
+        .strategy-banner h2 { color: #d4af37; margin-bottom: 0.5rem; }
+        .strategy-banner p { color: #ccc; }
+
+        .partner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
+
+        .partner-category { background: #1a1a1a; border-radius: 12px; border: 1px solid #333; overflow: hidden; }
+        .category-header { background: #222; padding: 1rem 1.5rem; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 1rem; }
+        .category-icon { font-size: 1.5rem; }
+        .category-header h3 { color: #d4af37; font-size: 1.1rem; }
+        .category-header span { color: #888; font-size: 0.85rem; margin-left: auto; }
+
+        .partner-list { padding: 1rem 1.5rem; }
+        .partner-item { padding: 0.75rem 0; border-bottom: 1px solid #333; }
+        .partner-item:last-child { border-bottom: none; }
+        .partner-name { color: #fff; font-weight: 500; }
+        .partner-type { color: #888; font-size: 0.85rem; margin-top: 0.25rem; }
+        .partner-location { color: #d4af37; font-size: 0.8rem; }
+
+        .priority-tag { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; margin-left: 0.5rem; }
+        .priority-high { background: #22c55e20; color: #22c55e; }
+        .priority-medium { background: #eab30820; color: #eab308; }
+        .priority-low { background: #3b82f620; color: #3b82f6; }
+
+        .search-section { background: #1a1a1a; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; border: 1px solid #333; }
+        .search-section h2 { color: #d4af37; margin-bottom: 1rem; }
+        .search-tips { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+        .search-tip { background: #111; padding: 1rem; border-radius: 8px; border-left: 3px solid #d4af37; }
+        .search-tip strong { color: #d4af37; display: block; margin-bottom: 0.5rem; }
+        .search-tip p { color: #888; font-size: 0.85rem; }
+
+        .outreach-template { background: #1a1a1a; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; border: 1px solid #333; }
+        .outreach-template h2 { color: #d4af37; margin-bottom: 1rem; }
+        .template-box { background: #0a0a0a; padding: 1.5rem; border-radius: 8px; font-family: monospace; font-size: 0.9rem; white-space: pre-wrap; color: #ccc; border: 1px solid #333; }
+        .template-box .highlight { color: #d4af37; }
+
+        .stats-row { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .stat-card { background: #1a1a1a; border-radius: 8px; padding: 1rem 1.5rem; border: 1px solid #333; flex: 1; min-width: 150px; text-align: center; }
+        .stat-card .number { font-size: 2rem; font-weight: 700; color: #d4af37; }
+        .stat-card .label { color: #888; font-size: 0.85rem; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #333; }
+        th { color: #888; font-weight: 500; background: #111; }
+        td { color: #fff; }
+        tr:hover { background: #1a1a1a; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="partner-program.html">Partner Program</a>
+        <a href="target-partners.html" class="active">Target Partners</a>
+        <a href="b2b-targets.html">B2B Hotels</a>
+        <a href="partner-crm.html">CRM</a>
+        <a href="quote-calculator.html">Quote Calculator</a>
+    </nav>
+
+    <div class="container">
+        <h1>Target Partner Identification</h1>
+        <p class="subtitle">Potential resellers, installers, and channel partners for Apex Enclosures</p>
+
+        <div class="strategy-banner">
+            <h2>Partner-First Sales Strategy</h2>
+            <p>Rather than direct-to-consumer marketing, we build a network of authorized partners who sell, install, and service our products. Partners earn 25-45% margins while we focus on manufacturing and product development.</p>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="number">6</div>
+                <div class="label">Partner Categories</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">50+</div>
+                <div class="label">Target Companies</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">25-45%</div>
+                <div class="label">Partner Margins</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">UAE + KSA</div>
+                <div class="label">Primary Markets</div>
+            </div>
+        </div>
+
+        <div class="partner-grid">
+            <!-- AV Integrators -->
+            <div class="partner-category">
+                <div class="category-header">
+                    <span class="category-icon">📺</span>
+                    <h3>AV Integrators & Home Theater</h3>
+                    <span>Priority 1</span>
+                </div>
+                <div class="partner-list">
+                    <div class="partner-item">
+                        <div class="partner-name">Majid Al Futtaim - VOX Cinemas <span class="priority-tag priority-high">HIGH</span></div>
+                        <div class="partner-type">Commercial AV, Cinema Technology</div>
+                        <div class="partner-location">UAE - Dubai, Abu Dhabi</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">Almoe AV Systems <span class="priority-tag priority-high">HIGH</span></div>
+                        <div class="partner-type">AV Integration, Smart Homes</div>
+                        <div class="partner-location">UAE - Dubai</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">Accel Technologies <span class="priority-tag priority-medium">MEDIUM</span></div>
+                        <div class="partner-type">Commercial AV Solutions</div>
+                        <div class="partner-location">UAE - Dubai</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">CEDIA Middle East Members</div>
+                        <div class="partner-type">Certified Home Technology Installers</div>
+                        <div class="partner-location">UAE, KSA, GCC</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">Appotronics MENA</div>
+                        <div class="partner-type">Projection & Display Solutions</div>
+                        <div class="partner-location">UAE - Dubai</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pool & Landscape -->
+            <div class="partner-category">
+                <div class="category-header">
+                    <span class="category-icon">🏊</span>
+                    <h3>Pool & Landscape Contractors</h3>
+                    <span>Priority 1</span>
+                </div>
+                <div class="partner-list">
+                    <div class="partner-item">
+                        <div class="partner-name">Desert Group <span class="priority-tag priority-high">HIGH</span></div>
+                        <div class="partner-type">Luxury Landscape Design & Build</div>
+                        <div class="partner-location">UAE - Dubai</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">Ashtec Pools <span class="priority-tag priority-high">HIGH</span></div>
+                        <div class="partner-type">Pool Construction, Maintenance</div>
+                        <div class="partner-location">UAE - Dubai</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">Al Faisal Pools</div>
+                        <div class="partner-type">Pool Construction</div>
+                        <div class="partner-location">KSA - Riyadh, Jeddah</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">Aquamarine Pools</div>
+                        <div class="partner-type">Pool Design & Installation</div>
+                        <div class="partner-location">UAE - Dubai</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">Crystalline Pools</div>
+                        <div class="partner-type">Pool Construction & Hardscape</div>
+                        <div class="partner-location">UAE - Abu Dhabi</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Outdoor Living -->
+            <div class="partner-category">
+                <div class="category-header">
+                    <span class="category-icon">☀️</span>
+                    <h3>Outdoor Living & Furniture</h3>
+                    <span>Priority 2</span>
+                </div>
+                <div class="partner-list">
+                    <div class="partner-item">
+                        <div class="partner-name">2XL Furniture <span class="priority-tag priority-medium">MEDIUM</span></div>
+                        <div class="partner-type">Home & Outdoor Furniture Retail</div>
+                        <div class="partner-location">UAE - Multiple locations</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">Marina Home Interiors</div>
+                        <div class="partner-type">Premium Furniture & Accessories</div>
+                        <div class="partner-location">UAE - Dubai, Abu Dhabi</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">Pan Emirates Furnishing</div>
+                        <div class="partner-type">Home Furnishing Chain</div>
+                        <div class="partner-location">UAE - Nationwide</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">THG (The Home Gallery)</div>
+                        <div class="partner-type">Outdoor Furniture Specialist</div>
+                        <div class="partner-location">UAE - Dubai</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Smart Home Specialists -->
+            <div class="partner-category">
+                <div class="category-header">
+                    <span class="category-icon">🏠</span>
+                    <h3>Smart Home Integrators</h3>
+                    <span>Priority 1</span>
+                </div>
+                <div class="partner-list">
+                    <div class="partner-item">
+                        <div class="partner-name">Control4 Dealers - UAE <span class="priority-tag priority-high">HIGH</span></div>
+                        <div class="partner-type">Authorized Control4 Integrators</div>
+                        <div class="partner-location">UAE - Multiple</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">Crestron Partners - Middle East</div>
+                        <div class="partner-type">Commercial & Residential Automation</div>
+                        <div class="partner-location">UAE, KSA</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">Smart Home LLC</div>
+                        <div class="partner-type">Full Smart Home Solutions</div>
+                        <div class="partner-location">UAE - Dubai</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">Bayt Al Smart</div>
+                        <div class="partner-type">Smart Home Automation</div>
+                        <div class="partner-location">KSA - Riyadh</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">Savant Dealers - GCC</div>
+                        <div class="partner-type">Luxury Home Automation</div>
+                        <div class="partner-location">UAE, KSA</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hospitality Suppliers -->
+            <div class="partner-category">
+                <div class="category-header">
+                    <span class="category-icon">🏨</span>
+                    <h3>Hospitality FF&E Suppliers</h3>
+                    <span>Priority 2</span>
+                </div>
+                <div class="partner-list">
+                    <div class="partner-item">
+                        <div class="partner-name">DERA (Dubai Exhibition) <span class="priority-tag priority-medium">MEDIUM</span></div>
+                        <div class="partner-type">Hotel Equipment & Supplies</div>
+                        <div class="partner-location">UAE - Dubai</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">Hotelex Middle East</div>
+                        <div class="partner-type">Hospitality Equipment Trade Show</div>
+                        <div class="partner-location">UAE - Dubai (Annual)</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">FF&E Magazine Network</div>
+                        <div class="partner-type">Hospitality Procurement</div>
+                        <div class="partner-location">GCC</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">Tamimi Group - Hospitality</div>
+                        <div class="partner-type">Hotel Supplies & Equipment</div>
+                        <div class="partner-location">KSA - Multiple</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security & CCTV -->
+            <div class="partner-category">
+                <div class="category-header">
+                    <span class="category-icon">📹</span>
+                    <h3>Security & CCTV Installers</h3>
+                    <span>Priority 3</span>
+                </div>
+                <div class="partner-list">
+                    <div class="partner-item">
+                        <div class="partner-name">SECOM Middle East</div>
+                        <div class="partner-type">Security Systems Integration</div>
+                        <div class="partner-location">UAE - Dubai</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">Transguard Group</div>
+                        <div class="partner-type">Security & Surveillance</div>
+                        <div class="partner-location">UAE - Dubai</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">G4S UAE</div>
+                        <div class="partner-type">Security Technology Solutions</div>
+                        <div class="partner-location">UAE - Multiple</div>
+                    </div>
+                    <div class="partner-item">
+                        <div class="partner-name">Hikvision Partners</div>
+                        <div class="partner-type">CCTV & Display Solutions</div>
+                        <div class="partner-location">UAE, KSA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <h2>How to Find More Partners</h2>
+            <div class="search-tips">
+                <div class="search-tip">
+                    <strong>Google Search</strong>
+                    <p>"AV integrator Dubai" / "pool contractor Dubai" / "smart home installer UAE" / "outdoor furniture showroom Dubai"</p>
+                </div>
+                <div class="search-tip">
+                    <strong>LinkedIn Sales Navigator</strong>
+                    <p>Search: "Owner" OR "Director" at companies with "AV" OR "Pool" OR "Landscape" in UAE location</p>
+                </div>
+                <div class="search-tip">
+                    <strong>Trade Shows</strong>
+                    <p>Intersec Dubai (Jan), Big 5 Dubai (Nov), Hotel Show Dubai (May), CEDIA Expo</p>
+                </div>
+                <div class="search-tip">
+                    <strong>Industry Directories</strong>
+                    <p>CEDIA member directory, Control4 dealer locator, Crestron partner finder, Yellow Pages UAE</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="outreach-template">
+            <h2>Partner Outreach Email Template</h2>
+            <div class="template-box">Subject: Partnership Opportunity - Outdoor TV Enclosures for Your Clients
+
+Hi [Name],
+
+I noticed [Company Name] does excellent work in [AV integration/pool design/smart homes] across [UAE/Dubai/etc].
+
+We've developed a line of premium outdoor TV enclosures designed for the Gulf climate - IP66 weatherproof, active cooling for 50°C+ temperatures, and made specifically for the high-end residential and hospitality market.
+
+<span class="highlight">Why partner with us:</span>
+- 25-45% wholesale margins
+- Drop-ship direct to your clients
+- Full technical support and training
+- No inventory required
+- 2-year manufacturer warranty
+
+<span class="highlight">Your clients likely ask:</span>
+"Can we put a TV by the pool?" - Now you can say yes.
+
+Would you have 15 minutes this week for a quick call? I'd love to share our product specs and partner pricing.
+
+Best regards,
+Richard Foulkes
+Apex Enclosures
++971 50 559 8675 (WhatsApp)
+apexenclosures@icloud.com</div>
+        </div>
+
+        <div class="outreach-template" style="margin-top: 1rem;">
+            <h2>Partner Value Proposition by Type</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Partner Type</th>
+                        <th>Their Need</th>
+                        <th>Our Solution</th>
+                        <th>Revenue Opportunity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>AV Integrator</strong></td>
+                        <td>Clients want outdoor TVs but weather concerns</td>
+                        <td>IP66 enclosure, active cooling, handles 50°C+</td>
+                        <td>$600-1,000 profit per install</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pool Contractor</strong></td>
+                        <td>Premium upsell for pool/cabana projects</td>
+                        <td>Complete outdoor entertainment package</td>
+                        <td>$800-1,200 profit + installation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Smart Home</strong></td>
+                        <td>Extend automation to outdoor spaces</td>
+                        <td>Control4/Crestron compatible, IP control</td>
+                        <td>$700-1,000 profit per project</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Outdoor Furniture</strong></td>
+                        <td>Complete outdoor living solutions</td>
+                        <td>Premium product for showroom display</td>
+                        <td>$500-800 profit per sale</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hospitality FF&E</strong></td>
+                        <td>Pool deck, beach club, restaurant patios</td>
+                        <td>Commercial-grade, volume discounts</td>
+                        <td>$400-600 profit × volume orders</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
