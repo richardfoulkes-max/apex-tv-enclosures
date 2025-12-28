@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instant Quote Calculator - Apex Enclosures</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1428a0;
+            --primary-dark: #0f1f7a;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --text: #1a1a1a;
+            --text-muted: #6b7280;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .doc-nav {
+            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+            padding: 1rem 2rem;
+        }
+        .doc-nav h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 0.75rem;
+        }
+        .doc-nav-grid { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .doc-card {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .doc-card:hover { background: rgba(255,255,255,0.2); }
+        .doc-card.active { background: white; color: var(--primary); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* Layout */
+        .quote-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            background: var(--bg);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        .form-label .required {
+            color: var(--danger);
+        }
+
+        /* Size Selector */
+        .size-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.75rem;
+        }
+        .size-option {
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .size-option:hover {
+            border-color: var(--primary);
+            background: rgba(20, 40, 160, 0.05);
+        }
+        .size-option.selected {
+            border-color: var(--primary);
+            background: rgba(20, 40, 160, 0.1);
+        }
+        .size-option.recommended {
+            position: relative;
+        }
+        .size-option.recommended::after {
+            content: 'BEST';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--success);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .size-option .size {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .size-option .price {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Toggle Options */
+        .toggle-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .toggle-option:hover {
+            border-color: var(--primary);
+        }
+        .toggle-option.selected {
+            border-color: var(--success);
+            background: rgba(5, 150, 105, 0.05);
+        }
+        .toggle-info {
+            flex: 1;
+        }
+        .toggle-title {
+            font-weight: 600;
+        }
+        .toggle-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .toggle-price {
+            font-weight: 600;
+            color: var(--success);
+            white-space: nowrap;
+        }
+        .toggle-check {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            margin-left: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .toggle-option.selected .toggle-check {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        /* Select */
+        .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+        }
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Input */
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Quote Summary */
+        .quote-summary {
+            position: sticky;
+            top: 2rem;
+        }
+        .quote-total {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .quote-total .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .quote-total .amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+        }
+        .quote-total .currency {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .line-items {
+            padding: 1.5rem;
+        }
+        .line-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .line-item:last-child {
+            border-bottom: none;
+        }
+        .line-item .label {
+            color: var(--text-muted);
+        }
+        .line-item .value {
+            font-weight: 500;
+        }
+        .line-item.total {
+            border-top: 2px solid var(--primary);
+            margin-top: 0.5rem;
+            padding-top: 1rem;
+        }
+        .line-item.total .label,
+        .line-item.total .value {
+            font-weight: 700;
+            color: var(--text);
+        }
+        .line-item.savings {
+            background: rgba(5, 150, 105, 0.1);
+            margin: 0.5rem -1.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0;
+        }
+        .line-item.savings .value {
+            color: var(--success);
+        }
+
+        .deposit-info {
+            background: var(--bg);
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .deposit-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+        .deposit-info strong {
+            color: var(--text);
+        }
+
+        /* CTA Buttons */
+        .cta-buttons {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s;
+            margin-bottom: 0.75rem;
+        }
+        .btn:last-child {
+            margin-bottom: 0;
+        }
+        .btn-primary {
+            background: var(--success);
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #047857;
+        }
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        .btn-secondary:hover {
+            background: rgba(20, 40, 160, 0.05);
+        }
+        .btn-whatsapp {
+            background: #25d366;
+            color: white;
+        }
+        .btn-whatsapp:hover {
+            background: #1da851;
+        }
+
+        /* Comparison Box */
+        .comparison-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid var(--warning);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-top: 1rem;
+        }
+        .comparison-box h4 {
+            color: #92400e;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        .comparison-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            padding: 0.25rem 0;
+        }
+        .comparison-item .competitor {
+            text-decoration: line-through;
+            color: #b45309;
+        }
+
+        /* TV Selection */
+        .tv-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+        .tv-option {
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tv-option:hover {
+            border-color: var(--primary);
+        }
+        .tv-option.selected {
+            border-color: var(--success);
+            background: rgba(5, 150, 105, 0.05);
+        }
+        .tv-option .brand {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .tv-option .specs {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .tv-option .price {
+            font-weight: 600;
+            color: var(--success);
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .quote-layout {
+                grid-template-columns: 1fr;
+            }
+            .quote-summary {
+                position: static;
+            }
+            .size-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 500px) {
+            .size-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .tv-options {
+                grid-template-columns: 1fr;
+            }
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="doc-nav">
+        <h3>Manufacturing Documentation</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">Website</a>
+            <a href="specification.html" class="doc-card">Specification</a>
+            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
+            <a href="global-pricing.html" class="doc-card">Global Pricing</a>
+            <a href="financial-forecast.html" class="doc-card">Financial Forecast</a>
+            <a href="partner-crm.html" class="doc-card">Partner CRM</a>
+            <a href="quote-calculator.html" class="doc-card active">Quote Calculator</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Instant Quote Calculator</h1>
+        <p class="subtitle">Configure your outdoor TV enclosure and get an instant quote</p>
+
+        <div class="quote-layout">
+            <!-- Configuration -->
+            <div class="config-section">
+                <!-- Size Selection -->
+                <div class="card">
+                    <div class="card-header">
+                        <span>1. Select Enclosure Size</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="size-grid">
+                            <div class="size-option" onclick="selectSize(43, 899, 3500)">
+                                <div class="size">43"</div>
+                                <div class="price">$899</div>
+                            </div>
+                            <div class="size-option" onclick="selectSize(55, 1199, 4500)">
+                                <div class="size">55"</div>
+                                <div class="price">$1,199</div>
+                            </div>
+                            <div class="size-option" onclick="selectSize(65, 1499, 5500)">
+                                <div class="size">65"</div>
+                                <div class="price">$1,499</div>
+                            </div>
+                            <div class="size-option recommended selected" onclick="selectSize(75, 1899, 7000)">
+                                <div class="size">75"</div>
+                                <div class="price">$1,899</div>
+                            </div>
+                            <div class="size-option" onclick="selectSize(86, 2499, 9000)">
+                                <div class="size">86"</div>
+                                <div class="price">$2,499</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">
+                            <strong>Note:</strong> 75" is our flagship model, currently in production. Other sizes available Q2 2025.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- TV Bundle -->
+                <div class="card">
+                    <div class="card-header">
+                        <span>2. Add TV Bundle (Optional)</span>
+                        <span style="font-size: 0.8rem; color: var(--success);">Save vs outdoor TVs</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="toggle-option" onclick="toggleTVBundle(false)" id="noTvOption">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Enclosure Only</div>
+                                <div class="toggle-desc">I'll use my own TV or buy separately</div>
+                            </div>
+                            <div class="toggle-price">+$0</div>
+                            <div class="toggle-check"></div>
+                        </div>
+                        <div class="toggle-option selected" onclick="toggleTVBundle(true)" id="withTvOption">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Include Samsung QLED TV</div>
+                                <div class="toggle-desc">Pre-configured, tested, ready to install</div>
+                            </div>
+                            <div class="toggle-price" id="tvBundlePrice">+$1,200</div>
+                            <div class="toggle-check">✓</div>
+                        </div>
+
+                        <div class="comparison-box" id="savingsBox">
+                            <h4>Your Savings vs Outdoor TVs</h4>
+                            <div class="comparison-item">
+                                <span>Samsung Terrace 75"</span>
+                                <span class="competitor">$9,999</span>
+                            </div>
+                            <div class="comparison-item">
+                                <span>Your Apex + TV Bundle</span>
+                                <span style="color: var(--success); font-weight: 600;" id="bundleTotal">$3,099</span>
+                            </div>
+                            <div class="comparison-item" style="font-weight: 600; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid #d97706;">
+                                <span>You Save</span>
+                                <span style="color: var(--success);" id="savingsAmount">$6,900 (69%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Installation -->
+                <div class="card">
+                    <div class="card-header">
+                        <span>3. Installation Service (Optional)</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="toggle-option selected" onclick="toggleInstall(false)" id="noInstallOption">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Self Install / Own Contractor</div>
+                                <div class="toggle-desc">Full installation guide included</div>
+                            </div>
+                            <div class="toggle-price">+$0</div>
+                            <div class="toggle-check">✓</div>
+                        </div>
+                        <div class="toggle-option" onclick="toggleInstall(true)" id="withInstallOption">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Professional Installation</div>
+                                <div class="toggle-desc">Certified technician, wall mounting, setup</div>
+                            </div>
+                            <div class="toggle-price">+$350</div>
+                            <div class="toggle-check"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delivery Location -->
+                <div class="card">
+                    <div class="card-header">
+                        <span>4. Delivery Location</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="form-label">Country / Region</label>
+                            <select class="form-select" id="regionSelect" onchange="updateShipping()">
+                                <option value="uae" data-shipping="0">UAE (Free Delivery)</option>
+                                <option value="saudi" data-shipping="150">Saudi Arabia (+$150)</option>
+                                <option value="gcc" data-shipping="200">Other GCC (+$200)</option>
+                                <option value="usa" data-shipping="350">USA (+$350)</option>
+                                <option value="australia" data-shipping="400">Australia (+$400)</option>
+                                <option value="europe" data-shipping="300">Europe (+$300)</option>
+                                <option value="other" data-shipping="500">Other International (+$500)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Details -->
+                <div class="card">
+                    <div class="card-header">
+                        <span>5. Your Details</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="input-row">
+                                <div>
+                                    <label class="form-label">First Name <span class="required">*</span></label>
+                                    <input type="text" class="form-input" id="firstName" placeholder="John">
+                                </div>
+                                <div>
+                                    <label class="form-label">Last Name <span class="required">*</span></label>
+                                    <input type="text" class="form-input" id="lastName" placeholder="Smith">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email <span class="required">*</span></label>
+                            <input type="email" class="form-input" id="email" placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone / WhatsApp <span class="required">*</span></label>
+                            <input type="tel" class="form-input" id="phone" placeholder="+971 50 123 4567">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label class="form-label">Project Notes (Optional)</label>
+                            <textarea class="form-input" id="notes" rows="3" placeholder="Any specific requirements or questions..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quote Summary -->
+            <div class="quote-summary">
+                <div class="card">
+                    <div class="quote-total">
+                        <div class="label">Your Quote Total</div>
+                        <div class="amount" id="totalUSD">$3,099</div>
+                        <div class="currency" id="totalAED">AED 11,382</div>
+                    </div>
+
+                    <div class="line-items">
+                        <div class="line-item">
+                            <span class="label" id="enclosureLabel">75" Enclosure</span>
+                            <span class="value" id="enclosurePrice">$1,899</span>
+                        </div>
+                        <div class="line-item" id="tvLine">
+                            <span class="label">Samsung QLED TV</span>
+                            <span class="value" id="tvPrice">$1,200</span>
+                        </div>
+                        <div class="line-item" id="installLine" style="display: none;">
+                            <span class="label">Professional Install</span>
+                            <span class="value">$350</span>
+                        </div>
+                        <div class="line-item" id="shippingLine" style="display: none;">
+                            <span class="label" id="shippingLabel">Shipping</span>
+                            <span class="value" id="shippingPrice">$0</span>
+                        </div>
+                        <div class="line-item total">
+                            <span class="label">Total</span>
+                            <span class="value" id="totalLine">$3,099</span>
+                        </div>
+                        <div class="line-item savings" id="savingsLine">
+                            <span class="label">You Save vs Samsung Terrace</span>
+                            <span class="value" id="savingsLineAmount">$6,900</span>
+                        </div>
+                    </div>
+
+                    <div class="deposit-info">
+                        <p><strong>Deposit Required:</strong> <span id="depositAmount">$1,550</span> (50%)</p>
+                        <p>Balance due before delivery</p>
+                    </div>
+
+                    <div class="cta-buttons">
+                        <button class="btn btn-primary" onclick="submitQuote()">
+                            Request Quote
+                        </button>
+                        <a href="https://wa.me/971505598675?text=Hi%20I%27d%20like%20a%20quote%20for%20a%2075%22%20outdoor%20TV%20enclosure" class="btn btn-whatsapp" target="_blank">
+                            WhatsApp Us
+                        </a>
+                        <button class="btn btn-secondary" onclick="downloadQuote()">
+                            Download PDF Quote
+                        </button>
+                    </div>
+                </div>
+
+                <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 1rem;">
+                    Prices in USD. Delivery 4-6 weeks from order.<br>
+                    2-year warranty included.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quote State
+        let quote = {
+            size: 75,
+            enclosurePrice: 1899,
+            enclosurePriceAED: 7000,
+            includeTv: true,
+            tvPrice: 1200,
+            includeInstall: false,
+            installPrice: 350,
+            shippingPrice: 0,
+            region: 'uae'
+        };
+
+        // TV prices by size
+        const tvPrices = {
+            43: 600,
+            55: 800,
+            65: 1000,
+            75: 1200,
+            86: 1800
+        };
+
+        // Competitor prices for savings calculation
+        const competitorPrices = {
+            43: 4999,
+            55: 5999,
+            65: 7999,
+            75: 9999,
+            86: 12999
+        };
+
+        // Select size
+        function selectSize(size, priceUSD, priceAED) {
+            quote.size = size;
+            quote.enclosurePrice = priceUSD;
+            quote.enclosurePriceAED = priceAED;
+            quote.tvPrice = tvPrices[size];
+
+            // Update UI
+            document.querySelectorAll('.size-option').forEach(el => el.classList.remove('selected'));
+            event.target.closest('.size-option').classList.add('selected');
+
+            document.getElementById('tvBundlePrice').textContent = `+$${quote.tvPrice.toLocaleString()}`;
+            updateQuote();
+        }
+
+        // Toggle TV bundle
+        function toggleTVBundle(include) {
+            quote.includeTv = include;
+            document.getElementById('noTvOption').classList.toggle('selected', !include);
+            document.getElementById('withTvOption').classList.toggle('selected', include);
+            document.getElementById('noTvOption').querySelector('.toggle-check').textContent = include ? '' : '✓';
+            document.getElementById('withTvOption').querySelector('.toggle-check').textContent = include ? '✓' : '';
+            updateQuote();
+        }
+
+        // Toggle installation
+        function toggleInstall(include) {
+            quote.includeInstall = include;
+            document.getElementById('noInstallOption').classList.toggle('selected', !include);
+            document.getElementById('withInstallOption').classList.toggle('selected', include);
+            document.getElementById('noInstallOption').querySelector('.toggle-check').textContent = include ? '' : '✓';
+            document.getElementById('withInstallOption').querySelector('.toggle-check').textContent = include ? '✓' : '';
+            updateQuote();
+        }
+
+        // Update shipping
+        function updateShipping() {
+            const select = document.getElementById('regionSelect');
+            const option = select.options[select.selectedIndex];
+            quote.shippingPrice = parseInt(option.dataset.shipping);
+            quote.region = select.value;
+            updateQuote();
+        }
+
+        // Update quote display
+        function updateQuote() {
+            let total = quote.enclosurePrice;
+            if (quote.includeTv) total += quote.tvPrice;
+            if (quote.includeInstall) total += quote.installPrice;
+            total += quote.shippingPrice;
+
+            const totalAED = Math.round(total * 3.67);
+            const deposit = Math.round(total / 2);
+
+            // Update totals
+            document.getElementById('totalUSD').textContent = `$${total.toLocaleString()}`;
+            document.getElementById('totalAED').textContent = `AED ${totalAED.toLocaleString()}`;
+            document.getElementById('totalLine').textContent = `$${total.toLocaleString()}`;
+            document.getElementById('depositAmount').textContent = `$${deposit.toLocaleString()}`;
+
+            // Update line items
+            document.getElementById('enclosureLabel').textContent = `${quote.size}" Enclosure`;
+            document.getElementById('enclosurePrice').textContent = `$${quote.enclosurePrice.toLocaleString()}`;
+
+            // TV line
+            const tvLine = document.getElementById('tvLine');
+            if (quote.includeTv) {
+                tvLine.style.display = 'flex';
+                document.getElementById('tvPrice').textContent = `$${quote.tvPrice.toLocaleString()}`;
+            } else {
+                tvLine.style.display = 'none';
+            }
+
+            // Install line
+            document.getElementById('installLine').style.display = quote.includeInstall ? 'flex' : 'none';
+
+            // Shipping line
+            const shippingLine = document.getElementById('shippingLine');
+            if (quote.shippingPrice > 0) {
+                shippingLine.style.display = 'flex';
+                document.getElementById('shippingPrice').textContent = `$${quote.shippingPrice}`;
+            } else {
+                shippingLine.style.display = 'none';
+            }
+
+            // Savings calculation
+            const savingsBox = document.getElementById('savingsBox');
+            const savingsLine = document.getElementById('savingsLine');
+            if (quote.includeTv) {
+                const bundleTotal = quote.enclosurePrice + quote.tvPrice;
+                const competitor = competitorPrices[quote.size];
+                const savings = competitor - bundleTotal;
+                const savingsPercent = Math.round((savings / competitor) * 100);
+
+                savingsBox.style.display = 'block';
+                savingsLine.style.display = 'flex';
+
+                document.getElementById('bundleTotal').textContent = `$${bundleTotal.toLocaleString()}`;
+                document.getElementById('savingsAmount').textContent = `$${savings.toLocaleString()} (${savingsPercent}%)`;
+                document.getElementById('savingsLineAmount').textContent = `$${savings.toLocaleString()}`;
+            } else {
+                savingsBox.style.display = 'none';
+                savingsLine.style.display = 'none';
+            }
+        }
+
+        // Submit quote request
+        function submitQuote() {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            if (!firstName || !lastName || !email || !phone) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // Calculate total
+            let total = quote.enclosurePrice;
+            if (quote.includeTv) total += quote.tvPrice;
+            if (quote.includeInstall) total += quote.installPrice;
+            total += quote.shippingPrice;
+
+            // Create email body
+            const subject = `Quote Request - ${quote.size}" Outdoor TV Enclosure`;
+            const body = `
+New Quote Request
+
+Customer: ${firstName} ${lastName}
+Email: ${email}
+Phone: ${phone}
+Region: ${quote.region.toUpperCase()}
+
+Configuration:
+- ${quote.size}" Enclosure: $${quote.enclosurePrice}
+${quote.includeTv ? `- Samsung QLED TV: $${quote.tvPrice}` : '- No TV (enclosure only)'}
+${quote.includeInstall ? '- Professional Installation: $350' : '- Self Install'}
+${quote.shippingPrice > 0 ? `- Shipping: $${quote.shippingPrice}` : ''}
+
+TOTAL: $${total.toLocaleString()} (AED ${Math.round(total * 3.67).toLocaleString()})
+Deposit Required: $${Math.round(total / 2).toLocaleString()}
+
+Notes: ${document.getElementById('notes').value || 'None'}
+            `.trim();
+
+            // Open email client
+            window.location.href = `mailto:apexenclosures@icloud.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            alert('Quote request submitted! Check your email to send.');
+        }
+
+        // Download PDF quote
+        function downloadQuote() {
+            alert('PDF quote generation coming soon! For now, please use "Request Quote" or WhatsApp.');
+        }
+
+        // Initialize
+        updateQuote();
+    </script>
+</body>
+</html>
