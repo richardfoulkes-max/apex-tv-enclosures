@@ -1,0 +1,2152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Outdoor TV Enclosures | Protect Your TV from Extreme Heat</title>
+    <meta name="description" content="Premium weatherproof TV enclosures engineered for outdoor living. Protect any TV from 50°C+ heat, dust, and rain. 5-year warranty. Save 70% vs outdoor TVs.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --primary-light: #1e293b;
+            --accent: #2563eb;
+            --accent-light: #3b82f6;
+            --accent-dark: #1d4ed8;
+            --success: #059669;
+            --warning: #d97706;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --text-light: #94a3b8;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --bg-dark: #0f172a;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        .nav.scrolled {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+        }
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .logo-mark {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+            font-size: 1.25rem;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-cta {
+            background: var(--accent);
+            color: white;
+            padding: 0.75rem 1.75rem;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        .nav-cta:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+        .mobile-menu { display: none; }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 140px 2rem 100px;
+            background: linear-gradient(165deg, var(--bg) 0%, var(--bg-alt) 50%, #e0f2fe 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="80" cy="20" r="40" fill="%232563eb" fill-opacity="0.03"/><circle cx="20" cy="80" r="50" fill="%232563eb" fill-opacity="0.02"/></svg>');
+            background-size: cover;
+        }
+        .hero-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+        }
+        .hero-content { position: relative; z-index: 1; }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #dcfce7 0%, #d1fae5 100%);
+            border: 1px solid #86efac;
+            color: #166534;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .hero-badge::before { content: '✓'; }
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.75rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--accent), #0ea5e9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 520px;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--border);
+        }
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+        }
+        .hero-stat {
+            text-align: left;
+        }
+        .hero-stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+        .hero-stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .hero-visual {
+            position: relative;
+        }
+        .hero-image {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(37, 99, 235, 0.1) 100%);
+        }
+        .tv-placeholder {
+            width: 80%;
+            height: 60%;
+            background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+            border-radius: 8px;
+            border: 4px solid #475569;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .tv-placeholder::after {
+            content: 'Your 75" TV Here';
+            color: #64748b;
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+        .trust-badge {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .trust-badge .rating { color: #f59e0b; }
+
+        /* Problem/Solution */
+        .problem-section {
+            padding: 120px 2rem;
+            background: var(--bg);
+        }
+        .section-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+        .section-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #dbeafe, #e0f2fe);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .section-header h2 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            line-height: 1.7;
+        }
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .problem-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .problem-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            border-color: transparent;
+        }
+        .problem-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+        .problem-card.solution .problem-icon {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+        }
+        .problem-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+        .problem-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Value Comparison */
+        .comparison-section {
+            padding: 120px 2rem;
+            background: var(--bg-dark);
+            color: white;
+        }
+        .comparison-section .section-label {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .comparison-section .section-header h2 { color: white; }
+        .comparison-section .section-header p { color: rgba(255,255,255,0.7); }
+        .comparison-table {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.05);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .comparison-row:last-child { border-bottom: none; }
+        .comparison-row.header {
+            background: rgba(255,255,255,0.05);
+        }
+        .comparison-cell {
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .comparison-row.header .comparison-cell {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.7);
+        }
+        .comparison-cell.feature { font-weight: 500; }
+        .comparison-cell.them {
+            background: rgba(220, 38, 38, 0.1);
+            color: #fca5a5;
+            justify-content: center;
+        }
+        .comparison-cell.us {
+            background: rgba(5, 150, 105, 0.1);
+            color: #6ee7b7;
+            justify-content: center;
+            font-weight: 600;
+        }
+        .comparison-row.header .comparison-cell.us {
+            background: rgba(5, 150, 105, 0.2);
+            color: #6ee7b7;
+        }
+        .price-callout {
+            max-width: 900px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .price-box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .price-box.highlight {
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.2), rgba(16, 185, 129, 0.1));
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+        .price-box h4 {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .price-box .price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        .price-box.highlight .price { color: #6ee7b7; }
+        .price-box p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+        .savings-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Products */
+        .products-section {
+            padding: 120px 2rem;
+            background: var(--bg-alt);
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+        .product-card.featured {
+            border: 2px solid var(--accent);
+            position: relative;
+        }
+        .product-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .product-image {
+            height: 180px;
+            background: linear-gradient(145deg, #f1f5f9 0%, #e2e8f0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-size {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+        .product-body {
+            padding: 1.5rem;
+        }
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        .product-fits {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .product-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        .product-features li {
+            padding: 0.4rem 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .product-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: 700;
+        }
+        .product-price {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .product-price span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        .product-cta {
+            display: block;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            padding: 0.875rem;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .product-cta:hover { background: var(--accent); }
+
+        /* Features */
+        .features-section {
+            padding: 120px 2rem;
+            background: var(--bg);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .feature-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+        .feature-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.1);
+        }
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #dbeafe, #e0f2fe);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Advantages Section */
+        .advantages-section {
+            padding: 120px 2rem;
+            background: var(--bg-dark);
+            color: white;
+        }
+        .advantages-section .section-label {
+            background: rgba(16, 185, 129, 0.2);
+            color: #6ee7b7;
+        }
+        .advantages-section .section-header h2 { color: white; }
+        .advantages-section .section-header p { color: rgba(255,255,255,0.7); }
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .advantage-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            transition: all 0.3s;
+        }
+        .advantage-card:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(16, 185, 129, 0.3);
+            transform: translateY(-4px);
+        }
+        .advantage-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.1));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            flex-shrink: 0;
+        }
+        .advantage-content h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        .advantage-content p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+        .advantage-stat {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.15);
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #6ee7b7;
+            font-weight: 600;
+        }
+        .advantage-stat.winner {
+            background: rgba(16, 185, 129, 0.25);
+        }
+        .comparison-highlight {
+            max-width: 1100px;
+            margin: 3rem auto 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.1));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+        }
+        .comparison-highlight h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        .comparison-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        .comp-stat {
+            text-align: center;
+        }
+        .comp-stat .value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #6ee7b7;
+        }
+        .comp-stat .label {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Outdoor TV Showdown Section */
+        .showdown-section {
+            padding: 120px 2rem;
+            background: linear-gradient(180deg, var(--bg-alt) 0%, #e0f2fe 100%);
+        }
+        .showdown-intro {
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            text-align: center;
+        }
+        .showdown-intro p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        .brand-comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+        }
+        .brand-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .brand-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        }
+        .brand-card.apex {
+            border-color: var(--accent);
+            background: linear-gradient(180deg, #eff6ff 0%, white 30%);
+        }
+        .brand-card.apex .brand-header {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+        }
+        .brand-header {
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+        .brand-card:not(.apex) .brand-header {
+            background: linear-gradient(135deg, #475569, #334155);
+        }
+        .brand-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+        .brand-model {
+            font-size: 0.85rem;
+            opacity: 0.85;
+        }
+        .brand-price-block {
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .brand-price {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .brand-card.apex .brand-price {
+            color: var(--accent);
+        }
+        .brand-price-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+        .brand-specs {
+            padding: 1.5rem;
+        }
+        .brand-spec-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .brand-spec-row:last-child {
+            border-bottom: none;
+        }
+        .spec-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .spec-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .spec-value.good {
+            color: var(--success);
+        }
+        .spec-value.bad {
+            color: #dc2626;
+        }
+        .winner-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--success), #10b981);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-left: 0.5rem;
+        }
+        .tco-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+        .tco-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .tco-header h3 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .tco-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+        .tco-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .tco-card {
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+        .tco-card.highlight {
+            border-color: var(--accent);
+            background: linear-gradient(180deg, #eff6ff 0%, white 100%);
+        }
+        .tco-card h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .tco-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px dashed var(--border);
+        }
+        .tco-line:last-child {
+            border-bottom: none;
+        }
+        .tco-line.total {
+            border-top: 2px solid var(--border);
+            border-bottom: none;
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        .tco-card.highlight .tco-line.total {
+            color: var(--accent);
+        }
+        .tco-line span:first-child {
+            color: var(--text-muted);
+        }
+        .tco-line span:last-child {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .tco-savings {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #dcfce7, #d1fae5);
+            border-radius: 16px;
+        }
+        .tco-savings-amount {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--success);
+        }
+        .tco-savings-label {
+            font-size: 1.1rem;
+            color: #166534;
+            font-weight: 600;
+        }
+
+        @media (max-width: 1024px) {
+            .brand-comparison-grid { grid-template-columns: repeat(2, 1fr); }
+            .tco-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            .brand-comparison-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Testimonial */
+        .testimonial-section {
+            padding: 120px 2rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+        }
+        .testimonial-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .testimonial-content blockquote {
+            font-size: 1.75rem;
+            font-weight: 500;
+            line-height: 1.5;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .testimonial-info h4 { font-weight: 600; }
+        .testimonial-info p { opacity: 0.8; font-size: 0.9rem; }
+
+        /* How It Works */
+        .how-section {
+            padding: 120px 2rem;
+            background: var(--bg-alt);
+        }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        .step-card {
+            text-align: center;
+            position: relative;
+        }
+        .step-card::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -1rem;
+            width: 2rem;
+            height: 2px;
+            background: var(--border);
+        }
+        .step-card:last-child::after { display: none; }
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+        .step-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+        .step-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 2rem;
+            background: var(--bg);
+        }
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, var(--primary), #1e293b);
+            border-radius: 32px;
+            padding: 4rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, transparent 70%);
+        }
+        .cta-container h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        .cta-container p {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .cta-container .btn-primary {
+            background: white;
+            color: var(--primary);
+            font-size: 1.1rem;
+            padding: 1.25rem 2.5rem;
+        }
+        .cta-container .btn-primary:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Contact */
+        .contact-section {
+            padding: 120px 2rem;
+            background: var(--bg-alt);
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .contact-info h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        .contact-info > p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .contact-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #dbeafe, #e0f2fe);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .contact-method h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--primary);
+        }
+        .contact-method a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .contact-method a:hover { text-decoration: underline; }
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: var(--bg-alt);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: white;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 1.125rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-dark);
+            padding: 60px 2rem 30px;
+            color: white;
+        }
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        .footer-brand p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .footer-column h4 {
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .footer-column ul { list-style: none; }
+        .footer-column li { margin-bottom: 0.75rem; }
+        .footer-column a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        .footer-column a:hover { color: white; }
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-bottom p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        /* WhatsApp */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 64px;
+            height: 64px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5);
+            z-index: 999;
+            transition: all 0.3s;
+        }
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.6);
+        }
+        .whatsapp-btn svg {
+            width: 36px;
+            height: 36px;
+            fill: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container { grid-template-columns: 1fr; text-align: center; }
+            .hero-subtitle { margin: 0 auto 2rem; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .hero-visual { display: none; }
+            .nav-links { display: none; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .steps-grid { grid-template-columns: repeat(2, 1fr); }
+            .step-card::after { display: none; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 640px) {
+            .problem-grid, .products-grid, .features-grid, .steps-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .comparison-row { grid-template-columns: 1fr; }
+            .comparison-cell { justify-content: flex-start; }
+            .price-callout { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-mark">A</div>
+                Apex
+            </a>
+            <ul class="nav-links">
+                <li><a href="#products">Products</a></li>
+                <li><a href="#outdoor-tv-comparison">vs Outdoor TVs</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="nav-cta">Get Free Quote</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="hero-badge">Save 70% vs Outdoor TVs</span>
+                <h1>Watch TV <span class="highlight">Outdoors</span> Without Buying an Outdoor TV</h1>
+                <p class="hero-subtitle">Premium weatherproof enclosures that protect your regular TV from extreme heat, dust, and rain. Use any TV brand you love.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">
+                        Get Your Free Quote
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#products" class="btn btn-secondary">View Products</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">50°C+</div>
+                        <div class="hero-stat-label">Heat Protection</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">IP66</div>
+                        <div class="hero-stat-label">Weatherproof</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">5 Year</div>
+                        <div class="hero-stat-label">Warranty</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image">
+                    <div class="tv-placeholder"></div>
+                </div>
+                <div class="trust-badge">
+                    <span class="rating">★★★★★</span>
+                    <span>Trusted by 500+ homes</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution -->
+    <section class="problem-section">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">The Problem</span>
+                <h2>Your TV Wasn't Built for Outdoors</h2>
+                <p>Standard TVs fail within weeks when exposed to outdoor conditions. But outdoor TVs cost a fortune.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">🌡️</div>
+                    <h3>Extreme Heat</h3>
+                    <p>Summer temperatures exceed 50°C, causing TVs to overheat and fail permanently.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">🌧️</div>
+                    <h3>Rain & Humidity</h3>
+                    <p>Water damage destroys electronics. Humidity corrodes internal components over time.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">💸</div>
+                    <h3>Outdoor TVs Cost $10K+</h3>
+                    <p>Samsung Terrace 75" costs $9,999. That's expensive for a TV that still has limitations.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <span class="section-label" style="background: linear-gradient(135deg, #dcfce7, #d1fae5); color: #166534;">The Solution</span>
+            </div>
+            <div class="problem-grid" style="margin-top: 2rem;">
+                <div class="problem-card solution">
+                    <div class="problem-icon">❄️</div>
+                    <h3>Active Cooling</h3>
+                    <p>Thermostat-controlled fans keep your TV cool even in 50°C+ heat. Runs only when needed.</p>
+                </div>
+                <div class="problem-card solution">
+                    <div class="problem-icon">🛡️</div>
+                    <h3>IP66 Sealed</h3>
+                    <p>Completely dust-tight and protected against powerful water jets. Better than most outdoor TVs.</p>
+                </div>
+                <div class="problem-card solution">
+                    <div class="problem-icon">💰</div>
+                    <h3>Save 70%</h3>
+                    <p>Apex enclosure + any 75" TV = $2,999 total. That's $7,000 less than an outdoor TV.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="comparison-section">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">The Smart Choice</span>
+                <h2>Outdoor TV vs Apex Enclosure</h2>
+                <p>See why smart homeowners choose Apex over expensive outdoor TVs.</p>
+            </div>
+            <div class="comparison-table">
+                <div class="comparison-row header">
+                    <div class="comparison-cell feature">Feature</div>
+                    <div class="comparison-cell them">Outdoor TV</div>
+                    <div class="comparison-cell us">Apex + Regular TV</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell feature">75" Complete Setup</div>
+                    <div class="comparison-cell them">$9,999+</div>
+                    <div class="comparison-cell us">$2,999</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell feature">Weather Rating</div>
+                    <div class="comparison-cell them">IP55</div>
+                    <div class="comparison-cell us">IP66 (Better)</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell feature">TV Replacement Cost</div>
+                    <div class="comparison-cell them">$9,999 (new outdoor TV)</div>
+                    <div class="comparison-cell us">$800 (any TV)</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell feature">Brand Choice</div>
+                    <div class="comparison-cell them">Samsung only</div>
+                    <div class="comparison-cell us">Any brand you prefer</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell feature">Upgrade Path</div>
+                    <div class="comparison-cell them">Buy new $10K TV</div>
+                    <div class="comparison-cell us">Swap in latest TV anytime</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-cell feature">Cooling System</div>
+                    <div class="comparison-cell them">Passive only</div>
+                    <div class="comparison-cell us">Active thermostat fans</div>
+                </div>
+            </div>
+            <div class="price-callout">
+                <div class="price-box">
+                    <h4>Samsung Terrace 75"</h4>
+                    <div class="price">$9,999</div>
+                    <p>Limited to one brand, passive cooling</p>
+                </div>
+                <div class="price-box highlight">
+                    <h4>Apex + Samsung 75" QLED</h4>
+                    <div class="price">$2,999</div>
+                    <p>Any TV brand, active cooling, IP66</p>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <span class="savings-badge">Save $7,000+ Instantly</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products-section" id="products">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">Our Products</span>
+                <h2>Choose Your Size</h2>
+                <p>Premium enclosures for every TV size. All include active cooling, IP66 protection, and 5-year warranty.</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-size">55"</span>
+                    </div>
+                    <div class="product-body">
+                        <div class="product-name">Standard Series</div>
+                        <div class="product-fits">Fits 49" - 55" TVs</div>
+                        <ul class="product-features">
+                            <li>4-fan cooling system</li>
+                            <li>Anti-reflective glass</li>
+                            <li>IP66 weatherproof</li>
+                            <li>5-year warranty</li>
+                        </ul>
+                        <div class="product-price">$1,199 <span>USD</span></div>
+                        <a href="#contact" class="product-cta">Get Quote</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-size">65"</span>
+                    </div>
+                    <div class="product-body">
+                        <div class="product-name">Professional Series</div>
+                        <div class="product-fits">Fits 60" - 65" TVs</div>
+                        <ul class="product-features">
+                            <li>5-fan cooling system</li>
+                            <li>Anti-reflective glass</li>
+                            <li>Commercial grade build</li>
+                            <li>5-year warranty</li>
+                        </ul>
+                        <div class="product-price">$1,499 <span>USD</span></div>
+                        <a href="#contact" class="product-cta">Get Quote</a>
+                    </div>
+                </div>
+                <div class="product-card featured">
+                    <div class="product-image">
+                        <span class="product-size">75"</span>
+                    </div>
+                    <div class="product-body">
+                        <div class="product-name">Premium Series</div>
+                        <div class="product-fits">Fits 70" - 75" TVs</div>
+                        <ul class="product-features">
+                            <li>6-fan cooling system</li>
+                            <li>Anti-reflective glass</li>
+                            <li>Heavy-duty construction</li>
+                            <li>5-year warranty</li>
+                        </ul>
+                        <div class="product-price">$1,899 <span>USD</span></div>
+                        <a href="#contact" class="product-cta">Get Quote</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="product-size">86"</span>
+                    </div>
+                    <div class="product-body">
+                        <div class="product-name">Commercial Series</div>
+                        <div class="product-fits">Fits 82" - 86" TVs</div>
+                        <ul class="product-features">
+                            <li>7-fan cooling system</li>
+                            <li>Commercial grade glass</li>
+                            <li>Hospitality grade</li>
+                            <li>5-year warranty</li>
+                        </ul>
+                        <div class="product-price">$2,499 <span>USD</span></div>
+                        <a href="#contact" class="product-cta">Get Quote</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section" id="features">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">Built to Last</span>
+                <h2>Engineering Excellence</h2>
+                <p>Every detail designed to protect your investment in the harshest outdoor conditions.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌡️</div>
+                    <h3>Smart Cooling</h3>
+                    <p>Thermostat-controlled fans activate automatically when temperature rises. Ball-bearing fans rated for 50,000+ hours.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌧️</div>
+                    <h3>IP66 Weatherproof</h3>
+                    <p>Completely sealed against dust and powerful water jets. Protected cable entries. Better than most outdoor TVs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">☀️</div>
+                    <h3>Anti-Glare Glass</h3>
+                    <p>4mm tempered safety glass with AR coating reduces glare by 90%. Crystal clear viewing in bright sunlight.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Easy Access</h3>
+                    <p>Hinged door with gas struts for full TV access. Tool-free filter cleaning. Swap TVs in minutes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔊</div>
+                    <h3>Sound Ports</h3>
+                    <p>Engineered audio channels direct sound outward. No muffled audio. Optional soundbar mounting included.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>5-Year Warranty</h3>
+                    <p>Built with powder-coated aluminum that lasts 10+ years. Comprehensive warranty and local support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Apex Wins -->
+    <section class="advantages-section" id="advantages">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">The Apex Advantage</span>
+                <h2>Why We Beat the Competition</h2>
+                <p>Engineered superiority in every detail. Here's how Apex outperforms other enclosures and outdoor TVs.</p>
+            </div>
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">🔇</div>
+                    <div class="advantage-content">
+                        <h3>Whisper-Quiet Operation</h3>
+                        <p>Our Noctua premium fans run at just 12-14 dBA during normal operation - quieter than a whisper. Even at maximum speed, only 24.6 dBA. Competitors use cheap, noisy fans.</p>
+                        <span class="advantage-stat winner">12-14 dBA vs 35+ dBA typical</span>
+                    </div>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">🛡️</div>
+                    <div class="advantage-content">
+                        <h3>Superior Weather Protection</h3>
+                        <p>IP66 rated - completely dust-tight and protected against powerful water jets. Most outdoor TVs and competitors are only IP55.</p>
+                        <span class="advantage-stat winner">IP66 vs IP55</span>
+                    </div>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">🌡️</div>
+                    <div class="advantage-content">
+                        <h3>Active Smart Cooling</h3>
+                        <p>6 thermostat-controlled fans activate automatically at 30°C. Ball-bearing motors rated for 50,000+ hours. Outdoor TVs use passive cooling only.</p>
+                        <span class="advantage-stat winner">Active vs Passive</span>
+                    </div>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">🔥</div>
+                    <div class="advantage-content">
+                        <h3>Extreme Heat Rated</h3>
+                        <p>Engineered specifically for Gulf climate - tested and certified for 50°C+ ambient temperatures. Samsung Terrace warns against use above 40°C.</p>
+                        <span class="advantage-stat winner">50°C+ vs 40°C limit</span>
+                    </div>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">📺</div>
+                    <div class="advantage-content">
+                        <h3>Any TV Brand You Want</h3>
+                        <p>Use Samsung, Sony, TCL, Hisense - whatever you prefer. Outdoor TVs lock you into one brand. Upgrade to the latest model anytime.</p>
+                        <span class="advantage-stat winner">Your choice vs locked in</span>
+                    </div>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">💰</div>
+                    <div class="advantage-content">
+                        <h3>Dramatically Lower Cost</h3>
+                        <p>Complete 75" setup for $2,999 vs $9,999+ for Samsung Terrace. When your TV eventually fails, replace it for $800 - not $10,000.</p>
+                        <span class="advantage-stat winner">70% savings</span>
+                    </div>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">🔊</div>
+                    <div class="advantage-content">
+                        <h3>Real Audio Solution</h3>
+                        <p>Engineered sound ports plus integrated soundbar mounting bracket. Competitors trap sound inside. We direct it outward for clear audio.</p>
+                        <span class="advantage-stat">Soundbar ready</span>
+                    </div>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">🔧</div>
+                    <div class="advantage-content">
+                        <h3>Easy 15-Minute TV Swap</h3>
+                        <p>Hinged door with gas struts for full access. Swap TVs in 15 minutes with no tools. Outdoor TVs require professional service for any repair.</p>
+                        <span class="advantage-stat">DIY friendly</span>
+                    </div>
+                </div>
+            </div>
+            <div class="comparison-highlight">
+                <h3>The Numbers Don't Lie</h3>
+                <div class="comparison-stats">
+                    <div class="comp-stat">
+                        <div class="value">70%</div>
+                        <div class="label">Cost Savings</div>
+                    </div>
+                    <div class="comp-stat">
+                        <div class="value">IP66</div>
+                        <div class="label">Weather Rating</div>
+                    </div>
+                    <div class="comp-stat">
+                        <div class="value">12 dBA</div>
+                        <div class="label">Whisper Quiet</div>
+                    </div>
+                    <div class="comp-stat">
+                        <div class="value">50°C+</div>
+                        <div class="label">Heat Rated</div>
+                    </div>
+                    <div class="comp-stat">
+                        <div class="value">5 Year</div>
+                        <div class="label">Warranty</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Outdoor TV Showdown -->
+    <section class="showdown-section" id="outdoor-tv-comparison">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">The Real Comparison</span>
+                <h2>Apex vs. Every Outdoor TV Brand</h2>
+            </div>
+            <div class="showdown-intro">
+                <p>Thinking about a Samsung Terrace, SunBrite, or Seura? We compared them all. See exactly what you get for your money with each option - and why savvy buyers choose Apex.</p>
+            </div>
+
+            <!-- Brand Comparison Cards -->
+            <div class="brand-comparison-grid">
+                <!-- Samsung Terrace -->
+                <div class="brand-card">
+                    <div class="brand-header">
+                        <div class="brand-logo">Samsung</div>
+                        <div class="brand-model">Terrace 75" QLED</div>
+                    </div>
+                    <div class="brand-price-block">
+                        <div class="brand-price">$9,999</div>
+                        <div class="brand-price-note">MSRP 2025</div>
+                    </div>
+                    <div class="brand-specs">
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Weather Rating</span>
+                            <span class="spec-value">IP55</span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Heat Tolerance</span>
+                            <span class="spec-value bad">40°C max</span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Cooling System</span>
+                            <span class="spec-value">Passive only</span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Replacement Cost</span>
+                            <span class="spec-value bad">$9,999</span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Brand Choice</span>
+                            <span class="spec-value">Samsung only</span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Upgradeable</span>
+                            <span class="spec-value bad">No</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SunBrite -->
+                <div class="brand-card">
+                    <div class="brand-header">
+                        <div class="brand-logo">SunBrite</div>
+                        <div class="brand-model">Veranda 3 75"</div>
+                    </div>
+                    <div class="brand-price-block">
+                        <div class="brand-price">$6,499</div>
+                        <div class="brand-price-note">MSRP 2025</div>
+                    </div>
+                    <div class="brand-specs">
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Weather Rating</span>
+                            <span class="spec-value">IP55</span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Heat Tolerance</span>
+                            <span class="spec-value bad">40°C max</span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Cooling System</span>
+                            <span class="spec-value">Passive only</span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Replacement Cost</span>
+                            <span class="spec-value bad">$6,499</span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Brand Choice</span>
+                            <span class="spec-value">SunBrite only</span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Upgradeable</span>
+                            <span class="spec-value bad">No</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seura -->
+                <div class="brand-card">
+                    <div class="brand-header">
+                        <div class="brand-logo">Seura</div>
+                        <div class="brand-model">Shade Series 75"</div>
+                    </div>
+                    <div class="brand-price-block">
+                        <div class="brand-price">$10,348</div>
+                        <div class="brand-price-note">MSRP 2025</div>
+                    </div>
+                    <div class="brand-specs">
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Weather Rating</span>
+                            <span class="spec-value">IP55</span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Heat Tolerance</span>
+                            <span class="spec-value bad">40°C max</span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Cooling System</span>
+                            <span class="spec-value">Passive only</span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Replacement Cost</span>
+                            <span class="spec-value bad">$10,348</span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Brand Choice</span>
+                            <span class="spec-value">Seura only</span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Upgradeable</span>
+                            <span class="spec-value bad">No</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Apex -->
+                <div class="brand-card apex">
+                    <div class="brand-header">
+                        <div class="brand-logo">Apex + Any TV</div>
+                        <div class="brand-model">Premium Enclosure 75"</div>
+                    </div>
+                    <div class="brand-price-block">
+                        <div class="brand-price">$2,899</div>
+                        <div class="brand-price-note">Enclosure + Samsung 75" QLED</div>
+                    </div>
+                    <div class="brand-specs">
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Weather Rating</span>
+                            <span class="spec-value good">IP66<span class="winner-badge">Best</span></span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Heat Tolerance</span>
+                            <span class="spec-value good">50°C+<span class="winner-badge">Best</span></span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Cooling System</span>
+                            <span class="spec-value good">Active fans<span class="winner-badge">Best</span></span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Replacement Cost</span>
+                            <span class="spec-value good">$800<span class="winner-badge">Best</span></span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Brand Choice</span>
+                            <span class="spec-value good">Any brand<span class="winner-badge">Best</span></span>
+                        </div>
+                        <div class="brand-spec-row">
+                            <span class="spec-label">Upgradeable</span>
+                            <span class="spec-value good">Yes<span class="winner-badge">Best</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Cost of Ownership -->
+            <div class="tco-section">
+                <div class="tco-header">
+                    <h3>10-Year Total Cost of Ownership</h3>
+                    <p>What you'll really spend over a decade, including one TV replacement</p>
+                </div>
+                <div class="tco-grid">
+                    <!-- Outdoor TV -->
+                    <div class="tco-card">
+                        <h4>Samsung Terrace 75"</h4>
+                        <div class="tco-line">
+                            <span>Initial Purchase</span>
+                            <span>$9,999</span>
+                        </div>
+                        <div class="tco-line">
+                            <span>Replacement at Year 5</span>
+                            <span>$9,999</span>
+                        </div>
+                        <div class="tco-line">
+                            <span>Professional Install (2x)</span>
+                            <span>$800</span>
+                        </div>
+                        <div class="tco-line">
+                            <span>Extended Warranty (2x)</span>
+                            <span>$600</span>
+                        </div>
+                        <div class="tco-line total">
+                            <span>10-Year Total</span>
+                            <span>$21,398</span>
+                        </div>
+                    </div>
+                    <!-- Apex -->
+                    <div class="tco-card highlight">
+                        <h4>Apex + Samsung QLED 75"</h4>
+                        <div class="tco-line">
+                            <span>Enclosure (one-time)</span>
+                            <span>$1,899</span>
+                        </div>
+                        <div class="tco-line">
+                            <span>Initial TV</span>
+                            <span>$1,000</span>
+                        </div>
+                        <div class="tco-line">
+                            <span>Replacement TV at Year 5</span>
+                            <span>$800</span>
+                        </div>
+                        <div class="tco-line">
+                            <span>Installation (DIY-friendly)</span>
+                            <span>$0</span>
+                        </div>
+                        <div class="tco-line">
+                            <span>5-Year Enclosure Warranty</span>
+                            <span>Included</span>
+                        </div>
+                        <div class="tco-line total">
+                            <span>10-Year Total</span>
+                            <span>$3,699</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tco-savings">
+                    <div class="tco-savings-amount">$17,699</div>
+                    <div class="tco-savings-label">Saved Over 10 Years with Apex</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="testimonial-section">
+        <div class="testimonial-content">
+            <blockquote>"We saved over $7,000 compared to buying an outdoor TV. The enclosure keeps our Samsung perfectly cool even in 48°C Dubai summers. Best investment for our pool area."</blockquote>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">👤</div>
+                <div class="testimonial-info">
+                    <h4>Mohammed Al-Rashid</h4>
+                    <p>Villa Owner, Palm Jumeirah</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-section" id="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">Simple Process</span>
+                <h2>How It Works</h2>
+                <p>From quote to installation in just a few easy steps.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Get Your Quote</h3>
+                    <p>Tell us your TV size and location. We'll send a custom quote within 24 hours.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Confirm Order</h3>
+                    <p>Pay 50% deposit to start production. We build your enclosure to order.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>We Deliver</h3>
+                    <p>Your enclosure arrives in 2-3 weeks. Pay balance on delivery.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Professional Install</h3>
+                    <p>Optional pro installation available. Or DIY with our step-by-step guide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2>Ready to Protect Your Investment?</h2>
+            <p>Get a free quote today. No obligation. Fast response via WhatsApp or email.</p>
+            <a href="#contact" class="btn btn-primary">Get Your Free Quote</a>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-section" id="contact">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h2>Get Your Quote</h2>
+                <p>Ready to protect your outdoor TV? Contact us for a personalized quote. We respond within hours.</p>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="contact-icon">📱</div>
+                        <div>
+                            <h4>WhatsApp</h4>
+                            <a href="https://wa.me/971XXXXXXXXX">+971 XX XXX XXXX</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <h4>Email</h4>
+                            <a href="mailto:hello@apexenclosures.com">hello@apexenclosures.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-icon">🌍</div>
+                        <div>
+                            <h4>Worldwide Shipping</h4>
+                            <p style="color: var(--text-muted);">USA, Europe, Middle East, Australia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" id="quoteForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" name="lastName" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone / WhatsApp</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>TV Size Needed</label>
+                        <select name="tvSize" required>
+                            <option value="">Select size...</option>
+                            <option value="55">55" (49-55")</option>
+                            <option value="65">65" (60-65")</option>
+                            <option value="75">75" (70-75") - Most Popular</option>
+                            <option value="86">86" (82-86")</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Country</label>
+                        <select name="country" required>
+                            <option value="">Select country...</option>
+                            <option value="uae">UAE</option>
+                            <option value="saudi">Saudi Arabia</option>
+                            <option value="usa">United States</option>
+                            <option value="australia">Australia</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="spain">Spain</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Message (Optional)</label>
+                    <textarea name="message" rows="3" placeholder="Tell us about your project..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Get My Free Quote</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-mark">A</div>
+                        Apex
+                    </a>
+                    <p>Premium outdoor TV enclosures engineered to protect your investment. Worldwide shipping from our facilities in China and the Middle East.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="#products">55" Enclosure</a></li>
+                        <li><a href="#products">65" Enclosure</a></li>
+                        <li><a href="#products">75" Enclosure</a></li>
+                        <li><a href="#products">86" Enclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Warranty</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Installation Guide</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Also See</h4>
+                    <ul>
+                        <li><a href="../partner/index.html">Partner Program</a></li>
+                        <li><a href="../commercial/index.html">Commercial Sales</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Apex Enclosures. All rights reserved.</p>
+                <p>Global shipping from China & UAE</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/971XXXXXXXXX" class="whatsapp-btn" target="_blank" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Form submission
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            const message = `Hi, I'm interested in an Apex TV Enclosure.
+
+Name: ${data.firstName} ${data.lastName}
+Email: ${data.email}
+Phone: ${data.phone}
+TV Size: ${data.tvSize}"
+Country: ${data.country}
+${data.message ? `Message: ${data.message}` : ''}`;
+
+            window.open(`https://wa.me/971XXXXXXXXX?text=${encodeURIComponent(message)}`, '_blank');
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>China OEM Suppliers - Apex Enclosures</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #f8f9fa;
+        }
+
+        /* Document Navigation */
+        .doc-nav {
+            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .doc-nav h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 0.75rem;
+        }
+        .doc-nav-grid {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .doc-nav .doc-card {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .doc-nav .doc-card:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .doc-nav .doc-card.active {
+            background: white;
+            color: #1428a0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            color: #1428a0;
+            font-size: 24pt;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #6b7280;
+            font-size: 12pt;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: #1428a0;
+            font-size: 16pt;
+            border-bottom: 2px solid #1428a0;
+            padding-bottom: 0.5rem;
+            margin: 2rem 0 1rem;
+        }
+        h2.warning {
+            color: #dc2626;
+            border-color: #dc2626;
+        }
+
+        /* Supplier Cards */
+        .supplier-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .supplier-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+        .supplier-card.recommended {
+            border: 2px solid #16a34a;
+        }
+        .supplier-card.caution {
+            border: 2px solid #d97706;
+        }
+        .supplier-card.avoid {
+            border: 2px solid #dc2626;
+            opacity: 0.7;
+        }
+
+        .card-header {
+            padding: 1rem 1.25rem;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-header h3 {
+            font-size: 14pt;
+            color: #1a1a1a;
+        }
+        .badge {
+            font-size: 9pt;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .badge.recommended {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .badge.top-pick {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .badge.caution {
+            background: #ffedd5;
+            color: #9a3412;
+        }
+        .badge.avoid {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .card-body {
+            padding: 1.25rem;
+        }
+
+        .location {
+            font-size: 10pt;
+            color: #6b7280;
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.5rem 1rem;
+            font-size: 10pt;
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .contact-label {
+            color: #6b7280;
+            font-weight: 500;
+        }
+        .contact-value {
+            color: #1a1a1a;
+        }
+        .contact-value a {
+            color: #1428a0;
+            text-decoration: none;
+        }
+        .contact-value a:hover {
+            text-decoration: underline;
+        }
+
+        .capabilities {
+            margin: 1rem 0;
+        }
+        .capabilities h4 {
+            font-size: 10pt;
+            color: #1428a0;
+            margin-bottom: 0.5rem;
+        }
+        .capabilities ul {
+            margin-left: 1.25rem;
+            font-size: 10pt;
+            color: #374151;
+        }
+        .capabilities li {
+            margin-bottom: 0.25rem;
+        }
+
+        .notes {
+            font-size: 10pt;
+            color: #374151;
+            padding: 0.75rem;
+            background: #fffbeb;
+            border-left: 3px solid #d97706;
+            border-radius: 0 4px 4px 0;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            display: inline-block;
+            background: #1428a0;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 10pt;
+            font-weight: 500;
+            margin-top: 1rem;
+            transition: background 0.2s;
+        }
+        .action-btn:hover {
+            background: #0f1f7a;
+        }
+        .action-btn.whatsapp {
+            background: #25d366;
+        }
+        .action-btn.whatsapp:hover {
+            background: #1da851;
+        }
+
+        /* Strategy Section */
+        .strategy-box {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-top: 2rem;
+        }
+        .strategy-box h3 {
+            color: #1428a0;
+            margin-bottom: 1rem;
+        }
+        .strategy-box ol {
+            margin-left: 1.5rem;
+        }
+        .strategy-box li {
+            margin-bottom: 0.75rem;
+        }
+        .strategy-box li strong {
+            color: #1428a0;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: #fee2e2;
+            border: 2px solid #dc2626;
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+        }
+        .warning-box h4 {
+            color: #991b1b;
+            margin-bottom: 0.5rem;
+        }
+        .warning-box ul {
+            margin-left: 1.25rem;
+            color: #991b1b;
+        }
+
+        /* Avoid List */
+        .avoid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .avoid-item {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        .avoid-item h4 {
+            color: #991b1b;
+            font-size: 11pt;
+            margin-bottom: 0.25rem;
+        }
+        .avoid-item p {
+            color: #7f1d1d;
+            font-size: 9pt;
+        }
+
+        @media print {
+            .doc-nav { display: none; }
+            body { background: white; }
+            .container { padding: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .supplier-grid { grid-template-columns: 1fr; }
+            .container { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="doc-nav">
+        <h3>Manufacturing Documentation</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">Website</a>
+            <a href="specification.html" class="doc-card">Specification</a>
+            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
+            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
+            <a href="control-logic.html" class="doc-card">Control Logic</a>
+            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
+            <a href="market-research.html" class="doc-card">Market Research</a>
+            <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
+            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
+            <a href="engineering-analysis.html" class="doc-card">Engineering Analysis</a>
+            <a href="testing-plan.html" class="doc-card">Testing Plan</a>
+            <a href="china-suppliers.html" class="doc-card active">China Suppliers</a>
+            <a href="go-to-market.html" class="doc-card">Go-to-Market</a>
+            <a href="tv-compatibility.html" class="doc-card">TV Compatibility</a>
+            <a href="audio-noise-video.html" class="doc-card">Audio &amp; Video</a>
+            <a href="designs.html" class="doc-card">Designs</a>
+            <a href="contractors.html" class="doc-card">Contractors</a>
+            <a href="compliance-guide.html" class="doc-card">Compliance Guide</a>
+            <a href="global-pricing.html" class="doc-card">Global Pricing</a>
+            <a href="financial-forecast.html" class="doc-card">Financial Forecast</a>
+            <a href="competitor-analysis.html" class="doc-card">Competitors</a>
+            <a href="legal-risk.html" class="doc-card">Legal Risk</a>
+            <a href="retail/index.html" class="doc-card">Retail</a>
+            <a href="partner/index.html" class="doc-card">Partner</a>
+            <a href="commercial/index.html" class="doc-card">Commercial</a>
+            <a href="partner-crm.html" class="doc-card">Partner CRM</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>China OEM Suppliers</h1>
+        <p class="subtitle">Vetted manufacturers for Apex TV Enclosure production - Updated December 2025</p>
+
+        <!-- Strategy Summary -->
+        <div class="strategy-box">
+            <h3>Supplier Selection Strategy</h3>
+            <ol>
+                <li><strong>Approach KDM Steel first</strong> - They're pure fabricators with 10+ years experience, ISO certified, and specifically make outdoor enclosures to customer specs.</li>
+                <li><strong>Get comparison quote from Hofengfab or SKYT</strong> - Both are industrial enclosure OEMs, not competitors.</li>
+                <li><strong>Don't mention "TV enclosure market"</strong> to fabricators - just say "outdoor electronics enclosure" to avoid them researching the margin opportunity.</li>
+                <li><strong>Never share retail pricing</strong> in RFQs - only share technical specifications.</li>
+            </ol>
+        </div>
+
+        <h2>Recommended OEM Partners</h2>
+        <p style="color: #6b7280; margin-bottom: 1rem;">Pure fabricators who manufacture to YOUR design. They don't have competing products.</p>
+
+        <div class="supplier-grid">
+            <!-- KDM Steel -->
+            <div class="supplier-card recommended">
+                <div class="card-header">
+                    <h3>KDM Steel</h3>
+                    <span class="badge top-pick">TOP PICK</span>
+                </div>
+                <div class="card-body">
+                    <div class="location">Wuxi, Jiangsu Province, China</div>
+
+                    <div class="contact-grid">
+                        <span class="contact-label">Email:</span>
+                        <span class="contact-value"><a href="mailto:sales@kdmsteel.com">sales@kdmsteel.com</a></span>
+
+                        <span class="contact-label">Phone:</span>
+                        <span class="contact-value">+86-13175970882</span>
+
+                        <span class="contact-label">WhatsApp:</span>
+                        <span class="contact-value">+86-13175970882</span>
+
+                        <span class="contact-label">Address:</span>
+                        <span class="contact-value">No.123 Beihui Road, Huishan District, Wuxi</span>
+
+                        <span class="contact-label">Website:</span>
+                        <span class="contact-value"><a href="https://www.kdmsteel.com" target="_blank">kdmsteel.com</a></span>
+                    </div>
+
+                    <div class="capabilities">
+                        <h4>Capabilities</h4>
+                        <ul>
+                            <li>10+ years outdoor enclosure manufacturing</li>
+                            <li>ISO 9001:2015 certified</li>
+                            <li>IP55/IP65/IP66 rated enclosures</li>
+                            <li>Steel and aluminum fabrication</li>
+                            <li>Custom powder coating</li>
+                            <li>OEM/ODM production</li>
+                            <li>Low MOQ (prototype friendly)</li>
+                        </ul>
+                    </div>
+
+                    <div class="notes">
+                        <strong>Why recommended:</strong> They specifically manufacture outdoor TV enclosures and electronics housings. Pure fabricator - no competing products. Established export experience.
+                    </div>
+
+                    <a href="https://wa.me/8613175970882" target="_blank" class="action-btn whatsapp">WhatsApp Contact</a>
+                    <a href="mailto:sales@kdmsteel.com?subject=RFQ%20-%20Outdoor%20Electronics%20Enclosure%2075%22" class="action-btn">Send Email</a>
+                </div>
+            </div>
+
+            <!-- Hofengfab -->
+            <div class="supplier-card recommended">
+                <div class="card-header">
+                    <h3>Hofengfab</h3>
+                    <span class="badge recommended">RECOMMENDED</span>
+                </div>
+                <div class="card-body">
+                    <div class="location">Shenzhen, Guangdong Province, China</div>
+
+                    <div class="contact-grid">
+                        <span class="contact-label">Email:</span>
+                        <span class="contact-value"><a href="mailto:vivian@hofengfab.com">vivian@hofengfab.com</a></span>
+
+                        <span class="contact-label">Website:</span>
+                        <span class="contact-value"><a href="https://www.hofengfab.com" target="_blank">hofengfab.com</a></span>
+                    </div>
+
+                    <div class="capabilities">
+                        <h4>Capabilities</h4>
+                        <ul>
+                            <li>15+ years precision manufacturing</li>
+                            <li>ISO 9001 certified facility</li>
+                            <li>Die-cast aluminum enclosures</li>
+                            <li>IP66/IP67/IP68 ratings</li>
+                            <li>NEMA 4X certified</li>
+                            <li>Exports to Middle East, Europe, North America</li>
+                            <li>Prototyping: 10 days, Production: 15 days</li>
+                        </ul>
+                    </div>
+
+                    <div class="notes">
+                        <strong>Why recommended:</strong> Premium aluminum enclosure specialist. Experience with harsh environment applications (industrial, IoT, automotive). Fast prototyping.
+                    </div>
+
+                    <a href="mailto:vivian@hofengfab.com?subject=RFQ%20-%20IP66%20Aluminum%20Enclosure%2075%22" class="action-btn">Send Email</a>
+                </div>
+            </div>
+
+            <!-- SKYT -->
+            <div class="supplier-card recommended">
+                <div class="card-header">
+                    <h3>SKYT (Hebei Shouke Yuantuo)</h3>
+                    <span class="badge recommended">RECOMMENDED</span>
+                </div>
+                <div class="card-body">
+                    <div class="location">Zhangjiakou, Hebei Province, China</div>
+
+                    <div class="contact-grid">
+                        <span class="contact-label">Contact:</span>
+                        <span class="contact-value">Wendy</span>
+
+                        <span class="contact-label">Email:</span>
+                        <span class="contact-value"><a href="mailto:Wendy@hbskyt.com">Wendy@hbskyt.com</a></span>
+
+                        <span class="contact-label">Phone:</span>
+                        <span class="contact-value">+86-15832266315</span>
+
+                        <span class="contact-label">WhatsApp:</span>
+                        <span class="contact-value">+86-15832266315</span>
+
+                        <span class="contact-label">Skype:</span>
+                        <span class="contact-value">live:sarasales0812</span>
+
+                        <span class="contact-label">Website:</span>
+                        <span class="contact-value"><a href="https://www.hbskyt.com" target="_blank">hbskyt.com</a></span>
+                    </div>
+
+                    <div class="capabilities">
+                        <h4>Capabilities</h4>
+                        <ul>
+                            <li>Established 2013, 3,788m² factory</li>
+                            <li>Outdoor enclosures and cabinets specialist</li>
+                            <li>IP65 weatherproof cabinets</li>
+                            <li>Telecom and industrial enclosures</li>
+                            <li>Non-standard customization</li>
+                            <li>OEM production focus</li>
+                            <li>24-hour response time</li>
+                        </ul>
+                    </div>
+
+                    <div class="notes">
+                        <strong>Why recommended:</strong> Outdoor cabinet specialist - telecom/industrial focus means they understand weatherproofing. Pure OEM, no consumer products.
+                    </div>
+
+                    <a href="https://wa.me/8615832266315" target="_blank" class="action-btn whatsapp">WhatsApp Wendy</a>
+                    <a href="mailto:Wendy@hbskyt.com?subject=RFQ%20-%20Outdoor%20Enclosure%20Custom%20Project" class="action-btn">Send Email</a>
+                </div>
+            </div>
+
+            <!-- MaidaTech -->
+            <div class="supplier-card recommended">
+                <div class="card-header">
+                    <h3>MaidaTech</h3>
+                    <span class="badge recommended">RECOMMENDED</span>
+                </div>
+                <div class="card-body">
+                    <div class="location">Shenzhen, Guangdong Province, China</div>
+
+                    <div class="contact-grid">
+                        <span class="contact-label">Website:</span>
+                        <span class="contact-value"><a href="https://maidatechenclosure.com" target="_blank">maidatechenclosure.com</a></span>
+                    </div>
+
+                    <div class="capabilities">
+                        <h4>Capabilities</h4>
+                        <ul>
+                            <li>9+ years enclosure manufacturing</li>
+                            <li>Custom aluminum enclosures</li>
+                            <li>CNC machining precision parts</li>
+                            <li>IP-rated waterproof enclosures</li>
+                            <li>OEM/ODM services</li>
+                            <li>Global B2B clients</li>
+                            <li>Full customization from drawing to packaging</li>
+                        </ul>
+                    </div>
+
+                    <div class="notes">
+                        <strong>Why recommended:</strong> Custom aluminum specialist with strong CNC capabilities. Good for complex enclosure designs requiring precision.
+                    </div>
+
+                    <a href="https://maidatechenclosure.com" target="_blank" class="action-btn">Visit Website</a>
+                </div>
+            </div>
+
+            <!-- Hongfashunda -->
+            <div class="supplier-card recommended">
+                <div class="card-header">
+                    <h3>Hongfashunda Mould</h3>
+                    <span class="badge recommended">RECOMMENDED</span>
+                </div>
+                <div class="card-body">
+                    <div class="location">Shenzhen, Guangdong Province, China</div>
+
+                    <div class="contact-grid">
+                        <span class="contact-label">Website:</span>
+                        <span class="contact-value"><a href="https://www.enclosure-box-mould.com" target="_blank">enclosure-box-mould.com</a></span>
+
+                        <span class="contact-label">Made-in-China:</span>
+                        <span class="contact-value">Diamond Member</span>
+                    </div>
+
+                    <div class="capabilities">
+                        <h4>Capabilities</h4>
+                        <ul>
+                            <li>ISO 9001 certified</li>
+                            <li>17+ years industry experience</li>
+                            <li>5,000m² production facility</li>
+                            <li>Aluminum extruded enclosures</li>
+                            <li>Sheet metal fabrication</li>
+                            <li>Die casting</li>
+                            <li>MOQ: 2 pieces (existing designs)</li>
+                        </ul>
+                    </div>
+
+                    <div class="notes">
+                        <strong>Why recommended:</strong> Very low MOQ for prototypes. Diamond supplier status on Made-in-China indicates verified quality and reliability.
+                    </div>
+
+                    <a href="https://www.enclosure-box-mould.com" target="_blank" class="action-btn">Visit Website</a>
+                </div>
+            </div>
+
+            <!-- SZOMK -->
+            <div class="supplier-card recommended">
+                <div class="card-header">
+                    <h3>SZOMK Electronics</h3>
+                    <span class="badge recommended">RECOMMENDED</span>
+                </div>
+                <div class="card-body">
+                    <div class="location">Shenzhen, Guangdong Province, China</div>
+
+                    <div class="contact-grid">
+                        <span class="contact-label">Website:</span>
+                        <span class="contact-value"><a href="https://www.chinaenclosure.com" target="_blank">chinaenclosure.com</a></span>
+
+                        <span class="contact-label">Alibaba:</span>
+                        <span class="contact-value"><a href="https://szomk.en.alibaba.com" target="_blank">szomk.en.alibaba.com</a></span>
+                    </div>
+
+                    <div class="capabilities">
+                        <h4>Capabilities</h4>
+                        <ul>
+                            <li>1,000+ existing molds</li>
+                            <li>Plastic and aluminum enclosures</li>
+                            <li>Custom cutouts, silkscreen, laser engraving</li>
+                            <li>Mold development for new designs</li>
+                            <li>Low MOQ (1pc for existing, 1000pc for new mold)</li>
+                            <li>Electronics, industrial, medical applications</li>
+                        </ul>
+                    </div>
+
+                    <div class="notes">
+                        <strong>Why recommended:</strong> Massive mold library means they may have something close to your needs. Good for quick prototypes using existing designs as base.
+                    </div>
+
+                    <a href="https://www.chinaenclosure.com" target="_blank" class="action-btn">Visit Website</a>
+                </div>
+            </div>
+        </div>
+
+        <h2>Proceed with Caution</h2>
+        <p style="color: #6b7280; margin-bottom: 1rem;">May be partners OR competitors depending on relationship. Assess carefully.</p>
+
+        <div class="supplier-grid">
+            <!-- EKAA -->
+            <div class="supplier-card caution">
+                <div class="card-header">
+                    <h3>EKAA Technology</h3>
+                    <span class="badge caution">CAUTION</span>
+                </div>
+                <div class="card-body">
+                    <div class="location">Guangzhou, Guangdong Province, China + Japan office</div>
+
+                    <div class="contact-grid">
+                        <span class="contact-label">Email:</span>
+                        <span class="contact-value"><a href="mailto:Enquiry@ekaa.net">Enquiry@ekaa.net</a></span>
+
+                        <span class="contact-label">Phone:</span>
+                        <span class="contact-value">+86-15899977792</span>
+
+                        <span class="contact-label">WhatsApp:</span>
+                        <span class="contact-value">+86-15899977792</span>
+
+                        <span class="contact-label">WeChat:</span>
+                        <span class="contact-value">EK999777</span>
+
+                        <span class="contact-label">Website:</span>
+                        <span class="contact-value"><a href="https://www.ekaa.net" target="_blank">ekaa.net</a></span>
+                    </div>
+
+                    <div class="capabilities">
+                        <h4>Capabilities</h4>
+                        <ul>
+                            <li>4,000m² factory in Guangzhou</li>
+                            <li>Own enclosure factory + structural engineers</li>
+                            <li>OEM/ODM welcomed</li>
+                            <li>Outdoor digital signage specialist</li>
+                            <li>Export to 100+ countries</li>
+                            <li>3-5 year warranty</li>
+                        </ul>
+                    </div>
+
+                    <div class="notes" style="background: #ffedd5; border-color: #f97316;">
+                        <strong>Caution:</strong> They sell complete digital signage solutions (enclosure + display). Could be a turnkey partner OR could view you as competition. Only approach if you want complete units, not just enclosures.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="warning">Do Not Approach - Competitors</h2>
+
+        <div class="warning-box">
+            <h4>Design Theft Risk</h4>
+            <ul>
+                <li>These companies manufacture and sell their OWN outdoor TV enclosures</li>
+                <li>They will NOT manufacture yours - they'll study your design and compete</li>
+                <li>Never share specifications with these companies</li>
+            </ul>
+        </div>
+
+        <div class="avoid-list">
+            <div class="avoid-item">
+                <h4>DeerTV / Kinytech</h4>
+                <p>Make own enclosures, sell direct to consumers worldwide. Competitor, not supplier.</p>
+            </div>
+            <div class="avoid-item">
+                <h4>Yebox</h4>
+                <p>Same company as DeerTV/Kinytech (same Dongguan address). Sells competing products.</p>
+            </div>
+            <div class="avoid-item">
+                <h4>Apollo Enclosures</h4>
+                <p>US competitor - reference for features only, not a potential supplier.</p>
+            </div>
+            <div class="avoid-item">
+                <h4>Aqualite Outdoor</h4>
+                <p>US competitor - reference for features only, not a potential supplier.</p>
+            </div>
+            <div class="avoid-item">
+                <h4>The TV Shield</h4>
+                <p>US competitor - reference for features only, not a potential supplier.</p>
+            </div>
+        </div>
+
+        <!-- RFQ Template -->
+        <div class="strategy-box" style="margin-top: 3rem;">
+            <h3>Sample RFQ Email Template</h3>
+            <div style="background: #f3f4f6; padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 10pt; white-space: pre-wrap; margin-top: 1rem;">Subject: RFQ - Custom Outdoor Electronics Enclosure (75")
+
+Dear Sales Team,
+
+We are developing an outdoor electronics enclosure for the Gulf region market and seeking an OEM manufacturing partner.
+
+Product: 75-inch outdoor electronics enclosure
+Material: 5052-H32 aluminum frame (2-3mm walls)
+Rating: IP66 weatherproof (IEC 60529)
+Features: PWM fan cooling, hinged door with gas struts, powder coat finish
+Target markets: UAE, Saudi Arabia, Qatar
+
+Initial order: 1-2 prototype samples for validation
+Production: 50-100 units first batch, 500+/year potential
+
+Please advise:
+1. Can you manufacture to our specification? (Technical PDF attached)
+2. Prototype cost and lead time?
+3. Production unit pricing at 50/100/500 quantities?
+4. Are you willing to sign an NDA before we share full specifications?
+
+Best regards,
+Richard Foulkes
+Apex Enclosures
+apexenclosures@icloud.com
++971 50 559 8675 (WhatsApp)</div>
+            <p style="margin-top: 1rem; font-size: 10pt; color: #6b7280;"><strong>Note:</strong> Don't mention "TV enclosure" - say "electronics enclosure" to avoid them researching the market opportunity.</p>
+        </div>
+
+        <p style="text-align: center; color: #9ca3af; font-size: 9pt; margin-top: 3rem;">
+            Last updated: December 2025 | Apex Enclosures
+        </p>
+    </div>
+</body>
+</html>

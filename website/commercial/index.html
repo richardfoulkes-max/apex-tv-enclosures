@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Commercial | Outdoor TV Solutions for Hotels, Restaurants & Venues</title>
+    <meta name="description" content="Commercial-grade outdoor TV enclosures for hospitality, sports bars, and entertainment venues. Professional installation. 5-year warranty.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #059669;
+            --accent-light: #10b981;
+            --accent-dark: #047857;
+            --gold: #d97706;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --bg-dark: #0f172a;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--bg);
+        }
+
+        /* Nav */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(20px);
+        }
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .logo-mark {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+        }
+        .logo span { color: var(--accent-light); font-weight: 400; font-size: 1rem; margin-left: 0.5rem; }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent-light); }
+        .nav-cta {
+            background: var(--accent);
+            color: white;
+            padding: 0.75rem 1.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .nav-cta:hover { background: var(--accent-dark); }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 2rem 80px;
+            background: linear-gradient(165deg, var(--bg-dark) 0%, #1e293b 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.15) 0%, transparent 70%);
+        }
+        .hero-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(5, 150, 105, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent-light);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 .highlight { color: var(--accent-light); }
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        .hero-buttons { display: flex; gap: 1rem; margin-bottom: 3rem; }
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+        }
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .btn-secondary:hover { border-color: var(--accent-light); color: var(--accent-light); }
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 2rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .hero-stat { text-align: center; }
+        .hero-stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-light);
+        }
+        .hero-stat-label {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+        .hero-visual {
+            position: relative;
+        }
+        .hero-image {
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(145deg, #334155, #1e293b);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .venue-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--gold);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .tv-screen {
+            width: 75%;
+            height: 55%;
+            background: linear-gradient(180deg, #475569, #334155);
+            border-radius: 6px;
+            border: 3px solid #64748b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        /* Sectors */
+        .sectors-section {
+            padding: 100px 2rem;
+            background: var(--bg);
+        }
+        .section-container { max-width: 1280px; margin: 0 auto; }
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+        .section-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #dcfce7, #d1fae5);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        .sectors-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .sector-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .sector-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+        }
+        .sector-image {
+            height: 160px;
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+        .sector-body { padding: 1.5rem; }
+        .sector-body h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        .sector-body p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        .sector-stats {
+            display: flex;
+            gap: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        .sector-stat span {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .sector-stat strong {
+            font-size: 1.1rem;
+            color: var(--accent);
+        }
+
+        /* Value Prop */
+        .value-section {
+            padding: 100px 2rem;
+            background: var(--bg-alt);
+        }
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        .value-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        .value-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #dcfce7, #d1fae5);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+        .value-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        .value-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Cost Savings Section */
+        .savings-section {
+            padding: 100px 2rem;
+            background: var(--bg-dark);
+            color: white;
+        }
+        .savings-section .section-label {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-light);
+        }
+        .savings-section .section-header h2 { color: white; }
+        .savings-section .section-header p { color: rgba(255,255,255,0.7); }
+        .savings-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .savings-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+        }
+        .savings-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--accent-light);
+        }
+        .savings-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .savings-item:last-child { border-bottom: none; }
+        .savings-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .savings-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .savings-content p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+        .savings-highlight {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .savings-highlight h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        .savings-highlight p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        /* Case Study */
+        .case-section {
+            padding: 100px 2rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+        }
+        .case-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .case-content h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+        }
+        .case-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .case-stat-value {
+            font-size: 3rem;
+            font-weight: 800;
+        }
+        .case-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .case-quote {
+            font-size: 1.25rem;
+            font-style: italic;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+        .case-author {
+            font-weight: 600;
+        }
+
+        /* Contact */
+        .contact-section {
+            padding: 100px 2rem;
+            background: var(--bg);
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .contact-info h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        .contact-info > p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        .contact-benefits {
+            list-style: none;
+        }
+        .contact-benefits li {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 500;
+        }
+        .contact-benefits li::before {
+            content: '✓';
+            width: 30px;
+            height: 30px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+        .contact-form {
+            background: var(--bg-alt);
+            padding: 2.5rem;
+            border-radius: 20px;
+        }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 1.125rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .submit-btn:hover { background: var(--accent-dark); }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-dark);
+            padding: 60px 2rem 30px;
+            color: white;
+        }
+        .footer-container { max-width: 1280px; margin: 0 auto; }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        .footer-brand p {
+            color: rgba(255,255,255,0.6);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .footer-column h4 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .footer-column ul { list-style: none; }
+        .footer-column li { margin-bottom: 0.75rem; }
+        .footer-column a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .footer-column a:hover { color: white; }
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-container { grid-template-columns: 1fr; }
+            .hero-visual { display: none; }
+            .nav-links { display: none; }
+            .sectors-grid { grid-template-columns: 1fr 1fr; }
+            .value-grid { grid-template-columns: 1fr 1fr; }
+            .savings-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 640px) {
+            .sectors-grid, .value-grid { grid-template-columns: 1fr; }
+            .hero-stats { grid-template-columns: 1fr; }
+            .case-stats { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-mark">A</div>
+                Apex <span>Commercial</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#sectors">Sectors</a></li>
+                <li><a href="#why">Why Apex</a></li>
+                <li><a href="#savings">Cost Savings</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="nav-cta">Get Quote</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="hero-label">Commercial Grade Solutions</span>
+                <h1>Outdoor TV Protection for <span class="highlight">Hotels, Bars & Venues</span></h1>
+                <p class="hero-subtitle">Transform your outdoor spaces with weatherproof TV enclosures. Professional installation. 5-year commercial warranty.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Get Your Quote</a>
+                    <a href="#sectors" class="btn btn-secondary">View Sectors</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">500+</div>
+                        <div class="hero-stat-label">Units Deployed</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">50°C+</div>
+                        <div class="hero-stat-label">Heat Tolerance</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">5 Year</div>
+                        <div class="hero-stat-label">Commercial Warranty</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image">
+                    <span class="venue-badge">SPORTS BAR</span>
+                    <div class="tv-screen">Match Day Ready</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sectors -->
+    <section class="sectors-section" id="sectors">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">Industries We Serve</span>
+                <h2>Built for Commercial Environments</h2>
+                <p>From 5-star resorts to neighborhood sports bars, our enclosures perform 24/7 in the toughest conditions.</p>
+            </div>
+            <div class="sectors-grid">
+                <div class="sector-card">
+                    <div class="sector-image">🏨</div>
+                    <div class="sector-body">
+                        <h3>Hotels & Resorts</h3>
+                        <p>Pool decks, beach clubs, outdoor restaurants, gym terraces, and VIP cabanas.</p>
+                        <div class="sector-stats">
+                            <div class="sector-stat">
+                                <strong>2-10</strong>
+                                <span>Units per property</span>
+                            </div>
+                            <div class="sector-stat">
+                                <strong>75-86"</strong>
+                                <span>Popular sizes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sector-card">
+                    <div class="sector-image">🍺</div>
+                    <div class="sector-body">
+                        <h3>Sports Bars & Pubs</h3>
+                        <p>Outdoor terraces, beer gardens, match day viewing areas, and VIP sections.</p>
+                        <div class="sector-stats">
+                            <div class="sector-stat">
+                                <strong>3-8</strong>
+                                <span>Units per venue</span>
+                            </div>
+                            <div class="sector-stat">
+                                <strong>65-75"</strong>
+                                <span>Popular sizes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sector-card">
+                    <div class="sector-image">🍽️</div>
+                    <div class="sector-body">
+                        <h3>Restaurants & Cafes</h3>
+                        <p>Terrace dining, shisha lounges, rooftop venues, and beachfront restaurants.</p>
+                        <div class="sector-stats">
+                            <div class="sector-stat">
+                                <strong>1-4</strong>
+                                <span>Units per venue</span>
+                            </div>
+                            <div class="sector-stat">
+                                <strong>55-75"</strong>
+                                <span>Popular sizes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sector-card">
+                    <div class="sector-image">🎢</div>
+                    <div class="sector-body">
+                        <h3>Entertainment Venues</h3>
+                        <p>Theme parks, outdoor malls, event spaces, and community centers.</p>
+                        <div class="sector-stats">
+                            <div class="sector-stat">
+                                <strong>10-50+</strong>
+                                <span>Units per project</span>
+                            </div>
+                            <div class="sector-stat">
+                                <strong>75-86"</strong>
+                                <span>Popular sizes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sector-card">
+                    <div class="sector-image">🏋️</div>
+                    <div class="sector-body">
+                        <h3>Fitness & Sports Clubs</h3>
+                        <p>Outdoor gyms, pool areas, tennis clubs, and golf clubhouses.</p>
+                        <div class="sector-stats">
+                            <div class="sector-stat">
+                                <strong>2-6</strong>
+                                <span>Units per facility</span>
+                            </div>
+                            <div class="sector-stat">
+                                <strong>55-75"</strong>
+                                <span>Popular sizes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sector-card">
+                    <div class="sector-image">🏢</div>
+                    <div class="sector-body">
+                        <h3>Corporate Campuses</h3>
+                        <p>Outdoor break areas, rooftop terraces, and employee recreation zones.</p>
+                        <div class="sector-stats">
+                            <div class="sector-stat">
+                                <strong>5-20</strong>
+                                <span>Units per campus</span>
+                            </div>
+                            <div class="sector-stat">
+                                <strong>65-75"</strong>
+                                <span>Popular sizes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Props -->
+    <section class="value-section" id="why">
+        <div class="section-container">
+            <div class="value-grid">
+                <div class="value-card">
+                    <div class="value-icon">💰</div>
+                    <h3>Save 60-70%</h3>
+                    <p>vs. commercial outdoor TVs. Use any standard TV brand and model.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🔧</div>
+                    <h3>Easy Replacement</h3>
+                    <p>TV fails? Swap it out in 15 minutes. No expensive repairs or downtime.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🛡️</div>
+                    <h3>IP66 Protected</h3>
+                    <p>Dust-tight and jet-spray proof. Better protection than most outdoor TVs.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🌡️</div>
+                    <h3>Active Cooling</h3>
+                    <p>Thermostat-controlled fans maintain safe operating temps in 50°C+ heat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cost Savings & Hassle-Free -->
+    <section class="savings-section" id="savings">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">The Bottom Line</span>
+                <h2>Save Money. Reduce Hassle. Get Results.</h2>
+                <p>Commercial outdoor displays shouldn't drain your budget or create maintenance headaches.</p>
+            </div>
+            <div class="savings-grid">
+                <div class="savings-card">
+                    <h3>Massive Cost Savings</h3>
+                    <div class="savings-item">
+                        <div class="savings-icon">💰</div>
+                        <div class="savings-content">
+                            <h4>70% Lower Initial Cost</h4>
+                            <p>Apex + Samsung QLED costs $2,899 vs $9,999 for Samsung Terrace outdoor TV.</p>
+                        </div>
+                    </div>
+                    <div class="savings-item">
+                        <div class="savings-icon">📉</div>
+                        <div class="savings-content">
+                            <h4>90% Cheaper Replacements</h4>
+                            <p>Replace a $800 TV, not a $10,000 outdoor unit when something goes wrong.</p>
+                        </div>
+                    </div>
+                    <div class="savings-item">
+                        <div class="savings-icon">🏷️</div>
+                        <div class="savings-content">
+                            <h4>No Premium TV Tax</h4>
+                            <p>Use any commercial or consumer TV brand. No vendor lock-in.</p>
+                        </div>
+                    </div>
+                    <div class="savings-item">
+                        <div class="savings-icon">📊</div>
+                        <div class="savings-content">
+                            <h4>Project Pricing Available</h4>
+                            <p>Multi-unit projects receive competitive project pricing.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="savings-card">
+                    <h3>Zero Hassle Operation</h3>
+                    <div class="savings-item">
+                        <div class="savings-icon">⏱️</div>
+                        <div class="savings-content">
+                            <h4>15-Minute TV Swap</h4>
+                            <p>Staff can replace a TV themselves. No technician callout needed.</p>
+                        </div>
+                    </div>
+                    <div class="savings-item">
+                        <div class="savings-icon">🛒</div>
+                        <div class="savings-content">
+                            <h4>Local TV Sourcing</h4>
+                            <p>Pick up a replacement TV from any electronics store, same day.</p>
+                        </div>
+                    </div>
+                    <div class="savings-item">
+                        <div class="savings-icon">🔧</div>
+                        <div class="savings-content">
+                            <h4>Simple Installation</h4>
+                            <p>Standard VESA mount. Any AV installer can set it up.</p>
+                        </div>
+                    </div>
+                    <div class="savings-item">
+                        <div class="savings-icon">📋</div>
+                        <div class="savings-content">
+                            <h4>One Point of Contact</h4>
+                            <p>Dedicated project manager handles everything from quote to install.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="savings-highlight">
+                <h3>Your 8-Screen Project? $56,000 Saved.</h3>
+                <p>That's the difference between Apex + standard TVs versus outdoor-rated TVs. Same outdoor performance. Fraction of the cost.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study -->
+    <section class="case-section">
+        <div class="case-content">
+            <h2>Real Results from Real Venues</h2>
+            <div class="case-stats">
+                <div>
+                    <div class="case-stat-value">8</div>
+                    <div class="case-stat-label">75" Units Installed</div>
+                </div>
+                <div>
+                    <div class="case-stat-value">$56K</div>
+                    <div class="case-stat-label">Saved vs Outdoor TVs</div>
+                </div>
+                <div>
+                    <div class="case-stat-value">100%</div>
+                    <div class="case-stat-label">Uptime During Summer</div>
+                </div>
+            </div>
+            <p class="case-quote">"We were quoted $80,000 for 8 Samsung Terrace units. Apex delivered the same outdoor viewing experience for under $24,000 total including installation."</p>
+            <p class="case-author">- Operations Manager, Dubai Sports Bar Group</p>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-section" id="contact">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h2>Get Your Commercial Quote</h2>
+                <p>Tell us about your project and we'll prepare a detailed proposal within 24 hours.</p>
+                <ul class="contact-benefits">
+                    <li>Free site assessment for projects 5+ units</li>
+                    <li>Dedicated project manager assigned</li>
+                    <li>Professional installation included</li>
+                    <li>Flexible payment terms available</li>
+                    <li>Priority support for commercial clients</li>
+                </ul>
+            </div>
+            <form class="contact-form" id="quoteForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Company</label>
+                        <input type="text" name="company" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Industry</label>
+                        <select name="industry" required>
+                            <option value="">Select...</option>
+                            <option value="hotel">Hotel / Resort</option>
+                            <option value="restaurant">Restaurant / Bar</option>
+                            <option value="sports">Sports Venue</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="corporate">Corporate</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity Needed</label>
+                        <select name="quantity" required>
+                            <option value="">Select...</option>
+                            <option value="1-4">1-4 units</option>
+                            <option value="5-9">5-9 units</option>
+                            <option value="10-19">10-19 units</option>
+                            <option value="20+">20+ units</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Project Details</label>
+                    <textarea name="details" rows="3" placeholder="Tell us about your venue and requirements..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Request Commercial Quote</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-mark">A</div>
+                        Apex <span>Commercial</span>
+                    </a>
+                    <p>Commercial-grade outdoor TV protection for hospitality, entertainment, and corporate environments worldwide.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li><a href="#">Hotels & Resorts</a></li>
+                        <li><a href="#">Sports Bars</a></li>
+                        <li><a href="#">Restaurants</a></li>
+                        <li><a href="#">Entertainment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="../index.html">Main Site</a></li>
+                        <li><a href="../retail/index.html">Retail</a></li>
+                        <li><a href="../partner/index.html">Partners</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Installation</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Apex Commercial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            const message = `Commercial Inquiry:
+Name: ${data.name}
+Company: ${data.company}
+Email: ${data.email}
+Phone: ${data.phone}
+Industry: ${data.industry}
+Quantity: ${data.quantity}
+Details: ${data.details || 'Not provided'}`;
+            window.open(`https://wa.me/971XXXXXXXXX?text=${encodeURIComponent(message)}`, '_blank');
+        });
+    </script>
+</body>
+</html>

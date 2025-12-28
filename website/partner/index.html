@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Partner Program | Global Distribution Opportunities</title>
+    <meta name="description" content="Become an Apex distribution partner. High-margin outdoor TV enclosures with AI-powered support. Exclusive territories available worldwide.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #7c3aed;
+            --accent-light: #a78bfa;
+            --accent-dark: #6d28d9;
+            --gold: #f59e0b;
+            --green: #10b981;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --bg-dark: #0f172a;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--bg);
+        }
+
+        /* Nav */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(20px);
+        }
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .logo-mark {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+        }
+        .logo span { color: var(--accent-light); font-weight: 400; font-size: 1rem; margin-left: 0.5rem; }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent-light); }
+        .nav-cta {
+            background: var(--accent);
+            color: white;
+            padding: 0.75rem 1.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .nav-cta:hover { background: var(--accent-dark); }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 2rem 80px;
+            background: linear-gradient(165deg, var(--bg-dark) 0%, #1e1b4b 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+        }
+        .hero-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(124, 58, 237, 0.2);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            color: var(--accent-light);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 .highlight { color: var(--accent-light); }
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        .hero-buttons { display: flex; gap: 1rem; margin-bottom: 3rem; }
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+        }
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .btn-secondary:hover { border-color: var(--accent-light); color: var(--accent-light); }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .hero-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .hero-stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+        .hero-stat-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 0.25rem;
+        }
+
+        .global-map {
+            position: relative;
+            padding: 2rem;
+        }
+        .map-visual {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+        }
+        .map-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--accent-light);
+        }
+        .region-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        .region-tag {
+            background: rgba(124, 58, 237, 0.2);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .region-tag.hot {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: rgba(245, 158, 11, 0.4);
+            color: var(--gold);
+        }
+
+        /* Why Partner */
+        .why-section {
+            padding: 100px 2rem;
+            background: var(--bg);
+        }
+        .section-container { max-width: 1280px; margin: 0 auto; }
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+        .section-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .benefit-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+        }
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .benefit-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+        .benefit-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .benefit-highlight {
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #92400e;
+        }
+
+        /* Global Markets */
+        .markets-section {
+            padding: 100px 2rem;
+            background: linear-gradient(165deg, var(--bg-dark) 0%, #1e1b4b 100%);
+            color: white;
+        }
+        .markets-section .section-label {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--gold);
+        }
+        .markets-section .section-header h2 { color: white; }
+        .markets-section .section-header p { color: rgba(255,255,255,0.7); }
+
+        .markets-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .market-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        .market-card:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--accent-light);
+        }
+        .market-card.priority {
+            border-color: var(--gold);
+            background: rgba(245, 158, 11, 0.1);
+        }
+        .market-region {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 0.5rem;
+        }
+        .market-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .market-countries {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
+        }
+        .market-status {
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        .market-status.open {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+        }
+        .market-status.hot {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--gold);
+        }
+
+        /* AI Powered */
+        .ai-section {
+            padding: 100px 2rem;
+            background: var(--bg-alt);
+        }
+        .ai-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .ai-content h2 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        .ai-content > p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        .ai-features {
+            list-style: none;
+        }
+        .ai-features li {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .ai-features li::before {
+            content: '🤖';
+            font-size: 1.25rem;
+        }
+        .ai-features strong {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .ai-features span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .ai-visual {
+            background: linear-gradient(135deg, var(--bg-dark), #1e1b4b);
+            border-radius: 24px;
+            padding: 3rem;
+            color: white;
+        }
+        .ai-visual h3 {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--accent-light);
+        }
+        .ai-stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .ai-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+        }
+        .ai-stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+        .ai-stat-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 0.25rem;
+        }
+
+        /* Partner Types */
+        .partners-section {
+            padding: 100px 2rem;
+            background: var(--bg);
+        }
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .partner-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .partner-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+        .partner-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            text-align: center;
+        }
+        .partner-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .partner-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .partner-body {
+            padding: 2rem;
+        }
+        .partner-body ul {
+            list-style: none;
+        }
+        .partner-body li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+        }
+        .partner-body li:last-child { border-bottom: none; }
+        .partner-body li::before {
+            content: '✓';
+            width: 24px;
+            height: 24px;
+            background: var(--green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .partner-margin {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #dcfce7, #d1fae5);
+            border-radius: 12px;
+            text-align: center;
+        }
+        .partner-margin-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #059669;
+        }
+        .partner-margin-label {
+            font-size: 0.85rem;
+            color: #047857;
+        }
+
+        /* Economics */
+        .economics-section {
+            padding: 100px 2rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+        }
+        .economics-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .economics-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        .economics-content > p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+        }
+        .economics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .econ-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+        .econ-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+        .econ-label {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            margin-top: 0.5rem;
+        }
+        .economics-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: white;
+            color: var(--accent);
+            padding: 1.25rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        .economics-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+
+        /* Contact */
+        .contact-section {
+            padding: 100px 2rem;
+            background: var(--bg);
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .contact-info h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        .contact-info > p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        .contact-points {
+            list-style: none;
+        }
+        .contact-points li {
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .contact-points li::before {
+            content: '→';
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        .contact-points strong {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .contact-points span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .contact-form {
+            background: var(--bg-alt);
+            padding: 2.5rem;
+            border-radius: 20px;
+        }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 1.125rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .submit-btn:hover { background: var(--accent-dark); }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-dark);
+            padding: 60px 2rem 30px;
+            color: white;
+        }
+        .footer-container { max-width: 1280px; margin: 0 auto; }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        .footer-brand p {
+            color: rgba(255,255,255,0.6);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .footer-column h4 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .footer-column ul { list-style: none; }
+        .footer-column li { margin-bottom: 0.75rem; }
+        .footer-column a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .footer-column a:hover { color: white; }
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-container { grid-template-columns: 1fr; }
+            .global-map { display: none; }
+            .nav-links { display: none; }
+            .benefits-grid { grid-template-columns: 1fr 1fr; }
+            .markets-grid { grid-template-columns: 1fr 1fr; }
+            .ai-grid { grid-template-columns: 1fr; }
+            .partners-grid { grid-template-columns: 1fr 1fr; }
+            .economics-grid { grid-template-columns: 1fr 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 640px) {
+            .benefits-grid, .markets-grid, .partners-grid { grid-template-columns: 1fr; }
+            .hero-stats { grid-template-columns: 1fr 1fr; }
+            .economics-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-mark">A</div>
+                Apex <span>Partners</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#why">Why Partner</a></li>
+                <li><a href="#markets">Markets</a></li>
+                <li><a href="#types">Partner Types</a></li>
+                <li><a href="#contact">Apply</a></li>
+            </ul>
+            <a href="#contact" class="nav-cta">Become a Partner</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="hero-label">Global Partner Program</span>
+                <h1>Distribute Apex Enclosures in <span class="highlight">Your Market</span></h1>
+                <p class="hero-subtitle">High-margin outdoor TV enclosures with AI-powered sales support. We handle inquiries 24/7 in any language. You focus on closing deals and installations.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Apply for Partnership</a>
+                    <a href="#markets" class="btn btn-secondary">View Open Markets</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">45-60%</div>
+                        <div class="hero-stat-label">Partner Margins</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">40+</div>
+                        <div class="hero-stat-label">Markets Open</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">24/7</div>
+                        <div class="hero-stat-label">AI Lead Support</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">0</div>
+                        <div class="hero-stat-label">Inventory Required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="global-map">
+                <div class="map-visual">
+                    <div class="map-title">Territories Available Worldwide</div>
+                    <div class="region-tags">
+                        <span class="region-tag hot">Middle East</span>
+                        <span class="region-tag hot">Southeast Asia</span>
+                        <span class="region-tag hot">Latin America</span>
+                        <span class="region-tag">Africa</span>
+                        <span class="region-tag">Caribbean</span>
+                        <span class="region-tag">South Asia</span>
+                        <span class="region-tag">Eastern Europe</span>
+                        <span class="region-tag">Pacific Islands</span>
+                        <span class="region-tag">Central Asia</span>
+                        <span class="region-tag">Mediterranean</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Partner -->
+    <section class="why-section" id="why">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">The Apex Advantage</span>
+                <h2>Why Partners Choose Apex</h2>
+                <p>We've built the infrastructure to support partners anywhere in the world. You bring local market knowledge; we bring everything else.</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <h3>High Margins, Low Risk</h3>
+                    <p>45-60% partner margins on a product that sells itself. No inventory required - we drop-ship directly to your customers.</p>
+                    <div class="benefit-highlight">$800-1,200 profit per unit</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🤖</div>
+                    <h3>AI Handles Lead Gen</h3>
+                    <p>Our AI system responds to inquiries in seconds, qualifies leads, and books appointments. Works 24/7 in any language.</p>
+                    <div class="benefit-highlight">You only talk to qualified buyers</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌍</div>
+                    <h3>Exclusive Territories</h3>
+                    <p>Secure exclusive distribution rights for your country or region. No competing with other partners in your market.</p>
+                    <div class="benefit-highlight">First-mover advantage available</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📦</div>
+                    <h3>Drop-Ship Ready</h3>
+                    <p>We ship directly to your customers from manufacturing. No warehousing, no inventory risk, no logistics headaches.</p>
+                    <div class="benefit-highlight">Zero upfront inventory cost</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📈</div>
+                    <h3>Marketing Support</h3>
+                    <p>White-label marketing materials, localized content, and digital ad templates ready for your market.</p>
+                    <div class="benefit-highlight">Launch in days, not months</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔧</div>
+                    <h3>Technical Training</h3>
+                    <p>Comprehensive installation training, technical documentation, and ongoing support for your team.</p>
+                    <div class="benefit-highlight">Full certification program</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Markets -->
+    <section class="markets-section" id="markets">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">Global Expansion</span>
+                <h2>40+ Markets Open for Partners</h2>
+                <p>We're aggressively expanding into tier 2 and tier 3 markets where outdoor entertainment is booming but competition is minimal.</p>
+            </div>
+            <div class="markets-grid">
+                <div class="market-card priority">
+                    <div class="market-region">Middle East</div>
+                    <h4>GCC Countries</h4>
+                    <p class="market-countries">UAE, Saudi Arabia, Qatar, Kuwait, Bahrain, Oman</p>
+                    <span class="market-status hot">High Priority</span>
+                </div>
+                <div class="market-card priority">
+                    <div class="market-region">Southeast Asia</div>
+                    <h4>ASEAN Markets</h4>
+                    <p class="market-countries">Thailand, Vietnam, Philippines, Indonesia, Malaysia, Singapore</p>
+                    <span class="market-status hot">High Priority</span>
+                </div>
+                <div class="market-card priority">
+                    <div class="market-region">Latin America</div>
+                    <h4>LATAM Markets</h4>
+                    <p class="market-countries">Mexico, Brazil, Colombia, Chile, Argentina, Peru, Panama</p>
+                    <span class="market-status hot">High Priority</span>
+                </div>
+                <div class="market-card">
+                    <div class="market-region">Africa</div>
+                    <h4>Sub-Saharan</h4>
+                    <p class="market-countries">South Africa, Nigeria, Kenya, Ghana, Tanzania, Morocco, Egypt</p>
+                    <span class="market-status open">Open</span>
+                </div>
+                <div class="market-card">
+                    <div class="market-region">Caribbean</div>
+                    <h4>Island Nations</h4>
+                    <p class="market-countries">Jamaica, Dominican Republic, Bahamas, Barbados, Trinidad</p>
+                    <span class="market-status open">Open</span>
+                </div>
+                <div class="market-card">
+                    <div class="market-region">South Asia</div>
+                    <h4>Indian Subcontinent</h4>
+                    <p class="market-countries">India, Pakistan, Sri Lanka, Bangladesh, Nepal</p>
+                    <span class="market-status open">Open</span>
+                </div>
+                <div class="market-card">
+                    <div class="market-region">Eastern Europe</div>
+                    <h4>Emerging Markets</h4>
+                    <p class="market-countries">Turkey, Poland, Czech Republic, Hungary, Romania, Greece</p>
+                    <span class="market-status open">Open</span>
+                </div>
+                <div class="market-card">
+                    <div class="market-region">Pacific</div>
+                    <h4>Oceania</h4>
+                    <p class="market-countries">Australia, New Zealand, Fiji, Papua New Guinea</p>
+                    <span class="market-status open">Open</span>
+                </div>
+                <div class="market-card">
+                    <div class="market-region">Central Asia</div>
+                    <h4">Silk Road Markets</h4>
+                    <p class="market-countries">Kazakhstan, Uzbekistan, Azerbaijan, Georgia</p>
+                    <span class="market-status open">Open</span>
+                </div>
+                <div class="market-card">
+                    <div class="market-region">Mediterranean</div>
+                    <h4>Southern Europe</h4>
+                    <p class="market-countries">Spain, Portugal, Italy, Cyprus, Malta, Croatia</p>
+                    <span class="market-status open">Open</span>
+                </div>
+                <div class="market-card">
+                    <div class="market-region">North Africa</div>
+                    <h4>Maghreb</h4>
+                    <p class="market-countries">Morocco, Tunisia, Algeria, Libya</p>
+                    <span class="market-status open">Open</span>
+                </div>
+                <div class="market-card">
+                    <div class="market-region">Central America</div>
+                    <h4>Bridge Markets</h4>
+                    <p class="market-countries">Costa Rica, Guatemala, Honduras, El Salvador</p>
+                    <span class="market-status open">Open</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Powered -->
+    <section class="ai-section" id="ai">
+        <div class="section-container">
+            <div class="ai-grid">
+                <div class="ai-content">
+                    <h2>AI-Powered Partner Support</h2>
+                    <p>Our AI system lets you scale across multiple markets without scaling your team. We handle the heavy lifting so you can focus on closing deals.</p>
+                    <ul class="ai-features">
+                        <li>
+                            <div>
+                                <strong>Instant Lead Response</strong>
+                                <span>AI responds to inquiries in under 30 seconds, 24/7/365. Never lose a lead to slow response times.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <strong>Multi-Language Support</strong>
+                                <span>Handles conversations in Arabic, Spanish, Portuguese, French, and 20+ languages natively.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <strong>Smart Lead Qualification</strong>
+                                <span>AI qualifies budget, timeline, and project scope before passing to you. Only speak with ready buyers.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <strong>Automated Follow-Up</strong>
+                                <span>Never let a lead go cold. AI nurtures prospects with personalized follow-ups until they're ready.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <strong>Quote Generation</strong>
+                                <span>AI generates accurate quotes instantly based on project requirements and your territory pricing.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ai-visual">
+                    <h3>How It Works for Partners</h3>
+                    <div class="ai-stat-grid">
+                        <div class="ai-stat">
+                            <div class="ai-stat-value">&lt;30s</div>
+                            <div class="ai-stat-label">Lead Response Time</div>
+                        </div>
+                        <div class="ai-stat">
+                            <div class="ai-stat-value">85%</div>
+                            <div class="ai-stat-label">Leads Pre-Qualified</div>
+                        </div>
+                        <div class="ai-stat">
+                            <div class="ai-stat-value">24/7</div>
+                            <div class="ai-stat-label">Coverage</div>
+                        </div>
+                        <div class="ai-stat">
+                            <div class="ai-stat-value">20+</div>
+                            <div class="ai-stat-label">Languages</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partner Types -->
+    <section class="partners-section" id="types">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">Partnership Models</span>
+                <h2>Choose Your Partnership Level</h2>
+                <p>Whether you're an AV integrator, hospitality supplier, or regional distributor, we have a partnership model that fits.</p>
+            </div>
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <div class="partner-header">
+                        <div class="partner-icon">🔧</div>
+                        <h3>AV Integrators</h3>
+                    </div>
+                    <div class="partner-body">
+                        <ul>
+                            <li>Sell to your existing commercial clients</li>
+                            <li>Bundle with installation services</li>
+                            <li>Technical training included</li>
+                            <li>Project-by-project ordering</li>
+                            <li>No minimum order requirements</li>
+                        </ul>
+                        <div class="partner-margin">
+                            <div class="partner-margin-value">45%</div>
+                            <div class="partner-margin-label">Standard Margin</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-header">
+                        <div class="partner-icon">🏨</div>
+                        <h3>Hospitality Suppliers</h3>
+                    </div>
+                    <div class="partner-body">
+                        <ul>
+                            <li>Add to your hotel/restaurant catalog</li>
+                            <li>FF&E specification support</li>
+                            <li>Project design assistance</li>
+                            <li>Bulk pricing available</li>
+                            <li>Co-branded proposals</li>
+                        </ul>
+                        <div class="partner-margin">
+                            <div class="partner-margin-value">50%</div>
+                            <div class="partner-margin-label">Preferred Margin</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-header">
+                        <div class="partner-icon">🌍</div>
+                        <h3>Regional Distributors</h3>
+                    </div>
+                    <div class="partner-body">
+                        <ul>
+                            <li>Exclusive territory rights</li>
+                            <li>Build local dealer network</li>
+                            <li>Marketing development funds</li>
+                            <li>Volume incentive bonuses</li>
+                            <li>Full white-label available</li>
+                        </ul>
+                        <div class="partner-margin">
+                            <div class="partner-margin-value">60%</div>
+                            <div class="partner-margin-label">Distributor Margin</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Economics -->
+    <section class="economics-section">
+        <div class="economics-content">
+            <h2>The Partner Economics</h2>
+            <p>Here's what a typical partner earns per sale:</p>
+            <div class="economics-grid">
+                <div class="econ-card">
+                    <div class="econ-value">$2,400</div>
+                    <div class="econ-label">Your Selling Price (75")</div>
+                </div>
+                <div class="econ-card">
+                    <div class="econ-value">$1,200</div>
+                    <div class="econ-label">Your Cost (50% margin)</div>
+                </div>
+                <div class="econ-card">
+                    <div class="econ-value">$1,200</div>
+                    <div class="econ-label">Gross Profit Per Unit</div>
+                </div>
+                <div class="econ-card">
+                    <div class="econ-value">$60,000</div>
+                    <div class="econ-label">50 Units/Year Profit</div>
+                </div>
+            </div>
+            <a href="#contact" class="economics-cta">Calculate Your Market Potential →</a>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-section" id="contact">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h2>Apply for Partnership</h2>
+                <p>Tell us about your business and target market. We'll review your application and respond within 48 hours.</p>
+                <ul class="contact-points">
+                    <li>
+                        <div>
+                            <strong>No upfront investment required</strong>
+                            <span>Start selling immediately with drop-ship fulfillment</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <strong>Territory exclusivity available</strong>
+                            <span>Secure your market before competitors do</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <strong>Full onboarding support</strong>
+                            <span>Training, materials, and dedicated partner manager</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <strong>AI lead system access</strong>
+                            <span>Start receiving qualified leads in your territory</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <form class="contact-form" id="partnerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Company</label>
+                        <input type="text" name="company" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone / WhatsApp</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Country / Region</label>
+                        <input type="text" name="region" placeholder="e.g., Thailand, Brazil, South Africa" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Partner Type</label>
+                        <select name="type" required>
+                            <option value="">Select...</option>
+                            <option value="integrator">AV Integrator</option>
+                            <option value="hospitality">Hospitality Supplier</option>
+                            <option value="distributor">Regional Distributor</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Tell Us About Your Business</label>
+                    <textarea name="details" rows="3" placeholder="Current business, target customers, why you're interested in Apex..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Partnership Application</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-mark">A</div>
+                        Apex <span>Partners</span>
+                    </a>
+                    <p>Global distribution partner program for premium outdoor TV enclosures. AI-powered support. High margins. Zero inventory risk.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Partner Program</h4>
+                    <ul>
+                        <li><a href="#why">Why Partner</a></li>
+                        <li><a href="#markets">Open Markets</a></li>
+                        <li><a href="#types">Partner Types</a></li>
+                        <li><a href="#contact">Apply Now</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Partner Portal</a></li>
+                        <li><a href="#">Marketing Kit</a></li>
+                        <li><a href="#">Technical Docs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="../index.html">Main Site</a></li>
+                        <li><a href="../retail/index.html">Retail</a></li>
+                        <li><a href="../commercial/index.html">Commercial</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Apex Enclosures. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('partnerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            const message = `Partnership Application:
+Name: ${data.name}
+Company: ${data.company}
+Email: ${data.email}
+Phone: ${data.phone}
+Region: ${data.region}
+Type: ${data.type}
+Details: ${data.details || 'Not provided'}`;
+            window.open(`https://wa.me/971XXXXXXXXX?text=${encodeURIComponent(message)}`, '_blank');
+        });
+    </script>
+</body>
+</html>

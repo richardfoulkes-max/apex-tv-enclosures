@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Competitor Analysis - Apex Enclosures</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #f8f9fa;
+        }
+
+        .doc-nav {
+            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+            padding: 1rem 2rem;
+        }
+        .doc-nav h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 0.75rem;
+        }
+        .doc-nav-grid { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .doc-nav .doc-card {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .doc-nav .doc-card:hover { background: rgba(255,255,255,0.2); }
+        .doc-nav .doc-card.active { background: white; color: #1428a0; }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        h1 { color: #1428a0; font-size: 28pt; margin-bottom: 0.5rem; }
+        .subtitle { color: #6b7280; font-size: 14pt; margin-bottom: 2rem; }
+
+        h2 {
+            color: #1428a0;
+            font-size: 18pt;
+            border-bottom: 3px solid #1428a0;
+            padding-bottom: 0.5rem;
+            margin: 2.5rem 0 1.5rem;
+        }
+        h2.red { border-color: #dc2626; color: #dc2626; }
+        h2.orange { border-color: #d97706; color: #d97706; }
+        h2.green { border-color: #059669; color: #059669; }
+        h2.purple { border-color: #7c3aed; color: #7c3aed; }
+
+        h3 { color: #374151; font-size: 14pt; margin: 1.5rem 0 1rem; }
+
+        /* Competitor Cards */
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .competitor-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .competitor-header {
+            padding: 1rem 1.5rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .competitor-header.enclosure { background: linear-gradient(135deg, #dc2626, #b91c1c); }
+        .competitor-header.outdoor-tv { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
+        .competitor-header.commercial { background: linear-gradient(135deg, #d97706, #b45309); }
+        .competitor-header h4 { font-size: 14pt; }
+        .competitor-header .price { font-size: 12pt; opacity: 0.9; }
+        .competitor-body { padding: 1.5rem; }
+        .competitor-body p { margin-bottom: 1rem; color: #6b7280; }
+        .competitor-body ul { margin-left: 1.25rem; }
+        .competitor-body li { margin-bottom: 0.5rem; }
+        .pro { color: #059669; }
+        .con { color: #dc2626; }
+        .competitor-footer {
+            padding: 1rem 1.5rem;
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+        }
+        .competitor-footer .label { font-size: 9pt; color: #6b7280; margin-bottom: 0.25rem; }
+        .competitor-footer .value { font-weight: 600; }
+
+        /* Comparison Tables */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin: 1.5rem 0;
+        }
+        .compare-table th, .compare-table td {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+        }
+        .compare-table th {
+            background: #1428a0;
+            color: white;
+            font-weight: 600;
+        }
+        .compare-table th.apex { background: #059669; }
+        .compare-table .row-label {
+            text-align: left;
+            font-weight: 500;
+            background: #f9fafb;
+        }
+        .compare-table .win { background: #dcfce7; color: #166534; font-weight: 600; }
+        .compare-table .lose { background: #fee2e2; color: #991b1b; }
+        .compare-table .neutral { background: #fef3c7; }
+
+        /* Pub TV Analysis */
+        .pub-analysis {
+            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .pub-analysis h3 { color: white; margin-bottom: 1.5rem; font-size: 16pt; }
+        .pub-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .pub-issue {
+            background: rgba(255,255,255,0.15);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .pub-issue h4 { font-size: 14pt; margin-bottom: 0.5rem; }
+        .pub-issue p { font-size: 10pt; opacity: 0.9; }
+
+        /* Highlight Boxes */
+        .insight-box {
+            background: #dcfce7;
+            border: 2px solid #059669;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .insight-box.warning {
+            background: #fef3c7;
+            border-color: #d97706;
+        }
+        .insight-box h4 { color: #166534; margin-bottom: 0.75rem; }
+        .insight-box.warning h4 { color: #92400e; }
+        .insight-box ul { margin-left: 1.25rem; }
+        .insight-box li { margin-bottom: 0.5rem; }
+
+        /* SWOT Grid */
+        .swot-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .swot-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .swot-header {
+            padding: 1rem 1.5rem;
+            color: white;
+            font-weight: 600;
+        }
+        .swot-header.strength { background: #059669; }
+        .swot-header.weakness { background: #dc2626; }
+        .swot-header.opportunity { background: #0284c7; }
+        .swot-header.threat { background: #7c3aed; }
+        .swot-body {
+            padding: 1.5rem;
+        }
+        .swot-body ul { list-style: none; }
+        .swot-body li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        .swot-body li:last-child { border-bottom: none; }
+        .swot-body li::before {
+            content: '•';
+            font-weight: bold;
+        }
+        .swot-header.strength + .swot-body li::before { color: #059669; }
+        .swot-header.weakness + .swot-body li::before { color: #dc2626; }
+        .swot-header.opportunity + .swot-body li::before { color: #0284c7; }
+        .swot-header.threat + .swot-body li::before { color: #7c3aed; }
+
+        /* Market Share */
+        .market-box {
+            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .market-box h3 { color: white; margin-bottom: 1.5rem; }
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .market-stat { text-align: center; }
+        .market-stat .value { font-size: 28pt; font-weight: 700; }
+        .market-stat .label { font-size: 10pt; opacity: 0.8; }
+
+        @media (max-width: 1024px) {
+            .competitor-grid, .swot-grid { grid-template-columns: 1fr; }
+            .pub-grid { grid-template-columns: 1fr 1fr; }
+            .market-stats { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .pub-grid { grid-template-columns: 1fr; }
+        }
+        @media print {
+            .doc-nav { display: none; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="doc-nav">
+        <h3>Project Documents</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">Website</a>
+            <a href="specification.html" class="doc-card">Specification</a>
+            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
+            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
+            <a href="control-logic.html" class="doc-card">Control Logic</a>
+            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
+            <a href="market-research.html" class="doc-card">Market Research</a>
+            <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
+            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
+            <a href="engineering-analysis.html" class="doc-card">Engineering Analysis</a>
+            <a href="testing-plan.html" class="doc-card">Testing Plan</a>
+            <a href="china-suppliers.html" class="doc-card">China Suppliers</a>
+            <a href="go-to-market.html" class="doc-card">Go-to-Market</a>
+            <a href="tv-compatibility.html" class="doc-card">TV Compatibility</a>
+            <a href="audio-noise-video.html" class="doc-card">Audio &amp; Video</a>
+            <a href="designs.html" class="doc-card">Designs</a>
+            <a href="contractors.html" class="doc-card">Contractors</a>
+            <a href="compliance-guide.html" class="doc-card">Compliance Guide</a>
+            <a href="global-pricing.html" class="doc-card">Global Pricing</a>
+            <a href="financial-forecast.html" class="doc-card">Financial Forecast</a>
+            <a href="competitor-analysis.html" class="doc-card active">Competitors</a>
+            <a href="legal-risk.html" class="doc-card">Legal Risk</a>
+            <a href="retail/index.html" class="doc-card">Retail</a>
+            <a href="partner/index.html" class="doc-card">Partner</a>
+            <a href="commercial/index.html" class="doc-card">Commercial</a>
+            <a href="partner-crm.html" class="doc-card">Partner CRM</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Comprehensive Competitor Analysis</h1>
+        <p class="subtitle">Outdoor TV Enclosures, Outdoor TVs, and Commercial Display Solutions</p>
+
+        <!-- Market Overview -->
+        <div class="market-box">
+            <h3>Global Outdoor TV Market Overview</h3>
+            <div class="market-stats">
+                <div class="market-stat">
+                    <div class="value">$532M</div>
+                    <div class="label">Market Size 2024</div>
+                </div>
+                <div class="market-stat">
+                    <div class="value">$1.26B</div>
+                    <div class="label">Projected 2033</div>
+                </div>
+                <div class="market-stat">
+                    <div class="value">10.2%</div>
+                    <div class="label">CAGR Growth</div>
+                </div>
+                <div class="market-stat">
+                    <div class="value">37%</div>
+                    <div class="label">North America Share</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enclosure Competitors -->
+        <h2 class="red">Outdoor TV Enclosure Competitors</h2>
+        <p>These are direct competitors selling weatherproof enclosures for standard TVs.</p>
+
+        <div class="competitor-grid">
+            <div class="competitor-card">
+                <div class="competitor-header enclosure">
+                    <h4>Apollo Enclosures (USA)</h4>
+                    <span class="price">$899-$2,499</span>
+                </div>
+                <div class="competitor-body">
+                    <p><strong>Market position:</strong> Premium US brand, established 2010. Claims to be industry leader.</p>
+                    <p><strong>Products:</strong> Outdoor TV enclosures 32" to 86", digital signage, all-weather cabinets.</p>
+                    <ul>
+                        <li class="pro">Strong brand recognition in USA</li>
+                        <li class="pro">Professional dealer network</li>
+                        <li class="pro">UL/ETL certified</li>
+                        <li class="con">Premium pricing limits market reach</li>
+                        <li class="con">Limited international presence</li>
+                        <li class="con">Sound quality issues reported by users</li>
+                    </ul>
+                </div>
+                <div class="competitor-footer">
+                    <div class="label">APEX ADVANTAGE</div>
+                    <div class="value">30-40% lower price, active cooling, better sound design</div>
+                </div>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header enclosure">
+                    <h4>The TV Shield (USA)</h4>
+                    <span class="price">$399-$1,999</span>
+                </div>
+                <div class="competitor-body">
+                    <p><strong>Market position:</strong> Budget-friendly alternative, strong Amazon presence.</p>
+                    <p><strong>Products:</strong> TV Shield Pro, TV Shield Lite, commercial displays.</p>
+                    <ul>
+                        <li class="pro">Lower price point than Apollo</li>
+                        <li class="pro">Good Amazon reviews</li>
+                        <li class="pro">DIY-friendly installation</li>
+                        <li class="con">Lighter construction quality</li>
+                        <li class="con">Passive cooling only on basic models</li>
+                        <li class="con">Limited warranty terms</li>
+                    </ul>
+                </div>
+                <div class="competitor-footer">
+                    <div class="label">APEX ADVANTAGE</div>
+                    <div class="value">Superior cooling system, IP66 vs IP55 rating, longer warranty</div>
+                </div>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header enclosure">
+                    <h4>Storm Shell (USA/Canada)</h4>
+                    <span class="price">$279-$799</span>
+                </div>
+                <div class="competitor-body">
+                    <p><strong>Market position:</strong> Entry-level covers and basic enclosures.</p>
+                    <p><strong>Products:</strong> Outdoor TV covers, Storm Shell enclosures.</p>
+                    <ul>
+                        <li class="pro">Lowest price point</li>
+                        <li class="pro">Good for mild climates</li>
+                        <li class="pro">Easy installation</li>
+                        <li class="con">Not suitable for extreme heat</li>
+                        <li class="con">No active cooling</li>
+                        <li class="con">Cover-style products, not full enclosures</li>
+                    </ul>
+                </div>
+                <div class="competitor-footer">
+                    <div class="label">APEX ADVANTAGE</div>
+                    <div class="value">Engineered for 50°C+, active cooling, true weatherproof enclosure</div>
+                </div>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header enclosure">
+                    <h4>Digiscreens (UAE)</h4>
+                    <span class="price">AED 5,000-15,000</span>
+                </div>
+                <div class="competitor-body">
+                    <p><strong>Market position:</strong> Middle East focused, digital signage emphasis.</p>
+                    <p><strong>Products:</strong> Outdoor displays, kiosks, menu boards, enclosures.</p>
+                    <ul>
+                        <li class="pro">Local UAE presence</li>
+                        <li class="pro">Arabic language support</li>
+                        <li class="pro">Commercial relationships</li>
+                        <li class="con">Higher pricing for residential</li>
+                        <li class="con">More signage-focused than entertainment</li>
+                        <li class="con">Limited size range</li>
+                    </ul>
+                </div>
+                <div class="competitor-footer">
+                    <div class="label">APEX ADVANTAGE</div>
+                    <div class="value">Competitive residential pricing, full size range 43"-86"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Outdoor TV Competitors -->
+        <h2 class="purple">Dedicated Outdoor TV Competitors</h2>
+        <p>These are manufacturers of purpose-built outdoor televisions.</p>
+
+        <div class="competitor-grid">
+            <div class="competitor-card">
+                <div class="competitor-header outdoor-tv">
+                    <h4>Samsung Terrace</h4>
+                    <span class="price">$3,499-$9,999</span>
+                </div>
+                <div class="competitor-body">
+                    <p><strong>Market position:</strong> Premium outdoor TV leader from global brand.</p>
+                    <p><strong>Products:</strong> Terrace Full Sun (2000+ nits), Partial Sun (1000 nits).</p>
+                    <ul>
+                        <li class="pro">Brand recognition and trust</li>
+                        <li class="pro">High brightness displays</li>
+                        <li class="pro">Integrated smart TV features</li>
+                        <li class="con">Extremely high price point</li>
+                        <li class="con">Only IP55 weather rating</li>
+                        <li class="con">Expensive repairs when it fails</li>
+                        <li class="con">Passive cooling only</li>
+                    </ul>
+                </div>
+                <div class="competitor-footer">
+                    <div class="label">APEX ADVANTAGE</div>
+                    <div class="value">70% cost savings, IP66 rating, easy TV replacement</div>
+                </div>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header outdoor-tv">
+                    <h4>SunBrite (Peerless-AV)</h4>
+                    <span class="price">$2,999-$10,348</span>
+                </div>
+                <div class="competitor-body">
+                    <p><strong>Market position:</strong> Original outdoor TV pioneer, now owned by Peerless-AV.</p>
+                    <p><strong>Products:</strong> Veranda (shade), Signature (partial sun), Solis (full sun).</p>
+                    <ul>
+                        <li class="pro">Longest track record in market</li>
+                        <li class="pro">Commercial/residential options</li>
+                        <li class="pro">Strong dealer network</li>
+                        <li class="con">Very high pricing</li>
+                        <li class="con">Some models have lower brightness</li>
+                        <li class="con">Complex product lineup</li>
+                    </ul>
+                </div>
+                <div class="competitor-footer">
+                    <div class="label">APEX ADVANTAGE</div>
+                    <div class="value">60-70% savings, use any TV brand, simpler purchase decision</div>
+                </div>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header outdoor-tv">
+                    <h4>Seura</h4>
+                    <span class="price">$4,000-$15,000+</span>
+                </div>
+                <div class="competitor-body">
+                    <p><strong>Market position:</strong> Ultra-premium, targeting luxury market.</p>
+                    <p><strong>Products:</strong> Shade Series, Storm Ultra Bright, custom solutions.</p>
+                    <ul>
+                        <li class="pro">High-end luxury positioning</li>
+                        <li class="pro">Excellent build quality</li>
+                        <li class="pro">Designer/architect relationships</li>
+                        <li class="con">Extremely expensive</li>
+                        <li class="con">Limited availability</li>
+                        <li class="con">Overkill for most applications</li>
+                    </ul>
+                </div>
+                <div class="competitor-footer">
+                    <div class="label">APEX ADVANTAGE</div>
+                    <div class="value">Same protection at 80% less cost</div>
+                </div>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header outdoor-tv">
+                    <h4>Furrion / SkyVue</h4>
+                    <span class="price">$2,000-$6,000</span>
+                </div>
+                <div class="competitor-body">
+                    <p><strong>Market position:</strong> RV/marine focus, expanding to residential.</p>
+                    <p><strong>Products:</strong> Aurora outdoor TVs, marine displays.</p>
+                    <ul>
+                        <li class="pro">Strong in RV/marine segment</li>
+                        <li class="pro">Mid-range pricing</li>
+                        <li class="pro">Durable construction</li>
+                        <li class="con">Less brand awareness in residential</li>
+                        <li class="con">Limited retail distribution</li>
+                        <li class="con">Smaller size options</li>
+                    </ul>
+                </div>
+                <div class="competitor-footer">
+                    <div class="label">APEX ADVANTAGE</div>
+                    <div class="value">Full residential focus, larger sizes, lower total cost</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pub/Bar TV Analysis -->
+        <h2 class="orange">Commercial Venue Analysis: Why Pub/Bar TVs Look Bad</h2>
+
+        <div class="pub-analysis">
+            <h3>The Problem with Outdoor TVs at Pubs, Sports Bars & Restaurants</h3>
+            <div class="pub-grid">
+                <div class="pub-issue">
+                    <h4>Washed Out Picture</h4>
+                    <p>Standard indoor TVs (400-600 nits) can't compete with ambient light. Image looks grey and unwatchable in daylight. Many venues use consumer TVs not rated for outdoor brightness.</p>
+                </div>
+                <div class="pub-issue">
+                    <h4>Heat Damage</h4>
+                    <p>Consumer TVs overheat in direct sun and hot climates. Internal components degrade rapidly. Many venues replace TVs annually - hidden cost of $2,000+ per screen per year.</p>
+                </div>
+                <div class="pub-issue">
+                    <h4>Poor Weatherproofing</h4>
+                    <p>Rain, humidity, and dust destroy unprotected TVs. Even "waterproof covers" don't protect from humidity infiltration. Venues often just accept high replacement rates.</p>
+                </div>
+                <div class="pub-issue">
+                    <h4>No Active Cooling</h4>
+                    <p>Most venues don't use proper enclosures or cooling. TVs run at maximum temperature constantly. Lifespan reduced from 7-10 years to 1-2 years.</p>
+                </div>
+                <div class="pub-issue">
+                    <h4>Wrong Size TVs</h4>
+                    <p>Budget constraints mean venues use smaller TVs (55") when they need larger (75"+). Poor viewing experience for customers seated far from screen.</p>
+                </div>
+                <div class="pub-issue">
+                    <h4>Sound Issues</h4>
+                    <p>Built-in TV speakers are inadequate for noisy outdoor environments. Many venues have no proper audio solution - customers can't hear match commentary.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <h4>The Apex Solution for Commercial Venues</h4>
+            <ul>
+                <li><strong>Active cooling maintains optimal operating temperature</strong> - TV lasts 5-7 years instead of 1-2</li>
+                <li><strong>IP66 weatherproofing</strong> - Complete protection from rain, dust, humidity</li>
+                <li><strong>Use high-brightness commercial displays</strong> - 1000+ nit screens available if needed</li>
+                <li><strong>75" and 86" sizes</strong> - Proper viewing for large outdoor areas</li>
+                <li><strong>Integrated soundbar mounting</strong> - Neptune, Samsung Terrace soundbar compatible</li>
+                <li><strong>Easy replacement when technology upgrades</strong> - Swap TV in 15 minutes, keep enclosure for 10+ years</li>
+            </ul>
+        </div>
+
+        <h3>Commercial TV Replacement Cost Analysis</h3>
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Approach</th>
+                    <th>Year 1</th>
+                    <th>Year 2</th>
+                    <th>Year 3</th>
+                    <th>5-Year Total</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="row-label">Unprotected Consumer TV</td>
+                    <td>$1,200</td>
+                    <td>$1,200</td>
+                    <td>$1,200</td>
+                    <td class="lose">$6,000</td>
+                    <td>Replace annually due to heat/weather damage</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Cheap Enclosure + TV</td>
+                    <td>$1,800</td>
+                    <td>$400</td>
+                    <td>$1,200</td>
+                    <td class="neutral">$4,000</td>
+                    <td>Enclosure fails year 3, plus TV replacement</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Samsung Terrace Outdoor TV</td>
+                    <td>$5,000</td>
+                    <td>$0</td>
+                    <td>$0</td>
+                    <td class="neutral">$5,000+</td>
+                    <td>Works but expensive initial outlay</td>
+                </tr>
+                <tr>
+                    <td class="row-label"><strong>Apex Enclosure + TV</strong></td>
+                    <td>$2,500</td>
+                    <td>$0</td>
+                    <td>$0</td>
+                    <td class="win">$2,500</td>
+                    <td>One-time cost, 10+ year enclosure life</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Comparison Matrix -->
+        <h2>Feature Comparison Matrix</h2>
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th class="apex">Apex ATE-75</th>
+                    <th>Apollo Enclosure</th>
+                    <th>Samsung Terrace</th>
+                    <th>SunBrite Veranda</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="row-label">75" Price</td>
+                    <td class="win">$1,899</td>
+                    <td>$1,799</td>
+                    <td class="lose">$9,999</td>
+                    <td class="lose">$4,999</td>
+                </tr>
+                <tr>
+                    <td class="row-label">75" Bundle (w/ TV)</td>
+                    <td class="win">$2,999</td>
+                    <td>$2,800</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Weather Rating</td>
+                    <td class="win">IP66</td>
+                    <td class="neutral">IP55</td>
+                    <td class="neutral">IP55</td>
+                    <td class="neutral">IP55</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Cooling System</td>
+                    <td class="win">Active (6 fans)</td>
+                    <td class="neutral">Active (2-4 fans)</td>
+                    <td class="lose">Passive only</td>
+                    <td class="lose">Passive only</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Max Ambient Temp</td>
+                    <td class="win">50°C+</td>
+                    <td class="neutral">45°C</td>
+                    <td class="neutral">40°C (claimed)</td>
+                    <td class="neutral">40°C</td>
+                </tr>
+                <tr>
+                    <td class="row-label">TV Replacement Cost</td>
+                    <td class="win">$800-1,200</td>
+                    <td class="win">$800-1,200</td>
+                    <td class="lose">$9,999 (new unit)</td>
+                    <td class="lose">$4,999 (new unit)</td>
+                </tr>
+                <tr>
+                    <td class="row-label">TV Brand Choice</td>
+                    <td class="win">Any</td>
+                    <td class="win">Any</td>
+                    <td class="lose">Samsung only</td>
+                    <td class="lose">SunBrite only</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Warranty</td>
+                    <td class="win">5 years</td>
+                    <td class="neutral">3 years</td>
+                    <td class="neutral">2 years</td>
+                    <td class="neutral">2 years</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Sound Solution</td>
+                    <td class="win">Ports + soundbar mount</td>
+                    <td class="neutral">Sound ports</td>
+                    <td class="neutral">Built-in</td>
+                    <td class="neutral">Built-in</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Gulf Climate Optimized</td>
+                    <td class="win">Yes</td>
+                    <td class="neutral">No</td>
+                    <td class="neutral">No</td>
+                    <td class="neutral">No</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SWOT Analysis -->
+        <h2 class="green">Apex SWOT Analysis vs Competition</h2>
+        <div class="swot-grid">
+            <div class="swot-card">
+                <div class="swot-header strength">STRENGTHS</div>
+                <div class="swot-body">
+                    <ul>
+                        <li>60-70% lower price than outdoor TVs</li>
+                        <li>IP66 rating (better than most competitors)</li>
+                        <li>Active thermostat-controlled cooling</li>
+                        <li>Gulf climate engineering (50°C+ rated)</li>
+                        <li>Use any TV brand - upgrade anytime</li>
+                        <li>Low capital, deposit-funded model</li>
+                        <li>5-year warranty (industry leading)</li>
+                        <li>Dual supply chain (China + Middle East)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="swot-card">
+                <div class="swot-header weakness">WEAKNESSES</div>
+                <div class="swot-body">
+                    <ul>
+                        <li>New brand - no track record yet</li>
+                        <li>No physical showroom/demo units initially</li>
+                        <li>Longer lead time (made to order)</li>
+                        <li>Less brand recognition than Apollo/Samsung</li>
+                        <li>No certification (UL/ETL) initially</li>
+                        <li>Single founder operation</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="swot-card">
+                <div class="swot-header opportunity">OPPORTUNITIES</div>
+                <div class="swot-body">
+                    <ul>
+                        <li>Growing outdoor living market (10%+ CAGR)</li>
+                        <li>Middle East expansion (fastest growing region)</li>
+                        <li>Commercial venue replacement market</li>
+                        <li>TV bundle upselling (30% attach rate)</li>
+                        <li>Partner network (AV integrators, brokers)</li>
+                        <li>Amazon/marketplace expansion Year 2</li>
+                        <li>Video marketing advantage (3D/CGI content)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="swot-card">
+                <div class="swot-header threat">THREATS</div>
+                <div class="swot-body">
+                    <ul>
+                        <li>Outdoor TV prices may drop significantly</li>
+                        <li>Apollo/TV Shield could lower prices</li>
+                        <li>Chinese competitors could copy design</li>
+                        <li>Large player could enter market (LG, Sony)</li>
+                        <li>Economic downturn reducing discretionary spending</li>
+                        <li>Shipping cost increases</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="insight-box warning">
+            <h4>Competitive Positioning Strategy</h4>
+            <ul>
+                <li><strong>Don't compete on brand:</strong> Compete on value, engineering, and Gulf-specific design</li>
+                <li><strong>Target underserved segments:</strong> Middle East residential, commercial venues replacing TVs annually</li>
+                <li><strong>Emphasize total cost of ownership:</strong> Not just purchase price, but 5-year cost including replacements</li>
+                <li><strong>Build trust through content:</strong> 3D videos, detailed specs, transparent pricing</li>
+                <li><strong>Partner network for credibility:</strong> AV integrators, real estate brokers lend established credibility</li>
+            </ul>
+        </div>
+
+        <p style="text-align: center; color: #9ca3af; font-size: 9pt; margin-top: 3rem;">
+            Last updated: December 2025 | Apex Enclosures Competitor Analysis<br>
+            <em>Pricing and specifications based on publicly available information. Subject to change.</em>
+        </p>
+    </div>
+</body>
+</html>

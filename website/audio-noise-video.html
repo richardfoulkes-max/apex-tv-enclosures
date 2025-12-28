@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio, Noise & Video Strategy - Apex Enclosures</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #f8f9fa;
+        }
+
+        .doc-nav {
+            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+            padding: 1rem 2rem;
+        }
+        .doc-nav h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 0.75rem;
+        }
+        .doc-nav-grid { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .doc-nav .doc-card {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .doc-nav .doc-card:hover { background: rgba(255,255,255,0.2); }
+        .doc-nav .doc-card.active { background: white; color: #1428a0; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        h1 { color: #1428a0; font-size: 28pt; margin-bottom: 0.5rem; }
+        .subtitle { color: #6b7280; font-size: 14pt; margin-bottom: 2rem; }
+
+        h2 {
+            color: #1428a0;
+            font-size: 18pt;
+            border-bottom: 3px solid #1428a0;
+            padding-bottom: 0.5rem;
+            margin: 2.5rem 0 1.5rem;
+        }
+        h2.audio { border-color: #7c3aed; color: #7c3aed; }
+        h2.video { border-color: #dc2626; color: #dc2626; }
+
+        h3 { color: #374151; font-size: 14pt; margin: 1.5rem 0 1rem; }
+
+        /* Noise Meter */
+        .noise-meter {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin: 1.5rem 0;
+        }
+        .noise-bar {
+            height: 40px;
+            background: linear-gradient(to right, #dcfce7 0%, #fef3c7 50%, #fee2e2 100%);
+            border-radius: 8px;
+            position: relative;
+            margin: 1.5rem 0;
+        }
+        .noise-marker {
+            position: absolute;
+            top: -10px;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+        .noise-marker .dot {
+            width: 20px;
+            height: 60px;
+            border-left: 3px solid #1428a0;
+            margin: 0 auto;
+        }
+        .noise-marker .label {
+            font-size: 9pt;
+            font-weight: 600;
+            color: #1428a0;
+            white-space: nowrap;
+        }
+        .noise-marker .value {
+            font-size: 12pt;
+            font-weight: 700;
+            color: #1428a0;
+        }
+        .noise-scale {
+            display: flex;
+            justify-content: space-between;
+            font-size: 9pt;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin: 1.5rem 0;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .comparison-table th { background: #1428a0; color: white; }
+        .comparison-table .good { color: #059669; font-weight: 600; }
+        .comparison-table .warning { color: #d97706; }
+        .comparison-table .source { font-weight: 600; }
+
+        /* Audio Solution Cards */
+        .audio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .audio-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .audio-card.recommended { border: 3px solid #059669; }
+        .audio-header {
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #7c3aed, #5b21b6);
+            color: white;
+        }
+        .audio-header.budget { background: linear-gradient(135deg, #059669, #047857); }
+        .audio-header.premium { background: linear-gradient(135deg, #d97706, #b45309); }
+        .audio-header h4 { font-size: 14pt; margin-bottom: 0.25rem; }
+        .audio-header .price { font-size: 11pt; opacity: 0.9; }
+        .audio-body { padding: 1.5rem; }
+        .audio-body ul { margin-left: 1.25rem; margin-bottom: 1rem; }
+        .audio-body li { margin-bottom: 0.5rem; font-size: 10pt; }
+        .audio-body .note {
+            font-size: 10pt;
+            padding: 0.75rem;
+            background: #f3f4f6;
+            border-radius: 6px;
+        }
+
+        /* Problem/Solution */
+        .problem-box {
+            background: #fee2e2;
+            border: 2px solid #dc2626;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .problem-box h4 { color: #991b1b; margin-bottom: 0.75rem; }
+        .problem-box p { color: #7f1d1d; }
+
+        .solution-box {
+            background: #dcfce7;
+            border: 2px solid #059669;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .solution-box h4 { color: #166534; margin-bottom: 0.75rem; }
+        .solution-box p { color: #14532d; }
+
+        /* Video Strategy */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .video-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .video-card h4 {
+            color: #dc2626;
+            font-size: 14pt;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #fee2e2;
+        }
+        .video-card ul { margin-left: 1.25rem; }
+        .video-card li { margin-bottom: 0.75rem; }
+        .video-card .stat {
+            display: inline-block;
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 9pt;
+            font-weight: 600;
+        }
+
+        /* Stats Box */
+        .stats-box {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+        .stats-box h3 { color: white; margin-bottom: 1rem; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .stat-item { text-align: center; }
+        .stat-item .value { font-size: 28pt; font-weight: 700; }
+        .stat-item .label { font-size: 10pt; opacity: 0.9; }
+
+        /* Action Plan */
+        .action-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .action-table th, .action-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .action-table th { background: #dc2626; color: white; }
+        .priority {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 9pt;
+            font-weight: 600;
+        }
+        .priority.high { background: #dcfce7; color: #166534; }
+        .priority.medium { background: #fef3c7; color: #92400e; }
+
+        /* Checklist */
+        .checklist {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .checklist h4 { color: #1428a0; margin-bottom: 1rem; }
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .checklist-item:last-child { border-bottom: none; }
+        .check-num {
+            width: 28px;
+            height: 28px;
+            background: #1428a0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 11pt;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .audio-grid, .video-grid, .stats-grid { grid-template-columns: 1fr; }
+        }
+        @media print {
+            .doc-nav { display: none; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="doc-nav">
+        <h3>Manufacturing Documentation</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">Website</a>
+            <a href="specification.html" class="doc-card">Specification</a>
+            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
+            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
+            <a href="control-logic.html" class="doc-card">Control Logic</a>
+            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
+            <a href="market-research.html" class="doc-card">Market Research</a>
+            <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
+            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
+            <a href="engineering-analysis.html" class="doc-card">Engineering Analysis</a>
+            <a href="testing-plan.html" class="doc-card">Testing Plan</a>
+            <a href="china-suppliers.html" class="doc-card">China Suppliers</a>
+            <a href="go-to-market.html" class="doc-card">Go-to-Market</a>
+            <a href="tv-compatibility.html" class="doc-card">TV Compatibility</a>
+            <a href="audio-noise-video.html" class="doc-card active">Audio &amp; Video</a>
+            <a href="designs.html" class="doc-card">Designs</a>
+            <a href="contractors.html" class="doc-card">Contractors</a>
+            <a href="compliance-guide.html" class="doc-card">Compliance Guide</a>
+            <a href="global-pricing.html" class="doc-card">Global Pricing</a>
+            <a href="financial-forecast.html" class="doc-card">Financial Forecast</a>
+            <a href="competitor-analysis.html" class="doc-card">Competitors</a>
+            <a href="legal-risk.html" class="doc-card">Legal Risk</a>
+            <a href="retail/index.html" class="doc-card">Retail</a>
+            <a href="partner/index.html" class="doc-card">Partner</a>
+            <a href="commercial/index.html" class="doc-card">Commercial</a>
+            <a href="partner-crm.html" class="doc-card">Partner CRM</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Audio, Noise & Video Strategy</h1>
+        <p class="subtitle">Fan noise analysis, outdoor audio solutions, and video marketing for online sales</p>
+
+        <!-- NOISE ANALYSIS -->
+        <h2>Enclosure Noise Analysis</h2>
+
+        <h3>ATE-75 Fan Configuration</h3>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Specification</th>
+                    <th>Noise Level</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="source">Noctua NF-A14 PWM (x3)</td>
+                    <td>140mm, 300-1500 RPM, 82.5 CFM</td>
+                    <td class="good">24.6 dBA max (per fan)</td>
+                    <td>Premium quiet fan, ball bearing, 150,000hr life</td>
+                </tr>
+                <tr>
+                    <td class="source">With Low-Noise Adapter</td>
+                    <td>Max 1200 RPM</td>
+                    <td class="good">~19-20 dBA (per fan)</td>
+                    <td>Included with Noctua, reduces max speed</td>
+                </tr>
+                <tr>
+                    <td class="source">At PWM 30% (30°C ambient)</td>
+                    <td>~450 RPM</td>
+                    <td class="good">~12-14 dBA (per fan)</td>
+                    <td>Normal evening operation</td>
+                </tr>
+                <tr>
+                    <td class="source">At PWM 100% (50°C+ ambient)</td>
+                    <td>1500 RPM</td>
+                    <td class="warning">~28-30 dBA combined</td>
+                    <td>Peak summer midday only</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Noise Level Comparison</h3>
+        <div class="noise-meter">
+            <p style="margin-bottom: 1rem; font-weight: 600;">How Loud is the ATE-75 Enclosure?</p>
+            <div class="noise-bar">
+                <!-- Markers -->
+                <div class="noise-marker" style="left: 10%;">
+                    <div class="dot"></div>
+                    <div class="value">10 dBA</div>
+                    <div class="label">Breathing</div>
+                </div>
+                <div class="noise-marker" style="left: 20%;">
+                    <div class="dot" style="border-color: #059669;"></div>
+                    <div class="value" style="color: #059669;">20 dBA</div>
+                    <div class="label" style="color: #059669;">Rustling leaves</div>
+                </div>
+                <div class="noise-marker" style="left: 28%;">
+                    <div class="dot" style="border-color: #059669; border-width: 4px;"></div>
+                    <div class="value" style="color: #059669; font-size: 14pt;">24.6 dBA</div>
+                    <div class="label" style="color: #059669;">ATE-75 MAX</div>
+                </div>
+                <div class="noise-marker" style="left: 40%;">
+                    <div class="dot"></div>
+                    <div class="value">40 dBA</div>
+                    <div class="label">Quiet library</div>
+                </div>
+                <div class="noise-marker" style="left: 50%;">
+                    <div class="dot"></div>
+                    <div class="value">50 dBA</div>
+                    <div class="label">Normal conversation</div>
+                </div>
+                <div class="noise-marker" style="left: 60%;">
+                    <div class="dot"></div>
+                    <div class="value">60 dBA</div>
+                    <div class="label">AC unit</div>
+                </div>
+                <div class="noise-marker" style="left: 75%;">
+                    <div class="dot"></div>
+                    <div class="value">75 dBA</div>
+                    <div class="label">Vacuum cleaner</div>
+                </div>
+            </div>
+            <div class="noise-scale">
+                <span>0 dBA</span>
+                <span>Silent</span>
+                <span>Quiet</span>
+                <span>Moderate</span>
+                <span>Loud</span>
+                <span>100 dBA</span>
+            </div>
+        </div>
+
+        <div class="solution-box">
+            <h4>Noise Summary: Virtually Silent</h4>
+            <p><strong>At 24.6 dBA maximum</strong>, the ATE-75 fans are quieter than rustling leaves. During evening viewing (30°C ambient), fans run at ~30% speed producing only 12-14 dBA - essentially inaudible over any TV audio or outdoor ambient noise. The enclosure will NOT disturb neighbors or viewing experience.</p>
+        </div>
+
+        <!-- AUDIO SOLUTIONS -->
+        <h2 class="audio">Outdoor Audio Solutions</h2>
+
+        <div class="problem-box">
+            <h4>The Problem: Muffled TV Sound</h4>
+            <p>Competitors like Apollo claim "sound works well" but customer reviews tell a different story. The enclosure glass and sealed design block/dampen the TV's built-in speakers significantly. Customers end up turning volume to maximum and still struggle to hear dialogue clearly - especially outdoors with ambient noise from pools, AC units, and wind.</p>
+        </div>
+
+        <div class="solution-box">
+            <h4>Our Approach: Bundle Audio Solution</h4>
+            <p>Rather than pretend the problem doesn't exist, Apex will acknowledge it upfront and offer a better solution. We'll recommend or bundle a weatherproof Bluetooth soundbar, making the complete package genuinely better than competitors. This becomes a selling point, not a hidden weakness.</p>
+        </div>
+
+        <h3>Recommended Audio Solutions</h3>
+        <div class="audio-grid">
+            <div class="audio-card recommended">
+                <div class="audio-header budget">
+                    <h4>Budget Option</h4>
+                    <div class="price">AED 200-400</div>
+                </div>
+                <div class="audio-body">
+                    <ul>
+                        <li><strong>JBL Flip 7</strong> - IP68, 12hr battery</li>
+                        <li><strong>JBL Charge 6</strong> - IP68, 24hr battery</li>
+                        <li>Bluetooth 5.3, easy pairing</li>
+                        <li>Portable - bring inside when not in use</li>
+                        <li>Can be mounted with bracket</li>
+                    </ul>
+                    <div class="note">
+                        <strong>Best for:</strong> Residential customers who want flexibility. Can use by pool, at BBQ, or with enclosure.
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-card recommended">
+                <div class="audio-header">
+                    <h4>Recommended Option</h4>
+                    <div class="price">AED 600-1,200</div>
+                </div>
+                <div class="audio-body">
+                    <ul>
+                        <li><strong>Neptune Outdoor Soundbar</strong> - IP55</li>
+                        <li>150W peak power, designed for outdoors</li>
+                        <li>-22°F to 122°F operating range</li>
+                        <li>Bluetooth 5.3 + 3.5mm aux</li>
+                        <li>Mounts below enclosure permanently</li>
+                    </ul>
+                    <div class="note">
+                        <strong>Best for:</strong> Most customers. Purpose-built, install and forget, great sound quality.
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-card">
+                <div class="audio-header premium">
+                    <h4>Premium Option</h4>
+                    <div class="price">AED 4,500+</div>
+                </div>
+                <div class="audio-body">
+                    <ul>
+                        <li><strong>Samsung Terrace Soundbar</strong> - IP55</li>
+                        <li>3.0CH with center channel for dialogue</li>
+                        <li>Wi-Fi + Bluetooth + HDMI ARC</li>
+                        <li>Designed for Samsung outdoor TVs</li>
+                        <li>Premium brand, warranty support</li>
+                    </ul>
+                    <div class="note">
+                        <strong>Best for:</strong> Luxury villa customers with Samsung TVs. Premium positioning matches enclosure.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Audio Bundle Options</h3>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Package</th>
+                    <th>Enclosure</th>
+                    <th>Audio</th>
+                    <th>Total Price</th>
+                    <th>Margin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="source">Enclosure Only</td>
+                    <td>ATE-75</td>
+                    <td>None (customer's own)</td>
+                    <td>AED 7,000</td>
+                    <td>50%</td>
+                </tr>
+                <tr>
+                    <td class="source">Complete Package - Standard</td>
+                    <td>ATE-75</td>
+                    <td>Neptune Soundbar (bundled)</td>
+                    <td>AED 7,800</td>
+                    <td>45%</td>
+                </tr>
+                <tr>
+                    <td class="source">Complete Package - Premium</td>
+                    <td>ATE-75</td>
+                    <td>Samsung Terrace Soundbar</td>
+                    <td>AED 11,000</td>
+                    <td>40%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- VIDEO MARKETING -->
+        <h2 class="video">Video Marketing Strategy</h2>
+
+        <div class="stats-box">
+            <h3>Why Video is Critical for Online Sales</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="value">85%</div>
+                    <div class="label">Consumers rely on video when shopping online</div>
+                </div>
+                <div class="stat-item">
+                    <div class="value">+60%</div>
+                    <div class="label">Conversion increase with 3D/AR content</div>
+                </div>
+                <div class="stat-item">
+                    <div class="value">+40%</div>
+                    <div class="label">Conversion boost from product animation</div>
+                </div>
+                <div class="stat-item">
+                    <div class="value">+28%</div>
+                    <div class="label">Longer dwell time with 3D assets</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="problem-box">
+            <h4>The Challenge: Selling Without Physical Demos</h4>
+            <p>Outdoor TV enclosures are difficult to sell online - customers want to see them installed, understand the size, verify build quality, and see them in action. Shipping demo units to every potential customer is impractical and expensive. We need video content that does the selling for us.</p>
+        </div>
+
+        <h3>Video Content Strategy</h3>
+        <div class="video-grid">
+            <div class="video-card">
+                <h4>1. 3D Product Animation</h4>
+                <ul>
+                    <li><strong>Exploded view:</strong> Show all components, materials, build quality <span class="stat">+40% conversion</span></li>
+                    <li><strong>Cutaway views:</strong> Reveal cooling system, cable management, IP66 sealing</li>
+                    <li><strong>Installation sequence:</strong> Wall mount → enclosure → TV → cabling</li>
+                    <li><strong>Feature highlights:</strong> Hinged door, gas struts, locks, ventilation</li>
+                </ul>
+                <p style="margin-top: 1rem; font-size: 10pt; color: #6b7280;"><strong>Cost:</strong> $2,000-5,000 for 60-90 second animation from CAD files</p>
+            </div>
+
+            <div class="video-card">
+                <h4>2. CGI Lifestyle Renders</h4>
+                <ul>
+                    <li><strong>Villa pool setting:</strong> Dubai luxury villa, evening lighting</li>
+                    <li><strong>Rooftop terrace:</strong> City skyline, sports viewing</li>
+                    <li><strong>Hotel pool deck:</strong> Commercial application</li>
+                    <li><strong>Restaurant outdoor:</strong> Multiple screens, dining atmosphere</li>
+                </ul>
+                <p style="margin-top: 1rem; font-size: 10pt; color: #6b7280;"><strong>Cost:</strong> $500-1,500 per scene. Can show product in any environment without physical installation.</p>
+            </div>
+
+            <div class="video-card">
+                <h4>3. Real Installation Video</h4>
+                <ul>
+                    <li><strong>Prototype installation:</strong> Film at your location or first customer</li>
+                    <li><strong>Unboxing and assembly:</strong> Shows what customer receives</li>
+                    <li><strong>Before/after:</strong> Bare wall → complete entertainment area</li>
+                    <li><strong>Testimonial:</strong> Customer explaining why they chose Apex</li>
+                </ul>
+                <p style="margin-top: 1rem; font-size: 10pt; color: #6b7280;"><strong>Cost:</strong> $500-2,000 for professional videographer. Essential for trust.</p>
+            </div>
+
+            <div class="video-card">
+                <h4>4. Comparison/Demo Videos</h4>
+                <ul>
+                    <li><strong>Heat test:</strong> Show thermal camera, fans activating</li>
+                    <li><strong>Water test:</strong> Hose down for IP66 demonstration</li>
+                    <li><strong>Sound demo:</strong> External soundbar vs built-in speakers</li>
+                    <li><strong>Dust test:</strong> UAE conditions, filter effectiveness</li>
+                </ul>
+                <p style="margin-top: 1rem; font-size: 10pt; color: #6b7280;"><strong>Cost:</strong> Can do in-house with prototype. Highly shareable content.</p>
+            </div>
+        </div>
+
+        <h3>Video Production Plan</h3>
+        <div class="checklist">
+            <h4>Phase 1: Pre-Prototype (Now - use 3D/CGI)</h4>
+            <div class="checklist-item">
+                <div class="check-num">1</div>
+                <div>
+                    <strong>Commission 3D product animation</strong><br>
+                    <span style="color: #6b7280; font-size: 10pt;">Use KDM Steel's CAD files (when received) to create exploded view, installation sequence, feature highlights. 60-90 seconds. Budget: $3,000-5,000</span>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <div class="check-num">2</div>
+                <div>
+                    <strong>Create CGI lifestyle renders</strong><br>
+                    <span style="color: #6b7280; font-size: 10pt;">3-4 scenes: Dubai villa pool, rooftop terrace, hotel setting, restaurant. Use for website, social, ads. Budget: $2,000-4,000</span>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <div class="check-num">3</div>
+                <div>
+                    <strong>Build product page with 3D content</strong><br>
+                    <span style="color: #6b7280; font-size: 10pt;">Embed animations, 360° viewer if possible. Can launch website before prototype arrives.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="checklist" style="margin-top: 1.5rem;">
+            <h4>Phase 2: With Prototype (After KDM delivery)</h4>
+            <div class="checklist-item">
+                <div class="check-num">4</div>
+                <div>
+                    <strong>Professional installation video</strong><br>
+                    <span style="color: #6b7280; font-size: 10pt;">Film full installation at your location or first customer's villa. Unboxing → complete setup. Budget: $1,000-2,000</span>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <div class="check-num">5</div>
+                <div>
+                    <strong>Performance demonstration videos</strong><br>
+                    <span style="color: #6b7280; font-size: 10pt;">Water test (IP66), thermal test with camera, dust filter demo, sound comparison. Can film yourself. Budget: $0-500</span>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <div class="check-num">6</div>
+                <div>
+                    <strong>Customer testimonial</strong><br>
+                    <span style="color: #6b7280; font-size: 10pt;">After first 2-3 installations, get customer on video explaining their experience. Builds trust. Budget: $0-500</span>
+                </div>
+            </div>
+        </div>
+
+        <h3>Video Platform Strategy</h3>
+        <table class="action-table">
+            <thead>
+                <tr>
+                    <th>Platform</th>
+                    <th>Content Type</th>
+                    <th>Purpose</th>
+                    <th>Priority</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Website (Hero)</td>
+                    <td>3D animation + lifestyle CGI</td>
+                    <td>Conversion - show product quality</td>
+                    <td><span class="priority high">HIGH</span></td>
+                </tr>
+                <tr>
+                    <td>YouTube</td>
+                    <td>Full installation video, demos</td>
+                    <td>SEO, long-form education</td>
+                    <td><span class="priority high">HIGH</span></td>
+                </tr>
+                <tr>
+                    <td>Instagram Reels</td>
+                    <td>Short clips: water test, before/after</td>
+                    <td>Awareness, viral potential</td>
+                    <td><span class="priority medium">MEDIUM</span></td>
+                </tr>
+                <tr>
+                    <td>WhatsApp</td>
+                    <td>Product video, installation clip</td>
+                    <td>Sales tool - send to inquiries</td>
+                    <td><span class="priority high">HIGH</span></td>
+                </tr>
+                <tr>
+                    <td>LinkedIn</td>
+                    <td>Commercial installation, hotel projects</td>
+                    <td>B2B hospitality sales</td>
+                    <td><span class="priority medium">MEDIUM</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="solution-box">
+            <h4>Key Insight: 3D First, Then Real</h4>
+            <p>The best approach combines both: <strong>Start with 3D animation</strong> to showcase features, functionality, and internal mechanics in a polished environment. <strong>Then add real video</strong> for unboxing, installation, and customer testimonials to build trust. Studies show this combined approach covers both "function" (3D) and "feeling" (real footage) - the two factors that drive purchase decisions.</p>
+        </div>
+
+        <h3>Recommended 3D/CGI Vendors</h3>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Vendor</th>
+                    <th>Specialty</th>
+                    <th>Price Range</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="source">Offplan3D</td>
+                    <td>Consumer electronics CGI</td>
+                    <td>$2,000-5,000</td>
+                    <td>Experience with waterproof TV products</td>
+                </tr>
+                <tr>
+                    <td class="source">DanThree Studio</td>
+                    <td>Product animation, ecommerce</td>
+                    <td>$1,500-4,000</td>
+                    <td>Good for exploded views</td>
+                </tr>
+                <tr>
+                    <td class="source">CGI Furniture</td>
+                    <td>3D rendering, outdoor products</td>
+                    <td>$1,000-3,000</td>
+                    <td>Lifestyle scenes specialty</td>
+                </tr>
+                <tr>
+                    <td class="source">Fiverr/Upwork</td>
+                    <td>Freelance 3D artists</td>
+                    <td>$500-2,000</td>
+                    <td>Variable quality, vet carefully</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p style="text-align: center; color: #9ca3af; font-size: 9pt; margin-top: 3rem;">
+            Last updated: December 2025 | Apex Enclosures
+        </p>
+    </div>
+</body>
+</html>

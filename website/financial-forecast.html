@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-Year Aggressive Financial Forecast - Apex Enclosures</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #f8f9fa;
+        }
+
+        .doc-nav {
+            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+            padding: 1rem 2rem;
+        }
+        .doc-nav h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 0.75rem;
+        }
+        .doc-nav-grid { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .doc-nav .doc-card {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .doc-nav .doc-card:hover { background: rgba(255,255,255,0.2); }
+        .doc-nav .doc-card.active { background: white; color: #1428a0; }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        h1 { color: #1428a0; font-size: 28pt; margin-bottom: 0.5rem; }
+        .subtitle { color: #6b7280; font-size: 14pt; margin-bottom: 2rem; }
+
+        h2 {
+            color: #1428a0;
+            font-size: 18pt;
+            border-bottom: 3px solid #1428a0;
+            padding-bottom: 0.5rem;
+            margin: 2.5rem 0 1.5rem;
+        }
+        h2.green { border-color: #059669; color: #059669; }
+        h2.orange { border-color: #d97706; color: #d97706; }
+        h2.purple { border-color: #7c3aed; color: #7c3aed; }
+        h2.red { border-color: #dc2626; color: #dc2626; }
+
+        h3 { color: #374151; font-size: 14pt; margin: 1.5rem 0 1rem; }
+
+        /* Hero Stats */
+        .hero-stats {
+            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            color: white;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .hero-stats h2 { color: white; border-bottom: none; margin: 0 0 2rem; }
+        .hero-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+        }
+        .hero-stat {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+        .hero-stat .number {
+            font-size: 32pt;
+            font-weight: 800;
+        }
+        .hero-stat .label {
+            font-size: 10pt;
+            opacity: 0.9;
+            margin-top: 0.25rem;
+        }
+
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .summary-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .summary-card .number {
+            font-size: 24pt;
+            font-weight: 700;
+            color: #1428a0;
+        }
+        .summary-card .label {
+            font-size: 9pt;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+        .summary-card.green .number { color: #059669; }
+        .summary-card.purple .number { color: #7c3aed; }
+        .summary-card.orange .number { color: #d97706; }
+
+        /* AI Advantage Box */
+        .ai-box {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            color: white;
+            margin: 2rem 0;
+        }
+        .ai-box h3 { color: #60a5fa; margin-bottom: 1.5rem; font-size: 16pt; }
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .ai-item {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .ai-item .icon { font-size: 2rem; margin-bottom: 0.75rem; }
+        .ai-item h4 { color: white; font-size: 1rem; margin-bottom: 0.5rem; }
+        .ai-item p { color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+
+        /* Year Cards */
+        .year-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .year-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .year-header {
+            padding: 1.5rem;
+            color: white;
+            text-align: center;
+        }
+        .year-header.y1 { background: linear-gradient(135deg, #059669, #047857); }
+        .year-header.y2 { background: linear-gradient(135deg, #0284c7, #0369a1); }
+        .year-header.y3 { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
+        .year-header h3 { color: white; margin: 0 0 0.5rem; font-size: 16pt; }
+        .year-header .revenue {
+            font-size: 28pt;
+            font-weight: 700;
+        }
+        .year-header .growth {
+            font-size: 11pt;
+            opacity: 0.9;
+            margin-top: 0.25rem;
+        }
+        .year-body { padding: 1.5rem; }
+        .year-metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .year-metric:last-child { border-bottom: none; }
+        .year-metric .label { color: #6b7280; }
+        .year-metric .value { font-weight: 600; }
+        .year-metric .value.green { color: #059669; }
+        .year-metric .value.red { color: #dc2626; }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin: 1.5rem 0;
+        }
+        .data-table th, .data-table td {
+            padding: 1rem;
+            text-align: right;
+            border: 1px solid #e5e7eb;
+        }
+        .data-table th {
+            background: #1428a0;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+        }
+        .data-table th.green { background: #059669; }
+        .data-table th.blue { background: #0284c7; }
+        .data-table th.purple { background: #7c3aed; }
+        .data-table .row-label {
+            text-align: left;
+            font-weight: 500;
+            background: #f9fafb;
+        }
+        .data-table .total-row {
+            background: #f3f4f6;
+            font-weight: 700;
+        }
+        .data-table .total-row td { border-top: 2px solid #1428a0; }
+        .data-table .profit { color: #059669; font-weight: 600; }
+        .data-table .expense { color: #dc2626; }
+
+        /* Assumptions Box */
+        .assumptions-box {
+            background: #fef3c7;
+            border: 2px solid #d97706;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .assumptions-box h4 { color: #92400e; margin-bottom: 0.75rem; }
+        .assumptions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        .assumption-item {
+            background: white;
+            padding: 0.75rem;
+            border-radius: 6px;
+        }
+        .assumption-item .label { font-size: 9pt; color: #92400e; }
+        .assumption-item .value { font-weight: 600; color: #1a1a1a; }
+
+        /* Production Ramp */
+        .production-box {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            color: white;
+            margin: 2rem 0;
+        }
+        .production-box h3 { color: white; margin-bottom: 1.5rem; }
+        .production-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .production-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .production-item .month { font-size: 0.9rem; opacity: 0.9; }
+        .production-item .units { font-size: 2rem; font-weight: 700; margin: 0.5rem 0; }
+        .production-item .note { font-size: 0.85rem; opacity: 0.8; }
+
+        /* Market Cards */
+        .market-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .market-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .market-card h4 {
+            color: #1428a0;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .market-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+
+        /* Cash Flow */
+        .cashflow-box {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .cashflow-box h3 { color: white; margin-bottom: 1.5rem; font-size: 16pt; }
+        .cashflow-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .cashflow-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+        }
+        .cashflow-item .amount { font-size: 24pt; font-weight: 700; }
+        .cashflow-item .label { font-size: 10pt; opacity: 0.9; margin-top: 0.25rem; }
+
+        /* Scenario Cards */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .scenario-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .scenario-header {
+            padding: 1rem;
+            color: white;
+            text-align: center;
+        }
+        .scenario-header.base { background: #6b7280; }
+        .scenario-header.aggressive { background: #059669; }
+        .scenario-header.hypergrowth { background: #7c3aed; }
+        .scenario-body { padding: 1.5rem; }
+        .scenario-metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .scenario-metric:last-child { border-bottom: none; }
+
+        /* Risk Box */
+        .risk-box {
+            background: #dcfce7;
+            border: 2px solid #059669;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .risk-box h4 { color: #166534; margin-bottom: 0.75rem; }
+        .risk-box ul { margin-left: 1.25rem; }
+        .risk-box li { margin-bottom: 0.5rem; color: #166534; }
+
+        /* Constraint Box */
+        .constraint-box {
+            background: #fee2e2;
+            border: 2px solid #dc2626;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .constraint-box h4 { color: #991b1b; margin-bottom: 0.75rem; }
+        .constraint-box ul { margin-left: 1.25rem; }
+        .constraint-box li { margin-bottom: 0.5rem; color: #991b1b; }
+
+        @media (max-width: 1024px) {
+            .hero-stats-grid { grid-template-columns: repeat(3, 1fr); }
+            .summary-grid { grid-template-columns: repeat(3, 1fr); }
+            .year-grid, .scenario-grid { grid-template-columns: 1fr; }
+            .cashflow-grid { grid-template-columns: repeat(2, 1fr); }
+            .assumptions-grid { grid-template-columns: 1fr 1fr; }
+            .ai-grid { grid-template-columns: 1fr 1fr; }
+            .production-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            .hero-stats-grid, .summary-grid, .assumptions-grid { grid-template-columns: 1fr; }
+            .market-grid, .ai-grid { grid-template-columns: 1fr; }
+        }
+        @media print {
+            .doc-nav { display: none; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="doc-nav">
+        <h3>Manufacturing Documentation</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">Website</a>
+            <a href="specification.html" class="doc-card">Specification</a>
+            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
+            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
+            <a href="control-logic.html" class="doc-card">Control Logic</a>
+            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
+            <a href="market-research.html" class="doc-card">Market Research</a>
+            <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
+            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
+            <a href="engineering-analysis.html" class="doc-card">Engineering Analysis</a>
+            <a href="testing-plan.html" class="doc-card">Testing Plan</a>
+            <a href="china-suppliers.html" class="doc-card">China Suppliers</a>
+            <a href="go-to-market.html" class="doc-card">Go-to-Market</a>
+            <a href="tv-compatibility.html" class="doc-card">TV Compatibility</a>
+            <a href="audio-noise-video.html" class="doc-card">Audio &amp; Video</a>
+            <a href="designs.html" class="doc-card">Designs</a>
+            <a href="contractors.html" class="doc-card">Contractors</a>
+            <a href="compliance-guide.html" class="doc-card">Compliance Guide</a>
+            <a href="global-pricing.html" class="doc-card">Global Pricing</a>
+            <a href="financial-forecast.html" class="doc-card active">Financial Forecast</a>
+            <a href="competitor-analysis.html" class="doc-card">Competitors</a>
+            <a href="legal-risk.html" class="doc-card">Legal Risk</a>
+            <a href="retail/index.html" class="doc-card">Retail</a>
+            <a href="partner/index.html" class="doc-card">Partner</a>
+            <a href="commercial/index.html" class="doc-card">Commercial</a>
+            <a href="partner-crm.html" class="doc-card">Partner CRM</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>3-Year Aggressive Growth Forecast</h1>
+        <p class="subtitle">AI-Powered Global Scaling - Production Capacity is the Only Limit</p>
+
+        <!-- Hero Stats -->
+        <div class="hero-stats">
+            <h2>The Aggressive Growth Vision</h2>
+            <div class="hero-stats-grid">
+                <div class="hero-stat">
+                    <div class="number">$12.8M</div>
+                    <div class="label">Year 3 Revenue</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="number">$4.8M</div>
+                    <div class="label">Year 3 Net Profit</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="number">8,000</div>
+                    <div class="label">Units Year 3</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="number">15+</div>
+                    <div class="label">Countries Active</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="number">$9.3M</div>
+                    <div class="label">3-Year Total Profit</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Advantage -->
+        <div class="ai-box">
+            <h3>Why This Scale is Achievable: AI-Powered Operations</h3>
+            <div class="ai-grid">
+                <div class="ai-item">
+                    <div class="icon">🤖</div>
+                    <h4>24/7 Sales Automation</h4>
+                    <p>AI handles all initial enquiries, quotes, and follow-ups across every timezone. No sales team needed until Year 2.</p>
+                </div>
+                <div class="ai-item">
+                    <div class="icon">🌍</div>
+                    <h4>Instant Global Reach</h4>
+                    <p>Same website, same AI, serves UAE, USA, Australia, Europe simultaneously. No per-market setup cost.</p>
+                </div>
+                <div class="ai-item">
+                    <div class="icon">📊</div>
+                    <h4>Zero Marginal Cost</h4>
+                    <p>Each additional enquiry costs nothing. AI qualifies leads, sends quotes, processes orders 24/7.</p>
+                </div>
+                <div class="ai-item">
+                    <div class="icon">⚡</div>
+                    <h4>Production is the Bottleneck</h4>
+                    <p>We can generate unlimited demand. The only constraint is how fast factories can manufacture.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Assumptions -->
+        <h2 class="orange">Aggressive Model Assumptions</h2>
+        <div class="assumptions-box">
+            <h4>Financial Model Inputs</h4>
+            <div class="assumptions-grid">
+                <div class="assumption-item">
+                    <div class="label">Average Unit Cost</div>
+                    <div class="value">$500 (volume pricing)</div>
+                </div>
+                <div class="assumption-item">
+                    <div class="label">Average Selling Price</div>
+                    <div class="value">$1,600 (blended global)</div>
+                </div>
+                <div class="assumption-item">
+                    <div class="label">Gross Margin</div>
+                    <div class="value">69% average</div>
+                </div>
+                <div class="assumption-item">
+                    <div class="label">TV Bundle Rate</div>
+                    <div class="value">35% of orders</div>
+                </div>
+                <div class="assumption-item">
+                    <div class="label">Commercial/B2B</div>
+                    <div class="value">40% of volume</div>
+                </div>
+                <div class="assumption-item">
+                    <div class="label">Manufacturing Partners</div>
+                    <div class="value">3 by Year 2</div>
+                </div>
+                <div class="assumption-item">
+                    <div class="label">Marketing Spend</div>
+                    <div class="value">12% of revenue</div>
+                </div>
+                <div class="assumption-item">
+                    <div class="label">AI Operations Cost</div>
+                    <div class="value">$2K/month flat</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Production Capacity Ramp -->
+        <div class="production-box">
+            <h3>🏭 Production Capacity Ramp (The Real Constraint)</h3>
+            <div class="production-grid">
+                <div class="production-item">
+                    <div class="month">Year 1: Single Factory</div>
+                    <div class="units">500 units/year</div>
+                    <div class="note">~42 units/month capacity</div>
+                </div>
+                <div class="production-item">
+                    <div class="month">Year 2: Dual Factory</div>
+                    <div class="units">2,500 units/year</div>
+                    <div class="note">~210 units/month capacity</div>
+                </div>
+                <div class="production-item">
+                    <div class="month">Year 3: Multi-Factory Network</div>
+                    <div class="units">8,000 units/year</div>
+                    <div class="note">~670 units/month capacity</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3 Year Overview -->
+        <h2>3-Year Revenue & Profit Overview</h2>
+        <div class="year-grid">
+            <div class="year-card">
+                <div class="year-header y1">
+                    <h3>Year 1: Launch & Prove</h3>
+                    <div class="revenue">$960,000</div>
+                    <div class="growth">500 Units Sold</div>
+                </div>
+                <div class="year-body">
+                    <div class="year-metric">
+                        <span class="label">Enclosure Revenue</span>
+                        <span class="value">$800,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">TV Bundle Revenue</span>
+                        <span class="value">$160,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">COGS</span>
+                        <span class="value red">-$362,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">Gross Profit</span>
+                        <span class="value green">$598,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">Operating Costs</span>
+                        <span class="value red">-$192,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">Net Profit</span>
+                        <span class="value green">$406,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">Net Margin</span>
+                        <span class="value green">42.3%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="year-card">
+                <div class="year-header y2">
+                    <h3>Year 2: Scale Production</h3>
+                    <div class="revenue">$4,400,000</div>
+                    <div class="growth">2,500 Units (+400%)</div>
+                </div>
+                <div class="year-body">
+                    <div class="year-metric">
+                        <span class="label">Enclosure Revenue</span>
+                        <span class="value">$4,000,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">TV Bundle Revenue</span>
+                        <span class="value">$800,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">COGS</span>
+                        <span class="value red">-$1,600,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">Gross Profit</span>
+                        <span class="value green">$2,800,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">Operating Costs</span>
+                        <span class="value red">-$880,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">Net Profit</span>
+                        <span class="value green">$1,920,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">Net Margin</span>
+                        <span class="value green">43.6%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="year-card">
+                <div class="year-header y3">
+                    <h3>Year 3: Market Leader</h3>
+                    <div class="revenue">$12,800,000</div>
+                    <div class="growth">8,000 Units (+220%)</div>
+                </div>
+                <div class="year-body">
+                    <div class="year-metric">
+                        <span class="label">Enclosure Revenue</span>
+                        <span class="value">$12,000,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">TV Bundle Revenue</span>
+                        <span class="value">$2,400,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">COGS</span>
+                        <span class="value red">-$4,960,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">Gross Profit</span>
+                        <span class="value green">$7,840,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">Operating Costs</span>
+                        <span class="value red">-$3,040,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">Net Profit</span>
+                        <span class="value green">$4,800,000</span>
+                    </div>
+                    <div class="year-metric">
+                        <span class="label">Net Margin</span>
+                        <span class="value green">37.5%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed P&L -->
+        <h2 class="green">Detailed Profit & Loss Statement</h2>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Line Item</th>
+                    <th class="green">Year 1</th>
+                    <th class="blue">Year 2</th>
+                    <th class="purple">Year 3</th>
+                    <th>3-Year Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="row-label">Units Sold</td>
+                    <td>500</td>
+                    <td>2,500</td>
+                    <td>8,000</td>
+                    <td><strong>11,000</strong></td>
+                </tr>
+                <tr>
+                    <td class="row-label">Enclosure Revenue</td>
+                    <td>$800,000</td>
+                    <td>$4,000,000</td>
+                    <td>$12,800,000</td>
+                    <td><strong>$17,600,000</strong></td>
+                </tr>
+                <tr>
+                    <td class="row-label">TV Bundle Revenue (35%)</td>
+                    <td>$175,000</td>
+                    <td>$875,000</td>
+                    <td>$2,800,000</td>
+                    <td><strong>$3,850,000</strong></td>
+                </tr>
+                <tr class="total-row">
+                    <td class="row-label">Total Revenue</td>
+                    <td><strong>$975,000</strong></td>
+                    <td><strong>$4,875,000</strong></td>
+                    <td><strong>$15,600,000</strong></td>
+                    <td><strong>$21,450,000</strong></td>
+                </tr>
+                <tr>
+                    <td class="row-label">Enclosure COGS ($500/unit)</td>
+                    <td class="expense">-$250,000</td>
+                    <td class="expense">-$1,250,000</td>
+                    <td class="expense">-$4,000,000</td>
+                    <td class="expense">-$5,500,000</td>
+                </tr>
+                <tr>
+                    <td class="row-label">TV Bundle COGS ($800/unit)</td>
+                    <td class="expense">-$140,000</td>
+                    <td class="expense">-$700,000</td>
+                    <td class="expense">-$2,240,000</td>
+                    <td class="expense">-$3,080,000</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Shipping & Logistics</td>
+                    <td class="expense">-$25,000</td>
+                    <td class="expense">-$125,000</td>
+                    <td class="expense">-$400,000</td>
+                    <td class="expense">-$550,000</td>
+                </tr>
+                <tr class="total-row">
+                    <td class="row-label">Gross Profit</td>
+                    <td class="profit">$560,000</td>
+                    <td class="profit">$2,800,000</td>
+                    <td class="profit">$8,960,000</td>
+                    <td class="profit"><strong>$12,320,000</strong></td>
+                </tr>
+                <tr>
+                    <td class="row-label">Gross Margin</td>
+                    <td>57%</td>
+                    <td>57%</td>
+                    <td>57%</td>
+                    <td><strong>57%</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Operating Expenses</h3>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Expense Category</th>
+                    <th class="green">Year 1</th>
+                    <th class="blue">Year 2</th>
+                    <th class="purple">Year 3</th>
+                    <th>3-Year Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="row-label">Digital Marketing (12%)</td>
+                    <td class="expense">-$117,000</td>
+                    <td class="expense">-$585,000</td>
+                    <td class="expense">-$1,872,000</td>
+                    <td class="expense">-$2,574,000</td>
+                </tr>
+                <tr>
+                    <td class="row-label">AI Operations & Software</td>
+                    <td class="expense">-$24,000</td>
+                    <td class="expense">-$48,000</td>
+                    <td class="expense">-$120,000</td>
+                    <td class="expense">-$192,000</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Partner Commissions (8%)</td>
+                    <td class="expense">-$78,000</td>
+                    <td class="expense">-$390,000</td>
+                    <td class="expense">-$1,248,000</td>
+                    <td class="expense">-$1,716,000</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Customer Support Team</td>
+                    <td class="expense">-$36,000</td>
+                    <td class="expense">-$120,000</td>
+                    <td class="expense">-$360,000</td>
+                    <td class="expense">-$516,000</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Warranty Reserve (2%)</td>
+                    <td class="expense">-$19,500</td>
+                    <td class="expense">-$97,500</td>
+                    <td class="expense">-$312,000</td>
+                    <td class="expense">-$429,000</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Professional Services</td>
+                    <td class="expense">-$15,000</td>
+                    <td class="expense">-$50,000</td>
+                    <td class="expense">-$100,000</td>
+                    <td class="expense">-$165,000</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Operations & Admin</td>
+                    <td class="expense">-$24,000</td>
+                    <td class="expense">-$96,000</td>
+                    <td class="expense">-$240,000</td>
+                    <td class="expense">-$360,000</td>
+                </tr>
+                <tr class="total-row">
+                    <td class="row-label">Total Operating Expenses</td>
+                    <td class="expense">-$313,500</td>
+                    <td class="expense">-$1,386,500</td>
+                    <td class="expense">-$4,252,000</td>
+                    <td class="expense"><strong>-$5,952,000</strong></td>
+                </tr>
+                <tr class="total-row">
+                    <td class="row-label">Net Profit Before Tax</td>
+                    <td class="profit">$246,500</td>
+                    <td class="profit">$1,413,500</td>
+                    <td class="profit">$4,708,000</td>
+                    <td class="profit"><strong>$6,368,000</strong></td>
+                </tr>
+                <tr>
+                    <td class="row-label">Net Profit Margin</td>
+                    <td class="profit">25.3%</td>
+                    <td class="profit">29.0%</td>
+                    <td class="profit">30.2%</td>
+                    <td class="profit"><strong>29.7%</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Global Market Distribution -->
+        <h2 class="purple">Global Market Distribution</h2>
+        <div class="market-grid">
+            <div class="market-card">
+                <h4>Year 1: 500 Units by Region</h4>
+                <div class="market-item">
+                    <span>UAE + GCC</span>
+                    <span><strong>150 units (30%)</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Saudi Arabia</span>
+                    <span><strong>100 units (20%)</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>USA (Sunbelt States)</span>
+                    <span><strong>100 units (20%)</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Australia</span>
+                    <span><strong>75 units (15%)</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Europe (Spain, Italy, Greece)</span>
+                    <span><strong>50 units (10%)</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Other</span>
+                    <span><strong>25 units (5%)</strong></span>
+                </div>
+            </div>
+            <div class="market-card">
+                <h4>Year 3: 8,000 Units by Region</h4>
+                <div class="market-item">
+                    <span>USA (All Hot States)</span>
+                    <span><strong>2,400 units (30%)</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Middle East (UAE, Saudi, Qatar)</span>
+                    <span><strong>1,600 units (20%)</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Australia</span>
+                    <span><strong>1,200 units (15%)</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Europe (Mediterranean)</span>
+                    <span><strong>1,200 units (15%)</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Commercial/Hospitality (Global)</span>
+                    <span><strong>1,200 units (15%)</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Other Markets</span>
+                    <span><strong>400 units (5%)</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="market-grid">
+            <div class="market-card">
+                <h4>Retail vs Commercial Mix</h4>
+                <div class="market-item">
+                    <span>Year 1 Retail</span>
+                    <span><strong>70%</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Year 1 Commercial/B2B</span>
+                    <span><strong>30%</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Year 3 Retail</span>
+                    <span><strong>50%</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Year 3 Commercial/B2B</span>
+                    <span><strong>50%</strong></span>
+                </div>
+            </div>
+            <div class="market-card">
+                <h4>Commercial Segments Year 3</h4>
+                <div class="market-item">
+                    <span>Hotels & Resorts</span>
+                    <span><strong>800 units</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Restaurants & Bars</span>
+                    <span><strong>600 units</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Pool Clubs & Beach Clubs</span>
+                    <span><strong>400 units</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Corporate/Offices</span>
+                    <span><strong>200 units</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cash Flow -->
+        <h2>Cash Flow Analysis</h2>
+        <div class="cashflow-box">
+            <h3>Zero Capital Risk Model - Scales Infinitely</h3>
+            <div class="cashflow-grid">
+                <div class="cashflow-item">
+                    <div class="amount">50%</div>
+                    <div class="label">Deposit Collected Upfront</div>
+                </div>
+                <div class="cashflow-item">
+                    <div class="amount">$0</div>
+                    <div class="label">Inventory Investment</div>
+                </div>
+                <div class="cashflow-item">
+                    <div class="amount">Net 30</div>
+                    <div class="label">Factory Payment Terms</div>
+                </div>
+                <div class="cashflow-item">
+                    <div class="amount">100%</div>
+                    <div class="label">Paid Before Delivery</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="risk-box">
+            <h4>Why This Scales with Zero Additional Capital</h4>
+            <ul>
+                <li><strong>Customer deposit covers manufacturing</strong> - 50% deposit exceeds our 31% production cost</li>
+                <li><strong>No inventory risk</strong> - we manufacture to confirmed orders only</li>
+                <li><strong>AI handles unlimited enquiries</strong> - no incremental sales cost per lead</li>
+                <li><strong>Adding factories doesn't require capital</strong> - we pay after they produce</li>
+                <li><strong>Global reach from day 1</strong> - same website, same AI, serves every market</li>
+            </ul>
+        </div>
+
+        <!-- Scenarios -->
+        <h2>Scenario Analysis</h2>
+        <div class="scenario-grid">
+            <div class="scenario-card">
+                <div class="scenario-header base">
+                    <strong>Base Case</strong>
+                </div>
+                <div class="scenario-body">
+                    <div class="scenario-metric">
+                        <span>Year 1 Units</span>
+                        <span><strong>500</strong></span>
+                    </div>
+                    <div class="scenario-metric">
+                        <span>Year 3 Units</span>
+                        <span><strong>3,000</strong></span>
+                    </div>
+                    <div class="scenario-metric">
+                        <span>Year 3 Revenue</span>
+                        <span><strong>$4.8M</strong></span>
+                    </div>
+                    <div class="scenario-metric">
+                        <span>Year 3 Profit</span>
+                        <span><strong>$1.4M</strong></span>
+                    </div>
+                    <div class="scenario-metric">
+                        <span>3-Year Total Profit</span>
+                        <span><strong>$2.5M</strong></span>
+                    </div>
+                </div>
+            </div>
+            <div class="scenario-card">
+                <div class="scenario-header aggressive">
+                    <strong>Aggressive (Shown Above)</strong>
+                </div>
+                <div class="scenario-body">
+                    <div class="scenario-metric">
+                        <span>Year 1 Units</span>
+                        <span><strong>500</strong></span>
+                    </div>
+                    <div class="scenario-metric">
+                        <span>Year 3 Units</span>
+                        <span><strong>8,000</strong></span>
+                    </div>
+                    <div class="scenario-metric">
+                        <span>Year 3 Revenue</span>
+                        <span><strong>$12.8M</strong></span>
+                    </div>
+                    <div class="scenario-metric">
+                        <span>Year 3 Profit</span>
+                        <span><strong>$4.8M</strong></span>
+                    </div>
+                    <div class="scenario-metric">
+                        <span>3-Year Total Profit</span>
+                        <span><strong>$6.4M</strong></span>
+                    </div>
+                </div>
+            </div>
+            <div class="scenario-card">
+                <div class="scenario-header hypergrowth">
+                    <strong>Hyper-Growth</strong>
+                </div>
+                <div class="scenario-body">
+                    <div class="scenario-metric">
+                        <span>Year 1 Units</span>
+                        <span><strong>750</strong></span>
+                    </div>
+                    <div class="scenario-metric">
+                        <span>Year 3 Units</span>
+                        <span><strong>15,000</strong></span>
+                    </div>
+                    <div class="scenario-metric">
+                        <span>Year 3 Revenue</span>
+                        <span><strong>$24M</strong></span>
+                    </div>
+                    <div class="scenario-metric">
+                        <span>Year 3 Profit</span>
+                        <span><strong>$8.6M</strong></span>
+                    </div>
+                    <div class="scenario-metric">
+                        <span>3-Year Total Profit</span>
+                        <span><strong>$12M</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Constraints -->
+        <h2 class="red">Key Constraints & How We Overcome Them</h2>
+        <div class="constraint-box">
+            <h4>Production Capacity (The Only Real Constraint)</h4>
+            <ul>
+                <li><strong>Year 1:</strong> Single factory (KDM Steel) - ramp to 50 units/month by Q4</li>
+                <li><strong>Year 2:</strong> Add second factory - combined capacity 200+ units/month</li>
+                <li><strong>Year 3:</strong> 3-4 factories across China + potentially Middle East local production</li>
+                <li><strong>Solution:</strong> Sign backup manufacturers early, share production drawings</li>
+            </ul>
+        </div>
+
+        <div class="market-grid">
+            <div class="market-card">
+                <h4>Not a Constraint: Sales/Marketing</h4>
+                <div class="market-item">
+                    <span>AI handles enquiries</span>
+                    <span><strong>24/7 automated</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Quote generation</span>
+                    <span><strong>Instant</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Follow-up sequences</span>
+                    <span><strong>Automated</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Cost per lead</span>
+                    <span><strong>~$0</strong></span>
+                </div>
+            </div>
+            <div class="market-card">
+                <h4>Not a Constraint: Geographic Reach</h4>
+                <div class="market-item">
+                    <span>Website serves globally</span>
+                    <span><strong>Day 1</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Multi-currency pricing</span>
+                    <span><strong>Automated</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Shipping to any country</span>
+                    <span><strong>Factory direct</strong></span>
+                </div>
+                <div class="market-item">
+                    <span>Local presence needed</span>
+                    <span><strong>None</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Break Even -->
+        <h2>Break-Even Analysis</h2>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="row-label">Initial Investment</td>
+                    <td><strong>$15,000</strong></td>
+                    <td>Prototype + website + first demo unit</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Average Profit per Unit</td>
+                    <td><strong>$590</strong></td>
+                    <td>After all costs at scale</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Units to Break Even</td>
+                    <td><strong>26 units</strong></td>
+                    <td>$15,000 / $590 = 25.4 units</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Time to Break Even</td>
+                    <td><strong>~6 weeks</strong></td>
+                    <td>At aggressive ramp (10+ units/week by week 6)</td>
+                </tr>
+                <tr>
+                    <td class="row-label">Monthly Burn Rate</td>
+                    <td><strong>$3,000</strong></td>
+                    <td>AI tools + marketing before sales ramp</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Cumulative Profit -->
+        <div class="cashflow-box" style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);">
+            <h3>Cumulative 3-Year Financial Summary</h3>
+            <div class="cashflow-grid">
+                <div class="cashflow-item">
+                    <div class="amount">11,000</div>
+                    <div class="label">Total Units Sold</div>
+                </div>
+                <div class="cashflow-item">
+                    <div class="amount">$21.5M</div>
+                    <div class="label">Total Revenue</div>
+                </div>
+                <div class="cashflow-item">
+                    <div class="amount">$6.4M</div>
+                    <div class="label">Total Net Profit</div>
+                </div>
+                <div class="cashflow-item">
+                    <div class="amount">30%</div>
+                    <div class="label">Average Net Margin</div>
+                </div>
+            </div>
+        </div>
+
+        <p style="text-align: center; color: #9ca3af; font-size: 9pt; margin-top: 3rem;">
+            Last updated: December 2025 | Apex Enclosures Aggressive Growth Forecast<br>
+            <em>Projections assume AI-powered sales automation and production capacity scaling. Actual results depend on manufacturing partner execution.</em>
+        </p>
+    </div>
+</body>
+</html>

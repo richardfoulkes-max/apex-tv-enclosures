@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Risk Analysis - Apex Enclosures</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #f8f9fa;
+        }
+
+        .doc-nav {
+            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+            padding: 1rem 2rem;
+        }
+        .doc-nav h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 0.75rem;
+        }
+        .doc-nav-grid { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .doc-nav .doc-card {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .doc-nav .doc-card:hover { background: rgba(255,255,255,0.2); }
+        .doc-nav .doc-card.active { background: white; color: #1428a0; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        h1 { color: #1428a0; font-size: 28pt; margin-bottom: 0.5rem; }
+        .subtitle { color: #6b7280; font-size: 14pt; margin-bottom: 2rem; }
+
+        h2 {
+            color: #1428a0;
+            font-size: 18pt;
+            border-bottom: 3px solid #1428a0;
+            padding-bottom: 0.5rem;
+            margin: 2.5rem 0 1.5rem;
+        }
+        h2.green { border-color: #059669; color: #059669; }
+        h2.orange { border-color: #d97706; color: #d97706; }
+        h2.red { border-color: #dc2626; color: #dc2626; }
+
+        h3 { color: #374151; font-size: 14pt; margin: 1.5rem 0 1rem; }
+
+        /* Risk Cards */
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .risk-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .risk-header {
+            padding: 1rem 1.5rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .risk-header.low { background: linear-gradient(135deg, #059669, #047857); }
+        .risk-header.medium { background: linear-gradient(135deg, #d97706, #b45309); }
+        .risk-header.high { background: linear-gradient(135deg, #dc2626, #b91c1c); }
+        .risk-header h4 { font-size: 14pt; }
+        .risk-level {
+            padding: 0.25rem 0.75rem;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50px;
+            font-size: 10pt;
+            font-weight: 600;
+        }
+        .risk-body { padding: 1.5rem; }
+        .risk-body p { margin-bottom: 1rem; color: #6b7280; }
+        .risk-body ul { margin-left: 1.25rem; }
+        .risk-body li { margin-bottom: 0.5rem; }
+
+        /* Status Boxes */
+        .status-box {
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .status-box.safe {
+            background: #dcfce7;
+            border: 2px solid #059669;
+        }
+        .status-box.caution {
+            background: #fef3c7;
+            border: 2px solid #d97706;
+        }
+        .status-box.warning {
+            background: #fee2e2;
+            border: 2px solid #dc2626;
+        }
+        .status-box h4 { margin-bottom: 0.75rem; }
+        .status-box.safe h4 { color: #166534; }
+        .status-box.caution h4 { color: #92400e; }
+        .status-box.warning h4 { color: #991b1b; }
+        .status-box ul { margin-left: 1.25rem; }
+        .status-box li { margin-bottom: 0.5rem; }
+
+        /* Checklist */
+        .checklist {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin: 1.5rem 0;
+        }
+        .checklist h4 {
+            color: #1428a0;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .checklist-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .checklist-item:last-child { border-bottom: none; }
+        .check {
+            width: 24px;
+            height: 24px;
+            background: #dcfce7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #059669;
+            font-weight: bold;
+            font-size: 14pt;
+            flex-shrink: 0;
+        }
+        .check.pending {
+            background: #fef3c7;
+            color: #d97706;
+        }
+        .checklist-content { flex: 1; }
+        .checklist-content strong { display: block; margin-bottom: 0.25rem; }
+        .checklist-content p { font-size: 10pt; color: #6b7280; margin: 0; }
+
+        /* Action Items */
+        .action-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin: 1.5rem 0;
+        }
+        .action-table th, .action-table td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid #e5e7eb;
+        }
+        .action-table th {
+            background: #1428a0;
+            color: white;
+            font-weight: 600;
+        }
+        .action-table tr:hover { background: #f9fafb; }
+        .priority-badge {
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 9pt;
+            font-weight: 600;
+        }
+        .priority-badge.high { background: #fee2e2; color: #991b1b; }
+        .priority-badge.medium { background: #fef3c7; color: #92400e; }
+        .priority-badge.low { background: #dcfce7; color: #166534; }
+        .status-badge {
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 9pt;
+            font-weight: 600;
+        }
+        .status-badge.done { background: #dcfce7; color: #166534; }
+        .status-badge.pending { background: #fef3c7; color: #92400e; }
+        .status-badge.todo { background: #dbeafe; color: #1e40af; }
+
+        /* Timeline */
+        .timeline {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin: 1.5rem 0;
+        }
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-left: 3px solid #e5e7eb;
+            margin-left: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 1.25rem;
+            width: 12px;
+            height: 12px;
+            background: #1428a0;
+            border-radius: 50%;
+        }
+        .timeline-content h5 { margin-bottom: 0.25rem; }
+        .timeline-content p { font-size: 10pt; color: #6b7280; margin: 0; }
+
+        @media (max-width: 1024px) {
+            .risk-grid { grid-template-columns: 1fr; }
+        }
+        @media print {
+            .doc-nav { display: none; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="doc-nav">
+        <h3>Project Documents</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">Website</a>
+            <a href="specification.html" class="doc-card">Specification</a>
+            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
+            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
+            <a href="control-logic.html" class="doc-card">Control Logic</a>
+            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
+            <a href="market-research.html" class="doc-card">Market Research</a>
+            <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
+            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
+            <a href="engineering-analysis.html" class="doc-card">Engineering Analysis</a>
+            <a href="testing-plan.html" class="doc-card">Testing Plan</a>
+            <a href="china-suppliers.html" class="doc-card">China Suppliers</a>
+            <a href="go-to-market.html" class="doc-card">Go-to-Market</a>
+            <a href="tv-compatibility.html" class="doc-card">TV Compatibility</a>
+            <a href="audio-noise-video.html" class="doc-card">Audio &amp; Video</a>
+            <a href="designs.html" class="doc-card">Designs</a>
+            <a href="contractors.html" class="doc-card">Contractors</a>
+            <a href="compliance-guide.html" class="doc-card">Compliance Guide</a>
+            <a href="global-pricing.html" class="doc-card">Global Pricing</a>
+            <a href="financial-forecast.html" class="doc-card">Financial Forecast</a>
+            <a href="competitor-analysis.html" class="doc-card">Competitors</a>
+            <a href="legal-risk.html" class="doc-card active">Legal Risk</a>
+            <a href="retail/index.html" class="doc-card">Retail</a>
+            <a href="partner/index.html" class="doc-card">Partner</a>
+            <a href="commercial/index.html" class="doc-card">Commercial</a>
+            <a href="partner-crm.html" class="doc-card">Partner CRM</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Legal Risk Analysis</h1>
+        <p class="subtitle">Intellectual Property, Liability, and Compliance Considerations</p>
+
+        <!-- Overall Assessment -->
+        <div class="status-box safe">
+            <h4>Overall Legal Risk Assessment: LOW</h4>
+            <p style="margin-bottom: 1rem; color: #166534;">Based on the current approach, the legal risk for Apex Enclosures is <strong>LOW</strong>. The product is an original design, competitor comparisons are factual, and standard business practices are being followed.</p>
+            <ul style="color: #166534;">
+                <li><strong>Original design:</strong> Not copying any competitor's product</li>
+                <li><strong>Factual comparisons:</strong> Price and specification comparisons based on public data</li>
+                <li><strong>No trademark infringement:</strong> Using own brand name "Apex Enclosures"</li>
+                <li><strong>Standard product category:</strong> TV enclosures are not patented as a concept</li>
+            </ul>
+        </div>
+
+        <!-- IP Risk Analysis -->
+        <h2>Intellectual Property Risk Analysis</h2>
+
+        <div class="risk-grid">
+            <div class="risk-card">
+                <div class="risk-header low">
+                    <h4>Patent Infringement</h4>
+                    <span class="risk-level">LOW RISK</span>
+                </div>
+                <div class="risk-body">
+                    <p><strong>Assessment:</strong> The concept of weatherproof TV enclosures is not patentable - it's a standard product category. What could be patented are specific implementations.</p>
+                    <p><strong>Your protection:</strong></p>
+                    <ul>
+                        <li>Your design is original - not copying any specific competitor</li>
+                        <li>Standard engineering principles (fans, gaskets, enclosures)</li>
+                        <li>No proprietary technology being copied</li>
+                        <li>Common components from multiple suppliers</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Action:</strong> Optional - conduct patent search on Apollo/TV Shield patents before production to ensure no specific feature overlap.</p>
+                </div>
+            </div>
+
+            <div class="risk-card">
+                <div class="risk-header low">
+                    <h4>Design Patent / Trade Dress</h4>
+                    <span class="risk-level">LOW RISK</span>
+                </div>
+                <div class="risk-body">
+                    <p><strong>Assessment:</strong> Design patents protect ornamental appearance. Your enclosure has functional design, not ornamental copying.</p>
+                    <p><strong>Your protection:</strong></p>
+                    <ul>
+                        <li>Rectangular aluminum enclosure is functional, not distinctive</li>
+                        <li>Your specific dimensions and proportions are original</li>
+                        <li>No copying of competitor's distinctive visual elements</li>
+                        <li>Different door design, handle placement, branding</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Note:</strong> All TV enclosures look similar because the form follows function. This is not protectable.</p>
+                </div>
+            </div>
+
+            <div class="risk-card">
+                <div class="risk-header low">
+                    <h4>Trademark Infringement</h4>
+                    <span class="risk-level">LOW RISK</span>
+                </div>
+                <div class="risk-body">
+                    <p><strong>Assessment:</strong> You are using your own brand name "Apex Enclosures" - no trademark issues.</p>
+                    <p><strong>Your protection:</strong></p>
+                    <ul>
+                        <li>"Apex" is a common word, not exclusively trademarked for enclosures</li>
+                        <li>Full name "Apex Enclosures" is distinctive</li>
+                        <li>Not using competitor names in your branding</li>
+                        <li>Logo and visual identity are original</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Action:</strong> Register "Apex Enclosures" trademark in UAE and key markets.</p>
+                </div>
+            </div>
+
+            <div class="risk-card">
+                <div class="risk-header low">
+                    <h4>Trade Secret / Confidential Info</h4>
+                    <span class="risk-level">LOW RISK</span>
+                </div>
+                <div class="risk-body">
+                    <p><strong>Assessment:</strong> You are not using any competitor's confidential information.</p>
+                    <p><strong>Your protection:</strong></p>
+                    <ul>
+                        <li>All competitor data from public sources (websites, pricing)</li>
+                        <li>No employees hired from competitors</li>
+                        <li>No reverse engineering of competitor products</li>
+                        <li>Own design created from first principles</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Competitor Comparison Risk -->
+        <h2 class="orange">Competitor Comparison Risk</h2>
+
+        <div class="status-box safe">
+            <h4>Comparative Advertising: PERMISSIBLE</h4>
+            <p style="color: #166534;">Comparing your product to competitors is legal in most jurisdictions, provided:</p>
+            <ul style="color: #166534;">
+                <li>Comparisons are <strong>truthful and accurate</strong></li>
+                <li>Claims are <strong>objectively verifiable</strong> (prices, specifications)</li>
+                <li>No <strong>false or misleading statements</strong></li>
+                <li>No <strong>trademark misuse</strong> (using their logo, implying endorsement)</li>
+            </ul>
+        </div>
+
+        <h3>What You Can Safely Say</h3>
+        <div class="checklist">
+            <h4>Safe Comparative Statements</h4>
+            <div class="checklist-item">
+                <span class="check">✓</span>
+                <div class="checklist-content">
+                    <strong>"Save 70% compared to Samsung Terrace outdoor TV"</strong>
+                    <p>Price comparison is factual and verifiable from public pricing</p>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <span class="check">✓</span>
+                <div class="checklist-content">
+                    <strong>"IP66 weather rating vs IP55 for most outdoor TVs"</strong>
+                    <p>Specification comparison from published product specs</p>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <span class="check">✓</span>
+                <div class="checklist-content">
+                    <strong>"Replace your TV for $800 instead of buying a new $10,000 outdoor TV"</strong>
+                    <p>Factual cost comparison highlighting product advantage</p>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <span class="check">✓</span>
+                <div class="checklist-content">
+                    <strong>"Active thermostat-controlled cooling vs passive cooling in outdoor TVs"</strong>
+                    <p>Feature comparison based on product specifications</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>What to Avoid</h3>
+        <div class="checklist">
+            <h4>Statements That Could Create Risk</h4>
+            <div class="checklist-item">
+                <span class="check pending">!</span>
+                <div class="checklist-content">
+                    <strong>AVOID: "Apollo enclosures are low quality"</strong>
+                    <p>Subjective quality claims could be considered defamation. Stick to factual comparisons.</p>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <span class="check pending">!</span>
+                <div class="checklist-content">
+                    <strong>AVOID: "Samsung Terrace is overpriced junk"</strong>
+                    <p>Disparaging language could invite legal action. Use neutral comparisons.</p>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <span class="check pending">!</span>
+                <div class="checklist-content">
+                    <strong>AVOID: Using competitor logos without permission</strong>
+                    <p>Don't use Samsung, Apollo, etc. logos in your marketing materials.</p>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <span class="check pending">!</span>
+                <div class="checklist-content">
+                    <strong>AVOID: Implying endorsement or partnership</strong>
+                    <p>Don't suggest competitors recommend or approve your product.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Liability -->
+        <h2 class="red">Product Liability Risk</h2>
+
+        <div class="risk-grid">
+            <div class="risk-card">
+                <div class="risk-header medium">
+                    <h4>Electrical Safety</h4>
+                    <span class="risk-level">MEDIUM RISK</span>
+                </div>
+                <div class="risk-body">
+                    <p><strong>Risk:</strong> Enclosure contains powered fans and may have power supply. Electrical faults could cause fire or injury.</p>
+                    <p><strong>Mitigation:</strong></p>
+                    <ul>
+                        <li>Use certified components (CE, UL marked fans, PSU)</li>
+                        <li>Include safety warnings in user manual</li>
+                        <li>Recommend professional installation</li>
+                        <li>Use low-voltage DC systems where possible</li>
+                        <li>Include thermal fuse/cutoff protection</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Action:</strong> Get product testing/certification (CE mark minimum) before selling in EU.</p>
+                </div>
+            </div>
+
+            <div class="risk-card">
+                <div class="risk-header low">
+                    <h4>Physical Safety</h4>
+                    <span class="risk-level">LOW RISK</span>
+                </div>
+                <div class="risk-body">
+                    <p><strong>Risk:</strong> Heavy enclosure could fall and cause injury if improperly mounted.</p>
+                    <p><strong>Mitigation:</strong></p>
+                    <ul>
+                        <li>Clear mounting instructions with weight ratings</li>
+                        <li>Recommend wall mount rated for enclosure + TV weight</li>
+                        <li>Warning labels about professional installation</li>
+                        <li>Quality VESA mount included with safety margins</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="risk-card">
+                <div class="risk-header low">
+                    <h4>TV Damage Claims</h4>
+                    <span class="risk-level">LOW RISK</span>
+                </div>
+                <div class="risk-body">
+                    <p><strong>Risk:</strong> Customer claims enclosure caused TV to overheat or fail.</p>
+                    <p><strong>Mitigation:</strong></p>
+                    <ul>
+                        <li>Clear warranty terms (enclosure only, not TV)</li>
+                        <li>Temperature monitoring data from testing</li>
+                        <li>User manual with proper TV installation guidance</li>
+                        <li>Recommended TV models and compatibility list</li>
+                        <li>Disclaimer that Apex not responsible for TV failure</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="risk-card">
+                <div class="risk-header low">
+                    <h4>Weather Protection Claims</h4>
+                    <span class="risk-level">LOW RISK</span>
+                </div>
+                <div class="risk-body">
+                    <p><strong>Risk:</strong> Customer claims enclosure leaked and damaged TV.</p>
+                    <p><strong>Mitigation:</strong></p>
+                    <ul>
+                        <li>IP66 testing and certification from independent lab</li>
+                        <li>Clear installation requirements (cable glands, sealing)</li>
+                        <li>Warranty covers enclosure failure, not improper installation</li>
+                        <li>QC checklist with water ingress testing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Structure -->
+        <h2>Business Structure & Liability Protection</h2>
+
+        <div class="status-box caution">
+            <h4>Recommended: Form a Limited Liability Company</h4>
+            <p style="color: #92400e;">To protect personal assets from business liability, you should operate through a legal entity:</p>
+            <ul style="color: #92400e;">
+                <li><strong>UAE:</strong> LLC, Free Zone Company, or Sole Establishment</li>
+                <li><strong>International:</strong> Consider US LLC or UK Ltd for global sales</li>
+                <li><strong>Benefits:</strong> Separates personal assets from business liability</li>
+                <li><strong>Required for:</strong> Business bank account, import/export, formal contracts</li>
+            </ul>
+        </div>
+
+        <!-- Should You Patent Your Design? -->
+        <h2 class="purple">Should You Patent Your Design Before Production?</h2>
+
+        <div class="status-box" style="background: #fef3c7; border: 2px solid #d97706;">
+            <h4 style="color: #92400e;">Short Answer: Probably NOT Worth It</h4>
+            <p style="margin-bottom: 1rem; color: #78350f;">For a TV enclosure business, patenting your design is likely <strong>NOT the best use of your capital or time</strong>. Here's why:</p>
+        </div>
+
+        <div class="risk-grid">
+            <div class="risk-card">
+                <div class="risk-header" style="background: #dc2626;">
+                    <h4>Why NOT to Patent</h4>
+                    <span class="risk-level">COST vs BENEFIT</span>
+                </div>
+                <div class="risk-body">
+                    <p><strong>1. High Cost, Low Return:</strong></p>
+                    <ul>
+                        <li>US utility patent: $10,000-$20,000 (attorney + filing fees)</li>
+                        <li>Design patent: $2,000-$5,000</li>
+                        <li>International PCT: $30,000-$100,000+ for global protection</li>
+                        <li>Annual maintenance fees for 20 years</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>2. Hard to Enforce:</strong></p>
+                    <ul>
+                        <li>TV enclosures are simple products - easy to design around</li>
+                        <li>Competitors can change minor details to avoid infringement</li>
+                        <li>Enforcement requires expensive litigation ($200K+ per lawsuit)</li>
+                        <li>Chinese manufacturers will ignore patents anyway</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>3. No Clear Patentable Innovation:</strong></p>
+                    <ul>
+                        <li>Weatherproof enclosures already exist (prior art)</li>
+                        <li>Fans for cooling - well known technology</li>
+                        <li>Aluminum construction - standard practice</li>
+                        <li>Your design is excellent engineering, not novel invention</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="risk-card">
+                <div class="risk-header" style="background: #059669;">
+                    <h4>Better Use of Your Money</h4>
+                    <span class="risk-level">RECOMMENDED</span>
+                </div>
+                <div class="risk-body">
+                    <p><strong>Instead of $20K on patents, spend on:</strong></p>
+                    <ul>
+                        <li><strong>Trademark registration ($2-3K):</strong> Protect your brand name "Apex Enclosures" - this IS worth doing</li>
+                        <li><strong>Product liability insurance ($1-2K/year):</strong> Essential protection</li>
+                        <li><strong>Marketing budget ($5-10K):</strong> Build brand recognition first</li>
+                        <li><strong>Quality & service:</strong> Your competitive advantage is execution, not patents</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Your Real Competitive Moats:</strong></p>
+                    <ul>
+                        <li><strong>Speed to market:</strong> Being first in Middle East market</li>
+                        <li><strong>Brand reputation:</strong> Reviews, case studies, word of mouth</li>
+                        <li><strong>Customer relationships:</strong> Commercial contracts, installers</li>
+                        <li><strong>Operational excellence:</strong> Better support, faster delivery</li>
+                    </ul>
+                    <p style="margin-top: 1rem; background: #dcfce7; padding: 0.75rem; border-radius: 6px; color: #166534;"><strong>Bottom Line:</strong> Spend your $15-20K on building the business, not on patents you can't afford to enforce.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-box safe" style="margin-top: 1.5rem;">
+            <h4>When Patents MIGHT Make Sense</h4>
+            <p style="color: #166534;">Consider patents later IF:</p>
+            <ul style="color: #166534;">
+                <li>You invent a genuinely novel technology (e.g., new cooling method, unique weatherproofing)</li>
+                <li>Your business reaches $1M+ revenue and you can afford enforcement</li>
+                <li>You're seeking venture capital or acquisition (patents add perceived value)</li>
+                <li>You develop proprietary smart features (IoT, AI-based climate control)</li>
+            </ul>
+        </div>
+
+        <!-- Legal Action Items -->
+        <h2 class="green">Legal Action Items</h2>
+
+        <table class="action-table">
+            <thead>
+                <tr>
+                    <th>Action Item</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Form legal entity (LLC or equivalent)</td>
+                    <td><span class="priority-badge high">HIGH</span></td>
+                    <td><span class="status-badge todo">TO DO</span></td>
+                    <td>Before first sale - protects personal assets</td>
+                </tr>
+                <tr>
+                    <td>Draft Terms & Conditions for website</td>
+                    <td><span class="priority-badge high">HIGH</span></td>
+                    <td><span class="status-badge todo">TO DO</span></td>
+                    <td>Include warranty terms, liability limitations</td>
+                </tr>
+                <tr>
+                    <td>Create product warranty document</td>
+                    <td><span class="priority-badge high">HIGH</span></td>
+                    <td><span class="status-badge todo">TO DO</span></td>
+                    <td>5-year enclosure warranty, exclusions clear</td>
+                </tr>
+                <tr>
+                    <td>Product liability insurance</td>
+                    <td><span class="priority-badge medium">MEDIUM</span></td>
+                    <td><span class="status-badge todo">TO DO</span></td>
+                    <td>$1-2M coverage recommended before volume sales</td>
+                </tr>
+                <tr>
+                    <td>Trademark registration - "Apex Enclosures"</td>
+                    <td><span class="priority-badge medium">MEDIUM</span></td>
+                    <td><span class="status-badge todo">TO DO</span></td>
+                    <td>UAE first, then USA, EU as sales grow</td>
+                </tr>
+                <tr>
+                    <td>CE marking / product certification</td>
+                    <td><span class="priority-badge medium">MEDIUM</span></td>
+                    <td><span class="status-badge todo">TO DO</span></td>
+                    <td>Required for EU sales, recommended globally</td>
+                </tr>
+                <tr>
+                    <td>NDA template for manufacturers</td>
+                    <td><span class="priority-badge low">LOW</span></td>
+                    <td><span class="status-badge pending">PENDING</span></td>
+                    <td>Added to CLAUDE.md, need formal legal template</td>
+                </tr>
+                <tr>
+                    <td>Patent search (optional)</td>
+                    <td><span class="priority-badge low">LOW</span></td>
+                    <td><span class="status-badge todo">TO DO</span></td>
+                    <td>Low risk but provides peace of mind</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Timeline -->
+        <h3>Recommended Legal Timeline</h3>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h5>Before First Sale (Now - Prototype Phase)</h5>
+                    <p>Form LLC/legal entity, draft basic T&Cs and warranty, get manufacturer NDA signed</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h5>First 50 Sales</h5>
+                    <p>Get product liability insurance quote, begin trademark registration process</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h5>Before EU Sales</h5>
+                    <p>Complete CE certification process, ensure EU compliance</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h5>Year 2 - Scale Phase</h5>
+                    <p>Formal legal review of all materials, expanded insurance, trademark protection in key markets</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Assessment -->
+        <div class="status-box safe">
+            <h4>Summary: You Can Proceed with Confidence</h4>
+            <ul style="color: #166534;">
+                <li><strong>Your design is original</strong> - you created it from scratch, not copying competitors</li>
+                <li><strong>Comparative advertising is legal</strong> - as long as claims are factual and not disparaging</li>
+                <li><strong>Product category is not patented</strong> - TV enclosures are a standard product type</li>
+                <li><strong>Main action needed:</strong> Form legal entity before first sale to protect personal assets</li>
+                <li><strong>Biggest risk:</strong> Product liability (mitigated by insurance and proper documentation)</li>
+            </ul>
+        </div>
+
+        <p style="text-align: center; color: #9ca3af; font-size: 9pt; margin-top: 3rem;">
+            Last updated: December 2025 | Apex Enclosures Legal Risk Analysis<br>
+            <em>This is not legal advice. Consult a qualified attorney for specific legal questions.</em>
+        </p>
+    </div>
+</body>
+</html>

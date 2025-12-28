@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go-to-Market Strategy - Apex Enclosures</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #f8f9fa;
+        }
+
+        /* Document Navigation */
+        .doc-nav {
+            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .doc-nav h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 0.75rem;
+        }
+        .doc-nav-grid {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .doc-nav .doc-card {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .doc-nav .doc-card:hover { background: rgba(255,255,255,0.2); }
+        .doc-nav .doc-card.active { background: white; color: #1428a0; }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+
+        h1 { color: #1428a0; font-size: 28pt; margin-bottom: 0.5rem; }
+        .subtitle { color: #6b7280; font-size: 14pt; margin-bottom: 2rem; }
+
+        h2 {
+            color: #1428a0;
+            font-size: 18pt;
+            border-bottom: 3px solid #1428a0;
+            padding-bottom: 0.5rem;
+            margin: 2.5rem 0 1.5rem;
+        }
+        h2.commercial { border-color: #059669; color: #059669; }
+        h2.residential { border-color: #7c3aed; color: #7c3aed; }
+        h2.channels { border-color: #d97706; color: #d97706; }
+        h2.marketing { border-color: #dc2626; color: #dc2626; }
+
+        h3 {
+            color: #374151;
+            font-size: 14pt;
+            margin: 1.5rem 0 1rem;
+        }
+
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .summary-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .summary-card .number {
+            font-size: 32pt;
+            font-weight: 700;
+            color: #1428a0;
+        }
+        .summary-card .label {
+            font-size: 10pt;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+        .summary-card.green .number { color: #059669; }
+        .summary-card.purple .number { color: #7c3aed; }
+        .summary-card.orange .number { color: #d97706; }
+
+        /* Segment Cards */
+        .segment-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .segment-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .segment-header {
+            padding: 1rem 1.5rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .segment-header.hotels { background: linear-gradient(135deg, #059669, #047857); }
+        .segment-header.restaurants { background: linear-gradient(135deg, #0284c7, #0369a1); }
+        .segment-header.sports { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
+        .segment-header.events { background: linear-gradient(135deg, #d97706, #b45309); }
+        .segment-header.villas { background: linear-gradient(135deg, #7c3aed, #5b21b6); }
+        .segment-header.developers { background: linear-gradient(135deg, #1428a0, #0f1f7a); }
+        .segment-header h4 { font-size: 14pt; }
+        .segment-header .size { font-size: 11pt; opacity: 0.9; }
+        .segment-body { padding: 1.5rem; }
+        .segment-body ul { margin-left: 1.25rem; }
+        .segment-body li { margin-bottom: 0.5rem; }
+
+        /* Channel Cards */
+        .channel-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .channel-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid #1428a0;
+        }
+        .channel-card.priority-1 { border-color: #059669; }
+        .channel-card.priority-2 { border-color: #0284c7; }
+        .channel-card.priority-3 { border-color: #7c3aed; }
+        .channel-card h4 {
+            font-size: 12pt;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+        .channel-card .type {
+            font-size: 9pt;
+            color: white;
+            background: #6b7280;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 0.75rem;
+        }
+        .channel-card .type.direct { background: #059669; }
+        .channel-card .type.partner { background: #0284c7; }
+        .channel-card .type.referral { background: #7c3aed; }
+        .channel-card p { font-size: 10pt; color: #6b7280; margin-bottom: 0.75rem; }
+        .channel-card .companies {
+            font-size: 9pt;
+            background: #f3f4f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+        }
+        .channel-card .companies strong { color: #374151; }
+
+        /* Marketing Actions */
+        .action-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin: 1.5rem 0;
+        }
+        .action-table th, .action-table td {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .action-table th {
+            background: #1428a0;
+            color: white;
+            font-weight: 600;
+        }
+        .action-table tr:hover { background: #f8f9fa; }
+        .priority {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 9pt;
+            font-weight: 600;
+        }
+        .priority.high { background: #dcfce7; color: #166534; }
+        .priority.medium { background: #fef3c7; color: #92400e; }
+        .priority.low { background: #e0e7ff; color: #3730a3; }
+
+        /* Stats Box */
+        .stats-box {
+            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .stats-box h3 { color: white; margin-bottom: 1rem; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .stat-item { text-align: center; }
+        .stat-item .value { font-size: 28pt; font-weight: 700; }
+        .stat-item .label { font-size: 10pt; opacity: 0.8; }
+
+        /* Pricing Table */
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .pricing-table th, .pricing-table td {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+        }
+        .pricing-table th { background: #f3f4f6; font-weight: 600; }
+        .pricing-table .segment { text-align: left; font-weight: 600; }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: #fef3c7;
+            border: 2px solid #d97706;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .highlight-box h4 { color: #92400e; margin-bottom: 0.75rem; }
+        .highlight-box ul { margin-left: 1.25rem; }
+        .highlight-box li { margin-bottom: 0.5rem; color: #78350f; }
+
+        /* Two Column */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        /* Contact List */
+        .contact-list {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .contact-list h4 {
+            color: #1428a0;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .contact-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .contact-item:last-child { border-bottom: none; }
+        .contact-name { font-weight: 500; }
+        .contact-type {
+            font-size: 9pt;
+            color: #6b7280;
+        }
+        .contact-action {
+            font-size: 9pt;
+            color: #1428a0;
+            text-decoration: none;
+        }
+
+        @media (max-width: 1024px) {
+            .summary-grid, .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .segment-grid, .channel-grid { grid-template-columns: 1fr; }
+            .two-col { grid-template-columns: 1fr; }
+        }
+        @media print {
+            .doc-nav { display: none; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="doc-nav">
+        <h3>Manufacturing Documentation</h3>
+        <div class="doc-nav-grid">
+            <a href="index.html" class="doc-card">Website</a>
+            <a href="specification.html" class="doc-card">Specification</a>
+            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
+            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
+            <a href="control-logic.html" class="doc-card">Control Logic</a>
+            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
+            <a href="market-research.html" class="doc-card">Market Research</a>
+            <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
+            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
+            <a href="engineering-analysis.html" class="doc-card">Engineering Analysis</a>
+            <a href="testing-plan.html" class="doc-card">Testing Plan</a>
+            <a href="china-suppliers.html" class="doc-card">China Suppliers</a>
+            <a href="go-to-market.html" class="doc-card active">Go-to-Market</a>
+            <a href="tv-compatibility.html" class="doc-card">TV Compatibility</a>
+            <a href="audio-noise-video.html" class="doc-card">Audio &amp; Video</a>
+            <a href="designs.html" class="doc-card">Designs</a>
+            <a href="contractors.html" class="doc-card">Contractors</a>
+            <a href="compliance-guide.html" class="doc-card">Compliance Guide</a>
+            <a href="global-pricing.html" class="doc-card">Global Pricing</a>
+            <a href="financial-forecast.html" class="doc-card">Financial Forecast</a>
+            <a href="competitor-analysis.html" class="doc-card">Competitors</a>
+            <a href="legal-risk.html" class="doc-card">Legal Risk</a>
+            <a href="retail/index.html" class="doc-card">Retail</a>
+            <a href="partner/index.html" class="doc-card">Partner</a>
+            <a href="commercial/index.html" class="doc-card">Commercial</a>
+            <a href="partner-crm.html" class="doc-card">Partner CRM</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Go-to-Market Strategy</h1>
+        <p class="subtitle">UAE & Saudi Arabia - Commercial and Residential Demand Analysis</p>
+
+        <!-- Executive Summary -->
+        <div class="summary-grid">
+            <div class="summary-card">
+                <div class="number">$353M</div>
+                <div class="label">UAE TV Market 2032</div>
+            </div>
+            <div class="summary-card green">
+                <div class="number">16.8M</div>
+                <div class="label">Dubai Visitors 2024</div>
+            </div>
+            <div class="summary-card purple">
+                <div class="number">226K</div>
+                <div class="label">UAE Property Transactions 2024</div>
+            </div>
+            <div class="summary-card orange">
+                <div class="number">$27B</div>
+                <div class="label">Saudi Hospitality 2033</div>
+            </div>
+        </div>
+
+        <!-- COMMERCIAL DEMAND -->
+        <h2 class="commercial">Commercial Demand</h2>
+
+        <div class="stats-box">
+            <h3>UAE Hospitality Market Drivers</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="value">7.88%</div>
+                    <div class="label">CAGR 2025-2030</div>
+                </div>
+                <div class="stat-item">
+                    <div class="value">2,700+</div>
+                    <div class="label">New Hotel Rooms H1 2024</div>
+                </div>
+                <div class="stat-item">
+                    <div class="value">88%</div>
+                    <div class="label">Guests Require Smart Services</div>
+                </div>
+                <div class="stat-item">
+                    <div class="value">62%</div>
+                    <div class="label">Dubai's Share of UAE Market</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="segment-grid">
+            <div class="segment-card">
+                <div class="segment-header hotels">
+                    <h4>Hotels & Resorts</h4>
+                    <span class="size">HIGH VALUE</span>
+                </div>
+                <div class="segment-body">
+                    <p><strong>Use Cases:</strong></p>
+                    <ul>
+                        <li>Pool deck entertainment areas</li>
+                        <li>Beach clubs and cabanas</li>
+                        <li>Outdoor restaurants and lounges</li>
+                        <li>Gym and spa outdoor zones</li>
+                        <li>Kids clubs and family areas</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Volume:</strong> 2-10 units per property</p>
+                    <p><strong>Decision Maker:</strong> GM, Director of F&B, Chief Engineer</p>
+                </div>
+            </div>
+
+            <div class="segment-card">
+                <div class="segment-header restaurants">
+                    <h4>Restaurants & Bars</h4>
+                    <span class="size">HIGH VOLUME</span>
+                </div>
+                <div class="segment-body">
+                    <p><strong>Use Cases:</strong></p>
+                    <ul>
+                        <li>Outdoor terrace dining</li>
+                        <li>Shisha lounges</li>
+                        <li>Rooftop venues</li>
+                        <li>Beachfront restaurants</li>
+                        <li>Garden dining areas</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Volume:</strong> 1-4 units per venue</p>
+                    <p><strong>Decision Maker:</strong> Owner, GM, Operations Manager</p>
+                </div>
+            </div>
+
+            <div class="segment-card">
+                <div class="segment-header sports">
+                    <h4>Sports Bars & Pubs</h4>
+                    <span class="size">PREMIUM PRICING</span>
+                </div>
+                <div class="segment-body">
+                    <p><strong>Use Cases:</strong></p>
+                    <ul>
+                        <li>Outdoor terraces for match days</li>
+                        <li>Beer gardens</li>
+                        <li>Private viewing areas</li>
+                        <li>VIP outdoor sections</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Key Venues:</strong> Offside (JBR), Brighton Rock (Hilton), Shades (Le Royal Meridien), Double Decker (Downtown)</p>
+                    <p><strong>Volume:</strong> 2-6 units per venue</p>
+                </div>
+            </div>
+
+            <div class="segment-card">
+                <div class="segment-header events">
+                    <h4>Events & Entertainment</h4>
+                    <span class="size">PROJECT-BASED</span>
+                </div>
+                <div class="segment-body">
+                    <p><strong>Use Cases:</strong></p>
+                    <ul>
+                        <li>Theme parks and attractions</li>
+                        <li>Shopping mall outdoor areas</li>
+                        <li>Corporate campus outdoor spaces</li>
+                        <li>Community clubhouses</li>
+                        <li>Sports facilities and clubs</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Volume:</strong> 5-50+ units per project</p>
+                    <p><strong>Decision Maker:</strong> Facilities, Procurement</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>Saudi Arabia Commercial Opportunity</h3>
+        <div class="highlight-box">
+            <h4>Vision 2030 Creates Massive Demand</h4>
+            <ul>
+                <li><strong>362,000 new hotel rooms</strong> under development (78% luxury/upscale)</li>
+                <li><strong>150 million visitors</strong> target by 2030 (already hit 115.9M in 2024)</li>
+                <li><strong>Mega projects:</strong> NEOM, Qiddiya, Red Sea Project, Diriyah Gate</li>
+                <li><strong>Major events:</strong> Asian Games 2029, Expo 2030, FIFA World Cup 2034</li>
+                <li><strong>$94.6 billion</strong> economic injection from Expo 2030 alone</li>
+            </ul>
+        </div>
+
+        <!-- RESIDENTIAL DEMAND -->
+        <h2 class="residential">Residential Demand</h2>
+
+        <div class="stats-box" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);">
+            <h3>UAE Luxury Villa Market</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="value">AED 761B</div>
+                    <div class="label">Property Transactions 2024</div>
+                </div>
+                <div class="stat-item">
+                    <div class="value">+36%</div>
+                    <div class="label">Volume Growth YoY</div>
+                </div>
+                <div class="stat-item">
+                    <div class="value">$7.6B</div>
+                    <div class="label">$10M+ Home Sales</div>
+                </div>
+                <div class="stat-item">
+                    <div class="value">+13%</div>
+                    <div class="label">Villa Price Growth Q3 2024</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="segment-grid">
+            <div class="segment-card">
+                <div class="segment-header villas">
+                    <h4>Luxury Villa Owners</h4>
+                    <span class="size">PRIMARY TARGET</span>
+                </div>
+                <div class="segment-body">
+                    <p><strong>Target Communities:</strong></p>
+                    <ul>
+                        <li><strong>Palm Jumeirah:</strong> Beachfront villas, signature villas</li>
+                        <li><strong>Emirates Hills:</strong> Ultra-luxury, golf course</li>
+                        <li><strong>Arabian Ranches 1/2/3:</strong> Family-oriented, pools</li>
+                        <li><strong>DAMAC Hills/Lagoons:</strong> Modern developments</li>
+                        <li><strong>Jumeirah Golf Estates:</strong> Premium, golf views</li>
+                        <li><strong>MBR City:</strong> New luxury development</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Use Cases:</strong> Pool deck, outdoor living room, BBQ/majlis area, garden entertainment</p>
+                </div>
+            </div>
+
+            <div class="segment-card">
+                <div class="segment-header developers">
+                    <h4>Developers & New Builds</h4>
+                    <span class="size">BULK OPPORTUNITY</span>
+                </div>
+                <div class="segment-body">
+                    <p><strong>Target Developers:</strong></p>
+                    <ul>
+                        <li><strong>Emaar Properties:</strong> The Valley, Arabian Ranches III</li>
+                        <li><strong>DAMAC:</strong> DAMAC Lagoons, DAMAC Hills 2</li>
+                        <li><strong>Sobha Realty:</strong> Sobha Hartland</li>
+                        <li><strong>Nakheel:</strong> Palm Jebel Ali, JAFZA Living</li>
+                        <li><strong>Meraas:</strong> Premium communities</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Opportunity:</strong> Specify as upgrade option at handover. 10-50 units per phase.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>Residential Buyer Profile</h3>
+        <div class="two-col">
+            <div class="contact-list">
+                <h4>What Drives Purchase</h4>
+                <div class="contact-item">
+                    <span class="contact-name">Outdoor entertainment culture</span>
+                    <span class="contact-type">BBQ, majlis, pool parties</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name">Hospitality & social gatherings</span>
+                    <span class="contact-type">Cultural emphasis</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name">Sports viewing (F1, football, cricket)</span>
+                    <span class="contact-type">Year-round events</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name">Property value enhancement</span>
+                    <span class="contact-type">Luxury upgrades</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name">Climate control solution</span>
+                    <span class="contact-type">55°C summer protection</span>
+                </div>
+            </div>
+            <div class="contact-list">
+                <h4>Buyer Demographics</h4>
+                <div class="contact-item">
+                    <span class="contact-name">High-net-worth individuals</span>
+                    <span class="contact-type">AED 10M+ properties</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name">Expat professionals</span>
+                    <span class="contact-type">European, British, Indian</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name">Local Emirati families</span>
+                    <span class="contact-type">Large outdoor gatherings</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name">Property investors</span>
+                    <span class="contact-type">Rental value enhancement</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SALES CHANNELS -->
+        <h2 class="channels">Sales Channels</h2>
+
+        <h3>Priority 1: Direct Sales (High Margin)</h3>
+        <div class="channel-grid">
+            <div class="channel-card priority-1">
+                <span class="type direct">DIRECT</span>
+                <h4>Real Estate Broker Partnerships</h4>
+                <p>Partner with luxury villa brokers for handover referrals. Commission-based or co-marketing.</p>
+                <div class="companies">
+                    <strong>Target Partners:</strong><br>
+                    Aeon & Trisl, H&S Real Estate, AQUA Properties, Unique Properties, Provident Estate, haus & haus, Driven Properties
+                </div>
+            </div>
+
+            <div class="channel-card priority-1">
+                <span class="type direct">DIRECT</span>
+                <h4>Hospitality Direct Sales</h4>
+                <p>Direct outreach to hotel GMs, F&B Directors, and Chief Engineers. Focus on 5-star properties.</p>
+                <div class="companies">
+                    <strong>Target Properties:</strong><br>
+                    Jumeirah Group, Marriott, Hilton, Rotana, Atlantis, Four Seasons, One&Only
+                </div>
+            </div>
+
+            <div class="channel-card priority-1">
+                <span class="type direct">DIRECT</span>
+                <h4>Restaurant Groups</h4>
+                <p>Target multi-outlet restaurant groups with outdoor venues. Single decision maker, multiple units.</p>
+                <div class="companies">
+                    <strong>Target Groups:</strong><br>
+                    Sunset Hospitality, JRG Dubai, Solutions Leisure, Bull & Roo, Irish Village Group
+                </div>
+            </div>
+        </div>
+
+        <h3>Priority 2: Channel Partners (Scale)</h3>
+        <div class="channel-grid">
+            <div class="channel-card priority-2">
+                <span class="type partner">PARTNER</span>
+                <h4>AV Integrators</h4>
+                <p>Partner with commercial AV companies who spec equipment for hotels and venues. They install, we supply.</p>
+                <div class="companies">
+                    <strong>Target Partners:</strong><br>
+                    Oxford Integration, Granteq, Pulse Middle East, VisionTech, Electrosonic, AL IMTEDAD, Purple Rock
+                </div>
+            </div>
+
+            <div class="channel-card priority-2">
+                <span class="type partner">PARTNER</span>
+                <h4>Smart Home Companies</h4>
+                <p>Partner with luxury smart home installers who do villa automation. Bundle with AV packages.</p>
+                <div class="companies">
+                    <strong>Target Partners:</strong><br>
+                    MySmartHome, LuxSmart, Smart Citizens, Alayoubi Technologies, The Switch Company, GeeSmart
+                </div>
+            </div>
+
+            <div class="channel-card priority-2">
+                <span class="type partner">PARTNER</span>
+                <h4>Landscape & Pool Contractors</h4>
+                <p>Partner with villa landscaping companies who build outdoor entertainment areas.</p>
+                <div class="companies">
+                    <strong>Target Partners:</strong><br>
+                    Living Acre, Exterior Space, Elkin Corp, Better Gardens, Antonovich Group, Four Seasons Pools
+                </div>
+            </div>
+        </div>
+
+        <h3>Priority 3: Referral Networks</h3>
+        <div class="channel-grid">
+            <div class="channel-card priority-3">
+                <span class="type referral">REFERRAL</span>
+                <h4>Interior Fit-Out Companies</h4>
+                <p>Luxury fit-out companies doing villa renovations. Outdoor entertainment is growing scope.</p>
+                <div class="companies">
+                    <strong>Target Partners:</strong><br>
+                    Antonovich Group, Rayfitout, Havelock One, Enzo Milano, Settle, Spazio
+                </div>
+            </div>
+
+            <div class="channel-card priority-3">
+                <span class="type referral">REFERRAL</span>
+                <h4>Property Management</h4>
+                <p>Companies managing holiday villas and rental properties. Outdoor entertainment adds value.</p>
+                <div class="companies">
+                    <strong>Target:</strong><br>
+                    Luxury vacation rental managers, Airbnb Superhosts, hotel-managed residences
+                </div>
+            </div>
+
+            <div class="channel-card priority-3">
+                <span class="type referral">REFERRAL</span>
+                <h4>Architects & Designers</h4>
+                <p>Specify during design phase for new villa builds. Long lead but guaranteed orders.</p>
+                <div class="companies">
+                    <strong>Approach:</strong><br>
+                    Provide spec sheets, CAD drawings, collaborate on custom solutions
+                </div>
+            </div>
+        </div>
+
+        <!-- MARKETING PLAN -->
+        <h2 class="marketing">Marketing Plan</h2>
+
+        <div class="highlight-box" style="background: #dcfce7; border-color: #059669;">
+            <h4 style="color: #166534;">Leverage Your Real Estate Broker Contacts</h4>
+            <ul style="color: #166534;">
+                <li><strong>Handover Referral Program:</strong> 5-10% commission on each sale referred at villa handover</li>
+                <li><strong>Show Home Installation:</strong> Install demo unit at broker's model villa for viewings</li>
+                <li><strong>Co-Branded Marketing:</strong> Joint flyers, email campaigns to their buyer database</li>
+                <li><strong>Agent Training:</strong> Educate agents on product benefits as upsell opportunity</li>
+                <li><strong>Exclusive Territory:</strong> Give top brokers exclusive rights in specific communities</li>
+            </ul>
+        </div>
+
+        <h3>Marketing Actions by Priority</h3>
+        <table class="action-table">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Channel</th>
+                    <th>Target</th>
+                    <th>Investment</th>
+                    <th>Priority</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Demo unit at broker partner's show villa</td>
+                    <td>Real Estate</td>
+                    <td>1-2 units installed</td>
+                    <td>Cost of units + install</td>
+                    <td><span class="priority high">HIGH</span></td>
+                </tr>
+                <tr>
+                    <td>LinkedIn outreach to hotel GMs/F&B Directors</td>
+                    <td>Hospitality</td>
+                    <td>50 contacts/month</td>
+                    <td>Time only</td>
+                    <td><span class="priority high">HIGH</span></td>
+                </tr>
+                <tr>
+                    <td>Partnership meetings with AV integrators</td>
+                    <td>Channel Partner</td>
+                    <td>Top 5 integrators</td>
+                    <td>Time only</td>
+                    <td><span class="priority high">HIGH</span></td>
+                </tr>
+                <tr>
+                    <td>Attend The Hotel Show Dubai 2025</td>
+                    <td>Hospitality</td>
+                    <td>Lead generation</td>
+                    <td>AED 5-15K booth</td>
+                    <td><span class="priority medium">MEDIUM</span></td>
+                </tr>
+                <tr>
+                    <td>Instagram/social media (installed projects)</td>
+                    <td>Residential</td>
+                    <td>Brand awareness</td>
+                    <td>AED 2-5K/month</td>
+                    <td><span class="priority medium">MEDIUM</span></td>
+                </tr>
+                <tr>
+                    <td>Google Ads for "outdoor TV Dubai"</td>
+                    <td>Residential</td>
+                    <td>Direct leads</td>
+                    <td>AED 3-5K/month</td>
+                    <td><span class="priority medium">MEDIUM</span></td>
+                </tr>
+                <tr>
+                    <td>WhatsApp Business catalog</td>
+                    <td>All</td>
+                    <td>Easy inquiry</td>
+                    <td>Free</td>
+                    <td><span class="priority high">HIGH</span></td>
+                </tr>
+                <tr>
+                    <td>Partnership with smart home companies</td>
+                    <td>Channel Partner</td>
+                    <td>Top 3 companies</td>
+                    <td>Time only</td>
+                    <td><span class="priority medium">MEDIUM</span></td>
+                </tr>
+                <tr>
+                    <td>Listing on Dubizzle/Property Finder</td>
+                    <td>Residential</td>
+                    <td>Visibility</td>
+                    <td>AED 500-2K/month</td>
+                    <td><span class="priority low">LOW</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Pricing Strategy</h3>
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th>Segment</th>
+                    <th>75" Model Price</th>
+                    <th>Margin Target</th>
+                    <th>Volume Discount</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="segment">Residential Direct</td>
+                    <td>AED 7,000</td>
+                    <td>50%+</td>
+                    <td>-</td>
+                    <td>Premium positioning, includes install</td>
+                </tr>
+                <tr>
+                    <td class="segment">Hospitality Direct</td>
+                    <td>AED 6,000-6,500</td>
+                    <td>40-45%</td>
+                    <td>5% for 5+ units</td>
+                    <td>Volume relationship, faster payment</td>
+                </tr>
+                <tr>
+                    <td class="segment">AV Integrator Partner</td>
+                    <td>AED 5,000-5,500</td>
+                    <td>30-35%</td>
+                    <td>10% for 10+ units</td>
+                    <td>They mark up and install</td>
+                </tr>
+                <tr>
+                    <td class="segment">Developer Bulk</td>
+                    <td>AED 4,500-5,000</td>
+                    <td>25-30%</td>
+                    <td>15% for 20+ units</td>
+                    <td>Large orders, long payment terms</td>
+                </tr>
+                <tr>
+                    <td class="segment">Broker Referral</td>
+                    <td>AED 7,000</td>
+                    <td>40-45%</td>
+                    <td>10% commission to broker</td>
+                    <td>Residential full price, pay referral</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>90-Day Launch Plan</h3>
+        <div class="two-col">
+            <div class="contact-list">
+                <h4>Days 1-30: Foundation</h4>
+                <div class="contact-item">
+                    <span class="contact-name">Finalize prototype with KDM Steel</span>
+                    <span class="contact-type">Manufacturing</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name">Set up WhatsApp Business</span>
+                    <span class="contact-type">Sales channel</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name">Create product catalog PDF</span>
+                    <span class="contact-type">Sales tool</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name">Approach 2 real estate broker partners</span>
+                    <span class="contact-type">Channel</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name">LinkedIn profile optimization</span>
+                    <span class="contact-type">Marketing</span>
+                </div>
+            </div>
+            <div class="contact-list">
+                <h4>Days 31-60: Outreach</h4>
+                <div class="contact-item">
+                    <span class="contact-name">Install demo at broker show villa</span>
+                    <span class="contact-type">Demo unit</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name">Contact top 5 AV integrators</span>
+                    <span class="contact-type">Partnerships</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name">LinkedIn outreach to 30 hotel contacts</span>
+                    <span class="contact-type">Hospitality</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name">Set up Instagram with project photos</span>
+                    <span class="contact-type">Social media</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name">First residential installation</span>
+                    <span class="contact-type">Case study</span>
+                </div>
+            </div>
+        </div>
+        <div class="contact-list" style="margin-top: 1.5rem;">
+            <h4>Days 61-90: Scale</h4>
+            <div class="contact-item">
+                <span class="contact-name">Close first hospitality deal (3-5 units)</span>
+                <span class="contact-type">Revenue</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-name">Onboard 2 AV integrator partners</span>
+                <span class="contact-type">Channel scale</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-name">Launch Google Ads campaign</span>
+                <span class="contact-type">Lead gen</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-name">Expand to Saudi Arabia outreach</span>
+                <span class="contact-type">New market</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-name">Place first production order (50 units)</span>
+                <span class="contact-type">Inventory</span>
+            </div>
+        </div>
+
+        <p style="text-align: center; color: #9ca3af; font-size: 9pt; margin-top: 3rem;">
+            Last updated: December 2025 | Apex Enclosures
+        </p>
+    </div>
+</body>
+</html>
