@@ -385,4 +385,18 @@
             }
         }
     });
+
+    // Save sidebar scroll position before navigating
+    const sidebar = document.querySelector('.apex-sidebar');
+    document.querySelectorAll('.apex-nav-item').forEach(link => {
+        link.addEventListener('click', function() {
+            localStorage.setItem('apexNavScrollPos', sidebar.scrollTop);
+        });
+    });
+
+    // Restore sidebar scroll position on page load
+    const savedScrollPos = localStorage.getItem('apexNavScrollPos');
+    if (savedScrollPos && sidebar) {
+        sidebar.scrollTop = parseInt(savedScrollPos, 10);
+    }
 })();
