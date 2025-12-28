@@ -7,55 +7,30 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: 11pt;
             line-height: 1.6;
-            color: #1a1a1a;
-            background: #f8f9fa;
+            color: #0f172a;
+            background: #f8fafc;
         }
-
-        .doc-nav {
-            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
-            padding: 1rem 2rem;
-        }
-        .doc-nav h3 {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 0.75rem;
-        }
-        .doc-nav-grid { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-        .doc-nav .doc-card {
-            background: rgba(255,255,255,0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            text-decoration: none;
-            color: white;
-            border: 1px solid rgba(255,255,255,0.2);
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        .doc-nav .doc-card:hover { background: rgba(255,255,255,0.2); }
-        .doc-nav .doc-card.active { background: white; color: #1428a0; }
 
         .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
-        h1 { color: #1428a0; font-size: 28pt; margin-bottom: 0.5rem; }
-        .subtitle { color: #6b7280; font-size: 14pt; margin-bottom: 2rem; }
+        h1 { color: #0d9488; font-size: 2rem; margin-bottom: 0.5rem; }
+        .subtitle { color: #64748b; font-size: 1.1rem; margin-bottom: 2rem; }
 
         h2 {
-            color: #1428a0;
-            font-size: 18pt;
-            border-bottom: 3px solid #1428a0;
+            color: #0d9488;
+            font-size: 1.25rem;
+            border-bottom: 2px solid #0d9488;
             padding-bottom: 0.5rem;
             margin: 2.5rem 0 1.5rem;
         }
-        h2.green { border-color: #059669; color: #059669; }
+        h2.green { border-color: #0d9488; color: #0d9488; }
         h2.orange { border-color: #d97706; color: #d97706; }
         h2.purple { border-color: #7c3aed; color: #7c3aed; }
         h2.red { border-color: #dc2626; color: #dc2626; }
 
-        h3 { color: #374151; font-size: 14pt; margin: 1.5rem 0 1rem; }
+        h3 { color: #0f172a; font-size: 1.1rem; margin: 1.5rem 0 1rem; }
 
         /* Executive Summary */
         .exec-grid {
@@ -72,22 +47,22 @@
             text-align: center;
         }
         .exec-card .number {
-            font-size: 28pt;
+            font-size: 2rem;
             font-weight: 700;
-            color: #1428a0;
+            color: #0d9488;
         }
         .exec-card .label {
-            font-size: 10pt;
-            color: #6b7280;
+            font-size: 0.85rem;
+            color: #64748b;
             margin-top: 0.25rem;
         }
-        .exec-card.green .number { color: #059669; }
+        .exec-card.green .number { color: #0d9488; }
         .exec-card.purple .number { color: #7c3aed; }
         .exec-card.orange .number { color: #d97706; }
 
         /* Capital Box */
         .capital-box {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
             color: white;
             border-radius: 16px;
             padding: 2rem;
@@ -151,17 +126,17 @@
         .pricing-table th, .pricing-table td {
             padding: 1rem;
             text-align: center;
-            border: 1px solid #e5e7eb;
+            border: 1px solid #e2e8f0;
         }
         .pricing-table th {
-            background: #1428a0;
+            background: #0d9488;
             color: white;
             font-weight: 600;
         }
-        .pricing-table th.green { background: #059669; }
+        .pricing-table th.green { background: #0d9488; }
         .pricing-table th.compare { background: #dc2626; }
         .pricing-table .segment { text-align: left; font-weight: 600; }
-        .pricing-table tr:hover { background: #f8f9fa; }
+        .pricing-table tr:hover { background: #f8fafc; }
         .savings { color: #059669; font-weight: 600; }
         .premium { color: #dc2626; }
 
@@ -177,14 +152,14 @@
             border-radius: 12px;
             padding: 1.5rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            border-left: 4px solid #1428a0;
+            border-left: 4px solid #0d9488;
         }
         .country-card.tier-1 { border-color: #059669; }
         .country-card.tier-2 { border-color: #0284c7; }
         .country-card.tier-3 { border-color: #7c3aed; }
         .country-card h4 {
             font-size: 12pt;
-            color: #1a1a1a;
+            color: #0f172a;
             margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
@@ -202,14 +177,14 @@
         .tier.priority { background: #059669; }
         .tier.secondary { background: #0284c7; }
         .tier.emerging { background: #7c3aed; }
-        .country-card p { font-size: 10pt; color: #6b7280; margin-bottom: 0.5rem; }
+        .country-card p { font-size: 10pt; color: #64748b; margin-bottom: 0.5rem; }
         .country-stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0.5rem;
             margin-top: 0.75rem;
             padding-top: 0.75rem;
-            border-top: 1px solid #e5e7eb;
+            border-top: 1px solid #e2e8f0;
         }
         .country-stats span {
             font-size: 9pt;
@@ -275,7 +250,7 @@
         .flow-step .icon {
             width: 60px;
             height: 60px;
-            background: #1428a0;
+            background: #0d9488;
             color: white;
             border-radius: 50%;
             display: flex;
@@ -284,8 +259,8 @@
             font-size: 24pt;
             margin: 0 auto 0.75rem;
         }
-        .flow-step h5 { font-size: 11pt; color: #1a1a1a; margin-bottom: 0.25rem; }
-        .flow-step p { font-size: 9pt; color: #6b7280; }
+        .flow-step h5 { font-size: 11pt; color: #0f172a; margin-bottom: 0.25rem; }
+        .flow-step p { font-size: 9pt; color: #64748b; }
         .flow-arrow {
             font-size: 24pt;
             color: #d1d5db;
@@ -305,10 +280,10 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
         .info-card h4 {
-            color: #1428a0;
+            color: #0d9488;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid #e5e7eb;
+            border-bottom: 2px solid #e2e8f0;
         }
         .info-item {
             padding: 0.75rem 0;
@@ -338,39 +313,6 @@
     </style>
 </head>
 <body>
-    <nav class="doc-nav">
-        <h3>Project Documents</h3>
-        <div class="doc-nav-grid">
-            <a href="index.html" class="doc-card">Website</a>
-            <a href="specification.html" class="doc-card">Specification</a>
-            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
-            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
-            <a href="control-logic.html" class="doc-card">Control Logic</a>
-            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
-            <a href="market-research.html" class="doc-card">Market Research</a>
-            <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
-            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
-            <a href="engineering-analysis.html" class="doc-card">Engineering Analysis</a>
-            <a href="testing-plan.html" class="doc-card">Testing Plan</a>
-            <a href="china-suppliers.html" class="doc-card">China Suppliers</a>
-            <a href="go-to-market.html" class="doc-card">Go-to-Market</a>
-            <a href="tv-compatibility.html" class="doc-card">TV Compatibility</a>
-            <a href="audio-noise-video.html" class="doc-card">Audio &amp; Video</a>
-            <a href="designs.html" class="doc-card">Designs</a>
-            <a href="contractors.html" class="doc-card">Contractors</a>
-            <a href="compliance-guide.html" class="doc-card">Compliance Guide</a>
-            <a href="global-pricing.html" class="doc-card active">Global Pricing</a>
-            <a href="financial-forecast.html" class="doc-card">Financial Forecast</a>
-            <a href="competitor-analysis.html" class="doc-card">Competitors</a>
-            <a href="legal-risk.html" class="doc-card">Legal Risk</a>
-            <a href="retail/index.html" class="doc-card">Retail</a>
-            <a href="partner/index.html" class="doc-card">Partner</a>
-            <a href="commercial/index.html" class="doc-card">Commercial</a>
-            <a href="partner-crm.html" class="doc-card">Partner CRM</a>
-            <a href="quote-calculator.html" class="doc-card">Quote Calculator</a>
-        </div>
-    </nav>
-
     <div class="container">
         <h1>Global Pricing & Sales Strategy</h1>
         <p class="subtitle">Zero-Risk Growth Model: Build a Global Business with &lt;$20K Capital</p>
@@ -484,7 +426,7 @@
                         <li><strong>Bulk orders (10+):</strong> Always ship from China for best margin</li>
                         <li><strong>Rush orders:</strong> Premium pricing for local Middle East production</li>
                     </ul>
-                    <p style="margin-top: 1rem; font-size: 10pt; color: #6b7280;">
+                    <p style="margin-top: 1rem; font-size: 10pt; color: #64748b;">
                         Middle East local suppliers: Al Shurooq, Emirates Metal (pending responses)
                     </p>
                 </div>
@@ -504,7 +446,7 @@
                         <li>You add 15-20% margin on TV wholesale price</li>
                         <li><strong>Samsung 75" QLED:</strong> ~$1,000 wholesale → sell for $1,200</li>
                     </ul>
-                    <p style="margin-top: 1rem; font-size: 10pt; color: #6b7280;">
+                    <p style="margin-top: 1rem; font-size: 10pt; color: #64748b;">
                         Research: Contact Samsung/Sony B2B divisions for distributor accounts
                     </p>
                 </div>
@@ -524,7 +466,7 @@
                         <li><strong>Regional partners</strong> - local installers get commission</li>
                         <li><strong>Referral network</strong> - brokers, AV integrators earn 10%</li>
                     </ul>
-                    <p style="margin-top: 1rem; font-size: 10pt; color: #6b7280;">
+                    <p style="margin-top: 1rem; font-size: 10pt; color: #64748b;">
                         Goal: $1M revenue in Year 1 = 500 units @ $2,000 avg. = 42 units/month
                     </p>
                 </div>
@@ -932,15 +874,15 @@
                 <h4>Price Trend: Outdoor TVs</h4>
                 <div class="info-item">
                     <span class="info-label">Samsung Terrace 75" (2021)</span>
-                    <span style="color: #6b7280;">$12,999</span>
+                    <span style="color: #64748b;">$12,999</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Samsung Terrace 75" (2024)</span>
-                    <span style="color: #6b7280;">$9,999</span>
+                    <span style="color: #64748b;">$9,999</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Expected 2026</span>
-                    <span style="color: #6b7280;">~$7,000?</span>
+                    <span style="color: #64748b;">~$7,000?</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Trend</span>
@@ -955,11 +897,11 @@
                 </div>
                 <div class="info-item">
                     <span class="info-label">75" Samsung 2021</span>
-                    <span style="color: #6b7280;">$1,800</span>
+                    <span style="color: #64748b;">$1,800</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">75" Samsung 2024</span>
-                    <span style="color: #6b7280;">$998</span>
+                    <span style="color: #64748b;">$998</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Apex bundle stays</span>

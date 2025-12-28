@@ -8,13 +8,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1428a0;
-            --accent: #d4af37;
-            --text: #1a1a1a;
-            --text-muted: #6b7280;
+            --primary: #0d9488;
+            --accent: #0d9488;
+            --text: #0f172a;
+            --text-muted: #64748b;
             --bg-white: #ffffff;
-            --bg-section: #f9fafb;
-            --border: #e5e7eb;
+            --bg-section: #f8fafc;
+            --border: #e2e8f0;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: var(--bg-white); color: var(--text); line-height: 1.6; }
@@ -29,7 +29,7 @@
         
         .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 2rem 80px; background: linear-gradient(135deg, #f6f6f6 0%, #fff 100%); }
         .hero-content { max-width: 1200px; margin: 0 auto; }
-        .hero-badge { display: inline-block; background: rgba(20,40,160,0.1); border: 1px solid var(--primary); color: var(--primary); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.85rem; margin-bottom: 1.5rem; }
+        .hero-badge { display: inline-block; background: rgba(13,148,136,0.1); border: 1px solid var(--primary); color: var(--primary); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.85rem; margin-bottom: 1.5rem; }
         .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; max-width: 700px; }
         .hero h1 span { color: var(--primary); }
         .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 550px; margin-bottom: 2rem; }
@@ -49,7 +49,7 @@
         .products { background: var(--bg-section); }
         .product-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         .product-card { background: var(--bg-white); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; text-align: center; transition: all 0.3s; }
-        .product-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 8px 24px rgba(20,40,160,0.1); }
+        .product-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 8px 24px rgba(13,148,136,0.1); }
         .product-size { font-size: 3rem; font-weight: 700; color: var(--primary); }
         .product-name { font-size: 1.25rem; font-weight: 600; margin: 0.5rem 0 1rem; }
         .product-fits { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
@@ -61,7 +61,7 @@
         
         .features-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         .feature-card { padding: 2rem; background: var(--bg-white); border: 1px solid var(--border); border-radius: 16px; }
-        .feature-icon { width: 60px; height: 60px; background: rgba(20,40,160,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.5rem; }
+        .feature-icon { width: 60px; height: 60px; background: rgba(13,148,136,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.5rem; }
         .feature-card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; }
         .feature-card p { color: var(--text-muted); font-size: 0.95rem; }
         
@@ -69,7 +69,7 @@
         .contact-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
         .contact-info h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
         .contact-method { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
-        .contact-method-icon { width: 50px; height: 50px; background: rgba(20,40,160,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
+        .contact-method-icon { width: 50px; height: 50px; background: rgba(13,148,136,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
         .contact-method-text h4 { font-weight: 600; }
         .contact-method-text a { color: var(--primary); text-decoration: none; }
         .contact-form { background: var(--bg-white); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); }

@@ -7,13 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1428a0;
+            --primary: #0d9488;
             --primary-light: #e8ebf7;
-            --text: #1a1a1a;
-            --text-muted: #6b7280;
+            --text: #0f172a;
+            --text-muted: #64748b;
             --bg: #ffffff;
-            --bg-alt: #f8f9fa;
-            --border: #e5e7eb;
+            --bg-alt: #f8fafc;
+            --border: #e2e8f0;
             --success: #059669;
             --warning: #d97706;
             --danger: #dc2626;
@@ -21,7 +21,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: var(--bg-alt); color: var(--text); line-height: 1.6; }
 
-        .doc-nav { background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%); padding: 1rem 2rem; }
+        .doc-nav { background: linear-gradient(135deg, #0d9488 0%, #0a7169 100%); padding: 1rem 2rem; }
         .doc-nav h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(255,255,255,0.7); margin-bottom: 0.75rem; }
         .doc-nav-grid { display: flex; gap: 0.75rem; flex-wrap: wrap; }
         .doc-card { background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; color: white; border: 1px solid rgba(255,255,255,0.2); font-size: 0.85rem; font-weight: 500; }
@@ -137,37 +137,37 @@
                 <svg viewBox="0 0 600 400" width="100%" height="350">
                     <defs>
                         <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#1428a0"/>
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#0d9488"/>
                         </marker>
                     </defs>
 
                     <!-- TV Enclosure isometric -->
                     <!-- Back panel -->
-                    <polygon points="100,150 450,50 450,280 100,380" fill="#d0d0d0" stroke="#333" stroke-width="1.5"/>
+                    <polygon points="100,150 450,50 450,280 100,380" fill="#d0d0d0" stroke="#e2e8f0" stroke-width="1.5"/>
 
                     <!-- Top panel -->
-                    <polygon points="100,150 450,50 500,80 150,180" fill="#e8e8e8" stroke="#333" stroke-width="1.5"/>
+                    <polygon points="100,150 450,50 500,80 150,180" fill="#e8e8e8" stroke="#e2e8f0" stroke-width="1.5"/>
 
                     <!-- Fan circles on top -->
-                    <ellipse cx="200" cy="130" rx="15" ry="8" fill="#333"/>
-                    <ellipse cx="260" cy="115" rx="15" ry="8" fill="#333"/>
-                    <ellipse cx="350" cy="95" rx="15" ry="8" fill="#333"/>
-                    <ellipse cx="410" cy="80" rx="15" ry="8" fill="#333"/>
+                    <ellipse cx="200" cy="130" rx="15" ry="8" fill="#e2e8f0"/>
+                    <ellipse cx="260" cy="115" rx="15" ry="8" fill="#e2e8f0"/>
+                    <ellipse cx="350" cy="95" rx="15" ry="8" fill="#e2e8f0"/>
+                    <ellipse cx="410" cy="80" rx="15" ry="8" fill="#e2e8f0"/>
 
                     <!-- Bottom panel -->
-                    <polygon points="100,380 450,280 500,310 150,410" fill="#ccc" stroke="#333" stroke-width="1.5"/>
+                    <polygon points="100,380 450,280 500,310 150,410" fill="#ccc" stroke="#e2e8f0" stroke-width="1.5"/>
 
                     <!-- Side panel (right) -->
-                    <polygon points="450,50 500,80 500,310 450,280" fill="#bbb" stroke="#333" stroke-width="1.5"/>
+                    <polygon points="450,50 500,80 500,310 450,280" fill="#bbb" stroke="#e2e8f0" stroke-width="1.5"/>
 
                     <!-- Front glass panel -->
-                    <polygon points="150,180 500,80 500,310 150,410" fill="#1a365d" fill-opacity="0.4" stroke="#333" stroke-width="2"/>
+                    <polygon points="150,180 500,80 500,310 150,410" fill="#1a365d" fill-opacity="0.4" stroke="#e2e8f0" stroke-width="2"/>
 
                     <!-- Glass reflection -->
                     <polygon points="180,200 300,160 300,250 180,290" fill="white" fill-opacity="0.15"/>
 
                     <!-- Frame around glass -->
-                    <polygon points="150,180 500,80 500,310 150,410" fill="none" stroke="#333" stroke-width="4"/>
+                    <polygon points="150,180 500,80 500,310 150,410" fill="none" stroke="#e2e8f0" stroke-width="4"/>
 
                     <!-- Corner brackets -->
                     <polygon points="150,180 170,175 175,195 155,200" fill="#444"/>
@@ -176,19 +176,19 @@
                     <polygon points="500,310 480,305 475,290 495,285" fill="#444"/>
 
                     <!-- Labels -->
-                    <text x="300" y="30" text-anchor="middle" font-size="16" font-weight="600" fill="#1428a0">ATE-75 OUTDOOR TV ENCLOSURE</text>
+                    <text x="300" y="30" text-anchor="middle" font-size="16" font-weight="600" fill="#0d9488">ATE-75 OUTDOOR TV ENCLOSURE</text>
                     <text x="300" y="50" text-anchor="middle" font-size="11" fill="#666">1709 × 1084 × 135mm | IP66 | PWM Cooling</text>
 
                     <!-- Callouts -->
-                    <line x1="410" y1="80" x2="450" y2="40" stroke="#333" stroke-width="1"/>
-                    <text x="455" y="38" font-size="9" fill="#333">80mm PWM FANS × 4</text>
+                    <line x1="410" y1="80" x2="450" y2="40" stroke="#e2e8f0" stroke-width="1"/>
+                    <text x="455" y="38" font-size="9" fill="#e2e8f0">80mm PWM FANS × 4</text>
 
-                    <line x1="500" y1="200" x2="540" y2="180" stroke="#333" stroke-width="1"/>
-                    <text x="545" y="178" font-size="9" fill="#333">6mm TEMPERED</text>
-                    <text x="545" y="190" font-size="9" fill="#333">GLASS</text>
+                    <line x1="500" y1="200" x2="540" y2="180" stroke="#e2e8f0" stroke-width="1"/>
+                    <text x="545" y="178" font-size="9" fill="#e2e8f0">6mm TEMPERED</text>
+                    <text x="545" y="190" font-size="9" fill="#e2e8f0">GLASS</text>
 
-                    <line x1="150" y1="300" x2="100" y2="330" stroke="#333" stroke-width="1"/>
-                    <text x="40" y="335" font-size="9" fill="#333">2mm AL FRAME</text>
+                    <line x1="150" y1="300" x2="100" y2="330" stroke="#e2e8f0" stroke-width="1"/>
+                    <text x="40" y="335" font-size="9" fill="#e2e8f0">2mm AL FRAME</text>
 
                     <!-- Hinge indication -->
                     <circle cx="155" cy="220" r="5" fill="#f59e0b"/>
@@ -196,7 +196,7 @@
                     <text x="115" y="295" font-size="8" fill="#f59e0b" transform="rotate(-60,115,295)">HINGES</text>
 
                     <!-- Price tag -->
-                    <rect x="450" y="340" width="130" height="50" rx="8" fill="#dbeafe" stroke="#1428a0" stroke-width="2"/>
+                    <rect x="450" y="340" width="130" height="50" rx="8" fill="#dbeafe" stroke="#0d9488" stroke-width="2"/>
                     <text x="515" y="360" text-anchor="middle" font-size="10" font-weight="600" fill="#1e40af">Selling Price</text>
                     <text x="515" y="380" text-anchor="middle" font-size="16" font-weight="700" fill="#1e40af">AED 7,000</text>
                 </svg>
@@ -208,13 +208,13 @@
                     <h5>Front Elevation</h5>
                     <svg viewBox="0 0 420 280" width="100%" height="200">
                         <!-- Outer frame -->
-                        <rect x="40" y="30" width="340" height="216" fill="#333" stroke="#222" stroke-width="2" rx="4"/>
+                        <rect x="40" y="30" width="340" height="216" fill="#e2e8f0" stroke="#222" stroke-width="2" rx="4"/>
 
                         <!-- Glass panel -->
                         <rect x="50" y="40" width="320" height="196" fill="#4a90d9" fill-opacity="0.3" stroke="#666" stroke-width="1"/>
 
                         <!-- TV screen indication -->
-                        <rect x="55" y="55" width="310" height="175" fill="#1a1a1a" stroke="#444" stroke-width="1"/>
+                        <rect x="55" y="55" width="310" height="175" fill="#0f172a" stroke="#444" stroke-width="1"/>
                         <text x="210" y="150" text-anchor="middle" font-size="14" fill="#666">75" TV DISPLAY</text>
 
                         <!-- Frame corners -->
@@ -224,15 +224,15 @@
                         <rect x="360" y="226" width="20" height="20" fill="#444"/>
 
                         <!-- Dimensions -->
-                        <line x1="40" y1="260" x2="380" y2="260" stroke="#1428a0" stroke-width="1"/>
-                        <line x1="40" y1="255" x2="40" y2="265" stroke="#1428a0" stroke-width="1"/>
-                        <line x1="380" y1="255" x2="380" y2="265" stroke="#1428a0" stroke-width="1"/>
-                        <text x="210" y="275" text-anchor="middle" font-size="9" fill="#1428a0">1709mm</text>
+                        <line x1="40" y1="260" x2="380" y2="260" stroke="#0d9488" stroke-width="1"/>
+                        <line x1="40" y1="255" x2="40" y2="265" stroke="#0d9488" stroke-width="1"/>
+                        <line x1="380" y1="255" x2="380" y2="265" stroke="#0d9488" stroke-width="1"/>
+                        <text x="210" y="275" text-anchor="middle" font-size="9" fill="#0d9488">1709mm</text>
 
-                        <line x1="400" y1="30" x2="400" y2="246" stroke="#1428a0" stroke-width="1"/>
-                        <line x1="395" y1="30" x2="405" y2="30" stroke="#1428a0" stroke-width="1"/>
-                        <line x1="395" y1="246" x2="405" y2="246" stroke="#1428a0" stroke-width="1"/>
-                        <text x="415" y="145" text-anchor="middle" font-size="9" fill="#1428a0" transform="rotate(90,415,145)">1084mm</text>
+                        <line x1="400" y1="30" x2="400" y2="246" stroke="#0d9488" stroke-width="1"/>
+                        <line x1="395" y1="30" x2="405" y2="30" stroke="#0d9488" stroke-width="1"/>
+                        <line x1="395" y1="246" x2="405" y2="246" stroke="#0d9488" stroke-width="1"/>
+                        <text x="415" y="145" text-anchor="middle" font-size="9" fill="#0d9488" transform="rotate(90,415,145)">1084mm</text>
                     </svg>
                 </div>
 
@@ -240,7 +240,7 @@
                     <h5>Rear Elevation</h5>
                     <svg viewBox="0 0 420 280" width="100%" height="200">
                         <!-- Outer frame -->
-                        <rect x="40" y="30" width="340" height="216" fill="#e0e0e0" stroke="#333" stroke-width="2" rx="4"/>
+                        <rect x="40" y="30" width="340" height="216" fill="#e0e0e0" stroke="#e2e8f0" stroke-width="2" rx="4"/>
 
                         <!-- VESA mount pattern -->
                         <rect x="170" y="100" width="80" height="60" fill="none" stroke="#666" stroke-width="1" stroke-dasharray="4,2"/>
@@ -251,13 +251,13 @@
                         <text x="210" y="175" text-anchor="middle" font-size="8" fill="#666">VESA 600×400</text>
 
                         <!-- Fan grilles (top) -->
-                        <g fill="#333">
+                        <g fill="#e2e8f0">
                             <circle cx="100" cy="55" r="15"/>
                             <circle cx="160" cy="55" r="15"/>
                             <circle cx="260" cy="55" r="15"/>
                             <circle cx="320" cy="55" r="15"/>
                         </g>
-                        <text x="210" y="80" text-anchor="middle" font-size="8" fill="#333">80mm PWM FANS × 4</text>
+                        <text x="210" y="80" text-anchor="middle" font-size="8" fill="#e2e8f0">80mm PWM FANS × 4</text>
 
                         <!-- Intake grilles (bottom) -->
                         <rect x="80" y="200" width="260" height="30" fill="#ddd" stroke="#666" stroke-width="1"/>
@@ -274,11 +274,11 @@
                         <text x="210" y="245" text-anchor="middle" font-size="8" fill="#666">IP66 LABYRINTH INTAKE</text>
 
                         <!-- Electronics box -->
-                        <rect x="60" y="100" width="60" height="80" fill="#444" stroke="#333" stroke-width="1" rx="3"/>
+                        <rect x="60" y="100" width="60" height="80" fill="#444" stroke="#e2e8f0" stroke-width="1" rx="3"/>
                         <text x="90" y="145" text-anchor="middle" font-size="7" fill="#ccc">CTRL</text>
 
                         <!-- Cable entry -->
-                        <circle cx="90" cy="195" r="8" fill="#1a1a1a" stroke="#666" stroke-width="1"/>
+                        <circle cx="90" cy="195" r="8" fill="#0f172a" stroke="#666" stroke-width="1"/>
                         <text x="90" y="210" text-anchor="middle" font-size="6" fill="#666">CABLE</text>
                     </svg>
                 </div>
@@ -290,34 +290,34 @@
                     <svg viewBox="0 0 300 280" width="100%" height="200">
                         <defs>
                             <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                                <polygon points="0 0, 10 3.5, 0 7" fill="#1428a0"/>
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#0d9488"/>
                             </marker>
                         </defs>
 
                         <!-- Enclosure profile -->
-                        <rect x="80" y="30" width="135" height="216" fill="#f5f5f5" stroke="#333" stroke-width="1.5"/>
+                        <rect x="80" y="30" width="135" height="216" fill="#f5f5f5" stroke="#e2e8f0" stroke-width="1.5"/>
 
                         <!-- Glass front -->
-                        <rect x="80" y="30" width="6" height="216" fill="#4a90d9" fill-opacity="0.5" stroke="#333" stroke-width="1"/>
+                        <rect x="80" y="30" width="6" height="216" fill="#4a90d9" fill-opacity="0.5" stroke="#e2e8f0" stroke-width="1"/>
 
                         <!-- TV -->
-                        <rect x="90" y="60" width="65" height="160" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+                        <rect x="90" y="60" width="65" height="160" fill="#0f172a" stroke="#e2e8f0" stroke-width="1"/>
                         <text x="122" y="145" text-anchor="middle" font-size="8" fill="#666" transform="rotate(-90,122,145)">TV 65mm</text>
 
                         <!-- Rear cavity -->
                         <rect x="155" y="30" width="60" height="216" fill="#fff" stroke="none"/>
 
                         <!-- Fan (top) -->
-                        <circle cx="185" cy="55" r="15" fill="#333"/>
+                        <circle cx="185" cy="55" r="15" fill="#e2e8f0"/>
                         <text x="185" y="60" text-anchor="middle" font-size="7" fill="#fff">FAN</text>
 
                         <!-- Electronics -->
-                        <rect x="165" y="120" width="40" height="50" fill="#444" stroke="#333" stroke-width="1"/>
+                        <rect x="165" y="120" width="40" height="50" fill="#444" stroke="#e2e8f0" stroke-width="1"/>
                         <text x="185" y="150" text-anchor="middle" font-size="7" fill="#ccc">CTRL</text>
 
                         <!-- Airflow path -->
-                        <path d="M 185,230 L 185,180 L 185,80 L 185,40" fill="none" stroke="#1428a0" stroke-width="2" marker-end="url(#arrowhead2)"/>
-                        <text x="230" y="140" font-size="8" fill="#1428a0">AIRFLOW</text>
+                        <path d="M 185,230 L 185,180 L 185,80 L 185,40" fill="none" stroke="#0d9488" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                        <text x="230" y="140" font-size="8" fill="#0d9488">AIRFLOW</text>
                         <text x="230" y="152" font-size="7" fill="#666">Bottom to Top</text>
 
                         <!-- Intake -->
@@ -325,8 +325,8 @@
                         <text x="185" y="245" text-anchor="middle" font-size="7" fill="#666">INTAKE</text>
 
                         <!-- Dimensions -->
-                        <line x1="80" y1="260" x2="215" y2="260" stroke="#1428a0" stroke-width="1"/>
-                        <text x="147" y="275" text-anchor="middle" font-size="9" fill="#1428a0">135mm</text>
+                        <line x1="80" y1="260" x2="215" y2="260" stroke="#0d9488" stroke-width="1"/>
+                        <text x="147" y="275" text-anchor="middle" font-size="9" fill="#0d9488">135mm</text>
                     </svg>
                 </div>
 
@@ -334,19 +334,19 @@
                     <h5>Hinge Detail (Door Open)</h5>
                     <svg viewBox="0 0 300 280" width="100%" height="200">
                         <!-- Fixed frame -->
-                        <rect x="150" y="40" width="80" height="200" fill="#e0e0e0" stroke="#333" stroke-width="1.5"/>
+                        <rect x="150" y="40" width="80" height="200" fill="#e0e0e0" stroke="#e2e8f0" stroke-width="1.5"/>
                         <text x="190" y="145" text-anchor="middle" font-size="9" fill="#666">FIXED</text>
                         <text x="190" y="158" text-anchor="middle" font-size="9" fill="#666">FRAME</text>
 
                         <!-- Door (open position) -->
-                        <rect x="60" y="60" width="90" height="160" fill="#333" stroke="#222" stroke-width="1.5" transform="rotate(-15,150,140)"/>
+                        <rect x="60" y="60" width="90" height="160" fill="#e2e8f0" stroke="#222" stroke-width="1.5" transform="rotate(-15,150,140)"/>
 
                         <!-- Glass on door -->
                         <rect x="65" y="65" width="80" height="150" fill="#4a90d9" fill-opacity="0.3" stroke="#666" stroke-width="1" transform="rotate(-15,150,140)"/>
 
                         <!-- Hinges -->
-                        <circle cx="150" cy="80" r="8" fill="#666" stroke="#333" stroke-width="1"/>
-                        <circle cx="150" cy="200" r="8" fill="#666" stroke="#333" stroke-width="1"/>
+                        <circle cx="150" cy="80" r="8" fill="#666" stroke="#e2e8f0" stroke-width="1"/>
+                        <circle cx="150" cy="200" r="8" fill="#666" stroke="#e2e8f0" stroke-width="1"/>
 
                         <!-- Gas strut -->
                         <line x1="100" y1="100" x2="140" y2="70" stroke="#f59e0b" stroke-width="4"/>
@@ -355,11 +355,11 @@
                         <text x="85" y="120" font-size="7" fill="#f59e0b">GAS STRUT</text>
 
                         <!-- Rotation arrow -->
-                        <path d="M 130,140 A 30,30 0 0,0 100,140" fill="none" stroke="#1428a0" stroke-width="2"/>
-                        <text x="90" y="155" font-size="8" fill="#1428a0">OPENS</text>
+                        <path d="M 130,140 A 30,30 0 0,0 100,140" fill="none" stroke="#0d9488" stroke-width="2"/>
+                        <text x="90" y="155" font-size="8" fill="#0d9488">OPENS</text>
 
                         <!-- Cam lock -->
-                        <circle cx="70" cy="200" r="6" fill="#666" stroke="#333" stroke-width="1" transform="rotate(-15,150,140)"/>
+                        <circle cx="70" cy="200" r="6" fill="#666" stroke="#e2e8f0" stroke-width="1" transform="rotate(-15,150,140)"/>
                         <text x="45" y="220" font-size="7" fill="#666">CAM LOCK</text>
                     </svg>
                 </div>
@@ -369,62 +369,62 @@
             <div class="drawing-container">
                 <svg viewBox="0 0 700 450" width="100%" height="400">
                     <!-- Main shell -->
-                    <polygon points="200,180 400,120 400,280 200,340" fill="#e0e0e0" stroke="#333" stroke-width="1.5"/>
-                    <polygon points="200,180 400,120 430,135 230,195" fill="#ccc" stroke="#333" stroke-width="1.5"/>
-                    <polygon points="400,120 430,135 430,295 400,280" fill="#bbb" stroke="#333" stroke-width="1.5"/>
-                    <text x="315" y="210" text-anchor="middle" font-size="10" fill="#333">MAIN SHELL</text>
+                    <polygon points="200,180 400,120 400,280 200,340" fill="#e0e0e0" stroke="#e2e8f0" stroke-width="1.5"/>
+                    <polygon points="200,180 400,120 430,135 230,195" fill="#ccc" stroke="#e2e8f0" stroke-width="1.5"/>
+                    <polygon points="400,120 430,135 430,295 400,280" fill="#bbb" stroke="#e2e8f0" stroke-width="1.5"/>
+                    <text x="315" y="210" text-anchor="middle" font-size="10" fill="#e2e8f0">MAIN SHELL</text>
                     <text x="315" y="222" text-anchor="middle" font-size="8" fill="#666">2mm AL 5052-H32</text>
 
                     <!-- Door assembly (offset left) -->
-                    <polygon points="50,200 180,160 180,300 50,340" fill="#444" stroke="#333" stroke-width="1.5"/>
+                    <polygon points="50,200 180,160 180,300 50,340" fill="#444" stroke="#e2e8f0" stroke-width="1.5"/>
                     <polygon points="55,205 175,167 175,293 55,331" fill="#4a90d9" fill-opacity="0.4" stroke="#666" stroke-width="1"/>
                     <text x="115" y="260" text-anchor="middle" font-size="9" fill="#fff">DOOR + GLASS</text>
 
                     <!-- Arrow from door to shell -->
-                    <path d="M 180,250 L 195,245" fill="none" stroke="#1428a0" stroke-width="2" stroke-dasharray="5,3"/>
+                    <path d="M 180,250 L 195,245" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="5,3"/>
 
                     <!-- Fan assembly (offset up) -->
-                    <rect x="250" y="40" width="120" height="50" fill="#333" stroke="#222" stroke-width="1.5" rx="4"/>
-                    <circle cx="280" cy="65" r="12" fill="#555" stroke="#333"/>
-                    <circle cx="310" cy="65" r="12" fill="#555" stroke="#333"/>
-                    <circle cx="340" cy="65" r="12" fill="#555" stroke="#333"/>
-                    <text x="310" y="100" text-anchor="middle" font-size="9" fill="#333">FAN MODULE</text>
+                    <rect x="250" y="40" width="120" height="50" fill="#e2e8f0" stroke="#222" stroke-width="1.5" rx="4"/>
+                    <circle cx="280" cy="65" r="12" fill="#555" stroke="#e2e8f0"/>
+                    <circle cx="310" cy="65" r="12" fill="#555" stroke="#e2e8f0"/>
+                    <circle cx="340" cy="65" r="12" fill="#555" stroke="#e2e8f0"/>
+                    <text x="310" y="100" text-anchor="middle" font-size="9" fill="#e2e8f0">FAN MODULE</text>
                     <text x="310" y="112" text-anchor="middle" font-size="7" fill="#666">4× 80mm PWM</text>
 
                     <!-- Arrow from fans to shell -->
-                    <path d="M 310,90 L 310,115" fill="none" stroke="#1428a0" stroke-width="2" stroke-dasharray="5,3"/>
+                    <path d="M 310,90 L 310,115" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="5,3"/>
 
                     <!-- Electronics module (offset right) -->
-                    <rect x="480" y="180" width="80" height="100" fill="#1a1a1a" stroke="#333" stroke-width="1.5" rx="4"/>
-                    <rect x="490" y="195" width="60" height="30" fill="#059669" stroke="#333" stroke-width="1"/>
+                    <rect x="480" y="180" width="80" height="100" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" rx="4"/>
+                    <rect x="490" y="195" width="60" height="30" fill="#059669" stroke="#e2e8f0" stroke-width="1"/>
                     <text x="520" y="215" text-anchor="middle" font-size="7" fill="#fff">PCB</text>
-                    <rect x="490" y="235" width="60" height="25" fill="#444" stroke="#333" stroke-width="1"/>
+                    <rect x="490" y="235" width="60" height="25" fill="#444" stroke="#e2e8f0" stroke-width="1"/>
                     <text x="520" y="252" text-anchor="middle" font-size="7" fill="#ccc">PSU</text>
-                    <text x="520" y="295" text-anchor="middle" font-size="9" fill="#333">ELECTRONICS</text>
+                    <text x="520" y="295" text-anchor="middle" font-size="9" fill="#e2e8f0">ELECTRONICS</text>
                     <text x="520" y="307" text-anchor="middle" font-size="7" fill="#666">Controller + PSU</text>
 
                     <!-- Arrow from electronics to shell -->
-                    <path d="M 475,230 L 435,225" fill="none" stroke="#1428a0" stroke-width="2" stroke-dasharray="5,3"/>
+                    <path d="M 475,230 L 435,225" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="5,3"/>
 
                     <!-- VESA mount (offset back) -->
-                    <rect x="500" y="80" width="100" height="70" fill="#888" stroke="#333" stroke-width="1.5"/>
-                    <circle cx="520" cy="100" r="5" fill="#333"/>
-                    <circle cx="580" cy="100" r="5" fill="#333"/>
-                    <circle cx="520" cy="130" r="5" fill="#333"/>
-                    <circle cx="580" cy="130" r="5" fill="#333"/>
-                    <text x="550" y="165" text-anchor="middle" font-size="9" fill="#333">VESA MOUNT</text>
+                    <rect x="500" y="80" width="100" height="70" fill="#64748b" stroke="#e2e8f0" stroke-width="1.5"/>
+                    <circle cx="520" cy="100" r="5" fill="#e2e8f0"/>
+                    <circle cx="580" cy="100" r="5" fill="#e2e8f0"/>
+                    <circle cx="520" cy="130" r="5" fill="#e2e8f0"/>
+                    <circle cx="580" cy="130" r="5" fill="#e2e8f0"/>
+                    <text x="550" y="165" text-anchor="middle" font-size="9" fill="#e2e8f0">VESA MOUNT</text>
                     <text x="550" y="177" text-anchor="middle" font-size="7" fill="#666">600×400mm</text>
 
                     <!-- Arrow from VESA to shell -->
-                    <path d="M 495,115 L 435,150" fill="none" stroke="#1428a0" stroke-width="2" stroke-dasharray="5,3"/>
+                    <path d="M 495,115 L 435,150" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="5,3"/>
 
                     <!-- Gasket (offset) -->
-                    <rect x="50" y="380" width="150" height="20" fill="#333" stroke="#222" stroke-width="1" rx="3"/>
+                    <rect x="50" y="380" width="150" height="20" fill="#e2e8f0" stroke="#222" stroke-width="1" rx="3"/>
                     <text x="125" y="395" text-anchor="middle" font-size="8" fill="#fff">EPDM GASKET (CONTINUOUS)</text>
                     <text x="125" y="420" text-anchor="middle" font-size="7" fill="#666">IP66 Seal</text>
 
                     <!-- Intake grille (offset) -->
-                    <rect x="250" y="380" width="120" height="25" fill="#ddd" stroke="#333" stroke-width="1"/>
+                    <rect x="250" y="380" width="120" height="25" fill="#ddd" stroke="#e2e8f0" stroke-width="1"/>
                     <g stroke="#999" stroke-width="1">
                         <line x1="265" y1="385" x2="265" y2="400"/>
                         <line x1="285" y1="385" x2="285" y2="400"/>
@@ -432,15 +432,15 @@
                         <line x1="325" y1="385" x2="325" y2="400"/>
                         <line x1="345" y1="385" x2="345" y2="400"/>
                     </g>
-                    <text x="310" y="420" text-anchor="middle" font-size="8" fill="#333">IP66 LABYRINTH INTAKE</text>
+                    <text x="310" y="420" text-anchor="middle" font-size="8" fill="#e2e8f0">IP66 LABYRINTH INTAKE</text>
 
                     <!-- Hardware pack -->
-                    <rect x="420" y="380" width="100" height="40" fill="#f5f5f5" stroke="#333" stroke-width="1" rx="4"/>
-                    <text x="470" y="400" text-anchor="middle" font-size="8" fill="#333">HARDWARE</text>
+                    <rect x="420" y="380" width="100" height="40" fill="#f5f5f5" stroke="#e2e8f0" stroke-width="1" rx="4"/>
+                    <text x="470" y="400" text-anchor="middle" font-size="8" fill="#e2e8f0">HARDWARE</text>
                     <text x="470" y="412" text-anchor="middle" font-size="7" fill="#666">M5 SS, Hinges, Locks</text>
 
                     <!-- Title -->
-                    <text x="350" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#1428a0">EXPLODED ASSEMBLY - ATE-75</text>
+                    <text x="350" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#0d9488">EXPLODED ASSEMBLY - ATE-75</text>
                 </svg>
             </div>
 

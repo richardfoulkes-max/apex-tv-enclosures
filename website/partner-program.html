@@ -6,100 +6,155 @@
     <title>Partner Program - Apex Enclosures</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.6; color: #1a1a1a; background: #f8f9fa; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        h1 { color: #1428a0; font-size: 28pt; margin-bottom: 0.5rem; }
-        .subtitle { color: #6b7280; font-size: 14pt; margin-bottom: 2rem; }
-        h2 { color: #1428a0; font-size: 18pt; border-bottom: 3px solid #1428a0; padding-bottom: 0.5rem; margin: 2.5rem 0 1.5rem; }
-        h2.green { border-color: #059669; color: #059669; }
-        h2.purple { border-color: #7c3aed; color: #7c3aed; }
-        h2.orange { border-color: #d97706; color: #d97706; }
-        h3 { color: #374151; font-size: 14pt; margin: 1.5rem 0 1rem; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11pt; line-height: 1.6; color: #0f172a; background: #f8fafc; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        h1 { color: #0d9488; font-size: 2rem; margin-bottom: 0.5rem; }
+        .subtitle { color: #64748b; font-size: 1.1rem; margin-bottom: 2rem; }
+        h2 { color: #0d9488; font-size: 1.25rem; border-bottom: 2px solid #0d9488; padding-bottom: 0.5rem; margin: 2.5rem 0 1.5rem; }
 
         /* Hero Box */
         .hero-box {
-            background: linear-gradient(135deg, #1428a0 0%, #0f1f7a 100%);
+            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
             color: white;
-            border-radius: 20px;
-            padding: 3rem;
+            border-radius: 16px;
+            padding: 2.5rem;
             text-align: center;
             margin-bottom: 2rem;
         }
-        .hero-box h2 { color: white; border: none; margin: 0 0 1rem; font-size: 24pt; }
-        .hero-box p { font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto 2rem; }
-        .hero-stats { display: flex; justify-content: center; gap: 3rem; }
-        .hero-stat { text-align: center; }
-        .hero-stat .number { font-size: 2.5rem; font-weight: 700; }
-        .hero-stat .label { font-size: 0.9rem; opacity: 0.8; }
+        .hero-box h2 { color: white; border: none; margin: 0 0 1rem; font-size: 1.5rem; }
+        .hero-box p { font-size: 1rem; opacity: 0.9; max-width: 600px; margin: 0 auto 1.5rem; }
 
-        /* Partner Tiers */
-        .tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 2rem 0; }
-        .tier-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-        .tier-header { padding: 2rem; text-align: center; color: white; }
-        .tier-header.authorized { background: linear-gradient(135deg, #6b7280, #4b5563); }
-        .tier-header.preferred { background: linear-gradient(135deg, #0284c7, #0369a1); }
-        .tier-header.premier { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
-        .tier-header h3 { color: white; margin: 0 0 0.5rem; font-size: 1.3rem; }
-        .tier-header .discount { font-size: 2.5rem; font-weight: 700; }
-        .tier-header .discount-label { font-size: 0.85rem; opacity: 0.9; }
-        .tier-body { padding: 2rem; }
-        .tier-body h4 { color: #1428a0; margin-bottom: 1rem; font-size: 1rem; }
-        .tier-body ul { margin-left: 1.25rem; margin-bottom: 1.5rem; }
-        .tier-body li { margin-bottom: 0.5rem; }
-        .tier-requirement { background: #f3f4f6; padding: 1rem; border-radius: 8px; }
-        .tier-requirement strong { color: #374151; }
+        /* Simple Card */
+        .simple-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 1.5rem;
+        }
+        .simple-card h3 { color: #0d9488; margin-bottom: 1rem; }
+        .simple-card ul { margin-left: 1.5rem; }
+        .simple-card li { margin-bottom: 0.5rem; }
 
-        /* Pricing Table */
-        table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin: 1.5rem 0; }
-        th, td { padding: 1rem; text-align: center; border-bottom: 1px solid #e5e7eb; }
-        th { background: #1428a0; color: white; font-weight: 600; }
-        th:first-child, td:first-child { text-align: left; }
-        .highlight-row { background: #dcfce7; }
-        .your-margin { color: #059669; font-weight: 600; }
-
-        /* Benefits Grid */
-        .benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin: 1.5rem 0; }
-        .benefit-card { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-        .benefit-card h4 { color: #1428a0; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
-        .benefit-card ul { margin-left: 1.25rem; }
-        .benefit-card li { margin-bottom: 0.5rem; }
-
-        /* Process Steps */
-        .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin: 2rem 0; }
-        .process-step { text-align: center; }
-        .process-step .number { width: 60px; height: 60px; background: #1428a0; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 1rem; }
-        .process-step h4 { color: #1a1a1a; margin-bottom: 0.5rem; }
-        .process-step p { font-size: 0.9rem; color: #6b7280; }
-
-        /* Partner Types */
-        .partner-types { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin: 1.5rem 0; }
-        .partner-type { background: white; border-radius: 12px; padding: 1.5rem; border: 2px solid #e5e7eb; }
-        .partner-type.ideal { border-color: #059669; }
-        .partner-type h4 { color: #1428a0; margin-bottom: 0.5rem; }
-        .partner-type .badge { display: inline-block; background: #dcfce7; color: #166534; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-bottom: 0.75rem; }
-        .partner-type ul { margin-left: 1.25rem; font-size: 0.95rem; }
+        /* Partner Types Grid */
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .partner-type {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 2px solid #e2e8f0;
+        }
+        .partner-type h4 { color: #0f172a; margin-bottom: 0.5rem; }
+        .partner-type ul { margin-left: 1.25rem; font-size: 0.95rem; color: #475569; }
         .partner-type li { margin-bottom: 0.4rem; }
 
+        /* Pricing */
+        .pricing-highlight {
+            background: #f0fdfa;
+            border: 2px solid #0d9488;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .pricing-highlight .discount { font-size: 3rem; font-weight: 700; color: #0d9488; }
+        .pricing-highlight .label { color: #64748b; margin-bottom: 1rem; }
+        .pricing-highlight p { color: #475569; font-size: 0.95rem; }
+
+        /* Process Steps */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .process-step {
+            text-align: center;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .process-step .number {
+            width: 50px;
+            height: 50px;
+            background: #0d9488;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+        .process-step h4 { color: #0f172a; margin-bottom: 0.5rem; }
+        .process-step p { font-size: 0.9rem; color: #64748b; }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .benefit-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .benefit-item .icon { font-size: 1.25rem; }
+        .benefit-item span { color: #475569; }
+
         /* CTA Box */
-        .cta-box { background: linear-gradient(135deg, #059669, #047857); color: white; border-radius: 16px; padding: 2.5rem; text-align: center; margin: 2rem 0; }
-        .cta-box h3 { color: white; margin-bottom: 1rem; font-size: 1.5rem; }
-        .cta-box p { opacity: 0.9; margin-bottom: 1.5rem; }
-        .cta-btn { display: inline-block; background: white; color: #059669; padding: 1rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none; margin: 0 0.5rem; }
+        .cta-box {
+            background: linear-gradient(135deg, #0d9488, #0f766e);
+            color: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .cta-box h3 { color: white; margin-bottom: 0.75rem; font-size: 1.25rem; }
+        .cta-box p { opacity: 0.9; margin-bottom: 1.25rem; }
+        .cta-btn {
+            display: inline-block;
+            background: white;
+            color: #0d9488;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
         .cta-btn:hover { background: #f0fdf4; }
-        .cta-btn.secondary { background: transparent; border: 2px solid white; color: white; }
-        .cta-btn.secondary:hover { background: rgba(255,255,255,0.1); }
+        .cta-btn.secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
 
         /* FAQ */
-        .faq-item { background: white; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-        .faq-item h4 { color: #1428a0; margin-bottom: 0.5rem; }
-        .faq-item p { color: #6b7280; }
-
-        @media (max-width: 900px) {
-            .tier-grid, .process-grid { grid-template-columns: 1fr; }
-            .benefits-grid, .partner-types { grid-template-columns: 1fr; }
-            .hero-stats { flex-direction: column; gap: 1rem; }
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 0.75rem;
         }
-        @media print { body { background: white; } }
+        .faq-item h4 { color: #0d9488; margin-bottom: 0.5rem; font-size: 1rem; }
+        .faq-item p { color: #64748b; font-size: 0.95rem; }
+
+        @media (max-width: 600px) {
+            .container { padding: 1rem; }
+            .hero-box { padding: 1.5rem; }
+        }
     </style>
 </head>
 <body>
@@ -107,323 +162,150 @@
         <!-- Hero -->
         <div class="hero-box">
             <h2>Become an Apex Partner</h2>
-            <p>Sell premium outdoor TV enclosures to your customers. High margins, zero inventory risk, full support.</p>
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <div class="number">40%+</div>
-                    <div class="label">Partner Margins</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="number">$0</div>
-                    <div class="label">Inventory Required</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="number">4-6 wks</div>
-                    <div class="label">Delivery Time</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="number">2 Year</div>
-                    <div class="label">Warranty</div>
-                </div>
-            </div>
+            <p>Sell premium outdoor TV enclosures to your customers. We handle manufacturing and shipping - you focus on selling.</p>
         </div>
 
         <h1>Partner Program</h1>
-        <p class="subtitle">Reseller and installer program for outdoor TV enclosures</p>
+        <p class="subtitle">Simple reseller program for AV professionals and contractors</p>
 
-        <!-- Ideal Partners -->
-        <h2 class="green">Ideal Partner Types</h2>
-        <div class="partner-types">
-            <div class="partner-type ideal">
-                <span class="badge">HIGH FIT</span>
+        <!-- Simple Offer -->
+        <div class="pricing-highlight">
+            <div class="discount">Partner Pricing</div>
+            <div class="label">Competitive Discount on All Products</div>
+            <p>Simple, straightforward pricing. No complicated tiers or volume commitments to start.</p>
+        </div>
+
+        <!-- Who We Work With -->
+        <h2>Who We Work With</h2>
+        <div class="partner-grid">
+            <div class="partner-type">
                 <h4>AV Integrators & Installers</h4>
                 <ul>
                     <li>Already selling TVs and sound systems</li>
                     <li>Existing customer base for outdoor entertainment</li>
                     <li>Technical capability to install</li>
-                    <li>Can offer turnkey solutions</li>
                 </ul>
             </div>
-            <div class="partner-type ideal">
-                <span class="badge">HIGH FIT</span>
-                <h4>Landscape & Pool Contractors</h4>
+            <div class="partner-type">
+                <h4>Pool & Landscape Contractors</h4>
                 <ul>
                     <li>Building outdoor living spaces</li>
-                    <li>Pool, patio, garden projects</li>
-                    <li>Upsell opportunity at point of sale</li>
+                    <li>Upsell opportunity during projects</li>
                     <li>Trusted by homeowners</li>
                 </ul>
             </div>
-            <div class="partner-type ideal">
-                <span class="badge">HIGH FIT</span>
+            <div class="partner-type">
                 <h4>Home Automation Companies</h4>
                 <ul>
                     <li>Smart home installations</li>
-                    <li>Control4, Crestron, Savant dealers</li>
+                    <li>Control4, Crestron dealers</li>
                     <li>High-end residential clients</li>
-                    <li>Integration expertise</li>
                 </ul>
             </div>
-            <div class="partner-type ideal">
-                <span class="badge">HIGH FIT</span>
-                <h4>Commercial AV Contractors</h4>
+            <div class="partner-type">
+                <h4>Commercial Contractors</h4>
                 <ul>
                     <li>Hotels, restaurants, clubs</li>
-                    <li>Fit-out contractors</li>
-                    <li>Volume project opportunities</li>
-                    <li>B2B relationships</li>
+                    <li>Fit-out projects</li>
+                    <li>Volume opportunities</li>
                 </ul>
             </div>
         </div>
-
-        <!-- Partner Tiers -->
-        <h2>Partner Tiers</h2>
-        <div class="tier-grid">
-            <div class="tier-card">
-                <div class="tier-header authorized">
-                    <h3>Authorized Partner</h3>
-                    <div class="discount">25%</div>
-                    <div class="discount-label">off retail</div>
-                </div>
-                <div class="tier-body">
-                    <h4>Benefits</h4>
-                    <ul>
-                        <li>25% discount on all products</li>
-                        <li>Partner portal access</li>
-                        <li>Sales materials & specs</li>
-                        <li>Technical support</li>
-                        <li>Listed on partner locator</li>
-                    </ul>
-                    <div class="tier-requirement">
-                        <strong>Requirements:</strong><br>
-                        Sign partner agreement<br>
-                        Complete product training<br>
-                        No minimum order
-                    </div>
-                </div>
-            </div>
-            <div class="tier-card">
-                <div class="tier-header preferred">
-                    <h3>Preferred Partner</h3>
-                    <div class="discount">35%</div>
-                    <div class="discount-label">off retail</div>
-                </div>
-                <div class="tier-body">
-                    <h4>Benefits</h4>
-                    <ul>
-                        <li>35% discount on all products</li>
-                        <li>Priority order fulfillment</li>
-                        <li>Co-marketing support</li>
-                        <li>Demo unit at cost</li>
-                        <li>Dedicated account manager</li>
-                        <li>Lead referrals in your area</li>
-                    </ul>
-                    <div class="tier-requirement">
-                        <strong>Requirements:</strong><br>
-                        10+ units/year commitment<br>
-                        Showroom demo unit<br>
-                        Trained installation team
-                    </div>
-                </div>
-            </div>
-            <div class="tier-card">
-                <div class="tier-header premier">
-                    <h3>Premier Partner</h3>
-                    <div class="discount">45%</div>
-                    <div class="discount-label">off retail</div>
-                </div>
-                <div class="tier-body">
-                    <h4>Benefits</h4>
-                    <ul>
-                        <li>45% discount on all products</li>
-                        <li>Exclusive territory option</li>
-                        <li>Custom branding available</li>
-                        <li>Net-30 payment terms</li>
-                        <li>Marketing development funds</li>
-                        <li>Early access to new products</li>
-                        <li>Featured partner status</li>
-                    </ul>
-                    <div class="tier-requirement">
-                        <strong>Requirements:</strong><br>
-                        25+ units/year commitment<br>
-                        $50K annual revenue target<br>
-                        Quarterly business reviews
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Partner Pricing -->
-        <h2>Partner Pricing - 75" Model</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Configuration</th>
-                    <th>Retail Price</th>
-                    <th>Authorized (25%)</th>
-                    <th>Preferred (35%)</th>
-                    <th>Premier (45%)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Enclosure Only</strong></td>
-                    <td>$1,899</td>
-                    <td>$1,424<br><span class="your-margin">Your margin: $475</span></td>
-                    <td>$1,234<br><span class="your-margin">Your margin: $665</span></td>
-                    <td>$1,044<br><span class="your-margin">Your margin: $855</span></td>
-                </tr>
-                <tr class="highlight-row">
-                    <td><strong>With Samsung QLED TV</strong></td>
-                    <td>$3,099</td>
-                    <td>$2,324<br><span class="your-margin">Your margin: $775</span></td>
-                    <td>$2,014<br><span class="your-margin">Your margin: $1,085</span></td>
-                    <td>$1,704<br><span class="your-margin">Your margin: $1,395</span></td>
-                </tr>
-                <tr>
-                    <td><strong>+ Installation (you deliver)</strong></td>
-                    <td>$3,449</td>
-                    <td>$2,324 + your labor<br><span class="your-margin">Margin: $1,125+</span></td>
-                    <td>$2,014 + your labor<br><span class="your-margin">Margin: $1,435+</span></td>
-                    <td>$1,704 + your labor<br><span class="your-margin">Margin: $1,745+</span></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Size</th>
-                    <th>Retail</th>
-                    <th>Authorized Cost</th>
-                    <th>Preferred Cost</th>
-                    <th>Premier Cost</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>43"</td><td>$899</td><td>$674</td><td>$584</td><td>$494</td></tr>
-                <tr><td>55"</td><td>$1,199</td><td>$899</td><td>$779</td><td>$659</td></tr>
-                <tr><td>65"</td><td>$1,499</td><td>$1,124</td><td>$974</td><td>$824</td></tr>
-                <tr class="highlight-row"><td><strong>75"</strong></td><td><strong>$1,899</strong></td><td><strong>$1,424</strong></td><td><strong>$1,234</strong></td><td><strong>$1,044</strong></td></tr>
-                <tr><td>86"</td><td>$2,499</td><td>$1,874</td><td>$1,624</td><td>$1,374</td></tr>
-            </tbody>
-        </table>
 
         <!-- How It Works -->
         <h2>How It Works</h2>
         <div class="process-grid">
             <div class="process-step">
                 <div class="number">1</div>
-                <h4>Sign Up</h4>
-                <p>Complete partner application and agreement. Get portal access same day.</p>
+                <h4>Apply</h4>
+                <p>Quick application. We verify your business and get you set up.</p>
             </div>
             <div class="process-step">
                 <div class="number">2</div>
-                <h4>Get Trained</h4>
-                <p>30-minute product training. Receive sales kit and specs.</p>
+                <h4>Quote</h4>
+                <p>Get partner pricing. Quote your customer at retail or your preferred price.</p>
             </div>
             <div class="process-step">
                 <div class="number">3</div>
-                <h4>Sell to Customer</h4>
-                <p>Quote at retail (or your price). Collect payment. We handle the rest.</p>
+                <h4>Order</h4>
+                <p>Place order through us. Pay your partner price, keep the difference.</p>
             </div>
             <div class="process-step">
                 <div class="number">4</div>
-                <h4>We Deliver</h4>
-                <p>Ship direct to customer or your warehouse. You install or we coordinate.</p>
+                <h4>Deliver</h4>
+                <p>We ship to you or direct to your customer. You handle installation.</p>
             </div>
         </div>
 
-        <!-- Benefits -->
-        <h2>Partner Benefits</h2>
+        <!-- What You Get -->
+        <h2>What You Get</h2>
         <div class="benefits-grid">
-            <div class="benefit-card">
-                <h4>Zero Inventory Risk</h4>
-                <ul>
-                    <li>No upfront stock purchase required</li>
-                    <li>Order per project basis</li>
-                    <li>We manufacture to your orders</li>
-                    <li>No dead stock or storage costs</li>
-                </ul>
+            <div class="benefit-item">
+                <span class="icon">💰</span>
+                <span>Competitive partner pricing</span>
             </div>
-            <div class="benefit-card">
-                <h4>Drop Ship Available</h4>
-                <ul>
-                    <li>Ship direct to your customer</li>
-                    <li>Premium Apex branded packaging</li>
-                    <li>Professional delivery documentation</li>
-                    <li>No logistics headaches</li>
-                </ul>
+            <div class="benefit-item">
+                <span class="icon">📦</span>
+                <span>No inventory required</span>
             </div>
-            <div class="benefit-card">
-                <h4>Sales Support</h4>
-                <ul>
-                    <li>Professional sales materials</li>
-                    <li>Technical spec sheets</li>
-                    <li>Comparison guides vs competitors</li>
-                    <li>Custom quotes for projects</li>
-                </ul>
+            <div class="benefit-item">
+                <span class="icon">🚚</span>
+                <span>Drop-ship to your customers</span>
             </div>
-            <div class="benefit-card">
-                <h4>Technical Support</h4>
-                <ul>
-                    <li>Installation guides and videos</li>
-                    <li>WhatsApp support line</li>
-                    <li>Warranty handled by us</li>
-                    <li>Remote troubleshooting</li>
-                </ul>
+            <div class="benefit-item">
+                <span class="icon">📋</span>
+                <span>Sales materials & specs</span>
+            </div>
+            <div class="benefit-item">
+                <span class="icon">🛠️</span>
+                <span>Technical support</span>
+            </div>
+            <div class="benefit-item">
+                <span class="icon">🛡️</span>
+                <span>2-year warranty (we handle claims)</span>
             </div>
         </div>
 
-        <!-- Protected Pricing -->
-        <h2 class="orange">Protected Pricing Policy</h2>
-        <div style="background: #fef3c7; border: 2px solid #d97706; border-radius: 12px; padding: 1.5rem; margin: 1rem 0;">
-            <h4 style="color: #92400e; margin-bottom: 0.75rem;">We Protect Your Margins</h4>
-            <ul style="margin-left: 1.25rem;">
-                <li><strong>MAP Policy:</strong> All partners must sell at or above Minimum Advertised Price</li>
-                <li><strong>No Direct Competition:</strong> We don't sell direct to end customers in partner territories</li>
-                <li><strong>Lead Referrals:</strong> Website leads in your area are referred to you</li>
-                <li><strong>Price Consistency:</strong> Same partner pricing for everyone at each tier</li>
+        <!-- Simple Requirements -->
+        <div class="simple-card">
+            <h3>Requirements</h3>
+            <ul>
+                <li>Valid business in AV, construction, or related field</li>
+                <li>Ability to install or coordinate installation</li>
+                <li>Sign simple partner agreement</li>
             </ul>
+            <p style="color: #64748b; margin-top: 1rem; font-size: 0.9rem;">No minimum orders. No annual commitments. Start with one unit if you like.</p>
         </div>
 
         <!-- FAQ -->
-        <h2>Frequently Asked Questions</h2>
+        <h2>Quick Answers</h2>
         <div class="faq-item">
             <h4>Do I need to stock inventory?</h4>
-            <p>No. We manufacture to order. You sell, collect payment, and we ship. Zero inventory risk.</p>
+            <p>No. Order per project. We manufacture to your orders.</p>
         </div>
         <div class="faq-item">
             <h4>What's the lead time?</h4>
-            <p>4-6 weeks from order to delivery. Rush orders available for +15% (3 weeks).</p>
+            <p>4-6 weeks from order to delivery.</p>
         </div>
         <div class="faq-item">
-            <h4>Can I add my own margin for installation?</h4>
-            <p>Absolutely. Most partners charge $300-500 for installation on top of the product price. That's 100% yours.</p>
+            <h4>Can I charge for installation?</h4>
+            <p>Absolutely. Most partners charge $300-500 for installation. That's 100% yours.</p>
         </div>
         <div class="faq-item">
-            <h4>How do I handle warranty claims?</h4>
-            <p>Contact us directly. We handle all warranty claims and replacements. 2-year warranty on all products.</p>
-        </div>
-        <div class="faq-item">
-            <h4>Can I get exclusive territory?</h4>
-            <p>Premier Partners can request exclusive territory protection. Subject to volume commitments.</p>
-        </div>
-        <div class="faq-item">
-            <h4>What payment terms are available?</h4>
-            <p>Authorized: Payment with order. Preferred: 50% deposit. Premier: Net-30 after credit approval.</p>
+            <h4>How do warranty claims work?</h4>
+            <p>Contact us directly. We handle all warranty claims. 2-year coverage on all products.</p>
         </div>
 
         <!-- CTA -->
         <div class="cta-box">
-            <h3>Ready to Partner?</h3>
-            <p>Join our partner network and start offering premium outdoor TV solutions to your customers.</p>
+            <h3>Ready to Get Started?</h3>
+            <p>Apply to become an Apex partner. We'll get back to you within 24 hours.</p>
             <a href="mailto:apexenclosures@icloud.com?subject=Partner%20Application" class="cta-btn">Apply Now</a>
-            <a href="https://wa.me/971505598675?text=Hi%20I%27m%20interested%20in%20becoming%20an%20Apex%20partner" class="cta-btn secondary">WhatsApp Us</a>
+            <a href="https://wa.me/971505598675?text=Hi%20I%27m%20interested%20in%20becoming%20an%20Apex%20partner" class="cta-btn secondary">WhatsApp</a>
         </div>
 
-        <p style="text-align: center; color: #9ca3af; font-size: 9pt; margin-top: 3rem;">
-            Last updated: December 2025 | Apex Enclosures Partner Program
+        <p style="text-align: center; color: #94a3b8; font-size: 0.8rem; margin-top: 2rem;">
+            Apex Enclosures Partner Program | December 2025
         </p>
     </div>
 <script src="nav.js"></script>

@@ -323,7 +323,7 @@
 
         sidebarHTML += `
             <div class="apex-nav-section${hasActive ? '' : ' collapsed'}" data-section="${key}">
-                <div class="apex-nav-section-header" onclick="toggleApexSection('${key}')">
+                <div class="apex-nav-section-header" onclick="toggleApexSection('${key}', event)">
                     <span class="icon">${section.icon}</span>
                     <span>${section.label}</span>
                     <span class="arrow">▼</span>
@@ -353,7 +353,11 @@
     document.body.insertAdjacentHTML('afterbegin', sidebarHTML);
 
     // Toggle functions
-    window.toggleApexSection = function(sectionKey) {
+    window.toggleApexSection = function(sectionKey, event) {
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
         const section = document.querySelector(`.apex-nav-section[data-section="${sectionKey}"]`);
         if (section) {
             section.classList.toggle('collapsed');
