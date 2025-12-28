@@ -28,6 +28,7 @@
                 { href: 'specification.html', label: 'Specification' },
                 { href: 'design-detailed.html', label: 'Design Details' },
                 { href: 'designs.html', label: 'Design Gallery' },
+                { href: 'ai-image-prompts.html', label: 'AI Image Prompts' },
                 { href: 'bom-detailed.html', label: 'Bill of Materials' },
                 { href: 'engineering-analysis.html', label: 'Engineering Analysis' },
                 { href: 'control-logic.html', label: 'Control Logic' },

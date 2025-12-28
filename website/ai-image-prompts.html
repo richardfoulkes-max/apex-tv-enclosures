@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Generation Prompts - Apex Enclosures</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11pt; line-height: 1.6; color: #0f172a; background: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        h1 { color: #0d9488; font-size: 2rem; margin-bottom: 0.5rem; }
+        .subtitle { color: #64748b; margin-bottom: 2rem; }
+        h2 { color: #0d9488; font-size: 1.25rem; margin: 2rem 0 1rem; border-bottom: 2px solid #0d9488; padding-bottom: 0.5rem; }
+        .prompt-card { background: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .prompt-card h3 { color: #0f172a; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .prompt-card .use-case { color: #64748b; font-size: 0.85rem; margin-bottom: 1rem; }
+        .prompt-text { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.85rem; white-space: pre-wrap; line-height: 1.7; color: #334155; }
+        .copy-btn { background: #0d9488; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 1rem; }
+        .copy-btn:hover { background: #0f766e; }
+        .specs-box { background: #f0fdfa; border: 1px solid #99f6e4; border-radius: 8px; padding: 1rem; margin-bottom: 2rem; }
+        .specs-box h3 { color: #0d9488; margin-bottom: 0.5rem; }
+        .specs-box ul { margin-left: 1.5rem; color: #0f172a; }
+        .specs-box li { margin-bottom: 0.25rem; }
+        .tag { display: inline-block; background: #e0f2fe; color: #0369a1; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.5rem; }
+        .tag.hero { background: #fef3c7; color: #92400e; }
+        .tag.lifestyle { background: #dcfce7; color: #166534; }
+        .tag.detail { background: #f3e8ff; color: #7c3aed; }
+        .tag.technical { background: #e2e8f0; color: #475569; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Image Generation Prompts</h1>
+        <p class="subtitle">Detailed prompts for DALL-E, Midjourney, or similar AI tools to create realistic product renders</p>
+
+        <div class="specs-box">
+            <h3>Product Specifications (ATE-75)</h3>
+            <ul>
+                <li><strong>External Dimensions:</strong> 1760mm wide × 1040mm tall × 130mm deep</li>
+                <li><strong>Frame:</strong> Aluminum 5052-H32, 2.0mm thickness, matte black powder coat</li>
+                <li><strong>Front Panel:</strong> 8mm laminated tempered glass, anti-reflective coating</li>
+                <li><strong>Ventilation:</strong> 4 × 140mm DC fans on top, intake grille on bottom</li>
+                <li><strong>Door:</strong> Left-hinged with concealed piano hinges, gas strut support</li>
+                <li><strong>Locks:</strong> 2 × stainless steel cam locks on right edge</li>
+                <li><strong>Rating:</strong> IP66 weatherproof (dust-tight, water jet resistant)</li>
+                <li><strong>Mount:</strong> Universal VESA 200×200 to 600×400mm</li>
+            </ul>
+        </div>
+
+        <h2>Product Photography Prompts</h2>
+
+        <div class="prompt-card">
+            <span class="tag hero">Hero Shot</span>
+            <h3>3/4 Perspective - Product Catalog</h3>
+            <p class="use-case">Use for: Website hero, product pages, marketing materials</p>
+            <div class="prompt-text">Commercial product photography, Canon EOS R5, 70mm lens, f/8, studio strobe lighting with large softbox at 45 degrees camera-left and fill card camera-right:
+
+Subject: Premium outdoor TV enclosure cabinet
+- Dimensions: Wide rectangular form factor, landscape orientation, approximately 5:3 aspect ratio, very slim 130mm depth profile (noticeably thin like a large picture frame)
+- Frame: Matte black powder-coated aluminum, fine texture like luxury electronics (similar to Mac Pro finish), visible 45-degree chamfered edges, 25mm wide frame border around glass
+- Front panel: Single sheet of dark-tinted laminated glass, subtle green edge tint visible, slight reflection showing studio environment, glass sits flush with frame
+- Top edge: Four circular ventilation grilles (140mm diameter) with fine black mesh, evenly spaced, recessed 5mm into top surface
+- Right edge: Two brushed stainless steel cam locks visible, circular with quarter-turn slots
+- Left edge: Clean, hinges completely concealed
+- Corners: Reinforced corner brackets, same matte black finish, visible hex bolts with black oxide coating
+
+Camera angle: 30 degrees from front-left, 15 degrees above center, showing front face, top edge, and left edge
+Background: Seamless white cyclorama, soft gradient shadow beneath unit
+Style reference: Apple product photography, Bang & Olufsen catalog imagery
+Output: 8K, photorealistic, sharp focus throughout, visible material texture grain</div>
+            <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <div class="prompt-card">
+            <span class="tag lifestyle">Lifestyle</span>
+            <h3>Dubai Luxury Poolside</h3>
+            <p class="use-case">Use for: Website hero, social media, brochures</p>
+            <div class="prompt-text">Architectural interior/exterior photography, Sony A7R IV, 24mm wide lens, f/5.6, golden hour natural light with warm color temperature (5200K):
+
+Setting: Ultra-luxury Dubai villa outdoor living space
+- Location: Covered outdoor lounge area adjacent to infinity pool
+- Architecture: Contemporary Arabic-modern fusion, white rendered walls, dark bronze metal accents, geometric mashrabiya screen details
+- Pool: Infinity edge, turquoise water, subtle steam rising in warm evening air
+
+Focal point: Wall-mounted outdoor TV enclosure
+- Position: Mounted on shaded white wall, 1.5 meters above floor level, centered in entertainment zone
+- Appearance: Matte black rectangular cabinet, glass front showing 75-inch TV displaying Formula 1 race with vibrant colors
+- Scale reference: Enclosure is approximately 1.8 meters wide, shown next to 2-meter-tall potted olive tree
+
+Environment details:
+- Furniture: Luxury outdoor sectional sofa in cream performance fabric, teak coffee table
+- Flooring: Large format cream porcelain tiles
+- Lighting: Warm glow from recessed soffit lighting, sunset reflection in pool
+- Landscaping: Date palms, bougainvillea, manicured lawn visible beyond pool
+- Background: Dubai Marina skyline silhouette, soft focus
+
+Mood: Aspirational luxury lifestyle, relaxed evening entertainment
+Style reference: Architectural Digest photo spreads, luxury real estate photography
+Output: 8K photorealistic, natural color grading, architectural photography composition with strong leading lines toward TV</div>
+            <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <div class="prompt-card">
+            <span class="tag detail">Detail Shot</span>
+            <h3>Open Door Interior View</h3>
+            <p class="use-case">Use for: Product detail pages, installation guides</p>
+            <div class="prompt-text">Product detail photography, Canon 100mm macro lens, f/11, dual-point studio lighting for even illumination with minimal shadows:
+
+Subject: Outdoor TV enclosure with access door open 90 degrees
+- Door position: Hinged from left side, held open by stainless steel gas strut (visible at top-left), magnetic catch engaged
+- Door construction: Aluminum frame with laminated glass panel, full-perimeter EPDM gasket seal visible (black rubber, D-profile, continuous bead)
+- Interior visible:
+  * Samsung 75" QLED TV mounted inside (silver Samsung logo visible on bottom bezel)
+  * TV mounted on steel VESA bracket, slotted adjustment holes visible
+  * 20mm air gap visible between TV edges and enclosure walls
+  * Matte black painted interior surfaces
+  * Two cable pass-throughs with rubber grommets at bottom
+  * QR code sticker for product registration on interior wall
+
+Hardware details in focus:
+- Gas strut: Polished stainless steel cylinder, black end fittings, 250N rating visible on label
+- Cam lock: Open position showing latch mechanism, brushed steel face with quarter-turn slot
+- Hinge: Three-knuckle concealed hinge, stainless steel, precision engineering visible
+
+Camera angle: Slightly below center looking up into open cabinet at 20-degree angle
+Background: Neutral gray studio backdrop
+Style reference: IKEA assembly manual photography, Bosch appliance product shots
+Output: 8K, tack-sharp focus on gasket seal and hardware, shallow depth of field on TV screen</div>
+            <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <div class="prompt-card">
+            <span class="tag technical">Technical</span>
+            <h3>Rear View - Documentation</h3>
+            <p class="use-case">Use for: Spec sheets, installation manuals, technical docs</p>
+            <div class="prompt-text">Technical product photography, overhead studio lighting, flat even illumination, minimal shadows, orthographic perspective:
+
+Subject: Rear panel view of outdoor TV enclosure
+- Overall: Rectangular matte black aluminum panel, 1760mm × 1040mm, visible sheet metal construction with folded edges
+- Surface: Fine powder coat texture, slight orange-peel pattern typical of industrial coating
+
+Component layout (top to bottom):
+- Top section: Four circular exhaust fan housings (140mm), wire mesh guards, positioned in a row with 100mm spacing
+- Upper center: Product label plate (silver aluminum, laser-etched text showing model ATE-75, serial number, IP66 rating, CE mark)
+- Center: Universal VESA mounting plate (400×400mm steel plate with multiple hole patterns, silver zinc plating)
+- Cable entry points: Three IP66-rated compression glands (black nylon, 20mm diameter) positioned bottom-left
+- Bottom section: Intake ventilation grille, horizontal louvers with 45-degree angle, fine mesh behind
+- Mounting: Four keyhole slots for wall mounting, one at each corner, reinforced with backing plates
+
+Technical callouts desired: Dimension arrows, component labels
+Camera angle: Perfectly perpendicular to rear surface, zero perspective distortion
+Background: Pure white (#FFFFFF)
+Style reference: Technical product manual illustrations, engineering documentation photography
+Output: 8K, flat lighting, maximum detail visibility, suitable for specification sheets</div>
+            <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <div class="prompt-card">
+            <span class="tag lifestyle">Lifestyle</span>
+            <h3>Outdoor Kitchen Installation</h3>
+            <p class="use-case">Use for: Website gallery, social media, partner materials</p>
+            <div class="prompt-text">Lifestyle architectural photography, Phase One IQ4, 35mm lens, f/8, mixed ambient and flash fill lighting, HDR capture:
+
+Setting: Luxury villa outdoor kitchen and entertainment pavilion, evening
+- Structure: Covered outdoor kitchen with exposed timber beam ceiling, stone column supports
+- Kitchen: Built-in stainless steel BBQ, granite countertops (absolute black), outdoor sink, bar seating
+
+Focal point: TV enclosure installation
+- Position: Mounted on stone-clad chimney breast above linear gas fireplace (flames visible)
+- Height: Center of screen at 1.6m from floor (comfortable standing viewing height)
+- Display: 75" TV showing nature documentary with vibrant colors (coral reef scene)
+- Enclosure appearance: Matte black frame contrasting with light gray stone, glass reflecting fireplace flames subtly
+
+Environmental context:
+- Time: Blue hour (just after sunset, deep blue sky visible)
+- Lighting: Warm under-counter LED strips, pendant lights over bar, fireplace glow, TV screen illumination
+- Furniture: Four leather and chrome bar stools, outdoor dining table set for dinner
+- Accessories: Wine glasses, serving platters suggesting entertaining
+- Landscaping: Olive trees in large terracotta pots, lavender borders, string lights in background
+- Weather indication: Clear sky, perhaps single star visible, warm evening atmosphere
+
+Mood: Sophisticated outdoor entertaining, luxury lifestyle, warm hospitality
+Style reference: Luxury home builder marketing materials, Houzz featured photos
+Output: 8K photorealistic, warm color grading (slightly orange shadows, blue highlights), magazine-quality composition</div>
+            <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <div class="prompt-card">
+            <span class="tag detail">Detail Shot</span>
+            <h3>Weather Resistance Macro</h3>
+            <p class="use-case">Use for: IP66 certification pages, quality messaging</p>
+            <div class="prompt-text">Extreme macro product photography, 1:1 magnification, focus stacking (12 images), ring light with diffusion:
+
+Subject: Corner detail showing weatherproof construction
+- Primary focus: Junction of aluminum frame, glass panel, and EPDM gasket seal
+- Frame detail: Matte black powder coat surface texture at 10x magnification, showing fine particulate texture, no visible scratches or imperfections
+- Glass edge: 8mm laminated glass cross-section visible, showing two 3mm glass layers with 2mm PVB interlayer (slight green tint), polished edge
+- Gasket: Black EPDM rubber seal in compression, D-profile cross-section (12mm × 15mm), showing material density and compression against glass
+
+Weather demonstration:
+- Water droplets: Multiple water beads on powder coat surface, perfect spherical shape demonstrating hydrophobic properties
+- Droplet sizes: Varying from 2mm to 8mm diameter
+- Contact angle: Visible 90+ degree contact angle showing water beading, not sheeting
+
+Additional visible details:
+- Frame corner: Welded and ground smooth, no visible seam
+- Mounting screw: Black oxide stainless steel hex head, seated flush
+- Dust: None visible (demonstrating IP66 dust-tight rating)
+
+Background: Extreme shallow depth of field, neutral gray blur
+Style reference: Scientific material photography, IP rating test documentation imagery
+Output: 8K, extreme sharpness, laboratory photography quality, suitable for technical marketing</div>
+            <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <h2>Additional Angles</h2>
+
+        <div class="prompt-card">
+            <span class="tag hero">Hero Shot</span>
+            <h3>Front View - Straight On</h3>
+            <p class="use-case">Use for: Size comparison charts, dimension diagrams</p>
+            <div class="prompt-text">Commercial product photography, medium format camera, 80mm lens, f/11, perfectly flat studio lighting:
+
+Subject: Outdoor TV enclosure - direct front view
+- Orientation: Perfectly centered, level, no perspective distortion
+- Dimensions visible: 1760mm width × 1040mm height, slim profile evident from frame shadow
+- Frame: 25mm wide matte black aluminum border on all sides, consistent width
+- Glass: Large rectangular panel filling frame, slight reflection of softbox visible, dark tint
+- Screen area: TV visible through glass, displaying solid gradient (purple to blue) to show color accuracy
+- Ventilation: Top edge grilles just barely visible as thin dark line
+- Corners: Subtle corner brackets, symmetrical
+
+Composition: Centered in frame with equal margins, approximately 10% padding on all sides
+Background: Pure white seamless backdrop
+Lighting: Large overhead softbox, no harsh shadows, even illumination
+Style reference: Samsung TV product shots, LG OLED marketing images
+Output: 8K, perfectly sharp, suitable for overlay graphics and dimension annotations</div>
+            <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <div class="prompt-card">
+            <span class="tag lifestyle">Lifestyle</span>
+            <h3>Beach Club / Hotel Pool</h3>
+            <p class="use-case">Use for: B2B hospitality marketing, commercial pages</p>
+            <div class="prompt-text">Commercial hospitality photography, Sony A1, 35mm lens, f/4, late afternoon Mediterranean light:
+
+Setting: 5-star resort beach club, Dubai or Abu Dhabi
+- Location: Covered cabana/pergola structure beside resort pool
+- Architecture: Modern resort style, white fabric tensile shade structure, teak decking, stainless steel and rope railings
+
+Multiple TV installation (showing commercial application):
+- Configuration: Two outdoor TV enclosures mounted side by side on rear wall of cabana
+- Each unit: Matte black frame, 75-inch, one showing live sports (football match), one showing resort promotional content
+- Mounting: Flush to wall, approximately 2 meters from ground
+
+Resort environment:
+- Pool: Large resort pool in foreground, sun loungers with white cushions and umbrellas
+- Guests: Silhouettes of 2-3 people relaxed on loungers (not main focus, soft focus)
+- Staff: Waiter in background carrying drinks tray
+- Amenities: Poolside bar visible, towel station, tropical plantings
+- Sky: Clear blue with wispy clouds, late afternoon sun position
+- Water: Turquoise pool water with light reflections
+
+Branding opportunity: Small "Apex Enclosures" logo visible on enclosure corner
+Mood: Premium hospitality, leisure, luxury travel
+Style reference: Four Seasons hotel marketing, Marriott Bonvoy campaign imagery
+Output: 8K photorealistic, vibrant but natural colors, hospitality marketing quality</div>
+            <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <div class="prompt-card">
+            <span class="tag detail">Detail Shot</span>
+            <h3>Cooling System Close-up</h3>
+            <p class="use-case">Use for: Technical specs, thermal management messaging</p>
+            <div class="prompt-text">Technical product macro photography, 60mm macro lens, f/8, controlled studio lighting with rim light:
+
+Subject: Top ventilation system detail
+- Focus area: Two of the four 140mm exhaust fan grilles on enclosure top surface
+- Fan grille construction: Circular opening (140mm diameter), protective wire mesh (1mm stainless steel wire, 10mm grid), powder-coated frame ring
+- Mesh detail: Hexagonal pattern, visible depth showing labyrinth baffle design behind for IP66 rating
+- Surface context: Matte black powder-coated aluminum top panel, subtle texture visible
+
+Airflow indication:
+- Heat shimmer: Very subtle heat distortion rising from grille (if possible to render)
+- Or alternative: Thin wisps of vapor/steam rising to show active cooling
+
+Surrounding details:
+- Adjacent grille: Second fan grille visible but slightly soft focus
+- Panel seams: Clean welded joints visible
+- Edge detail: Chamfered edge of enclosure just visible at frame edge
+
+Lighting: Key light from upper left, rim light from behind to highlight grille edges and any rising heat
+Background: Shallow depth of field fading to neutral gray
+Style reference: Computer cooling product photography, Noctua fan marketing
+Output: 8K, sharp focus on primary grille, demonstrating thermal engineering quality</div>
+            <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+    </div>
+
+    <script>
+        function copyPrompt(btn) {
+            const promptText = btn.previousElementSibling.textContent;
+            navigator.clipboard.writeText(promptText).then(() => {
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = 'Copy Prompt', 2000);
+            });
+        }
+    </script>
+<script src="nav.js"></script>
+</body>
+</html>
