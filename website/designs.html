@@ -169,7 +169,479 @@
                 <p style="margin-top: 1rem; font-size: 0.85rem; color: #64748b;">Leonardo AI render - ATE-75 (75" model)</p>
             </div>
 
-            <h3>4. Technical Isometric View</h3>
+            <h3>4. v3.0 Front-Breathing Technical Drawings</h3>
+
+            <div class="success-box">
+                <strong>NEW v3.0 Cross-Sections:</strong> These detailed technical drawings show the front-breathing airflow architecture, component placement, and key dimensions.
+            </div>
+
+            <!-- SIDE CROSS-SECTION -->
+            <h4>4.1 Side Cross-Section - Complete Airflow Path</h4>
+            <div class="drawing-container">
+                <svg viewBox="0 0 800 600" width="100%" height="550">
+                    <defs>
+                        <marker id="airflow-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                            <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+                        </marker>
+                        <marker id="dim-arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                            <polygon points="0 0, 6 3, 0 6" fill="#64748b"/>
+                        </marker>
+                        <linearGradient id="heat-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                            <stop offset="0%" style="stop-color:#3b82f6"/>
+                            <stop offset="50%" style="stop-color:#f59e0b"/>
+                            <stop offset="100%" style="stop-color:#ef4444"/>
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Title -->
+                    <text x="400" y="30" text-anchor="middle" font-size="16" font-weight="600" fill="#0f172a">Side Cross-Section - Front-Breathing Airflow (v3.0)</text>
+                    <text x="400" y="50" text-anchor="middle" font-size="11" fill="#64748b">View from left side - showing internal airflow path</text>
+
+                    <!-- Main enclosure outline -->
+                    <rect x="150" y="80" width="120" height="450" fill="none" stroke="#1e293b" stroke-width="3" rx="4"/>
+
+                    <!-- Back wall (left side in this view) -->
+                    <rect x="150" y="80" width="8" height="450" fill="#374151"/>
+                    <text x="130" y="305" text-anchor="middle" font-size="9" fill="#374151" transform="rotate(-90 130 305)">REAR WALL (SEALED)</text>
+
+                    <!-- Front bezel frame (right side) -->
+                    <rect x="235" y="80" width="35" height="450" fill="#1e293b"/>
+
+                    <!-- Glass panel -->
+                    <rect x="230" y="115" width="6" height="380" fill="#93c5fd" stroke="#3b82f6" stroke-width="1" opacity="0.7"/>
+                    <text x="245" y="305" text-anchor="start" font-size="8" fill="#1e40af" transform="rotate(-90 248 305)">6mm GLASS</text>
+
+                    <!-- TV display -->
+                    <rect x="165" y="130" width="55" height="340" fill="#1e293b" stroke="#0f172a" stroke-width="2" rx="2"/>
+                    <rect x="168" y="135" width="49" height="330" fill="#334155"/>
+                    <text x="192" y="305" text-anchor="middle" font-size="10" fill="#94a3b8" transform="rotate(-90 192 305)">75" TV DISPLAY</text>
+
+                    <!-- Air channel (25mm gap) -->
+                    <rect x="220" y="115" width="10" height="380" fill="#dbeafe" opacity="0.5"/>
+
+                    <!-- TOP BEZEL DETAIL -->
+                    <rect x="235" y="80" width="35" height="35" fill="#1e293b" stroke="#0f172a" stroke-width="1"/>
+                    <!-- Exhaust louvers -->
+                    <line x1="240" y1="85" x2="265" y2="95" stroke="#64748b" stroke-width="2"/>
+                    <line x1="240" y1="92" x2="265" y2="102" stroke="#64748b" stroke-width="2"/>
+                    <line x1="240" y1="99" x2="265" y2="109" stroke="#64748b" stroke-width="2"/>
+                    <!-- Fan icon -->
+                    <circle cx="252" cy="97" r="12" fill="none" stroke="#059669" stroke-width="2"/>
+                    <text x="252" y="100" text-anchor="middle" font-size="7" fill="#059669">FAN</text>
+
+                    <!-- BOTTOM BEZEL DETAIL -->
+                    <rect x="235" y="495" width="35" height="35" fill="#1e293b" stroke="#0f172a" stroke-width="1"/>
+                    <!-- Intake louvers (angled down) -->
+                    <line x1="265" y1="502" x2="240" y2="510" stroke="#64748b" stroke-width="2"/>
+                    <line x1="265" y1="512" x2="240" y2="520" stroke="#64748b" stroke-width="2"/>
+                    <line x1="265" y1="522" x2="240" y2="530" stroke="#64748b" stroke-width="2"/>
+
+                    <!-- AIRFLOW ARROWS -->
+                    <!-- Intake arrows (blue, entering bottom) -->
+                    <path d="M 290 520 L 290 505 Q 290 495 280 495 L 232 495" stroke="#3b82f6" stroke-width="3" fill="none" marker-end="url(#airflow-arrow)"/>
+                    <path d="M 300 525 L 300 510 Q 300 500 285 500 L 232 500" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#airflow-arrow)"/>
+
+                    <!-- Rising air in channel (gradient color) -->
+                    <path d="M 225 480 L 225 400" stroke="url(#heat-gradient)" stroke-width="4" fill="none" marker-end="url(#airflow-arrow)"/>
+                    <path d="M 225 380 L 225 300" stroke="url(#heat-gradient)" stroke-width="4" fill="none" marker-end="url(#airflow-arrow)"/>
+                    <path d="M 225 280 L 225 200" stroke="url(#heat-gradient)" stroke-width="4" fill="none" marker-end="url(#airflow-arrow)"/>
+                    <path d="M 225 180 L 225 130" stroke="url(#heat-gradient)" stroke-width="4" fill="none" marker-end="url(#airflow-arrow)"/>
+
+                    <!-- Exhaust arrows (red, exiting top) -->
+                    <path d="M 225 120 Q 225 100 240 95 L 265 90 Q 280 88 285 75" stroke="#ef4444" stroke-width="3" fill="none" marker-end="url(#airflow-arrow)"/>
+                    <path d="M 225 115 Q 230 105 245 100 L 270 95 Q 290 93 295 80" stroke="#ef4444" stroke-width="2" fill="none" marker-end="url(#airflow-arrow)"/>
+
+                    <!-- DIMENSION LINES -->
+                    <!-- Overall depth 120mm -->
+                    <line x1="150" y1="560" x2="270" y2="560" stroke="#64748b" stroke-width="1"/>
+                    <line x1="150" y1="555" x2="150" y2="565" stroke="#64748b" stroke-width="1"/>
+                    <line x1="270" y1="555" x2="270" y2="565" stroke="#64748b" stroke-width="1"/>
+                    <text x="210" y="575" text-anchor="middle" font-size="10" font-weight="600" fill="#0f172a">120mm DEPTH</text>
+
+                    <!-- Bezel width 35mm -->
+                    <line x1="235" y1="70" x2="270" y2="70" stroke="#64748b" stroke-width="1"/>
+                    <line x1="235" y1="65" x2="235" y2="75" stroke="#64748b" stroke-width="1"/>
+                    <line x1="270" y1="65" x2="270" y2="75" stroke="#64748b" stroke-width="1"/>
+                    <text x="252" y="63" text-anchor="middle" font-size="9" fill="#64748b">35mm</text>
+
+                    <!-- Air channel 25mm -->
+                    <line x1="220" y1="250" x2="230" y2="250" stroke="#3b82f6" stroke-width="1"/>
+                    <text x="225" y="240" text-anchor="middle" font-size="8" fill="#3b82f6">25mm</text>
+                    <text x="225" y="262" text-anchor="middle" font-size="7" fill="#3b82f6">AIR GAP</text>
+
+                    <!-- LABELS -->
+                    <!-- Top bezel label -->
+                    <rect x="310" y="75" width="140" height="50" fill="#dcfce7" stroke="#16a34a" stroke-width="1" rx="4"/>
+                    <text x="380" y="92" text-anchor="middle" font-size="10" font-weight="600" fill="#166534">TOP BEZEL</text>
+                    <text x="380" y="105" text-anchor="middle" font-size="8" fill="#166534">4× 60mm fans</text>
+                    <text x="380" y="117" text-anchor="middle" font-size="8" fill="#166534">Exhaust louvers (up)</text>
+                    <line x1="270" y1="97" x2="310" y2="97" stroke="#16a34a" stroke-width="1" stroke-dasharray="3"/>
+
+                    <!-- Bottom bezel label -->
+                    <rect x="310" y="490" width="140" height="50" fill="#dbeafe" stroke="#3b82f6" stroke-width="1" rx="4"/>
+                    <text x="380" y="507" text-anchor="middle" font-size="10" font-weight="600" fill="#1e40af">BOTTOM BEZEL</text>
+                    <text x="380" y="520" text-anchor="middle" font-size="8" fill="#1e40af">Intake slot 1700×15mm</text>
+                    <text x="380" y="533" text-anchor="middle" font-size="8" fill="#1e40af">Louvers angled down (45°)</text>
+                    <line x1="270" y1="512" x2="310" y2="512" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3"/>
+
+                    <!-- Air channel label -->
+                    <rect x="310" y="280" width="140" height="45" fill="#fef3c7" stroke="#d97706" stroke-width="1" rx="4"/>
+                    <text x="380" y="297" text-anchor="middle" font-size="10" font-weight="600" fill="#92400e">FRONT AIR CHANNEL</text>
+                    <text x="380" y="310" text-anchor="middle" font-size="8" fill="#92400e">25mm glass-to-TV gap</text>
+                    <text x="380" y="320" text-anchor="middle" font-size="8" fill="#92400e">Natural convection assist</text>
+                    <line x1="230" y1="305" x2="310" y2="305" stroke="#d97706" stroke-width="1" stroke-dasharray="3"/>
+
+                    <!-- Rear cavity label -->
+                    <rect x="20" y="200" width="110" height="55" fill="#f1f5f9" stroke="#64748b" stroke-width="1" rx="4"/>
+                    <text x="75" y="217" text-anchor="middle" font-size="10" font-weight="600" fill="#374151">REAR CAVITY</text>
+                    <text x="75" y="230" text-anchor="middle" font-size="8" fill="#64748b">Sealed (no fans)</text>
+                    <text x="75" y="242" text-anchor="middle" font-size="8" fill="#64748b">Passive TV heat</text>
+                    <text x="75" y="254" text-anchor="middle" font-size="8" fill="#64748b">ePTFE breather</text>
+                    <line x1="130" y1="230" x2="150" y2="230" stroke="#64748b" stroke-width="1" stroke-dasharray="3"/>
+
+                    <!-- Heat arrows from TV -->
+                    <path d="M 215 200 L 222 200" stroke="#f59e0b" stroke-width="2" marker-end="url(#airflow-arrow)"/>
+                    <path d="M 215 300 L 222 300" stroke="#f59e0b" stroke-width="2" marker-end="url(#airflow-arrow)"/>
+                    <path d="M 215 400 L 222 400" stroke="#f59e0b" stroke-width="2" marker-end="url(#airflow-arrow)"/>
+                    <text x="218" y="260" text-anchor="middle" font-size="7" fill="#f59e0b" transform="rotate(-90 218 260)">TV HEAT →</text>
+
+                    <!-- Legend -->
+                    <rect x="500" y="150" width="170" height="130" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" rx="4"/>
+                    <text x="585" y="170" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">AIRFLOW LEGEND</text>
+                    <line x1="520" y1="190" x2="550" y2="190" stroke="#3b82f6" stroke-width="3"/>
+                    <text x="560" y="194" font-size="9" fill="#1e40af">Cool intake air</text>
+                    <line x1="520" y1="210" x2="550" y2="210" stroke="#f59e0b" stroke-width="3"/>
+                    <text x="560" y="214" font-size="9" fill="#92400e">Warming air</text>
+                    <line x1="520" y1="230" x2="550" y2="230" stroke="#ef4444" stroke-width="3"/>
+                    <text x="560" y="234" font-size="9" fill="#dc2626">Hot exhaust air</text>
+                    <rect x="520" y="248" width="30" height="12" fill="#93c5fd" stroke="#3b82f6" opacity="0.7"/>
+                    <text x="560" y="258" font-size="9" fill="#1e40af">Glass panel</text>
+
+                    <!-- CFM annotation -->
+                    <rect x="500" y="300" width="170" height="60" fill="#dcfce7" stroke="#16a34a" stroke-width="1" rx="4"/>
+                    <text x="585" y="320" text-anchor="middle" font-size="10" font-weight="600" fill="#166534">AIRFLOW RATE</text>
+                    <text x="585" y="335" text-anchor="middle" font-size="9" fill="#166534">~70 CFM (fans)</text>
+                    <text x="585" y="350" text-anchor="middle" font-size="9" fill="#166534">+15 CFM (convection)</text>
+                </svg>
+            </div>
+
+            <!-- TOP BEZEL DETAIL -->
+            <h4>4.2 Top Bezel Detail - Fan & Exhaust Assembly</h4>
+            <div class="drawing-container">
+                <svg viewBox="0 0 800 350" width="100%" height="320">
+                    <!-- Title -->
+                    <text x="400" y="25" text-anchor="middle" font-size="14" font-weight="600" fill="#0f172a">Top Bezel Cross-Section - Exhaust Fan Assembly</text>
+
+                    <!-- Main bezel cross-section -->
+                    <rect x="100" y="60" width="600" height="80" fill="#1e293b" stroke="#0f172a" stroke-width="2"/>
+
+                    <!-- Inner cavity -->
+                    <rect x="110" y="70" width="580" height="60" fill="#334155"/>
+
+                    <!-- Exhaust slot opening -->
+                    <rect x="115" y="60" width="570" height="8" fill="#475569"/>
+
+                    <!-- Louver blades -->
+                    <g fill="#64748b" stroke="#475569" stroke-width="1">
+                        <polygon points="120,60 130,60 145,68 135,68"/>
+                        <polygon points="150,60 160,60 175,68 165,68"/>
+                        <polygon points="180,60 190,60 205,68 195,68"/>
+                        <polygon points="210,60 220,60 235,68 225,68"/>
+                        <polygon points="240,60 250,60 265,68 255,68"/>
+                        <polygon points="270,60 280,60 295,68 285,68"/>
+                        <polygon points="300,60 310,60 325,68 315,68"/>
+                        <polygon points="330,60 340,60 355,68 345,68"/>
+                        <polygon points="360,60 370,60 385,68 375,68"/>
+                        <polygon points="390,60 400,60 415,68 405,68"/>
+                        <polygon points="420,60 430,60 445,68 435,68"/>
+                        <polygon points="450,60 460,60 475,68 465,68"/>
+                        <polygon points="480,60 490,60 505,68 495,68"/>
+                        <polygon points="510,60 520,60 535,68 525,68"/>
+                        <polygon points="540,60 550,60 565,68 555,68"/>
+                        <polygon points="570,60 580,60 595,68 585,68"/>
+                        <polygon points="600,60 610,60 625,68 615,68"/>
+                        <polygon points="630,60 640,60 655,68 645,68"/>
+                        <polygon points="660,60 670,60 685,68 675,68"/>
+                    </g>
+
+                    <!-- 4 Fans -->
+                    <g>
+                        <!-- Fan 1 -->
+                        <circle cx="200" cy="100" r="28" fill="#1e293b" stroke="#059669" stroke-width="2"/>
+                        <circle cx="200" cy="100" r="20" fill="none" stroke="#059669" stroke-width="1"/>
+                        <circle cx="200" cy="100" r="5" fill="#059669"/>
+                        <text x="200" y="103" text-anchor="middle" font-size="7" fill="white">60mm</text>
+
+                        <!-- Fan 2 -->
+                        <circle cx="333" cy="100" r="28" fill="#1e293b" stroke="#059669" stroke-width="2"/>
+                        <circle cx="333" cy="100" r="20" fill="none" stroke="#059669" stroke-width="1"/>
+                        <circle cx="333" cy="100" r="5" fill="#059669"/>
+                        <text x="333" y="103" text-anchor="middle" font-size="7" fill="white">60mm</text>
+
+                        <!-- Fan 3 -->
+                        <circle cx="466" cy="100" r="28" fill="#1e293b" stroke="#059669" stroke-width="2"/>
+                        <circle cx="466" cy="100" r="20" fill="none" stroke="#059669" stroke-width="1"/>
+                        <circle cx="466" cy="100" r="5" fill="#059669"/>
+                        <text x="466" y="103" text-anchor="middle" font-size="7" fill="white">60mm</text>
+
+                        <!-- Fan 4 -->
+                        <circle cx="600" cy="100" r="28" fill="#1e293b" stroke="#059669" stroke-width="2"/>
+                        <circle cx="600" cy="100" r="20" fill="none" stroke="#059669" stroke-width="1"/>
+                        <circle cx="600" cy="100" r="5" fill="#059669"/>
+                        <text x="600" y="103" text-anchor="middle" font-size="7" fill="white">60mm</text>
+                    </g>
+
+                    <!-- Glass edge -->
+                    <rect x="100" y="140" width="600" height="6" fill="#93c5fd" stroke="#3b82f6" stroke-width="1"/>
+                    <text x="400" y="158" text-anchor="middle" font-size="9" fill="#1e40af">GLASS PANEL (6mm)</text>
+
+                    <!-- Air channel -->
+                    <rect x="100" y="146" width="600" height="25" fill="#dbeafe" opacity="0.5"/>
+                    <text x="400" y="162" text-anchor="middle" font-size="8" fill="#3b82f6">25mm AIR CHANNEL</text>
+
+                    <!-- TV edge -->
+                    <rect x="100" y="171" width="600" height="20" fill="#1e293b" stroke="#0f172a" stroke-width="1"/>
+                    <text x="400" y="185" text-anchor="middle" font-size="9" fill="#94a3b8">TV TOP EDGE</text>
+
+                    <!-- Airflow arrows -->
+                    <defs>
+                        <marker id="up-arrow" markerWidth="8" markerHeight="6" refX="4" refY="6" orient="auto">
+                            <polygon points="0 6, 4 0, 8 6" fill="#ef4444"/>
+                        </marker>
+                    </defs>
+                    <line x1="200" y1="165" x2="200" y2="75" stroke="#ef4444" stroke-width="2" marker-end="url(#up-arrow)"/>
+                    <line x1="333" y1="165" x2="333" y2="75" stroke="#ef4444" stroke-width="2" marker-end="url(#up-arrow)"/>
+                    <line x1="466" y1="165" x2="466" y2="75" stroke="#ef4444" stroke-width="2" marker-end="url(#up-arrow)"/>
+                    <line x1="600" y1="165" x2="600" y2="75" stroke="#ef4444" stroke-width="2" marker-end="url(#up-arrow)"/>
+
+                    <!-- Dimension: Bezel height -->
+                    <line x1="720" y1="60" x2="720" y2="140" stroke="#64748b" stroke-width="1"/>
+                    <line x1="715" y1="60" x2="725" y2="60" stroke="#64748b" stroke-width="1"/>
+                    <line x1="715" y1="140" x2="725" y2="140" stroke="#64748b" stroke-width="1"/>
+                    <text x="740" y="105" text-anchor="middle" font-size="10" fill="#64748b" transform="rotate(90 740 105)">35mm BEZEL</text>
+
+                    <!-- Dimension: Slot width -->
+                    <line x1="115" y1="45" x2="685" y2="45" stroke="#64748b" stroke-width="1"/>
+                    <line x1="115" y1="40" x2="115" y2="50" stroke="#64748b" stroke-width="1"/>
+                    <line x1="685" y1="40" x2="685" y2="50" stroke="#64748b" stroke-width="1"/>
+                    <text x="400" y="40" text-anchor="middle" font-size="10" fill="#64748b">EXHAUST SLOT: 1700mm × 20mm</text>
+
+                    <!-- Labels -->
+                    <rect x="100" y="210" width="200" height="80" fill="#dcfce7" stroke="#16a34a" stroke-width="1" rx="4"/>
+                    <text x="200" y="230" text-anchor="middle" font-size="11" font-weight="600" fill="#166534">FAN SPECIFICATIONS</text>
+                    <text x="110" y="248" font-size="9" fill="#166534">• 4× Noctua NF-A6x15 PWM</text>
+                    <text x="110" y="262" font-size="9" fill="#166534">• 60mm × 60mm × 15mm slim</text>
+                    <text x="110" y="276" font-size="9" fill="#166534">• 17 CFM each (~70 CFM total)</text>
+
+                    <rect x="320" y="210" width="180" height="80" fill="#fef3c7" stroke="#d97706" stroke-width="1" rx="4"/>
+                    <text x="410" y="230" text-anchor="middle" font-size="11" font-weight="600" fill="#92400e">LOUVER DESIGN</text>
+                    <text x="330" y="248" font-size="9" fill="#92400e">• Angled UP (rain shedding)</text>
+                    <text x="330" y="262" font-size="9" fill="#92400e">• 316 SS mesh behind</text>
+                    <text x="330" y="276" font-size="9" fill="#92400e">• IP66 rated assembly</text>
+
+                    <rect x="520" y="210" width="180" height="80" fill="#e0e7ff" stroke="#6366f1" stroke-width="1" rx="4"/>
+                    <text x="610" y="230" text-anchor="middle" font-size="11" font-weight="600" fill="#4338ca">THERMAL NOTES</text>
+                    <text x="530" y="248" font-size="9" fill="#4338ca">• Hot air rises naturally</text>
+                    <text x="530" y="262" font-size="9" fill="#4338ca">• Fans pull air through</text>
+                    <text x="530" y="276" font-size="9" fill="#4338ca">• +15 CFM convection boost</text>
+                </svg>
+            </div>
+
+            <!-- BOTTOM BEZEL DETAIL -->
+            <h4>4.3 Bottom Bezel Detail - Intake & Filter Assembly</h4>
+            <div class="drawing-container">
+                <svg viewBox="0 0 800 320" width="100%" height="300">
+                    <!-- Title -->
+                    <text x="400" y="25" text-anchor="middle" font-size="14" font-weight="600" fill="#0f172a">Bottom Bezel Cross-Section - Intake & Filtration</text>
+
+                    <!-- TV bottom edge -->
+                    <rect x="100" y="60" width="600" height="20" fill="#1e293b" stroke="#0f172a" stroke-width="1"/>
+                    <text x="400" y="74" text-anchor="middle" font-size="9" fill="#94a3b8">TV BOTTOM EDGE</text>
+
+                    <!-- Air channel -->
+                    <rect x="100" y="80" width="600" height="25" fill="#dbeafe" opacity="0.5"/>
+                    <text x="400" y="96" text-anchor="middle" font-size="8" fill="#3b82f6">25mm AIR CHANNEL</text>
+
+                    <!-- Glass edge -->
+                    <rect x="100" y="105" width="600" height="6" fill="#93c5fd" stroke="#3b82f6" stroke-width="1"/>
+                    <text x="400" y="122" text-anchor="middle" font-size="9" fill="#1e40af">GLASS PANEL (6mm)</text>
+
+                    <!-- Main bezel cross-section -->
+                    <rect x="100" y="111" width="600" height="80" fill="#1e293b" stroke="#0f172a" stroke-width="2"/>
+
+                    <!-- Inner cavity with filter -->
+                    <rect x="110" y="121" width="580" height="35" fill="#334155"/>
+
+                    <!-- Filter media -->
+                    <rect x="115" y="126" width="570" height="25" fill="#fef3c7" stroke="#d97706" stroke-width="1" stroke-dasharray="3"/>
+                    <text x="400" y="142" text-anchor="middle" font-size="9" fill="#92400e">AUTOMOTIVE PLEATED FILTER (REPLACEABLE)</text>
+
+                    <!-- Intake slot opening -->
+                    <rect x="115" y="156" width="570" height="30" fill="#475569"/>
+
+                    <!-- Louver blades (angled DOWN) -->
+                    <g fill="#64748b" stroke="#475569" stroke-width="1">
+                        <polygon points="135,191 145,191 130,181 120,181"/>
+                        <polygon points="165,191 175,191 160,181 150,181"/>
+                        <polygon points="195,191 205,191 190,181 180,181"/>
+                        <polygon points="225,191 235,191 220,181 210,181"/>
+                        <polygon points="255,191 265,191 250,181 240,181"/>
+                        <polygon points="285,191 295,191 280,181 270,181"/>
+                        <polygon points="315,191 325,191 310,181 300,181"/>
+                        <polygon points="345,191 355,191 340,181 330,181"/>
+                        <polygon points="375,191 385,191 370,181 360,181"/>
+                        <polygon points="405,191 415,191 400,181 390,181"/>
+                        <polygon points="435,191 445,191 430,181 420,181"/>
+                        <polygon points="465,191 475,191 460,181 450,181"/>
+                        <polygon points="495,191 505,191 490,181 480,181"/>
+                        <polygon points="525,191 535,191 520,181 510,181"/>
+                        <polygon points="555,191 565,191 550,181 540,181"/>
+                        <polygon points="585,191 595,191 580,181 570,181"/>
+                        <polygon points="615,191 625,191 610,181 600,181"/>
+                        <polygon points="645,191 655,191 640,181 630,181"/>
+                        <polygon points="675,191 685,191 670,181 660,181"/>
+                    </g>
+
+                    <!-- Drain slots -->
+                    <rect x="200" y="191" width="8" height="5" fill="#0ea5e9"/>
+                    <rect x="400" y="191" width="8" height="5" fill="#0ea5e9"/>
+                    <rect x="600" y="191" width="8" height="5" fill="#0ea5e9"/>
+
+                    <!-- Airflow arrows -->
+                    <defs>
+                        <marker id="intake-arrow" markerWidth="8" markerHeight="6" refX="4" refY="0" orient="auto">
+                            <polygon points="0 0, 4 6, 8 0" fill="#3b82f6"/>
+                        </marker>
+                    </defs>
+                    <line x1="250" y1="210" x2="250" y2="165" stroke="#3b82f6" stroke-width="2" marker-end="url(#intake-arrow)"/>
+                    <line x1="400" y1="210" x2="400" y2="165" stroke="#3b82f6" stroke-width="2" marker-end="url(#intake-arrow)"/>
+                    <line x1="550" y1="210" x2="550" y2="165" stroke="#3b82f6" stroke-width="2" marker-end="url(#intake-arrow)"/>
+
+                    <!-- Rising arrows in channel -->
+                    <line x1="250" y1="105" x2="250" y2="65" stroke="#3b82f6" stroke-width="2" marker-end="url(#intake-arrow)" transform="rotate(180 250 85)"/>
+                    <line x1="400" y1="105" x2="400" y2="65" stroke="#3b82f6" stroke-width="2" marker-end="url(#intake-arrow)" transform="rotate(180 400 85)"/>
+                    <line x1="550" y1="105" x2="550" y2="65" stroke="#3b82f6" stroke-width="2" marker-end="url(#intake-arrow)" transform="rotate(180 550 85)"/>
+
+                    <!-- Dimension: Slot width -->
+                    <line x1="115" y1="205" x2="685" y2="205" stroke="#64748b" stroke-width="1"/>
+                    <line x1="115" y1="200" x2="115" y2="210" stroke="#64748b" stroke-width="1"/>
+                    <line x1="685" y1="200" x2="685" y2="210" stroke="#64748b" stroke-width="1"/>
+                    <text x="400" y="220" text-anchor="middle" font-size="10" fill="#64748b">INTAKE SLOT: 1700mm × 15mm</text>
+
+                    <!-- Labels -->
+                    <rect x="100" y="235" width="200" height="70" fill="#dbeafe" stroke="#3b82f6" stroke-width="1" rx="4"/>
+                    <text x="200" y="252" text-anchor="middle" font-size="11" font-weight="600" fill="#1e40af">LOUVER DESIGN</text>
+                    <text x="110" y="268" font-size="9" fill="#1e40af">• Angled DOWN at 45°</text>
+                    <text x="110" y="282" font-size="9" fill="#1e40af">• Water sheds forward</text>
+                    <text x="110" y="296" font-size="9" fill="#1e40af">• IP66 rain protection</text>
+
+                    <rect x="320" y="235" width="180" height="70" fill="#fef3c7" stroke="#d97706" stroke-width="1" rx="4"/>
+                    <text x="410" y="252" text-anchor="middle" font-size="11" font-weight="600" fill="#92400e">FILTRATION</text>
+                    <text x="330" y="268" font-size="9" fill="#92400e">• Automotive pleated media</text>
+                    <text x="330" y="282" font-size="9" fill="#92400e">• Tool-free replacement</text>
+                    <text x="330" y="296" font-size="9" fill="#92400e">• 1 spare included</text>
+
+                    <rect x="520" y="235" width="180" height="70" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="1" rx="4"/>
+                    <text x="610" y="252" text-anchor="middle" font-size="11" font-weight="600" fill="#0369a1">CONDENSATION</text>
+                    <text x="530" y="268" font-size="9" fill="#0369a1">• 3× drain slots (5mm)</text>
+                    <text x="530" y="282" font-size="9" fill="#0369a1">• Drains to front face</text>
+                    <text x="530" y="296" font-size="9" fill="#0369a1">• Prevents pooling</text>
+                </svg>
+            </div>
+
+            <!-- FRONT VIEW WITH BEZEL SLOTS -->
+            <h4>4.4 Front View - Bezel Slot Appearance</h4>
+            <div class="drawing-container">
+                <svg viewBox="0 0 800 500" width="100%" height="480">
+                    <!-- Title -->
+                    <text x="400" y="25" text-anchor="middle" font-size="14" font-weight="600" fill="#0f172a">Front View - v3.0 Front-Breathing Design</text>
+                    <text x="400" y="42" text-anchor="middle" font-size="10" fill="#64748b">Showing discrete bezel slots (intake bottom, exhaust top)</text>
+
+                    <!-- Main enclosure outline -->
+                    <rect x="100" y="60" width="600" height="380" fill="#1e293b" stroke="#0f172a" stroke-width="3" rx="6"/>
+
+                    <!-- Glass area -->
+                    <rect x="135" y="95" width="530" height="310" fill="#334155" stroke="#475569" stroke-width="1"/>
+                    <rect x="140" y="100" width="520" height="300" fill="#1e293b"/>
+                    <text x="400" y="255" text-anchor="middle" font-size="18" fill="#475569">75" TV DISPLAY AREA</text>
+                    <text x="400" y="280" text-anchor="middle" font-size="12" fill="#64748b">(1690 × 970mm visible)</text>
+
+                    <!-- TOP BEZEL with exhaust slot -->
+                    <rect x="100" y="60" width="600" height="35" fill="#1e293b"/>
+                    <!-- Exhaust slot (looks like accent line) -->
+                    <rect x="135" y="75" width="530" height="12" fill="#374151" rx="2"/>
+                    <!-- Louver lines -->
+                    <line x1="145" y1="78" x2="145" y2="84" stroke="#4b5563" stroke-width="1"/>
+                    <line x1="160" y1="78" x2="160" y2="84" stroke="#4b5563" stroke-width="1"/>
+                    <line x1="175" y1="78" x2="175" y2="84" stroke="#4b5563" stroke-width="1"/>
+                    <line x1="190" y1="78" x2="190" y2="84" stroke="#4b5563" stroke-width="1"/>
+                    <line x1="205" y1="78" x2="205" y2="84" stroke="#4b5563" stroke-width="1"/>
+                    <!-- (pattern continues...) -->
+                    <line x1="595" y1="78" x2="595" y2="84" stroke="#4b5563" stroke-width="1"/>
+                    <line x1="610" y1="78" x2="610" y2="84" stroke="#4b5563" stroke-width="1"/>
+                    <line x1="625" y1="78" x2="625" y2="84" stroke="#4b5563" stroke-width="1"/>
+                    <line x1="640" y1="78" x2="640" y2="84" stroke="#4b5563" stroke-width="1"/>
+                    <line x1="655" y1="78" x2="655" y2="84" stroke="#4b5563" stroke-width="1"/>
+
+                    <!-- BOTTOM BEZEL with intake slot -->
+                    <rect x="100" y="405" width="600" height="35" fill="#1e293b"/>
+                    <!-- Intake slot (looks like accent line) -->
+                    <rect x="135" y="415" width="530" height="8" fill="#374151" rx="1"/>
+
+                    <!-- LEFT BEZEL -->
+                    <rect x="100" y="95" width="35" height="310" fill="#1e293b"/>
+
+                    <!-- RIGHT BEZEL with cam locks -->
+                    <rect x="665" y="95" width="35" height="310" fill="#1e293b"/>
+                    <!-- Cam lock 1 -->
+                    <circle cx="682" cy="180" r="8" fill="#94a3b8" stroke="#64748b" stroke-width="1"/>
+                    <line x1="682" y1="175" x2="682" y2="185" stroke="#475569" stroke-width="2"/>
+                    <!-- Cam lock 2 -->
+                    <circle cx="682" cy="320" r="8" fill="#94a3b8" stroke="#64748b" stroke-width="1"/>
+                    <line x1="682" y1="315" x2="682" y2="325" stroke="#475569" stroke-width="2"/>
+
+                    <!-- Dimension annotations -->
+                    <!-- Width -->
+                    <line x1="100" y1="460" x2="700" y2="460" stroke="#64748b" stroke-width="1"/>
+                    <line x1="100" y1="455" x2="100" y2="465" stroke="#64748b" stroke-width="1"/>
+                    <line x1="700" y1="455" x2="700" y2="465" stroke="#64748b" stroke-width="1"/>
+                    <text x="400" y="478" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">1760mm</text>
+
+                    <!-- Height -->
+                    <line x1="730" y1="60" x2="730" y2="440" stroke="#64748b" stroke-width="1"/>
+                    <line x1="725" y1="60" x2="735" y2="60" stroke="#64748b" stroke-width="1"/>
+                    <line x1="725" y1="440" x2="735" y2="440" stroke="#64748b" stroke-width="1"/>
+                    <text x="760" y="255" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a" transform="rotate(90 760 255)">1040mm</text>
+
+                    <!-- Bezel width callout -->
+                    <line x1="100" y1="50" x2="135" y2="50" stroke="#0d9488" stroke-width="1"/>
+                    <line x1="100" y1="45" x2="100" y2="55" stroke="#0d9488" stroke-width="1"/>
+                    <line x1="135" y1="45" x2="135" y2="55" stroke="#0d9488" stroke-width="1"/>
+                    <text x="117" y="43" text-anchor="middle" font-size="9" fill="#0d9488">35mm</text>
+
+                    <!-- Callout labels -->
+                    <rect x="50" y="70" width="40" height="20" fill="#dcfce7" stroke="#16a34a" stroke-width="1" rx="3"/>
+                    <text x="70" y="84" text-anchor="middle" font-size="8" fill="#166534">EXHAUST</text>
+                    <line x1="90" y1="80" x2="135" y2="80" stroke="#16a34a" stroke-width="1" stroke-dasharray="2"/>
+
+                    <rect x="50" y="415" width="40" height="20" fill="#dbeafe" stroke="#3b82f6" stroke-width="1" rx="3"/>
+                    <text x="70" y="429" text-anchor="middle" font-size="8" fill="#1e40af">INTAKE</text>
+                    <line x1="90" y1="425" x2="135" y2="420" stroke="#3b82f6" stroke-width="1" stroke-dasharray="2"/>
+
+                    <rect x="710" y="170" width="50" height="30" fill="#f1f5f9" stroke="#64748b" stroke-width="1" rx="3"/>
+                    <text x="735" y="183" text-anchor="middle" font-size="7" fill="#475569">CAM</text>
+                    <text x="735" y="193" text-anchor="middle" font-size="7" fill="#475569">LOCKS</text>
+                    <line x1="710" y1="180" x2="690" y2="180" stroke="#64748b" stroke-width="1" stroke-dasharray="2"/>
+
+                    <!-- Design note -->
+                    <rect x="150" y="320" width="500" height="60" fill="rgba(13, 148, 136, 0.1)" stroke="#0d9488" stroke-width="1" rx="4"/>
+                    <text x="400" y="340" text-anchor="middle" font-size="11" font-weight="600" fill="#0d9488">DESIGN INTENT</text>
+                    <text x="400" y="355" text-anchor="middle" font-size="9" fill="#0f766e">Bezel slots look like intentional design accents - similar to TV soundbar grilles.</text>
+                    <text x="400" y="370" text-anchor="middle" font-size="9" fill="#0f766e">Premium appearance maintained. Not industrial-looking.</text>
+                </svg>
+            </div>
+
+            <h3>5. Technical Isometric View (Legacy v2.0)</h3>
             <div class="drawing-container">
                 <svg viewBox="0 0 600 400" width="100%" height="350">
                     <defs>
