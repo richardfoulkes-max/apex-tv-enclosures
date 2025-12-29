@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex TV Enclosures - Engineering Analysis v3.0 (Front-Breathing)</title>
+    <title>Apex TV Enclosures - Engineering Analysis v5.1 (Ducted Rear-Plenum)</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -83,10 +83,10 @@
 
     <header>
         <div class="container">
-            <h1>Engineering Analysis v3.0</h1>
-            <div class="subtitle">Front-Breathing Design | Recess-Compatible | 120mm Depth</div>
+            <h1>Engineering Analysis v5.1</h1>
+            <div class="subtitle">Ducted Rear-Plenum Design | Wall-Mount | 180mm Depth</div>
             <div class="badge">Model: ATE-75</div>
-            <div class="badge new">NEW: Front-Breathing Design</div>
+            <div class="badge new">VALIDATED: Roundtable AI Pass</div>
             <div class="badge">December 2025</div>
         </div>
     </header>
@@ -94,7 +94,7 @@
     <div class="container">
         <!-- Design Evolution -->
         <div class="success-note">
-            <strong>Design Evolution:</strong> The front-breathing design solves the recessed mounting problem by moving all airflow to the front face. Air enters through a hidden slot at the bottom of the bezel, flows up behind the glass, and exits through a slot at the top. This works in any mounting scenario because the front is always exposed.
+            <strong>Design Evolution:</strong> The v5.1 ducted rear-plenum design passed Roundtable AI engineering validation (PASS FOR PROTOTYPE VALIDATION). Air enters through filtered bottom bezel intake, flows through 50mm rear plenum behind TV (directly cooling heat sinks), then exhausts via 2×140mm PWM fans. Thermal margin ~13% at worst-case. Watch items: requires wall-mount or 50mm rear clearance.
         </div>
 
         <!-- Executive Summary -->
@@ -104,17 +104,17 @@
                 <div class="value">PASS</div>
                 <div class="label">Wall Mount</div>
             </div>
-            <div class="summary-card pass">
-                <div class="value">PASS</div>
+            <div class="summary-card warning">
+                <div class="value">WATCH</div>
                 <div class="label">Recessed Mount</div>
             </div>
             <div class="summary-card pass">
                 <div class="value">PASS</div>
-                <div class="label">Flush Mount</div>
+                <div class="label">50mm Clearance</div>
             </div>
             <div class="summary-card pass">
                 <div class="value">PASS</div>
-                <div class="label">Thermal</div>
+                <div class="label">Thermal (13%)</div>
             </div>
             <div class="summary-card pass">
                 <div class="value">PASS</div>
@@ -123,31 +123,31 @@
         </div>
 
         <!-- Section 1: Design Comparison -->
-        <h2>1. Design Comparison: Rear-Exhaust vs Front-Breathing</h2>
+        <h2>1. Design Comparison: Front-Breathing vs Ducted Rear-Plenum</h2>
 
         <table class="comparison-table">
             <thead>
                 <tr>
                     <th>Parameter</th>
-                    <th>v2.0 Rear-Exhaust (REJECTED)</th>
-                    <th>v3.0 Front-Breathing (NEW)</th>
+                    <th>v3.0 Front-Breathing (FAILED)</th>
+                    <th>v5.1 Ducted Rear-Plenum (VALIDATED)</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><strong>Intake Location</strong></td>
-                    <td>Bottom edge slot</td>
                     <td>Front bezel - bottom slot</td>
+                    <td>Front bezel - filtered bottom slot</td>
                 </tr>
                 <tr>
                     <td><strong>Exhaust Location</strong></td>
-                    <td>Rear panel (4× 80mm fans)</td>
                     <td>Front bezel - top slot (4× 60mm fans)</td>
+                    <td>Front bezel - top slot (2× 140mm fans)</td>
                 </tr>
                 <tr>
                     <td><strong>Airflow Path</strong></td>
-                    <td>Bottom → Rear</td>
                     <td>Front-bottom → Up behind glass → Front-top</td>
+                    <td>Bottom → 50mm rear plenum → Top (cools TV directly)</td>
                 </tr>
                 <tr>
                     <td><strong>Wall Mount</strong></td>
