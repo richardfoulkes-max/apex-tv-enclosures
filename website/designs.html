@@ -94,8 +94,8 @@
 
     <header>
         <div class="header-content">
-            <h1>Engineering Designs - ATE Series</h1>
-            <p class="subtitle">CAD-grade specifications for outdoor TV enclosures</p>
+            <h1>Engineering Designs - ATE Series (v3.0)</h1>
+            <p class="subtitle">CAD-grade specifications for outdoor TV enclosures - Front-Breathing Architecture</p>
         </div>
     </header>
 
@@ -138,35 +138,12 @@
                 <strong>Front-Breathing Design v3.0:</strong> 120mm depth with all airflow through front bezel. Air enters through discrete slot in bottom bezel, flows up 25mm channel between glass and TV, exits through top bezel with 4×60mm slim fans (~70 CFM + convection). <strong>Universal mounting:</strong> Works for wall-mount, recessed, and flush installations since front is always accessible.
             </div>
 
-            <h3>3. AI-Generated Design Validation</h3>
+            <h3>3. AI-Generated Design Renders</h3>
 
-            <div class="danger-box">
-                <strong>⚠️ Renders Need Update:</strong> The images below show the OLD v2.0 design (rear exhaust fans). The v3.0 front-breathing design has:
-                <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
-                    <li>35mm bezel (not 20mm)</li>
-                    <li>Discrete intake slot in bottom bezel</li>
-                    <li>Exhaust louvers in top bezel with 4×60mm fans</li>
-                    <li>Clean sealed rear (no fans visible)</li>
-                </ul>
-                <p style="margin-top: 0.5rem;">Use the updated prompts in <a href="ai-image-prompts.html">AI Image Prompts</a> to generate v3.0 renders.</p>
-            </div>
-
-            <h4>6-View Design Sheet (All Angles)</h4>
-            <div class="drawing-container" style="background: white; text-align: center; padding: 1.5rem;">
-                <img src="images/ate-75-gemini-render-1.png" alt="ATE-75 6-View Design Sheet" style="max-width: 100%; height: auto;">
-                <p style="margin-top: 1rem; font-size: 0.85rem; color: #64748b;">Complete design validation - Front, Top, Rear, Side, and 3/4 views showing TV-like profile</p>
-            </div>
-
-            <h4>3/4 Front-Right View (Wall Mounted)</h4>
-            <div class="drawing-container" style="background: white; text-align: center; padding: 1.5rem;">
-                <img src="images/ate-75-gemini-render-2.png" alt="ATE-75 Wall Mounted View" style="max-width: 100%; height: auto; max-height: 500px;">
-                <p style="margin-top: 1rem; font-size: 0.85rem; color: #64748b;">Premium TV-like appearance when wall-mounted - cam locks visible on right edge</p>
-            </div>
-
-            <h4>Leonardo AI Render (Earlier Version)</h4>
-            <div class="drawing-container" style="background: white; text-align: center;">
-                <img src="images/ate-75-3d-render.jpg" alt="ATE-75 Outdoor TV Enclosure 3D Render" style="max-width: 100%; height: auto; max-height: 400px;">
-                <p style="margin-top: 1rem; font-size: 0.85rem; color: #64748b;">Leonardo AI render - ATE-75 (75" model)</p>
+            <div class="note-box">
+                <strong>Generate v3.0 Renders:</strong> Use the prompts in <a href="ai-image-prompts.html">AI Image Prompts</a> with Leonardo AI, Midjourney, or DALL-E to create photorealistic renders of the v3.0 front-breathing design.
+                <br><br>
+                <a href="archive/designs-legacy.html" style="color: #92400e;">View archived v1.0-v2.0 designs and renders →</a>
             </div>
 
             <h3>4. v3.0 Front-Breathing Technical Drawings</h3>
@@ -641,369 +618,48 @@
                 </svg>
             </div>
 
-            <h3>5. Technical Isometric View (Legacy v2.0)</h3>
-            <div class="drawing-container">
-                <svg viewBox="0 0 600 400" width="100%" height="350">
-                    <defs>
-                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#0d9488"/>
-                        </marker>
-                    </defs>
-
-                    <!-- TV-Like Enclosure isometric - slim profile, no top vents -->
-                    <!-- Back panel with rear vents -->
-                    <polygon points="100,150 450,50 450,280 100,380" fill="#d0d0d0" stroke="#e2e8f0" stroke-width="1.5"/>
-
-                    <!-- Rear fan circles (visible through back) -->
-                    <ellipse cx="200" cy="220" rx="12" ry="18" fill="#888" stroke="#666" stroke-width="1"/>
-                    <ellipse cx="275" cy="200" rx="12" ry="18" fill="#888" stroke="#666" stroke-width="1"/>
-                    <ellipse cx="350" cy="180" rx="12" ry="18" fill="#888" stroke="#666" stroke-width="1"/>
-
-                    <!-- Rear intake mesh area -->
-                    <rect x="130" y="280" width="280" height="60" fill="#999" stroke="#777" stroke-width="1" transform="skewY(-15) translate(0, 50)"/>
-
-                    <!-- Top panel - CLEAN, no vents -->
-                    <polygon points="100,150 450,50 480,65 130,165" fill="#e8e8e8" stroke="#e2e8f0" stroke-width="1.5"/>
-
-                    <!-- Bottom panel - CLEAN -->
-                    <polygon points="100,380 450,280 480,295 130,395" fill="#ccc" stroke="#e2e8f0" stroke-width="1.5"/>
-
-                    <!-- Side panel (right) - slim 100mm depth -->
-                    <polygon points="450,50 480,65 480,295 450,280" fill="#bbb" stroke="#e2e8f0" stroke-width="1.5"/>
-
-                    <!-- Front glass panel -->
-                    <polygon points="130,165 480,65 480,295 130,395" fill="#1a365d" fill-opacity="0.4" stroke="#e2e8f0" stroke-width="2"/>
-
-                    <!-- Glass reflection -->
-                    <polygon points="160,185 280,140 280,230 160,275" fill="white" fill-opacity="0.15"/>
-
-                    <!-- Frame around glass - slim bezel -->
-                    <polygon points="130,165 480,65 480,295 130,395" fill="none" stroke="#333" stroke-width="3"/>
-
-                    <!-- Corner brackets -->
-                    <polygon points="130,165 148,161 152,178 134,182" fill="#444"/>
-                    <polygon points="480,65 462,69 458,84 476,80" fill="#444"/>
-                    <polygon points="130,395 148,391 152,376 134,380" fill="#444"/>
-                    <polygon points="480,295 462,291 458,276 476,272" fill="#444"/>
-
-                    <!-- Labels -->
-                    <text x="300" y="30" text-anchor="middle" font-size="16" font-weight="600" fill="#0d9488">ATE-75 OUTDOOR TV ENCLOSURE</text>
-                    <text x="300" y="50" text-anchor="middle" font-size="11" fill="#666">1760 × 1040 × 115mm | IP66 | TV-Like Profile</text>
-
-                    <!-- Callouts -->
-                    <line x1="275" y1="200" x2="50" y2="200" stroke="#666" stroke-width="1"/>
-                    <text x="20" y="190" font-size="9" fill="#666">4× 80mm FANS</text>
-                    <text x="20" y="202" font-size="9" fill="#666">(REAR-MOUNTED)</text>
-
-                    <line x1="480" y1="180" x2="540" y2="160" stroke="#666" stroke-width="1"/>
-                    <text x="545" y="158" font-size="9" fill="#666">6mm TEMPERED</text>
-                    <text x="545" y="170" font-size="9" fill="#666">GLASS</text>
-
-                    <line x1="130" y1="165" x2="50" y2="120" stroke="#666" stroke-width="1"/>
-                    <text x="20" y="110" font-size="9" fill="#666">CLEAN TOP</text>
-                    <text x="20" y="122" font-size="9" fill="#666">(NO VENTS)</text>
-
-                    <line x1="480" y1="280" x2="540" y2="300" stroke="#666" stroke-width="1"/>
-                    <text x="545" y="298" font-size="9" fill="#666">115mm SLIM</text>
-                    <text x="545" y="310" font-size="9" fill="#666">DEPTH</text>
-
-                    <!-- Hinge indication -->
-                    <circle cx="135" cy="230" r="5" fill="#f59e0b"/>
-                    <circle cx="135" cy="360" r="5" fill="#f59e0b"/>
-                    <text x="95" y="295" font-size="8" fill="#f59e0b" transform="rotate(-60,95,295)">HINGES</text>
-
-                    <!-- Price tag -->
-                    <rect x="450" y="340" width="130" height="50" rx="8" fill="#dbeafe" stroke="#0d9488" stroke-width="2"/>
-                    <text x="515" y="360" text-anchor="middle" font-size="10" font-weight="600" fill="#1e40af">Selling Price</text>
-                    <text x="515" y="380" text-anchor="middle" font-size="16" font-weight="700" fill="#1e40af">AED 7,000</text>
-                </svg>
-            </div>
-
-            <h3>5. Orthographic Views</h3>
-            <div class="view-grid">
-                <div class="view-box">
-                    <h5>Front Elevation</h5>
-                    <svg viewBox="0 0 420 280" width="100%" height="200">
-                        <!-- Outer frame -->
-                        <rect x="40" y="30" width="340" height="216" fill="#e2e8f0" stroke="#222" stroke-width="2" rx="4"/>
-
-                        <!-- Glass panel -->
-                        <rect x="50" y="40" width="320" height="196" fill="#4a90d9" fill-opacity="0.3" stroke="#666" stroke-width="1"/>
-
-                        <!-- TV screen indication -->
-                        <rect x="55" y="55" width="310" height="175" fill="#0f172a" stroke="#444" stroke-width="1"/>
-                        <text x="210" y="150" text-anchor="middle" font-size="14" fill="#666">75" TV DISPLAY</text>
-
-                        <!-- Frame corners -->
-                        <rect x="40" y="30" width="20" height="20" fill="#444"/>
-                        <rect x="360" y="30" width="20" height="20" fill="#444"/>
-                        <rect x="40" y="226" width="20" height="20" fill="#444"/>
-                        <rect x="360" y="226" width="20" height="20" fill="#444"/>
-
-                        <!-- Dimensions -->
-                        <line x1="40" y1="260" x2="380" y2="260" stroke="#0d9488" stroke-width="1"/>
-                        <line x1="40" y1="255" x2="40" y2="265" stroke="#0d9488" stroke-width="1"/>
-                        <line x1="380" y1="255" x2="380" y2="265" stroke="#0d9488" stroke-width="1"/>
-                        <text x="210" y="275" text-anchor="middle" font-size="9" fill="#0d9488">1760mm</text>
-
-                        <line x1="400" y1="30" x2="400" y2="246" stroke="#0d9488" stroke-width="1"/>
-                        <line x1="395" y1="30" x2="405" y2="30" stroke="#0d9488" stroke-width="1"/>
-                        <line x1="395" y1="246" x2="405" y2="246" stroke="#0d9488" stroke-width="1"/>
-                        <text x="415" y="145" text-anchor="middle" font-size="9" fill="#0d9488" transform="rotate(90,415,145)">1040mm</text>
-                    </svg>
-                </div>
-
-                <div class="view-box">
-                    <h5>Rear Elevation</h5>
-                    <svg viewBox="0 0 420 280" width="100%" height="200">
-                        <!-- Outer frame -->
-                        <rect x="40" y="30" width="340" height="216" fill="#e0e0e0" stroke="#333" stroke-width="2" rx="4"/>
-
-                        <!-- VESA mount pattern (center) -->
-                        <rect x="150" y="70" width="120" height="80" fill="none" stroke="#666" stroke-width="1" stroke-dasharray="4,2"/>
-                        <circle cx="165" cy="85" r="4" fill="#666"/>
-                        <circle cx="255" cy="85" r="4" fill="#666"/>
-                        <circle cx="165" cy="135" r="4" fill="#666"/>
-                        <circle cx="255" cy="135" r="4" fill="#666"/>
-                        <text x="210" y="165" text-anchor="middle" font-size="8" fill="#666">VESA 600×400</text>
-
-                        <!-- 4 Exhaust fans (middle row) -->
-                        <g fill="#555" stroke="#333" stroke-width="1">
-                            <circle cx="80" cy="120" r="15"/>
-                            <circle cx="150" cy="120" r="15"/>
-                            <circle cx="270" cy="120" r="15"/>
-                            <circle cx="340" cy="120" r="15"/>
-                        </g>
-                        <text x="210" y="155" text-anchor="middle" font-size="8" fill="#333">4× 80mm EXHAUST FANS</text>
-
-                        <!-- Intake mesh area (top) -->
-                        <rect x="60" y="40" width="300" height="25" fill="#ccc" stroke="#666" stroke-width="1"/>
-                        <g stroke="#999" stroke-width="1">
-                            <line x1="80" y1="45" x2="80" y2="60"/>
-                            <line x1="110" y1="45" x2="110" y2="60"/>
-                            <line x1="140" y1="45" x2="140" y2="60"/>
-                            <line x1="170" y1="45" x2="170" y2="60"/>
-                            <line x1="200" y1="45" x2="200" y2="60"/>
-                            <line x1="230" y1="45" x2="230" y2="60"/>
-                            <line x1="260" y1="45" x2="260" y2="60"/>
-                            <line x1="290" y1="45" x2="290" y2="60"/>
-                            <line x1="320" y1="45" x2="320" y2="60"/>
-                        </g>
-                        <text x="210" y="35" text-anchor="middle" font-size="7" fill="#666">FILTERED INTAKE</text>
-
-                        <!-- Electronics box -->
-                        <rect x="60" y="175" width="70" height="55" fill="#444" stroke="#333" stroke-width="1" rx="3"/>
-                        <text x="95" y="205" text-anchor="middle" font-size="7" fill="#ccc">CTRL</text>
-
-                        <!-- Cable entries -->
-                        <circle cx="310" cy="200" r="8" fill="#0f172a" stroke="#666" stroke-width="1"/>
-                        <circle cx="340" cy="200" r="8" fill="#0f172a" stroke="#666" stroke-width="1"/>
-                        <text x="325" y="220" text-anchor="middle" font-size="6" fill="#666">CABLES</text>
-                    </svg>
-                </div>
-            </div>
-
-            <div class="view-grid">
-                <div class="view-box">
-                    <h5>Side Section (Airflow)</h5>
-                    <svg viewBox="0 0 300 280" width="100%" height="200">
-                        <defs>
-                            <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                                <polygon points="0 0, 10 3.5, 0 7" fill="#0d9488"/>
-                            </marker>
-                        </defs>
-
-                        <!-- Slim enclosure profile (115mm depth) -->
-                        <rect x="90" y="30" width="115" height="216" fill="#f5f5f5" stroke="#333" stroke-width="1.5"/>
-
-                        <!-- Glass front -->
-                        <rect x="90" y="30" width="6" height="216" fill="#4a90d9" fill-opacity="0.5" stroke="#333" stroke-width="1"/>
-
-                        <!-- TV (65mm) -->
-                        <rect x="100" y="50" width="60" height="175" fill="#0f172a" stroke="#444" stroke-width="1"/>
-                        <text x="130" y="145" text-anchor="middle" font-size="8" fill="#666" transform="rotate(-90,130,145)">TV 65mm</text>
-
-                        <!-- Rear cavity (35mm for fans + cables) -->
-                        <rect x="160" y="30" width="45" height="216" fill="#eee" stroke="none"/>
-
-                        <!-- Bottom intake slot -->
-                        <rect x="90" y="236" width="115" height="10" fill="#ccc" stroke="#666" stroke-width="1"/>
-                        <text x="40" y="242" font-size="7" fill="#2563eb">INTAKE</text>
-
-                        <!-- Fan (rear mounted) -->
-                        <circle cx="190" cy="120" r="14" fill="#555" stroke="#333"/>
-                        <text x="250" y="120" font-size="7" fill="#16a34a">EXHAUST</text>
-
-                        <!-- Electronics (rear) -->
-                        <rect x="170" y="175" width="30" height="45" fill="#444" stroke="#333" stroke-width="1"/>
-                        <text x="250" y="200" font-size="7" fill="#666">CTRL</text>
-
-                        <!-- Airflow path - bottom intake to rear exhaust (convection-assisted) -->
-                        <path d="M 147,236 L 147,180 C 147,150 170,130 180,120" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="4"/>
-                        <path d="M 180,120 L 200,120" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowhead2)"/>
-
-                        <text x="40" y="100" font-size="8" fill="#0d9488">BOTTOM→REAR</text>
-                        <text x="40" y="112" font-size="8" fill="#0d9488">CONVECTION</text>
-
-                        <!-- Dimensions -->
-                        <line x1="90" y1="260" x2="205" y2="260" stroke="#0d9488" stroke-width="1"/>
-                        <text x="147" y="275" text-anchor="middle" font-size="9" fill="#0d9488">115mm</text>
-                    </svg>
-                </div>
-
-                <div class="view-box">
-                    <h5>Hinge Detail (Door Open)</h5>
-                    <svg viewBox="0 0 300 280" width="100%" height="200">
-                        <!-- Fixed frame -->
-                        <rect x="150" y="40" width="80" height="200" fill="#e0e0e0" stroke="#e2e8f0" stroke-width="1.5"/>
-                        <text x="190" y="145" text-anchor="middle" font-size="9" fill="#666">FIXED</text>
-                        <text x="190" y="158" text-anchor="middle" font-size="9" fill="#666">FRAME</text>
-
-                        <!-- Door (open position) -->
-                        <rect x="60" y="60" width="90" height="160" fill="#e2e8f0" stroke="#222" stroke-width="1.5" transform="rotate(-15,150,140)"/>
-
-                        <!-- Glass on door -->
-                        <rect x="65" y="65" width="80" height="150" fill="#4a90d9" fill-opacity="0.3" stroke="#666" stroke-width="1" transform="rotate(-15,150,140)"/>
-
-                        <!-- Hinges -->
-                        <circle cx="150" cy="80" r="8" fill="#666" stroke="#e2e8f0" stroke-width="1"/>
-                        <circle cx="150" cy="200" r="8" fill="#666" stroke="#e2e8f0" stroke-width="1"/>
-
-                        <!-- Gas strut -->
-                        <line x1="100" y1="100" x2="140" y2="70" stroke="#f59e0b" stroke-width="4"/>
-                        <circle cx="100" cy="100" r="5" fill="#f59e0b"/>
-                        <circle cx="140" cy="70" r="5" fill="#f59e0b"/>
-                        <text x="85" y="120" font-size="7" fill="#f59e0b">GAS STRUT</text>
-
-                        <!-- Rotation arrow -->
-                        <path d="M 130,140 A 30,30 0 0,0 100,140" fill="none" stroke="#0d9488" stroke-width="2"/>
-                        <text x="90" y="155" font-size="8" fill="#0d9488">OPENS</text>
-
-                        <!-- Cam lock -->
-                        <circle cx="70" cy="200" r="6" fill="#666" stroke="#e2e8f0" stroke-width="1" transform="rotate(-15,150,140)"/>
-                        <text x="45" y="220" font-size="7" fill="#666">CAM LOCK</text>
-                    </svg>
-                </div>
-            </div>
-
-            <h3>6. Exploded Assembly View</h3>
-            <div class="drawing-container">
-                <svg viewBox="0 0 700 450" width="100%" height="400">
-                    <!-- Main shell -->
-                    <polygon points="200,180 400,120 400,280 200,340" fill="#e0e0e0" stroke="#e2e8f0" stroke-width="1.5"/>
-                    <polygon points="200,180 400,120 430,135 230,195" fill="#ccc" stroke="#e2e8f0" stroke-width="1.5"/>
-                    <polygon points="400,120 430,135 430,295 400,280" fill="#bbb" stroke="#e2e8f0" stroke-width="1.5"/>
-                    <text x="315" y="210" text-anchor="middle" font-size="10" fill="#e2e8f0">MAIN SHELL</text>
-                    <text x="315" y="222" text-anchor="middle" font-size="8" fill="#666">2mm AL 5052-H32</text>
-
-                    <!-- Door assembly (offset left) -->
-                    <polygon points="50,200 180,160 180,300 50,340" fill="#444" stroke="#e2e8f0" stroke-width="1.5"/>
-                    <polygon points="55,205 175,167 175,293 55,331" fill="#4a90d9" fill-opacity="0.4" stroke="#666" stroke-width="1"/>
-                    <text x="115" y="260" text-anchor="middle" font-size="9" fill="#fff">DOOR + GLASS</text>
-
-                    <!-- Arrow from door to shell -->
-                    <path d="M 180,250 L 195,245" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="5,3"/>
-
-                    <!-- Fan assembly (offset up) -->
-                    <rect x="240" y="40" width="140" height="50" fill="#e2e8f0" stroke="#222" stroke-width="1.5" rx="4"/>
-                    <circle cx="265" cy="65" r="11" fill="#555" stroke="#e2e8f0"/>
-                    <circle cx="295" cy="65" r="11" fill="#555" stroke="#e2e8f0"/>
-                    <circle cx="325" cy="65" r="11" fill="#555" stroke="#e2e8f0"/>
-                    <circle cx="355" cy="65" r="11" fill="#555" stroke="#e2e8f0"/>
-                    <text x="310" y="100" text-anchor="middle" font-size="9" fill="#e2e8f0">FAN MODULE</text>
-                    <text x="310" y="112" text-anchor="middle" font-size="7" fill="#666">4× 80mm PWM (~100 CFM)</text>
-
-                    <!-- Arrow from fans to shell -->
-                    <path d="M 310,90 L 310,115" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="5,3"/>
-
-                    <!-- Electronics module (offset right) -->
-                    <rect x="480" y="180" width="80" height="100" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" rx="4"/>
-                    <rect x="490" y="195" width="60" height="30" fill="#059669" stroke="#e2e8f0" stroke-width="1"/>
-                    <text x="520" y="215" text-anchor="middle" font-size="7" fill="#fff">PCB</text>
-                    <rect x="490" y="235" width="60" height="25" fill="#444" stroke="#e2e8f0" stroke-width="1"/>
-                    <text x="520" y="252" text-anchor="middle" font-size="7" fill="#ccc">PSU</text>
-                    <text x="520" y="295" text-anchor="middle" font-size="9" fill="#e2e8f0">ELECTRONICS</text>
-                    <text x="520" y="307" text-anchor="middle" font-size="7" fill="#666">Controller + PSU</text>
-
-                    <!-- Arrow from electronics to shell -->
-                    <path d="M 475,230 L 435,225" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="5,3"/>
-
-                    <!-- VESA mount (offset back) -->
-                    <rect x="500" y="80" width="100" height="70" fill="#64748b" stroke="#e2e8f0" stroke-width="1.5"/>
-                    <circle cx="520" cy="100" r="5" fill="#e2e8f0"/>
-                    <circle cx="580" cy="100" r="5" fill="#e2e8f0"/>
-                    <circle cx="520" cy="130" r="5" fill="#e2e8f0"/>
-                    <circle cx="580" cy="130" r="5" fill="#e2e8f0"/>
-                    <text x="550" y="165" text-anchor="middle" font-size="9" fill="#e2e8f0">VESA MOUNT</text>
-                    <text x="550" y="177" text-anchor="middle" font-size="7" fill="#666">600×400mm</text>
-
-                    <!-- Arrow from VESA to shell -->
-                    <path d="M 495,115 L 435,150" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="5,3"/>
-
-                    <!-- Gasket (offset) -->
-                    <rect x="50" y="380" width="150" height="20" fill="#e2e8f0" stroke="#222" stroke-width="1" rx="3"/>
-                    <text x="125" y="395" text-anchor="middle" font-size="8" fill="#fff">EPDM GASKET (CONTINUOUS)</text>
-                    <text x="125" y="420" text-anchor="middle" font-size="7" fill="#666">IP66 Seal</text>
-
-                    <!-- Bottom intake slot (offset) -->
-                    <rect x="250" y="380" width="120" height="25" fill="#ddd" stroke="#e2e8f0" stroke-width="1"/>
-                    <g stroke="#999" stroke-width="1">
-                        <line x1="265" y1="385" x2="265" y2="400"/>
-                        <line x1="285" y1="385" x2="285" y2="400"/>
-                        <line x1="305" y1="385" x2="305" y2="400"/>
-                        <line x1="325" y1="385" x2="325" y2="400"/>
-                        <line x1="345" y1="385" x2="345" y2="400"/>
-                    </g>
-                    <text x="310" y="420" text-anchor="middle" font-size="8" fill="#e2e8f0">BOTTOM INTAKE SLOT (FILTERED)</text>
-
-                    <!-- Hardware pack -->
-                    <rect x="420" y="380" width="100" height="40" fill="#f5f5f5" stroke="#e2e8f0" stroke-width="1" rx="4"/>
-                    <text x="470" y="400" text-anchor="middle" font-size="8" fill="#e2e8f0">HARDWARE</text>
-                    <text x="470" y="412" text-anchor="middle" font-size="7" fill="#666">M5 SS, Hinges, Locks</text>
-
-                    <!-- Title -->
-                    <text x="350" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#0d9488">EXPLODED ASSEMBLY - ATE-75</text>
-                </svg>
-            </div>
-
-            <h3>7. Materials & Fabrication</h3>
+            <h3>5. Materials & Fabrication</h3>
             <table class="param-table">
                 <tr><th>Component</th><th>Material</th><th>Thickness</th><th>Finish</th></tr>
                 <tr><td>Main shell</td><td>Aluminium 5052-H32</td><td>2.0 mm</td><td>Powder coat RAL 9005 (black) or RAL 9016 (white)</td></tr>
                 <tr><td>Door frame</td><td>Aluminium 5052-H32</td><td>2.0 mm</td><td>Powder coat to match</td></tr>
-                <tr><td>Front glass</td><td>Tempered, anti-reflective</td><td>6.0 mm</td><td>AR coating both sides</td></tr>
-                <tr><td>Rear panel</td><td>Aluminium 5052-H32</td><td>2.0 mm</td><td>Powder coat</td></tr>
+                <tr><td>Front glass</td><td>Tempered, anti-reflective</td><td>6.0 mm</td><td>AR + anti-fog hydrophilic coating (interior)</td></tr>
+                <tr><td>Rear panel</td><td>Aluminium 5052-H32</td><td>2.0 mm</td><td>Powder coat (sealed - no vents)</td></tr>
+                <tr><td>Top bezel</td><td>Aluminium 5052-H32</td><td>2.0 mm</td><td>35mm with exhaust louvers + 4×60mm fans</td></tr>
+                <tr><td>Bottom bezel</td><td>Aluminium 5052-H32</td><td>2.0 mm</td><td>35mm with intake louvers (45° down)</td></tr>
                 <tr><td>Gasket</td><td>EPDM closed-cell</td><td>10×15 mm</td><td>Black, continuous channel</td></tr>
                 <tr><td>Fasteners</td><td>Stainless steel 316</td><td>M5</td><td>—</td></tr>
                 <tr><td>Hinges</td><td>Stainless steel 316</td><td>Heavy duty</td><td>Concealed type</td></tr>
             </table>
 
-            <h3>8. Thermal Validation (55°C Ambient)</h3>
+            <h3>6. Thermal Validation (55°C Ambient) - v3.0</h3>
             <table class="param-table">
                 <tr><th>Parameter</th><th>Value</th><th>Status</th></tr>
                 <tr><td>Ambient temperature (Dubai summer)</td><td>55°C</td><td>Design case</td></tr>
                 <tr><td>Solar load on enclosure</td><td>~200W absorbed</td><td>Black surfaces worst case</td></tr>
                 <tr><td>TV heat dissipation</td><td>~150W (75" LED)</td><td>Typical operating</td></tr>
                 <tr><td>Total heat load</td><td>~350W</td><td>Must be removed</td></tr>
-                <tr><td>Fan capacity (4 × 80mm @ 100%)</td><td>~100 CFM total</td><td>Forced + natural convection</td></tr>
+                <tr><td>Fan capacity (4 × 60mm slim @ 100%)</td><td>~70 CFM total</td><td>+ natural convection in 25mm channel</td></tr>
+                <tr><td>Airflow path</td><td>Front-breathing</td><td>Bottom bezel → 25mm channel → Top bezel</td></tr>
                 <tr><td>Target internal temp</td><td>&lt;45°C at TV</td><td>Below TV max operating</td></tr>
                 <tr><td>PWM control start</td><td>30°C internal</td><td>Ramp begins</td></tr>
                 <tr><td>PWM 100%</td><td>45°C internal</td><td>Full speed cooling</td></tr>
+                <tr><td>Idle fan mode (condensation)</td><td>10% PWM × 30 min</td><td>Post-shutdown prevention</td></tr>
             </table>
 
             <div class="note-box">
-                <strong>Thermal Margin:</strong> At 55°C ambient + 350W load + 100 CFM cooling (with natural convection assist from bottom-to-rear airflow), internal delta-T is approximately 12-18°C above ambient. Internal temperature: 67-73°C air, but TV surface receives direct airflow keeping display under 50°C. <strong>Thermally validated with convection-assisted design.</strong> Recommend white powder coat to reduce solar absorption by ~40%.
+                <strong>Thermal Margin:</strong> At 55°C ambient + 350W load + 70 CFM forced cooling (with natural convection assist from bottom-to-top front channel), internal delta-T is approximately 12-18°C above ambient. The 25mm air channel between glass and TV provides efficient heat extraction directly from the display surface. <strong>Thermally validated with front-breathing design.</strong> Recommend white powder coat to reduce solar absorption by ~40%.
             </div>
 
             <div class="success-box">
-                <strong>IP66 Validation:</strong> Continuous EPDM gasket seal, IP66 cable glands, labyrinth intake grilles with internal baffles, rain cowl exhaust with 40mm overhang. Design meets IEC 60529 requirements for dust-tight + protection against powerful water jets.
+                <strong>IP66 Validation:</strong> Continuous EPDM gasket seal, IP66 cable glands, labyrinth intake louvers (angled down 45°), exhaust louvers (angled up). Design meets IEC 60529 requirements for dust-tight + protection against powerful water jets.
             </div>
         </div>
 
         <!-- ========== SIZE VARIANTS ========== -->
         <div class="design-section">
-            <h2>Size Variants - ATE Series</h2>
-            <p>All variants share identical construction, materials, and thermal design. Only external dimensions and internal clearances scale.</p>
+            <h2>Size Variants - ATE Series (v3.0 Front-Breathing)</h2>
+            <p>All variants share identical construction, materials, and front-breathing thermal design. Only external dimensions scale proportionally.</p>
 
             <table class="param-table">
                 <tr>
@@ -1011,54 +667,62 @@
                     <th>TV Size</th>
                     <th>External W × H × D (mm)</th>
                     <th>Weight Empty</th>
-                    <th>Fan Count</th>
+                    <th>Fan Config (Top Bezel)</th>
                     <th>Target Price</th>
                 </tr>
                 <tr>
                     <td>ATE-43</td>
                     <td>43"</td>
-                    <td>1060 × 660 × 95</td>
+                    <td>1060 × 660 × 100</td>
                     <td>~15 kg</td>
-                    <td>2× 80mm (rear)</td>
+                    <td>2× 60mm (top bezel)</td>
                     <td>AED 4,500</td>
                 </tr>
                 <tr>
                     <td>ATE-55</td>
                     <td>55"</td>
-                    <td>1320 × 800 × 95</td>
+                    <td>1320 × 800 × 105</td>
                     <td>~20 kg</td>
-                    <td>2× 80mm (rear)</td>
+                    <td>3× 60mm (top bezel)</td>
                     <td>AED 5,500</td>
                 </tr>
                 <tr>
                     <td>ATE-65</td>
                     <td>65"</td>
-                    <td>1540 × 920 × 95</td>
+                    <td>1540 × 920 × 110</td>
                     <td>~24 kg</td>
-                    <td>3× 80mm (rear)</td>
+                    <td>3× 60mm (top bezel)</td>
                     <td>AED 6,200</td>
                 </tr>
                 <tr style="background: #dbeafe;">
                     <td><strong>ATE-75</strong></td>
                     <td><strong>75"</strong></td>
-                    <td><strong>1760 × 1040 × 115</strong></td>
-                    <td><strong>~30 kg</strong></td>
-                    <td><strong>4× 80mm (rear)</strong></td>
+                    <td><strong>1760 × 1040 × 120</strong></td>
+                    <td><strong>~32 kg</strong></td>
+                    <td><strong>4× 60mm (top bezel)</strong></td>
                     <td><strong>AED 7,000</strong></td>
                 </tr>
                 <tr>
                     <td>ATE-85</td>
                     <td>85"</td>
-                    <td>2000 × 1180 × 105</td>
-                    <td>~35 kg</td>
-                    <td>4× 80mm (rear)</td>
+                    <td>2000 × 1180 × 125</td>
+                    <td>~38 kg</td>
+                    <td>4× 60mm (top bezel)</td>
                     <td>AED 8,500</td>
                 </tr>
             </table>
 
+            <div class="success-box">
+                <strong>v3.0 Front-Breathing:</strong> All sizes feature the front-breathing airflow design with 60mm slim fans integrated in the top bezel, 35mm bezel width with discrete slots, and sealed rear panel. Universal mounting compatibility for wall-mount, recessed, and flush installations.
+            </div>
+
             <div class="note-box">
                 <strong>Prototype Focus:</strong> ATE-75 selected for initial prototype. Most common size for hospitality/commercial installations. Once validated, parametric scaling to other sizes is straightforward.
             </div>
+
+            <p style="margin-top: 1rem; font-size: 0.85rem; color: #64748b;">
+                <a href="archive/designs-legacy.html" style="color: #64748b;">View archived v1.0-v2.0 rear-exhaust designs →</a>
+            </p>
         </div>
 
         <!-- ========== MANUFACTURING STATUS ========== -->
