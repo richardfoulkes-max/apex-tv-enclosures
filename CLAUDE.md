@@ -142,6 +142,15 @@ website/
    - 31cec59: v3.0 Front-Breathing Design complete
    - 2e3a998: Add detailed SVG cross-section drawings
    - d000e02: Archive legacy v1-v2 designs
+   - 1323544: Track CLAUDE.md for context preservation
+   - 6986672: Add v3.0 lifestyle render
+
+7. **AI Render Breakthrough:**
+   - Technical spec prompts failed (too industrial or too plain TV)
+   - **Lifestyle/emotional prompts work better** for product visualization
+   - Successful prompt focused on: Dubai villa, luxury context, "Bang & Olufsen", "Architectural Digest"
+   - Saved render: `website/images/ate-75-v3-lifestyle-render.png`
+   - Design validated: Premium aesthetic achieved
 
 ---
 
