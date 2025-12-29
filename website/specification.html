@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex TV Enclosures - Manufacturing Specification v2.0</title>
+    <title>Apex TV Enclosures - Manufacturing Specification v3.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -316,7 +316,7 @@
         <div class="container">
             <h1>Apex TV Enclosures</h1>
             <div class="subtitle">Premium OEM Manufacturing Specification - Dubai Grade</div>
-            <div class="version">Version 2.0 | December 2025 | RFQ Ready</div>
+            <div class="version">Version 3.0 | December 2025 | Front-Breathing Design</div>
         </div>
     </header>
 
@@ -353,7 +353,7 @@
                 <li><strong>Dust/sand ingress resistance</strong> (positive pressure design)</li>
                 <li><strong>Corrosion resistance</strong> (coastal UAE specification)</li>
                 <li><strong>Premium fit/finish</strong> (luxury market positioning)</li>
-                <li><strong>Slim profile</strong> (120mm depth)</li>
+                <li><strong>Slim profile</strong> (120mm depth with front-breathing airflow)</li>
             </ol>
 
             <div class="callout callout-critical">
@@ -454,17 +454,17 @@
                         <td><strong>ATE-65</strong></td>
                         <td>60" - 65"</td>
                         <td>1480 × 860 × 80mm</td>
-                        <td>1540 × 920 × 115mm</td>
+                        <td>1540 × 920 × 120mm</td>
                         <td>300-600×400</td>
-                        <td>4 × 80mm (rear)</td>
+                        <td>4 × 60mm (top bezel)</td>
                     </tr>
                     <tr>
                         <td><strong>ATE-75</strong></td>
                         <td>70" - 75"</td>
                         <td>1700 × 1000 × 80mm</td>
-                        <td>1760 × 1040 × 115mm</td>
+                        <td>1760 × 1040 × 120mm</td>
                         <td>400-600×400</td>
-                        <td>4 × 80mm (rear)</td>
+                        <td>4 × 60mm (top bezel)</td>
                     </tr>
                     <tr>
                         <td><strong>ATE-86</strong></td>
@@ -478,7 +478,7 @@
             </table>
 
             <div class="callout callout-info">
-                <strong>TV-Like Profile:</strong> Slim 110-120mm depth with all exhaust ventilation on rear panel. Discrete intake slot on bottom edge (not visible when wall-mounted). Clean front, top, and sides - looks like a flat-screen TV while maintaining thermal performance for 55°C ambient operation.
+                <strong>Front-Breathing Design (v3.0):</strong> Slim 120mm depth with front-breathing airflow system. Air enters through discrete slot in bottom bezel (hidden from front view), flows up 25mm channel between glass and TV, exits through top bezel with 4× 60mm slim fans. Clean appearance - intake/exhaust slots hidden in 35mm bezel profile. <strong>Universal mounting:</strong> Works for wall-mount, recessed, and flush installations since front is always accessible.
             </div>
 
             <!-- Dimension Drawing -->
@@ -1555,7 +1555,7 @@
                 <div class="drawing-caption">Cross-section showing zoned airflow with positive pressure design. Airflow forced across TV hot zones.</div>
             </div>
 
-            <h3>6.2 Fan Specification</h3>
+            <h3>6.2 Fan Specification - Front-Breathing Design (v3.0)</h3>
             <table>
                 <tr>
                     <th>Parameter</th>
@@ -1563,15 +1563,15 @@
                 </tr>
                 <tr>
                     <td>Fan Size</td>
-                    <td><strong>80mm × 80mm × 25mm</strong></td>
+                    <td><strong>60mm × 60mm × 15mm (slim profile)</strong></td>
                 </tr>
                 <tr>
                     <td>Fan Count (ATE-75)</td>
-                    <td><strong>4 fans, rear-mounted exhaust (~100 CFM total)</strong></td>
+                    <td><strong>4 fans, top bezel exhaust (~70 CFM + convection assist)</strong></td>
                 </tr>
                 <tr>
                     <td>Fan Type</td>
-                    <td><strong>Noctua NF-A8 PWM / Sunon MagLev</strong></td>
+                    <td><strong>Noctua NF-A6x15 PWM / Delta AFB0612VHC-F00</strong></td>
                 </tr>
                 <tr>
                     <td>Control</td>
@@ -1591,13 +1591,17 @@
                 </tr>
                 <tr>
                     <td>Mounting</td>
-                    <td><strong>Rear panel, rubber isolators</strong></td>
+                    <td><strong>Top bezel, hidden behind louver grille</strong></td>
                 </tr>
                 <tr>
                     <td>Airflow Direction</td>
-                    <td><strong>Bottom intake (filtered slot) → Rear exhaust (convection-assisted)</strong></td>
+                    <td><strong>Bottom bezel intake → 25mm front air channel → Top bezel exhaust</strong></td>
                 </tr>
             </table>
+
+            <div class="callout callout-info">
+                <strong>Why 60mm Slim Fans:</strong> The 15mm slim profile allows fans to fit within the 35mm bezel while leaving space for louvers and gaskets. Four fans provide ~70 CFM forced airflow, supplemented by natural convection (stack effect) through the vertical front air channel - total effective airflow ~85 CFM equivalent.
+            </div>
 
             <h3>6.3 Noise Targets</h3>
             <table>
@@ -1666,32 +1670,36 @@
                 <li><strong>Design:</strong> Slight positive pressure to prevent dust ingress</li>
             </ul>
 
-            <h3>6.6 IP66 Ventilation System <span class="badge badge-premium">IP66</span></h3>
+            <h3>6.6 IP66 Ventilation System - Front-Breathing (v3.0) <span class="badge badge-premium">IP66</span></h3>
             <div class="callout callout-critical">
-                <strong>Critical for IP66:</strong> Standard mesh grilles are NOT IP66 rated. Labyrinth-style grilles with internal baffles are required.
+                <strong>Critical for IP66:</strong> All ventilation through front bezel. Angled louvers shed water. Labyrinth baffles prevent direct water ingress.
             </div>
 
             <div class="spec-grid">
                 <div class="spec-card">
-                    <h4>Intake Grilles (Bottom)</h4>
+                    <h4>Bottom Bezel Intake Slot</h4>
                     <ul>
-                        <li><strong>Type:</strong> IP66 labyrinth vent with internal baffles</li>
-                        <li><strong>Material:</strong> UV-stable ABS or 316 stainless</li>
-                        <li><strong>Design:</strong> Downward-facing louvers + internal maze</li>
-                        <li><strong>Filter:</strong> Behind grille, tool-free access</li>
-                        <li><strong>Quantity:</strong> 2× per unit (one per intake fan)</li>
+                        <li><strong>Dimensions:</strong> 1700mm × 15mm continuous slot</li>
+                        <li><strong>Type:</strong> Downward-angled louvers (45°) with internal labyrinth</li>
+                        <li><strong>Material:</strong> Aluminum louver with 316 SS mesh backing</li>
+                        <li><strong>Filter:</strong> Automotive-grade pleated, tool-free access</li>
+                        <li><strong>Water shedding:</strong> Angled design prevents pooling, water drains down front</li>
                     </ul>
                 </div>
                 <div class="spec-card">
-                    <h4>Exhaust System (Top)</h4>
+                    <h4>Top Bezel Exhaust Slot</h4>
                     <ul>
-                        <li><strong>Type:</strong> Rain cowl/hood with labyrinth exit</li>
-                        <li><strong>Material:</strong> Powder-coated aluminum</li>
-                        <li><strong>Design:</strong> Chimney effect, water cannot enter even in heavy rain</li>
-                        <li><strong>Mesh:</strong> 316 SS insect screen behind cowl</li>
-                        <li><strong>Overhang:</strong> Minimum 40mm projection</li>
+                        <li><strong>Dimensions:</strong> 1700mm × 20mm continuous slot</li>
+                        <li><strong>Type:</strong> Upward-angled louvers with rain cowl profile</li>
+                        <li><strong>Fans:</strong> 4× 60mm slim fans behind grille</li>
+                        <li><strong>Design:</strong> Hot air exits upward, water cannot enter from above</li>
+                        <li><strong>Mesh:</strong> 316 SS insect screen behind louvers</li>
                     </ul>
                 </div>
+            </div>
+
+            <div class="callout callout-info">
+                <strong>Front-Breathing Advantage:</strong> All airflow through front face means enclosure works identically whether wall-mounted, recessed into wall cavity, or flush-mounted. Rear and sides are fully sealed - no ventilation required.
             </div>
 
             <table>

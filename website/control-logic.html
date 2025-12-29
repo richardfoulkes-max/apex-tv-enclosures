@@ -308,8 +308,9 @@
 
                 <!-- POST_COOL State -->
                 <rect x="250" y="350" width="120" height="60" fill="#e0e7ff" stroke="#6366f1" stroke-width="2" rx="8"/>
-                <text x="310" y="375" text-anchor="middle" font-size="12" font-weight="600" fill="#4338ca">POST_COOL</text>
-                <text x="310" y="395" text-anchor="middle" font-size="9" fill="#6366f1">Cooldown period</text>
+                <text x="310" y="370" text-anchor="middle" font-size="12" font-weight="600" fill="#4338ca">POST_COOL</text>
+                <text x="310" y="385" text-anchor="middle" font-size="8" fill="#6366f1">30 min @ 10% PWM</text>
+                <text x="310" y="400" text-anchor="middle" font-size="8" fill="#6366f1">(condensation prevent)</text>
 
                 <!-- START -->
                 <circle cx="110" cy="100" r="20" fill="#1e293b" stroke="#1e293b" stroke-width="2"/>
@@ -479,7 +480,7 @@
             targetPWM = PWM_MAX;
             <span class="keyword">break</span>;
         <span class="keyword">case</span> STATE_POST_COOL:
-            targetPWM = <span class="number">50</span>;  <span class="comment">// Medium speed cooldown</span>
+            targetPWM = <span class="number">10</span>;  <span class="comment">// Low speed idle - condensation prevention (30 min)</span>
             <span class="keyword">break</span>;
     }
 

@@ -103,8 +103,8 @@
 
         <!-- ========== ATE-75 TV ENCLOSURE ========== -->
         <div class="design-section">
-            <h2>ATE-75: Outdoor TV Enclosure (75")</h2>
-            <p><strong>Design Intent:</strong> IP66 weatherproof enclosure for commercial 75" TVs in Gulf region outdoor environments. PWM thermal management, hinged access door, tempered glass front.</p>
+            <h2>ATE-75: Outdoor TV Enclosure (75") - Front-Breathing v3.0</h2>
+            <p><strong>Design Intent:</strong> IP66 weatherproof enclosure for commercial 75" TVs in Gulf region outdoor environments. Front-breathing thermal management enables wall-mount, recessed, and flush installations.</p>
 
             <h3>1. Global Parameters</h3>
             <table class="param-table">
@@ -112,35 +112,43 @@
                 <tr><td><code>TV_MAX_WIDTH</code></td><td>1675 mm</td><td>75" TV typical</td></tr>
                 <tr><td><code>TV_MAX_HEIGHT</code></td><td>960 mm</td><td>75" TV typical</td></tr>
                 <tr><td><code>TV_MAX_DEPTH</code></td><td>65 mm</td><td>Excludes stand</td></tr>
-                <tr><td><code>CLEARANCE_SIDE</code></td><td>15 mm</td><td>Each side</td></tr>
-                <tr><td><code>CLEARANCE_TOP</code></td><td>20 mm</td><td>Clean top surface</td></tr>
-                <tr><td><code>CLEARANCE_BOTTOM</code></td><td>20 mm</td><td>Intake slot area</td></tr>
-                <tr><td><code>CLEARANCE_REAR</code></td><td>35 mm</td><td>Airflow + fans + cables</td></tr>
+                <tr><td><code>BEZEL_WIDTH</code></td><td>35 mm</td><td>Contains airflow slots</td></tr>
+                <tr><td><code>AIR_CHANNEL</code></td><td>25 mm</td><td>Gap between glass and TV</td></tr>
+                <tr><td><code>CLEARANCE_REAR</code></td><td>30 mm</td><td>Cables + passive cooling</td></tr>
                 <tr><td><code>WALL_THICKNESS</code></td><td>2.0 mm</td><td>Aluminium 5052-H32</td></tr>
                 <tr><td><code>GLASS_THICKNESS</code></td><td>6 mm</td><td>Tempered, anti-reflective</td></tr>
-                <tr><td><code>FAN_SIZE</code></td><td>80 mm</td><td>× 4 PWM fans (rear-mounted exhaust)</td></tr>
+                <tr><td><code>FAN_SIZE</code></td><td>60 mm × 15 mm</td><td>× 4 slim fans (top bezel exhaust)</td></tr>
                 <tr><td><code>IP_RATING</code></td><td>IP66</td><td>Dust tight + water jets</td></tr>
-                <tr><td><code>PROFILE</code></td><td>TV-like</td><td>Clean front/top/sides, bottom intake, rear exhaust</td></tr>
+                <tr><td><code>PROFILE</code></td><td>Front-Breathing</td><td>Bottom bezel intake → Top bezel exhaust</td></tr>
             </table>
 
             <h3>2. Overall Dimensions</h3>
             <table class="param-table">
                 <tr><th>View</th><th>Dimension</th><th>Value</th></tr>
-                <tr><td>External</td><td>W × H × D</td><td>1760 × 1040 × 115 mm</td></tr>
-                <tr><td>Internal cavity</td><td>W × H × D</td><td>1720 × 1000 × 80 mm</td></tr>
-                <tr><td>Glass visible area</td><td>W × H</td><td>1680 × 960 mm</td></tr>
-                <tr><td>Weight (empty)</td><td>—</td><td>~30 kg</td></tr>
-                <tr><td>Weight (with 75" TV)</td><td>—</td><td>~60 kg</td></tr>
+                <tr><td>External</td><td>W × H × D</td><td>1760 × 1040 × 120 mm</td></tr>
+                <tr><td>Internal cavity</td><td>W × H × D</td><td>1690 × 970 × 80 mm</td></tr>
+                <tr><td>Glass visible area</td><td>W × H</td><td>1690 × 970 mm</td></tr>
+                <tr><td>Bottom intake slot</td><td>W × H</td><td>1700 × 15 mm</td></tr>
+                <tr><td>Top exhaust slot</td><td>W × H</td><td>1700 × 20 mm</td></tr>
+                <tr><td>Weight (empty)</td><td>—</td><td>~32 kg</td></tr>
+                <tr><td>Weight (with 75" TV)</td><td>—</td><td>~62 kg</td></tr>
             </table>
 
-            <div class="note-box">
-                <strong>TV-Like Profile (Thermally Validated):</strong> 115mm depth with 4×80mm rear exhaust fans (~100 CFM). Discrete filtered intake slot on bottom edge (hidden when wall-mounted). Clean front, top, and side surfaces - looks like a flat-screen TV while maintaining thermal performance for 55°C ambient + 350W heat load.
+            <div class="success-box">
+                <strong>Front-Breathing Design v3.0:</strong> 120mm depth with all airflow through front bezel. Air enters through discrete slot in bottom bezel, flows up 25mm channel between glass and TV, exits through top bezel with 4×60mm slim fans (~70 CFM + convection). <strong>Universal mounting:</strong> Works for wall-mount, recessed, and flush installations since front is always accessible.
             </div>
 
             <h3>3. AI-Generated Design Validation</h3>
 
-            <div class="success-box">
-                <strong>Design Validated:</strong> These AI renders confirm the TV-like profile design before prototype manufacturing. Clean front/top/sides, 4 exhaust fans on rear, slim 115mm depth.
+            <div class="danger-box">
+                <strong>⚠️ Renders Need Update:</strong> The images below show the OLD v2.0 design (rear exhaust fans). The v3.0 front-breathing design has:
+                <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                    <li>35mm bezel (not 20mm)</li>
+                    <li>Discrete intake slot in bottom bezel</li>
+                    <li>Exhaust louvers in top bezel with 4×60mm fans</li>
+                    <li>Clean sealed rear (no fans visible)</li>
+                </ul>
+                <p style="margin-top: 0.5rem;">Use the updated prompts in <a href="ai-image-prompts.html">AI Image Prompts</a> to generate v3.0 renders.</p>
             </div>
 
             <h4>6-View Design Sheet (All Angles)</h4>
