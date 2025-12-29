@@ -23,67 +23,89 @@ https://github.com/richardfoulkes-max/apex-tv-enclosures (private)
 
 ---
 
-## Current Design State (v3.0 Front-Breathing)
+## Current Design State (v5.0 Ducted Rear Plenum)
 
 ### Design Version History
 | Version | Architecture | Status | Notes |
 |---------|-------------|--------|-------|
 | v1.0 | Rear exhaust, 95mm depth | ARCHIVED | Initial concept |
 | v2.0 | Rear exhaust, 115mm depth | ARCHIVED | IP66 upgrade |
-| **v3.0** | **Front-breathing, 120mm depth** | **CURRENT** | Universal mounting |
+| v3.0 | Front-breathing, 120mm depth | FAILED | Roundtable AI: BLOCK RELEASE |
+| v4.0 | Ducted rear plenum, 150mm depth | FAILED | Roundtable AI: REDESIGN REQUIRED |
+| **v5.0** | **Ducted rear plenum, 180mm depth** | **CURRENT** | Awaiting validation |
 
-### Why v3.0 Front-Breathing? (Decision Rationale)
-**Problem with v1.0/v2.0:** Rear-mounted fans blocked airflow when wall-mounted or recessed. Customer installations often place enclosures flush against walls, blocking the rear exhaust.
+### Why v5.0? (Design Evolution via Roundtable AI)
 
-**v3.0 Solution:** Move all airflow to the FRONT face:
-- Air enters through discrete slot in bottom bezel (1700×15mm)
-- Flows UP through 25mm channel between glass and TV
-- Exits through top bezel with 4×60mm slim fans (1700×20mm slot)
-- Rear panel is completely sealed (just VESA mount + cable entry)
+**v3.0 Failed (BLOCK RELEASE):**
+- Front-breathing cooled glass, not TV heat sinks
+- 4×60mm fans delivered only ~35 CFM (needed 116+)
+- IP55 impossible with open slots
 
-**Benefits:**
-1. **Universal mounting** - works wall-mount, recessed, or flush
-2. **Better thermal** - airflow directly across TV display surface
-3. **Cleaner rear** - no visible fans, more premium appearance
-4. **Condensation path** - vertical airflow aids moisture management
+**v4.0 Improved but Failed (REDESIGN REQUIRED):**
+- Ducted rear plenum (correct strategy)
+- But 30mm plenum too restrictive, 80-100 CFM insufficient
+- No service access without removing glass
 
-### v3.0 Key Specifications (ATE-75)
+**v5.0 Solution:**
+- **180mm depth** (was 150mm) for proper 50mm plenum
+- **2×140mm high-static fans** delivering 140-160 CFM
+- **Hinged service door** in bottom bezel (fan access without glass removal)
+- **Continuous glass channel** (not discrete clips)
+- **Through-bolted VESA** (not adhesive)
+- **Standard MERV 8 filter** (not optional)
+
+### v5.0 Key Specifications (ATE-75)
 | Parameter | Value | Notes |
 |-----------|-------|-------|
-| External dimensions | 1760 × 1040 × 120mm | +5mm depth vs v2.0 |
-| Bezel width | 35mm | Contains airflow slots (was 20mm) |
-| Air channel | 25mm | Gap between glass and TV |
-| Fans | 4× 60mm × 15mm slim | In top bezel (was 4×80mm rear) |
-| Airflow | ~70 CFM + convection | Bottom bezel → top bezel |
-| Glass | 6mm tempered + AR + anti-fog | Hydrophilic interior coating |
-| IP rating | IP66 | Dust tight + water jets |
+| External dimensions | 1760 × 1040 × **180mm** | +30mm vs v4.0 |
+| Bezel width | 35mm | Contains intake/exhaust slots |
+| Rear plenum | **50mm** | Air channel behind TV |
+| Fans | **2× 140mm** IP55 PWM | 140-160 CFM system |
+| Glass | **8mm laminated (4+4)** | Continuous channel retention |
+| Service door | 1650 × 80mm hinged | Tool-less fan/filter access |
+| Filter | **MERV 8 standard** | Tool-less drawer |
+| VESA | Through-bolted, 6mm plate | 75kg @ 3× safety factor |
+| IP rating | IP54 | Realistic with ventilation |
 
-### Condensation Management (v3.0 specific)
-**Risk:** The 25mm air gap separates glass from TV heat, increasing condensation risk in Dubai's humid mornings.
+### Thermal Design (v5.0)
+```
+Air path: Front intake → Filter → Baffle → 50mm rear plenum →
+          Rises across TV back → Exits via 2×140mm fans
+```
+- **Target:** 140-160 CFM at 55°C ambient + solar
+- **Heat load:** 550W (300W TV + 250W solar gain)
+- **Margin:** ~13% at worst-case, 20%+ at typical
 
-**Mitigations implemented:**
-1. Anti-fog hydrophilic coating on glass interior (+$10)
-2. ePTFE breather membrane for pressure equalization ($8)
-3. Condensation drain slots (3×5mm at bottom of air channel)
-4. Idle fan mode: 10% PWM for 30 min post-shutdown
-
-### BOM Summary (v3.0)
-- **BOM Total:** $612.38
-- **Unit Cost:** $657.38 (with labor/overhead)
-- **Target FOB:** $700-750
+### BOM Summary (v5.0 - estimates)
+- **Target FOB:** $520-580
 - **Retail:** AED 7,000 (~$1,900)
 
 ### File Structure
 ```
-website/
-├── designs.html          ← v3.0 ONLY (cross-sections, specs)
-├── specification.html    ← v3.0 parameters
-├── bom-detailed.html     ← v3.0 costs
-├── engineering-analysis.html ← v3.0 thermal + condensation
-├── control-logic.html    ← Includes idle fan mode
-├── ai-image-prompts.html ← v3.0 render prompts
+website/                    ← Original website (needs v5.0 update)
+├── designs.html
+├── specification.html
+├── bom-detailed.html
+├── engineering-analysis.html
+├── control-logic.html
 └── archive/
-    └── designs-legacy.html ← v1.0/v2.0 archived here
+
+fusion-scripts/             ← 3D models
+├── ATE-75-Enclosure.scad   ← OpenSCAD parametric model
+├── ATE-75-Enclosure.stl    ← Basic STL mesh
+├── ATE-75-Enclosure.py     ← Fusion 360 Python script
+└── Fusion-360-Instructions.md
+
+manufacturer-rfq/           ← RFQ package for manufacturers
+├── ATE-75-Specification.md     ← Original spec
+├── ATE-75-Specification-v4.md  ← v4.0 (superseded)
+└── ATE-75-Specification-v5.md  ← v5.0 CURRENT
+
+roundtable-ai/              ← Engineering validation briefs
+├── product-brief.md            ← Market research brief
+├── engineering-brief.txt       ← v3.0 review (BLOCK RELEASE)
+├── engineering-brief-v4.txt    ← v4.0 review (REDESIGN REQUIRED)
+└── engineering-brief-v5.txt    ← v5.0 review (PENDING)
 ```
 
 ---
@@ -102,7 +124,53 @@ website/
 
 ## Recent Work History
 
-### Session: 2025-12-29 - v3.0 Front-Breathing Design Complete
+### Session: 2025-12-29 (PM) - Major Engineering Redesign via Roundtable AI
+
+**Roundtable AI engineering validation drove design from v3.0 → v5.0**
+
+1. **3D Model Attempts:**
+   - Attempted Fusion 360 modeling (user has no CAD experience)
+   - Created OpenSCAD parametric model (ATE-75-Enclosure.scad)
+   - Generated basic STL using numpy-stl Python library
+   - Created Fusion 360 instructions for manual build
+   - **Decision:** Let manufacturer create production CAD
+
+2. **v3.0 Engineering Review (BLOCK RELEASE):**
+   - Submitted to Roundtable AI for engineering validation
+   - **Fatal flaws identified:**
+     - Front-breathing path cooled glass, not TV heat sinks
+     - 4×60mm fans delivered ~35 CFM (needed 116+ CFM)
+     - IP55 impossible with open ventilation slots
+     - 3mm aluminum insufficient at 1.76m span
+
+3. **v4.0 Created & Reviewed (REDESIGN REQUIRED):**
+   - Switched to ducted rear plenum (correct thermal strategy)
+   - Increased depth to 150mm, plenum to 30mm
+   - Upgraded to 2×120mm fans (80-100 CFM target)
+   - **Still failed:** Thermal margin insufficient at 55°C + solar, poor serviceability
+
+4. **v5.0 Created (Current Design):**
+   - **Depth:** 180mm (50mm rear plenum)
+   - **Fans:** 2×140mm high-static (140-160 CFM)
+   - **Filter:** MERV 8 standard (not optional)
+   - **Glass:** 8mm laminated with continuous channel retention
+   - **Service:** Hinged door in bottom bezel
+   - **VESA:** Through-bolted with 6mm reinforcement
+   - **IP rating:** IP54 (realistic)
+
+5. **Files Created:**
+   - `fusion-scripts/` - OpenSCAD, STL, Fusion scripts
+   - `manufacturer-rfq/ATE-75-Specification-v5.md` - Current spec
+   - `roundtable-ai/engineering-brief-v5.txt` - Pending validation
+
+6. **Next Steps:**
+   - Run v5.0 through Roundtable AI validation
+   - Target verdict: PASS FOR PROTOTYPE VALIDATION
+   - Update website specs if v5.0 passes
+
+---
+
+### Session: 2025-12-29 (AM) - v3.0 Front-Breathing Design Complete
 **Major redesign from rear-exhaust to front-breathing architecture**
 
 1. **v3.0 Design Implementation:**

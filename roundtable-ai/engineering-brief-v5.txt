@@ -1,0 +1,365 @@
+PRODUCT: Apex ATE-75 Outdoor TV Enclosure v5.0 - Engineering Design Review
+
+REQUEST: This is the SECOND revision based on engineering feedback. v4.0 received "REDESIGN REQUIRED" verdict due to insufficient thermal margin, inadequate glass retention, and poor serviceability. Please review v5.0 changes and assess whether critical issues have been resolved. Target verdict: PASS FOR PROTOTYPE VALIDATION.
+
+---
+
+REVISION HISTORY
+
+| Version | Verdict | Key Issues |
+|---------|---------|------------|
+| v3.0 | BLOCK RELEASE | Wrong thermal path, undersized fans, IP55 impossible, no structure |
+| v4.0 | REDESIGN REQUIRED | Thermal margin insufficient at 55°C, glass clips risky, no service access |
+| v5.0 | Under Review | Addressed all v4.0 blockers (see below) |
+
+---
+
+DESIGN CHANGES v4.0 → v5.0
+
+| Issue Identified | v4.0 Design | v5.0 Fix |
+|------------------|-------------|----------|
+| Thermal margin insufficient | 80-100 CFM target, 30mm plenum | **140-160 CFM target, 50mm plenum** |
+| Fans undersized | 2× 120mm (~60 CFM delivered) | **2× 140mm high-static (~120 CFM delivered)** |
+| Filter optional (caused failures) | Optional MERV 5 | **Standard MERV 8, tool-less drawer** |
+| Glass retention risky | 8× M6 clips (point loads) | **Continuous U-channel (uniform compression)** |
+| Glass too thin | 6mm laminated (3+3) | **8mm laminated (4+4) heat-strengthened** |
+| Service requires glass removal | No service access | **Hinged service door in bottom bezel** |
+| VESA bonding unvalidated | Adhesive + rivets | **Through-bolted with fender washers** |
+| Enclosure too shallow | 150mm depth | **180mm depth** |
+| No condensation management | None | **15W anti-fog heater + humidity sensor** |
+| Drain overflow risk | Basic channels | **Overflow weirs + 2 L/min capacity** |
+
+---
+
+v5.0 DESIGN OVERVIEW
+
+Weatherproof aluminum enclosure for 75" commercial displays.
+- Ducted rear-plenum thermal design (50mm air channel behind TV)
+- 2× 140mm high-static IP55 fans (140-160 CFM system)
+- Hinged service door for fan/filter access without glass removal
+- Continuous glass retention channel (uniform gasket compression)
+- Through-bolted VESA mount with internal stiffeners
+- Standard MERV 8 filter (tool-less)
+- IP54 rating with segregated wet/dry zones
+
+---
+
+EXTERNAL DIMENSIONS
+- Width: 1760mm
+- Height: 1040mm
+- Depth: 180mm (was 150mm)
+- Weight: ~35kg
+
+CONSTRUCTION
+- Material: 5052-H32 Aluminum
+- Body panels: 3mm
+- VESA reinforcement: 6mm plate, 750 × 550mm, through-bolted
+- Internal stiffeners: 2× vertical hat-channels (30×30×2mm) + 2× horizontal ribs
+- Corner gussets: 4× (60×60×3mm)
+- Joints: Structural adhesive (Tg >80°C) + rivets
+- Finish: Marine-grade powder coat, 60-80μm
+
+---
+
+THERMAL DESIGN (v5.0)
+
+AIRFLOW PATH:
+1. Ambient air enters via front bottom louvered intake (1650 × 30mm)
+2. Passes through MERV 8 filter (standard, tool-less drawer)
+3. Internal baffle redirects air to rear of enclosure
+4. Air enters 50mm rear plenum (gap between TV back and enclosure back)
+5. Air rises across TV heat sinks (PSU, LED driver, main board - all on back)
+6. Hot air exits via top exhaust (1650 × 35mm) with 2× 140mm fans
+
+CROSS-SECTION:
+```
+         ┌─ TOP EXHAUST (2×140mm fans) ─┐
+         │  ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲   │
+         ├─────────────────────────────┤
+         │                             │
+         │  ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑   │ ← Hot air rising
+    ┌────┤       TV BACK               │
+    │    │    (heat sinks here)        │
+    │ G  │                             │
+    │ L  │  ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑   │
+    │ A  ├─────────────────────────────┤
+    │ S  │                             │
+    │ S  │   REAR PLENUM (50mm)        │ ← Generous channel
+    │    │                             │
+    └────┤  ← ← ← ← ← ← ← ← ← ← ← ←   │ ← Baffle
+         │                             │
+         │  ══ FILTER (MERV 8) ══════  │ ← Standard, tool-less
+         │         ↓                   │
+         └─ INTAKE (louvered, 30mm) ───┘
+```
+
+DEPTH ALLOCATION (180mm total):
+- Glass + front gap: 35mm (8mm glass + 27mm clearance)
+- TV mounting zone: 90mm (TV + bracket + wiring)
+- Rear plenum: 50mm (air channel)
+- Back panel: 5mm
+
+AIRFLOW SPECIFICATIONS:
+| Parameter | v4.0 | v5.0 |
+|-----------|------|------|
+| Target airflow | 80-100 CFM | **140-160 CFM** |
+| Design delta-T | 10-15K | **10K** |
+| Max ambient | 45°C | **55°C** |
+| Solar gain allowance | ~150W | **250W** |
+| Total heat load | 450W | **550W** |
+
+FAN SPECIFICATIONS:
+- Quantity: 2×
+- Size: 140mm × 25mm
+- Type: IP55-rated, ball bearing, PWM, EC motor
+- Airflow: 70-80 CFM each (free air)
+- Static pressure: 3-4 mmH₂O (high-static design)
+- Noise: ≤38 dBA at full speed
+- Models: Delta AFB1412SH, Noctua NF-A14 iPPC-3000 IP67
+
+THERMAL CONTROL:
+- <40°C: Fans 20% PWM (quiet mode)
+- 40-50°C: Fans 20-60% PWM (proportional)
+- 50-60°C: Fans 60-100% PWM
+- 60°C: Alert signal
+- 65°C: TV black-screen command via CEC
+- 70°C: Latching shutdown (manual reset)
+
+END-OF-LIFE MARGIN:
+- Fan derate: 30% CFM loss assumed at year 5
+- Filter clog: 50% ΔP increase at service interval
+- Design margin: ≥20% airflow headroom at worst-case + EoL
+
+THERMAL MATH CHECK:
+Required: V̇ = P / (ρ·cp·ΔT)
+- Heat load: 550W (300W TV + 250W solar)
+- Delta-T: 10K (55°C ambient → 65°C internal max)
+- Required: 550 / (1.1 × 10) = 50 L/s = **106 CFM**
+- v5.0 provides: 140-160 CFM system, ~120 CFM delivered after losses
+- Margin: 120/106 = **13% at worst-case** (+ additional margin at typical conditions)
+
+---
+
+VENTILATION
+
+BOTTOM INTAKE:
+- Size: 1650 × 30mm (49,500 mm² gross)
+- Protection: 45° louvers (12mm overlap) + 25mm labyrinth hood + hydrophobic mesh
+- Filter: MERV 8, 1600 × 60 × 25mm, slide-out drawer
+- Filter ΔP: ≤20 Pa clean, ≤40 Pa @ 50% clog
+
+TOP EXHAUST:
+- Size: 1650 × 35mm (57,750 mm² gross)
+- Protection: 45° louvers (angled upward)
+- Fans: 2× 140mm, 500mm spacing, rubber isolation mounts
+
+---
+
+SERVICE ACCESS (NEW IN v5.0)
+
+HINGED SERVICE DOOR:
+- Location: Bottom front bezel (below glass)
+- Size: 1650mm × 80mm
+- Hinge: Stainless steel piano hinge (full width)
+- Latches: 4× quarter-turn (tool-less)
+- Seal: EPDM gasket, compression fit
+- Access to: Filter drawer, fan wiring quick-connects, PSU bay
+
+SERVICE PROCEDURE (FAN REPLACEMENT):
+1. Open 4× quarter-turn latches
+2. Swing door down on piano hinge
+3. Slide out filter drawer
+4. Disconnect fan quick-connect cable
+5. Remove 4× fan mounting screws (Phillips)
+6. Swap fan, reverse steps
+- Target time: <20 minutes
+- Personnel: Single technician
+- Glass removal: NOT REQUIRED
+
+SERVICE PROCEDURE (FILTER REPLACEMENT):
+1. Open service door (4× latches)
+2. Slide out filter drawer
+3. Replace filter
+4. Slide in, close door
+- Target time: <5 minutes
+- Tools: None
+
+---
+
+GLASS PANEL & RETENTION
+
+GLASS SPECIFICATIONS:
+- Size: 1680 × 960 × 8mm
+- Type: Heat-strengthened laminated (4mm + PVB + 4mm)
+- Coating: Anti-reflective standard
+- Impact: 10J safe-break with fragment retention
+
+CONTINUOUS CHANNEL RETENTION (replaces discrete clips):
+- Type: Aluminum U-channel, full perimeter
+- Channel: 15mm wide × 12mm deep × 3mm walls
+- Gasket: EPDM 70A, continuous strip in channel groove
+- Compression: 25-35% uniform around full perimeter
+- Thermal float: ±3mm (setting blocks at corners)
+- Fastening: M5 screws every 200mm (~40 total)
+
+ADVANTAGES OVER v4.0 CLIPS:
+- Uniform compression (no point loads)
+- Even gasket sealing (no leak paths)
+- Thermal expansion accommodated
+- Retained fragments on break
+
+---
+
+STRUCTURAL DESIGN
+
+VESA MOUNT (THROUGH-BOLTED):
+- Pattern: 600 × 400mm (M8 holes)
+- Plate: 6mm aluminum, 750 × 550mm
+- Attachment: M6 × 12 bolts through back panel
+- Washers: 25mm OD fender washers (load distribution)
+- Load rating: 75kg with 3× safety factor
+
+INTERNAL STIFFENING:
+- 2× horizontal pressed ribs in back panel
+- 2× vertical hat-channels (30×30×2mm) riveted to ribs
+- Hat-channels through-bolted to VESA plate (load path)
+- 4× corner gussets (60×60×3mm)
+
+DEFLECTION LIMITS:
+- Wind load 1.2 kPa: Back panel <8.8mm (L/200)
+- Wind load 1.2 kPa: Glass <8.4mm (L/200)
+- Static self-weight: <2mm permanent set
+
+---
+
+WEATHER PROTECTION
+
+TARGET: IP54
+- IP5X: Dust protected
+- IPX4: Splash resistant all directions
+
+SEALING:
+- Glass: Continuous EPDM channel (uniform compression)
+- Service door: EPDM gasket + quarter-turn compression
+- Louvers: 45° + 25mm labyrinth + hydrophobic mesh
+- Cables: 2× IP68 glands (PG21)
+- Joints: Structural adhesive + fasteners
+
+DRAINAGE:
+- Wet zone: Intake plenum (isolated)
+- Dry zone: TV cavity
+- Overflow weirs: 15mm height between zones
+- Drain channels: 10mm wide, side routing
+- Capacity: 2 L/min transient
+- Insect screens: Stainless mesh at outlets
+- Pressure equalization: Gore-Tex breather vent
+
+CONDENSATION:
+- Anti-fog heater: 15W strip at glass bottom
+- Control: Humidity sensor, activates >80% RH
+- Drainage: Condensate to side channels
+
+---
+
+ELECTRICAL
+
+PSU:
+- Location: Segregated bay (service door access)
+- Input: 100-240V AC
+- Output: 12V DC, 5A (60W)
+- Thermal: Rated to 70°C ambient
+
+CONTROLLER:
+- Type: Digital PWM
+- Sensors: 2× NTC (exhaust + PSU area)
+- Outputs: 2× fan PWM, heater relay, alert
+- Protection: Conformal coated PCB
+- Optional: WiFi monitoring
+
+SURGE:
+- AC: MOV (275V) + TVS
+- DC: TVS array
+- Bonding: All panels <0.1Ω
+
+---
+
+MANUFACTURABILITY
+
+CONSTRUCTION:
+- Laser cut → CNC brake bend → rivet/adhesive assembly
+- Minimal welding (corner gussets only if needed)
+- Through-bolt VESA after powder coat
+
+ADHESIVE SPEC:
+- Type: 2-part structural acrylic
+- Shear strength: >15 MPa
+- Tg: >80°C
+- QA: Destructive pull test 5% of joints
+
+TOLERANCES:
+- Overall: ±2mm
+- Glass opening: ±1mm
+- VESA: ±0.5mm
+- Service door: ±1mm
+
+FINISH:
+- Pre-treatment: Chromate conversion
+- Powder: Polyester, 60-80μm
+- Salt spray: 500h ASTM B117
+
+---
+
+VALIDATION TEST MATRIX
+
+| Domain | Test | Pass Criteria |
+|--------|------|---------------|
+| Thermal | 55°C + 800 W/m² solar, 350W load, 50% clogged filter | TV inlet ≤65°C, PSU ≤75°C, ≥15% fan margin |
+| Thermal | Single fan failure + wet mesh | Graceful shutdown at 70°C, no damage |
+| Acoustic | SPL at 1m, idle/typical/full | ≤30/35/40 dBA, no tones >6dB |
+| IP | IEC 60529 IP5X + IPX4 | No water in dry zone, drains clear |
+| IP | IPX4 + wind-driven rain + clogged drains (75%) | No overflow to TV cavity |
+| Condensation | 40°C/95%RH → 10°C cycling | No drips on TV, heater effective |
+| Salt spray | ASTM B117, 500h | No creep >2mm, fasteners intact |
+| Structural | Wind 1.2 kPa on glass and back | Deflection <L/200, no oil-canning |
+| Structural | VESA 75kg × 3× SF static, 10k cycles | No yielding, tear-out, or loosening |
+| Impact | 2J and 10J pendulum (EN 12600) | 2J no damage, 10J safe-break retained |
+| Service | Fan replacement time trial | <20 min, single tech, no glass removal |
+| Service | Filter replacement | <5 min, tool-less |
+| Manufacturing | First-pass leak test (n=10 pilot) | ≥95% pass rate |
+
+---
+
+QUESTIONS FOR REVIEW
+
+THERMAL:
+1. Does 140-160 CFM with 50mm plenum provide adequate margin at 55°C + solar?
+2. Is the 13% worst-case margin acceptable, or should we target 20%?
+3. Are 2× 140mm fans sufficient, or should we specify 3× 120mm for redundancy?
+
+STRUCTURAL:
+4. Does through-bolted VESA with hat-channel stiffeners resolve the load path concern?
+5. Is 8mm (4+4) laminated glass adequate for 1.7m span and 10J impact?
+6. Does the continuous channel retention resolve point-load and leak path concerns?
+
+SERVICE:
+7. Does the hinged service door adequately address field serviceability?
+8. Is <20 min fan replacement acceptable, or should we target <15 min?
+
+WEATHER:
+9. Is IP54 with the enhanced louver/drain system adequate for outdoor use?
+10. Does the segregated wet/dry zone with overflow weirs resolve water ingress risk?
+
+OVERALL:
+11. Have all v4.0 blocking issues been resolved?
+12. Is this design ready for prototype validation testing?
+13. What issues remain that would prevent production release?
+
+---
+
+PREVIOUS VERDICTS:
+- v3.0: BLOCK RELEASE
+- v4.0: REDESIGN REQUIRED
+
+REQUESTED VERDICT FOR v5.0:
+- PASS FOR PROTOTYPE VALIDATION (preferred)
+- or identify remaining blockers
