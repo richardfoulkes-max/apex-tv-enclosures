@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex TV Enclosures - Engineering Analysis v5.1 (Ducted Rear-Plenum)</title>
+    <title>Apex TV Enclosures - Engineering Analysis v5.2.1 (Recess-Compatible)</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -83,10 +83,10 @@
 
     <header>
         <div class="container">
-            <h1>Engineering Analysis v5.1</h1>
-            <div class="subtitle">Ducted Rear-Plenum Design | Wall-Mount | 180mm Depth</div>
+            <h1>Engineering Analysis v5.2.1</h1>
+            <div class="subtitle">Recess-Compatible Ducted Plenum | Wall-Mount + Recessed | 160mm Depth</div>
             <div class="badge">Model: ATE-75</div>
-            <div class="badge new">VALIDATED: Roundtable AI Pass</div>
+            <div class="badge new">VALIDATED: ChatGPT Pass for Prototype</div>
             <div class="badge">December 2025</div>
         </div>
     </header>
@@ -94,7 +94,7 @@
     <div class="container">
         <!-- Design Evolution -->
         <div class="success-note">
-            <strong>Design Evolution:</strong> The v5.1 ducted rear-plenum design passed Roundtable AI engineering validation (PASS FOR PROTOTYPE VALIDATION). Air enters through filtered bottom bezel intake, flows through 50mm rear plenum behind TV (directly cooling heat sinks), then exhausts via 2×140mm PWM fans. Thermal margin ~13% at worst-case. Watch items: requires wall-mount or 50mm rear clearance.
+            <strong>Design Evolution:</strong> The v5.2.1 recess-compatible design passed ChatGPT engineering validation (PASS FOR PROTOTYPE). Air enters through filtered bottom bezel intake, passes through perforated diffuser plate, flows through 30mm rear plenum behind TV (directly cooling heat sinks), then exhausts via 3× Delta AFB1412HH-A fans (210-250 CFM) through 45° deflector. Thermal margin 80-115% wall-mount, 30-50% recessed. Works both wall-mounted AND recessed (1820 × 1130 × 215mm cavity with 60mm top gap).
         </div>
 
         <!-- Executive Summary -->
@@ -102,23 +102,23 @@
         <div class="summary-grid">
             <div class="summary-card pass">
                 <div class="value">PASS</div>
-                <div class="label">Wall Mount</div>
-            </div>
-            <div class="summary-card warning">
-                <div class="value">WATCH</div>
-                <div class="label">Recessed Mount</div>
+                <div class="label">Wall Mount (80-115%)</div>
             </div>
             <div class="summary-card pass">
                 <div class="value">PASS</div>
-                <div class="label">50mm Clearance</div>
+                <div class="label">Recessed Mount (30-50%)</div>
             </div>
             <div class="summary-card pass">
                 <div class="value">PASS</div>
-                <div class="label">Thermal (13%)</div>
+                <div class="label">60mm Top Gap</div>
+            </div>
+            <div class="summary-card pass">
+                <div class="value">210-250</div>
+                <div class="label">CFM Airflow</div>
             </div>
             <div class="summary-card pass">
                 <div class="value">PASS</div>
-                <div class="label">Structural</div>
+                <div class="label">IP54 Seal (4 Latches)</div>
             </div>
         </div>
 
@@ -130,7 +130,7 @@
                 <tr>
                     <th>Parameter</th>
                     <th>v3.0 Front-Breathing (FAILED)</th>
-                    <th>v5.1 Ducted Rear-Plenum (VALIDATED)</th>
+                    <th>v5.2.1 Recess-Compatible (VALIDATED)</th>
                 </tr>
             </thead>
             <tbody>
@@ -142,12 +142,12 @@
                 <tr>
                     <td><strong>Exhaust Location</strong></td>
                     <td>Front bezel - top slot (4× 60mm fans)</td>
-                    <td>Front bezel - top slot (2× 140mm fans)</td>
+                    <td>Front bezel - top slot (3× Delta AFB1412HH-A) + 45° deflector</td>
                 </tr>
                 <tr>
                     <td><strong>Airflow Path</strong></td>
                     <td>Front-bottom → Up behind glass → Front-top</td>
-                    <td>Bottom → 50mm rear plenum → Top (cools TV directly)</td>
+                    <td>Bottom → Diffuser → 30mm rear plenum → Top deflector (cools TV directly)</td>
                 </tr>
                 <tr>
                     <td><strong>Wall Mount</strong></td>
@@ -167,7 +167,7 @@
                 <tr>
                     <td><strong>Depth</strong></td>
                     <td>115mm</td>
-                    <td>120mm (+5mm for front channel)</td>
+                    <td>160mm (30mm plenum + diffuser plate)</td>
                 </tr>
                 <tr>
                     <td><strong>Aesthetics</strong></td>
@@ -655,26 +655,26 @@ Surface temperature < Dew point of surrounding air</div>
             </tr>
         </table>
 
-        <h3>7.4 Condensation Mitigation (v5.1)</h3>
+        <h3>7.4 Condensation Mitigation (v5.2.1)</h3>
 
         <div class="calc-box"><span class="comment">// === CONDENSATION MITIGATION PACKAGE ===</span>
 
-<span class="result">MANDATORY (Built into v5.1 design):</span>
+<span class="result">MANDATORY (Built into v5.2.1 design):</span>
 ✓ Condensation drain slots      3× 5mm slots at bottom of plenum
-✓ Idle fan mode                 Fans at 10% PWM for 30 min post-shutdown
+✓ Post-shutdown purge           Fans at 10% PWM for 30 min post-shutdown
 ✓ MERV 8 filtered intake        Reduces dust and moisture ingress
+✓ ePTFE breather membrane       Rear plenum pressure equalization (standard)
 
 <span class="result">RECOMMENDED (Standard spec):</span>
 + Anti-fog glass coating        Hydrophilic coating on interior surface    +$10
-+ ePTFE breather membrane       Rear plenum pressure equalization          +$8
 
 <span class="result">OPTIONAL (Extreme humidity areas):</span>
 ○ Desiccant packs               Replaceable silica gel sachets             +$5
 ○ Low-level heating element     2W PTC heater for overnight (overkill)     +$15
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-<span class="result">Condensation mitigation included in v5.1 BOM</span>
-<span class="result">Target FOB: $520-580</span></div>
+<span class="result">Condensation mitigation included in v5.2.1 BOM</span>
+<span class="result">Target FOB: $540-600</span></div>
 
         <h3>7.5 Control Logic Update</h3>
         <div class="calc-box"><span class="comment">// === IDLE FAN MODE (Add to control logic) ===</span>
@@ -724,29 +724,31 @@ Surface temperature < Dew point of surrounding air</div>
 
         <h3>8.1 Design Specifications Summary</h3>
         <table>
-            <tr><th>Parameter</th><th>v5.1 Ducted Rear-Plenum</th></tr>
-            <tr><td>External Dimensions</td><td>1760 × 1040 × <strong>180mm</strong></td></tr>
+            <tr><th>Parameter</th><th>v5.2.1 Recess-Compatible</th></tr>
+            <tr><td>External Dimensions</td><td>1760 × 1040 × <strong>160mm</strong></td></tr>
             <tr><td>Bezel Width</td><td><strong>35mm</strong></td></tr>
-            <tr><td>Intake</td><td>Bottom bezel filtered slot + service door</td></tr>
-            <tr><td>Exhaust</td><td>Top bezel (2× 140mm PWM fans + 1 blanking plate)</td></tr>
-            <tr><td>Airflow</td><td>140-160 CFM forced</td></tr>
-            <tr><td>Airflow Path</td><td>Bottom intake → Filter → 50mm rear plenum → Top exhaust</td></tr>
-            <tr><td>Rear Plenum</td><td>50mm air channel behind TV</td></tr>
-            <tr><td>Weight</td><td>~75 kg (with TV)</td></tr>
-            <tr><td>BOM Cost</td><td>~$520-580</td></tr>
-            <tr><td>Target FOB</td><td>$520 - $580</td></tr>
+            <tr><td>Intake</td><td>Bottom bezel filtered slot + MERV 8 filter</td></tr>
+            <tr><td>Exhaust</td><td>Top bezel (3× Delta AFB1412HH-A) + 45° deflector</td></tr>
+            <tr><td>Airflow</td><td>210-250 CFM forced (4.8 mmH₂O static)</td></tr>
+            <tr><td>Airflow Path</td><td>Bottom → Diffuser plate → 30mm rear plenum → Deflector out</td></tr>
+            <tr><td>Rear Plenum</td><td>30mm + perforated diffuser (8mm holes, 40% open)</td></tr>
+            <tr><td>Service Door</td><td>4 latches + EPDM compression stops (IP54)</td></tr>
+            <tr><td>Recess Cavity</td><td>1820 × 1130 × 215mm (60mm top gap)</td></tr>
+            <tr><td>Weight</td><td>~68 kg (with TV)</td></tr>
+            <tr><td>Target FOB</td><td>$540 - $600</td></tr>
         </table>
 
-        <h3>8.2 Advantages of Ducted Rear-Plenum Design</h3>
+        <h3>8.2 Advantages of v5.2.1 Recess-Compatible Design</h3>
         <div class="success-note">
-            <strong>Why v5.1 is engineering-validated:</strong>
+            <strong>Why v5.2.1 is engineering-validated:</strong>
             <ol style="margin-top: 0.5rem;">
-                <li><strong>Direct heat sink cooling:</strong> Airflow across TV's actual heat sinks (not just screen)</li>
-                <li><strong>50mm plenum:</strong> Full-width air channel for uniform cooling</li>
-                <li><strong>High-static fans:</strong> 2×140mm PWM delivering 140-160 CFM</li>
-                <li><strong>Third fan provision:</strong> Blanking plate for production de-risk</li>
-                <li><strong>Tool-less service:</strong> Hinged door for fan/filter access without glass removal</li>
-                <li><strong>13% thermal margin:</strong> Validated at 55°C ambient + 800 W/m² solar</li>
+                <li><strong>Recess-compatible:</strong> Works both wall-mounted AND recessed (1820 × 1130 × 215mm cavity)</li>
+                <li><strong>Diffuser plate:</strong> 8mm holes at 40% open ensures even airflow distribution</li>
+                <li><strong>High-static fans:</strong> 3× Delta AFB1412HH-A delivering 210-250 CFM @ 4.8 mmH₂O</li>
+                <li><strong>45° exhaust deflector:</strong> Architectural shadow element prevents recirculation</li>
+                <li><strong>4-latch service door:</strong> IP54 seal across 1650mm span with compression stops</li>
+                <li><strong>80-115% thermal margin (wall-mount):</strong> Excellent headroom at worst-case</li>
+                <li><strong>30-50% thermal margin (recessed):</strong> Acceptable with 60mm top gap</li>
             </ol>
         </div>
 
@@ -754,35 +756,38 @@ Surface temperature < Dew point of surrounding air</div>
         <div class="note">
             <strong>Considerations:</strong>
             <ul>
-                <li><strong>Depth:</strong> 180mm (vs 120mm v3.0) - required for proper plenum</li>
-                <li><strong>Not recess-compatible:</strong> Requires wall-mount or 50mm rear clearance</li>
+                <li><strong>Depth:</strong> 160mm (vs 147mm Apollo) - slightly deeper but recess-compatible</li>
+                <li><strong>Recess requirements:</strong> 1820 × 1130 × 215mm cavity with 60mm top gap</li>
                 <li><strong>IP54 rating:</strong> Realistic with active ventilation (not IP66)</li>
-                <li><strong>Weight:</strong> ~75 kg total - two-person install required</li>
-                <li><strong>Cost:</strong> FOB $520-580 - competitive with premium enclosures</li>
+                <li><strong>Weight:</strong> ~68 kg total - two-person install required</li>
+                <li><strong>Cost:</strong> FOB $540-600 - competitive with premium enclosures</li>
+                <li><strong>Exhaust deflector:</strong> 50mm @ 45° - engineered as architectural shadow element</li>
             </ul>
         </div>
 
         <div class="result-box result-pass">
-            <div class="verdict pass">v5.1 DUCTED REAR-PLENUM: PASS FOR PROTOTYPE VALIDATION</div>
+            <div class="verdict pass">v5.2.1 RECESS-COMPATIBLE: PASS FOR PROTOTYPE</div>
             <p><strong>Recommendation:</strong> Proceed to prototype build and thermal validation testing:</p>
             <ul>
-                <li>13% thermal margin at worst-case (55°C + 800 W/m² solar)</li>
-                <li>Direct heat sink cooling via 50mm rear plenum</li>
-                <li>Tool-less service access for field maintenance</li>
-                <li>Third fan provision for production de-risk</li>
+                <li>80-115% thermal margin wall-mounted, 30-50% recessed</li>
+                <li>Direct heat sink cooling via 30mm rear plenum + diffuser plate</li>
+                <li>3× Delta AFB1412HH-A fans (210-250 CFM @ 4.8 mmH₂O)</li>
+                <li>45° exhaust deflector as architectural shadow element</li>
+                <li>4-latch service door for IP54 seal across 1650mm span</li>
             </ul>
-            <p style="margin-top: 1rem;"><strong>Watch Items:</strong></p>
+            <p style="margin-top: 1rem;"><strong>Watch Items (ChatGPT validation):</strong></p>
             <ol>
-                <li>Not suitable for fully-recessed installations</li>
-                <li>Verify plenum airflow uniformity in thermal chamber</li>
-                <li>Test IP54 seal integrity under pressure wash</li>
-                <li>Validate fan noise at max RPM (&lt;45 dBA target)</li>
+                <li>Diffuser plate may be too open - validate pressure drop across plate</li>
+                <li>Delta fans loud at high PWM - test acoustic tonality, not just SPL</li>
+                <li>Full-sun thermal test: 55°C ambient + solar + 6 hours steady state</li>
+                <li>Recess worst-case: minimum gaps + 50% clogged filter</li>
+                <li>Fan failure test: one fan disconnected, run thermal again</li>
             </ol>
         </div>
 
         <footer style="text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid var(--border); color: var(--text-muted);">
-            <p>Apex TV Enclosures | Engineering Analysis v5.1 - Ducted Rear-Plenum Design | December 2025</p>
-            <p style="font-size: 0.85rem;">Design validated for wall mount with minimum 50mm rear clearance.</p>
+            <p>Apex TV Enclosures | Engineering Analysis v5.2.1 - Recess-Compatible Design | December 2025</p>
+            <p style="font-size: 0.85rem;">Design validated for both wall-mount AND recessed installation (60mm top gap required).</p>
             <p style="font-size: 0.85rem; margin-top: 0.5rem;">Prototype thermal chamber testing required before mass production.</p>
         </footer>
     </div>

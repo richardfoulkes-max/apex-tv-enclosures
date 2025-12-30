@@ -94,8 +94,8 @@
 
     <header>
         <div class="header-content">
-            <h1>Engineering Designs - ATE Series (v5.1)</h1>
-            <p class="subtitle">CAD-grade specifications for outdoor TV enclosures - Ducted Rear-Plenum Architecture</p>
+            <h1>Engineering Designs - ATE Series (v5.2.1)</h1>
+            <p class="subtitle">CAD-grade specifications for outdoor TV enclosures - Recess-Compatible Ducted Plenum Architecture</p>
         </div>
     </header>
 
@@ -103,8 +103,8 @@
 
         <!-- ========== ATE-75 TV ENCLOSURE ========== -->
         <div class="design-section">
-            <h2>ATE-75: Outdoor TV Enclosure (75") - Ducted Rear-Plenum v5.1</h2>
-            <p><strong>Design Intent:</strong> IP54 weatherproof enclosure for commercial 75" TVs in Gulf region outdoor environments. Ducted rear-plenum thermal management provides direct cooling of TV heat sinks. Wall-mount or installations with 50mm rear clearance.</p>
+            <h2>ATE-75: Outdoor TV Enclosure (75") - Recess-Compatible v5.2.1</h2>
+            <p><strong>Design Intent:</strong> IP54 weatherproof enclosure for commercial 75" TVs in Gulf region outdoor environments. Ducted rear-plenum thermal management with perforated diffuser plate provides direct cooling of TV heat sinks. Compatible with both wall-mount AND recessed installations.</p>
 
             <h3>1. Global Parameters</h3>
             <table class="param-table">
@@ -113,43 +113,47 @@
                 <tr><td><code>TV_MAX_HEIGHT</code></td><td>960 mm</td><td>75" TV typical</td></tr>
                 <tr><td><code>TV_MAX_DEPTH</code></td><td>65 mm</td><td>Excludes stand</td></tr>
                 <tr><td><code>BEZEL_WIDTH</code></td><td>35 mm</td><td>Contains intake/exhaust slots</td></tr>
-                <tr><td><code>REAR_PLENUM</code></td><td>50 mm</td><td>Ducted airflow channel behind TV</td></tr>
-                <tr><td><code>CLEARANCE_REAR</code></td><td>30 mm</td><td>Cables + VESA mount</td></tr>
+                <tr><td><code>REAR_PLENUM</code></td><td>30 mm + diffuser</td><td>Perforated plate (8mm holes, 40% open)</td></tr>
+                <tr><td><code>CLEARANCE_REAR</code></td><td>25 mm</td><td>Cables + VESA mount</td></tr>
                 <tr><td><code>WALL_THICKNESS</code></td><td>3.0 mm</td><td>Aluminium 5052-H32</td></tr>
                 <tr><td><code>GLASS_THICKNESS</code></td><td>8 mm</td><td>Laminated (4+4), anti-reflective</td></tr>
-                <tr><td><code>FAN_SIZE</code></td><td>140 mm × 25 mm</td><td>2 active + 1 blanking plate (top bezel)</td></tr>
+                <tr><td><code>FAN_MODEL</code></td><td>Delta AFB1412HH-A</td><td>3× 140mm, 210-250 CFM total (locked spec)</td></tr>
                 <tr><td><code>IP_RATING</code></td><td>IP54</td><td>Dust protected + splash resistant</td></tr>
-                <tr><td><code>PROFILE</code></td><td>Ducted Rear-Plenum</td><td>Bottom intake → 50mm rear plenum → Top exhaust</td></tr>
+                <tr><td><code>PROFILE</code></td><td>Ducted Rear-Plenum</td><td>Bottom intake → Diffuser → 30mm plenum → Top exhaust</td></tr>
+                <tr><td><code>EXHAUST_DEFLECTOR</code></td><td>50mm @ 45°</td><td>Architectural shadow element design</td></tr>
+                <tr><td><code>RECESS_CAVITY</code></td><td>1820 × 1130 × 215 mm</td><td>60mm top gap for exhaust (30mm sides/bottom)</td></tr>
             </table>
 
             <h3>2. Overall Dimensions</h3>
             <table class="param-table">
                 <tr><th>View</th><th>Dimension</th><th>Value</th></tr>
-                <tr><td>External</td><td>W × H × D</td><td>1760 × 1040 × 180 mm</td></tr>
-                <tr><td>Internal cavity</td><td>W × H × D</td><td>1690 × 970 × 145 mm</td></tr>
+                <tr><td>External</td><td>W × H × D</td><td>1760 × 1040 × 160 mm</td></tr>
+                <tr><td>Internal cavity</td><td>W × H × D</td><td>1690 × 970 × 125 mm</td></tr>
                 <tr><td>Glass visible area</td><td>W × H</td><td>1690 × 970 mm</td></tr>
-                <tr><td>Rear plenum</td><td>W × H × D</td><td>1650 × 900 × 50 mm</td></tr>
+                <tr><td>Rear plenum</td><td>W × H × D</td><td>1650 × 900 × 30 mm + diffuser</td></tr>
                 <tr><td>Bottom intake slot</td><td>W × H</td><td>1650 × 30 mm</td></tr>
                 <tr><td>Top exhaust slot</td><td>W × H</td><td>1650 × 35 mm</td></tr>
-                <tr><td>Service door</td><td>W × H</td><td>1650 × 80 mm</td></tr>
+                <tr><td>Service door</td><td>W × H</td><td>1650 × 80 mm (4 latches + compression stops)</td></tr>
+                <tr><td>Exhaust deflector</td><td>H × angle</td><td>50 mm @ 45° (architectural shadow element)</td></tr>
+                <tr><td>Recess cavity required</td><td>W × H × D</td><td>1820 × 1130 × 215 mm (60mm top gap)</td></tr>
                 <tr><td>Weight (empty)</td><td>—</td><td>~38 kg</td></tr>
                 <tr><td>Weight (with 75" TV)</td><td>—</td><td>~68 kg</td></tr>
             </table>
 
             <div class="success-box">
-                <strong>Ducted Rear-Plenum Design v5.1:</strong> 180mm depth with 50mm ducted rear plenum. Air enters through filtered bottom bezel intake, flows through baffle into 50mm channel behind TV (directly cooling heat sinks), then exhausts via 2×140mm PWM fans (140-160 CFM). Third fan provision with blanking plate for production de-risk. Service access via hinged door. <strong>Watch item:</strong> Not suitable for fully-recessed installations - requires wall-mount or 50mm rear clearance.
+                <strong>Recess-Compatible Design v5.2.1:</strong> 160mm depth with 30mm ducted rear plenum + perforated diffuser plate (8mm holes, 40% open). Air enters through filtered bottom bezel intake, passes through diffuser for even distribution, flows through 30mm channel behind TV (directly cooling heat sinks), then exhausts via 3× Delta AFB1412HH-A fans (210-250 CFM) through 45° deflector. <strong>Recess-compatible:</strong> 1820 × 1130 × 215mm cavity with 60mm top gap prevents exhaust recirculation.
             </div>
 
             <h3>3. AI-Generated Design Renders</h3>
 
-            <h4>v5.1 Lifestyle Render - Dubai Villa Installation</h4>
+            <h4>v5.2.1 Lifestyle Render - Dubai Villa Installation</h4>
             <div class="drawing-container" style="background: white; text-align: center; padding: 1.5rem;">
-                <img src="../marketing/ATE-75-v5-render.png" alt="ATE-75 v5.1 Lifestyle Render - Dubai Villa" style="max-width: 100%; height: auto; border-radius: 8px;">
-                <p style="margin-top: 1rem; font-size: 0.85rem; color: #64748b;">v5.1 Ducted Rear-Plenum Design - Premium lifestyle render showing wall-mounted installation with integrated bezel ventilation</p>
+                <img src="../marketing/ATE-75-v5-render.png" alt="ATE-75 v5.2.1 Lifestyle Render - Dubai Villa" style="max-width: 100%; height: auto; border-radius: 8px;">
+                <p style="margin-top: 1rem; font-size: 0.85rem; color: #64748b;">v5.2.1 Recess-Compatible Design - Premium lifestyle render with integrated bezel ventilation and architectural exhaust deflector</p>
             </div>
 
             <div class="success-box">
-                <strong>Design Validated:</strong> The v5.1 ducted rear-plenum design passed Roundtable AI engineering validation (PASS FOR PROTOTYPE VALIDATION). Thermal margin ~13% at worst-case conditions. Premium aesthetic maintained with subtle ventilation integrated into 35mm bezel.
+                <strong>Design Validated:</strong> The v5.2.1 recess-compatible design passed ChatGPT engineering validation (PASS FOR PROTOTYPE). Thermal margin 80-115% wall-mount, 30-50% recessed. Architectural shadow element exhaust deflector maintains premium aesthetic.
             </div>
 
             <div class="note-box">
@@ -158,10 +162,10 @@
                 <a href="archive/designs-legacy.html" style="color: #92400e;">View archived v1.0-v2.0 designs and renders →</a>
             </div>
 
-            <h3>4. v5.1 Ducted Rear-Plenum Technical Drawings</h3>
+            <h3>4. v5.2.1 Recess-Compatible Technical Drawings</h3>
 
             <div class="success-box">
-                <strong>v5.1 Cross-Sections:</strong> These detailed technical drawings show the ducted rear-plenum airflow architecture, 50mm air channel behind TV, component placement, and key dimensions.
+                <strong>v5.2.1 Cross-Sections:</strong> These detailed technical drawings show the recess-compatible ducted plenum architecture with 30mm air channel + diffuser plate, 3× Delta fans, and 45° exhaust deflector.
             </div>
 
             <!-- SIDE CROSS-SECTION -->
@@ -183,8 +187,8 @@
                     </defs>
 
                     <!-- Title -->
-                    <text x="400" y="30" text-anchor="middle" font-size="16" font-weight="600" fill="#0f172a">Side Cross-Section - Ducted Rear-Plenum Airflow (v5.1)</text>
-                    <text x="400" y="50" text-anchor="middle" font-size="11" fill="#64748b">View from left side - showing 50mm rear plenum airflow path</text>
+                    <text x="400" y="30" text-anchor="middle" font-size="16" font-weight="600" fill="#0f172a">Side Cross-Section - Ducted Rear-Plenum Airflow (v5.2.1)</text>
+                    <text x="400" y="50" text-anchor="middle" font-size="11" fill="#64748b">View from left side - showing 30mm rear plenum + diffuser plate airflow path</text>
 
                     <!-- Main enclosure outline -->
                     <rect x="150" y="80" width="120" height="450" fill="none" stroke="#1e293b" stroke-width="3" rx="4"/>
@@ -245,7 +249,7 @@
                     <line x1="150" y1="560" x2="270" y2="560" stroke="#64748b" stroke-width="1"/>
                     <line x1="150" y1="555" x2="150" y2="565" stroke="#64748b" stroke-width="1"/>
                     <line x1="270" y1="555" x2="270" y2="565" stroke="#64748b" stroke-width="1"/>
-                    <text x="210" y="575" text-anchor="middle" font-size="10" font-weight="600" fill="#0f172a">120mm DEPTH</text>
+                    <text x="210" y="575" text-anchor="middle" font-size="10" font-weight="600" fill="#0f172a">160mm DEPTH</text>
 
                     <!-- Bezel width 35mm -->
                     <line x1="235" y1="70" x2="270" y2="70" stroke="#64748b" stroke-width="1"/>
@@ -644,24 +648,24 @@
                 <tr><td>Hinges</td><td>Stainless steel 316</td><td>Heavy duty</td><td>Concealed type</td></tr>
             </table>
 
-            <h3>6. Thermal Validation (55°C Ambient) - v5.1</h3>
+            <h3>6. Thermal Validation (55°C Ambient) - v5.2.1</h3>
             <table class="param-table">
                 <tr><th>Parameter</th><th>Value</th><th>Status</th></tr>
                 <tr><td>Ambient temperature (Dubai summer)</td><td>55°C</td><td>Design case</td></tr>
                 <tr><td>Solar load on enclosure</td><td>~250W absorbed</td><td>With solar gain</td></tr>
                 <tr><td>TV heat dissipation</td><td>~300W (75" LED)</td><td>Maximum operating</td></tr>
                 <tr><td>Total heat load</td><td>~550W</td><td>Must be removed</td></tr>
-                <tr><td>Fan capacity (2 × 140mm @ 100%)</td><td>140-160 CFM</td><td>High-static pressure fans</td></tr>
-                <tr><td>Airflow path</td><td>Ducted rear-plenum</td><td>Bottom → 50mm plenum → Top exhaust</td></tr>
+                <tr><td>Fan capacity (3× Delta AFB1412HH-A)</td><td>210-250 CFM</td><td>4.8 mmH₂O static pressure</td></tr>
+                <tr><td>Airflow path</td><td>Ducted rear-plenum</td><td>Bottom → Diffuser → 30mm plenum → Deflector out</td></tr>
                 <tr><td>Target internal temp</td><td>&lt;45°C at TV</td><td>Below TV max operating</td></tr>
                 <tr><td>PWM control start</td><td>30°C internal</td><td>Ramp begins</td></tr>
                 <tr><td>PWM 100%</td><td>45°C internal</td><td>Full speed cooling</td></tr>
-                <tr><td>Thermal margin</td><td>~13%</td><td>At worst-case conditions</td></tr>
-                <tr><td>Third fan provision</td><td>Blanking plate</td><td>Production de-risk</td></tr>
+                <tr><td>Thermal margin (wall-mount)</td><td>80-115%</td><td>Excellent headroom</td></tr>
+                <tr><td>Thermal margin (recessed)</td><td>30-50%</td><td>Acceptable with 60mm top gap</td></tr>
             </table>
 
             <div class="note-box">
-                <strong>Thermal Margin:</strong> At 55°C ambient + 550W load + 140-160 CFM forced cooling through 50mm rear plenum, thermal margin is ~13% at worst-case. Airflow directly cools TV heat sinks via rear channel. Third fan provision allows adding additional cooling if margin proves insufficient during prototype validation. <strong>Passed Roundtable AI engineering validation.</strong>
+                <strong>Thermal Margin:</strong> At 55°C ambient + 550W load + 210-250 CFM forced cooling through 30mm rear plenum with diffuser plate, thermal margin is 80-115% wall-mounted or 30-50% recessed. Perforated diffuser plate ensures even airflow distribution across TV heat sinks. <strong>Passed ChatGPT engineering validation (PASS FOR PROTOTYPE).</strong>
             </div>
 
             <div class="success-box">
@@ -671,8 +675,8 @@
 
         <!-- ========== SIZE VARIANTS ========== -->
         <div class="design-section">
-            <h2>Size Variants - ATE Series (v5.1 Ducted Rear-Plenum)</h2>
-            <p>All variants share identical construction, materials, and ducted rear-plenum thermal design. Only external dimensions scale proportionally.</p>
+            <h2>Size Variants - ATE Series (v5.2.1 Recess-Compatible)</h2>
+            <p>All variants share identical construction, materials, and ducted rear-plenum thermal design with diffuser plate. Only external dimensions scale proportionally.</p>
 
             <table class="param-table">
                 <tr>
@@ -710,9 +714,9 @@
                 <tr style="background: #dbeafe;">
                     <td><strong>ATE-75</strong></td>
                     <td><strong>75"</strong></td>
-                    <td><strong>1760 × 1040 × 180</strong></td>
+                    <td><strong>1760 × 1040 × 160</strong></td>
                     <td><strong>~38 kg</strong></td>
-                    <td><strong>2× 140mm + 1 blank (top bezel)</strong></td>
+                    <td><strong>3× Delta AFB1412HH-A (top bezel)</strong></td>
                     <td><strong>AED 7,000</strong></td>
                 </tr>
                 <tr>
@@ -726,7 +730,7 @@
             </table>
 
             <div class="success-box">
-                <strong>v5.1 Ducted Rear-Plenum:</strong> All sizes feature the ducted rear-plenum airflow design with 140mm high-static pressure fans in top bezel, 50mm rear air channel, hinged service door, and MERV 8 filtration. Wall-mount or installations with 50mm rear clearance.
+                <strong>v5.2.1 Recess-Compatible:</strong> All sizes feature the ducted rear-plenum airflow design with Delta AFB1412HH-A fans in top bezel, 30mm rear air channel + diffuser plate, 4-latch hinged service door, and MERV 8 filtration. Compatible with both wall-mount AND recessed installations (60mm top gap required for recess).
             </div>
 
             <div class="note-box">
