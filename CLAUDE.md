@@ -23,7 +23,7 @@ https://github.com/richardfoulkes-max/apex-tv-enclosures (private)
 
 ---
 
-## Current Design State (v5.0 Ducted Rear Plenum)
+## Current Design State (v5.2.1 Recess-Compatible - VALIDATED)
 
 ### Design Version History
 | Version | Architecture | Status | Notes |
@@ -32,7 +32,10 @@ https://github.com/richardfoulkes-max/apex-tv-enclosures (private)
 | v2.0 | Rear exhaust, 115mm depth | ARCHIVED | IP66 upgrade |
 | v3.0 | Front-breathing, 120mm depth | FAILED | Roundtable AI: BLOCK RELEASE |
 | v4.0 | Ducted rear plenum, 150mm depth | FAILED | Roundtable AI: REDESIGN REQUIRED |
-| **v5.0** | **Ducted rear plenum, 180mm depth** | **CURRENT** | Awaiting validation |
+| v5.0 | Ducted rear plenum, 180mm depth | VALIDATED | Roundtable AI: PASS FOR PROTOTYPE |
+| v5.1 | v5.0 + 3rd fan provision | SUPERSEDED | Production de-risk update |
+| v5.2 | 160mm depth, 3 active fans | SUPERSEDED | Recess-compatible base design |
+| **v5.2.1** | **v5.2 + engineering fixes** | **VALIDATED** | ChatGPT: PASS FOR PROTOTYPE |
 
 ### Why v5.0? (Design Evolution via Roundtable AI)
 
@@ -54,35 +57,45 @@ https://github.com/richardfoulkes-max/apex-tv-enclosures (private)
 - **Through-bolted VESA** (not adhesive)
 - **Standard MERV 8 filter** (not optional)
 
-### v5.0 Key Specifications (ATE-75)
+**v5.2.1 Final Design (Recess-Compatible + Engineering Fixes):**
+- **160mm depth** (reduced from 180mm) to match Apollo cavity requirements
+- **30mm plenum + perforated diffuser plate** (8mm holes, 40% open)
+- **3× Delta AFB1412HH-A fans** delivering 210-250 CFM (locked model)
+- **60mm top gap** for recess (prevents exhaust recirculation)
+- **45° exhaust deflector** - architectural shadow element design
+- **4 latches + compression stops** on service door for IP54 seal
+- Works both wall-mounted AND recessed
+
+### v5.2.1 Key Specifications (ATE-75)
 | Parameter | Value | Notes |
 |-----------|-------|-------|
-| External dimensions | 1760 × 1040 × **180mm** | +30mm vs v4.0 |
-| Bezel width | 35mm | Contains intake/exhaust slots |
-| Rear plenum | **50mm** | Air channel behind TV |
-| Fans | **2× 140mm** IP55 PWM | 140-160 CFM system |
+| External dimensions | 1760 × 1040 × **160mm** | Recess-compatible |
+| Exhaust deflector | **50mm @ 45°** | Architectural shadow element |
+| Rear plenum | **30mm + diffuser** | Perforated plate equalizes flow |
+| Fans | **3× Delta AFB1412HH-A** | 210-250 CFM, 4.8 mmH₂O static |
 | Glass | **8mm laminated (4+4)** | Continuous channel retention |
-| Service door | 1650 × 80mm hinged | Tool-less fan/filter access |
+| Service door | 1650 × 80mm, **4 latches** | Compression stops for IP54 |
 | Filter | **MERV 8 standard** | Tool-less drawer |
 | VESA | Through-bolted, 6mm plate | 75kg @ 3× safety factor |
 | IP rating | IP54 | Realistic with ventilation |
+| **Recess cavity** | **1820 × 1130 × 215mm** | 60mm top gap |
 
-### Thermal Design (v5.0)
+### Thermal Design (v5.2.1)
 ```
-Air path: Front intake → Filter → Baffle → 50mm rear plenum →
-          Rises across TV back → Exits via 2×140mm fans
+Air path: Bottom intake → Filter → Diffuser plate → 30mm rear plenum →
+          Distributed across TV back → 3× Delta fans → Deflector out
 ```
-- **Target:** 140-160 CFM at 55°C ambient + solar
+- **Target:** 210-250 CFM at 55°C ambient + solar
 - **Heat load:** 550W (300W TV + 250W solar gain)
-- **Margin:** ~13% at worst-case, 20%+ at typical
+- **Margin:** ~80-115% wall-mount, 30-50% recess
 
-### BOM Summary (v5.0 - estimates)
-- **Target FOB:** $520-580
+### BOM Summary (v5.2.1 - estimates)
+- **Target FOB:** $540-600
 - **Retail:** AED 7,000 (~$1,900)
 
 ### File Structure
 ```
-website/                    ← Original website (needs v5.0 update)
+website/                    ← Website (needs v5.2 update)
 ├── designs.html
 ├── specification.html
 ├── bom-detailed.html
@@ -96,10 +109,14 @@ fusion-scripts/             ← 3D models
 ├── ATE-75-Enclosure.py     ← Fusion 360 Python script
 └── Fusion-360-Instructions.md
 
+internal/                   ← Internal analysis (not published)
+└── apollo-thermal-analysis.md ← Competitor thermal analysis
+
 manufacturer-rfq/           ← RFQ package for manufacturers
 ├── ATE-75-Specification.md     ← Original spec
 ├── ATE-75-Specification-v4.md  ← v4.0 (superseded)
-└── ATE-75-Specification-v5.md  ← v5.0 CURRENT
+├── ATE-75-Specification-v5.md  ← v5.0/5.1 (superseded)
+└── ATE-75-Specification-v5.2.md ← v5.2 CURRENT (recess-compatible)
 
 roundtable-ai/              ← Engineering validation briefs
 ├── product-brief.md            ← Market research brief
