@@ -57,39 +57,49 @@ https://github.com/richardfoulkes-max/apex-tv-enclosures (private)
 - **Through-bolted VESA** (not adhesive)
 - **Standard MERV 8 filter** (not optional)
 
-**v5.2.1 Final Design (Recess-Compatible + Engineering Fixes):**
+**v5.2.1 Design (Recess-Compatible + Engineering Fixes):**
 - **160mm depth** (reduced from 180mm) to match Apollo cavity requirements
 - **30mm plenum + perforated diffuser plate** (8mm holes, 40% open)
 - **3× Delta AFB1412HH-A fans** delivering 210-250 CFM (locked model)
 - **60mm top gap** for recess (prevents exhaust recirculation)
 - **45° exhaust deflector** - architectural shadow element design
 - **4 latches + compression stops** on service door for IP54 seal
-- Works both wall-mounted AND recessed
 
-### v5.2.1 Key Specifications (ATE-75)
+**v5.2.2 CURRENT Design (IP55 Upgrade):**
+- All v5.2.1 features PLUS:
+- **IP55 rated** - protected against low-pressure water jets (garden hose safe)
+- **Double-layer labyrinth baffles** on intake with drip edges
+- **75mm exhaust deflector** (was 50mm) with secondary lip
+- **Gasketed filter drawer** for IP55 seal
+- **Higher-durometer EPDM gaskets** throughout
+- **180-210 CFM** (reduced from 210-250 due to baffle restriction)
+
+### v5.2.2 Key Specifications (ATE-75)
 | Parameter | Value | Notes |
 |-----------|-------|-------|
 | External dimensions | 1760 × 1040 × **160mm** | Recess-compatible |
-| Exhaust deflector | **50mm @ 45°** | Architectural shadow element |
+| Exhaust deflector | **75mm @ 45° + secondary lip** | IP55 rain protection |
+| Intake baffles | **Double-layer labyrinth** | IP55 jet resistant |
 | Rear plenum | **30mm + diffuser** | Perforated plate equalizes flow |
-| Fans | **3× Delta AFB1412HH-A** | 210-250 CFM, 4.8 mmH₂O static |
+| Fans | **3× Delta AFB1412HH-A** | 180-210 CFM, 4.8 mmH₂O static |
 | Glass | **8mm laminated (4+4)** | Continuous channel retention |
-| Service door | 1650 × 80mm, **4 latches** | Compression stops for IP54 |
-| Filter | **MERV 8 standard** | Tool-less drawer |
+| Service door | 1650 × 80mm, **4 latches** | Higher-durometer EPDM |
+| Filter | **MERV 8 standard** | Gasketed drawer (IP55) |
 | VESA | Through-bolted, 6mm plate | 75kg @ 3× safety factor |
-| IP rating | IP54 | Realistic with ventilation |
+| **IP rating** | **IP55** | Jet resistant, hose-cleanable |
 | **Recess cavity** | **1820 × 1130 × 215mm** | 60mm top gap |
 
-### Thermal Design (v5.2.1)
+### Thermal Design (v5.2.2)
 ```
-Air path: Bottom intake → Filter → Diffuser plate → 30mm rear plenum →
-          Distributed across TV back → 3× Delta fans → Deflector out
+Air path: Bottom intake → Double-layer labyrinth → Filter → Diffuser plate →
+          30mm rear plenum → TV back → 3× Delta fans → 75mm Deflector out
 ```
-- **Target:** 210-250 CFM at 55°C ambient + solar
+- **Target:** 180-210 CFM at 55°C ambient + solar
 - **Heat load:** 550W (300W TV + 250W solar gain)
-- **Margin:** ~80-115% wall-mount, 30-50% recess
+- **Margin:** ~60-90% wall-mount, 20-40% recess (adequate)
 
-### BOM Summary (v5.2.1 - estimates)
+### BOM Summary (v5.2.2 - estimates)
+- **BOM Cost:** $638.63 (+$26 for IP55 upgrade)
 - **Target FOB:** $540-600
 - **Retail:** AED 7,000 (~$1,900)
 
