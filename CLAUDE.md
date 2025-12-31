@@ -151,6 +151,30 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
+### Session: 2025-12-31 (Night) - Business Development & CRM Expansion
+
+**New BD plan created (website/bd-plan.html):**
+- Free traffic sources: LinkedIn, Google Business Profile, directories, Instagram
+- LinkedIn strategy: 10-20 connections/week, 2-3 posts/week
+- Directory listings: Bayut, PropertyFinder, TradeArabia, Clutch
+- Outreach templates for LinkedIn, email, hotel inquiries
+- Weekly action schedule (~3 hours/week for $0 marketing budget)
+
+**CRM expanded with sales partners (website/partner-crm.html):**
+- Added 13 new contacts across 5 partner categories:
+  - AV Integrators: Central AV, Thomsun, JBK Controls
+  - Pool/Landscape: Faisal Movers, Desert Dreams, Gulf Landscaping
+  - Hospitality: Hotel Store ME, HoReCa Trade
+  - Interior Designers: Bishop Design, XBD Collective
+  - Property Developers: Emaar, Aldar, DAMAC
+- New badge colors for each partner type
+- Updated filter dropdown with all partner types
+- Fixed CSS class generation for multi-word types
+
+**Commit:** 28f96e5 - pushed to origin/main
+
+---
+
 ### Session: 2025-12-31 (Late PM) - Website Cleanup, Pricing, Audit System
 
 **Pricing updates:**
