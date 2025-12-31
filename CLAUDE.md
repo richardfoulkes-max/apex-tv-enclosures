@@ -151,6 +151,33 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
+### Session: 2025-12-31 (PM) - Industry Pages, FAQ, Competitor Analysis
+
+**New pages created:**
+- `website/industries/hotels-resorts.html` - Hospitality landing page
+- `website/industries/restaurants-bars.html` - F&B landing page with speaker recs
+- `website/industries/pool-areas.html` - Residential pool page with pricing, FAQ
+- `website/retail/faq.html` - Comprehensive FAQ (8 sections, 25+ questions)
+- `website/engineering-drawings.html` - Installation diagrams (hook & hang, cables, power)
+
+**Competitor analysis:**
+- Added Neptune TV to competitor-analysis.html (US-only, 50°C rating, 1-year warranty)
+- Added Display Shield deep-dive to competitor-comparison.html (5 product lines, dealer program)
+
+**Audio recommendations fixed:**
+- Neptune soundbar is $899 (AED 3,300), not AED 600-1,200 as previously listed
+- Neptune is US-only, doesn't ship internationally
+- Replaced with SYLVOX Elf S2 (IP65, ~AED 750-1,000) as mid-tier option
+
+**Other updates:**
+- Added FAQ link to retail nav and footer
+- Removed 30-day satisfaction guarantee (user decision - too risky for heavy products)
+- Added "Key Research Documents" section to CLAUDE.md
+
+**Commit:** 173c3d1 - pushed to origin/main
+
+---
+
 ### Session: 2025-12-31 - SVG Drawing Overhaul for v5.2.2 IP55
 
 **Complete rewrite of all 4 technical drawings in designs.html:**
