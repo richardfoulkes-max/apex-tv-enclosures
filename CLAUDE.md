@@ -105,7 +105,7 @@ Air path: Bottom intake → Double-layer labyrinth → Filter → Diffuser plate
 
 ### File Structure
 ```
-website/                    ← Website (needs v5.2 update)
+website/                    ← Website (v5.2.2 IP55 - fully updated)
 ├── designs.html
 ├── specification.html
 ├── bom-detailed.html
@@ -150,6 +150,46 @@ roundtable-ai/              ← Engineering validation briefs
 7. Open folder for user to verify before sending
 
 ## Recent Work History
+
+### Session: 2025-12-31 - SVG Drawing Overhaul for v5.2.2 IP55
+
+**Complete rewrite of all 4 technical drawings in designs.html:**
+
+1. **Side Cross-Section:** Rewrote to show v5.2.2 ducted rear-plenum architecture
+   - 30mm rear plenum with perforated diffuser plate
+   - 3× Delta AFB1412HH-A 140mm fans
+   - 75mm @ 45° exhaust deflector with secondary lip
+   - Double-layer labyrinth intake with drip edges
+   - Heat gradient visualization
+
+2. **Top Bezel Detail:** Updated for IP55 exhaust
+   - 3× Delta 140mm fans (was 4× 60mm Noctua)
+   - 75mm deflector with secondary lip
+   - Double-layer louvers for IP55
+   - 180-210 CFM (reduced for IP55 baffle restriction)
+
+3. **Bottom Bezel Detail:** Complete IP55 intake redesign
+   - Double-layer labyrinth baffles with drip edges
+   - Gasketed MERV 8 filter drawer with pull tab
+   - 316 SS insect mesh
+   - Water jet blocking diagram
+   - Tortuous airflow path visualization
+
+4. **Front View:** Updated to v5.2.2 appearance
+   - 8mm laminated glass callout
+   - 4 service door latches (was 2 cam locks)
+   - IP55 labyrinth intake appearance
+   - 75mm deflector shadow element
+
+**Also updated:**
+- All spec tables to v5.2.2 (180-210 CFM, IP55)
+- Materials & Fabrication table
+- Thermal Validation section
+- Size Variants header
+
+**Commits:** `23a6873` - pushed to origin/main
+
+---
 
 ### Session: 2025-12-29 (PM) - Major Engineering Redesign via Roundtable AI
 
