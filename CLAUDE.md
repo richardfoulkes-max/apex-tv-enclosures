@@ -151,6 +151,29 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
+### Session: 2025-12-31 (Late PM) - Website Cleanup, Pricing, Audit System
+
+**Pricing updates:**
+- 65": AED 9,000 → AED 8,500
+- 75": AED 12,000 → AED 10,500
+- Updated across: retail/index, retail/faq, industries/pool-areas, competitor-comparison
+
+**Claims cleanup:**
+- Added OLED TV warning (not suitable for outdoor - burn-in, not bright enough)
+- Removed "garden hose cleaning" claims → changed to "rain and splashes"
+- Removed competitor comparison language from customer-facing pages
+- Simplified TV warranty text ("work directly with manufacturer")
+
+**New audit system:**
+- Created `AUDIT.md` - comprehensive consistency checklist
+- Tracks: pricing, specs, claims, TV/speaker recs, contact info, page inventory
+- Includes checklist for common changes (pricing, specs, contact info)
+- Lists known inconsistencies to watch
+
+**Commits:** 173c3d1, b70090d, 2b304d8 - all pushed to origin/main
+
+---
+
 ### Session: 2025-12-31 (PM) - Industry Pages, FAQ, Competitor Analysis
 
 **New pages created:**
