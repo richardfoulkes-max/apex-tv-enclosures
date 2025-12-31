@@ -68,9 +68,11 @@
 
 | Recommendation | Current Guidance | Locations |
 |----------------|------------------|-----------|
-| Recommended brands | Samsung QLED, LG QNED | retail/faq.html |
+| Technology to use | LED, QLED, or QNED | retail/faq.html, industries/pool-areas.html |
 | Avoid | OLED TVs | retail/faq.html, industries/pool-areas.html |
 | Reason for avoiding OLED | Not bright enough, burn-in risk, heat degrades organic compounds | retail/faq.html |
+
+**Note:** Do NOT recommend specific brands - guide on technology types only.
 
 ---
 

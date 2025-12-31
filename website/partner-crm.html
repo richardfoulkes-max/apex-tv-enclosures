@@ -191,6 +191,11 @@
         .type-distributor { background: #dcfce7; color: #166534; }
         .type-contractor { background: #fef3c7; color: #92400e; }
         .type-supplier { background: #e0e7ff; color: #4338ca; }
+        .type-av-integrator { background: #fae8ff; color: #86198f; }
+        .type-pool-landscape { background: #ccfbf1; color: #0f766e; }
+        .type-hospitality { background: #fef3c7; color: #b45309; }
+        .type-designer { background: #fce7f3; color: #9d174d; }
+        .type-developer { background: #e0e7ff; color: #4f46e5; }
         .type-other { background: #f1f5f9; color: #64748b; }
 
         /* Filters */
@@ -450,9 +455,13 @@
                     <select class="form-select" id="typeFilter" style="width: 150px;" onchange="renderPartners()">
                         <option value="">All Types</option>
                         <option value="Fabricator">Fabricator</option>
+                        <option value="AV Integrator">AV Integrator</option>
+                        <option value="Pool/Landscape">Pool/Landscape</option>
+                        <option value="Hospitality">Hospitality</option>
+                        <option value="Designer">Designer</option>
+                        <option value="Developer">Developer</option>
                         <option value="Distributor">Distributor</option>
                         <option value="Contractor">Contractor</option>
-                        <option value="Supplier">Supplier</option>
                         <option value="Other">Other</option>
                     </select>
                 </div>
@@ -522,10 +531,14 @@
                             <label class="form-label">Partner Type *</label>
                             <select class="form-select" id="partnerType" required>
                                 <option value="">Select type...</option>
-                                <option value="Fabricator">Fabricator</option>
+                                <option value="Fabricator">Fabricator (Manufacturing)</option>
+                                <option value="AV Integrator">AV Integrator</option>
+                                <option value="Pool/Landscape">Pool / Landscape</option>
+                                <option value="Hospitality">Hospitality Supplier</option>
+                                <option value="Designer">Interior Designer</option>
+                                <option value="Developer">Property Developer</option>
                                 <option value="Distributor">Distributor</option>
                                 <option value="Contractor">Contractor</option>
-                                <option value="Supplier">Supplier</option>
                                 <option value="Other">Other</option>
                             </select>
                         </div>
@@ -612,10 +625,14 @@
                     <div class="form-group">
                         <label class="form-label">Partner Type *</label>
                         <select class="form-select" id="editPartnerType" required>
-                            <option value="Fabricator">Fabricator</option>
+                            <option value="Fabricator">Fabricator (Manufacturing)</option>
+                            <option value="AV Integrator">AV Integrator</option>
+                            <option value="Pool/Landscape">Pool / Landscape</option>
+                            <option value="Hospitality">Hospitality Supplier</option>
+                            <option value="Designer">Interior Designer</option>
+                            <option value="Developer">Property Developer</option>
                             <option value="Distributor">Distributor</option>
                             <option value="Contractor">Contractor</option>
-                            <option value="Supplier">Supplier</option>
                             <option value="Other">Other</option>
                         </select>
                     </div>
@@ -899,16 +916,243 @@
                 ],
                 createdAt: '2025-12-28T10:00:00Z',
                 lastContact: '2025-12-28T14:00:00Z'
+            },
+            // ========== SALES PARTNERS (Added 31 Dec 2025) ==========
+            // AV Integrators
+            {
+                id: 101,
+                companyName: 'Pulse Cinemas Middle East',
+                partnerType: 'AV Integrator',
+                region: 'UAE',
+                contactName: '',
+                email: '',
+                phone: '',
+                website: 'https://www.pulsecinemas.com',
+                status: 'Not Contacted',
+                followupDate: '',
+                priority: 'High',
+                notes: 'Luxury home cinema installation. Perfect partner for high-end residential market.',
+                activities: [],
+                createdAt: '2025-12-31T21:00:00Z',
+                lastContact: null
+            },
+            {
+                id: 102,
+                companyName: 'Almoe AV Systems',
+                partnerType: 'AV Integrator',
+                region: 'UAE',
+                contactName: '',
+                email: 'info@almoe.com',
+                phone: '+971 4 339 4455',
+                website: 'https://www.almoe.com',
+                status: 'Not Contacted',
+                followupDate: '',
+                priority: 'High',
+                notes: 'AV integration, smart homes. Major player in UAE.',
+                activities: [],
+                createdAt: '2025-12-31T21:00:00Z',
+                lastContact: null
+            },
+            {
+                id: 103,
+                companyName: 'Accel Technologies',
+                partnerType: 'AV Integrator',
+                region: 'UAE',
+                contactName: '',
+                email: '',
+                phone: '',
+                website: '',
+                status: 'Not Contacted',
+                followupDate: '',
+                priority: 'Medium',
+                notes: 'Commercial AV solutions.',
+                activities: [],
+                createdAt: '2025-12-31T21:00:00Z',
+                lastContact: null
+            },
+            // Pool & Landscape
+            {
+                id: 111,
+                companyName: 'Desert Group',
+                partnerType: 'Pool/Landscape',
+                region: 'UAE',
+                contactName: '',
+                email: 'info@desertgroup.ae',
+                phone: '+971 4 340 7725',
+                website: 'https://www.desertgroup.ae',
+                status: 'Not Contacted',
+                followupDate: '',
+                priority: 'High',
+                notes: 'Luxury landscape design & build. High-end residential projects.',
+                activities: [],
+                createdAt: '2025-12-31T21:00:00Z',
+                lastContact: null
+            },
+            {
+                id: 112,
+                companyName: 'Ashtec Pools',
+                partnerType: 'Pool/Landscape',
+                region: 'UAE',
+                contactName: '',
+                email: 'info@ashtecpools.com',
+                phone: '',
+                website: 'https://www.ashtecpools.com',
+                status: 'Not Contacted',
+                followupDate: '',
+                priority: 'High',
+                notes: 'Pool construction and maintenance. Natural upsell for outdoor entertainment.',
+                activities: [],
+                createdAt: '2025-12-31T21:00:00Z',
+                lastContact: null
+            },
+            {
+                id: 113,
+                companyName: 'Riviera Pools',
+                partnerType: 'Pool/Landscape',
+                region: 'UAE',
+                contactName: '',
+                email: '',
+                phone: '',
+                website: '',
+                status: 'Not Contacted',
+                followupDate: '',
+                priority: 'Medium',
+                notes: 'Luxury pool builder.',
+                activities: [],
+                createdAt: '2025-12-31T21:00:00Z',
+                lastContact: null
+            },
+            // Hospitality Suppliers
+            {
+                id: 121,
+                companyName: 'Scientechnic',
+                partnerType: 'Hospitality',
+                region: 'UAE',
+                contactName: '',
+                email: 'info@scientechnic.com',
+                phone: '+971 4 282 5434',
+                website: 'https://www.scientechnic.com',
+                status: 'Not Contacted',
+                followupDate: '',
+                priority: 'High',
+                notes: 'Hotel & restaurant equipment supplier. Established relationships with hospitality sector.',
+                activities: [],
+                createdAt: '2025-12-31T21:00:00Z',
+                lastContact: null
+            },
+            {
+                id: 122,
+                companyName: 'SKM Gulf',
+                partnerType: 'Hospitality',
+                region: 'UAE',
+                contactName: '',
+                email: '',
+                phone: '',
+                website: '',
+                status: 'Not Contacted',
+                followupDate: '',
+                priority: 'Medium',
+                notes: 'Hospitality solutions provider.',
+                activities: [],
+                createdAt: '2025-12-31T21:00:00Z',
+                lastContact: null
+            },
+            // Interior Designers
+            {
+                id: 131,
+                companyName: 'Pallavi Dean Interiors',
+                partnerType: 'Designer',
+                region: 'UAE',
+                contactName: 'Pallavi Dean',
+                email: '',
+                phone: '',
+                website: 'https://www.pallavidean.com',
+                status: 'Not Contacted',
+                followupDate: '',
+                priority: 'Medium',
+                notes: 'High-end residential interior design. Influences HNW clients.',
+                activities: [],
+                createdAt: '2025-12-31T21:00:00Z',
+                lastContact: null
+            },
+            {
+                id: 132,
+                companyName: 'Bishop Design',
+                partnerType: 'Designer',
+                region: 'UAE',
+                contactName: '',
+                email: '',
+                phone: '',
+                website: 'https://www.bishopdesign.com',
+                status: 'Not Contacted',
+                followupDate: '',
+                priority: 'Medium',
+                notes: 'Hospitality-focused interior design. Many hotel/restaurant projects.',
+                activities: [],
+                createdAt: '2025-12-31T21:00:00Z',
+                lastContact: null
+            },
+            // Property Developers
+            {
+                id: 141,
+                companyName: 'Emaar Properties',
+                partnerType: 'Developer',
+                region: 'UAE',
+                contactName: '',
+                email: '',
+                phone: '',
+                website: 'https://www.emaar.com',
+                status: 'Not Contacted',
+                followupDate: '',
+                priority: 'High',
+                notes: 'Premium villa communities. Potential for bulk orders in new developments.',
+                activities: [],
+                createdAt: '2025-12-31T21:00:00Z',
+                lastContact: null
+            },
+            {
+                id: 142,
+                companyName: 'Sobha Realty',
+                partnerType: 'Developer',
+                region: 'UAE',
+                contactName: '',
+                email: '',
+                phone: '',
+                website: 'https://www.sobharealty.com',
+                status: 'Not Contacted',
+                followupDate: '',
+                priority: 'Medium',
+                notes: 'Luxury developments. Known for quality finishes.',
+                activities: [],
+                createdAt: '2025-12-31T21:00:00Z',
+                lastContact: null
+            },
+            {
+                id: 143,
+                companyName: 'Aldar Properties',
+                partnerType: 'Developer',
+                region: 'UAE',
+                contactName: '',
+                email: '',
+                phone: '',
+                website: 'https://www.aldar.com',
+                status: 'Not Contacted',
+                followupDate: '',
+                priority: 'Medium',
+                notes: 'Abu Dhabi-based. Premium developments.',
+                activities: [],
+                createdAt: '2025-12-31T21:00:00Z',
+                lastContact: null
             }
         ];
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            // Always load initial partners (version 3 - updated 28 Dec 2025)
+            // Always load initial partners (version 4 - added sales partners 31 Dec 2025)
             const dataVersion = localStorage.getItem('apexPartnersVersion');
-            if (dataVersion !== 'v3') {
+            if (dataVersion !== 'v4') {
                 partners = initialPartners;
-                localStorage.setItem('apexPartnersVersion', 'v3');
+                localStorage.setItem('apexPartnersVersion', 'v4');
                 saveData();
             }
             renderPartners();
@@ -1007,7 +1251,7 @@
                         <strong style="color: var(--accent);">${p.companyName}</strong>
                         ${p.website ? `<br><a href="${p.website}" target="_blank" style="font-size: 0.8rem; color: var(--text-muted);" onclick="event.stopPropagation()">Website ↗</a>` : ''}
                     </td>
-                    <td><span class="badge type-${p.partnerType.toLowerCase()}">${p.partnerType}</span></td>
+                    <td><span class="badge type-${p.partnerType.toLowerCase().replace(/[\s\/]+/g, '-')}">${p.partnerType}</span></td>
                     <td>
                         ${p.contactName || '-'}
                         ${p.email ? `<br><a href="mailto:${p.email}" style="font-size: 0.8rem;" onclick="event.stopPropagation()">${p.email}</a>` : ''}
