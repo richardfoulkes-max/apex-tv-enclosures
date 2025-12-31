@@ -151,7 +151,7 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
-### Session: 2025-12-31 (Night) - Business Development & CRM Expansion
+### Session: 2025-12-31 (Night) - Business Development & CRM Redesign
 
 **New BD plan created (website/bd-plan.html):**
 - Free traffic sources: LinkedIn, Google Business Profile, directories, Instagram
@@ -160,18 +160,19 @@ roundtable-ai/              ← Engineering validation briefs
 - Outreach templates for LinkedIn, email, hotel inquiries
 - Weekly action schedule (~3 hours/week for $0 marketing budget)
 
-**CRM expanded with sales partners (website/partner-crm.html):**
-- Added 13 new contacts across 5 partner categories:
-  - AV Integrators: Central AV, Thomsun, JBK Controls
-  - Pool/Landscape: Faisal Movers, Desert Dreams, Gulf Landscaping
-  - Hospitality: Hotel Store ME, HoReCa Trade
-  - Interior Designers: Bishop Design, XBD Collective
-  - Property Developers: Emaar, Aldar, DAMAC
-- New badge colors for each partner type
-- Updated filter dropdown with all partner types
-- Fixed CSS class generation for multi-word types
+**Complete CRM redesign (website/partner-crm.html):**
+- Master-detail layout: partner list on left, detail view on right
+- Tabbed detail view: Overview, Contacts, Deal, Activity
+- Multiple contacts per company with roles (Primary, Decision Maker)
+- Deal tracking: value (AED), win probability (%), expected close, products interested
+- Activity timeline with 8 types: Note, Call, Email Sent, Email Received, Meeting, Demo, Quote Sent, Site Visit
+- Color-coded activity dots and chronological timeline
+- Company info: LinkedIn URL, address, lead source tracking
+- Lost reason capture when deals marked as lost
+- Header stats: total partners, active deals, pipeline value, follow-ups due
+- New v5 data structure with automatic migration from v4
 
-**Commit:** 28f96e5 - pushed to origin/main
+**Commits:** 28f96e5, c1782e1, 9d6920d - all pushed to origin/main
 
 ---
 
