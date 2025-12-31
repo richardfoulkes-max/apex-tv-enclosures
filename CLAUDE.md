@@ -358,6 +358,14 @@ roundtable-ai/              ← Engineering validation briefs
 - Photos saved in Obsidian vault: 03-Projects/Apex TV Enclosures/
 - **Email procedures:** Always read `~/.claude/EMAIL_PROCEDURES.md` before sending
 
+## Key Research Documents
+- **Audio/Speakers:** See `website/audio-noise-video.html` - contains:
+  - Fan noise analysis (24.6 dBA max, virtually silent)
+  - Outdoor speaker recommendations: JBL Flip 7 (budget), Neptune Soundbar (recommended), Samsung Terrace (premium)
+  - Bundle pricing options
+  - Video marketing strategy
+- **Competitor Analysis:** See `website/competitor-comparison.html` - includes Display Shield deep-dive
+
 ## Session: 2025-12-26 - Testing Plan + Al Shurooq Follow-up
 - Created testing-plan.html with 14-day prototype validation protocol
 - Added Testing Plan tab to all page navigation

@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Drawings - ATE-75 v5.2.2 IP55 | Apex Enclosures</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Courier New', monospace; background: #fff; color: #000; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+        h1 { text-align: center; font-size: 1.5rem; border-bottom: 2px solid #000; padding-bottom: 0.5rem; margin-bottom: 0.25rem; }
+        .title-block { text-align: center; font-size: 0.8rem; margin-bottom: 1rem; }
+        .drawing-section { margin: 2rem 0; page-break-inside: avoid; }
+        .drawing-section h2 { font-size: 1rem; border-bottom: 1px solid #000; margin-bottom: 1rem; }
+        .drawing-container { background: #fff; border: 2px solid #000; padding: 1rem; }
+        .notes { font-size: 0.75rem; margin-top: 1rem; padding: 0.5rem; border: 1px solid #000; }
+        .notes h3 { font-size: 0.8rem; margin-bottom: 0.25rem; }
+        .scale-info { font-size: 0.7rem; text-align: right; margin-top: 0.5rem; }
+        @media print { .drawing-section { page-break-inside: avoid; } body { font-size: 10pt; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ATE-75 OUTDOOR TV ENCLOSURE</h1>
+        <div class="title-block">
+            <strong>ENGINEERING DRAWINGS - v5.2.2 IP55</strong><br>
+            Apex Enclosures | For Manufacturing Reference<br>
+            All dimensions in millimeters unless noted
+        </div>
+
+        <!-- DRAWING 1: SIDE VIEW - TRUE SCALE -->
+        <div class="drawing-section">
+            <h2>DRAWING 1: SIDE ELEVATION - TRUE SCALE 1:5</h2>
+            <div class="drawing-container">
+                <!-- TRUE SCALE 1:5: 1mm = 0.2px -->
+                <!-- Height 1040mm = 208px, Depth 160mm = 32px -->
+                <svg viewBox="0 0 300 320" width="100%" height="300">
+                    <!-- Title -->
+                    <text x="150" y="20" text-anchor="middle" font-size="10" font-weight="bold">SIDE ELEVATION (TRUE PROPORTIONS)</text>
+                    <text x="150" y="32" text-anchor="middle" font-size="7">Scale 1:5 | Looking from left side</text>
+
+                    <!-- Main enclosure - TRUE SCALE -->
+                    <!-- 160mm depth × 1040mm height at 1:5 = 32px × 208px -->
+                    <rect x="120" y="50" width="32" height="208" fill="none" stroke="#000" stroke-width="1.5"/>
+
+                    <!-- Top deflector projection (75mm = 15px) -->
+                    <polygon points="152,50 152,58 167,43 167,50" fill="none" stroke="#000" stroke-width="1"/>
+
+                    <!-- Bottom intake (simplified) -->
+                    <rect x="120" y="250" width="32" height="8" fill="none" stroke="#000" stroke-width="0.5"/>
+
+                    <!-- Internal divisions (shown as lines) -->
+                    <!-- Glass position (8mm from front = 1.6px) -->
+                    <line x1="122" y1="55" x2="122" y2="250" stroke="#000" stroke-width="0.5"/>
+                    <!-- Plenum start (130mm from front = 26px) -->
+                    <line x1="146" y1="55" x2="146" y2="250" stroke="#000" stroke-width="0.5" stroke-dasharray="2,1"/>
+
+                    <!-- DIMENSIONS -->
+                    <!-- Height: 1040mm -->
+                    <line x1="180" y1="50" x2="180" y2="258" stroke="#000" stroke-width="0.5"/>
+                    <line x1="175" y1="50" x2="185" y2="50" stroke="#000" stroke-width="0.5"/>
+                    <line x1="175" y1="258" x2="185" y2="258" stroke="#000" stroke-width="0.5"/>
+                    <text x="195" y="158" text-anchor="middle" font-size="8" font-weight="bold" transform="rotate(90 195 158)">1040</text>
+
+                    <!-- Depth: 160mm -->
+                    <line x1="120" y1="275" x2="152" y2="275" stroke="#000" stroke-width="0.5"/>
+                    <line x1="120" y1="270" x2="120" y2="280" stroke="#000" stroke-width="0.5"/>
+                    <line x1="152" y1="270" x2="152" y2="280" stroke="#000" stroke-width="0.5"/>
+                    <text x="136" y="290" text-anchor="middle" font-size="8" font-weight="bold">160</text>
+
+                    <!-- Deflector: 75mm -->
+                    <line x1="152" y1="38" x2="167" y2="38" stroke="#000" stroke-width="0.5"/>
+                    <line x1="152" y1="35" x2="152" y2="41" stroke="#000" stroke-width="0.5"/>
+                    <line x1="167" y1="35" x2="167" y2="41" stroke="#000" stroke-width="0.5"/>
+                    <text x="160" y="33" text-anchor="middle" font-size="6">75</text>
+
+                    <!-- Labels -->
+                    <text x="100" y="155" text-anchor="end" font-size="6">FRONT</text>
+                    <line x1="102" y1="154" x2="118" y2="154" stroke="#000" stroke-width="0.5"/>
+                    <text x="170" y="155" font-size="6">REAR</text>
+
+                    <!-- Note about thin profile -->
+                    <text x="150" y="310" text-anchor="middle" font-size="7" font-style="italic">Note: Enclosure is only 160mm deep (thin profile)</text>
+                </svg>
+            </div>
+            <p class="scale-info">Scale 1:5 | Depth:Height ratio = 160:1040 = 1:6.5</p>
+        </div>
+
+        <!-- DRAWING 2: DEPTH DETAIL - ENLARGED -->
+        <div class="drawing-section">
+            <h2>DRAWING 2: CROSS-SECTION DETAIL - DEPTH BREAKDOWN (ENLARGED)</h2>
+            <div class="drawing-container">
+                <!-- ENLARGED to show internal arrangement -->
+                <!-- Scale: 1mm = 3px for depth clarity -->
+                <!-- 160mm depth = 480px -->
+                <svg viewBox="0 0 700 500" width="100%" height="480">
+                    <!-- Title -->
+                    <text x="350" y="25" text-anchor="middle" font-size="12" font-weight="bold">SECTION A-A: DEPTH ARRANGEMENT (ENLARGED 3:1)</text>
+                    <text x="350" y="42" text-anchor="middle" font-size="9">Horizontal section through enclosure showing component stack</text>
+
+                    <!-- This shows a HORIZONTAL slice through the enclosure -->
+                    <!-- Front (glass) on left, Rear on right -->
+                    <!-- Total depth 160mm = 480px at 3:1 -->
+
+                    <!-- Reference outline -->
+                    <rect x="60" y="80" width="480" height="300" fill="none" stroke="#000" stroke-width="2"/>
+
+                    <!-- COMPONENT STACK (left to right = front to rear) -->
+
+                    <!-- 1. FRONT BEZEL EDGE (part of 35mm bezel) - 5mm = 15px -->
+                    <rect x="60" y="80" width="15" height="300" fill="#e8e8e8" stroke="#000" stroke-width="1"/>
+                    <text x="67" y="235" text-anchor="middle" font-size="7" transform="rotate(-90 67 235)">BEZEL</text>
+
+                    <!-- 2. GLASS 8mm = 24px -->
+                    <rect x="75" y="100" width="24" height="260" fill="#d4e8ff" stroke="#000" stroke-width="1.5"/>
+                    <text x="87" y="235" text-anchor="middle" font-size="8" transform="rotate(-90 87 235)">8mm GLASS</text>
+
+                    <!-- 3. AIR GAP to TV ~15mm = 45px -->
+                    <rect x="99" y="100" width="45" height="260" fill="none" stroke="#000" stroke-width="0.5" stroke-dasharray="3,2"/>
+                    <text x="122" y="235" text-anchor="middle" font-size="7" transform="rotate(-90 122 235)">AIR GAP</text>
+
+                    <!-- 4. TV DEPTH ~55mm = 165px -->
+                    <rect x="144" y="90" width="165" height="280" fill="#c0c0c0" stroke="#000" stroke-width="1.5"/>
+                    <text x="226" y="200" text-anchor="middle" font-size="11" transform="rotate(-90 226 200)">75" TV (~55mm DEPTH)</text>
+                    <!-- Heat sinks on rear of TV -->
+                    <rect x="294" y="110" width="15" height="50" fill="#a0a0a0" stroke="#000" stroke-width="0.5"/>
+                    <rect x="294" y="180" width="15" height="50" fill="#a0a0a0" stroke="#000" stroke-width="0.5"/>
+                    <rect x="294" y="250" width="15" height="50" fill="#a0a0a0" stroke="#000" stroke-width="0.5"/>
+                    <text x="301" y="340" text-anchor="middle" font-size="6">HEAT SINKS</text>
+
+                    <!-- 5. REAR CLEARANCE (cables, VESA) ~22mm = 66px -->
+                    <rect x="309" y="100" width="66" height="260" fill="none" stroke="#000" stroke-width="0.5" stroke-dasharray="3,2"/>
+                    <text x="342" y="235" text-anchor="middle" font-size="7" transform="rotate(-90 342 235)">CABLE/VESA ZONE</text>
+                    <!-- VESA mount indication -->
+                    <rect x="330" y="180" width="30" height="100" fill="none" stroke="#000" stroke-width="1"/>
+                    <text x="345" y="235" text-anchor="middle" font-size="6" transform="rotate(-90 345 235)">VESA</text>
+
+                    <!-- 6. DIFFUSER PLATE 2mm = 6px -->
+                    <rect x="375" y="90" width="6" height="280" fill="#808080" stroke="#000" stroke-width="1"/>
+                    <!-- Perforation dots -->
+                    <g fill="#fff">
+                        <circle cx="378" cy="120" r="2"/>
+                        <circle cx="378" cy="150" r="2"/>
+                        <circle cx="378" cy="180" r="2"/>
+                        <circle cx="378" cy="210" r="2"/>
+                        <circle cx="378" cy="240" r="2"/>
+                        <circle cx="378" cy="270" r="2"/>
+                        <circle cx="378" cy="300" r="2"/>
+                        <circle cx="378" cy="330" r="2"/>
+                    </g>
+
+                    <!-- 7. REAR PLENUM 30mm = 90px -->
+                    <rect x="381" y="90" width="90" height="280" fill="#e8f4ff" stroke="#000" stroke-width="1"/>
+                    <text x="426" y="235" text-anchor="middle" font-size="9" transform="rotate(-90 426 235)">30mm REAR PLENUM</text>
+                    <!-- Airflow arrows in plenum -->
+                    <defs>
+                        <marker id="arr" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto">
+                            <polygon points="0,0 6,2.5 0,5" fill="#000"/>
+                        </marker>
+                    </defs>
+                    <line x1="426" y1="350" x2="426" y2="120" stroke="#000" stroke-width="1.5" marker-end="url(#arr)"/>
+
+                    <!-- 8. FANS + REAR PANEL ~50mm = 150px (but shown compressed) -->
+                    <rect x="471" y="80" width="69" height="300" fill="#f0f0f0" stroke="#000" stroke-width="1"/>
+                    <text x="505" y="235" text-anchor="middle" font-size="8" transform="rotate(-90 505 235)">FAN ZONE + PANEL</text>
+
+                    <!-- DIMENSION LINES -->
+
+                    <!-- Total depth: 160mm -->
+                    <line x1="60" y1="420" x2="540" y2="420" stroke="#000" stroke-width="0.75"/>
+                    <line x1="60" y1="410" x2="60" y2="430" stroke="#000" stroke-width="0.75"/>
+                    <line x1="540" y1="410" x2="540" y2="430" stroke="#000" stroke-width="0.75"/>
+                    <text x="300" y="445" text-anchor="middle" font-size="12" font-weight="bold">160mm TOTAL DEPTH</text>
+
+                    <!-- Glass: 8mm -->
+                    <line x1="75" y1="395" x2="99" y2="395" stroke="#000" stroke-width="0.5"/>
+                    <line x1="75" y1="390" x2="75" y2="400" stroke="#000" stroke-width="0.5"/>
+                    <line x1="99" y1="390" x2="99" y2="400" stroke="#000" stroke-width="0.5"/>
+                    <text x="87" y="390" text-anchor="middle" font-size="7">8</text>
+
+                    <!-- Plenum: 30mm -->
+                    <line x1="381" y1="395" x2="471" y2="395" stroke="#000" stroke-width="0.5"/>
+                    <line x1="381" y1="390" x2="381" y2="400" stroke="#000" stroke-width="0.5"/>
+                    <line x1="471" y1="390" x2="471" y2="400" stroke="#000" stroke-width="0.5"/>
+                    <text x="426" y="390" text-anchor="middle" font-size="7">30</text>
+
+                    <!-- TV depth: ~55mm -->
+                    <line x1="144" y1="70" x2="309" y2="70" stroke="#000" stroke-width="0.5"/>
+                    <line x1="144" y1="65" x2="144" y2="75" stroke="#000" stroke-width="0.5"/>
+                    <line x1="309" y1="65" x2="309" y2="75" stroke="#000" stroke-width="0.5"/>
+                    <text x="226" y="65" text-anchor="middle" font-size="7">~55 (TV)</text>
+
+                    <!-- LEGEND -->
+                    <rect x="560" y="100" width="120" height="180" fill="none" stroke="#000" stroke-width="1"/>
+                    <text x="620" y="118" text-anchor="middle" font-size="9" font-weight="bold">COMPONENT STACK</text>
+                    <line x1="565" y1="125" x2="675" y2="125" stroke="#000" stroke-width="0.5"/>
+                    <text x="570" y="140" font-size="7">1. Front bezel edge</text>
+                    <text x="570" y="155" font-size="7">2. Glass 8mm (4+4)</text>
+                    <text x="570" y="170" font-size="7">3. Air gap ~15mm</text>
+                    <text x="570" y="185" font-size="7">4. TV ~55mm</text>
+                    <text x="570" y="200" font-size="7">5. Cable zone ~22mm</text>
+                    <text x="570" y="215" font-size="7">6. Diffuser plate 2mm</text>
+                    <text x="570" y="230" font-size="7">7. Plenum 30mm</text>
+                    <text x="570" y="245" font-size="7">8. Fans + rear ~50mm</text>
+                    <line x1="565" y1="255" x2="675" y2="255" stroke="#000" stroke-width="0.5"/>
+                    <text x="620" y="270" text-anchor="middle" font-size="7" font-weight="bold">TOTAL: 160mm</text>
+
+                    <!-- Direction labels -->
+                    <text x="60" y="75" font-size="8" font-weight="bold">← FRONT</text>
+                    <text x="500" y="75" font-size="8" font-weight="bold">REAR →</text>
+                </svg>
+            </div>
+            <p class="scale-info">Enlarged 3:1 for component visibility | True proportions shown in Drawing 1</p>
+        </div>
+
+        <!-- DRAWING 3: FRONT VIEW - TRUE SCALE -->
+        <div class="drawing-section">
+            <h2>DRAWING 3: FRONT ELEVATION - TRUE SCALE 1:8</h2>
+            <div class="drawing-container">
+                <!-- TRUE SCALE 1:8: 1mm = 0.125px -->
+                <!-- 1760mm × 1040mm = 220px × 130px -->
+                <svg viewBox="0 0 400 250" width="100%" height="230">
+                    <!-- Title -->
+                    <text x="200" y="20" text-anchor="middle" font-size="10" font-weight="bold">FRONT ELEVATION (TRUE PROPORTIONS)</text>
+                    <text x="200" y="32" text-anchor="middle" font-size="7">Scale 1:8 | Showing overall appearance</text>
+
+                    <!-- Main enclosure outline -->
+                    <!-- 1760 × 1040 at 1:8 = 220px × 130px -->
+                    <rect x="90" y="50" width="220" height="130" fill="none" stroke="#000" stroke-width="1.5"/>
+
+                    <!-- Glass/display area (inset by bezel ~35mm = 4.4px each side) -->
+                    <rect x="95" y="55" width="210" height="120" fill="#f5f5f5" stroke="#000" stroke-width="0.5"/>
+                    <text x="200" y="118" text-anchor="middle" font-size="8">75" DISPLAY</text>
+
+                    <!-- Top exhaust slot -->
+                    <rect x="95" y="51" width="210" height="3" fill="#d0d0d0" stroke="#000" stroke-width="0.5"/>
+
+                    <!-- Bottom intake slot -->
+                    <rect x="95" y="172" width="210" height="4" fill="#d0d0d0" stroke="#000" stroke-width="0.5"/>
+
+                    <!-- 4 latches on right side -->
+                    <rect x="306" y="70" width="3" height="5" fill="#808080" stroke="#000" stroke-width="0.5"/>
+                    <rect x="306" y="100" width="3" height="5" fill="#808080" stroke="#000" stroke-width="0.5"/>
+                    <rect x="306" y="130" width="3" height="5" fill="#808080" stroke="#000" stroke-width="0.5"/>
+                    <rect x="306" y="160" width="3" height="5" fill="#808080" stroke="#000" stroke-width="0.5"/>
+
+                    <!-- DIMENSIONS -->
+                    <!-- Width: 1760mm -->
+                    <line x1="90" y1="200" x2="310" y2="200" stroke="#000" stroke-width="0.5"/>
+                    <line x1="90" y1="195" x2="90" y2="205" stroke="#000" stroke-width="0.5"/>
+                    <line x1="310" y1="195" x2="310" y2="205" stroke="#000" stroke-width="0.5"/>
+                    <text x="200" y="215" text-anchor="middle" font-size="9" font-weight="bold">1760</text>
+
+                    <!-- Height: 1040mm -->
+                    <line x1="330" y1="50" x2="330" y2="180" stroke="#000" stroke-width="0.5"/>
+                    <line x1="325" y1="50" x2="335" y2="50" stroke="#000" stroke-width="0.5"/>
+                    <line x1="325" y1="180" x2="335" y2="180" stroke="#000" stroke-width="0.5"/>
+                    <text x="350" y="120" text-anchor="middle" font-size="9" font-weight="bold" transform="rotate(90 350 120)">1040</text>
+
+                    <!-- Bezel: 35mm -->
+                    <line x1="90" y1="42" x2="95" y2="42" stroke="#000" stroke-width="0.5"/>
+                    <line x1="90" y1="39" x2="90" y2="45" stroke="#000" stroke-width="0.5"/>
+                    <line x1="95" y1="39" x2="95" y2="45" stroke="#000" stroke-width="0.5"/>
+                    <text x="92" y="38" text-anchor="middle" font-size="5">35</text>
+
+                    <!-- Labels -->
+                    <text x="60" y="53" font-size="6">EXHAUST</text>
+                    <line x1="75" y1="52" x2="88" y2="52" stroke="#000" stroke-width="0.5" stroke-dasharray="1,1"/>
+
+                    <text x="60" y="175" font-size="6">INTAKE</text>
+                    <line x1="73" y1="174" x2="88" y2="174" stroke="#000" stroke-width="0.5" stroke-dasharray="1,1"/>
+
+                    <!-- Aspect ratio note -->
+                    <text x="200" y="235" text-anchor="middle" font-size="7" font-style="italic">Aspect ratio 1.69:1 (width:height)</text>
+                </svg>
+            </div>
+            <p class="scale-info">Scale 1:8 | True proportions</p>
+        </div>
+
+        <!-- DRAWING 4: TOP VIEW - TRUE SCALE -->
+        <div class="drawing-section">
+            <h2>DRAWING 4: TOP VIEW (PLAN) - TRUE SCALE 1:8</h2>
+            <div class="drawing-container">
+                <!-- TRUE SCALE 1:8 -->
+                <!-- 1760mm × 160mm = 220px × 20px -->
+                <svg viewBox="0 0 400 150" width="100%" height="140">
+                    <!-- Title -->
+                    <text x="200" y="20" text-anchor="middle" font-size="10" font-weight="bold">TOP VIEW / PLAN (TRUE PROPORTIONS)</text>
+                    <text x="200" y="32" text-anchor="middle" font-size="7">Scale 1:8 | Showing thin profile</text>
+
+                    <!-- Main enclosure outline -->
+                    <!-- 1760 × 160 at 1:8 = 220px × 20px -->
+                    <rect x="90" y="60" width="220" height="20" fill="none" stroke="#000" stroke-width="1.5"/>
+
+                    <!-- 75mm deflector projection = 9.4px -->
+                    <rect x="90" y="50" width="220" height="10" fill="none" stroke="#000" stroke-width="0.5" stroke-dasharray="2,1"/>
+
+                    <!-- 3 fans (140mm = 17.5px diameter, but shown smaller due to scale) -->
+                    <circle cx="145" cy="70" r="6" fill="none" stroke="#000" stroke-width="0.5"/>
+                    <circle cx="200" cy="70" r="6" fill="none" stroke="#000" stroke-width="0.5"/>
+                    <circle cx="255" cy="70" r="6" fill="none" stroke="#000" stroke-width="0.5"/>
+
+                    <!-- DIMENSIONS -->
+                    <!-- Width: 1760mm -->
+                    <line x1="90" y1="100" x2="310" y2="100" stroke="#000" stroke-width="0.5"/>
+                    <line x1="90" y1="95" x2="90" y2="105" stroke="#000" stroke-width="0.5"/>
+                    <line x1="310" y1="95" x2="310" y2="105" stroke="#000" stroke-width="0.5"/>
+                    <text x="200" y="115" text-anchor="middle" font-size="9" font-weight="bold">1760</text>
+
+                    <!-- Depth: 160mm -->
+                    <line x1="330" y1="60" x2="330" y2="80" stroke="#000" stroke-width="0.5"/>
+                    <line x1="325" y1="60" x2="335" y2="60" stroke="#000" stroke-width="0.5"/>
+                    <line x1="325" y1="80" x2="335" y2="80" stroke="#000" stroke-width="0.5"/>
+                    <text x="355" y="73" text-anchor="middle" font-size="9" font-weight="bold">160</text>
+
+                    <!-- Deflector: 75mm -->
+                    <line x1="60" y1="50" x2="60" y2="60" stroke="#000" stroke-width="0.5"/>
+                    <line x1="55" y1="50" x2="65" y2="50" stroke="#000" stroke-width="0.5"/>
+                    <line x1="55" y1="60" x2="65" y2="60" stroke="#000" stroke-width="0.5"/>
+                    <text x="45" y="58" text-anchor="middle" font-size="6">75</text>
+
+                    <!-- Labels -->
+                    <text x="70" y="73" font-size="6">FRONT</text>
+                    <text x="320" y="73" font-size="6">REAR</text>
+
+                    <!-- Note -->
+                    <text x="200" y="135" text-anchor="middle" font-size="7" font-style="italic">Width:Depth ratio = 11:1 (very wide, very thin)</text>
+                </svg>
+            </div>
+            <p class="scale-info">Scale 1:8 | True proportions</p>
+        </div>
+
+        <!-- DRAWING 5: DEFLECTOR - 3D VIEW -->
+        <div class="drawing-section">
+            <h2>DRAWING 5: TOP EXHAUST DEFLECTOR - 3D PERSPECTIVE VIEW</h2>
+            <div class="drawing-container">
+                <svg viewBox="0 0 700 450" width="100%" height="430">
+                    <!-- Title -->
+                    <text x="350" y="25" text-anchor="middle" font-size="12" font-weight="bold">75mm DEFLECTOR - WHAT IT LOOKS LIKE</text>
+                    <text x="350" y="42" text-anchor="middle" font-size="9">3D perspective showing the "architectural shadow element"</text>
+
+                    <!-- 3D ISOMETRIC VIEW OF TOP CORNER -->
+
+                    <!-- Main enclosure top surface -->
+                    <polygon points="100,200 350,150 450,180 200,230" fill="#d0d0d0" stroke="#000" stroke-width="1.5"/>
+                    <text x="275" y="195" text-anchor="middle" font-size="8">TOP OF ENCLOSURE</text>
+
+                    <!-- Front face of enclosure (partial) -->
+                    <polygon points="100,200 200,230 200,330 100,300" fill="#b0b0b0" stroke="#000" stroke-width="1.5"/>
+                    <text x="150" y="270" text-anchor="middle" font-size="7">FRONT</text>
+
+                    <!-- THE DEFLECTOR - angled hood projecting outward -->
+                    <!-- Top surface of deflector (angled at 45°) -->
+                    <polygon points="100,200 350,150 380,120 130,170" fill="#808080" stroke="#000" stroke-width="2"/>
+
+                    <!-- Front lip of deflector -->
+                    <polygon points="130,170 380,120 380,135 130,185" fill="#606060" stroke="#000" stroke-width="1.5"/>
+
+                    <!-- Secondary lip (small upward curl at edge) -->
+                    <polygon points="380,120 390,115 390,130 380,135" fill="#505050" stroke="#000" stroke-width="1"/>
+
+                    <!-- Underside of deflector (dark - the "shadow") -->
+                    <polygon points="100,200 130,185 380,135 350,150" fill="#404040" stroke="#000" stroke-width="1"/>
+
+                    <!-- LOUVER SLOTS visible on underside -->
+                    <line x1="150" y1="193" x2="170" y2="180" stroke="#202020" stroke-width="2"/>
+                    <line x1="190" y1="188" x2="210" y2="175" stroke="#202020" stroke-width="2"/>
+                    <line x1="230" y1="183" x2="250" y2="170" stroke="#202020" stroke-width="2"/>
+                    <line x1="270" y1="178" x2="290" y2="165" stroke="#202020" stroke-width="2"/>
+                    <line x1="310" y1="173" x2="330" y2="160" stroke="#202020" stroke-width="2"/>
+
+                    <!-- Rain drops hitting top and running off -->
+                    <circle cx="200" cy="155" r="4" fill="#3399ff" opacity="0.7"/>
+                    <circle cx="250" cy="145" r="4" fill="#3399ff" opacity="0.7"/>
+                    <circle cx="300" cy="135" r="4" fill="#3399ff" opacity="0.7"/>
+
+                    <!-- Rain running off arrows -->
+                    <path d="M 200 160 Q 220 175 250 195" stroke="#3399ff" stroke-width="2" fill="none" marker-end="url(#blue-arr)"/>
+                    <path d="M 300 140 Q 330 155 370 175" stroke="#3399ff" stroke-width="2" fill="none" marker-end="url(#blue-arr)"/>
+                    <defs>
+                        <marker id="blue-arr" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto">
+                            <polygon points="0,0 6,2.5 0,5" fill="#3399ff"/>
+                        </marker>
+                    </defs>
+
+                    <!-- Hot air coming out from underneath -->
+                    <path d="M 180 195 Q 200 180 230 160 Q 260 140 300 110" stroke="#ff6600" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#orange-arr)"/>
+                    <path d="M 250 190 Q 280 170 320 145 Q 350 125 380 100" stroke="#ff6600" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#orange-arr)"/>
+                    <defs>
+                        <marker id="orange-arr" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto">
+                            <polygon points="0,0 6,2.5 0,5" fill="#ff6600"/>
+                        </marker>
+                    </defs>
+
+                    <!-- ANNOTATIONS -->
+                    <line x1="385" y1="127" x2="450" y2="100" stroke="#000" stroke-width="0.5"/>
+                    <text x="455" y="95" font-size="8">Secondary lip</text>
+                    <text x="455" y="107" font-size="7">(catches drips)</text>
+
+                    <line x1="255" y1="145" x2="320" y2="90" stroke="#000" stroke-width="0.5"/>
+                    <text x="325" y="85" font-size="8">Angled top surface</text>
+                    <text x="325" y="97" font-size="7">(rain runs off)</text>
+
+                    <line x1="240" y1="185" x2="400" y2="220" stroke="#000" stroke-width="0.5"/>
+                    <text x="405" y="215" font-size="8">Dark underside</text>
+                    <text x="405" y="227" font-size="7">("shadow element")</text>
+
+                    <line x1="270" y1="175" x2="400" y2="250" stroke="#000" stroke-width="0.5"/>
+                    <text x="405" y="248" font-size="8">Louver slots</text>
+                    <text x="405" y="260" font-size="7">(air exits here)</text>
+
+                    <!-- Legend -->
+                    <rect x="480" y="280" width="180" height="100" fill="#f8f8f8" stroke="#000" stroke-width="1"/>
+                    <text x="570" y="298" text-anchor="middle" font-size="9" font-weight="bold">LEGEND</text>
+                    <line x1="490" y1="305" x2="650" y2="305" stroke="#000" stroke-width="0.5"/>
+                    <circle cx="500" cy="320" r="5" fill="#3399ff"/>
+                    <text x="515" y="323" font-size="8">Rain (hits top, runs off)</text>
+                    <line x1="490" y1="340" x2="510" y2="340" stroke="#ff6600" stroke-width="2" stroke-dasharray="3,2"/>
+                    <text x="515" y="343" font-size="8">Hot air (exits underneath)</text>
+                    <rect x="490" y="355" width="20" height="10" fill="#404040"/>
+                    <text x="515" y="363" font-size="8">Shadow (looks like accent)</text>
+
+                    <!-- Dimension callout -->
+                    <text x="80" y="185" font-size="9" font-weight="bold">75mm</text>
+                    <text x="80" y="197" font-size="7">projection</text>
+                </svg>
+
+                <!-- CROSS-SECTION BELOW -->
+                <svg viewBox="0 0 700 280" width="100%" height="260" style="margin-top: 20px;">
+                    <text x="350" y="20" text-anchor="middle" font-size="11" font-weight="bold">CROSS-SECTION VIEW (How it works)</text>
+                    <!-- Title -->
+                    <text x="350" y="25" text-anchor="middle" font-size="12" font-weight="bold">75mm DEFLECTOR @ 45° - RAIN PROTECTION MECHANISM</text>
+                    <text x="350" y="42" text-anchor="middle" font-size="9">Cross-section showing how rain is shed while hot air exhausts (IP55)</text>
+
+                    <!-- ENCLOSURE TOP SECTION -->
+                    <!-- Main enclosure wall (vertical) -->
+                    <rect x="150" y="150" width="10" height="200" fill="#c0c0c0" stroke="#000" stroke-width="1.5"/>
+                    <text x="155" y="255" text-anchor="middle" font-size="7" transform="rotate(-90 155 255)">REAR PANEL</text>
+
+                    <!-- Top of enclosure (horizontal) -->
+                    <rect x="60" y="150" width="100" height="10" fill="#c0c0c0" stroke="#000" stroke-width="1.5"/>
+
+                    <!-- Fan zone -->
+                    <rect x="80" y="160" width="70" height="40" fill="#e0e0e0" stroke="#000" stroke-width="1"/>
+                    <text x="115" y="183" text-anchor="middle" font-size="8">FAN</text>
+                    <!-- Fan arrow (air going up) -->
+                    <line x1="115" y1="195" x2="115" y2="165" stroke="#000" stroke-width="1.5" marker-end="url(#arr)"/>
+
+                    <!-- 75mm DEFLECTOR @ 45° -->
+                    <!-- Main deflector body -->
+                    <polygon points="160,150 160,100 240,60 250,60 250,70 170,105 170,150" fill="#a0a0a0" stroke="#000" stroke-width="2"/>
+
+                    <!-- Secondary lip at top -->
+                    <polygon points="250,60 250,70 270,55 270,50" fill="#808080" stroke="#000" stroke-width="1.5"/>
+                    <text x="280" y="60" font-size="7">SECONDARY LIP</text>
+
+                    <!-- Double-layer louvers inside deflector -->
+                    <line x1="175" y1="140" x2="200" y2="115" stroke="#000" stroke-width="1"/>
+                    <line x1="180" y1="130" x2="210" y2="100" stroke="#000" stroke-width="1"/>
+                    <line x1="185" y1="120" x2="220" y2="90" stroke="#000" stroke-width="1"/>
+                    <line x1="190" y1="110" x2="235" y2="75" stroke="#000" stroke-width="0.75"/>
+                    <line x1="195" y1="100" x2="240" y2="68" stroke="#000" stroke-width="0.75"/>
+
+                    <!-- Opening for air exhaust -->
+                    <rect x="170" y="100" width="70" height="50" fill="none" stroke="#000" stroke-width="0.5" stroke-dasharray="3,2"/>
+
+                    <!-- RAIN ARROWS (being deflected) -->
+                    <defs>
+                        <marker id="rain" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                            <circle cx="3" cy="3" r="2" fill="#0066cc"/>
+                        </marker>
+                    </defs>
+
+                    <!-- Rain falling vertically -->
+                    <line x1="200" y1="30" x2="200" y2="55" stroke="#0066cc" stroke-width="2" marker-end="url(#rain)"/>
+                    <line x1="220" y1="25" x2="220" y2="50" stroke="#0066cc" stroke-width="2" marker-end="url(#rain)"/>
+                    <line x1="240" y1="30" x2="240" y2="55" stroke="#0066cc" stroke-width="2" marker-end="url(#rain)"/>
+
+                    <!-- Rain hitting deflector and running off -->
+                    <path d="M 200 70 Q 210 75 230 90 Q 260 110 290 130" stroke="#0066cc" stroke-width="2" fill="none" stroke-dasharray="4,2"/>
+                    <path d="M 220 65 Q 235 75 260 95 Q 290 115 320 135" stroke="#0066cc" stroke-width="2" fill="none" stroke-dasharray="4,2"/>
+                    <path d="M 240 60 Q 255 70 280 85 Q 310 105 340 120" stroke="#0066cc" stroke-width="2" fill="none" stroke-dasharray="4,2"/>
+
+                    <!-- HOT AIR EXHAUST (going up and out) -->
+                    <path d="M 115 160 Q 140 130 180 110 Q 220 90 280 70" stroke="#cc0000" stroke-width="2" fill="none" marker-end="url(#arr-red)"/>
+                    <path d="M 100 165 Q 130 140 170 120 Q 210 100 260 80" stroke="#cc0000" stroke-width="1.5" fill="none" marker-end="url(#arr-red)"/>
+                    <defs>
+                        <marker id="arr-red" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto">
+                            <polygon points="0,0 6,2.5 0,5" fill="#cc0000"/>
+                        </marker>
+                    </defs>
+
+                    <!-- DIMENSIONS -->
+                    <!-- 75mm projection -->
+                    <line x1="160" y1="170" x2="250" y2="170" stroke="#000" stroke-width="0.5"/>
+                    <line x1="160" y1="165" x2="160" y2="175" stroke="#000" stroke-width="0.5"/>
+                    <line x1="250" y1="165" x2="250" y2="175" stroke="#000" stroke-width="0.5"/>
+                    <text x="205" y="185" text-anchor="middle" font-size="8" font-weight="bold">75mm</text>
+
+                    <!-- 45° angle -->
+                    <path d="M 160 140 A 20 20 0 0 1 175 125" stroke="#000" stroke-width="0.5" fill="none"/>
+                    <text x="180" y="138" font-size="7">45°</text>
+
+                    <!-- LEGEND -->
+                    <rect x="400" y="80" width="250" height="180" fill="none" stroke="#000" stroke-width="1"/>
+                    <text x="525" y="100" text-anchor="middle" font-size="10" font-weight="bold">HOW RAIN IS BLOCKED</text>
+                    <line x1="410" y1="110" x2="640" y2="110" stroke="#000" stroke-width="0.5"/>
+
+                    <line x1="420" y1="130" x2="450" y2="130" stroke="#0066cc" stroke-width="2"/>
+                    <circle cx="455" cy="130" r="3" fill="#0066cc"/>
+                    <text x="465" y="133" font-size="8">Rain (deflected away)</text>
+
+                    <line x1="420" y1="150" x2="450" y2="150" stroke="#cc0000" stroke-width="2" marker-end="url(#arr-red)"/>
+                    <text x="465" y="153" font-size="8">Hot air exhaust</text>
+
+                    <text x="420" y="175" font-size="8" font-weight="bold">Protection mechanism:</text>
+                    <text x="420" y="190" font-size="7">1. Deflector angles OUT at 45°</text>
+                    <text x="420" y="203" font-size="7">2. Rain hits top, runs DOWN and AWAY</text>
+                    <text x="420" y="216" font-size="7">3. Secondary lip catches edge drips</text>
+                    <text x="420" y="229" font-size="7">4. Louvers angle DOWN - rain can't go UP</text>
+                    <text x="420" y="242" font-size="7">5. Hot air rises naturally, exits easily</text>
+                    <text x="420" y="255" font-size="7" font-weight="bold">Result: IP55 - blocks water jets</text>
+
+                    <!-- GRAVITY ARROW -->
+                    <text x="320" y="200" font-size="8">GRAVITY</text>
+                    <line x1="335" y1="210" x2="335" y2="250" stroke="#000" stroke-width="1.5" marker-end="url(#arr)"/>
+
+                    <!-- Key insight callout -->
+                    <rect x="60" y="300" width="580" height="60" fill="#f0f8ff" stroke="#000" stroke-width="1"/>
+                    <text x="350" y="320" text-anchor="middle" font-size="9" font-weight="bold">KEY INSIGHT: Rain falls DOWN, hot air rises UP</text>
+                    <text x="350" y="338" text-anchor="middle" font-size="8">The 45° deflector uses gravity - rain runs off the angled surface and drips away from the opening.</text>
+                    <text x="350" y="353" text-anchor="middle" font-size="8">Louvers inside angle downward, so rain would have to travel UPHILL to enter - it can't.</text>
+                </svg>
+            </div>
+            <p class="scale-info">Detail view - not to scale | Shows rain deflection principle</p>
+        </div>
+
+        <!-- DRAWING 6: SERVICE ACCESS - TV INSTALLATION -->
+        <div class="drawing-section">
+            <h2>DRAWING 6: SERVICE ACCESS - TV INSTALLATION</h2>
+            <div class="drawing-container">
+                <svg viewBox="0 0 800 550" width="100%" height="520">
+                    <!-- Title -->
+                    <text x="400" y="25" text-anchor="middle" font-size="12" font-weight="bold">HOW TO OPEN ENCLOSURE & INSTALL TV</text>
+                    <text x="400" y="42" text-anchor="middle" font-size="9">Front glass door hinged on left side, 4 latches on right side</text>
+
+                    <!-- LEFT SIDE: CLOSED STATE -->
+                    <text x="150" y="70" text-anchor="middle" font-size="10" font-weight="bold">CLOSED (Normal Operation)</text>
+
+                    <!-- Enclosure frame - front view (simplified) -->
+                    <rect x="50" y="90" width="200" height="120" fill="#e0e0e0" stroke="#000" stroke-width="2"/>
+
+                    <!-- Glass door (closed) -->
+                    <rect x="55" y="95" width="190" height="110" fill="#d4e8ff" stroke="#000" stroke-width="1.5"/>
+                    <text x="150" y="155" text-anchor="middle" font-size="8">8mm LAMINATED GLASS</text>
+
+                    <!-- 4 latches on right side -->
+                    <rect x="240" y="105" width="8" height="12" fill="#404040" stroke="#000" stroke-width="1"/>
+                    <rect x="240" y="135" width="8" height="12" fill="#404040" stroke="#000" stroke-width="1"/>
+                    <rect x="240" y="165" width="8" height="12" fill="#404040" stroke="#000" stroke-width="1"/>
+                    <rect x="240" y="185" width="8" height="12" fill="#404040" stroke="#000" stroke-width="1"/>
+
+                    <!-- Latch labels -->
+                    <line x1="252" y1="111" x2="275" y2="95" stroke="#000" stroke-width="0.5"/>
+                    <text x="280" y="95" font-size="7">4× COMPRESSION LATCHES</text>
+                    <text x="280" y="105" font-size="6">(316 SS, quick-release)</text>
+
+                    <!-- Hinge side indicator -->
+                    <line x1="55" y1="95" x2="55" y2="205" stroke="#000" stroke-width="3"/>
+                    <text x="35" y="155" text-anchor="middle" font-size="7" transform="rotate(-90 35 155)">HINGE</text>
+
+                    <!-- RIGHT SIDE: OPEN STATE -->
+                    <text x="550" y="70" text-anchor="middle" font-size="10" font-weight="bold">OPEN (TV Installation/Service)</text>
+
+                    <!-- Enclosure frame - front view (showing interior) -->
+                    <rect x="450" y="90" width="200" height="120" fill="#f5f5f5" stroke="#000" stroke-width="2"/>
+
+                    <!-- Interior visible - VESA mount plate -->
+                    <rect x="520" y="120" width="60" height="60" fill="#808080" stroke="#000" stroke-width="1.5"/>
+                    <text x="550" y="155" text-anchor="middle" font-size="7">VESA MOUNT</text>
+                    <!-- VESA holes -->
+                    <circle cx="530" cy="135" r="3" fill="#404040"/>
+                    <circle cx="570" cy="135" r="3" fill="#404040"/>
+                    <circle cx="530" cy="165" r="3" fill="#404040"/>
+                    <circle cx="570" cy="165" r="3" fill="#404040"/>
+
+                    <!-- Cable routing -->
+                    <rect x="590" y="140" width="15" height="20" fill="#404040" stroke="#000" stroke-width="0.5"/>
+                    <text x="597" y="180" text-anchor="middle" font-size="5">CABLES</text>
+
+                    <!-- Fan zone at top -->
+                    <rect x="475" y="93" width="150" height="20" fill="#d0d0d0" stroke="#000" stroke-width="0.5"/>
+                    <text x="550" y="107" text-anchor="middle" font-size="6">3× FANS (top)</text>
+
+                    <!-- Glass door swung open (90°) -->
+                    <g transform="translate(450, 90)">
+                        <!-- Door panel extending toward viewer -->
+                        <polygon points="0,0 0,120 -100,100 -100,-20" fill="#a0c8ff" stroke="#000" stroke-width="1.5"/>
+                        <text x="-50" y="55" text-anchor="middle" font-size="7" transform="rotate(-10 -50 55)">GLASS</text>
+                        <text x="-50" y="70" text-anchor="middle" font-size="6" transform="rotate(-10 -50 70)">(open ~90°)</text>
+
+                        <!-- Hinge pin indication -->
+                        <circle cx="0" cy="0" r="4" fill="#606060" stroke="#000" stroke-width="1"/>
+                        <circle cx="0" cy="120" r="4" fill="#606060" stroke="#000" stroke-width="1"/>
+                    </g>
+
+                    <!-- Open angle arc -->
+                    <path d="M 450 150 A 80 80 0 0 0 380 100" stroke="#000" stroke-width="0.5" fill="none" stroke-dasharray="3,2"/>
+                    <text x="400" y="135" font-size="7">90°</text>
+
+                    <!-- BOTTOM: SIDE VIEW SHOWING OPENING -->
+                    <text x="400" y="250" text-anchor="middle" font-size="10" font-weight="bold">SIDE VIEW - OPENING SEQUENCE</text>
+
+                    <!-- Step 1: Release latches -->
+                    <rect x="80" y="280" width="140" height="180" fill="none" stroke="#000" stroke-width="1"/>
+                    <text x="150" y="300" text-anchor="middle" font-size="8" font-weight="bold">STEP 1: Release Latches</text>
+
+                    <!-- Side view of enclosure -->
+                    <rect x="100" y="320" width="30" height="100" fill="#e0e0e0" stroke="#000" stroke-width="1.5"/>
+                    <!-- Glass (front) -->
+                    <rect x="100" y="325" width="3" height="90" fill="#a0c8ff" stroke="#000" stroke-width="1"/>
+                    <!-- TV inside -->
+                    <rect x="108" y="340" width="12" height="60" fill="#404040" stroke="#000" stroke-width="0.5"/>
+                    <text x="114" y="375" text-anchor="middle" font-size="5" fill="#fff" transform="rotate(-90 114 375)">TV</text>
+
+                    <!-- Hand releasing latch -->
+                    <ellipse cx="150" cy="350" rx="15" ry="8" fill="#ffddaa" stroke="#000" stroke-width="0.5"/>
+                    <path d="M 140 350 Q 130 345 125 340" stroke="#ffddaa" stroke-width="6" fill="none"/>
+                    <line x1="130" y1="330" x2="102" y2="330" stroke="#000" stroke-width="0.5"/>
+                    <text x="145" y="330" font-size="6">Release all 4</text>
+
+                    <!-- Step 2: Swing open -->
+                    <rect x="260" y="280" width="140" height="180" fill="none" stroke="#000" stroke-width="1"/>
+                    <text x="330" y="300" text-anchor="middle" font-size="8" font-weight="bold">STEP 2: Swing Door Open</text>
+
+                    <!-- Side view - door opening -->
+                    <rect x="280" y="320" width="30" height="100" fill="#e0e0e0" stroke="#000" stroke-width="1.5"/>
+                    <!-- TV inside (now visible) -->
+                    <rect x="288" y="340" width="12" height="60" fill="#404040" stroke="#000" stroke-width="0.5"/>
+
+                    <!-- Door swinging open -->
+                    <polygon points="280,325 280,415 240,400 240,310" fill="#a0c8ff" stroke="#000" stroke-width="1"/>
+                    <text x="260" y="365" text-anchor="middle" font-size="6" transform="rotate(-10 260 365)">GLASS</text>
+
+                    <!-- Swing arrow -->
+                    <path d="M 278 370 Q 260 365 250 360" stroke="#000" stroke-width="1" fill="none" marker-end="url(#arr)"/>
+
+                    <!-- Hinge point -->
+                    <circle cx="280" cy="420" r="3" fill="#606060" stroke="#000" stroke-width="1"/>
+                    <text x="290" y="435" font-size="6">Hinge (bottom)</text>
+
+                    <!-- Step 3: Install/service TV -->
+                    <rect x="440" y="280" width="140" height="180" fill="none" stroke="#000" stroke-width="1"/>
+                    <text x="510" y="300" text-anchor="middle" font-size="8" font-weight="bold">STEP 3: Install TV</text>
+
+                    <!-- Side view - full access -->
+                    <rect x="460" y="320" width="30" height="100" fill="#e0e0e0" stroke="#000" stroke-width="1.5"/>
+
+                    <!-- TV being inserted -->
+                    <rect x="420" y="345" width="12" height="50" fill="#404040" stroke="#000" stroke-width="1"/>
+                    <text x="426" y="375" text-anchor="middle" font-size="5" fill="#fff" transform="rotate(-90 426 375)">TV</text>
+
+                    <!-- Movement arrows -->
+                    <path d="M 435 370 L 455 370" stroke="#000" stroke-width="1.5" marker-end="url(#arr)"/>
+                    <text x="445" y="385" text-anchor="middle" font-size="6">Slide in</text>
+
+                    <!-- VESA mount visible -->
+                    <rect x="475" y="355" width="8" height="30" fill="#808080" stroke="#000" stroke-width="0.5"/>
+                    <text x="479" y="400" text-anchor="middle" font-size="5">VESA</text>
+
+                    <!-- Door fully open (flat) -->
+                    <rect x="460" y="425" width="90" height="3" fill="#a0c8ff" stroke="#000" stroke-width="0.5"/>
+                    <text x="505" y="440" text-anchor="middle" font-size="5">Door open ~110°</text>
+
+                    <!-- Step 4: Close & latch -->
+                    <rect x="620" y="280" width="140" height="180" fill="none" stroke="#000" stroke-width="1"/>
+                    <text x="690" y="300" text-anchor="middle" font-size="8" font-weight="bold">STEP 4: Close & Latch</text>
+
+                    <!-- Side view - closed -->
+                    <rect x="640" y="320" width="30" height="100" fill="#e0e0e0" stroke="#000" stroke-width="1.5"/>
+                    <!-- Glass (front) - closed -->
+                    <rect x="640" y="325" width="3" height="90" fill="#a0c8ff" stroke="#000" stroke-width="1"/>
+                    <!-- TV inside -->
+                    <rect x="648" y="340" width="12" height="60" fill="#404040" stroke="#000" stroke-width="0.5"/>
+
+                    <!-- Latches engaged -->
+                    <rect x="637" y="340" width="6" height="8" fill="#404040" stroke="#000" stroke-width="0.5"/>
+                    <rect x="637" y="370" width="6" height="8" fill="#404040" stroke="#000" stroke-width="0.5"/>
+                    <rect x="637" y="400" width="6" height="8" fill="#404040" stroke="#000" stroke-width="0.5"/>
+
+                    <!-- EPDM seal indication -->
+                    <line x1="643" y1="325" x2="643" y2="415" stroke="#ff6600" stroke-width="2"/>
+                    <text x="700" y="370" font-size="6">EPDM gasket</text>
+                    <text x="700" y="380" font-size="6">compresses</text>
+                    <line x1="695" y1="375" x2="648" y2="370" stroke="#000" stroke-width="0.5"/>
+
+                    <!-- Checkmark -->
+                    <text x="690" y="440" text-anchor="middle" font-size="20">✓</text>
+                    <text x="690" y="455" text-anchor="middle" font-size="6">IP55 SEALED</text>
+
+                    <!-- KEY INFO BOX -->
+                    <rect x="50" y="480" width="700" height="55" fill="#fffde0" stroke="#000" stroke-width="1"/>
+                    <text x="400" y="498" text-anchor="middle" font-size="9" font-weight="bold">INSTALLATION SEQUENCE (Important!)</text>
+                    <text x="60" y="515" font-size="7">1. Mount EMPTY enclosure to wall first (rear brackets)</text>
+                    <text x="60" y="528" font-size="7">2. Open front door for full access</text>
+                    <text x="280" y="515" font-size="7">3. Attach TV to internal VESA plate FROM THE FRONT</text>
+                    <text x="280" y="528" font-size="7">4. Connect cables through sealed gland</text>
+                    <text x="540" y="515" font-size="7">5. Close door &amp; engage latches</text>
+                    <text x="540" y="528" font-size="7">→ No rear access needed after wall mount!</text>
+                </svg>
+            </div>
+            <p class="scale-info">Conceptual view - not to scale | Shows service access mechanism</p>
+        </div>
+
+        <!-- DRAWING 7: MOUNTING DETAIL -->
+        <div class="drawing-section">
+            <h2>DRAWING 7: WALL MOUNTING - NO REAR ACCESS NEEDED</h2>
+            <div class="drawing-container">
+                <svg viewBox="0 0 800 400" width="100%" height="380">
+                    <!-- Title -->
+                    <text x="400" y="25" text-anchor="middle" font-size="12" font-weight="bold">MOUNTING SEQUENCE - FRONT ACCESS ONLY</text>
+                    <text x="400" y="42" text-anchor="middle" font-size="9">Enclosure mounts to wall first, then TV installs from front</text>
+
+                    <!-- STEP 1: Wall brackets -->
+                    <rect x="30" y="70" width="170" height="280" fill="none" stroke="#000" stroke-width="1"/>
+                    <text x="115" y="90" text-anchor="middle" font-size="9" font-weight="bold">STEP 1</text>
+                    <text x="115" y="105" text-anchor="middle" font-size="7">Fix brackets to wall</text>
+
+                    <!-- Wall -->
+                    <rect x="50" y="130" width="15" height="180" fill="#d4c4a8" stroke="#000" stroke-width="1"/>
+                    <text x="57" y="225" text-anchor="middle" font-size="6" transform="rotate(-90 57 225)">WALL</text>
+
+                    <!-- Wall brackets -->
+                    <rect x="65" y="160" width="25" height="8" fill="#606060" stroke="#000" stroke-width="1"/>
+                    <rect x="65" y="220" width="25" height="8" fill="#606060" stroke="#000" stroke-width="1"/>
+                    <rect x="65" y="280" width="25" height="8" fill="#606060" stroke="#000" stroke-width="1"/>
+
+                    <!-- Screws into wall -->
+                    <circle cx="60" cy="164" r="2" fill="#000"/>
+                    <circle cx="60" cy="224" r="2" fill="#000"/>
+                    <circle cx="60" cy="284" r="2" fill="#000"/>
+
+                    <text x="115" y="330" text-anchor="middle" font-size="6">Wall plugs + screws</text>
+                    <text x="115" y="342" text-anchor="middle" font-size="6">into masonry</text>
+
+                    <!-- STEP 2: Hang enclosure -->
+                    <rect x="220" y="70" width="170" height="280" fill="none" stroke="#000" stroke-width="1"/>
+                    <text x="305" y="90" text-anchor="middle" font-size="9" font-weight="bold">STEP 2</text>
+                    <text x="305" y="105" text-anchor="middle" font-size="7">Hang empty enclosure</text>
+
+                    <!-- Wall -->
+                    <rect x="240" y="130" width="15" height="180" fill="#d4c4a8" stroke="#000" stroke-width="1"/>
+
+                    <!-- Wall brackets -->
+                    <rect x="255" y="160" width="25" height="8" fill="#606060" stroke="#000" stroke-width="1"/>
+                    <rect x="255" y="220" width="25" height="8" fill="#606060" stroke="#000" stroke-width="1"/>
+                    <rect x="255" y="280" width="25" height="8" fill="#606060" stroke="#000" stroke-width="1"/>
+
+                    <!-- Enclosure (empty, side view) -->
+                    <rect x="280" y="140" width="35" height="160" fill="#e0e0e0" stroke="#000" stroke-width="1.5"/>
+
+                    <!-- Internal VESA plate -->
+                    <rect x="285" y="180" width="8" height="80" fill="#808080" stroke="#000" stroke-width="1"/>
+                    <text x="289" y="225" text-anchor="middle" font-size="5" transform="rotate(-90 289 225)">VESA PLATE</text>
+
+                    <!-- Mounting hooks on back of enclosure -->
+                    <rect x="280" y="162" width="5" height="4" fill="#404040" stroke="#000" stroke-width="0.5"/>
+                    <rect x="280" y="222" width="5" height="4" fill="#404040" stroke="#000" stroke-width="0.5"/>
+                    <rect x="280" y="282" width="5" height="4" fill="#404040" stroke="#000" stroke-width="0.5"/>
+
+                    <!-- Glass door (closed) -->
+                    <rect x="312" y="145" width="3" height="150" fill="#a0c8ff" stroke="#000" stroke-width="1"/>
+
+                    <text x="305" y="330" text-anchor="middle" font-size="6">Enclosure hooks onto</text>
+                    <text x="305" y="342" text-anchor="middle" font-size="6">wall brackets (empty)</text>
+
+                    <!-- STEP 3: Open door, mount TV -->
+                    <rect x="410" y="70" width="170" height="280" fill="none" stroke="#000" stroke-width="1"/>
+                    <text x="495" y="90" text-anchor="middle" font-size="9" font-weight="bold">STEP 3</text>
+                    <text x="495" y="105" text-anchor="middle" font-size="7">Open door, mount TV from front</text>
+
+                    <!-- Wall -->
+                    <rect x="430" y="130" width="15" height="180" fill="#d4c4a8" stroke="#000" stroke-width="1"/>
+
+                    <!-- Enclosure on wall -->
+                    <rect x="470" y="140" width="35" height="160" fill="#e0e0e0" stroke="#000" stroke-width="1.5"/>
+
+                    <!-- VESA plate with bolts highlighted -->
+                    <rect x="475" y="180" width="8" height="80" fill="#808080" stroke="#000" stroke-width="1"/>
+
+                    <!-- Bolt holes (accessed from front) -->
+                    <circle cx="479" cy="200" r="3" fill="#ffff00" stroke="#000" stroke-width="1"/>
+                    <circle cx="479" cy="240" r="3" fill="#ffff00" stroke="#000" stroke-width="1"/>
+
+                    <!-- TV being inserted -->
+                    <rect x="510" y="175" width="15" height="90" fill="#404040" stroke="#000" stroke-width="1"/>
+                    <text x="517" y="225" text-anchor="middle" font-size="5" fill="#fff" transform="rotate(-90 517 225)">TV</text>
+
+                    <!-- Arrow showing TV moving toward VESA -->
+                    <path d="M 508 220 L 490 220" stroke="#000" stroke-width="1.5" marker-end="url(#arr)"/>
+
+                    <!-- Door open -->
+                    <polygon points="505,145 505,295 560,280 560,130" fill="#a0c8ff" stroke="#000" stroke-width="1"/>
+                    <text x="535" y="215" text-anchor="middle" font-size="5">DOOR</text>
+                    <text x="535" y="225" text-anchor="middle" font-size="5">OPEN</text>
+
+                    <!-- Bolts label -->
+                    <line x1="479" y1="195" x2="450" y2="150" stroke="#000" stroke-width="0.5"/>
+                    <text x="440" y="145" font-size="6">Bolt TV to plate</text>
+                    <text x="440" y="155" font-size="6">FROM FRONT</text>
+
+                    <text x="495" y="330" text-anchor="middle" font-size="6">Access VESA bolts</text>
+                    <text x="495" y="342" text-anchor="middle" font-size="6">through open door</text>
+
+                    <!-- STEP 4: Close & done -->
+                    <rect x="600" y="70" width="170" height="280" fill="none" stroke="#000" stroke-width="1"/>
+                    <text x="685" y="90" text-anchor="middle" font-size="9" font-weight="bold">STEP 4</text>
+                    <text x="685" y="105" text-anchor="middle" font-size="7">Close door - complete</text>
+
+                    <!-- Wall -->
+                    <rect x="620" y="130" width="15" height="180" fill="#d4c4a8" stroke="#000" stroke-width="1"/>
+
+                    <!-- Complete assembly -->
+                    <rect x="660" y="140" width="35" height="160" fill="#e0e0e0" stroke="#000" stroke-width="1.5"/>
+
+                    <!-- TV inside -->
+                    <rect x="680" y="175" width="12" height="90" fill="#404040" stroke="#000" stroke-width="0.5"/>
+
+                    <!-- Glass door closed -->
+                    <rect x="692" y="145" width="3" height="150" fill="#a0c8ff" stroke="#000" stroke-width="1"/>
+
+                    <!-- Latches -->
+                    <rect x="693" y="170" width="4" height="6" fill="#404040" stroke="#000" stroke-width="0.5"/>
+                    <rect x="693" y="220" width="4" height="6" fill="#404040" stroke="#000" stroke-width="0.5"/>
+                    <rect x="693" y="270" width="4" height="6" fill="#404040" stroke="#000" stroke-width="0.5"/>
+
+                    <!-- Checkmark -->
+                    <text x="685" y="330" text-anchor="middle" font-size="24" fill="#228B22">✓</text>
+                    <text x="685" y="350" text-anchor="middle" font-size="7" font-weight="bold">DONE!</text>
+
+                    <!-- KEY INSIGHT BOX -->
+                    <rect x="50" y="360" width="700" height="30" fill="#e8ffe8" stroke="#228B22" stroke-width="2"/>
+                    <text x="400" y="380" text-anchor="middle" font-size="9" font-weight="bold">KEY: The VESA mount bolts are accessed FROM THE FRONT through the open door - no rear access needed!</text>
+                </svg>
+            </div>
+            <p class="scale-info">Conceptual view - not to scale | Shows service access mechanism</p>
+        </div>
+
+        <!-- DRAWING 8: HOOK & HANG MOUNTING SYSTEM -->
+        <div class="drawing-section">
+            <h2>DRAWING 8: HOOK &amp; HANG TV MOUNTING (Correct Method)</h2>
+            <div class="drawing-container">
+                <svg viewBox="0 0 800 600" width="100%" height="580">
+                    <!-- Title -->
+                    <text x="400" y="25" text-anchor="middle" font-size="12" font-weight="bold">TV MOUNTING - HOOK &amp; HANG SYSTEM</text>
+                    <text x="400" y="42" text-anchor="middle" font-size="9">Attach bracket to TV on table FIRST, then hook onto rail inside enclosure</text>
+
+                    <!-- STEP 1: Attach bracket to TV (on table) -->
+                    <rect x="30" y="60" width="230" height="250" fill="none" stroke="#000" stroke-width="1"/>
+                    <text x="145" y="80" text-anchor="middle" font-size="9" font-weight="bold">STEP 1: Attach bracket to TV</text>
+                    <text x="145" y="95" text-anchor="middle" font-size="7">(on table, TV face-down)</text>
+
+                    <!-- Table surface -->
+                    <rect x="50" y="250" width="190" height="10" fill="#8B4513" stroke="#000" stroke-width="1"/>
+                    <text x="145" y="280" text-anchor="middle" font-size="6">TABLE / FLOOR</text>
+
+                    <!-- TV face down -->
+                    <rect x="70" y="140" width="150" height="110" fill="#404040" stroke="#000" stroke-width="1.5"/>
+                    <text x="145" y="200" text-anchor="middle" font-size="8" fill="#fff">TV (face down)</text>
+
+                    <!-- VESA holes on back of TV -->
+                    <circle cx="110" cy="170" r="4" fill="#606060" stroke="#000" stroke-width="1"/>
+                    <circle cx="180" cy="170" r="4" fill="#606060" stroke="#000" stroke-width="1"/>
+                    <circle cx="110" cy="220" r="4" fill="#606060" stroke="#000" stroke-width="1"/>
+                    <circle cx="180" cy="220" r="4" fill="#606060" stroke="#000" stroke-width="1"/>
+
+                    <!-- Mounting bracket being attached -->
+                    <rect x="100" y="155" width="90" height="80" fill="none" stroke="#ff6600" stroke-width="2"/>
+
+                    <!-- Hooks on top of bracket -->
+                    <path d="M 110 155 L 110 140 L 120 140 L 120 155" fill="none" stroke="#ff6600" stroke-width="3"/>
+                    <path d="M 170 155 L 170 140 L 180 140 L 180 155" fill="none" stroke="#ff6600" stroke-width="3"/>
+
+                    <!-- Bolts going into TV -->
+                    <circle cx="110" cy="170" r="6" fill="#303030" stroke="#000" stroke-width="1"/>
+                    <circle cx="180" cy="170" r="6" fill="#303030" stroke="#000" stroke-width="1"/>
+                    <circle cx="110" cy="220" r="6" fill="#303030" stroke="#000" stroke-width="1"/>
+                    <circle cx="180" cy="220" r="6" fill="#303030" stroke="#000" stroke-width="1"/>
+
+                    <!-- Screwdriver -->
+                    <rect x="195" y="160" width="40" height="8" fill="#ffcc00" stroke="#000" stroke-width="1"/>
+                    <rect x="230" y="162" width="15" height="4" fill="#808080" stroke="#000" stroke-width="0.5"/>
+
+                    <text x="145" y="300" text-anchor="middle" font-size="7">Bolt bracket to TV's VESA holes</text>
+                    <text x="145" y="312" text-anchor="middle" font-size="7">(full access to back of TV)</text>
+
+                    <!-- STEP 2: Rail inside enclosure -->
+                    <rect x="280" y="60" width="230" height="250" fill="none" stroke="#000" stroke-width="1"/>
+                    <text x="395" y="80" text-anchor="middle" font-size="9" font-weight="bold">STEP 2: Rail inside enclosure</text>
+                    <text x="395" y="95" text-anchor="middle" font-size="7">(already installed in enclosure)</text>
+
+                    <!-- Enclosure cross-section -->
+                    <rect x="300" y="120" width="180" height="160" fill="#e0e0e0" stroke="#000" stroke-width="1.5"/>
+
+                    <!-- Rear panel -->
+                    <rect x="460" y="120" width="10" height="160" fill="#c0c0c0" stroke="#000" stroke-width="1"/>
+
+                    <!-- Mounting rail (horizontal bar with lip) -->
+                    <rect x="440" y="150" width="20" height="8" fill="#606060" stroke="#000" stroke-width="1.5"/>
+                    <rect x="440" y="158" width="8" height="15" fill="#606060" stroke="#000" stroke-width="1"/>
+
+                    <rect x="440" y="220" width="20" height="8" fill="#606060" stroke="#000" stroke-width="1.5"/>
+                    <rect x="440" y="228" width="8" height="15" fill="#606060" stroke="#000" stroke-width="1"/>
+
+                    <!-- Label the rail -->
+                    <line x1="448" y1="175" x2="380" y2="190" stroke="#000" stroke-width="0.5"/>
+                    <text x="340" y="190" font-size="7">Mounting rail</text>
+                    <text x="340" y="200" font-size="7">(hooks catch here)</text>
+
+                    <!-- Glass door (open) -->
+                    <polygon points="300,120 300,280 260,270 260,110" fill="#a0c8ff" stroke="#000" stroke-width="1"/>
+                    <text x="280" y="200" text-anchor="middle" font-size="6" transform="rotate(-5 280 200)">DOOR OPEN</text>
+
+                    <text x="395" y="300" text-anchor="middle" font-size="7">Rail welded to rear panel</text>
+                    <text x="395" y="312" text-anchor="middle" font-size="7">(part of enclosure)</text>
+
+                    <!-- STEP 3: Hook TV onto rail -->
+                    <rect x="530" y="60" width="230" height="250" fill="none" stroke="#000" stroke-width="1"/>
+                    <text x="645" y="80" text-anchor="middle" font-size="9" font-weight="bold">STEP 3: Hook TV onto rail</text>
+                    <text x="645" y="95" text-anchor="middle" font-size="7">(lift, tilt, drop onto hooks)</text>
+
+                    <!-- Enclosure cross-section -->
+                    <rect x="570" y="120" width="150" height="160" fill="#e0e0e0" stroke="#000" stroke-width="1.5"/>
+
+                    <!-- Rear panel -->
+                    <rect x="700" y="120" width="10" height="160" fill="#c0c0c0" stroke="#000" stroke-width="1"/>
+
+                    <!-- Rails -->
+                    <rect x="680" y="150" width="20" height="8" fill="#606060" stroke="#000" stroke-width="1"/>
+                    <rect x="680" y="158" width="8" height="15" fill="#606060" stroke="#000" stroke-width="1"/>
+                    <rect x="680" y="220" width="20" height="8" fill="#606060" stroke="#000" stroke-width="1"/>
+                    <rect x="680" y="228" width="8" height="15" fill="#606060" stroke="#000" stroke-width="1"/>
+
+                    <!-- TV with bracket attached -->
+                    <rect x="590" y="135" width="80" height="130" fill="#404040" stroke="#000" stroke-width="1.5"/>
+                    <text x="630" y="205" text-anchor="middle" font-size="7" fill="#fff">TV</text>
+
+                    <!-- Bracket on TV -->
+                    <rect x="650" y="150" width="15" height="80" fill="none" stroke="#ff6600" stroke-width="2"/>
+
+                    <!-- Hooks engaging rail -->
+                    <path d="M 660 150 L 660 155 L 680 155 L 680 165 L 668 165 L 668 150" fill="#ff6600" stroke="#000" stroke-width="1"/>
+                    <path d="M 660 215 L 660 220 L 680 220 L 680 230 L 668 230 L 668 215" fill="#ff6600" stroke="#000" stroke-width="1"/>
+
+                    <!-- Drop arrow -->
+                    <path d="M 630 115 L 630 130" stroke="#228B22" stroke-width="2" marker-end="url(#arr)"/>
+                    <text x="645" y="115" font-size="6" fill="#228B22">DROP</text>
+
+                    <text x="645" y="300" text-anchor="middle" font-size="7">Hooks slide over rail lip</text>
+                    <text x="645" y="312" text-anchor="middle" font-size="7">TV hangs securely</text>
+
+                    <!-- BOTTOM SECTION: Detail view of hook mechanism -->
+                    <text x="400" y="340" text-anchor="middle" font-size="10" font-weight="bold">DETAIL: HOW HOOKS ENGAGE RAIL</text>
+
+                    <rect x="100" y="360" width="600" height="180" fill="#f5f5f5" stroke="#000" stroke-width="1"/>
+
+                    <!-- Before hooking -->
+                    <text x="220" y="385" text-anchor="middle" font-size="8" font-weight="bold">APPROACHING</text>
+
+                    <!-- Rail (side view) -->
+                    <rect x="250" y="420" width="60" height="12" fill="#606060" stroke="#000" stroke-width="1.5"/>
+                    <rect x="250" y="432" width="20" height="30" fill="#606060" stroke="#000" stroke-width="1"/>
+                    <text x="280" y="480" text-anchor="middle" font-size="6">RAIL (side view)</text>
+
+                    <!-- Hook approaching -->
+                    <path d="M 180 400 L 180 420 L 240 420 L 240 450 L 200 450 L 200 400 Z" fill="#ff6600" stroke="#000" stroke-width="1.5"/>
+                    <text x="160" y="430" font-size="6">HOOK</text>
+
+                    <!-- Arrow showing movement -->
+                    <path d="M 200 470 Q 230 490 260 470" stroke="#000" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+                    <text x="230" y="510" text-anchor="middle" font-size="6">Tilt forward, drop</text>
+
+                    <!-- After hooking -->
+                    <text x="520" y="385" text-anchor="middle" font-size="8" font-weight="bold">HOOKED (SECURE)</text>
+
+                    <!-- Rail (side view) -->
+                    <rect x="530" y="420" width="60" height="12" fill="#606060" stroke="#000" stroke-width="1.5"/>
+                    <rect x="530" y="432" width="20" height="30" fill="#606060" stroke="#000" stroke-width="1"/>
+
+                    <!-- Hook engaged -->
+                    <path d="M 490 400 L 490 420 L 550 420 L 550 460 L 510 460 L 510 400 Z" fill="#ff6600" stroke="#000" stroke-width="1.5"/>
+
+                    <!-- Weight arrow -->
+                    <path d="M 500 470 L 500 510" stroke="#000" stroke-width="2" marker-end="url(#arr)"/>
+                    <text x="515" y="500" font-size="6">WEIGHT</text>
+
+                    <!-- Checkmark -->
+                    <text x="600" y="450" font-size="24" fill="#228B22">✓</text>
+                    <text x="620" y="445" font-size="7">Hook catches</text>
+                    <text x="620" y="458" font-size="7">behind rail lip</text>
+                    <text x="620" y="471" font-size="7">- can't fall off!</text>
+
+                    <!-- Key insight box -->
+                    <rect x="100" y="550" width="600" height="40" fill="#e8ffe8" stroke="#228B22" stroke-width="2"/>
+                    <text x="400" y="568" text-anchor="middle" font-size="9" font-weight="bold">KEY: Bolts go into TV on a TABLE (easy access). At the wall, just HOOK and DROP - no tools needed!</text>
+                    <text x="400" y="583" text-anchor="middle" font-size="8">This is how all wall-mount TV brackets work. Same principle inside the enclosure.</text>
+                </svg>
+            </div>
+            <p class="scale-info">Conceptual view - not to scale | Shows hook &amp; hang mechanism</p>
+        </div>
+
+        <!-- DRAWING 9: CABLE ENTRY -->
+        <div class="drawing-section">
+            <h2>DRAWING 9: CABLE ENTRY - WEATHERPROOF GLANDS</h2>
+            <div class="drawing-container">
+                <svg viewBox="0 0 800 450" width="100%" height="430">
+                    <!-- Title -->
+                    <text x="400" y="25" text-anchor="middle" font-size="12" font-weight="bold">HOW CABLES ENTER THE ENCLOSURE</text>
+                    <text x="400" y="42" text-anchor="middle" font-size="9">Sealed cable glands maintain IP55 rating while allowing power &amp; signal cables</text>
+
+                    <!-- LEFT: Rear panel view showing gland positions -->
+                    <text x="200" y="70" text-anchor="middle" font-size="10" font-weight="bold">REAR PANEL (inside view)</text>
+
+                    <!-- Rear panel -->
+                    <rect x="50" y="90" width="300" height="200" fill="#c0c0c0" stroke="#000" stroke-width="2"/>
+
+                    <!-- Fan cutouts -->
+                    <circle cx="120" cy="150" r="35" fill="#404040" stroke="#000" stroke-width="1"/>
+                    <circle cx="200" cy="150" r="35" fill="#404040" stroke="#000" stroke-width="1"/>
+                    <circle cx="280" cy="150" r="35" fill="#404040" stroke="#000" stroke-width="1"/>
+                    <text x="200" y="155" text-anchor="middle" font-size="7" fill="#fff">3× FANS</text>
+
+                    <!-- Mounting rail -->
+                    <rect x="80" y="200" width="240" height="15" fill="#606060" stroke="#000" stroke-width="1"/>
+                    <text x="200" y="210" text-anchor="middle" font-size="6" fill="#fff">MOUNTING RAIL</text>
+
+                    <!-- CABLE GLANDS - bottom of panel -->
+                    <circle cx="120" cy="260" r="12" fill="#404040" stroke="#000" stroke-width="2"/>
+                    <circle cx="120" cy="260" r="6" fill="#202020" stroke="#000" stroke-width="1"/>
+                    <text x="120" y="285" text-anchor="middle" font-size="6">POWER</text>
+
+                    <circle cx="200" cy="260" r="12" fill="#404040" stroke="#000" stroke-width="2"/>
+                    <circle cx="200" cy="260" r="6" fill="#202020" stroke="#000" stroke-width="1"/>
+                    <text x="200" y="285" text-anchor="middle" font-size="6">HDMI</text>
+
+                    <circle cx="280" cy="260" r="12" fill="#404040" stroke="#000" stroke-width="2"/>
+                    <circle cx="280" cy="260" r="6" fill="#202020" stroke="#000" stroke-width="1"/>
+                    <text x="280" y="285" text-anchor="middle" font-size="6">SPARE</text>
+
+                    <!-- Label -->
+                    <line x1="320" y1="260" x2="360" y2="260" stroke="#000" stroke-width="0.5"/>
+                    <text x="365" y="255" font-size="7">IP68 Cable Glands</text>
+                    <text x="365" y="267" font-size="7">(weatherproof)</text>
+
+                    <!-- RIGHT: Cross-section of cable gland -->
+                    <text x="600" y="70" text-anchor="middle" font-size="10" font-weight="bold">CABLE GLAND (cross-section)</text>
+
+                    <rect x="450" y="90" width="300" height="200" fill="#f5f5f5" stroke="#000" stroke-width="1"/>
+
+                    <!-- Panel wall -->
+                    <rect x="560" y="110" width="20" height="160" fill="#c0c0c0" stroke="#000" stroke-width="1.5"/>
+                    <text x="570" y="195" text-anchor="middle" font-size="6" transform="rotate(-90 570 195)">PANEL</text>
+
+                    <!-- Gland body (outside) -->
+                    <rect x="580" y="160" width="40" height="50" fill="#404040" stroke="#000" stroke-width="1.5" rx="3"/>
+                    <text x="600" y="190" text-anchor="middle" font-size="6" fill="#fff">GLAND</text>
+
+                    <!-- Gland nut (inside) -->
+                    <rect x="520" y="165" width="40" height="40" fill="#505050" stroke="#000" stroke-width="1.5" rx="2"/>
+                    <text x="540" y="188" text-anchor="middle" font-size="5" fill="#fff">NUT</text>
+
+                    <!-- Rubber seal inside gland -->
+                    <rect x="580" y="175" width="10" height="20" fill="#ff6600" stroke="#000" stroke-width="1"/>
+
+                    <!-- Cable passing through -->
+                    <rect x="470" y="180" width="150" height="10" fill="#000" stroke="#333" stroke-width="1"/>
+                    <text x="490" y="175" font-size="6">CABLE</text>
+
+                    <!-- Compression arrows -->
+                    <path d="M 585 172 L 585 178" stroke="#ff0000" stroke-width="2" marker-end="url(#arr-red)"/>
+                    <path d="M 585 198 L 585 192" stroke="#ff0000" stroke-width="2" marker-end="url(#arr-red)"/>
+                    <text x="595" y="230" font-size="6" fill="#ff0000">Rubber</text>
+                    <text x="595" y="240" font-size="6" fill="#ff0000">compresses</text>
+                    <text x="595" y="250" font-size="6" fill="#ff0000">around cable</text>
+
+                    <!-- Labels -->
+                    <text x="480" y="265" font-size="7">INSIDE</text>
+                    <text x="610" y="265" font-size="7">OUTSIDE</text>
+
+                    <!-- BOTTOM: Installation sequence -->
+                    <text x="400" y="320" text-anchor="middle" font-size="10" font-weight="bold">CABLE ROUTING</text>
+
+                    <rect x="50" y="340" width="700" height="100" fill="#fffde0" stroke="#000" stroke-width="1"/>
+
+                    <!-- Step 1 -->
+                    <text x="70" y="365" font-size="8" font-weight="bold">Before mounting:</text>
+                    <text x="70" y="380" font-size="7">1. Run cables through wall to enclosure location</text>
+                    <text x="70" y="393" font-size="7">2. Cables poke out of wall where enclosure will mount</text>
+
+                    <!-- Step 2 -->
+                    <text x="320" y="365" font-size="8" font-weight="bold">During mounting:</text>
+                    <text x="320" y="380" font-size="7">3. Thread cables through glands BEFORE hanging enclosure</text>
+                    <text x="320" y="393" font-size="7">4. Mount enclosure (cables already inside)</text>
+
+                    <!-- Step 3 -->
+                    <text x="560" y="365" font-size="8" font-weight="bold">Final:</text>
+                    <text x="560" y="380" font-size="7">5. Connect to TV</text>
+                    <text x="560" y="393" font-size="7">6. Tighten gland nuts</text>
+                    <text x="560" y="406" font-size="7">7. Close door</text>
+
+                    <!-- Key point -->
+                    <text x="400" y="430" text-anchor="middle" font-size="8" font-style="italic">Glands seal around cable - water can't get in even with direct spray (IP55)</text>
+                </svg>
+            </div>
+            <p class="scale-info">Conceptual view - not to scale | Shows cable entry method</p>
+        </div>
+
+        <!-- DRAWING 10: INTERNAL POWER FOR STREAMING BOXES -->
+        <div class="drawing-section">
+            <h2>DRAWING 10: INTERNAL POWER - FOR STREAMING BOXES</h2>
+            <div class="drawing-container">
+                <svg viewBox="0 0 800 500" width="100%" height="480">
+                    <!-- Title -->
+                    <text x="400" y="25" text-anchor="middle" font-size="12" font-weight="bold">INTERNAL POWER FOR APPLE TV / STREAMING DEVICES</text>
+                    <text x="400" y="42" text-anchor="middle" font-size="9">Power inlet from outside → internal socket strip → plug in devices</text>
+
+                    <!-- LEFT: Outside view showing IEC inlet -->
+                    <text x="180" y="70" text-anchor="middle" font-size="10" font-weight="bold">OUTSIDE (rear panel)</text>
+
+                    <!-- Rear panel section -->
+                    <rect x="50" y="90" width="260" height="200" fill="#a0a0a0" stroke="#000" stroke-width="2"/>
+                    <text x="180" y="110" text-anchor="middle" font-size="8">REAR PANEL</text>
+
+                    <!-- IEC Power Inlet -->
+                    <rect x="130" y="140" width="100" height="60" fill="#303030" stroke="#000" stroke-width="2" rx="5"/>
+                    <rect x="150" y="155" width="60" height="30" fill="#000" stroke="#fff" stroke-width="1"/>
+                    <text x="180" y="175" text-anchor="middle" font-size="7" fill="#fff">IEC C14</text>
+                    <text x="180" y="220" text-anchor="middle" font-size="7">WEATHERPROOF</text>
+                    <text x="180" y="232" text-anchor="middle" font-size="7">POWER INLET</text>
+
+                    <!-- Power cable coming in -->
+                    <rect x="160" y="200" width="40" height="80" fill="none" stroke="#000" stroke-width="2" stroke-dasharray="5,3"/>
+                    <text x="180" y="260" text-anchor="middle" font-size="6">MAINS</text>
+                    <text x="180" y="272" text-anchor="middle" font-size="6">CABLE</text>
+
+                    <!-- Arrow to inside -->
+                    <path d="M 310 170 L 350 170" stroke="#000" stroke-width="2" marker-end="url(#arr)"/>
+
+                    <!-- RIGHT: Inside view showing socket strip -->
+                    <text x="560" y="70" text-anchor="middle" font-size="10" font-weight="bold">INSIDE ENCLOSURE</text>
+
+                    <!-- Interior box -->
+                    <rect x="370" y="90" width="380" height="280" fill="#e8e8e8" stroke="#000" stroke-width="2"/>
+
+                    <!-- Socket strip mounted to side -->
+                    <rect x="400" y="130" width="60" height="180" fill="#f0f0f0" stroke="#000" stroke-width="1.5"/>
+                    <text x="430" y="150" text-anchor="middle" font-size="7" font-weight="bold">POWER</text>
+                    <text x="430" y="162" text-anchor="middle" font-size="7" font-weight="bold">STRIP</text>
+
+                    <!-- Individual sockets -->
+                    <rect x="410" y="175" width="40" height="25" fill="#fff" stroke="#000" stroke-width="1"/>
+                    <circle cx="420" cy="187" r="3" fill="#000"/>
+                    <circle cx="440" cy="187" r="3" fill="#000"/>
+                    <text x="470" y="190" font-size="6">← TV Power</text>
+
+                    <rect x="410" y="210" width="40" height="25" fill="#fff" stroke="#000" stroke-width="1"/>
+                    <circle cx="420" cy="222" r="3" fill="#000"/>
+                    <circle cx="440" cy="222" r="3" fill="#000"/>
+                    <text x="470" y="225" font-size="6">← Apple TV / Streaming box</text>
+
+                    <rect x="410" y="245" width="40" height="25" fill="#fff" stroke="#000" stroke-width="1"/>
+                    <circle cx="420" cy="257" r="3" fill="#000"/>
+                    <circle cx="440" cy="257" r="3" fill="#000"/>
+                    <text x="470" y="260" font-size="6">← Spare (soundbar, etc.)</text>
+
+                    <rect x="410" y="280" width="40" height="25" fill="#fff" stroke="#000" stroke-width="1"/>
+                    <circle cx="420" cy="292" r="3" fill="#000"/>
+                    <circle cx="440" cy="292" r="3" fill="#000"/>
+                    <text x="470" y="295" font-size="6">← Fan controller</text>
+
+                    <!-- Apple TV box -->
+                    <rect x="550" y="200" width="80" height="25" fill="#1a1a1a" stroke="#000" stroke-width="1" rx="3"/>
+                    <text x="590" y="217" text-anchor="middle" font-size="7" fill="#fff">Apple TV</text>
+
+                    <!-- Power cord to Apple TV -->
+                    <path d="M 450 222 Q 500 222 550 212" stroke="#000" stroke-width="2" fill="none"/>
+
+                    <!-- HDMI from Apple TV to TV -->
+                    <path d="M 630 212 L 680 212 L 680 150" stroke="#0066cc" stroke-width="2" fill="none"/>
+                    <text x="700" y="180" font-size="6" fill="#0066cc">HDMI</text>
+                    <text x="700" y="192" font-size="6" fill="#0066cc">to TV</text>
+
+                    <!-- TV outline (partial) -->
+                    <rect x="640" y="110" width="100" height="80" fill="#404040" stroke="#000" stroke-width="1.5"/>
+                    <text x="690" y="155" text-anchor="middle" font-size="8" fill="#fff">TV</text>
+
+                    <!-- BOTTOM: Wiring diagram -->
+                    <text x="400" y="395" text-anchor="middle" font-size="10" font-weight="bold">WIRING LAYOUT</text>
+
+                    <rect x="50" y="410" width="700" height="80" fill="#fffde0" stroke="#000" stroke-width="1"/>
+
+                    <!-- Flow diagram -->
+                    <rect x="80" y="430" width="80" height="40" fill="#fff" stroke="#000" stroke-width="1"/>
+                    <text x="120" y="455" text-anchor="middle" font-size="7">MAINS</text>
+                    <text x="120" y="465" text-anchor="middle" font-size="7">240V AC</text>
+
+                    <path d="M 160 450 L 200 450" stroke="#000" stroke-width="2" marker-end="url(#arr)"/>
+
+                    <rect x="200" y="430" width="80" height="40" fill="#303030" stroke="#000" stroke-width="1"/>
+                    <text x="240" y="450" text-anchor="middle" font-size="7" fill="#fff">IEC Inlet</text>
+                    <text x="240" y="462" text-anchor="middle" font-size="6" fill="#fff">(waterproof)</text>
+
+                    <path d="M 280 450 L 320 450" stroke="#000" stroke-width="2" marker-end="url(#arr)"/>
+
+                    <rect x="320" y="430" width="80" height="40" fill="#f0f0f0" stroke="#000" stroke-width="1"/>
+                    <text x="360" y="450" text-anchor="middle" font-size="7">Power Strip</text>
+                    <text x="360" y="462" text-anchor="middle" font-size="6">(4 sockets)</text>
+
+                    <path d="M 400 450 L 440 450" stroke="#000" stroke-width="2" marker-end="url(#arr)"/>
+
+                    <!-- Multiple outputs -->
+                    <text x="480" y="435" font-size="7">→ TV</text>
+                    <text x="480" y="450" font-size="7">→ Apple TV / streaming box</text>
+                    <text x="480" y="465" font-size="7">→ Soundbar (optional)</text>
+                    <text x="480" y="480" font-size="7">→ Fan controller</text>
+
+                    <!-- Key benefit -->
+                    <rect x="620" y="425" width="120" height="55" fill="#e8ffe8" stroke="#228B22" stroke-width="1"/>
+                    <text x="680" y="445" text-anchor="middle" font-size="7" font-weight="bold">SINGLE CABLE</text>
+                    <text x="680" y="458" text-anchor="middle" font-size="7" font-weight="bold">TO ENCLOSURE</text>
+                    <text x="680" y="473" text-anchor="middle" font-size="6">Everything else</text>
+                    <text x="680" y="483" text-anchor="middle" font-size="6">plugs in inside!</text>
+                </svg>
+            </div>
+            <p class="scale-info">Conceptual view - not to scale | Shows internal power arrangement</p>
+        </div>
+
+        <!-- NOTES SECTION -->
+        <div class="notes">
+            <h3>GENERAL NOTES</h3>
+            <ol style="font-size: 0.75rem; margin-left: 1.5rem;">
+                <li>ALL DIMENSIONS IN MILLIMETERS</li>
+                <li>DRAWING 1, 3, 4: TRUE SCALE SHOWING ACTUAL PROPORTIONS</li>
+                <li>DRAWING 2: ENLARGED 3:1 TO SHOW INTERNAL COMPONENT ARRANGEMENT</li>
+                <li>DRAWING 5-6: DETAIL VIEWS (NOT TO SCALE) - FUNCTIONAL DIAGRAMS</li>
+                <li>MATERIAL: ALUMINIUM 5052-H32, 2mm SHEET (3mm FOR STRUCTURAL)</li>
+                <li>FINISH: POWDER COAT RAL 9005 (BLACK) OR RAL 9016 (WHITE)</li>
+                <li>HARDWARE: ALL FASTENERS 316 STAINLESS STEEL (MARINE GRADE)</li>
+                <li>IP RATING: IP55 (DUST PROTECTED + LOW-PRESSURE WATER JETS)</li>
+                <li>FANS: 3× DELTA AFB1412HH-A, 140mm, 180-210 CFM TOTAL</li>
+                <li>GLASS: 8mm LAMINATED (4+4), AR COATED</li>
+                <li>TOLERANCES: ±1mm LINEAR, ±0.5° ANGULAR</li>
+            </ol>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem; font-size: 0.8rem;">
+            <p><strong>APEX ENCLOSURES</strong> | ATE-75 v5.2.2 IP55 | REV 2 | 2025-12-31</p>
+            <p><a href="designs.html">← Back to Design Overview</a></p>
+        </div>
+    </div>
+</body>
+</html>

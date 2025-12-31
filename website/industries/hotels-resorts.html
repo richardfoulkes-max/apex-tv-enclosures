@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outdoor TV Enclosures for Hotels & Resorts | Apex Enclosures UAE</title>
+    <meta name="description" content="Weatherproof TV enclosures for hotel pool areas, beach clubs, and resort outdoor spaces. Engineered for Gulf climate. Used by 5-star properties across UAE and Saudi Arabia.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0d9488;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --border: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+        .nav { background: white; padding: 1rem 2rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.25rem; font-weight: 700; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        .logo-icon { width: 36px; height: 36px; background: var(--primary); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1rem; }
+        .nav-cta { background: var(--primary); color: white; padding: 0.6rem 1.25rem; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+
+        .hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; padding: 80px 2rem; }
+        .hero-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .hero-badge { display: inline-block; background: rgba(13,148,136,0.2); border: 1px solid var(--primary); color: var(--primary); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; margin-bottom: 1rem; }
+        .hero h1 { font-size: 2.75rem; font-weight: 700; line-height: 1.15; margin-bottom: 1.5rem; }
+        .hero h1 span { color: var(--primary); }
+        .hero p { font-size: 1.1rem; color: rgba(255,255,255,0.8); margin-bottom: 2rem; }
+        .hero-stats { display: flex; gap: 2rem; margin-top: 2rem; }
+        .hero-stat { text-align: center; }
+        .hero-stat-value { font-size: 2rem; font-weight: 700; color: var(--primary); }
+        .hero-stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+        .hero-visual { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 2rem; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        .hero-visual-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .hero-visual-text { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+
+        section { padding: 80px 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 3rem; }
+        .section-header h2 { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
+        .section-header p { color: var(--text-muted); }
+
+        .use-cases { background: var(--bg-alt); }
+        .use-case-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .use-case-card { background: white; border-radius: 12px; padding: 2rem; border: 1px solid var(--border); }
+        .use-case-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .use-case-card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+        .use-case-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        .benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .benefit-card { display: flex; gap: 1rem; padding: 1.5rem; background: var(--bg-alt); border-radius: 12px; }
+        .benefit-icon { width: 50px; height: 50px; background: rgba(13,148,136,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+        .benefit-card h4 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .benefit-card p { color: var(--text-muted); font-size: 0.9rem; }
+
+        .specs { background: var(--bg-alt); }
+        .specs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .spec-card { background: white; padding: 1.5rem; border-radius: 12px; text-align: center; border: 1px solid var(--border); }
+        .spec-value { font-size: 1.75rem; font-weight: 700; color: var(--primary); }
+        .spec-label { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+        .cta-section { background: linear-gradient(135deg, #0d9488 0%, #0a7169 100%); color: white; text-align: center; }
+        .cta-section h2 { font-size: 2rem; margin-bottom: 1rem; }
+        .cta-section p { opacity: 0.9; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 1rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none; }
+        .btn-white { background: white; color: var(--primary); }
+        .btn-outline { border: 2px solid white; color: white; }
+
+        .testimonial { background: white; border-radius: 16px; padding: 2.5rem; border: 1px solid var(--border); max-width: 800px; margin: 3rem auto 0; }
+        .testimonial-quote { font-size: 1.1rem; font-style: italic; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+        .testimonial-avatar { width: 50px; height: 50px; background: var(--bg-alt); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
+        .testimonial-name { font-weight: 600; }
+        .testimonial-role { font-size: 0.85rem; color: var(--text-muted); }
+
+        .footer { background: var(--text); color: white; padding: 3rem 2rem; text-align: center; }
+        .footer p { opacity: 0.7; font-size: 0.9rem; }
+        .footer a { color: var(--primary); text-decoration: none; }
+
+        @media (max-width: 968px) {
+            .hero-container, .benefits-grid { grid-template-columns: 1fr; }
+            .use-case-grid, .specs-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero h1 { font-size: 2rem; }
+        }
+        @media (max-width: 640px) {
+            .use-case-grid, .specs-grid { grid-template-columns: 1fr; }
+            .hero-stats { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../retail/index.html" class="logo"><div class="logo-icon">A</div> Apex Enclosures</a>
+            <a href="../retail/index.html#contact" class="nav-cta">Get Quote</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-container">
+            <div>
+                <span class="hero-badge">Hospitality Solutions</span>
+                <h1>Outdoor TV Enclosures for <span>Hotels & Resorts</span></h1>
+                <p>Transform your pool areas, beach clubs, and outdoor lounges into premium entertainment destinations. Engineered for Gulf climate with 55°C heat protection.</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">55°C</div>
+                        <div class="hero-stat-label">Heat Rating</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">IP55</div>
+                        <div class="hero-stat-label">Weather Sealed</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">2 Year</div>
+                        <div class="hero-stat-label">Warranty</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-visual-icon">🏨</div>
+                <p class="hero-visual-text">Premium outdoor TV protection for 5-star properties</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="use-cases">
+        <div class="container">
+            <div class="section-header">
+                <h2>Where Hotels Use Our Enclosures</h2>
+                <p>From pool bars to private cabanas, our enclosures enhance guest experience in every outdoor area</p>
+            </div>
+            <div class="use-case-grid">
+                <div class="use-case-card">
+                    <div class="use-case-icon">🏊</div>
+                    <h3>Pool Areas & Cabanas</h3>
+                    <p>Keep guests entertained poolside with sports, news, and entertainment. Waterproof design handles splashes and pool chemicals.</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">🍸</div>
+                    <h3>Beach Clubs & Rooftop Bars</h3>
+                    <p>Create atmosphere at your outdoor venues. Perfect for live sports events, ambient visuals, or promotional content.</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">🌴</div>
+                    <h3>Garden Restaurants</h3>
+                    <p>Al fresco dining with entertainment. Durable enough for Dubai summers and Saudi heat waves.</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">🎯</div>
+                    <h3>Outdoor Lobby & Entrance</h3>
+                    <p>Digital signage for wayfinding, event schedules, and promotional content at hotel entrances.</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">🏖️</div>
+                    <h3>Private Beach Areas</h3>
+                    <p>Salt-resistant construction with 316 stainless steel hardware. Built for beachfront installations.</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">🎾</div>
+                    <h3>Sports & Fitness Zones</h3>
+                    <p>Outdoor gyms, tennis courts, and sports viewing areas. Dust-sealed for desert environments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Hotels Choose Apex</h2>
+                <p>Purpose-built for Gulf hospitality with features that matter</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌡️</div>
+                    <div>
+                        <h4>55°C Ambient Rating</h4>
+                        <p>Designed specifically for Gulf summers. Active cooling maintains safe TV temperature even in direct afternoon sun.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔇</div>
+                    <div>
+                        <h4>Quiet PWM Cooling</h4>
+                        <p>Variable speed fans run quietly at low RPM most of the time. No disruptive on/off cycling that disturbs guests.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🧂</div>
+                    <div>
+                        <h4>Marine-Grade Materials</h4>
+                        <p>5052-H32 aluminum and 316 stainless steel hardware resist salt corrosion at beachfront locations.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔒</div>
+                    <div>
+                        <h4>Secure Locking System</h4>
+                        <p>4-point compression latches deter tampering. Optional keyed locks for high-traffic public areas.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📺</div>
+                    <div>
+                        <h4>Use Any TV Brand</h4>
+                        <p>Install Samsung, LG, or any commercial display. Easy to swap if damaged - no proprietary panels.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🛠️</div>
+                    <div>
+                        <h4>Easy Maintenance</h4>
+                        <p>Front-access service door. Filter replacement takes 2 minutes. No need to unmount from wall.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="specs">
+        <div class="container">
+            <div class="section-header">
+                <h2>Technical Specifications</h2>
+                <p>Commercial-grade construction for demanding hospitality environments</p>
+            </div>
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <div class="spec-value">75"</div>
+                    <div class="spec-label">Screen Size (55"-85" available)</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-value">IP55</div>
+                    <div class="spec-label">Dust & Water Jet Protected</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-value">8mm</div>
+                    <div class="spec-label">Laminated Safety Glass</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-value">210 CFM</div>
+                    <div class="spec-label">Active Airflow</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-value">160mm</div>
+                    <div class="spec-label">Slim Profile Depth</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-value">316 SS</div>
+                    <div class="spec-label">Marine-Grade Hardware</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-value">MERV 8</div>
+                    <div class="spec-label">Dust Filtration</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-value">4 Socket</div>
+                    <div class="spec-label">Internal Power Strip</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2>Volume Pricing for Hotels</h2>
+                <p>Special rates for hospitality projects with 3+ units</p>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial-quote">"We're offering volume discounts for hotel and resort projects. Whether you need 3 units for a pool area or 20+ for a full property rollout, contact us for project pricing."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">📞</div>
+                    <div>
+                        <div class="testimonial-name">Contact our hospitality team</div>
+                        <div class="testimonial-role">+971 50 559 8675 | apexenclosures@icloud.com</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Upgrade Your Outdoor Spaces?</h2>
+            <p>Get a customized quote for your hotel or resort project. We offer site assessments, installation coordination, and ongoing support.</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/971505598675?text=Hi%2C%20I%27m%20interested%20in%20outdoor%20TV%20enclosures%20for%20our%20hotel%2Fresort.%20Please%20send%20information%20about%20volume%20pricing." class="btn btn-white">WhatsApp Us</a>
+                <a href="mailto:apexenclosures@icloud.com?subject=Hotel%20Project%20Inquiry" class="btn btn-outline">Email for Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Apex Enclosures | Dubai, UAE | <a href="tel:+971505598675">+971 50 559 8675</a></p>
+            <p style="margin-top: 0.5rem;"><a href="../retail/index.html">Home</a> · <a href="restaurants-bars.html">Restaurants</a> · <a href="pool-areas.html">Pool Areas</a></p>
+        </div>
+    </footer>
+</body>
+</html>

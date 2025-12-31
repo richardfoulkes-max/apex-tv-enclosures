@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outdoor TV Enclosures for Pool Areas & Villas | Apex Enclosures UAE</title>
+    <meta name="description" content="Weatherproof TV enclosures for villa pool areas, covered patios, and outdoor living spaces. Engineered for UAE and Saudi Arabia extreme heat.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #0d9488; --text: #0f172a; --text-muted: #64748b; --bg: #ffffff; --bg-alt: #f8fafc; --border: #e2e8f0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .nav { background: white; padding: 1rem 2rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.25rem; font-weight: 700; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        .logo-icon { width: 36px; height: 36px; background: var(--primary); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; }
+        .nav-cta { background: var(--primary); color: white; padding: 0.6rem 1.25rem; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+        .hero { background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%); color: white; padding: 80px 2rem; }
+        .hero-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .hero-badge { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; margin-bottom: 1rem; }
+        .hero h1 { font-size: 2.75rem; font-weight: 700; line-height: 1.15; margin-bottom: 1.5rem; }
+        .hero p { font-size: 1.1rem; color: rgba(255,255,255,0.85); margin-bottom: 2rem; }
+        .hero-stats { display: flex; gap: 2rem; margin-top: 2rem; }
+        .hero-stat { text-align: center; }
+        .hero-stat-value { font-size: 2rem; font-weight: 700; }
+        .hero-stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.7); }
+        .hero-visual { background: rgba(255,255,255,0.1); border-radius: 16px; padding: 2rem; text-align: center; border: 1px solid rgba(255,255,255,0.2); }
+        .hero-visual-icon { font-size: 4rem; margin-bottom: 1rem; }
+        section { padding: 80px 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 3rem; }
+        .section-header h2 { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
+        .section-header p { color: var(--text-muted); }
+        .alt-bg { background: var(--bg-alt); }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .card { background: white; border-radius: 12px; padding: 2rem; border: 1px solid var(--border); }
+        .card-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .benefit-card { display: flex; gap: 1rem; padding: 1.5rem; background: var(--bg-alt); border-radius: 12px; }
+        .benefit-icon { width: 50px; height: 50px; background: rgba(13,148,136,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+        .benefit-card h4 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .benefit-card p { color: var(--text-muted); font-size: 0.9rem; }
+        .pricing-section { background: linear-gradient(135deg, var(--primary) 0%, #0a7169 100%); color: white; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .price-card { background: white; color: var(--text); border-radius: 16px; padding: 2rem; text-align: center; }
+        .price-card.featured { transform: scale(1.05); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .price-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .price-card .size { color: var(--primary); font-size: 3rem; font-weight: 700; }
+        .price-card .price { font-size: 1.5rem; font-weight: 600; margin: 1rem 0; }
+        .price-card .price span { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
+        .price-card ul { list-style: none; text-align: left; margin: 1.5rem 0; }
+        .price-card li { padding: 0.5rem 0; font-size: 0.9rem; color: var(--text-muted); }
+        .price-card li::before { content: "✓ "; color: var(--primary); font-weight: bold; }
+        .price-card .btn { display: block; padding: 1rem; background: var(--primary); color: white; border-radius: 8px; text-decoration: none; font-weight: 600; }
+        .speaker-section { background: var(--text); color: white; }
+        .speaker-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .speaker-card { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 1.5rem; border: 1px solid rgba(255,255,255,0.1); }
+        .speaker-card h4 { margin-bottom: 0.5rem; }
+        .speaker-card .price { color: var(--primary); font-weight: 600; font-size: 1.25rem; margin: 0.5rem 0; }
+        .speaker-card p { font-size: 0.85rem; opacity: 0.8; }
+        .speaker-card .tag { display: inline-block; background: var(--primary); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; margin-bottom: 0.5rem; }
+        .faq { background: var(--bg-alt); }
+        .faq-list { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: white; border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 1rem; border: 1px solid var(--border); }
+        .faq-item h4 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--primary); }
+        .faq-item p { color: var(--text-muted); font-size: 0.95rem; }
+        .cta-section { background: var(--bg); text-align: center; border-top: 1px solid var(--border); }
+        .cta-section h2 { font-size: 2rem; margin-bottom: 1rem; }
+        .cta-section p { color: var(--text-muted); margin-bottom: 2rem; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 1rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-outline { border: 2px solid var(--border); color: var(--text); }
+        .footer { background: var(--text); color: white; padding: 3rem 2rem; text-align: center; }
+        .footer p { opacity: 0.7; font-size: 0.9rem; }
+        .footer a { color: var(--primary); text-decoration: none; }
+        @media (max-width: 968px) { .hero-container, .grid-2 { grid-template-columns: 1fr; } .grid-3, .pricing-grid, .speaker-grid { grid-template-columns: repeat(2, 1fr); } .hero h1 { font-size: 2rem; } .price-card.featured { transform: none; } }
+        @media (max-width: 640px) { .grid-3, .pricing-grid, .speaker-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../retail/index.html" class="logo"><div class="logo-icon">A</div> Apex Enclosures</a>
+            <a href="../retail/index.html#contact" class="nav-cta">Get Quote</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-container">
+            <div>
+                <span class="hero-badge">Residential Solutions</span>
+                <h1>Outdoor TV for Your Villa Pool Area</h1>
+                <p>Watch sports by the pool. Movie nights under the stars. Your outdoor living space deserves entertainment that survives Gulf summers.</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">55°C</div>
+                        <div class="hero-stat-label">Heat Rated</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">IP55</div>
+                        <div class="hero-stat-label">Splash Proof</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">2 Year</div>
+                        <div class="hero-stat-label">Warranty</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-visual-icon">🏊</div>
+                <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">Perfect for covered patios, pergolas, and pool houses</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <h2>Where Homeowners Install</h2>
+                <p>The most popular locations in UAE and Saudi villas</p>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon">🏖️</div>
+                    <h3>Pool Side</h3>
+                    <p>Watch the game while floating in the pool. Our enclosure handles splashes, chlorine, and intense sun reflection off the water.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🌿</div>
+                    <h3>Covered Patio</h3>
+                    <p>The most popular spot. Shaded installations run cooler and give the best viewing experience day and night.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🍖</div>
+                    <h3>Outdoor Kitchen / BBQ Area</h3>
+                    <p>Entertainment while you grill. Protected from grease splatter and cooking heat.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏡</div>
+                    <h3>Garden Majlis</h3>
+                    <p>Traditional outdoor seating with modern entertainment. Perfect for gatherings and Ramadan evenings.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🚗</div>
+                    <h3>Garage / Workshop</h3>
+                    <p>Entertainment while you work on projects. Dust-sealed design keeps the interior clean in workshop environments.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🌙</div>
+                    <h3>Rooftop Terrace</h3>
+                    <p>Dubai skyline views with movie nights. Wind-resistant mounting and full weather protection.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Homeowners Choose Apex</h2>
+                <p>Features that matter for residential installations</p>
+            </div>
+            <div class="grid-2">
+                <div class="benefit-card">
+                    <div class="benefit-icon">📺</div>
+                    <div>
+                        <h4>Use Your Own TV</h4>
+                        <p>Install any Samsung, LG, or Sony TV. Upgrade to a newer model anytime without replacing the enclosure. Use your existing TV remote and smart features.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔌</div>
+                    <div>
+                        <h4>Built-in Streaming Box Space</h4>
+                        <p>4-socket internal power strip for Apple TV, OSN box, or gaming console. Everything stays protected inside the enclosure.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔇</div>
+                    <div>
+                        <h4>Whisper-Quiet Cooling</h4>
+                        <p>PWM-controlled fans run slowly when cool, speed up only when needed. No annoying on/off cycling that disturbs relaxation.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🛡️</div>
+                    <div>
+                        <h4>Premium Glass Front</h4>
+                        <p>8mm laminated glass (not cheap plastic). Crystal clear viewing that won't yellow or scratch over time.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🧹</div>
+                    <div>
+                        <h4>Hose It Down</h4>
+                        <p>IP55 rated - spray it with the garden hose to clean. Protected against low-pressure water jets from any direction.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🏗️</div>
+                    <div>
+                        <h4>Wall or Recess Mount</h4>
+                        <p>Standard wall mount included. Or specify recess installation for a flush, built-in look in new construction.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-section">
+        <div class="container">
+            <div class="section-header" style="color: white;">
+                <h2>Choose Your Size</h2>
+                <p style="color: rgba(255,255,255,0.8);">Enclosure only - bring your own TV</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>Standard</h3>
+                    <div class="size">55"</div>
+                    <div class="price">AED 7,000 <span>excl. VAT</span></div>
+                    <ul>
+                        <li>Fits 49" - 55" TVs</li>
+                        <li>3-fan cooling system</li>
+                        <li>8mm laminated glass</li>
+                        <li>Wall mount included</li>
+                        <li>2 year warranty</li>
+                    </ul>
+                    <a href="https://wa.me/971505598675?text=Hi%2C%20I%27m%20interested%20in%20a%2055%22%20outdoor%20TV%20enclosure%20for%20my%20villa." class="btn">Get Quote</a>
+                </div>
+                <div class="price-card featured">
+                    <h3>Most Popular</h3>
+                    <div class="size">65"</div>
+                    <div class="price">AED 9,000 <span>excl. VAT</span></div>
+                    <ul>
+                        <li>Fits 60" - 65" TVs</li>
+                        <li>3-fan cooling system</li>
+                        <li>8mm laminated glass</li>
+                        <li>Wall mount included</li>
+                        <li>2 year warranty</li>
+                    </ul>
+                    <a href="https://wa.me/971505598675?text=Hi%2C%20I%27m%20interested%20in%20a%2065%22%20outdoor%20TV%20enclosure%20for%20my%20villa." class="btn">Get Quote</a>
+                </div>
+                <div class="price-card">
+                    <h3>Premium</h3>
+                    <div class="size">75"</div>
+                    <div class="price">AED 12,000 <span>excl. VAT</span></div>
+                    <ul>
+                        <li>Fits 70" - 75" TVs</li>
+                        <li>3-fan cooling system</li>
+                        <li>8mm laminated glass</li>
+                        <li>Wall mount included</li>
+                        <li>2 year warranty</li>
+                    </ul>
+                    <a href="https://wa.me/971505598675?text=Hi%2C%20I%27m%20interested%20in%20a%2075%22%20outdoor%20TV%20enclosure%20for%20my%20villa." class="btn">Get Quote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="speaker-section">
+        <div class="container">
+            <div class="section-header" style="color: white;">
+                <h2>Add Outdoor Speakers</h2>
+                <p style="color: rgba(255,255,255,0.8);">Recommended weatherproof speakers for pool areas</p>
+            </div>
+            <div class="speaker-grid">
+                <div class="speaker-card">
+                    <span class="tag">Best Value</span>
+                    <h4>JBL Flip 7</h4>
+                    <div class="price">~AED 480</div>
+                    <p>IP67 fully waterproof - drop it in the pool, it floats! 12hr battery. Portable, move it anywhere. Great starter option.</p>
+                </div>
+                <div class="speaker-card">
+                    <span class="tag">Permanent Install</span>
+                    <h4>Polk Atrium 4</h4>
+                    <div class="price">~AED 750/pair</div>
+                    <p>Wired outdoor speakers. Mount under the patio. Paintable to match walls. IP65 rated. Clear vocals for sports.</p>
+                </div>
+                <div class="speaker-card">
+                    <span class="tag">Premium Choice</span>
+                    <h4>Sonos Move 2</h4>
+                    <div class="price">~AED 1,650</div>
+                    <p>Smart speaker with auto-tuning. WiFi streaming + Bluetooth. 24hr battery. The premium pool-side companion.</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.7;">Ask about speaker bundles when you order your enclosure</p>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Common Questions</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h4>Can I use my existing TV?</h4>
+                    <p>Yes! Any standard flat-screen TV up to the enclosure's size limit will work. Samsung, LG, Sony, TCL - all work perfectly. You keep all your smart TV features and use your normal remote.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Will it survive Dubai summer?</h4>
+                    <p>Yes. We're rated for 55°C ambient temperature - hotter than any Dubai summer day. The active cooling system keeps your TV at safe operating temperature even in direct afternoon sun.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Can I install an Apple TV or streaming box inside?</h4>
+                    <p>Yes! There's a 4-socket internal power strip. Put your Apple TV, OSN box, or gaming console inside the enclosure. Connect via short HDMI cable to the TV. Everything stays protected.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Is it loud?</h4>
+                    <p>No. Our PWM-controlled fans run quietly at low speed most of the time. They only speed up when internal temperature rises. Much quieter than competitors with simple on/off thermostats.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What if my TV breaks?</h4>
+                    <p>Simply open the enclosure and swap the TV. No need to buy a whole new unit like with "outdoor TVs". Replace with any TV of the same size. Local purchase, local warranty.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Do you install?</h4>
+                    <p>We can recommend installation partners, or your own contractor/handyman can install. It mounts like a standard wall bracket - any electrician or AV installer can handle it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready for Outdoor Entertainment?</h2>
+            <p>Get a quote for your villa. We'll help you choose the right size and answer any questions.</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/971505598675?text=Hi%2C%20I%27m%20interested%20in%20an%20outdoor%20TV%20enclosure%20for%20my%20villa%20pool%20area." class="btn btn-primary">WhatsApp Us</a>
+                <a href="mailto:apexenclosures@icloud.com" class="btn btn-outline">Email Us</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Apex Enclosures | Dubai, UAE | <a href="tel:+971505598675">+971 50 559 8675</a></p>
+            <p style="margin-top: 0.5rem;"><a href="../retail/index.html">Home</a> · <a href="hotels-resorts.html">Hotels</a> · <a href="restaurants-bars.html">Restaurants</a></p>
+        </div>
+    </footer>
+</body>
+</html>
