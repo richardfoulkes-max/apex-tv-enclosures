@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex TV Enclosures - Partner CRM</title>
+    <title>Apex Enclosures - Partner CRM</title>
     <style>
         :root {
             --primary: #1e3a5f;
@@ -24,211 +24,299 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.5;
+            height: 100vh;
+            overflow: hidden;
         }
 
         /* Header */
         .header {
             background: linear-gradient(135deg, var(--primary), #2d4a6f);
             color: white;
-            padding: 1.5rem 2rem;
+            padding: 1rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            height: 60px;
         }
-        .header h1 { font-size: 1.5rem; }
-        .header-stats {
+        .header h1 { font-size: 1.25rem; }
+        .header-stats { display: flex; gap: 1.5rem; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 1.25rem; font-weight: 700; }
+        .stat-label { font-size: 0.7rem; opacity: 0.8; }
+
+        /* Main Layout - Master/Detail */
+        .main-container {
             display: flex;
-            gap: 2rem;
-        }
-        .stat {
-            text-align: center;
-        }
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        .stat-label {
-            font-size: 0.75rem;
-            opacity: 0.8;
+            height: calc(100vh - 60px);
+            margin-top: 60px;
         }
 
-        /* Main Content */
-        .main-content { padding: 2rem; max-width: 1600px; margin: 0 auto; }
-
-        /* Tabs */
-        .tabs {
+        /* Left Panel - Partner List */
+        .list-panel {
+            width: 400px;
+            min-width: 350px;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            background: white;
+        }
+        .list-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            background: #f8fafc;
+        }
+        .search-box {
             display: flex;
             gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
-        .tab {
-            padding: 0.75rem 1.5rem;
-            background: none;
-            border: none;
+        .search-input {
+            flex: 1;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        .search-input:focus { outline: none; border-color: var(--accent); }
+        .filter-row {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .filter-select {
+            flex: 1;
+            padding: 0.4rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            background: white;
+        }
+        .partner-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+        .partner-item {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
             cursor: pointer;
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            border-radius: 8px 8px 0 0;
-            transition: all 0.2s;
+            transition: background 0.15s;
         }
-        .tab:hover { background: #f1f5f9; color: var(--text); }
-        .tab.active { background: var(--accent); color: white; }
+        .partner-item:hover { background: #f1f5f9; }
+        .partner-item.active { background: #eff6ff; border-left: 3px solid var(--accent); }
+        .partner-name { font-weight: 600; font-size: 0.95rem; color: var(--text); }
+        .partner-meta { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
+        .partner-badges { display: flex; gap: 0.5rem; margin-top: 0.5rem; flex-wrap: wrap; }
+
+        /* Right Panel - Detail View */
+        .detail-panel {
+            flex: 1;
+            overflow-y: auto;
+            background: var(--bg);
+        }
+        .detail-empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        .detail-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        .detail-title { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .detail-subtitle { color: var(--text-muted); margin-top: 0.25rem; }
+        .detail-actions { display: flex; gap: 0.5rem; }
 
         /* Cards */
         .card {
             background: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 10px;
             border: 1px solid var(--border);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
         .card-header {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid var(--border);
         }
-        .card-title { font-size: 1.1rem; font-weight: 600; color: var(--primary); }
+        .card-body { padding: 1rem; }
 
-        /* Form */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-        }
-        .form-group { margin-bottom: 0.5rem; }
-        .form-group.full { grid-column: span 4; }
-        .form-group.half { grid-column: span 2; }
-        .form-label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: 0.25rem;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
+        /* Form Elements */
+        .form-row { display: flex; gap: 1rem; margin-bottom: 0.75rem; }
+        .form-group { flex: 1; }
+        .form-group.full { flex: 100%; }
+        .form-label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.25rem; text-transform: uppercase; }
         .form-input, .form-select, .form-textarea {
             width: 100%;
-            padding: 0.6rem;
+            padding: 0.5rem 0.75rem;
             border: 1px solid var(--border);
             border-radius: 6px;
             font-size: 0.9rem;
+            background: white;
         }
+        .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--accent); }
         .form-textarea { min-height: 80px; resize: vertical; }
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
+        .form-value { font-size: 0.95rem; padding: 0.25rem 0; }
 
         /* Buttons */
         .btn {
-            padding: 0.6rem 1.25rem;
+            padding: 0.5rem 1rem;
             border-radius: 6px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.15s;
             border: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
         }
         .btn-primary { background: var(--accent); color: white; }
         .btn-primary:hover { background: #1d4ed8; }
         .btn-success { background: var(--success); color: white; }
         .btn-danger { background: var(--danger); color: white; }
-        .btn-small { padding: 0.4rem 0.75rem; font-size: 0.8rem; }
-        .btn-outline {
-            background: white;
-            border: 1px solid var(--border);
-            color: var(--text);
-        }
+        .btn-outline { background: white; border: 1px solid var(--border); color: var(--text); }
         .btn-outline:hover { background: #f8fafc; }
+        .btn-small { padding: 0.35rem 0.75rem; font-size: 0.8rem; }
+        .btn-icon { padding: 0.4rem; min-width: 32px; justify-content: center; }
 
-        /* Table */
-        .table-container { overflow-x: auto; }
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-        }
-        .data-table th, .data-table td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-        .data-table th {
-            font-weight: 600;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            background: #f8fafc;
-            position: sticky;
-            top: 0;
-        }
-        .data-table tr:hover { background: #f8fafc; }
-        .data-table tr.selected { background: #eff6ff; }
-
-        /* Status Badges */
+        /* Badges */
         .badge {
             display: inline-block;
-            padding: 0.25rem 0.6rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
             font-weight: 600;
         }
-        .badge-not-contacted { background: #f1f5f9; color: #64748b; }
-        .badge-contacted { background: #dbeafe; color: #1e40af; }
-        .badge-responded { background: #fef3c7; color: #92400e; }
-        .badge-meeting { background: #e0e7ff; color: #4338ca; }
-        .badge-quoted { background: #fce7f3; color: #9d174d; }
-        .badge-won { background: #dcfce7; color: #166534; }
-        .badge-lost { background: #fee2e2; color: #991b1b; }
+        .badge-status-not-contacted { background: #f1f5f9; color: #64748b; }
+        .badge-status-contacted { background: #dbeafe; color: #1e40af; }
+        .badge-status-responded { background: #fef3c7; color: #92400e; }
+        .badge-status-meeting { background: #e0e7ff; color: #4338ca; }
+        .badge-status-quoted { background: #fce7f3; color: #9d174d; }
+        .badge-status-won { background: #dcfce7; color: #166534; }
+        .badge-status-lost { background: #fee2e2; color: #991b1b; }
 
-        /* Partner Type Badges */
-        .type-fabricator { background: #dbeafe; color: #1e40af; }
-        .type-distributor { background: #dcfce7; color: #166534; }
-        .type-contractor { background: #fef3c7; color: #92400e; }
-        .type-supplier { background: #e0e7ff; color: #4338ca; }
-        .type-av-integrator { background: #fae8ff; color: #86198f; }
-        .type-pool-landscape { background: #ccfbf1; color: #0f766e; }
-        .type-hospitality { background: #fef3c7; color: #b45309; }
-        .type-designer { background: #fce7f3; color: #9d174d; }
-        .type-developer { background: #e0e7ff; color: #4f46e5; }
-        .type-other { background: #f1f5f9; color: #64748b; }
+        .badge-type-fabricator { background: #dbeafe; color: #1e40af; }
+        .badge-type-av-integrator { background: #fae8ff; color: #86198f; }
+        .badge-type-pool-landscape { background: #ccfbf1; color: #0f766e; }
+        .badge-type-hospitality { background: #fef3c7; color: #b45309; }
+        .badge-type-designer { background: #fce7f3; color: #9d174d; }
+        .badge-type-developer { background: #e0e7ff; color: #4f46e5; }
+        .badge-type-distributor { background: #dcfce7; color: #166534; }
+        .badge-type-contractor { background: #fef3c7; color: #92400e; }
+        .badge-type-other { background: #f1f5f9; color: #64748b; }
 
-        /* Filters */
-        .filters {
+        .badge-priority-high { background: #fee2e2; color: #991b1b; }
+        .badge-priority-medium { background: #fef3c7; color: #92400e; }
+        .badge-priority-low { background: #f1f5f9; color: #64748b; }
+
+        /* Contacts List */
+        .contact-item {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
+            justify-content: space-between;
             align-items: center;
-        }
-        .filter-group {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .filter-label { font-size: 0.85rem; color: var(--text-muted); }
-        .search-input {
-            padding: 0.5rem 1rem;
+            padding: 0.75rem;
             border: 1px solid var(--border);
-            border-radius: 6px;
-            width: 250px;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            background: #fafafa;
         }
+        .contact-info { flex: 1; }
+        .contact-name { font-weight: 600; font-size: 0.9rem; }
+        .contact-title { font-size: 0.8rem; color: var(--text-muted); }
+        .contact-details { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
+        .contact-badges { margin-top: 0.25rem; }
+        .badge-dm { background: #dcfce7; color: #166534; font-size: 0.65rem; }
+        .badge-primary { background: #dbeafe; color: #1e40af; font-size: 0.65rem; }
+
+        /* Deal Section */
+        .deal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .deal-stat { text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px; }
+        .deal-stat-value { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .deal-stat-label { font-size: 0.75rem; color: var(--text-muted); }
+        .products-interested { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+        .product-tag { background: var(--accent); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; }
+        .product-tag.inactive { background: #e2e8f0; color: #64748b; }
+
+        /* Activity Timeline */
+        .activity-timeline { position: relative; padding-left: 1.5rem; }
+        .activity-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+        .activity-item {
+            position: relative;
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        .activity-item::before {
+            content: '';
+            position: absolute;
+            left: -1.25rem;
+            top: 1rem;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid white;
+        }
+        .activity-item.type-call::before { background: #10b981; }
+        .activity-item.type-email_sent::before { background: #2563eb; }
+        .activity-item.type-email_received::before { background: #8b5cf6; }
+        .activity-item.type-meeting::before { background: #f59e0b; }
+        .activity-item.type-demo::before { background: #ec4899; }
+        .activity-item.type-quote_sent::before { background: #14b8a6; }
+        .activity-item.type-site_visit::before { background: #f97316; }
+        .activity-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem; }
+        .activity-type { font-weight: 600; font-size: 0.85rem; }
+        .activity-date { font-size: 0.75rem; color: var(--text-muted); }
+        .activity-desc { font-size: 0.85rem; color: var(--text); }
+
+        /* Add Activity Form */
+        .add-activity-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        .add-activity-form select { width: 140px; }
+        .add-activity-form input { flex: 1; }
 
         /* Modal */
         .modal-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.5);
-            z-index: 1000;
+            z-index: 200;
             align-items: center;
             justify-content: center;
         }
@@ -237,9 +325,9 @@
             background: white;
             border-radius: 12px;
             padding: 1.5rem;
-            max-width: 700px;
+            max-width: 500px;
             width: 90%;
-            max-height: 90vh;
+            max-height: 80vh;
             overflow-y: auto;
         }
         .modal-header {
@@ -247,8 +335,6 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid var(--border);
         }
         .modal-title { font-size: 1.1rem; font-weight: 600; }
         .modal-close {
@@ -259,200 +345,70 @@
             color: var(--text-muted);
         }
 
-        /* Activity Log */
-        .activity-log {
-            max-height: 200px;
-            overflow-y: auto;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 0.75rem;
-            background: #f8fafc;
-        }
-        .activity-item {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.85rem;
-        }
-        .activity-item:last-child { border-bottom: none; }
-        .activity-date { color: var(--text-muted); font-size: 0.75rem; }
-
-        /* Summary Cards */
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .summary-card {
-            background: white;
-            border-radius: 8px;
-            padding: 1rem;
-            text-align: center;
-            border: 1px solid var(--border);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .summary-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .summary-card.active { border-color: var(--accent); background: #eff6ff; }
-        .summary-count { font-size: 1.5rem; font-weight: 700; }
-        .summary-label { font-size: 0.75rem; color: var(--text-muted); }
-
-        /* Tab Panels */
-        .tab-panel { display: none; }
-        .tab-panel.active { display: block; }
-
-        /* Actions */
-        .actions { display: flex; gap: 0.5rem; }
-
-        @media (max-width: 1200px) {
-            .form-grid { grid-template-columns: repeat(2, 1fr); }
-            .form-group.full { grid-column: span 2; }
-            .form-group.half { grid-column: span 1; }
-            .summary-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-        @media (max-width: 768px) {
-            .form-grid { grid-template-columns: 1fr; }
-            .form-group.full, .form-group.half { grid-column: span 1; }
-            .summary-grid { grid-template-columns: repeat(2, 1fr); }
-            .header { flex-direction: column; gap: 1rem; }
-        }
-        /* Navigation */
-        .doc-nav {
-            background: linear-gradient(135deg, #1e3a5f 0%, #0f1f3a 100%);
-            padding: 1rem 2rem;
-            border-bottom: 1px solid var(--border);
-        }
-        .doc-nav h3 {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 0.75rem;
-        }
-        .doc-nav-grid {
+        /* Tabs */
+        .tabs {
             display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
+            gap: 0;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 1rem;
         }
-        .doc-card {
-            background: rgba(255,255,255,0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            text-decoration: none;
-            color: white;
-            border: 1px solid rgba(255,255,255,0.2);
-            font-size: 0.85rem;
+        .tab {
+            padding: 0.75rem 1.25rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
             font-weight: 500;
-            transition: all 0.2s ease;
+            color: var(--text-muted);
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
         }
-        .doc-card:hover {
-            background: rgba(255,255,255,0.2);
-        }
-        .doc-card.active {
-            background: white;
-            color: var(--primary);
+        .tab:hover { color: var(--text); }
+        .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* New Partner Button */
+        .new-partner-btn {
+            width: 100%;
+            padding: 0.75rem;
+            margin: 1rem 1rem 0 1rem;
+            width: calc(100% - 2rem);
         }
 
-        /* Sortable headers */
-        .sortable {
-            cursor: pointer;
-            user-select: none;
+        /* Responsive */
+        @media (max-width: 900px) {
+            .list-panel { width: 100%; position: absolute; z-index: 50; height: 100%; }
+            .detail-panel { display: none; }
+            .detail-panel.active { display: block; position: absolute; left: 0; right: 0; z-index: 60; }
+            .back-btn { display: block !important; }
         }
-        .sortable:hover {
-            background: #e2e8f0;
-        }
-        .sort-arrow {
-            margin-left: 4px;
-            opacity: 0.5;
-        }
-        .sort-arrow.active {
-            opacity: 1;
-        }
+        .back-btn { display: none; }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="doc-nav">
-        <h3>Manufacturing Documentation</h3>
-        <div class="doc-nav-grid">
-            <a href="index.html" class="doc-card">Website</a>
-            <a href="specification.html" class="doc-card">Specification</a>
-            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
-            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
-            <a href="china-suppliers.html" class="doc-card">China Suppliers</a>
-            <a href="go-to-market.html" class="doc-card">Go-to-Market</a>
-            <a href="partner-crm.html" class="doc-card active">Partner CRM</a>
-        </div>
-    </nav>
-
     <!-- Header -->
     <header class="header">
-        <div>
-            <h1>Apex TV Enclosures - Partner CRM</h1>
-            <p style="opacity: 0.8; font-size: 0.9rem;">Track fabricators, distributors, and contractors</p>
-        </div>
+        <h1>Partner CRM</h1>
         <div class="header-stats">
-            <div class="stat">
-                <div class="stat-value" id="totalPartners">0</div>
-                <div class="stat-label">Total Partners</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value" id="activeDeals">0</div>
-                <div class="stat-label">Active Deals</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value" id="needsFollowup">0</div>
-                <div class="stat-label">Needs Follow-up</div>
-            </div>
+            <div class="stat"><div class="stat-value" id="totalPartners">0</div><div class="stat-label">Total</div></div>
+            <div class="stat"><div class="stat-value" id="activeDeals">0</div><div class="stat-label">Active</div></div>
+            <div class="stat"><div class="stat-value" id="pipelineValue">0</div><div class="stat-label">Pipeline</div></div>
+            <div class="stat"><div class="stat-value" id="followupsToday">0</div><div class="stat-label">Follow-ups</div></div>
         </div>
     </header>
 
-    <main class="main-content">
-        <!-- Tabs -->
-        <div class="tabs">
-            <button class="tab active" onclick="showTab('partners')">All Partners</button>
-            <button class="tab" onclick="showTab('pipeline')">Pipeline</button>
-            <button class="tab" onclick="showTab('add')">+ Add Partner</button>
-        </div>
-
-        <!-- Partners Tab -->
-        <div id="partners" class="tab-panel active">
-            <!-- Status Summary -->
-            <div class="summary-grid">
-                <div class="summary-card" onclick="filterByStatus('all')">
-                    <div class="summary-count" id="countAll">0</div>
-                    <div class="summary-label">All</div>
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Left Panel - Partner List -->
+        <div class="list-panel">
+            <div class="list-header">
+                <div class="search-box">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search partners..." oninput="renderList()">
+                    <button class="btn btn-primary btn-icon" onclick="showNewPartnerModal()">+</button>
                 </div>
-                <div class="summary-card" onclick="filterByStatus('Not Contacted')">
-                    <div class="summary-count" id="countNotContacted">0</div>
-                    <div class="summary-label">Not Contacted</div>
-                </div>
-                <div class="summary-card" onclick="filterByStatus('Contacted')">
-                    <div class="summary-count" id="countContacted">0</div>
-                    <div class="summary-label">Contacted</div>
-                </div>
-                <div class="summary-card" onclick="filterByStatus('Responded')">
-                    <div class="summary-count" id="countResponded">0</div>
-                    <div class="summary-label">Responded</div>
-                </div>
-                <div class="summary-card" onclick="filterByStatus('Quoted')">
-                    <div class="summary-count" id="countQuoted">0</div>
-                    <div class="summary-label">Quoted</div>
-                </div>
-                <div class="summary-card" onclick="filterByStatus('Won')">
-                    <div class="summary-count" id="countWon">0</div>
-                    <div class="summary-label">Won</div>
-                </div>
-            </div>
-
-            <!-- Filters -->
-            <div class="filters">
-                <div class="filter-group">
-                    <input type="text" class="search-input" id="searchInput" placeholder="Search partners..." oninput="renderPartners()">
-                </div>
-                <div class="filter-group">
-                    <label class="filter-label">Type:</label>
-                    <select class="form-select" id="typeFilter" style="width: 150px;" onchange="renderPartners()">
+                <div class="filter-row">
+                    <select class="filter-select" id="typeFilter" onchange="renderList()">
                         <option value="">All Types</option>
                         <option value="Fabricator">Fabricator</option>
                         <option value="AV Integrator">AV Integrator</option>
@@ -462,175 +418,61 @@
                         <option value="Developer">Developer</option>
                         <option value="Distributor">Distributor</option>
                         <option value="Contractor">Contractor</option>
-                        <option value="Other">Other</option>
                     </select>
-                </div>
-                <div class="filter-group">
-                    <label class="filter-label">Region:</label>
-                    <select class="form-select" id="regionFilter" style="width: 150px;" onchange="renderPartners()">
+                    <select class="filter-select" id="statusFilter" onchange="renderList()">
+                        <option value="">All Status</option>
+                        <option value="Not Contacted">Not Contacted</option>
+                        <option value="Contacted">Contacted</option>
+                        <option value="Responded">Responded</option>
+                        <option value="Meeting">Meeting</option>
+                        <option value="Quoted">Quoted</option>
+                        <option value="Won">Won</option>
+                        <option value="Lost">Lost</option>
+                    </select>
+                    <select class="filter-select" id="regionFilter" onchange="renderList()">
                         <option value="">All Regions</option>
                         <option value="UAE">UAE</option>
                         <option value="GCC">GCC</option>
                         <option value="China">China</option>
                         <option value="Europe">Europe</option>
                         <option value="USA">USA</option>
-                        <option value="Other">Other</option>
                     </select>
                 </div>
-                <button class="btn btn-outline btn-small" onclick="exportData()">Export CSV</button>
             </div>
-
-            <!-- Partners Table -->
-            <div class="card">
-                <div class="table-container">
-                    <table class="data-table" id="partnersTable">
-                        <thead>
-                            <tr>
-                                <th class="sortable" onclick="sortBy('companyName')">Company <span class="sort-arrow" id="sort-companyName">↕</span></th>
-                                <th class="sortable" onclick="sortBy('partnerType')">Type <span class="sort-arrow" id="sort-partnerType">↕</span></th>
-                                <th>Contact</th>
-                                <th class="sortable" onclick="sortBy('region')">Region <span class="sort-arrow" id="sort-region">↕</span></th>
-                                <th class="sortable" onclick="sortBy('status')">Status <span class="sort-arrow" id="sort-status">↕</span></th>
-                                <th class="sortable" onclick="sortBy('lastContact')">Last Contact <span class="sort-arrow" id="sort-lastContact">↕</span></th>
-                                <th class="sortable" onclick="sortBy('followupDate')">Follow-up <span class="sort-arrow" id="sort-followupDate">↕</span></th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="partnersBody">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <div class="partner-list" id="partnerList"></div>
         </div>
 
-        <!-- Pipeline Tab -->
-        <div id="pipeline" class="tab-panel">
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">Deal Pipeline</span>
-                </div>
-                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem;" id="pipelineBoard">
-                    <!-- Pipeline columns will be rendered here -->
-                </div>
+        <!-- Right Panel - Detail View -->
+        <div class="detail-panel" id="detailPanel">
+            <div class="detail-empty" id="detailEmpty">
+                Select a partner to view details
             </div>
+            <div class="detail-content" id="detailContent" style="display: none;"></div>
         </div>
+    </div>
 
-        <!-- Add Partner Tab -->
-        <div id="add" class="tab-panel">
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">Add New Partner</span>
-                </div>
-                <form id="partnerForm" onsubmit="savePartner(event)">
-                    <div class="form-grid">
-                        <div class="form-group half">
-                            <label class="form-label">Company Name *</label>
-                            <input type="text" class="form-input" id="companyName" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Partner Type *</label>
-                            <select class="form-select" id="partnerType" required>
-                                <option value="">Select type...</option>
-                                <option value="Fabricator">Fabricator (Manufacturing)</option>
-                                <option value="AV Integrator">AV Integrator</option>
-                                <option value="Pool/Landscape">Pool / Landscape</option>
-                                <option value="Hospitality">Hospitality Supplier</option>
-                                <option value="Designer">Interior Designer</option>
-                                <option value="Developer">Property Developer</option>
-                                <option value="Distributor">Distributor</option>
-                                <option value="Contractor">Contractor</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Region *</label>
-                            <select class="form-select" id="region" required>
-                                <option value="">Select region...</option>
-                                <option value="UAE">UAE</option>
-                                <option value="GCC">GCC</option>
-                                <option value="China">China</option>
-                                <option value="Europe">Europe</option>
-                                <option value="USA">USA</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Contact Name</label>
-                            <input type="text" class="form-input" id="contactName">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-input" id="email">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Phone</label>
-                            <input type="text" class="form-input" id="phone">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Website</label>
-                            <input type="url" class="form-input" id="website" placeholder="https://">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Status</label>
-                            <select class="form-select" id="status">
-                                <option value="Not Contacted">Not Contacted</option>
-                                <option value="Contacted">Contacted</option>
-                                <option value="Responded">Responded</option>
-                                <option value="Meeting">Meeting Scheduled</option>
-                                <option value="Quoted">Quoted</option>
-                                <option value="Won">Won</option>
-                                <option value="Lost">Lost</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Follow-up Date</label>
-                            <input type="date" class="form-input" id="followupDate">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Priority</label>
-                            <select class="form-select" id="priority">
-                                <option value="Low">Low</option>
-                                <option value="Medium">Medium</option>
-                                <option value="High">High</option>
-                            </select>
-                        </div>
-                        <div class="form-group full">
-                            <label class="form-label">Notes</label>
-                            <textarea class="form-textarea" id="notes" placeholder="Add any relevant notes..."></textarea>
-                        </div>
-                    </div>
-                    <div style="margin-top: 1rem; display: flex; gap: 1rem;">
-                        <button type="submit" class="btn btn-primary">Save Partner</button>
-                        <button type="button" class="btn btn-outline" onclick="clearForm()">Clear</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </main>
-
-    <!-- Edit Modal -->
-    <div class="modal-overlay" id="editModal">
+    <!-- New Partner Modal -->
+    <div class="modal-overlay" id="newPartnerModal">
         <div class="modal">
             <div class="modal-header">
-                <span class="modal-title">Edit Partner</span>
+                <span class="modal-title">Add New Partner</span>
                 <button class="modal-close" onclick="closeModal()">&times;</button>
             </div>
-            <form id="editForm" onsubmit="updatePartner(event)">
-                <input type="hidden" id="editId">
-                <div class="form-grid">
-                    <div class="form-group half">
-                        <label class="form-label">Company Name *</label>
-                        <input type="text" class="form-input" id="editCompanyName" required>
-                    </div>
+            <form id="newPartnerForm" onsubmit="createPartner(event)">
+                <div class="form-group" style="margin-bottom: 0.75rem;">
+                    <label class="form-label">Company Name *</label>
+                    <input type="text" class="form-input" id="newCompanyName" required>
+                </div>
+                <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">Partner Type *</label>
-                        <select class="form-select" id="editPartnerType" required>
-                            <option value="Fabricator">Fabricator (Manufacturing)</option>
+                        <label class="form-label">Type *</label>
+                        <select class="form-select" id="newPartnerType" required>
+                            <option value="Fabricator">Fabricator</option>
                             <option value="AV Integrator">AV Integrator</option>
-                            <option value="Pool/Landscape">Pool / Landscape</option>
-                            <option value="Hospitality">Hospitality Supplier</option>
-                            <option value="Designer">Interior Designer</option>
-                            <option value="Developer">Property Developer</option>
+                            <option value="Pool/Landscape">Pool/Landscape</option>
+                            <option value="Hospitality">Hospitality</option>
+                            <option value="Designer">Designer</option>
+                            <option value="Developer">Developer</option>
                             <option value="Distributor">Distributor</option>
                             <option value="Contractor">Contractor</option>
                             <option value="Other">Other</option>
@@ -638,7 +480,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">Region *</label>
-                        <select class="form-select" id="editRegion" required>
+                        <select class="form-select" id="newRegion" required>
                             <option value="UAE">UAE</option>
                             <option value="GCC">GCC</option>
                             <option value="China">China</option>
@@ -647,100 +489,138 @@
                             <option value="Other">Other</option>
                         </select>
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Contact Name</label>
-                        <input type="text" class="form-input" id="editContactName">
+                        <input type="text" class="form-input" id="newContactName">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Email</label>
-                        <input type="email" class="form-input" id="editEmail">
+                        <input type="email" class="form-input" id="newEmail">
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Phone</label>
-                        <input type="text" class="form-input" id="editPhone">
+                        <input type="text" class="form-input" id="newPhone">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Website</label>
-                        <input type="url" class="form-input" id="editWebsite">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Status</label>
-                        <select class="form-select" id="editStatus">
-                            <option value="Not Contacted">Not Contacted</option>
-                            <option value="Contacted">Contacted</option>
-                            <option value="Responded">Responded</option>
-                            <option value="Meeting">Meeting Scheduled</option>
-                            <option value="Quoted">Quoted</option>
-                            <option value="Won">Won</option>
-                            <option value="Lost">Lost</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Follow-up Date</label>
-                        <input type="date" class="form-input" id="editFollowupDate">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Priority</label>
-                        <select class="form-select" id="editPriority">
-                            <option value="Low">Low</option>
-                            <option value="Medium">Medium</option>
-                            <option value="High">High</option>
-                        </select>
-                    </div>
-                    <div class="form-group full">
-                        <label class="form-label">Notes</label>
-                        <textarea class="form-textarea" id="editNotes"></textarea>
-                    </div>
-                    <div class="form-group full">
-                        <label class="form-label">Add Activity Note</label>
-                        <div style="display: flex; gap: 0.5rem;">
-                            <input type="text" class="form-input" id="activityNote" placeholder="Log a call, email, meeting...">
-                            <button type="button" class="btn btn-outline" onclick="addActivity()">Add</button>
-                        </div>
-                    </div>
-                    <div class="form-group full">
-                        <label class="form-label">Activity History</label>
-                        <div class="activity-log" id="activityLog"></div>
+                        <input type="url" class="form-input" id="newWebsite" placeholder="https://...">
                     </div>
                 </div>
-                <div style="margin-top: 1rem; display: flex; gap: 1rem; justify-content: space-between;">
-                    <div>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                        <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+                <div class="form-group" style="margin-bottom: 0.75rem;">
+                    <label class="form-label">Lead Source</label>
+                    <select class="form-select" id="newLeadSource">
+                        <option value="cold_outreach">Cold Outreach</option>
+                        <option value="linkedin">LinkedIn</option>
+                        <option value="referral">Referral</option>
+                        <option value="website">Website</option>
+                        <option value="trade_show">Trade Show</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label class="form-label">Notes</label>
+                    <textarea class="form-textarea" id="newNotes" rows="2"></textarea>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button type="submit" class="btn btn-primary">Create Partner</button>
+                    <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Contact Modal -->
+    <div class="modal-overlay" id="addContactModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title">Add Contact</span>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="addContactForm" onsubmit="addContact(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Name *</label>
+                        <input type="text" class="form-input" id="contactName" required>
                     </div>
-                    <button type="button" class="btn btn-danger" onclick="deletePartner()">Delete</button>
+                    <div class="form-group">
+                        <label class="form-label">Job Title</label>
+                        <input type="text" class="form-input" id="contactTitle" placeholder="e.g. Sales Manager">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" id="contactEmail">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input type="text" class="form-input" id="contactPhone">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label"><input type="checkbox" id="contactIsPrimary"> Primary Contact</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><input type="checkbox" id="contactIsDecisionMaker"> Decision Maker</label>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                    <button type="submit" class="btn btn-primary">Add Contact</button>
+                    <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
                 </div>
             </form>
         </div>
     </div>
 
     <script>
-        // Data storage
-        let partners = JSON.parse(localStorage.getItem('apexPartners')) || [];
-        let currentFilter = 'all';
-        let editingId = null;
-        let sortField = 'companyName';
-        let sortDirection = 'asc';
+        // ============ DATA LAYER ============
+        let partners = [];
+        let selectedPartnerId = null;
 
-        // Initial data - companies already contacted
+        // Activity type labels
+        const activityTypes = {
+            'note': 'Note',
+            'call': 'Call',
+            'email_sent': 'Email Sent',
+            'email_received': 'Email Received',
+            'meeting': 'Meeting',
+            'demo': 'Demo',
+            'quote_sent': 'Quote Sent',
+            'site_visit': 'Site Visit'
+        };
+
+        // Initial data - migrated from old format
         const initialPartners = [
             {
                 id: 1,
                 companyName: 'Al Shurooq',
                 partnerType: 'Fabricator',
                 region: 'UAE',
-                contactName: 'Danica Sison',
-                email: 'info@alshurooq.ae',
-                phone: '+971 4 42 55988',
                 website: 'https://alshurooq.ae',
+                linkedInUrl: '',
+                address: 'Dubai, UAE',
+                leadSource: 'cold_outreach',
                 status: 'Responded',
-                followupDate: '2025-01-02',
                 priority: 'High',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 40,
+                lostReason: '',
+                followupDate: '2025-01-02',
                 notes: 'Confirmed will prepare quote under individual name. Can fabricate aluminum enclosure but cannot do IP66 certification - may need to source sealing separately. AWAITING QUOTE.',
+                contacts: [
+                    { id: 1, name: 'Danica Sison', title: 'Sales', email: 'info@alshurooq.ae', phone: '+971 4 42 55988', isPrimary: true, isDecisionMaker: false }
+                ],
                 activities: [
-                    { date: '2025-12-24T20:00:00Z', note: 'RFQ sent via email' },
-                    { date: '2025-12-26T10:44:00Z', note: 'Response received - reviewing tech package, asked for Trade License' },
-                    { date: '2025-12-26T14:44:00Z', note: 'Confirmed proceeding as individual. Preparing quotation.' }
+                    { id: 1, type: 'email_sent', description: 'RFQ sent via email', timestamp: '2025-12-24T20:00:00Z' },
+                    { id: 2, type: 'email_received', description: 'Response received - reviewing tech package, asked for Trade License', timestamp: '2025-12-26T10:44:00Z' },
+                    { id: 3, type: 'email_sent', description: 'Confirmed proceeding as individual. Preparing quotation.', timestamp: '2025-12-26T14:44:00Z' }
                 ],
                 createdAt: '2025-12-24T20:00:00Z',
                 lastContact: '2025-12-26T14:44:00Z'
@@ -750,188 +630,130 @@
                 companyName: 'Eurotech FZCO',
                 partnerType: 'Fabricator',
                 region: 'UAE',
-                contactName: '',
-                email: 'general@eurotech-metal.com',
-                phone: '+971 4 883 0333',
                 website: 'https://eurotech-metal.com',
+                linkedInUrl: '',
+                address: 'JAFZA, Dubai, UAE',
+                leadSource: 'cold_outreach',
                 status: 'Contacted',
-                followupDate: '2025-01-02',
                 priority: 'High',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 20,
+                lostReason: '',
+                followupDate: '2025-01-02',
                 notes: 'Sheet metal, powder coating, panels. JAFZA Dubai location.',
+                contacts: [
+                    { id: 1, name: '', title: '', email: 'general@eurotech-metal.com', phone: '+971 4 883 0333', isPrimary: true, isDecisionMaker: false }
+                ],
                 activities: [
-                    { date: '2025-12-24T20:00:00Z', note: 'RFQ sent via email' }
+                    { id: 1, type: 'email_sent', description: 'RFQ sent via email', timestamp: '2025-12-24T20:00:00Z' }
                 ],
                 createdAt: '2025-12-24T20:00:00Z',
                 lastContact: '2025-12-24T20:00:00Z'
             },
             {
                 id: 3,
-                companyName: 'EmirFab',
-                partnerType: 'Fabricator',
-                region: 'UAE',
-                contactName: '',
-                email: 'sales@emirfab.com',
-                phone: '+971 52 905 5245',
-                website: '',
-                status: 'Contacted',
-                followupDate: '2025-01-02',
-                priority: 'Medium',
-                notes: 'Custom metal fabrication, aluminum specialist.',
-                activities: [
-                    { date: '2025-12-24T20:00:00Z', note: 'RFQ sent via email' }
-                ],
-                createdAt: '2025-12-24T20:00:00Z',
-                lastContact: '2025-12-24T20:00:00Z'
-            },
-            {
-                id: 4,
                 companyName: 'Al Amazon Industries',
                 partnerType: 'Fabricator',
                 region: 'UAE',
-                contactName: '',
-                email: 'alamazonuae@gmail.com',
-                phone: '+971 6 535 5667',
                 website: 'https://www.alamazonuae.com',
+                linkedInUrl: '',
+                address: 'Sharjah, UAE',
+                leadSource: 'cold_outreach',
                 status: 'Contacted',
-                followupDate: '2025-01-02',
                 priority: 'High',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 30,
+                lostReason: '',
+                followupDate: '2025-01-02',
                 notes: 'HIGH FIT - Already makes aluminum enclosures & electrical cabinets. Has own powder coating plant. Custom specs to DEWA/ADDC standards.',
+                contacts: [
+                    { id: 1, name: '', title: '', email: 'alamazonuae@gmail.com', phone: '+971 6 535 5667', isPrimary: true, isDecisionMaker: false }
+                ],
                 activities: [
-                    { date: '2025-12-24T08:00:00Z', note: 'RFQ sent via email' }
+                    { id: 1, type: 'email_sent', description: 'RFQ sent via email', timestamp: '2025-12-24T08:00:00Z' }
                 ],
                 createdAt: '2025-12-24T08:00:00Z',
                 lastContact: '2025-12-24T08:00:00Z'
             },
             {
-                id: 5,
-                companyName: 'Rainbow Aluminium',
-                partnerType: 'Fabricator',
-                region: 'UAE',
-                contactName: '',
-                email: 'info@rainbowaluminium.com',
-                phone: '+971 6 743 6914',
-                website: 'https://rainbowaluminium.com',
-                status: 'Contacted',
-                followupDate: '2025-01-02',
-                priority: 'Medium',
-                notes: 'GOOD FIT - Aluminum fabrication + own powder coating (200+ colors). 30+ years experience. Received duplicate email.',
-                activities: [
-                    { date: '2025-12-24T08:00:00Z', note: 'RFQ sent via email (x2 duplicate)' }
-                ],
-                createdAt: '2025-12-24T08:00:00Z',
-                lastContact: '2025-12-24T08:00:00Z'
-            },
-            {
-                id: 6,
-                companyName: 'Saudi Modern Factory (SMF)',
-                partnerType: 'Fabricator',
-                region: 'GCC',
-                contactName: '',
-                email: 'info@smf.com.sa',
-                phone: '',
-                website: '',
-                status: 'Contacted',
-                followupDate: '2025-01-02',
-                priority: 'Medium',
-                notes: 'Saudi - Riyadh. Possibly delivered.',
-                activities: [
-                    { date: '2025-12-24T20:00:00Z', note: 'RFQ sent via email' }
-                ],
-                createdAt: '2025-12-24T20:00:00Z',
-                lastContact: '2025-12-24T20:00:00Z'
-            },
-            {
-                id: 7,
-                companyName: 'Flezco',
-                partnerType: 'Fabricator',
-                region: 'GCC',
-                contactName: '',
-                email: 'hello@flezco.com',
-                phone: '+966 50 830 4644',
-                website: 'https://www.flezco.com',
-                status: 'Contacted',
-                followupDate: '2025-01-02',
-                priority: 'High',
-                notes: 'HIGH FIT - Saudi Jeddah + nationwide. Sheet metal for enclosures, machinery panels. Received duplicate email.',
-                activities: [
-                    { date: '2025-12-24T08:00:00Z', note: 'RFQ sent via email (x2 duplicate)' }
-                ],
-                createdAt: '2025-12-24T08:00:00Z',
-                lastContact: '2025-12-24T08:00:00Z'
-            },
-            {
-                id: 8,
-                companyName: 'Lucky Fabricators',
-                partnerType: 'Fabricator',
-                region: 'GCC',
-                contactName: 'Hamza',
-                email: 'hamza@luckyfabricators.sa',
-                phone: '+966 54 218 4642',
-                website: 'https://luckyfabricators.sa',
-                status: 'Contacted',
-                followupDate: '2025-01-02',
-                priority: 'High',
-                notes: 'HIGH FIT - Saudi Riyadh. Precision aluminum work, laser/water jet cutting, anodizing. Aerospace & electronics. Received duplicate email.',
-                activities: [
-                    { date: '2025-12-24T08:00:00Z', note: 'RFQ sent via email (x2 duplicate)' }
-                ],
-                createdAt: '2025-12-24T08:00:00Z',
-                lastContact: '2025-12-24T08:00:00Z'
-            },
-            {
-                id: 9,
-                companyName: 'Prisma Metal Industry',
-                partnerType: 'Fabricator',
-                region: 'GCC',
-                contactName: '',
-                email: 'prisma@prismaksa.com',
-                phone: '+966 13 890 1419',
-                website: 'https://prisma-ksa.com',
-                status: 'Contacted',
-                followupDate: '2025-01-02',
-                priority: 'Medium',
-                notes: 'GOOD FIT - Saudi Dammam. 35 years experience, 38,000m² factory. May be oversized for initial volumes. Received duplicate email.',
-                activities: [
-                    { date: '2025-12-24T08:00:00Z', note: 'RFQ sent via email (x2 duplicate)' }
-                ],
-                createdAt: '2025-12-24T08:00:00Z',
-                lastContact: '2025-12-24T08:00:00Z'
-            },
-            {
-                id: 10,
+                id: 4,
                 companyName: 'KDM Steel',
                 partnerType: 'Fabricator',
                 region: 'China',
-                contactName: '',
-                email: 'sales@kdmsteel.com',
-                phone: '+86-13175970882',
                 website: 'https://www.kdmsteel.com',
+                linkedInUrl: '',
+                address: 'Wuxi, Jiangsu, China',
+                leadSource: 'cold_outreach',
                 status: 'Responded',
-                followupDate: '2025-01-03',
                 priority: 'High',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 50,
+                lostReason: '',
+                followupDate: '2025-01-03',
                 notes: 'TOP PICK - Pure OEM fabricator. 10+ years, ISO 9001, makes outdoor enclosures to spec. Responded on WhatsApp - will follow up.',
+                contacts: [
+                    { id: 1, name: '', title: 'Sales', email: 'sales@kdmsteel.com', phone: '+86-13175970882', isPrimary: true, isDecisionMaker: false }
+                ],
                 activities: [
-                    { date: '2025-12-28T10:00:00Z', note: 'RFQ sent via email + WhatsApp follow-up' },
-                    { date: '2025-12-28T14:00:00Z', note: 'WhatsApp response received - said they will follow up' }
+                    { id: 1, type: 'email_sent', description: 'RFQ sent via email + WhatsApp follow-up', timestamp: '2025-12-28T10:00:00Z' },
+                    { id: 2, type: 'email_received', description: 'WhatsApp response received - said they will follow up', timestamp: '2025-12-28T14:00:00Z' }
                 ],
                 createdAt: '2025-12-28T10:00:00Z',
                 lastContact: '2025-12-28T14:00:00Z'
             },
-            // ========== SALES PARTNERS (Added 31 Dec 2025) ==========
-            // AV Integrators
+            {
+                id: 5,
+                companyName: 'Flezco',
+                partnerType: 'Fabricator',
+                region: 'GCC',
+                website: 'https://www.flezco.com',
+                linkedInUrl: '',
+                address: 'Jeddah, Saudi Arabia',
+                leadSource: 'cold_outreach',
+                status: 'Contacted',
+                priority: 'High',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 25,
+                lostReason: '',
+                followupDate: '2025-01-02',
+                notes: 'HIGH FIT - Saudi Jeddah + nationwide. Sheet metal for enclosures, machinery panels.',
+                contacts: [
+                    { id: 1, name: '', title: '', email: 'hello@flezco.com', phone: '+966 50 830 4644', isPrimary: true, isDecisionMaker: false }
+                ],
+                activities: [
+                    { id: 1, type: 'email_sent', description: 'RFQ sent via email', timestamp: '2025-12-24T08:00:00Z' }
+                ],
+                createdAt: '2025-12-24T08:00:00Z',
+                lastContact: '2025-12-24T08:00:00Z'
+            },
+            // Sales Partners
             {
                 id: 101,
                 companyName: 'Pulse Cinemas Middle East',
                 partnerType: 'AV Integrator',
                 region: 'UAE',
-                contactName: '',
-                email: '',
-                phone: '',
                 website: 'https://www.pulsecinemas.com',
+                linkedInUrl: '',
+                address: 'Dubai, UAE',
+                leadSource: 'cold_outreach',
                 status: 'Not Contacted',
-                followupDate: '',
                 priority: 'High',
+                dealValue: 50000,
+                productsInterested: ['75"', '65"'],
+                expectedCloseDate: '',
+                winProbability: 0,
+                lostReason: '',
+                followupDate: '',
                 notes: 'Luxury home cinema installation. Perfect partner for high-end residential market.',
+                contacts: [],
                 activities: [],
                 createdAt: '2025-12-31T21:00:00Z',
                 lastContact: null
@@ -941,587 +763,738 @@
                 companyName: 'Almoe AV Systems',
                 partnerType: 'AV Integrator',
                 region: 'UAE',
-                contactName: '',
-                email: 'info@almoe.com',
-                phone: '+971 4 339 4455',
                 website: 'https://www.almoe.com',
+                linkedInUrl: '',
+                address: 'Dubai, UAE',
+                leadSource: 'cold_outreach',
                 status: 'Not Contacted',
-                followupDate: '',
                 priority: 'High',
-                notes: 'AV integration, smart homes. Major player in UAE.',
+                dealValue: 75000,
+                productsInterested: ['75"', '65"', '55"'],
+                expectedCloseDate: '',
+                winProbability: 0,
+                lostReason: '',
+                followupDate: '',
+                notes: 'AV integration, smart homes. Major player in UAE market.',
+                contacts: [
+                    { id: 1, name: '', title: '', email: 'info@almoe.com', phone: '+971 4 339 4455', isPrimary: true, isDecisionMaker: false }
+                ],
                 activities: [],
                 createdAt: '2025-12-31T21:00:00Z',
                 lastContact: null
             },
             {
                 id: 103,
-                companyName: 'Accel Technologies',
-                partnerType: 'AV Integrator',
-                region: 'UAE',
-                contactName: '',
-                email: '',
-                phone: '',
-                website: '',
-                status: 'Not Contacted',
-                followupDate: '',
-                priority: 'Medium',
-                notes: 'Commercial AV solutions.',
-                activities: [],
-                createdAt: '2025-12-31T21:00:00Z',
-                lastContact: null
-            },
-            // Pool & Landscape
-            {
-                id: 111,
-                companyName: 'Desert Group',
-                partnerType: 'Pool/Landscape',
-                region: 'UAE',
-                contactName: '',
-                email: 'info@desertgroup.ae',
-                phone: '+971 4 340 7725',
-                website: 'https://www.desertgroup.ae',
-                status: 'Not Contacted',
-                followupDate: '',
-                priority: 'High',
-                notes: 'Luxury landscape design & build. High-end residential projects.',
-                activities: [],
-                createdAt: '2025-12-31T21:00:00Z',
-                lastContact: null
-            },
-            {
-                id: 112,
-                companyName: 'Ashtec Pools',
-                partnerType: 'Pool/Landscape',
-                region: 'UAE',
-                contactName: '',
-                email: 'info@ashtecpools.com',
-                phone: '',
-                website: 'https://www.ashtecpools.com',
-                status: 'Not Contacted',
-                followupDate: '',
-                priority: 'High',
-                notes: 'Pool construction and maintenance. Natural upsell for outdoor entertainment.',
-                activities: [],
-                createdAt: '2025-12-31T21:00:00Z',
-                lastContact: null
-            },
-            {
-                id: 113,
-                companyName: 'Riviera Pools',
-                partnerType: 'Pool/Landscape',
-                region: 'UAE',
-                contactName: '',
-                email: '',
-                phone: '',
-                website: '',
-                status: 'Not Contacted',
-                followupDate: '',
-                priority: 'Medium',
-                notes: 'Luxury pool builder.',
-                activities: [],
-                createdAt: '2025-12-31T21:00:00Z',
-                lastContact: null
-            },
-            // Hospitality Suppliers
-            {
-                id: 121,
-                companyName: 'Scientechnic',
-                partnerType: 'Hospitality',
-                region: 'UAE',
-                contactName: '',
-                email: 'info@scientechnic.com',
-                phone: '+971 4 282 5434',
-                website: 'https://www.scientechnic.com',
-                status: 'Not Contacted',
-                followupDate: '',
-                priority: 'High',
-                notes: 'Hotel & restaurant equipment supplier. Established relationships with hospitality sector.',
-                activities: [],
-                createdAt: '2025-12-31T21:00:00Z',
-                lastContact: null
-            },
-            {
-                id: 122,
-                companyName: 'SKM Gulf',
-                partnerType: 'Hospitality',
-                region: 'UAE',
-                contactName: '',
-                email: '',
-                phone: '',
-                website: '',
-                status: 'Not Contacted',
-                followupDate: '',
-                priority: 'Medium',
-                notes: 'Hospitality solutions provider.',
-                activities: [],
-                createdAt: '2025-12-31T21:00:00Z',
-                lastContact: null
-            },
-            // Interior Designers
-            {
-                id: 131,
-                companyName: 'Pallavi Dean Interiors',
-                partnerType: 'Designer',
-                region: 'UAE',
-                contactName: 'Pallavi Dean',
-                email: '',
-                phone: '',
-                website: 'https://www.pallavidean.com',
-                status: 'Not Contacted',
-                followupDate: '',
-                priority: 'Medium',
-                notes: 'High-end residential interior design. Influences HNW clients.',
-                activities: [],
-                createdAt: '2025-12-31T21:00:00Z',
-                lastContact: null
-            },
-            {
-                id: 132,
-                companyName: 'Bishop Design',
-                partnerType: 'Designer',
-                region: 'UAE',
-                contactName: '',
-                email: '',
-                phone: '',
-                website: 'https://www.bishopdesign.com',
-                status: 'Not Contacted',
-                followupDate: '',
-                priority: 'Medium',
-                notes: 'Hospitality-focused interior design. Many hotel/restaurant projects.',
-                activities: [],
-                createdAt: '2025-12-31T21:00:00Z',
-                lastContact: null
-            },
-            // Property Developers
-            {
-                id: 141,
                 companyName: 'Emaar Properties',
                 partnerType: 'Developer',
                 region: 'UAE',
-                contactName: '',
-                email: '',
-                phone: '',
                 website: 'https://www.emaar.com',
+                linkedInUrl: 'https://www.linkedin.com/company/emaar',
+                address: 'Dubai, UAE',
+                leadSource: 'cold_outreach',
                 status: 'Not Contacted',
-                followupDate: '',
                 priority: 'High',
-                notes: 'Premium villa communities. Potential for bulk orders in new developments.',
+                dealValue: 500000,
+                productsInterested: ['75"', '65"'],
+                expectedCloseDate: '',
+                winProbability: 0,
+                lostReason: '',
+                followupDate: '',
+                notes: 'Largest developer in UAE. Target for bulk orders in new developments with outdoor entertainment areas.',
+                contacts: [],
                 activities: [],
                 createdAt: '2025-12-31T21:00:00Z',
                 lastContact: null
             },
             {
-                id: 142,
-                companyName: 'Sobha Realty',
-                partnerType: 'Developer',
+                id: 104,
+                companyName: 'Bishop Design',
+                partnerType: 'Designer',
                 region: 'UAE',
-                contactName: '',
-                email: '',
-                phone: '',
-                website: 'https://www.sobharealty.com',
+                website: 'https://www.bishopdesign.com',
+                linkedInUrl: '',
+                address: 'Dubai, UAE',
+                leadSource: 'cold_outreach',
                 status: 'Not Contacted',
-                followupDate: '',
                 priority: 'Medium',
-                notes: 'Luxury developments. Known for quality finishes.',
+                dealValue: 25000,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 0,
+                lostReason: '',
+                followupDate: '',
+                notes: 'Hospitality-focused interior design. Many hotel/restaurant projects.',
+                contacts: [],
                 activities: [],
                 createdAt: '2025-12-31T21:00:00Z',
                 lastContact: null
             },
             {
-                id: 143,
-                companyName: 'Aldar Properties',
-                partnerType: 'Developer',
+                id: 105,
+                companyName: 'Desert Dreams Landscaping',
+                partnerType: 'Pool/Landscape',
                 region: 'UAE',
-                contactName: '',
-                email: '',
-                phone: '',
-                website: 'https://www.aldar.com',
+                website: '',
+                linkedInUrl: '',
+                address: 'Dubai, UAE',
+                leadSource: 'cold_outreach',
                 status: 'Not Contacted',
-                followupDate: '',
                 priority: 'Medium',
-                notes: 'Abu Dhabi-based. Premium developments.',
+                dealValue: 35000,
+                productsInterested: ['75"', '65"'],
+                expectedCloseDate: '',
+                winProbability: 0,
+                lostReason: '',
+                followupDate: '',
+                notes: 'Pool and outdoor living specialists. Good referral partner for residential installations.',
+                contacts: [],
                 activities: [],
                 createdAt: '2025-12-31T21:00:00Z',
                 lastContact: null
             }
         ];
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            // Always load initial partners (version 4 - added sales partners 31 Dec 2025)
-            const dataVersion = localStorage.getItem('apexPartnersVersion');
-            if (dataVersion !== 'v4') {
+        // ============ STORAGE ============
+        function loadData() {
+            const stored = localStorage.getItem('apexCrmData');
+            const version = localStorage.getItem('apexCrmVersion');
+
+            if (version !== 'v5' || !stored) {
+                // Initialize with new data structure
                 partners = initialPartners;
-                localStorage.setItem('apexPartnersVersion', 'v4');
                 saveData();
+                localStorage.setItem('apexCrmVersion', 'v5');
+            } else {
+                partners = JSON.parse(stored);
             }
-            renderPartners();
-            updateStats();
-        });
-
-        // Show Tab
-        function showTab(tabId) {
-            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            event.target.classList.add('active');
-
-            if (tabId === 'pipeline') renderPipeline();
         }
 
-        // Save Partner
-        function savePartner(e) {
+        function saveData() {
+            localStorage.setItem('apexCrmData', JSON.stringify(partners));
+        }
+
+        // ============ LIST VIEW ============
+        function renderList() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const typeFilter = document.getElementById('typeFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const regionFilter = document.getElementById('regionFilter').value;
+
+            let filtered = partners.filter(p => {
+                if (search && !p.companyName.toLowerCase().includes(search) &&
+                    !p.notes?.toLowerCase().includes(search)) return false;
+                if (typeFilter && p.partnerType !== typeFilter) return false;
+                if (statusFilter && p.status !== statusFilter) return false;
+                if (regionFilter && p.region !== regionFilter) return false;
+                return true;
+            });
+
+            // Sort by priority then name
+            filtered.sort((a, b) => {
+                const priorityOrder = { 'High': 0, 'Medium': 1, 'Low': 2 };
+                const pA = priorityOrder[a.priority] ?? 2;
+                const pB = priorityOrder[b.priority] ?? 2;
+                if (pA !== pB) return pA - pB;
+                return a.companyName.localeCompare(b.companyName);
+            });
+
+            const listHtml = filtered.map(p => {
+                const typeClass = 'badge-type-' + p.partnerType.toLowerCase().replace(/[\s\/]+/g, '-');
+                const statusClass = 'badge-status-' + p.status.toLowerCase().replace(/\s+/g, '-');
+                const primaryContact = p.contacts?.find(c => c.isPrimary) || p.contacts?.[0];
+
+                return `
+                    <div class="partner-item ${selectedPartnerId === p.id ? 'active' : ''}" onclick="selectPartner(${p.id})">
+                        <div class="partner-name">${p.companyName}</div>
+                        <div class="partner-meta">${primaryContact?.name || 'No contact'} &middot; ${p.region}</div>
+                        <div class="partner-badges">
+                            <span class="badge ${typeClass}">${p.partnerType}</span>
+                            <span class="badge ${statusClass}">${p.status}</span>
+                            ${p.priority === 'High' ? '<span class="badge badge-priority-high">High</span>' : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('partnerList').innerHTML = listHtml || '<div style="padding: 2rem; text-align: center; color: var(--text-muted);">No partners found</div>';
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('totalPartners').textContent = partners.length;
+
+            const active = partners.filter(p => !['Won', 'Lost', 'Not Contacted'].includes(p.status)).length;
+            document.getElementById('activeDeals').textContent = active;
+
+            const pipeline = partners.reduce((sum, p) => sum + (p.dealValue || 0), 0);
+            document.getElementById('pipelineValue').textContent = pipeline > 0 ? (pipeline / 1000).toFixed(0) + 'K' : '0';
+
+            const today = new Date().toISOString().split('T')[0];
+            const followups = partners.filter(p => p.followupDate && p.followupDate <= today).length;
+            document.getElementById('followupsToday').textContent = followups;
+        }
+
+        // ============ DETAIL VIEW ============
+        function selectPartner(id) {
+            selectedPartnerId = id;
+            renderList();
+            renderDetail();
+            document.getElementById('detailPanel').classList.add('active');
+        }
+
+        function renderDetail() {
+            const p = partners.find(p => p.id === selectedPartnerId);
+            if (!p) {
+                document.getElementById('detailEmpty').style.display = 'flex';
+                document.getElementById('detailContent').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('detailEmpty').style.display = 'none';
+            document.getElementById('detailContent').style.display = 'block';
+
+            const typeClass = 'badge-type-' + p.partnerType.toLowerCase().replace(/[\s\/]+/g, '-');
+            const statusClass = 'badge-status-' + p.status.toLowerCase().replace(/\s+/g, '-');
+
+            const html = `
+                <button class="btn btn-outline back-btn" onclick="closeDetail()" style="margin-bottom: 1rem;">&larr; Back</button>
+
+                <div class="detail-header">
+                    <div>
+                        <div class="detail-title">${p.companyName}</div>
+                        <div class="detail-subtitle">
+                            <span class="badge ${typeClass}">${p.partnerType}</span>
+                            <span class="badge ${statusClass}">${p.status}</span>
+                            <span class="badge badge-priority-${p.priority.toLowerCase()}">${p.priority} Priority</span>
+                        </div>
+                    </div>
+                    <div class="detail-actions">
+                        <button class="btn btn-outline btn-small" onclick="editPartnerField('status')">Update Status</button>
+                        <button class="btn btn-danger btn-small" onclick="deletePartner(${p.id})">Delete</button>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('overview')">Overview</button>
+                    <button class="tab" onclick="switchTab('contacts')">Contacts (${p.contacts?.length || 0})</button>
+                    <button class="tab" onclick="switchTab('deal')">Deal</button>
+                    <button class="tab" onclick="switchTab('activity')">Activity (${p.activities?.length || 0})</button>
+                </div>
+
+                <!-- Overview Tab -->
+                <div class="tab-content active" id="tab-overview">
+                    <div class="card">
+                        <div class="card-header">Company Information</div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Website</label>
+                                    <div class="form-value">${p.website ? `<a href="${p.website}" target="_blank">${p.website}</a>` : '-'}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">LinkedIn</label>
+                                    <div class="form-value">${p.linkedInUrl ? `<a href="${p.linkedInUrl}" target="_blank">View Profile</a>` : '-'}</div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Address</label>
+                                    <div class="form-value">${p.address || '-'}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Lead Source</label>
+                                    <div class="form-value">${p.leadSource?.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase()) || '-'}</div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Follow-up Date</label>
+                                    <div class="form-value">${p.followupDate ? formatDate(p.followupDate) : '-'}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Last Contact</label>
+                                    <div class="form-value">${p.lastContact ? formatDate(p.lastContact) : 'Never'}</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline btn-small" onclick="showEditCompanyModal()">Edit Company Info</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">Notes</div>
+                        <div class="card-body">
+                            <textarea class="form-textarea" id="partnerNotes" onblur="saveNotes()" style="min-height: 100px;">${p.notes || ''}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contacts Tab -->
+                <div class="tab-content" id="tab-contacts">
+                    <div class="card">
+                        <div class="card-header">
+                            <span>Contacts</span>
+                            <button class="btn btn-primary btn-small" onclick="showAddContactModal()">+ Add Contact</button>
+                        </div>
+                        <div class="card-body">
+                            ${p.contacts?.length ? p.contacts.map(c => `
+                                <div class="contact-item">
+                                    <div class="contact-info">
+                                        <div class="contact-name">${c.name || 'Unnamed Contact'}</div>
+                                        <div class="contact-title">${c.title || 'No title'}</div>
+                                        <div class="contact-details">
+                                            ${c.email ? `<a href="mailto:${c.email}">${c.email}</a>` : ''}
+                                            ${c.email && c.phone ? ' &middot; ' : ''}
+                                            ${c.phone || ''}
+                                        </div>
+                                        <div class="contact-badges">
+                                            ${c.isPrimary ? '<span class="badge badge-primary">Primary</span>' : ''}
+                                            ${c.isDecisionMaker ? '<span class="badge badge-dm">Decision Maker</span>' : ''}
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-outline btn-small" onclick="deleteContact(${c.id})">Remove</button>
+                                </div>
+                            `).join('') : '<div style="text-align: center; color: var(--text-muted); padding: 2rem;">No contacts yet. Add one to get started.</div>'}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deal Tab -->
+                <div class="tab-content" id="tab-deal">
+                    <div class="card">
+                        <div class="card-header">
+                            <span>Deal Information</span>
+                            <button class="btn btn-outline btn-small" onclick="showEditDealModal()">Edit Deal</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="deal-grid">
+                                <div class="deal-stat">
+                                    <div class="deal-stat-value">AED ${(p.dealValue || 0).toLocaleString()}</div>
+                                    <div class="deal-stat-label">Deal Value</div>
+                                </div>
+                                <div class="deal-stat">
+                                    <div class="deal-stat-value">${p.winProbability || 0}%</div>
+                                    <div class="deal-stat-label">Win Probability</div>
+                                </div>
+                                <div class="deal-stat">
+                                    <div class="deal-stat-value">${p.expectedCloseDate ? formatDate(p.expectedCloseDate) : '-'}</div>
+                                    <div class="deal-stat-label">Expected Close</div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 1rem;">
+                                <label class="form-label">Products Interested</label>
+                                <div class="products-interested">
+                                    ${['55"', '65"', '75"'].map(size => `
+                                        <span class="product-tag ${p.productsInterested?.includes(size) ? '' : 'inactive'}">${size}</span>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            ${p.status === 'Lost' && p.lostReason ? `
+                                <div style="margin-top: 1rem; padding: 0.75rem; background: #fee2e2; border-radius: 6px;">
+                                    <strong>Lost Reason:</strong> ${p.lostReason}
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Tab -->
+                <div class="tab-content" id="tab-activity">
+                    <div class="card">
+                        <div class="card-header">Activity Timeline</div>
+                        <div class="card-body">
+                            <div class="add-activity-form">
+                                <select class="form-select" id="newActivityType">
+                                    ${Object.entries(activityTypes).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}
+                                </select>
+                                <input type="text" class="form-input" id="newActivityDesc" placeholder="Describe the activity...">
+                                <button class="btn btn-primary" onclick="addActivity()">Add</button>
+                            </div>
+
+                            <div class="activity-timeline">
+                                ${p.activities?.length ? [...p.activities].reverse().map(a => `
+                                    <div class="activity-item type-${a.type}">
+                                        <div class="activity-header">
+                                            <span class="activity-type">${activityTypes[a.type] || a.type}</span>
+                                            <span class="activity-date">${formatDateTime(a.timestamp)}</span>
+                                        </div>
+                                        <div class="activity-desc">${a.description}</div>
+                                    </div>
+                                `).join('') : '<div style="text-align: center; color: var(--text-muted); padding: 2rem;">No activities yet.</div>'}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('detailContent').innerHTML = html;
+        }
+
+        function closeDetail() {
+            selectedPartnerId = null;
+            document.getElementById('detailPanel').classList.remove('active');
+            document.getElementById('detailEmpty').style.display = 'flex';
+            document.getElementById('detailContent').style.display = 'none';
+            renderList();
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('tab-' + tabId).classList.add('active');
+        }
+
+        // ============ CRUD OPERATIONS ============
+        function showNewPartnerModal() {
+            document.getElementById('newPartnerForm').reset();
+            document.getElementById('newPartnerModal').classList.add('active');
+        }
+
+        function showAddContactModal() {
+            document.getElementById('addContactForm').reset();
+            document.getElementById('addContactModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+        }
+
+        function createPartner(e) {
             e.preventDefault();
-            const partner = {
+
+            const newPartner = {
                 id: Date.now(),
-                companyName: document.getElementById('companyName').value,
-                partnerType: document.getElementById('partnerType').value,
-                region: document.getElementById('region').value,
-                contactName: document.getElementById('contactName').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                website: document.getElementById('website').value,
-                status: document.getElementById('status').value,
-                followupDate: document.getElementById('followupDate').value,
-                priority: document.getElementById('priority').value,
-                notes: document.getElementById('notes').value,
-                activities: [{
-                    date: new Date().toISOString(),
-                    note: 'Partner added to CRM'
-                }],
+                companyName: document.getElementById('newCompanyName').value,
+                partnerType: document.getElementById('newPartnerType').value,
+                region: document.getElementById('newRegion').value,
+                website: document.getElementById('newWebsite').value || '',
+                linkedInUrl: '',
+                address: '',
+                leadSource: document.getElementById('newLeadSource').value,
+                status: 'Not Contacted',
+                priority: 'Medium',
+                dealValue: 0,
+                productsInterested: [],
+                expectedCloseDate: '',
+                winProbability: 0,
+                lostReason: '',
+                followupDate: '',
+                notes: document.getElementById('newNotes').value || '',
+                contacts: [],
+                activities: [],
                 createdAt: new Date().toISOString(),
                 lastContact: null
             };
 
-            partners.push(partner);
-            saveData();
-            clearForm();
-            showTab('partners');
-            document.querySelector('.tab').click();
-            alert('Partner saved successfully!');
-        }
+            // Add contact if provided
+            const contactName = document.getElementById('newContactName').value;
+            const contactEmail = document.getElementById('newEmail').value;
+            const contactPhone = document.getElementById('newPhone').value;
 
-        // Clear Form
-        function clearForm() {
-            document.getElementById('partnerForm').reset();
-        }
-
-        // Render Partners Table
-        function renderPartners() {
-            const search = document.getElementById('searchInput').value.toLowerCase();
-            const typeFilter = document.getElementById('typeFilter').value;
-            const regionFilter = document.getElementById('regionFilter').value;
-
-            let filtered = partners.filter(p => {
-                const matchSearch = p.companyName.toLowerCase().includes(search) ||
-                                   (p.contactName && p.contactName.toLowerCase().includes(search)) ||
-                                   (p.email && p.email.toLowerCase().includes(search));
-                const matchType = !typeFilter || p.partnerType === typeFilter;
-                const matchRegion = !regionFilter || p.region === regionFilter;
-                const matchStatus = currentFilter === 'all' || p.status === currentFilter;
-                return matchSearch && matchType && matchRegion && matchStatus;
-            });
-
-            // Sort the filtered results
-            filtered.sort((a, b) => {
-                let aVal = a[sortField] || '';
-                let bVal = b[sortField] || '';
-                if (typeof aVal === 'string') aVal = aVal.toLowerCase();
-                if (typeof bVal === 'string') bVal = bVal.toLowerCase();
-                if (aVal < bVal) return sortDirection === 'asc' ? -1 : 1;
-                if (aVal > bVal) return sortDirection === 'asc' ? 1 : -1;
-                return 0;
-            });
-
-            // Update sort arrows
-            document.querySelectorAll('.sort-arrow').forEach(el => {
-                el.textContent = '↕';
-                el.classList.remove('active');
-            });
-            const activeArrow = document.getElementById('sort-' + sortField);
-            if (activeArrow) {
-                activeArrow.textContent = sortDirection === 'asc' ? '↑' : '↓';
-                activeArrow.classList.add('active');
-            }
-
-            const tbody = document.getElementById('partnersBody');
-            tbody.innerHTML = filtered.map(p => `
-                <tr style="cursor: pointer;" onclick="editPartner(${p.id})">
-                    <td>
-                        <strong style="color: var(--accent);">${p.companyName}</strong>
-                        ${p.website ? `<br><a href="${p.website}" target="_blank" style="font-size: 0.8rem; color: var(--text-muted);" onclick="event.stopPropagation()">Website ↗</a>` : ''}
-                    </td>
-                    <td><span class="badge type-${p.partnerType.toLowerCase().replace(/[\s\/]+/g, '-')}">${p.partnerType}</span></td>
-                    <td>
-                        ${p.contactName || '-'}
-                        ${p.email ? `<br><a href="mailto:${p.email}" style="font-size: 0.8rem;" onclick="event.stopPropagation()">${p.email}</a>` : ''}
-                        ${p.phone ? `<br><span style="font-size: 0.8rem; color: var(--text-muted);">${p.phone}</span>` : ''}
-                    </td>
-                    <td>${p.region}</td>
-                    <td><span class="badge badge-${p.status.toLowerCase().replace(' ', '-')}">${p.status}</span></td>
-                    <td>${p.lastContact ? formatDate(p.lastContact) : '-'}</td>
-                    <td>${p.followupDate ? formatDate(p.followupDate) : '-'}</td>
-                    <td class="actions" onclick="event.stopPropagation()">
-                        <button class="btn btn-outline btn-small" onclick="editPartner(${p.id})">Edit</button>
-                        <button class="btn btn-small" style="background: var(--success); color: white;" onclick="quickStatus(${p.id})">Update</button>
-                    </td>
-                </tr>
-            `).join('');
-
-            updateStats();
-        }
-
-        // Sort by field
-        function sortBy(field) {
-            if (sortField === field) {
-                sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
-            } else {
-                sortField = field;
-                sortDirection = 'asc';
-            }
-            renderPartners();
-        }
-
-        // Filter by Status
-        function filterByStatus(status) {
-            currentFilter = status;
-            document.querySelectorAll('.summary-card').forEach(c => c.classList.remove('active'));
-            event.target.closest('.summary-card').classList.add('active');
-            renderPartners();
-        }
-
-        // Update Stats
-        function updateStats() {
-            document.getElementById('totalPartners').textContent = partners.length;
-            document.getElementById('countAll').textContent = partners.length;
-
-            const statuses = ['Not Contacted', 'Contacted', 'Responded', 'Quoted', 'Won'];
-            statuses.forEach(s => {
-                const count = partners.filter(p => p.status === s).length;
-                const id = 'count' + s.replace(' ', '');
-                if (document.getElementById(id)) {
-                    document.getElementById(id).textContent = count;
-                }
-            });
-
-            // Active deals (not Won or Lost)
-            const active = partners.filter(p => !['Won', 'Lost', 'Not Contacted'].includes(p.status)).length;
-            document.getElementById('activeDeals').textContent = active;
-
-            // Needs followup (past due or today)
-            const today = new Date().toISOString().split('T')[0];
-            const needsFollowup = partners.filter(p => p.followupDate && p.followupDate <= today && !['Won', 'Lost'].includes(p.status)).length;
-            document.getElementById('needsFollowup').textContent = needsFollowup;
-        }
-
-        // Edit Partner
-        function editPartner(id) {
-            const partner = partners.find(p => p.id === id);
-            if (!partner) return;
-
-            editingId = id;
-            document.getElementById('editId').value = id;
-            document.getElementById('editCompanyName').value = partner.companyName;
-            document.getElementById('editPartnerType').value = partner.partnerType;
-            document.getElementById('editRegion').value = partner.region;
-            document.getElementById('editContactName').value = partner.contactName || '';
-            document.getElementById('editEmail').value = partner.email || '';
-            document.getElementById('editPhone').value = partner.phone || '';
-            document.getElementById('editWebsite').value = partner.website || '';
-            document.getElementById('editStatus').value = partner.status;
-            document.getElementById('editFollowupDate').value = partner.followupDate || '';
-            document.getElementById('editPriority').value = partner.priority || 'Medium';
-            document.getElementById('editNotes').value = partner.notes || '';
-
-            // Render activities
-            const activityLog = document.getElementById('activityLog');
-            activityLog.innerHTML = (partner.activities || []).reverse().map(a => `
-                <div class="activity-item">
-                    <div class="activity-date">${formatDateTime(a.date)}</div>
-                    <div>${a.note}</div>
-                </div>
-            `).join('') || '<p style="color: var(--text-muted); font-size: 0.85rem;">No activities logged yet.</p>';
-
-            document.getElementById('editModal').classList.add('active');
-        }
-
-        // Update Partner
-        function updatePartner(e) {
-            e.preventDefault();
-            const index = partners.findIndex(p => p.id === editingId);
-            if (index === -1) return;
-
-            const oldStatus = partners[index].status;
-            const newStatus = document.getElementById('editStatus').value;
-
-            partners[index] = {
-                ...partners[index],
-                companyName: document.getElementById('editCompanyName').value,
-                partnerType: document.getElementById('editPartnerType').value,
-                region: document.getElementById('editRegion').value,
-                contactName: document.getElementById('editContactName').value,
-                email: document.getElementById('editEmail').value,
-                phone: document.getElementById('editPhone').value,
-                website: document.getElementById('editWebsite').value,
-                status: newStatus,
-                followupDate: document.getElementById('editFollowupDate').value,
-                priority: document.getElementById('editPriority').value,
-                notes: document.getElementById('editNotes').value,
-                lastContact: new Date().toISOString()
-            };
-
-            // Log status change
-            if (oldStatus !== newStatus) {
-                partners[index].activities = partners[index].activities || [];
-                partners[index].activities.push({
-                    date: new Date().toISOString(),
-                    note: `Status changed from "${oldStatus}" to "${newStatus}"`
+            if (contactName || contactEmail || contactPhone) {
+                newPartner.contacts.push({
+                    id: 1,
+                    name: contactName,
+                    title: '',
+                    email: contactEmail,
+                    phone: contactPhone,
+                    isPrimary: true,
+                    isDecisionMaker: false
                 });
             }
 
+            partners.push(newPartner);
             saveData();
             closeModal();
-            renderPartners();
+            selectPartner(newPartner.id);
         }
 
-        // Add Activity
+        function addContact(e) {
+            e.preventDefault();
+            const p = partners.find(p => p.id === selectedPartnerId);
+            if (!p) return;
+
+            const newContact = {
+                id: Date.now(),
+                name: document.getElementById('contactName').value,
+                title: document.getElementById('contactTitle').value,
+                email: document.getElementById('contactEmail').value,
+                phone: document.getElementById('contactPhone').value,
+                isPrimary: document.getElementById('contactIsPrimary').checked,
+                isDecisionMaker: document.getElementById('contactIsDecisionMaker').checked
+            };
+
+            if (newContact.isPrimary) {
+                p.contacts.forEach(c => c.isPrimary = false);
+            }
+
+            p.contacts.push(newContact);
+            saveData();
+            closeModal();
+            renderDetail();
+            renderList();
+        }
+
+        function deleteContact(contactId) {
+            if (!confirm('Remove this contact?')) return;
+            const p = partners.find(p => p.id === selectedPartnerId);
+            if (!p) return;
+            p.contacts = p.contacts.filter(c => c.id !== contactId);
+            saveData();
+            renderDetail();
+        }
+
+        function deletePartner(id) {
+            if (!confirm('Delete this partner? This cannot be undone.')) return;
+            partners = partners.filter(p => p.id !== id);
+            saveData();
+            closeDetail();
+            renderList();
+        }
+
+        function saveNotes() {
+            const p = partners.find(p => p.id === selectedPartnerId);
+            if (!p) return;
+            p.notes = document.getElementById('partnerNotes').value;
+            saveData();
+        }
+
         function addActivity() {
-            const note = document.getElementById('activityNote').value;
-            if (!note) return;
+            const p = partners.find(p => p.id === selectedPartnerId);
+            if (!p) return;
 
-            const index = partners.findIndex(p => p.id === editingId);
-            if (index === -1) return;
+            const type = document.getElementById('newActivityType').value;
+            const desc = document.getElementById('newActivityDesc').value;
+            if (!desc.trim()) return alert('Please enter a description');
 
-            partners[index].activities = partners[index].activities || [];
-            partners[index].activities.push({
-                date: new Date().toISOString(),
-                note: note
-            });
-            partners[index].lastContact = new Date().toISOString();
+            const activity = {
+                id: Date.now(),
+                type: type,
+                description: desc,
+                timestamp: new Date().toISOString()
+            };
+
+            p.activities = p.activities || [];
+            p.activities.push(activity);
+            p.lastContact = activity.timestamp;
+
+            // Update status if needed
+            if (p.status === 'Not Contacted') {
+                p.status = 'Contacted';
+            }
 
             saveData();
-            document.getElementById('activityNote').value = '';
-            editPartner(editingId); // Refresh modal
+            document.getElementById('newActivityDesc').value = '';
+            renderDetail();
+            renderList();
         }
 
-        // Quick Status Update
-        function quickStatus(id) {
-            const partner = partners.find(p => p.id === id);
-            if (!partner) return;
+        function editPartnerField(field) {
+            const p = partners.find(p => p.id === selectedPartnerId);
+            if (!p) return;
 
-            const statuses = ['Not Contacted', 'Contacted', 'Responded', 'Meeting', 'Quoted', 'Won', 'Lost'];
-            const currentIndex = statuses.indexOf(partner.status);
-            const nextStatus = statuses[currentIndex + 1] || statuses[0];
+            if (field === 'status') {
+                const statuses = ['Not Contacted', 'Contacted', 'Responded', 'Meeting', 'Quoted', 'Won', 'Lost'];
+                const current = statuses.indexOf(p.status);
+                const newStatus = prompt(`Current: ${p.status}\n\nEnter new status:\n${statuses.map((s, i) => `${i + 1}. ${s}`).join('\n')}`);
 
-            if (confirm(`Update status to "${nextStatus}"?`)) {
-                const index = partners.findIndex(p => p.id === id);
-                partners[index].status = nextStatus;
-                partners[index].lastContact = new Date().toISOString();
-                partners[index].activities = partners[index].activities || [];
-                partners[index].activities.push({
-                    date: new Date().toISOString(),
-                    note: `Status updated to "${nextStatus}"`
-                });
-                saveData();
-                renderPartners();
+                if (newStatus && statuses[parseInt(newStatus) - 1]) {
+                    p.status = statuses[parseInt(newStatus) - 1];
+
+                    if (p.status === 'Lost') {
+                        const reason = prompt('Why was this deal lost?');
+                        if (reason) p.lostReason = reason;
+                    }
+
+                    saveData();
+                    renderDetail();
+                    renderList();
+                }
             }
         }
 
-        // Delete Partner
-        function deletePartner() {
-            if (confirm('Are you sure you want to delete this partner?')) {
-                partners = partners.filter(p => p.id !== editingId);
-                saveData();
-                closeModal();
-                renderPartners();
-            }
-        }
+        function showEditCompanyModal() {
+            const p = partners.find(p => p.id === selectedPartnerId);
+            if (!p) return;
 
-        // Close Modal
-        function closeModal() {
-            document.getElementById('editModal').classList.remove('active');
-            editingId = null;
-        }
-
-        // Render Pipeline
-        function renderPipeline() {
-            const stages = [
-                { name: 'Not Contacted', color: '#64748b' },
-                { name: 'Contacted', color: '#2563eb' },
-                { name: 'Responded', color: '#f59e0b' },
-                { name: 'Quoted', color: '#8b5cf6' },
-                { name: 'Won', color: '#10b981' }
-            ];
-
-            const board = document.getElementById('pipelineBoard');
-            board.innerHTML = stages.map(stage => {
-                const stagePartners = partners.filter(p => p.status === stage.name);
-                return `
-                    <div style="background: #f8fafc; border-radius: 8px; padding: 1rem;">
-                        <div style="font-weight: 600; margin-bottom: 1rem; color: ${stage.color};">
-                            ${stage.name} (${stagePartners.length})
+            const html = `
+                <div class="modal-overlay active" id="editCompanyModal" onclick="if(event.target===this)closeModal()">
+                    <div class="modal">
+                        <div class="modal-header">
+                            <span class="modal-title">Edit Company Info</span>
+                            <button class="modal-close" onclick="closeModal()">&times;</button>
                         </div>
-                        ${stagePartners.map(p => `
-                            <div style="background: white; border-radius: 6px; padding: 0.75rem; margin-bottom: 0.5rem; border: 1px solid var(--border); cursor: pointer;" onclick="editPartner(${p.id})">
-                                <div style="font-weight: 500; font-size: 0.9rem;">${p.companyName}</div>
-                                <div style="font-size: 0.8rem; color: var(--text-muted);">${p.partnerType} - ${p.region}</div>
-                                ${p.followupDate ? `<div style="font-size: 0.75rem; color: ${new Date(p.followupDate) <= new Date() ? 'var(--danger)' : 'var(--text-muted)'}; margin-top: 0.25rem;">Follow-up: ${formatDate(p.followupDate)}</div>` : ''}
+                        <form onsubmit="saveCompanyInfo(event)">
+                            <div class="form-group" style="margin-bottom: 0.75rem;">
+                                <label class="form-label">Company Name *</label>
+                                <input type="text" class="form-input" id="editCompanyName" value="${p.companyName}" required>
                             </div>
-                        `).join('')}
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Type</label>
+                                    <select class="form-select" id="editPartnerType">
+                                        ${['Fabricator', 'AV Integrator', 'Pool/Landscape', 'Hospitality', 'Designer', 'Developer', 'Distributor', 'Contractor', 'Other'].map(t =>
+                                            `<option value="${t}" ${p.partnerType === t ? 'selected' : ''}>${t}</option>`
+                                        ).join('')}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Region</label>
+                                    <select class="form-select" id="editRegion">
+                                        ${['UAE', 'GCC', 'China', 'Europe', 'USA', 'Other'].map(r =>
+                                            `<option value="${r}" ${p.region === r ? 'selected' : ''}>${r}</option>`
+                                        ).join('')}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Website</label>
+                                    <input type="url" class="form-input" id="editWebsite" value="${p.website || ''}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">LinkedIn</label>
+                                    <input type="url" class="form-input" id="editLinkedIn" value="${p.linkedInUrl || ''}">
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0.75rem;">
+                                <label class="form-label">Address</label>
+                                <input type="text" class="form-input" id="editAddress" value="${p.address || ''}">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Priority</label>
+                                    <select class="form-select" id="editPriority">
+                                        ${['Low', 'Medium', 'High'].map(pr =>
+                                            `<option value="${pr}" ${p.priority === pr ? 'selected' : ''}>${pr}</option>`
+                                        ).join('')}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Follow-up Date</label>
+                                    <input type="date" class="form-input" id="editFollowup" value="${p.followupDate || ''}">
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+                            </div>
+                        </form>
                     </div>
-                `;
-            }).join('');
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', html);
         }
 
-        // Export CSV
-        function exportData() {
-            const headers = ['Company', 'Type', 'Region', 'Contact', 'Email', 'Phone', 'Website', 'Status', 'Follow-up', 'Priority', 'Notes'];
-            const rows = partners.map(p => [
-                p.companyName,
-                p.partnerType,
-                p.region,
-                p.contactName || '',
-                p.email || '',
-                p.phone || '',
-                p.website || '',
-                p.status,
-                p.followupDate || '',
-                p.priority || '',
-                (p.notes || '').replace(/"/g, '""')
-            ]);
+        function saveCompanyInfo(e) {
+            e.preventDefault();
+            const p = partners.find(p => p.id === selectedPartnerId);
+            if (!p) return;
 
-            const csv = [headers.join(','), ...rows.map(r => r.map(c => `"${c}"`).join(','))].join('\n');
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `apex-partners-${new Date().toISOString().split('T')[0]}.csv`;
-            a.click();
+            p.companyName = document.getElementById('editCompanyName').value;
+            p.partnerType = document.getElementById('editPartnerType').value;
+            p.region = document.getElementById('editRegion').value;
+            p.website = document.getElementById('editWebsite').value;
+            p.linkedInUrl = document.getElementById('editLinkedIn').value;
+            p.address = document.getElementById('editAddress').value;
+            p.priority = document.getElementById('editPriority').value;
+            p.followupDate = document.getElementById('editFollowup').value;
+
+            saveData();
+            document.getElementById('editCompanyModal').remove();
+            renderDetail();
+            renderList();
         }
 
-        // Save Data
-        function saveData() {
-            localStorage.setItem('apexPartners', JSON.stringify(partners));
+        function showEditDealModal() {
+            const p = partners.find(p => p.id === selectedPartnerId);
+            if (!p) return;
+
+            const html = `
+                <div class="modal-overlay active" id="editDealModal" onclick="if(event.target===this)closeModal()">
+                    <div class="modal">
+                        <div class="modal-header">
+                            <span class="modal-title">Edit Deal Information</span>
+                            <button class="modal-close" onclick="closeModal()">&times;</button>
+                        </div>
+                        <form onsubmit="saveDealInfo(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Deal Value (AED)</label>
+                                    <input type="number" class="form-input" id="editDealValue" value="${p.dealValue || 0}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Win Probability (%)</label>
+                                    <input type="number" class="form-input" id="editWinProb" min="0" max="100" value="${p.winProbability || 0}">
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0.75rem;">
+                                <label class="form-label">Expected Close Date</label>
+                                <input type="date" class="form-input" id="editCloseDate" value="${p.expectedCloseDate || ''}">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0.75rem;">
+                                <label class="form-label">Products Interested</label>
+                                <div style="display: flex; gap: 1rem;">
+                                    ${['55"', '65"', '75"'].map(size => `
+                                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <input type="checkbox" value="${size}" ${p.productsInterested?.includes(size) ? 'checked' : ''} class="productCheckbox">
+                                            ${size}
+                                        </label>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', html);
         }
 
-        // Format Date
+        function saveDealInfo(e) {
+            e.preventDefault();
+            const p = partners.find(p => p.id === selectedPartnerId);
+            if (!p) return;
+
+            p.dealValue = parseInt(document.getElementById('editDealValue').value) || 0;
+            p.winProbability = parseInt(document.getElementById('editWinProb').value) || 0;
+            p.expectedCloseDate = document.getElementById('editCloseDate').value;
+            p.productsInterested = Array.from(document.querySelectorAll('.productCheckbox:checked')).map(cb => cb.value);
+
+            saveData();
+            document.getElementById('editDealModal').remove();
+            renderDetail();
+            renderList();
+        }
+
+        // ============ UTILITIES ============
         function formatDate(dateStr) {
             if (!dateStr) return '-';
-            const date = new Date(dateStr);
-            return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
         }
 
         function formatDateTime(dateStr) {
             if (!dateStr) return '-';
-            const date = new Date(dateStr);
-            return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
         }
 
-        // Close modal on escape
+        // ============ INIT ============
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            renderList();
+        });
+
+        // Close modals on escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeModal();
         });
     </script>
-<script src="nav.js"></script>
+    <script src="nav.js"></script>
 </body>
 </html>
