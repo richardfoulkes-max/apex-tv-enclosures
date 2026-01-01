@@ -12,8 +12,8 @@
 
 ## Project Overview
 Apex Enclosures business project - outdoor enclosures for Gulf region.
-- **Current product:** TV Enclosures (75" prototype in development)
-- **Future product:** Pool Enclosures (pump/filter housings)
+- **Product 1:** TV Enclosures (ATE Series) - 75" prototype in development, v5.2.2 IP55
+- **Product 2:** Pool Equipment Enclosures (APE Series) - v1.0 engineering complete
 
 ## GitHub Repository
 https://github.com/richardfoulkes-max/apex-tv-enclosures (private)
@@ -150,6 +150,61 @@ roundtable-ai/              ← Engineering validation briefs
 7. Open folder for user to verify before sending
 
 ## Recent Work History
+
+### Session: 2026-01-01 (PM) - APE Series Pool Equipment Enclosures v1.0
+
+**Created complete engineering specification for APE Series Pool Equipment Enclosures:**
+
+**Design Philosophy:**
+- Modular system: BASE unit (600×600×800mm) + optional extensions (EXT-A, EXT-B, EXT-C)
+- Acoustic focus: 70-80% noise reduction using 25-50mm closed-cell foam
+- Passive ventilation: No fans required (unlike TV enclosures)
+- Chiller variant (APE-CHILL): Louvered design for compressor airflow, 50-60% noise reduction only
+- 316 SS hardware required for salt pool compatibility
+
+**Files created:**
+- `website/pool-specification.html` (~800 lines) - Full engineering spec with 12 sections
+- `website/pool-designs.html` (5 SVG drawings) - Side cross-section, top view, chiller variant, access panel, front view
+- `website/pool-bom.html` - Component costing: BASE $148, full system $318
+- `manufacturer-rfq/APE-Specification-v1.md` - Manufacturer RFQ package
+
+**Key specifications:**
+- APE-BASE: 600×600×800mm, single pump capacity, ~$148 BOM
+- APE-EXT-A: 300×600×800mm, filter module, ~$78 BOM
+- APE-EXT-B: 400×600×800mm, chlorinator/automation, ~$92 BOM
+- APE-CHILL: 1200×600×1000mm, standalone chiller enclosure, ~$252 BOM
+- Materials: 5052-H32 aluminum, 316 SS fasteners, EPDM gaskets
+- Pricing targets: BASE AED 1,500-2,000, Full system AED 5,000-6,500
+
+**Market opportunity:** No UAE competitors. Australian imports $1,200+ USD. Pool contractors build custom but without acoustic treatment.
+
+---
+
+### Session: 2026-01-01 - Retykle Growth Plan + Apex WhatsApp Strategy
+
+**Retykle UAE Growth Plan (side project for friend):**
+- Comprehensive WhatsApp growth playbook (legitimate opt-in strategies)
+- 10 silver bullet ideas they're NOT already doing
+- Styled HTML to match Retykle branding (#4BA9A5 teal header)
+- Published: https://richardfoulkes-max.github.io/retykle-growth-plan/
+- Updated: Removed Elfsight (they already have widget), fixed market size $1.2B → $1.5B (Statista)
+
+**Added WhatsApp Growth Strategy to Apex BD plan (website/bd-plan.html):**
+- WhatsApp Business catalog setup
+- Click-to-WhatsApp ads (AED 15-40/lead, 13× ROI example)
+- QR codes for offline lead capture (business cards, demo unit, trade shows)
+- Partner WhatsApp group strategy
+- Automated quick replies (price, install, warranty triggers)
+- 6-month growth roadmap (target 200+ contacts)
+
+**WhatsApp tools explained:**
+- WATI ($49/mo) - WhatsApp API, broadcasts, chatbots, team inbox
+- Interakt ($15/mo) - Budget WhatsApp API, good Shopify integration
+- Elfsight (free) - Website widget only (not needed if already have one)
+
+**Commits:** 16ad10a (Apex BD plan), 261b6f3 (Retykle GitHub)
+
+---
 
 ### Session: 2025-12-31 (Night) - Business Development & CRM Redesign
 
