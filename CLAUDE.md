@@ -440,6 +440,45 @@ roundtable-ai/              ← Engineering validation briefs
   - Bundle pricing options
   - Video marketing strategy
 - **Competitor Analysis:** See `website/competitor-comparison.html` - includes Display Shield deep-dive
+- **Business Development:** See `website/bd-plan.html` - free marketing channels, partner outreach templates
+
+## Business Development Opportunities
+
+### Future Product Expansion (Same Customer, Same Manufacturing)
+
+| Product | Opportunity | Priority |
+|---------|-------------|----------|
+| **Outdoor AV Cabinet** | Weatherproof cabinet for streaming devices, receivers, gaming consoles. Natural upsell with TV enclosure. AED 2,000-3,500. | HIGH |
+| **Pool Equipment Enclosure** | Architectural covers for pumps, filters, heaters. Every villa has ugly exposed equipment. AED 3,000-8,000. | HIGH |
+| **Digital Signage Enclosure** | Same product, commercial focus - restaurants, malls, petrol stations. Already in capability. | MEDIUM |
+| **Generator Enclosure** | Noise + weather protection. Ugly units visible in villas. | MEDIUM |
+| **AC Unit Covers** | Every villa has ugly outdoor AC units. Low margin but high volume. | LOW |
+
+### Bundle Opportunities
+
+**Complete Outdoor Entertainment Package:**
+- TV Enclosure (AED 7,000-10,500)
+- AV Cabinet (AED 2,500)
+- Speaker pair (AED 750-1,500)
+- Installation (AED 500)
+- **Package total: AED 12,000-15,000** (turns AED 7K sale into AED 15K)
+
+### Adjacent Markets to Explore
+- Outdoor kitchen/BBQ enclosures
+- Misting/cooling systems (resale, not manufacturing)
+- Premium outdoor speakers (resale/bundle)
+- Motorized pergolas/shade structures (partnership opportunity)
+
+### Competitor Financial Intelligence
+| Company | Revenue | Employees | Notes |
+|---------|---------|-----------|-------|
+| **PEC (Display Shield)** | $59M (2025) | 4 | Proves enclosure-only model scales |
+| **SunBrite TV** | $120M (2024) | - | 24% US market share, 14% EBIT margin |
+| **Apollo Enclosures** | Est. $1-5M | 3 | Small player competing successfully |
+
+**Market size:** $400-450M globally (2024), growing 9-11% CAGR. North America = 48-70%.
+
+---
 
 ## Session: 2025-12-26 - Testing Plan + Al Shurooq Follow-up
 - Created testing-plan.html with 14-day prototype validation protocol
