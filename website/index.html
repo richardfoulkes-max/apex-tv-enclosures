@@ -4,387 +4,411 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apex Enclosures - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #0d9488;
+            --sales: #6366f1;
+            --product: #0d9488;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #ffffff;
-            color: #0f172a;
-            line-height: 1.6;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        /* Header */
+        .header {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            padding: 24px 32px;
+        }
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+        .logo h1 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .logo p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .header-links {
+            display: flex;
+            gap: 16px;
+        }
+        .header-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.15s;
+        }
+        .header-links a:hover {
+            background: var(--bg);
+            color: var(--text);
+        }
 
-        h1 { color: #0d9488; font-size: 2rem; margin-bottom: 0.5rem; }
-        .subtitle { color: #64748b; margin-bottom: 2rem; }
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 48px 32px;
+        }
 
-        /* Website Cards */
-        .websites-section { margin-bottom: 3rem; }
-        .websites-section h2 { color: #0d9488; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+        .welcome {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .welcome h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .welcome p {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
 
-        .website-grid {
+        /* Main Cards Grid */
+        .main-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin-bottom: 48px;
         }
 
         @media (max-width: 800px) {
-            .website-grid { grid-template-columns: 1fr; }
+            .main-grid { grid-template-columns: 1fr; }
         }
 
-        .website-card {
-            background: #ffffff;
-            border: 2px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 2rem;
+        .main-card {
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
             text-decoration: none;
             color: inherit;
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
         }
-
-        .website-card:hover {
-            border-color: #0d9488;
+        .main-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(13, 148, 136, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+        .main-card.sales {
+            border-color: var(--sales);
+        }
+        .main-card.sales:hover {
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.2);
+        }
+        .main-card.product {
+            border-color: var(--product);
+        }
+        .main-card.product:hover {
+            box-shadow: 0 20px 50px rgba(13, 148, 136, 0.2);
         }
 
-        .website-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-        }
-
-        .website-card.retail::before { background: linear-gradient(90deg, #0d9488, #14b8a6); }
-        .website-card.partner::before { background: linear-gradient(90deg, #3b82f6, #2563eb); }
-        .website-card.commercial::before { background: linear-gradient(90deg, #f59e0b, #d97706); }
-
-        .website-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .website-card h3 {
-            font-size: 1.5rem;
-            color: #0f172a;
-            margin-bottom: 0.5rem;
-        }
-
-        .website-card p {
-            color: #64748b;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .website-card .audience {
-            display: inline-block;
-            background: #f1f5f9;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: #475569;
-        }
-
-        .website-card .status {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .status.live { background: #dcfce7; color: #16a34a; }
-        .status.draft { background: #fef3c7; color: #d97706; }
-        .status.coming { background: #dbeafe; color: #2563eb; }
-
-        /* Quick Links Section */
-        .quick-links { margin-bottom: 2rem; }
-        .quick-links h2 { color: #0d9488; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
-
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .link-card {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 1rem 1.25rem;
-            text-decoration: none;
-            color: #475569;
-            transition: all 0.2s;
+        .card-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            justify-content: center;
+            font-size: 36px;
+            margin-bottom: 24px;
+        }
+        .sales .card-icon {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        }
+        .product .card-icon {
+            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
         }
 
-        .link-card:hover {
-            background: #f0fdfa;
-            border-color: #0d9488;
-            color: #0f172a;
+        .main-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .main-card .description {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 24px;
         }
 
-        .link-card .icon { font-size: 1.25rem; }
+        .card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .card-features span {
+            background: var(--bg);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .sales .card-features span {
+            background: rgba(99, 102, 241, 0.1);
+            color: #4f46e5;
+        }
+        .product .card-features span {
+            background: rgba(13, 148, 136, 0.1);
+            color: #0f766e;
+        }
 
-        /* Stats Row */
-        .stats-row {
+        .card-arrow {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+        .main-card:hover .card-arrow {
+            transform: translateX(4px);
+        }
+        .sales .card-arrow { background: rgba(99, 102, 241, 0.1); }
+        .product .card-arrow { background: rgba(13, 148, 136, 0.1); }
+
+        /* Quick Stats */
+        .stats-section {
+            margin-bottom: 48px;
+        }
+        .stats-section h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
         }
-
         .stat-card {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 1.25rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
             text-align: center;
         }
-
         .stat-card .value {
-            font-size: 2rem;
+            font-size: 28px;
             font-weight: 700;
-            color: #0d9488;
+            color: var(--primary);
         }
-
         .stat-card .label {
-            color: #64748b;
-            font-size: 0.85rem;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
         }
 
-        /* Contact Info */
-        .contact-bar {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 1rem 1.5rem;
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            align-items: center;
-            margin-top: 2rem;
+        /* Customer Sites */
+        .sites-section h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 16px;
         }
-
-        .contact-bar .item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #64748b;
-            font-size: 0.9rem;
+        .sites-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
         }
-
-        .contact-bar a {
-            color: #0d9488;
+        @media (max-width: 800px) {
+            .sites-grid { grid-template-columns: 1fr; }
+        }
+        .site-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
             text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.2s;
+        }
+        .site-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .site-card .icon {
+            font-size: 28px;
+        }
+        .site-card h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .site-card p {
+            font-size: 13px;
+            color: var(--text-muted);
         }
 
-        .contact-bar a:hover {
-            text-decoration: underline;
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">A</div>
+                <div>
+                    <h1>Apex Enclosures</h1>
+                    <p>Internal Dashboard</p>
+                </div>
+            </div>
+            <div class="header-links">
+                <a href="retail/index.html">Retail Site</a>
+                <a href="mailto:apexenclosures@icloud.com">Contact</a>
+            </div>
+        </div>
+    </header>
+
     <div class="container">
-        <h1>Apex Enclosures</h1>
-        <p class="subtitle">Outdoor TV Enclosures - Internal Dashboard</p>
+        <div class="welcome">
+            <h2>Welcome back</h2>
+            <p>Choose an area to work in</p>
+        </div>
 
-        <div class="stats-row">
-            <div class="stat-card">
-                <div class="value">v5.2.1</div>
-                <div class="label">Design Version</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">75"</div>
-                <div class="label">Prototype Size</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">160mm</div>
-                <div class="label">Enclosure Depth</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">210-250</div>
-                <div class="label">CFM Airflow</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">IP54</div>
-                <div class="label">Weather Rating</div>
+        <div class="main-grid">
+            <a href="ai-dashboard.html" class="main-card sales">
+                <div class="card-icon">📊</div>
+                <h3>Sales & Operations</h3>
+                <p class="description">
+                    Manage customer enquiries, orders pipeline, partner relationships, and AI-assisted responses.
+                </p>
+                <div class="card-features">
+                    <span>AI Queue</span>
+                    <span>Orders</span>
+                    <span>CRM</span>
+                    <span>Quotes</span>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+
+            <a href="product-dashboard.html" class="main-card product">
+                <div class="card-icon">🔧</div>
+                <h3>Product Development</h3>
+                <p class="description">
+                    Engineering specifications, designs, manufacturing docs, testing plans, and supplier management.
+                </p>
+                <div class="card-features">
+                    <span>Specs</span>
+                    <span>BOMs</span>
+                    <span>Testing</span>
+                    <span>RFQs</span>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+        </div>
+
+        <div class="stats-section">
+            <h3>Product Status</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="value">v5.2.2</div>
+                    <div class="label">Design Version</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">75"</div>
+                    <div class="label">Prototype Size</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">IP55</div>
+                    <div class="label">Weather Rating</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">160mm</div>
+                    <div class="label">Enclosure Depth</div>
+                </div>
             </div>
         </div>
 
-        <div class="websites-section">
-            <h2>Customer-Facing Websites</h2>
-            <div class="website-grid">
-                <a href="retail/index.html" class="website-card retail">
-                    <span class="status draft">Draft</span>
-                    <div class="website-icon">🏠</div>
-                    <h3>Retail Website</h3>
-                    <p>Consumer-focused site for homeowners wanting outdoor TV protection for villas, gardens, and pool areas.</p>
-                    <span class="audience">Homeowners & Consumers</span>
+        <div class="sites-section">
+            <h3>Customer-Facing Websites</h3>
+            <div class="sites-grid">
+                <a href="retail/index.html" class="site-card">
+                    <div class="icon">🏠</div>
+                    <div>
+                        <h4>Retail Website</h4>
+                        <p>Homeowners & consumers</p>
+                    </div>
                 </a>
-
-                <a href="partner/index.html" class="website-card partner">
-                    <span class="status draft">Draft</span>
-                    <div class="website-icon">🤝</div>
-                    <h3>Partner Portal</h3>
-                    <p>Reseller portal for AV integrators, pool contractors, and smart home installers to join our partner program.</p>
-                    <span class="audience">AV Installers & Contractors</span>
+                <a href="partner/index.html" class="site-card">
+                    <div class="icon">🤝</div>
+                    <div>
+                        <h4>Partner Portal</h4>
+                        <p>AV installers & contractors</p>
+                    </div>
                 </a>
-
-                <a href="commercial/index.html" class="website-card commercial">
-                    <span class="status draft">Draft</span>
-                    <div class="website-icon">🏨</div>
-                    <h3>Commercial / B2B</h3>
-                    <p>Enterprise solutions for hotels, resorts, restaurants, and hospitality venues requiring volume orders.</p>
-                    <span class="audience">Hotels & Hospitality</span>
+                <a href="commercial/index.html" class="site-card">
+                    <div class="icon">🏨</div>
+                    <div>
+                        <h4>Commercial / B2B</h4>
+                        <p>Hotels & hospitality</p>
+                    </div>
                 </a>
-            </div>
-        </div>
-
-        <div class="quick-links">
-            <h2>AI Director</h2>
-            <div class="links-grid">
-                <a href="ai-queue.html" class="link-card" style="border-color: #7c3aed;">
-                    <span class="icon">🤖</span>
-                    AI Approval Queue
-                </a>
-                <a href="orders.html" class="link-card" style="border-color: #7c3aed; background: rgba(124, 58, 237, 0.1);">
-                    <span class="icon">📦</span>
-                    Orders Pipeline
-                </a>
-                <a href="ai-insights.html" class="link-card" style="border-color: #7c3aed;">
-                    <span class="icon">📈</span>
-                    Learning Insights
-                </a>
-                <a href="partner-crm.html" class="link-card" style="border-color: #7c3aed;">
-                    <span class="icon">👥</span>
-                    Partner CRM
-                </a>
-                <a href="setup.html" class="link-card" style="border-color: #7c3aed;">
-                    <span class="icon">🔌</span>
-                    Database Setup
-                </a>
-            </div>
-        </div>
-
-        <div class="quick-links">
-            <h2>Sales Tools</h2>
-            <div class="links-grid">
-                <a href="ai-queue.html" class="link-card" style="border-color: #7c3aed; background: rgba(124, 58, 237, 0.1);">
-                    <span class="icon">🤖</span>
-                    AI Queue
-                </a>
-                <a href="partner-program.html" class="link-card">
-                    <span class="icon">📋</span>
-                    Partner Program
-                </a>
-                <a href="target-partners.html" class="link-card">
-                    <span class="icon">🎯</span>
-                    Target Partners
-                </a>
-                <a href="b2b-targets.html" class="link-card">
-                    <span class="icon">🏨</span>
-                    B2B Targets
-                </a>
-                <a href="partner-crm.html" class="link-card">
-                    <span class="icon">📊</span>
-                    Partner CRM
-                </a>
-                <a href="quote-calculator.html" class="link-card">
-                    <span class="icon">🧮</span>
-                    Quote Calculator
-                </a>
-                <a href="landed-cost-calculator.html" class="link-card">
-                    <span class="icon">💰</span>
-                    Landed Cost Calculator
-                </a>
-            </div>
-        </div>
-
-        <div class="quick-links">
-            <h2>Engineering & Manufacturing</h2>
-            <div class="links-grid">
-                <a href="specification.html" class="link-card">
-                    <span class="icon">📐</span>
-                    Specification
-                </a>
-                <a href="bom-detailed.html" class="link-card">
-                    <span class="icon">📦</span>
-                    Bill of Materials
-                </a>
-                <a href="testing-plan.html" class="link-card">
-                    <span class="icon">🧪</span>
-                    Testing Plan
-                </a>
-                <a href="qc-checklist.html" class="link-card">
-                    <span class="icon">✅</span>
-                    QC Checklist
-                </a>
-                <a href="manufacturer-rfq.html" class="link-card">
-                    <span class="icon">📄</span>
-                    RFQ Package
-                </a>
-                <a href="china-suppliers.html" class="link-card">
-                    <span class="icon">🏭</span>
-                    China Suppliers
-                </a>
-            </div>
-        </div>
-
-        <div class="quick-links">
-            <h2>Legal Documents</h2>
-            <div class="links-grid">
-                <a href="legal/terms-conditions.html" class="link-card">
-                    <span class="icon">📋</span>
-                    Terms & Conditions
-                </a>
-                <a href="legal/warranty-policy.html" class="link-card">
-                    <span class="icon">🛡️</span>
-                    Warranty Policy
-                </a>
-                <a href="legal/nda-template.html" class="link-card">
-                    <span class="icon">🔒</span>
-                    NDA Template
-                </a>
-                <a href="legal/partner-agreement.html" class="link-card">
-                    <span class="icon">✍️</span>
-                    Partner Agreement
-                </a>
-            </div>
-        </div>
-
-        <div class="contact-bar">
-            <div class="item">
-                <span>📧</span>
-                <a href="mailto:apexenclosures@icloud.com">apexenclosures@icloud.com</a>
-            </div>
-            <div class="item">
-                <span>📱</span>
-                <a href="https://wa.me/971505598675">+971 50 559 8675</a>
-            </div>
-            <div class="item">
-                <span>📍</span>
-                Dubai, UAE
             </div>
         </div>
     </div>
 
-<script src="nav.js"></script>
+    <footer class="footer">
+        <p>Apex Enclosures | <a href="mailto:apexenclosures@icloud.com">apexenclosures@icloud.com</a> | +971 50 559 8675</p>
+    </footer>
 </body>
 </html>
-<!-- Deployed Fri Jan  2 16:36:29 +04 2026 -->
-<!-- Fri Jan  2 16:52:35 +04 2026 -->
-<!-- env Fri Jan  2 16:54:39 +04 2026 -->
-<!-- key Fri Jan  2 16:58:10 +04 2026 -->
-<!-- supabase Fri Jan  2 17:28:17 +04 2026 -->
-<!-- env2 Fri Jan  2 17:31:58 +04 2026 -->
-<!-- learning Fri Jan  2 18:18:35 +04 2026 -->

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Development | Apex Enclosures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0d9488;
+            --primary-dark: #0f766e;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #f0fdfa;
+            --card: #ffffff;
+            --border: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 24px 32px;
+        }
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-left h1 {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .header-left p {
+            opacity: 0.8;
+            margin-top: 4px;
+            font-size: 14px;
+        }
+        .header-nav {
+            display: flex;
+            gap: 8px;
+        }
+        .header-nav a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .header-nav a:hover {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+        .header-nav a.active {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px;
+        }
+
+        /* Product Selector */
+        .product-selector {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .product-tab {
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 32px;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex: 1;
+            text-align: center;
+        }
+        .product-tab:hover {
+            border-color: var(--primary);
+        }
+        .product-tab.active {
+            border-color: var(--primary);
+            background: rgba(13, 148, 136, 0.05);
+        }
+        .product-tab h3 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+        .product-tab p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .product-tab .version {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 32px;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .section-header h2 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+
+        /* Link Grid */
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .link-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: all 0.2s;
+        }
+        .link-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 16px rgba(13, 148, 136, 0.1);
+            transform: translateY(-2px);
+        }
+        .link-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(13, 148, 136, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        .link-card h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .link-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Quick Stats */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .stat-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .stat-card .value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .stat-card .label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Pool Section (hidden by default) */
+        .pool-section {
+            display: none;
+        }
+        .pool-section.active {
+            display: block;
+        }
+        .tv-section {
+            display: block;
+        }
+        .tv-section.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <h1>🔧 Product Development</h1>
+                <p>Engineering specifications, designs, and manufacturing</p>
+            </div>
+            <nav class="header-nav">
+                <a href="index.html">← Apex Dashboard</a>
+                <a href="ai-dashboard.html">Sales & Ops</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Product Selector -->
+        <div class="product-selector">
+            <div class="product-tab active" onclick="showProduct('tv')">
+                <h3>📺 TV Enclosures</h3>
+                <p>ATE Series - Outdoor TV Protection</p>
+                <span class="version">v5.2.2 IP55</span>
+            </div>
+            <div class="product-tab" onclick="showProduct('pool')">
+                <h3>🏊 Pool Equipment</h3>
+                <p>APE Series - Pump & Filter Enclosures</p>
+                <span class="version">v1.0</span>
+            </div>
+        </div>
+
+        <!-- TV Enclosure Section -->
+        <div id="tv-section" class="tv-section">
+            <!-- Stats -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="value">v5.2.2</div>
+                    <div class="label">Design Version</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">75"</div>
+                    <div class="label">Prototype Size</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">IP55</div>
+                    <div class="label">Weather Rating</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">160mm</div>
+                    <div class="label">Depth</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">180-210</div>
+                    <div class="label">CFM Airflow</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">$638</div>
+                    <div class="label">BOM Cost</div>
+                </div>
+            </div>
+
+            <!-- Engineering Docs -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Engineering Documentation</h2>
+                </div>
+                <div class="link-grid">
+                    <a href="specification.html" class="link-card">
+                        <div class="link-icon">📐</div>
+                        <div>
+                            <h4>Full Specification</h4>
+                            <p>Complete manufacturing spec with dimensions, materials, assembly</p>
+                        </div>
+                    </a>
+                    <a href="designs.html" class="link-card">
+                        <div class="link-icon">✏️</div>
+                        <div>
+                            <h4>Technical Drawings</h4>
+                            <p>SVG cross-sections, airflow diagrams, component layouts</p>
+                        </div>
+                    </a>
+                    <a href="bom-detailed.html" class="link-card">
+                        <div class="link-icon">📦</div>
+                        <div>
+                            <h4>Bill of Materials</h4>
+                            <p>Component list with suppliers, pricing, lead times</p>
+                        </div>
+                    </a>
+                    <a href="engineering-analysis.html" class="link-card">
+                        <div class="link-icon">🔬</div>
+                        <div>
+                            <h4>Engineering Analysis</h4>
+                            <p>Thermal calculations, structural analysis, validation</p>
+                        </div>
+                    </a>
+                    <a href="control-logic.html" class="link-card">
+                        <div class="link-icon">🎛️</div>
+                        <div>
+                            <h4>Control Logic</h4>
+                            <p>PWM fan control, temperature thresholds, firmware</p>
+                        </div>
+                    </a>
+                    <a href="wiring-diagram.html" class="link-card">
+                        <div class="link-icon">⚡</div>
+                        <div>
+                            <h4>Wiring Diagram</h4>
+                            <p>Electrical schematic, wire gauges, connectors</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Testing & QC -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Testing & Quality Control</h2>
+                </div>
+                <div class="link-grid">
+                    <a href="testing-plan.html" class="link-card">
+                        <div class="link-icon">🧪</div>
+                        <div>
+                            <h4>Testing Plan</h4>
+                            <p>14-day prototype validation protocol</p>
+                        </div>
+                    </a>
+                    <a href="qc-checklist.html" class="link-card">
+                        <div class="link-icon">✅</div>
+                        <div>
+                            <h4>QC Checklist</h4>
+                            <p>Production inspection template, IP55 verification</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Manufacturing -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Manufacturing & Suppliers</h2>
+                </div>
+                <div class="link-grid">
+                    <a href="manufacturer-rfq.html" class="link-card">
+                        <div class="link-icon">📄</div>
+                        <div>
+                            <h4>RFQ Package</h4>
+                            <p>Request for quote document for manufacturers</p>
+                        </div>
+                    </a>
+                    <a href="china-suppliers.html" class="link-card">
+                        <div class="link-icon">🏭</div>
+                        <div>
+                            <h4>China Suppliers</h4>
+                            <p>Vetted OEM fabricators and component sources</p>
+                        </div>
+                    </a>
+                    <a href="project-tracker.html" class="link-card">
+                        <div class="link-icon">📊</div>
+                        <div>
+                            <h4>Project Tracker</h4>
+                            <p>Development timeline and milestones</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Market Research -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Market Research</h2>
+                </div>
+                <div class="link-grid">
+                    <a href="market-research.html" class="link-card">
+                        <div class="link-icon">📈</div>
+                        <div>
+                            <h4>Market Research</h4>
+                            <p>Industry analysis, market size, growth trends</p>
+                        </div>
+                    </a>
+                    <a href="competitor-analysis.html" class="link-card">
+                        <div class="link-icon">🔍</div>
+                        <div>
+                            <h4>Competitor Analysis</h4>
+                            <p>Competitive landscape, pricing, features</p>
+                        </div>
+                    </a>
+                    <a href="competitor-comparison.html" class="link-card">
+                        <div class="link-icon">⚖️</div>
+                        <div>
+                            <h4>Feature Comparison</h4>
+                            <p>Side-by-side product comparisons</p>
+                        </div>
+                    </a>
+                    <a href="tv-compatibility.html" class="link-card">
+                        <div class="link-icon">📺</div>
+                        <div>
+                            <h4>TV Compatibility</h4>
+                            <p>Compatible TV models and sizes</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pool Equipment Section -->
+        <div id="pool-section" class="pool-section">
+            <!-- Stats -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="value">v1.0</div>
+                    <div class="label">Design Version</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">Modular</div>
+                    <div class="label">Architecture</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">70-80%</div>
+                    <div class="label">Noise Reduction</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">Passive</div>
+                    <div class="label">Ventilation</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">$148</div>
+                    <div class="label">BASE Cost</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">$318</div>
+                    <div class="label">Full System</div>
+                </div>
+            </div>
+
+            <!-- Pool Docs -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Pool Enclosure Documentation</h2>
+                </div>
+                <div class="link-grid">
+                    <a href="pool-specification.html" class="link-card">
+                        <div class="link-icon">📐</div>
+                        <div>
+                            <h4>APE Specification</h4>
+                            <p>Modular pool equipment enclosure spec</p>
+                        </div>
+                    </a>
+                    <a href="pool-designs.html" class="link-card">
+                        <div class="link-icon">✏️</div>
+                        <div>
+                            <h4>Technical Drawings</h4>
+                            <p>Cross-sections, modular configurations</p>
+                        </div>
+                    </a>
+                    <a href="pool-bom.html" class="link-card">
+                        <div class="link-icon">📦</div>
+                        <div>
+                            <h4>Bill of Materials</h4>
+                            <p>Components for BASE, extensions, chiller variant</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legal Docs (shared) -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Legal Documents</h2>
+            </div>
+            <div class="link-grid">
+                <a href="legal/terms-conditions.html" class="link-card">
+                    <div class="link-icon">📋</div>
+                    <div>
+                        <h4>Terms & Conditions</h4>
+                        <p>Customer terms of service</p>
+                    </div>
+                </a>
+                <a href="legal/warranty-policy.html" class="link-card">
+                    <div class="link-icon">🛡️</div>
+                    <div>
+                        <h4>Warranty Policy</h4>
+                        <p>2-year warranty terms</p>
+                    </div>
+                </a>
+                <a href="legal/nda-template.html" class="link-card">
+                    <div class="link-icon">🔒</div>
+                    <div>
+                        <h4>NDA Template</h4>
+                        <p>For manufacturer discussions</p>
+                    </div>
+                </a>
+                <a href="legal/partner-agreement.html" class="link-card">
+                    <div class="link-icon">✍️</div>
+                    <div>
+                        <h4>Partner Agreement</h4>
+                        <p>Reseller partnership terms</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showProduct(product) {
+            const tvSection = document.getElementById('tv-section');
+            const poolSection = document.getElementById('pool-section');
+            const tabs = document.querySelectorAll('.product-tab');
+
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            if (product === 'tv') {
+                tvSection.classList.remove('hidden');
+                poolSection.classList.remove('active');
+                tabs[0].classList.add('active');
+            } else {
+                tvSection.classList.add('hidden');
+                poolSection.classList.add('active');
+                tabs[1].classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
