@@ -125,7 +125,7 @@ export default async function handler(req, res) {
 
     // PATCH - Update order
     } else if (req.method === 'PATCH') {
-        const { id, status, notes, ...updates } = req.body;
+        const { id, status, notes, lead_temperature, lost_reason, ...updates } = req.body;
 
         if (!id) {
             return res.status(400).json({ error: 'Order id is required' });
@@ -143,10 +143,19 @@ export default async function handler(req, res) {
                 if (status === 'production') updateData.production_started_at = now;
                 if (status === 'shipped') updateData.shipped_at = now;
                 if (status === 'delivered') updateData.delivered_at = now;
+                if (status === 'cancelled') updateData.lost_at = now;
             }
 
             if (notes !== undefined) {
                 updateData.notes = notes;
+            }
+
+            if (lead_temperature) {
+                updateData.lead_temperature = lead_temperature;
+            }
+
+            if (lost_reason) {
+                updateData.lost_reason = lost_reason;
             }
 
             const { data: order, error } = await supabase

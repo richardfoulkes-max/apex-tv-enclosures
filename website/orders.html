@@ -54,7 +54,7 @@
         /* Pipeline */
         .pipeline {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(6, 1fr);
             gap: 1rem;
             margin-bottom: 2rem;
         }
@@ -85,6 +85,42 @@
         .col-production .column-header { border-color: #3b82f6; }
         .col-shipped .column-header { border-color: #8b5cf6; }
         .col-delivered .column-header { border-color: #10b981; }
+        .col-cancelled .column-header { border-color: #dc2626; }
+        .col-cancelled { background: #fef2f2; }
+
+        /* Temperature badges */
+        .temp-badge {
+            display: inline-block;
+            padding: 0.125rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .temp-hot { background: #fee2e2; color: #dc2626; }
+        .temp-warm { background: #fef3c7; color: #d97706; }
+        .temp-cold { background: #dbeafe; color: #2563eb; }
+        .temp-dead { background: #f1f5f9; color: #64748b; }
+
+        /* Temperature selector */
+        .temp-selector {
+            display: none;
+            position: absolute;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 0.5rem;
+            z-index: 100;
+        }
+        .temp-selector.active { display: block; }
+        .temp-option {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+        .temp-option:hover { background: #f1f5f9; }
 
         .column-cards {
             padding: 0.75rem;
@@ -405,6 +441,10 @@
                 <div class="stat-label">Pipeline Value</div>
             </div>
             <div class="stat">
+                <div class="stat-value" id="hotLeads">0</div>
+                <div class="stat-label">🔥 Hot Leads</div>
+            </div>
+            <div class="stat">
                 <div class="stat-value" id="dueToday">0</div>
                 <div class="stat-label">Follow-ups Due</div>
             </div>
@@ -469,6 +509,14 @@
                     <span class="count" id="countDelivered">0</span>
                 </div>
                 <div class="column-cards" id="colDelivered"></div>
+            </div>
+
+            <div class="pipeline-column col-cancelled">
+                <div class="column-header">
+                    <span>Lost</span>
+                    <span class="count" id="countCancelled">0</span>
+                </div>
+                <div class="column-cards" id="colCancelled"></div>
             </div>
         </div>
     </div>
@@ -567,6 +615,40 @@
         </div>
     </div>
 
+    <!-- Mark as Lost Modal -->
+    <div class="modal-overlay" id="lostModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Mark as Lost</h3>
+                <button class="modal-close" onclick="closeModal('lostModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 1rem; color: #64748b;">Help us understand why this deal didn't close:</p>
+                <div class="form-group">
+                    <label class="form-label">Reason</label>
+                    <select class="form-select" id="lostReason">
+                        <option value="too_expensive">Too expensive</option>
+                        <option value="competitor">Went with competitor</option>
+                        <option value="no_response">No response / Ghosted</option>
+                        <option value="project_cancelled">Project cancelled</option>
+                        <option value="timing">Bad timing / Not ready</option>
+                        <option value="diy">Decided to DIY</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Notes (optional)</label>
+                    <textarea class="form-textarea" id="lostNotes" rows="2" placeholder="Any additional context..."></textarea>
+                </div>
+                <input type="hidden" id="lostOrderId">
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal('lostModal')">Cancel</button>
+                <button class="btn-save" style="background: #dc2626;" onclick="confirmMarkLost()">Mark as Lost</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const API_BASE = window.location.hostname === 'localhost'
             ? 'http://localhost:3000/api'
@@ -574,6 +656,25 @@
 
         let orders = [];
         let followUps = [];
+
+        // Temperature config
+        const TEMPS = {
+            hot: { label: '🔥 Hot', class: 'temp-hot' },
+            warm: { label: '🌡️ Warm', class: 'temp-warm' },
+            cold: { label: '❄️ Cold', class: 'temp-cold' },
+            dead: { label: '💀 Dead', class: 'temp-dead' }
+        };
+
+        // Run auto-followups then load data
+        async function init() {
+            try {
+                // Generate any auto follow-ups
+                await fetch(`${API_BASE}/auto-followups`, { method: 'POST' });
+            } catch (e) {
+                console.log('Auto-followups skipped');
+            }
+            loadData();
+        }
 
         // Load data
         async function loadData() {
@@ -605,14 +706,15 @@
                 deposit: document.getElementById('colDeposit'),
                 production: document.getElementById('colProduction'),
                 shipped: document.getElementById('colShipped'),
-                delivered: document.getElementById('colDelivered')
+                delivered: document.getElementById('colDelivered'),
+                cancelled: document.getElementById('colCancelled')
             };
 
             // Clear columns
             Object.values(columns).forEach(col => col.innerHTML = '');
 
             // Count by status
-            const counts = { quote: 0, deposit: 0, production: 0, shipped: 0, delivered: 0 };
+            const counts = { quote: 0, deposit: 0, production: 0, shipped: 0, delivered: 0, cancelled: 0 };
 
             orders.forEach(order => {
                 const status = order.status || 'quote';
@@ -630,20 +732,23 @@
             document.getElementById('countProduction').textContent = counts.production;
             document.getElementById('countShipped').textContent = counts.shipped;
             document.getElementById('countDelivered').textContent = counts.delivered;
+            document.getElementById('countCancelled').textContent = counts.cancelled;
         }
 
         // Create order card
         function createOrderCard(order) {
             const card = document.createElement('div');
             card.className = 'order-card';
-            card.onclick = () => showOrderDetail(order);
+            card.style.position = 'relative';
 
             const nextStatus = getNextStatus(order.status);
             const orderFollowups = followUps.filter(f => f.order_id === order.id && !f.completed_at);
             const nextFollowup = orderFollowups[0];
+            const temp = order.lead_temperature || 'warm';
+            const tempConfig = TEMPS[temp] || TEMPS.warm;
 
             let followupHtml = '';
-            if (nextFollowup) {
+            if (nextFollowup && order.status !== 'delivered' && order.status !== 'cancelled') {
                 const isOverdue = nextFollowup.due_date < new Date().toISOString().split('T')[0];
                 followupHtml = `
                     <div class="order-followup ${isOverdue ? 'overdue' : ''}">
@@ -652,24 +757,113 @@
                 `;
             }
 
+            // Show lost reason for cancelled orders
+            let lostReasonHtml = '';
+            if (order.status === 'cancelled' && order.lost_reason) {
+                const reasons = {
+                    too_expensive: '💰 Too expensive',
+                    competitor: '🏃 Went with competitor',
+                    no_response: '👻 No response',
+                    project_cancelled: '🚫 Project cancelled',
+                    timing: '⏰ Bad timing',
+                    diy: '🔨 DIY',
+                    other: '❓ Other'
+                };
+                lostReasonHtml = `<div class="order-meta" style="color: #dc2626;">${reasons[order.lost_reason] || order.lost_reason}</div>`;
+            }
+
+            // Actions based on status
+            let actionsHtml = '';
+            if (order.status !== 'delivered' && order.status !== 'cancelled') {
+                actionsHtml = `
+                    <div class="order-actions" onclick="event.stopPropagation()">
+                        ${nextStatus ? `<button class="btn-advance" onclick="advanceOrder('${order.id}', '${nextStatus}')">→ ${capitalize(nextStatus)}</button>` : ''}
+                        <button class="btn-followup" onclick="quickFollowup('${order.id}')">📅</button>
+                        <button class="btn-followup" onclick="showLostModal('${order.id}')" title="Mark as Lost">✗</button>
+                    </div>
+                `;
+            }
+
             card.innerHTML = `
                 <div class="order-header">
                     <span class="order-name">${order.customer_name || 'Unknown'}</span>
+                    <span class="temp-badge ${tempConfig.class}" onclick="event.stopPropagation(); toggleTempSelector('${order.id}')">${tempConfig.label}</span>
+                </div>
+                <div class="temp-selector" id="tempSelect-${order.id}">
+                    <div class="temp-option" onclick="setTemperature('${order.id}', 'hot')">🔥 Hot - Ready to buy</div>
+                    <div class="temp-option" onclick="setTemperature('${order.id}', 'warm')">🌡️ Warm - Interested</div>
+                    <div class="temp-option" onclick="setTemperature('${order.id}', 'cold')">❄️ Cold - Just browsing</div>
+                    <div class="temp-option" onclick="setTemperature('${order.id}', 'dead')">💀 Dead - No response</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="order-amount">AED ${(order.total_aed || 0).toLocaleString()}</div>
                     <span class="order-size">${order.size || 75}"</span>
                 </div>
-                <div class="order-amount">AED ${(order.total_aed || 0).toLocaleString()}</div>
                 <div class="order-meta">
-                    ${order.include_tv ? '📺 TV Bundle' : ''}
+                    ${order.include_tv ? '📺 TV' : ''}
                     ${order.include_install ? '🔧 Install' : ''}
                 </div>
+                ${lostReasonHtml}
                 ${followupHtml}
-                <div class="order-actions" onclick="event.stopPropagation()">
-                    ${nextStatus ? `<button class="btn-advance" onclick="advanceOrder('${order.id}', '${nextStatus}')">→ ${capitalize(nextStatus)}</button>` : ''}
-                    <button class="btn-followup" onclick="quickFollowup('${order.id}')">+ Follow-up</button>
-                </div>
+                ${actionsHtml}
             `;
 
             return card;
+        }
+
+        // Toggle temperature selector
+        function toggleTempSelector(orderId) {
+            // Close all others
+            document.querySelectorAll('.temp-selector').forEach(el => el.classList.remove('active'));
+            const selector = document.getElementById(`tempSelect-${orderId}`);
+            selector.classList.toggle('active');
+        }
+
+        // Set temperature
+        async function setTemperature(orderId, temp) {
+            document.querySelectorAll('.temp-selector').forEach(el => el.classList.remove('active'));
+            try {
+                await fetch(`${API_BASE}/orders`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id: orderId, lead_temperature: temp })
+                });
+                loadData();
+            } catch (err) {
+                console.error('Failed to set temperature:', err);
+            }
+        }
+
+        // Show lost modal
+        function showLostModal(orderId) {
+            document.getElementById('lostOrderId').value = orderId;
+            document.getElementById('lostReason').value = 'no_response';
+            document.getElementById('lostNotes').value = '';
+            document.getElementById('lostModal').classList.add('active');
+        }
+
+        // Confirm mark as lost
+        async function confirmMarkLost() {
+            const orderId = document.getElementById('lostOrderId').value;
+            const reason = document.getElementById('lostReason').value;
+            const notes = document.getElementById('lostNotes').value;
+
+            try {
+                await fetch(`${API_BASE}/orders`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        id: orderId,
+                        status: 'cancelled',
+                        lost_reason: reason,
+                        notes: notes ? `Lost: ${notes}` : undefined
+                    })
+                });
+                closeModal('lostModal');
+                loadData();
+            } catch (err) {
+                console.error('Failed to mark as lost:', err);
+            }
         }
 
         // Get next status in pipeline
@@ -753,10 +947,16 @@
             const pipelineValue = orders
                 .filter(o => o.status !== 'delivered' && o.status !== 'cancelled')
                 .reduce((sum, o) => sum + (o.total_aed || 0), 0);
+            const hotLeads = orders.filter(o =>
+                o.lead_temperature === 'hot' &&
+                o.status !== 'delivered' &&
+                o.status !== 'cancelled'
+            ).length;
             const dueToday = (counts?.overdue || 0) + (counts?.today || 0);
 
             document.getElementById('totalOrders').textContent = activeOrders;
             document.getElementById('pipelineValue').textContent = `AED ${pipelineValue.toLocaleString()}`;
+            document.getElementById('hotLeads').textContent = hotLeads;
             document.getElementById('dueToday').textContent = dueToday;
 
             // Alerts bar
@@ -887,8 +1087,15 @@
             });
         }
 
+        // Close temp selectors when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.temp-badge') && !e.target.closest('.temp-selector')) {
+                document.querySelectorAll('.temp-selector').forEach(el => el.classList.remove('active'));
+            }
+        });
+
         // Initialize
-        loadData();
+        init();
     </script>
 <script src="nav.js"></script>
 </body>
