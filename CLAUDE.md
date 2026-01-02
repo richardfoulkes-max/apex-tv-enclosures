@@ -158,7 +158,15 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
-### Session: 2026-01-02 (Evening) - Lead Capture + AI Director Dashboard
+### Session: 2026-01-02 (Evening) - Lead Capture + Dashboard Reorganization
+
+**Dashboard Reorganization:**
+- Split into two main areas: Sales & Operations vs Product Development
+- Master dashboard (index.html): Clean hub with two main cards
+- Sales dashboard (ai-dashboard.html): AI Queue, Orders, CRM, Insights
+- Product dashboard (product-dashboard.html): Specs, BOMs, Testing, RFQs
+- Product dashboard has tabs to switch between TV Enclosures (v5.2.2) and Pool Equipment (v1.0)
+- Clean navigation between all areas
 
 **Zapier Webhook Integration:**
 - Created `/api/zapier.js` with sendToZapier() helper function
