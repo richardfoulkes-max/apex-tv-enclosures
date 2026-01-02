@@ -1075,6 +1075,9 @@
                 const response = await fetch(`${BACKEND_URL}/api/enquiries`);
                 if (response.ok) {
                     const data = await response.json();
+                    // API connected - show connected status
+                    updateConnectionStatus(true);
+
                     if (data.enquiries && data.enquiries.length > 0) {
                         // Transform API data to queue format
                         pendingQueue = data.enquiries.map(row => ({
@@ -1095,14 +1098,18 @@
                             aiDraft: row.ai_draft
                         }));
                         console.log(`Loaded ${pendingQueue.length} enquiries from API`);
-                        return;
+                    } else {
+                        pendingQueue = [];
+                        console.log('No pending enquiries');
                     }
+                    return;
                 }
             } catch (e) {
                 console.warn('API load failed:', e);
             }
 
             // Fallback to localStorage demo data
+            updateConnectionStatus(false);
             pendingQueue = JSON.parse(localStorage.getItem('apex_ai_pending') || '[]');
             if (pendingQueue.length === 0) {
                 addDemoItems();
