@@ -7,6 +7,7 @@
 import { createClient } from '@supabase/supabase-js';
 import Anthropic from '@anthropic-ai/sdk';
 import OpenAI from 'openai';
+import { sendToZapier } from './zapier.js';
 
 const SYSTEM_PROMPT = `You are the AI Director for Apex Enclosures, a company that manufactures premium outdoor enclosures for the Gulf region.
 
@@ -207,6 +208,17 @@ export default async function handler(req, res) {
                     console.error('AI error:', aiError.message);
                 }
             }
+
+            // Send to Zapier
+            sendToZapier('new_enquiry', {
+                id: enquiry.id,
+                customer_name: customerName,
+                customer_email: customerEmail,
+                subject: subject,
+                message: message,
+                ai_confidence: enquiry.ai_confidence,
+                created_at: enquiry.created_at
+            }).catch(err => console.log('Zapier send failed:', err));
 
             res.status(201).json({
                 success: true,

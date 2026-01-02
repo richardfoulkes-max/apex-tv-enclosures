@@ -6,6 +6,7 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
+import { sendToZapier } from './zapier.js';
 
 export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -117,6 +118,21 @@ export default async function handler(req, res) {
                     .eq('id', enquiry_id);
             }
 
+            // Send to Zapier
+            sendToZapier('new_order', {
+                id: order.id,
+                customer_name,
+                customer_email,
+                customer_phone,
+                size,
+                total_aed,
+                total_usd,
+                include_tv,
+                include_install,
+                region,
+                created_at: order.created_at
+            }).catch(err => console.log('Zapier send failed:', err));
+
             res.status(201).json({ success: true, order });
 
         } catch (err) {
@@ -167,6 +183,23 @@ export default async function handler(req, res) {
 
             if (error) {
                 return res.status(500).json({ error: 'Failed to update order', details: error.message });
+            }
+
+            // Send to Zapier for status changes
+            if (status) {
+                const eventType = status === 'delivered' ? 'order_won' :
+                                  status === 'cancelled' ? 'order_lost' :
+                                  'order_status_changed';
+
+                sendToZapier(eventType, {
+                    id: order.id,
+                    customer_name: order.customer_name,
+                    customer_email: order.customer_email,
+                    status: order.status,
+                    previous_status: status, // The new status that triggered this
+                    total_aed: order.total_aed,
+                    lost_reason: order.lost_reason || null
+                }).catch(err => console.log('Zapier send failed:', err));
             }
 
             res.status(200).json({ success: true, order });

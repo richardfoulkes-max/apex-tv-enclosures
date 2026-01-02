@@ -298,6 +298,69 @@
             </div>
         </div>
 
+        <!-- Zapier Integration -->
+        <div class="card" style="margin-top: 1.5rem;">
+            <h1>Zapier Integration</h1>
+            <p class="subtitle">Connect to 5,000+ apps via Zapier webhooks</p>
+
+            <div class="status-card">
+                <div class="status-header">
+                    <div class="status-dot" id="zapierStatusDot"></div>
+                    <span id="zapierStatusText">Checking webhook...</span>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <span class="step-number">1</span>
+                    <span>Create a Zap in Zapier</span>
+                </div>
+                <div class="step-content">
+                    Go to <a href="https://zapier.com/app/zaps" target="_blank">zapier.com</a> &rarr; Create Zap &rarr; Trigger: <strong>Webhooks by Zapier</strong> &rarr; <strong>Catch Hook</strong>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <span class="step-number">2</span>
+                    <span>Copy your webhook URL</span>
+                </div>
+                <div class="step-content">
+                    Zapier will give you a URL like: <code>https://hooks.zapier.com/hooks/catch/123/abc/</code>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <span class="step-number">3</span>
+                    <span>Add to Vercel environment</span>
+                </div>
+                <div class="step-content" style="color: var(--text);">
+                    Add <code>ZAPIER_WEBHOOK_URL</code> to your <a href="https://vercel.com/richardfoulkes-maxs-projects/apex-tv-enclosures/settings/environment-variables" target="_blank">Vercel environment variables</a>
+                </div>
+            </div>
+
+            <div class="button-row">
+                <button class="btn btn-primary" onclick="testZapierWebhook()">
+                    Test Webhook
+                </button>
+            </div>
+
+            <div class="success-message" id="zapierSuccessMsg"></div>
+            <div class="error-message" id="zapierErrorMsg"></div>
+
+            <div style="margin-top: 1.5rem; padding: 1rem; background: var(--bg); border-radius: 8px;">
+                <strong>Events sent to Zapier:</strong>
+                <ul style="margin: 0.5rem 0 0 1.5rem; color: var(--muted); font-size: 0.9rem;">
+                    <li><code>new_enquiry</code> - New customer enquiry received</li>
+                    <li><code>new_order</code> - New order created</li>
+                    <li><code>order_status_changed</code> - Order moved to new stage</li>
+                    <li><code>order_won</code> - Order marked as delivered</li>
+                    <li><code>order_lost</code> - Order marked as lost</li>
+                </ul>
+            </div>
+        </div>
+
         <!-- Claude API Setup -->
         <div class="card" style="margin-top: 1.5rem;">
             <h1>Claude AI Setup</h1>
@@ -564,6 +627,77 @@ npm start</pre>
 
         // Check Claude backend on page load
         setTimeout(testClaudeConnection, 500);
+
+        // Zapier Functions
+        function setZapierStatus(state, text) {
+            const dot = document.getElementById('zapierStatusDot');
+            const textEl = document.getElementById('zapierStatusText');
+            dot.className = 'status-dot ' + state;
+            textEl.textContent = text;
+        }
+
+        function showZapierError(msg) {
+            const el = document.getElementById('zapierErrorMsg');
+            el.textContent = msg;
+            el.classList.add('show');
+            document.getElementById('zapierSuccessMsg').classList.remove('show');
+        }
+
+        function showZapierSuccess(msg) {
+            const el = document.getElementById('zapierSuccessMsg');
+            el.textContent = msg;
+            el.classList.add('show');
+            document.getElementById('zapierErrorMsg').classList.remove('show');
+        }
+
+        async function checkZapierConfig() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/zapier`);
+                const data = await response.json();
+
+                if (data.configured) {
+                    setZapierStatus('connected', 'Webhook configured');
+                } else {
+                    setZapierStatus('disconnected', 'Webhook not configured');
+                }
+            } catch (err) {
+                setZapierStatus('disconnected', 'Could not check status');
+            }
+        }
+
+        async function testZapierWebhook() {
+            setZapierStatus('', 'Sending test event...');
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/zapier`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        eventType: 'test',
+                        testData: {
+                            message: 'Test from AI Director Setup',
+                            timestamp: new Date().toISOString()
+                        }
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    setZapierStatus('connected', 'Webhook working!');
+                    showZapierSuccess('Test event sent successfully! Check your Zap.');
+                } else {
+                    setZapierStatus('disconnected', 'Webhook not configured');
+                    showZapierError('Webhook not configured. Add ZAPIER_WEBHOOK_URL to Vercel environment variables.');
+                }
+            } catch (err) {
+                setZapierStatus('disconnected', 'Test failed');
+                showZapierError('Could not send test event: ' + err.message);
+            }
+        }
+
+        // Check Zapier on page load
+        setTimeout(checkZapierConfig, 700);
     </script>
 </body>
 </html>
