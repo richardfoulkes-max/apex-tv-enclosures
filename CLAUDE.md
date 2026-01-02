@@ -158,6 +158,37 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
+### Session: 2026-01-02 (Evening) - Lead Capture + AI Director Dashboard
+
+**Zapier Webhook Integration:**
+- Created `/api/zapier.js` with sendToZapier() helper function
+- Events: new_enquiry, new_order, order_status_changed, order_won, order_lost
+- Added Zapier config UI to setup.html with test button
+- Updated enquiries.js and orders.js to trigger webhooks
+
+**Lead Capture System (chat-widget.js):**
+- Floating chat bubble in bottom-right corner of all customer pages
+- 3 options: WhatsApp (direct), Send Message (form), Free Guide (lead magnet)
+- Contact form modal → submits to AI Director queue
+- Lead magnet: "Outdoor TV Buying Guide" → captures email
+- Added to 8 pages: retail (2), industries (3), partner (1), commercial (1)
+
+**AI Director Dashboard (ai-dashboard.html):**
+- Dedicated sales/CRM hub separate from main Apex dashboard
+- Stats: Pending enquiries, Hot leads, Pipeline value, Follow-ups due
+- Navigation cards to Queue, Orders, CRM, Insights
+- Recent activity feed
+
+**Consistent Navigation:**
+- Added nav bar to all AI Director pages: Dashboard → Queue → Orders → Insights → CRM
+- Updated: ai-queue.html, ai-insights.html, orders.html, partner-crm.html
+
+**Deferred:**
+- Mailgun auto-send ($15/mo) - requires email automation
+- Auto-approve for high-confidence replies - needs data first
+
+---
+
 ### Session: 2026-01-02 (PM) - Orders Pipeline + Auto Follow-ups
 
 **Built complete order management system with automated follow-ups:**
