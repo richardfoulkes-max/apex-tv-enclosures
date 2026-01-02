@@ -502,7 +502,7 @@ npm start</pre>
         async function testClaudeConnection() {
             setClaudeStatus('', 'Checking backend...');
             try {
-                const response = await fetch(`${BACKEND_URL}/health`);
+                const response = await fetch(`${BACKEND_URL}/api/health`);
                 if (!response.ok) throw new Error('Backend not responding');
 
                 const data = await response.json();
