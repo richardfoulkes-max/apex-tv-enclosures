@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Setup | Apex Enclosures</title>
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --primary-dark: #6d28d9;
+            --success: #10b981;
+            --danger: #ef4444;
+            --bg: #f5f3ff;
+            --card: #ffffff;
+            --text: #1e1b4b;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 24px rgba(124, 58, 237, 0.1);
+        }
+        h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .subtitle {
+            color: var(--muted);
+            margin-bottom: 2rem;
+        }
+        .status-card {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .status-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--muted);
+        }
+        .status-dot.connected { background: var(--success); }
+        .status-dot.disconnected { background: var(--danger); }
+        .step {
+            margin-bottom: 1.5rem;
+        }
+        .step-header {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        .step-content {
+            margin-left: 2rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-family: monospace;
+            margin-bottom: 1rem;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        input[type="text"].valid {
+            border-color: var(--success);
+        }
+        input[type="text"].invalid {
+            border-color: var(--danger);
+        }
+        .hint {
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-top: -0.5rem;
+            margin-bottom: 1rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        .btn-primary:disabled {
+            background: var(--muted);
+            cursor: not-allowed;
+        }
+        .btn-secondary {
+            background: var(--bg);
+            color: var(--text);
+        }
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+        .button-row {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+        }
+        .success-message.show {
+            display: block;
+        }
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+        }
+        .error-message.show {
+            display: block;
+        }
+        code {
+            background: var(--bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .schema-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+        pre {
+            background: #1e1b4b;
+            color: #e5e7eb;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            overflow-x: auto;
+            max-height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Database Setup</h1>
+            <p class="subtitle">Connect to Supabase for persistent storage and real CRM</p>
+
+            <div class="status-card">
+                <div class="status-header">
+                    <div class="status-dot" id="statusDot"></div>
+                    <span id="statusText">Checking connection...</span>
+                </div>
+            </div>
+
+            <div id="setupForm">
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-number">1</span>
+                        <span>Get your Supabase credentials</span>
+                    </div>
+                    <div class="step-content">
+                        Go to <a href="https://supabase.com/dashboard" target="_blank">supabase.com/dashboard</a> &rarr;
+                        Select your project &rarr; Project Settings &rarr; API
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-number">2</span>
+                        <span>Enter your credentials</span>
+                    </div>
+                    <div class="step-content" style="color: var(--text);">
+                        <label for="supabaseUrl">Project URL</label>
+                        <input type="text" id="supabaseUrl" placeholder="https://xxxxx.supabase.co">
+                        <p class="hint">Found under "Project URL" in your API settings</p>
+
+                        <label for="supabaseKey">Anon Public Key</label>
+                        <input type="text" id="supabaseKey" placeholder="eyJhbGciOiJI...">
+                        <p class="hint">Found under "anon public" - this is safe for client-side use</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-number">3</span>
+                        <span>Run the database schema</span>
+                    </div>
+                    <div class="step-content">
+                        Copy the SQL from <code>database/schema.sql</code> and run it in your Supabase SQL Editor
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button class="btn btn-primary" onclick="saveAndTest()" id="saveBtn">
+                        Save & Test Connection
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.location.href='ai-queue.html'">
+                        Skip for Now
+                    </button>
+                </div>
+
+                <div class="success-message" id="successMsg">
+                    Connected successfully! Tables found: <span id="tableCount">0</span>
+                </div>
+                <div class="error-message" id="errorMsg"></div>
+            </div>
+
+            <div id="connectedView" style="display: none;">
+                <div style="text-align: center; padding: 2rem 0;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">Connected</div>
+                    <p style="color: var(--muted); margin-bottom: 1.5rem;">
+                        Database is configured and ready to use
+                    </p>
+                    <div class="button-row" style="justify-content: center;">
+                        <button class="btn btn-primary" onclick="window.location.href='ai-queue.html'">
+                            Go to AI Queue
+                        </button>
+                        <button class="btn btn-secondary" onclick="disconnect()">
+                            Disconnect
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Claude API Setup -->
+        <div class="card" style="margin-top: 1.5rem;">
+            <h1>Claude AI Setup</h1>
+            <p class="subtitle">Connect to Claude API for real AI-generated responses</p>
+
+            <div class="status-card">
+                <div class="status-header">
+                    <div class="status-dot" id="claudeStatusDot"></div>
+                    <span id="claudeStatusText">Checking backend...</span>
+                </div>
+            </div>
+
+            <div id="claudeSetupForm">
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-number">1</span>
+                        <span>Start the backend server</span>
+                    </div>
+                    <div class="step-content">
+                        Open terminal in <code>backend/</code> folder and run:
+                        <pre style="margin-top: 0.5rem; max-height: none;">npm install
+npm start</pre>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-number">2</span>
+                        <span>Get your Claude API key</span>
+                    </div>
+                    <div class="step-content">
+                        Go to <a href="https://console.anthropic.com/settings/keys" target="_blank">console.anthropic.com</a> &rarr; API Keys &rarr; Create Key
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-number">3</span>
+                        <span>Enter your API key</span>
+                    </div>
+                    <div class="step-content" style="color: var(--text);">
+                        <label for="claudeApiKey">Claude API Key</label>
+                        <input type="text" id="claudeApiKey" placeholder="sk-ant-api03-...">
+                        <p class="hint">Your key is stored on the backend server only, never in the browser</p>
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button class="btn btn-primary" onclick="saveClaudeKey()" id="claudeSaveBtn">
+                        Save API Key
+                    </button>
+                    <button class="btn btn-secondary" onclick="testClaudeConnection()">
+                        Test Connection
+                    </button>
+                </div>
+
+                <div class="success-message" id="claudeSuccessMsg"></div>
+                <div class="error-message" id="claudeErrorMsg"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const STORAGE_KEY = 'apex_supabase_config';
+        let supabase = null;
+
+        // Check existing connection on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                const config = JSON.parse(saved);
+                document.getElementById('supabaseUrl').value = config.url || '';
+                document.getElementById('supabaseKey').value = config.key || '';
+                testConnection(config.url, config.key);
+            } else {
+                setStatus('disconnected', 'Not configured');
+            }
+        });
+
+        function setStatus(state, text) {
+            const dot = document.getElementById('statusDot');
+            const textEl = document.getElementById('statusText');
+            dot.className = 'status-dot ' + state;
+            textEl.textContent = text;
+        }
+
+        async function saveAndTest() {
+            const url = document.getElementById('supabaseUrl').value.trim();
+            const key = document.getElementById('supabaseKey').value.trim();
+
+            // Validation
+            if (!url || !url.includes('supabase.co')) {
+                showError('Please enter a valid Supabase URL');
+                return;
+            }
+            if (!key || !key.startsWith('eyJ')) {
+                showError('Please enter a valid Supabase anon key');
+                return;
+            }
+
+            // Save to localStorage
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({ url, key }));
+
+            // Test connection
+            await testConnection(url, key);
+        }
+
+        async function testConnection(url, key) {
+            setStatus('', 'Testing connection...');
+            document.getElementById('saveBtn').disabled = true;
+
+            try {
+                supabase = window.supabase.createClient(url, key);
+
+                // Try to query customers table
+                const { data, error } = await supabase.from('customers').select('id').limit(1);
+
+                if (error) {
+                    if (error.message.includes('does not exist')) {
+                        showError('Connection works, but tables not found. Please run database/schema.sql in Supabase SQL Editor.');
+                        setStatus('disconnected', 'Schema not installed');
+                    } else {
+                        showError('Connection failed: ' + error.message);
+                        setStatus('disconnected', 'Connection failed');
+                    }
+                    return;
+                }
+
+                // Check other tables
+                const tables = ['enquiries', 'ai_interactions', 'learned_patterns', 'quotes', 'partners', 'partner_contacts', 'partner_activities'];
+                let tableCount = 1; // customers already checked
+                for (const table of tables) {
+                    const { error: tableError } = await supabase.from(table).select('id').limit(1);
+                    if (!tableError) tableCount++;
+                }
+
+                setStatus('connected', `Connected (${tableCount}/8 tables ready)`);
+                document.getElementById('tableCount').textContent = tableCount;
+                document.getElementById('successMsg').classList.add('show');
+                document.getElementById('errorMsg').classList.remove('show');
+
+                // Show connected view after short delay
+                if (tableCount === 8) {
+                    setTimeout(() => {
+                        document.getElementById('setupForm').style.display = 'none';
+                        document.getElementById('connectedView').style.display = 'block';
+                    }, 1500);
+                }
+
+            } catch (err) {
+                showError('Connection error: ' + err.message);
+                setStatus('disconnected', 'Connection error');
+            } finally {
+                document.getElementById('saveBtn').disabled = false;
+            }
+        }
+
+        function showError(msg) {
+            const el = document.getElementById('errorMsg');
+            el.textContent = msg;
+            el.classList.add('show');
+            document.getElementById('successMsg').classList.remove('show');
+        }
+
+        function disconnect() {
+            localStorage.removeItem(STORAGE_KEY);
+            document.getElementById('supabaseUrl').value = '';
+            document.getElementById('supabaseKey').value = '';
+            document.getElementById('setupForm').style.display = 'block';
+            document.getElementById('connectedView').style.display = 'none';
+            document.getElementById('successMsg').classList.remove('show');
+            document.getElementById('errorMsg').classList.remove('show');
+            setStatus('disconnected', 'Not configured');
+        }
+
+        // Claude API Functions
+        const BACKEND_URL = 'http://localhost:3001';
+
+        function setClaudeStatus(state, text) {
+            const dot = document.getElementById('claudeStatusDot');
+            const textEl = document.getElementById('claudeStatusText');
+            dot.className = 'status-dot ' + state;
+            textEl.textContent = text;
+        }
+
+        function showClaudeError(msg) {
+            const el = document.getElementById('claudeErrorMsg');
+            el.textContent = msg;
+            el.classList.add('show');
+            document.getElementById('claudeSuccessMsg').classList.remove('show');
+        }
+
+        function showClaudeSuccess(msg) {
+            const el = document.getElementById('claudeSuccessMsg');
+            el.textContent = msg;
+            el.classList.add('show');
+            document.getElementById('claudeErrorMsg').classList.remove('show');
+        }
+
+        async function testClaudeConnection() {
+            setClaudeStatus('', 'Checking backend...');
+            try {
+                const response = await fetch(`${BACKEND_URL}/health`);
+                if (!response.ok) throw new Error('Backend not responding');
+
+                const data = await response.json();
+                if (data.status === 'ok') {
+                    if (data.hasApiKey) {
+                        setClaudeStatus('connected', 'Backend connected, API key configured');
+                        showClaudeSuccess('Claude AI is ready to use!');
+                    } else {
+                        setClaudeStatus('disconnected', 'Backend connected, API key needed');
+                        showClaudeError('Backend running but no API key configured');
+                    }
+                }
+            } catch (err) {
+                setClaudeStatus('disconnected', 'Backend not running');
+                showClaudeError('Cannot reach backend server. Make sure to run: cd backend && npm start');
+            }
+        }
+
+        async function saveClaudeKey() {
+            const apiKey = document.getElementById('claudeApiKey').value.trim();
+
+            if (!apiKey) {
+                showClaudeError('Please enter an API key');
+                return;
+            }
+
+            if (!apiKey.startsWith('sk-ant-')) {
+                showClaudeError('Invalid API key format. Should start with sk-ant-');
+                return;
+            }
+
+            document.getElementById('claudeSaveBtn').disabled = true;
+            setClaudeStatus('', 'Saving API key...');
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/set-key`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ apiKey })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    setClaudeStatus('connected', 'API key configured');
+                    showClaudeSuccess('API key saved! Claude AI is ready.');
+                    document.getElementById('claudeApiKey').value = ''; // Clear for security
+                } else {
+                    showClaudeError(data.error || 'Failed to save API key');
+                    setClaudeStatus('disconnected', 'Configuration failed');
+                }
+            } catch (err) {
+                showClaudeError('Cannot reach backend server. Make sure it is running.');
+                setClaudeStatus('disconnected', 'Backend not running');
+            } finally {
+                document.getElementById('claudeSaveBtn').disabled = false;
+            }
+        }
+
+        // Check Claude backend on page load
+        setTimeout(testClaudeConnection, 500);
+    </script>
+</body>
+</html>

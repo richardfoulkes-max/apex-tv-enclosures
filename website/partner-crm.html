@@ -577,7 +577,56 @@
         </div>
     </div>
 
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script>
+        // ============ SUPABASE CONFIGURATION ============
+        const SUPABASE_STORAGE_KEY = 'apex_supabase_config';
+        let supabaseClient = null;
+        let useSupabase = false;
+
+        function initSupabase() {
+            const saved = localStorage.getItem(SUPABASE_STORAGE_KEY);
+            if (saved) {
+                try {
+                    const config = JSON.parse(saved);
+                    if (config.url && config.key) {
+                        supabaseClient = window.supabase.createClient(config.url, config.key);
+                        useSupabase = true;
+                        console.log('Supabase connected for CRM');
+                        updateConnectionBadge(true);
+                    }
+                } catch (e) {
+                    console.warn('Supabase config invalid');
+                }
+            }
+            if (!useSupabase) {
+                updateConnectionBadge(false);
+            }
+        }
+
+        function updateConnectionBadge(connected) {
+            // Add connection indicator to header
+            const header = document.querySelector('.header');
+            let badge = document.getElementById('dbBadge');
+            if (!badge) {
+                badge = document.createElement('div');
+                badge.id = 'dbBadge';
+                badge.style.cssText = 'padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; cursor: pointer;';
+                badge.onclick = () => window.location.href = 'setup.html';
+                header.appendChild(badge);
+            }
+            if (connected) {
+                badge.textContent = '🟢 Database Connected';
+                badge.style.background = 'rgba(16, 185, 129, 0.3)';
+            } else {
+                badge.textContent = '🟡 Local Storage';
+                badge.style.background = 'rgba(245, 158, 11, 0.3)';
+                badge.title = 'Click to connect database';
+            }
+        }
+
         // ============ DATA LAYER ============
         let partners = [];
         let selectedPartnerId = null;
@@ -855,7 +904,80 @@
         ];
 
         // ============ STORAGE ============
-        function loadData() {
+        async function loadData() {
+            if (useSupabase) {
+                try {
+                    // Load partners from Supabase
+                    const { data: partnersData, error: pError } = await supabaseClient
+                        .from('partners')
+                        .select('*')
+                        .order('created_at', { ascending: false });
+
+                    if (!pError && partnersData && partnersData.length > 0) {
+                        // Load contacts and activities for each partner
+                        const partnerIds = partnersData.map(p => p.id);
+
+                        const { data: contactsData } = await supabaseClient
+                            .from('partner_contacts')
+                            .select('*')
+                            .in('partner_id', partnerIds);
+
+                        const { data: activitiesData } = await supabaseClient
+                            .from('partner_activities')
+                            .select('*')
+                            .in('partner_id', partnerIds)
+                            .order('timestamp', { ascending: false });
+
+                        // Transform to local format
+                        partners = partnersData.map(p => ({
+                            id: p.id,
+                            companyName: p.company_name,
+                            partnerType: p.partner_type,
+                            region: p.region,
+                            website: p.website,
+                            linkedInUrl: p.linkedin_url,
+                            address: p.address,
+                            leadSource: p.lead_source,
+                            status: p.status,
+                            priority: p.priority,
+                            dealValue: parseFloat(p.deal_value) || 0,
+                            winProbability: p.win_probability,
+                            expectedCloseDate: p.expected_close_date,
+                            lostReason: p.lost_reason,
+                            productsInterested: p.products_interested || [],
+                            followupDate: p.followup_date,
+                            notes: p.notes,
+                            contacts: (contactsData || [])
+                                .filter(c => c.partner_id === p.id)
+                                .map(c => ({
+                                    id: c.id,
+                                    name: c.name,
+                                    title: c.title,
+                                    email: c.email,
+                                    phone: c.phone,
+                                    isPrimary: c.is_primary,
+                                    isDecisionMaker: c.is_decision_maker
+                                })),
+                            activities: (activitiesData || [])
+                                .filter(a => a.partner_id === p.id)
+                                .map(a => ({
+                                    id: a.id,
+                                    type: a.activity_type,
+                                    description: a.description,
+                                    timestamp: a.timestamp
+                                })),
+                            createdAt: p.created_at,
+                            lastContact: p.last_contact
+                        }));
+                        console.log(`Loaded ${partners.length} partners from Supabase`);
+                        return;
+                    }
+                } catch (e) {
+                    console.warn('Supabase load failed, using localStorage', e);
+                }
+            }
+
+            // Fallback to localStorage
             const stored = localStorage.getItem('apexCrmData');
             const version = localStorage.getItem('apexCrmVersion');
 
@@ -870,7 +992,87 @@
         }
 
         function saveData() {
+            // Always save to localStorage as backup
             localStorage.setItem('apexCrmData', JSON.stringify(partners));
+        }
+
+        // Save a partner to Supabase
+        async function savePartnerToSupabase(partner) {
+            if (!useSupabase) return;
+
+            try {
+                // Check if partner exists (has UUID format id)
+                const isExisting = typeof partner.id === 'string' && partner.id.includes('-');
+
+                const partnerData = {
+                    company_name: partner.companyName,
+                    partner_type: partner.partnerType,
+                    region: partner.region,
+                    website: partner.website,
+                    linkedin_url: partner.linkedInUrl,
+                    address: partner.address,
+                    lead_source: partner.leadSource,
+                    status: partner.status,
+                    priority: partner.priority,
+                    deal_value: partner.dealValue,
+                    win_probability: partner.winProbability,
+                    expected_close_date: partner.expectedCloseDate || null,
+                    lost_reason: partner.lostReason,
+                    products_interested: partner.productsInterested,
+                    followup_date: partner.followupDate || null,
+                    notes: partner.notes,
+                    last_contact: partner.lastContact
+                };
+
+                let partnerId;
+                if (isExisting) {
+                    // Update existing
+                    await supabaseClient.from('partners').update(partnerData).eq('id', partner.id);
+                    partnerId = partner.id;
+                } else {
+                    // Insert new
+                    const { data } = await supabaseClient.from('partners').insert(partnerData).select('id').single();
+                    if (data) partnerId = data.id;
+                }
+
+                // Sync contacts if we have a partnerId
+                if (partnerId && partner.contacts?.length > 0) {
+                    // Delete existing contacts and re-insert
+                    await supabaseClient.from('partner_contacts').delete().eq('partner_id', partnerId);
+
+                    const contactsData = partner.contacts.map(c => ({
+                        partner_id: partnerId,
+                        name: c.name,
+                        title: c.title,
+                        email: c.email,
+                        phone: c.phone,
+                        is_primary: c.isPrimary,
+                        is_decision_maker: c.isDecisionMaker
+                    }));
+                    await supabaseClient.from('partner_contacts').insert(contactsData);
+                }
+
+                console.log('Partner saved to Supabase');
+            } catch (e) {
+                console.error('Supabase save error:', e);
+            }
+        }
+
+        // Save an activity to Supabase
+        async function saveActivityToSupabase(partnerId, activity) {
+            if (!useSupabase) return;
+
+            try {
+                await supabaseClient.from('partner_activities').insert({
+                    partner_id: partnerId,
+                    activity_type: activity.type,
+                    description: activity.description,
+                    timestamp: activity.timestamp
+                });
+                console.log('Activity saved to Supabase');
+            } catch (e) {
+                console.error('Activity save error:', e);
+            }
         }
 
         // ============ LIST VIEW ============
@@ -1206,6 +1408,7 @@
 
             partners.push(newPartner);
             saveData();
+            savePartnerToSupabase(newPartner);
             closeModal();
             selectPartner(newPartner.id);
         }
@@ -1231,6 +1434,7 @@
 
             p.contacts.push(newContact);
             saveData();
+            savePartnerToSupabase(p);
             closeModal();
             renderDetail();
             renderList();
@@ -1242,6 +1446,7 @@
             if (!p) return;
             p.contacts = p.contacts.filter(c => c.id !== contactId);
             saveData();
+            savePartnerToSupabase(p);
             renderDetail();
         }
 
@@ -1258,6 +1463,7 @@
             if (!p) return;
             p.notes = document.getElementById('partnerNotes').value;
             saveData();
+            savePartnerToSupabase(p);
         }
 
         function addActivity() {
@@ -1285,9 +1491,12 @@
             }
 
             saveData();
+            savePartnerToSupabase(p);
+            saveActivityToSupabase(p.id, activity);
             document.getElementById('newActivityDesc').value = '';
             renderDetail();
             renderList();
+            switchTab('activity'); // Stay on activity tab
         }
 
         function editPartnerField(field) {
@@ -1308,6 +1517,7 @@
                     }
 
                     saveData();
+                    savePartnerToSupabase(p);
                     renderDetail();
                     renderList();
                 }
@@ -1402,6 +1612,7 @@
             p.followupDate = document.getElementById('editFollowup').value;
 
             saveData();
+            savePartnerToSupabase(p);
             document.getElementById('editCompanyModal').remove();
             renderDetail();
             renderList();
@@ -1466,6 +1677,7 @@
             p.productsInterested = Array.from(document.querySelectorAll('.productCheckbox:checked')).map(cb => cb.value);
 
             saveData();
+            savePartnerToSupabase(p);
             document.getElementById('editDealModal').remove();
             renderDetail();
             renderList();
@@ -1485,8 +1697,9 @@
         }
 
         // ============ INIT ============
-        document.addEventListener('DOMContentLoaded', () => {
-            loadData();
+        document.addEventListener('DOMContentLoaded', async () => {
+            initSupabase();
+            await loadData();
             renderList();
         });
 

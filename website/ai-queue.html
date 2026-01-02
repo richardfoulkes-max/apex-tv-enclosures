@@ -1,0 +1,2374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Director - Approval Queue | Apex Enclosures</title>
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --primary-dark: #6d28d9;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --bg: #f5f3ff;
+            --card: #ffffff;
+            --text: #1e1b4b;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-left { display: flex; align-items: center; gap: 1rem; }
+        .header h1 { font-size: 1.25rem; display: flex; align-items: center; gap: 0.5rem; }
+        .header-stats { display: flex; gap: 1.5rem; }
+        .stat {
+            text-align: center;
+            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+        .stat-value { font-size: 1.5rem; font-weight: 700; }
+        .stat-label { font-size: 0.7rem; opacity: 0.8; text-transform: uppercase; }
+        .learning-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+        }
+        .btn-new-enquiry {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-new-enquiry:hover {
+            background: #f0f0f0;
+        }
+        .ai-status {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            background: rgba(255,255,255,0.1);
+            padding: 0.375rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+        .ai-status .ai-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ef4444;
+        }
+        .ai-status.connected .ai-dot {
+            background: #10b981;
+        }
+        .ai-status .ai-text {
+            font-weight: 600;
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            background: white;
+            border-right: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+        .sidebar-section {
+            padding: 0.5rem 1rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-weight: 600;
+        }
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        .sidebar-link:hover { background: var(--bg); }
+        .sidebar-link.active {
+            background: var(--bg);
+            border-left-color: var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .sidebar-link .badge {
+            margin-left: auto;
+            background: var(--danger);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.125rem 0.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        /* Content */
+        .content {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .content-header h2 {
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+        .filters {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover { border-color: var(--primary); }
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Queue Items */
+        .queue-empty {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--muted);
+        }
+        .queue-empty .icon { font-size: 3rem; margin-bottom: 1rem; }
+        .queue-item {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .queue-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1rem 1.25rem;
+            background: #fafafa;
+            border-bottom: 1px solid var(--border);
+        }
+        .queue-item-meta { display: flex; flex-direction: column; gap: 0.25rem; }
+        .queue-item-type {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .type-badge {
+            padding: 0.125rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .type-badge.lead { background: #dbeafe; color: #1d4ed8; }
+        .type-badge.followup { background: #fef3c7; color: #b45309; }
+        .type-badge.outreach { background: #ede9fe; color: #6d28d9; }
+        .type-badge.quote { background: #d1fae5; color: #047857; }
+        .type-badge.support { background: #fee2e2; color: #b91c1c; }
+        .queue-item-context {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+        .queue-item-badges {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .product-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .product-badge.tv { background: #1e3a5f; color: white; }
+        .product-badge.pool { background: #0891b2; color: white; }
+        .market-badge {
+            font-size: 1.25rem;
+        }
+        .confidence {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+        .confidence-bar {
+            width: 60px;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .confidence-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+        .confidence-fill.low { background: var(--danger); }
+        .confidence-fill.medium { background: var(--warning); }
+        .confidence-fill.high { background: var(--success); }
+
+        /* Queue Item Content */
+        .queue-item-body { padding: 1.25rem; }
+        .context-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .context-item label {
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.25rem;
+        }
+        .context-item span {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .message-section {
+            margin-bottom: 1rem;
+        }
+        .message-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .customer-message {
+            background: #f3f4f6;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--muted);
+            white-space: pre-wrap;
+        }
+        .customer-message.foreign {
+            background: #fef3c7;
+            border-left-color: var(--warning);
+            margin-bottom: 0.5rem;
+        }
+        .customer-message.english {
+            background: #dbeafe;
+            border-left-color: var(--info);
+        }
+        .translation-label {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+        .lang-badge {
+            background: var(--warning);
+            color: #92400e;
+            padding: 0.125rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        .lang-indicator {
+            color: var(--warning);
+            font-weight: 600;
+        }
+        .ai-draft {
+            background: #f0fdf4;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            border-left: 3px solid var(--success);
+            white-space: pre-wrap;
+        }
+        .ai-draft.english {
+            background: #dbeafe;
+            border-left-color: var(--info);
+        }
+        .ai-draft.foreign {
+            background: #fef3c7;
+            border-left-color: var(--warning);
+        }
+        .foreign-draft {
+            margin-top: 0.75rem;
+        }
+        .foreign-draft summary {
+            cursor: pointer;
+            color: var(--muted);
+            font-size: 0.85rem;
+            padding: 0.5rem;
+            background: #f8fafc;
+            border-radius: 4px;
+        }
+        .foreign-draft summary:hover {
+            color: var(--primary);
+        }
+        .ai-draft.editable {
+            background: white;
+            border: 2px solid var(--primary);
+        }
+
+        /* Custom Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            transform: scale(0.9);
+            transition: transform 0.2s;
+        }
+        .modal-overlay.show .modal {
+            transform: scale(1);
+        }
+        .modal-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        .modal-message {
+            text-align: center;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+        .modal-buttons {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+        .modal-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .modal-btn.primary {
+            background: var(--primary);
+            color: white;
+        }
+        .modal-btn.primary:hover {
+            background: var(--primary-dark);
+        }
+        .modal-btn.secondary {
+            background: #f1f5f9;
+            color: var(--text);
+        }
+        .modal-btn.secondary:hover {
+            background: #e2e8f0;
+        }
+        .modal-btn.danger {
+            background: var(--danger);
+            color: white;
+        }
+        .modal-btn.danger:hover {
+            background: #dc2626;
+        }
+        .ai-draft textarea {
+            width: 100%;
+            min-height: 150px;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            resize: vertical;
+        }
+        .ai-draft textarea:focus { outline: none; }
+
+        /* Action Buttons */
+        .queue-item-actions {
+            display: flex;
+            gap: 0.75rem;
+            padding: 1rem 1.25rem;
+            background: #fafafa;
+            border-top: 1px solid var(--border);
+        }
+        .action-btn {
+            padding: 0.625rem 1.25rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            border: none;
+        }
+        .action-btn.approve {
+            background: var(--success);
+            color: white;
+        }
+        .action-btn.approve:hover { background: #059669; }
+        .action-btn.edit {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        .action-btn.edit:hover { background: var(--bg); }
+        .action-btn.reject {
+            background: white;
+            color: var(--danger);
+            border: 2px solid var(--border);
+        }
+        .action-btn.reject:hover { border-color: var(--danger); }
+        .action-btn.save {
+            background: var(--primary);
+            color: white;
+        }
+        .action-btn.cancel {
+            background: white;
+            color: var(--muted);
+            border: 2px solid var(--border);
+        }
+        .action-info {
+            margin-left: auto;
+            font-size: 0.8rem;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* Learning Stats Panel */
+        .learning-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .learning-panel h3 {
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .learning-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        .learning-stat {
+            text-align: center;
+            padding: 0.75rem;
+            background: var(--bg);
+            border-radius: 8px;
+        }
+        .learning-stat .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .learning-stat .label {
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+        .modal-overlay.show .modal {
+            transform: translateY(0);
+        }
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-header h2 {
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--muted);
+        }
+        .modal-body {
+            padding: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-family: inherit;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        .btn-primary:disabled {
+            background: var(--muted);
+            cursor: not-allowed;
+        }
+        .btn-secondary {
+            background: var(--bg);
+            color: var(--text);
+        }
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+        .ai-generating {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: #f0f9ff;
+            border-radius: 8px;
+            color: #0369a1;
+            margin-bottom: 1rem;
+        }
+        .ai-generating .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #bae6fd;
+            border-top-color: #0369a1;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .ai-draft-preview {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--text);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.success { background: var(--success); }
+        .toast.error { background: var(--danger); }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .sidebar { display: none; }
+            .header-stats { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <h1>🧠 AI Director</h1>
+            <span class="learning-badge">Phase 1: Learning Mode</span>
+        </div>
+        <div class="header-stats">
+            <div class="stat">
+                <div class="stat-value" id="pendingCount">0</div>
+                <div class="stat-label">Pending</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="approvedToday">0</div>
+                <div class="stat-label">Approved Today</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="totalLearned">0</div>
+                <div class="stat-label">Total Learned</div>
+            </div>
+            <button class="btn-new-enquiry" onclick="openNewEnquiryModal()">
+                + New Enquiry
+            </button>
+            <div class="ai-status" id="aiStatus" title="Claude AI Status">
+                <span class="ai-dot"></span>
+                <span class="ai-text">AI</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">Navigation</div>
+            <a href="index.html" class="sidebar-link">
+                <span>🏠</span> Dashboard
+            </a>
+            <a href="ai-insights.html" class="sidebar-link">
+                <span>📈</span> Learning Insights
+            </a>
+
+            <div class="sidebar-section">Queue</div>
+            <a href="#" class="sidebar-link active" data-filter="all">
+                <span>📥</span> All Pending
+                <span class="badge" id="allBadge">0</span>
+            </a>
+            <a href="#" class="sidebar-link" data-filter="lead_response">
+                <span>💬</span> Lead Responses
+            </a>
+            <a href="#" class="sidebar-link" data-filter="follow_up">
+                <span>📧</span> Follow-ups
+            </a>
+            <a href="#" class="sidebar-link" data-filter="quote">
+                <span>💰</span> Quotes
+            </a>
+            <a href="#" class="sidebar-link" data-filter="outreach">
+                <span>📤</span> Outreach
+            </a>
+            <a href="#" class="sidebar-link" data-filter="support">
+                <span>🛠️</span> Support
+            </a>
+
+            <div class="sidebar-section">Products</div>
+            <a href="#" class="sidebar-link" data-product="tv">
+                <span>📺</span> TV Enclosures
+            </a>
+            <a href="#" class="sidebar-link" data-product="pool">
+                <span>🏊</span> Pool Enclosures
+            </a>
+
+            <div class="sidebar-section">Markets</div>
+            <a href="#" class="sidebar-link" data-market="uae">
+                <span>🇦🇪</span> UAE
+            </a>
+            <a href="#" class="sidebar-link" data-market="saudi">
+                <span>🇸🇦</span> Saudi Arabia
+            </a>
+            <a href="#" class="sidebar-link" data-market="spain">
+                <span>🇪🇸</span> Spain
+            </a>
+            <a href="#" class="sidebar-link" data-market="france">
+                <span>🇫🇷</span> France
+            </a>
+
+            <div class="sidebar-section">History</div>
+            <a href="#" class="sidebar-link" onclick="showHistory()">
+                <span>📊</span> Learning History
+            </a>
+            <a href="#" class="sidebar-link" onclick="exportData()">
+                <span>💾</span> Export Data
+            </a>
+
+            <div class="sidebar-section">Settings</div>
+            <a href="setup.html" class="sidebar-link">
+                <span>🔌</span> Database Setup
+            </a>
+        </aside>
+
+        <main class="content">
+            <!-- Learning Stats -->
+            <div class="learning-panel">
+                <h3>🎓 Learning Progress</h3>
+                <div class="learning-grid">
+                    <div class="learning-stat">
+                        <div class="value" id="learnedResponses">0</div>
+                        <div class="label">Responses Learned</div>
+                    </div>
+                    <div class="learning-stat">
+                        <div class="value" id="editRate">0%</div>
+                        <div class="label">Edit Rate</div>
+                    </div>
+                    <div class="learning-stat">
+                        <div class="value" id="rejectRate">0%</div>
+                        <div class="label">Reject Rate</div>
+                    </div>
+                    <div class="learning-stat">
+                        <div class="value" id="avgConfidence">--</div>
+                        <div class="label">Avg Confidence</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-header">
+                <h2>Pending Approval</h2>
+                <div class="filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="urgent">Urgent</button>
+                    <button class="filter-btn" data-filter="new">New</button>
+                </div>
+            </div>
+
+            <div id="queueContainer">
+                <!-- Queue items will be inserted here -->
+            </div>
+
+            <div class="queue-empty" id="emptyState" style="display: none;">
+                <div class="icon">✅</div>
+                <h3>All caught up!</h3>
+                <p>No pending items. AI Director is waiting for new interactions.</p>
+                <button class="action-btn approve" style="margin-top: 1rem;" onclick="addDemoItems()">
+                    Add Demo Items
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <!-- New Enquiry Modal -->
+    <div class="modal-overlay" id="newEnquiryModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>New Customer Enquiry</h2>
+                <button class="modal-close" onclick="closeNewEnquiryModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Customer Name</label>
+                        <input type="text" id="newCustomerName" placeholder="Ahmed Mohammed">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="newCustomerEmail" placeholder="customer@email.com">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Product</label>
+                        <select id="newProduct">
+                            <option value="tv">TV Enclosure (ATE Series)</option>
+                            <option value="pool">Pool Enclosure (APE Series)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Market</label>
+                        <select id="newMarket">
+                            <option value="uae">UAE</option>
+                            <option value="saudi">Saudi Arabia</option>
+                            <option value="spain">Spain</option>
+                            <option value="france">France</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Language</label>
+                        <select id="newLanguage">
+                            <option value="english">English</option>
+                            <option value="arabic">Arabic</option>
+                            <option value="spanish">Spanish</option>
+                            <option value="french">French</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select id="newType">
+                            <option value="lead_response">Lead Response</option>
+                            <option value="follow_up">Follow-up</option>
+                            <option value="quote">Quote Request</option>
+                            <option value="support">Support</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Customer Message</label>
+                    <textarea id="newCustomerMessage" rows="4" placeholder="Enter the customer's message or enquiry..."></textarea>
+                </div>
+
+                <div id="aiGeneratingStatus" style="display: none;">
+                    <div class="ai-generating">
+                        <div class="spinner"></div>
+                        <span>Claude is generating a response...</span>
+                    </div>
+                </div>
+
+                <div id="aiDraftPreviewContainer" style="display: none;">
+                    <div class="form-group">
+                        <label>AI Draft Response (Confidence: <span id="draftConfidence">--</span>%)</label>
+                        <div class="ai-draft-preview" id="aiDraftPreview"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeNewEnquiryModal()">Cancel</button>
+                <button class="btn btn-primary" id="generateAiBtn" onclick="generateAiResponse()">
+                    Generate AI Response
+                </button>
+                <button class="btn btn-primary" id="addToQueueBtn" onclick="addToQueue()" style="display: none;">
+                    Add to Queue
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-icon" id="modalIcon"></div>
+            <div class="modal-title" id="modalTitle"></div>
+            <div class="modal-message" id="modalMessage"></div>
+            <div class="modal-buttons" id="modalButtons"></div>
+        </div>
+    </div>
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        // ============================================
+        // SUPABASE CONFIGURATION
+        // ============================================
+        const SUPABASE_STORAGE_KEY = 'apex_supabase_config';
+        let supabaseClient = null;
+        let useSupabase = false;
+
+        function initSupabase() {
+            const saved = localStorage.getItem(SUPABASE_STORAGE_KEY);
+            if (saved) {
+                try {
+                    const config = JSON.parse(saved);
+                    if (config.url && config.key) {
+                        supabaseClient = window.supabase.createClient(config.url, config.key);
+                        useSupabase = true;
+                        console.log('Supabase connected');
+                        // Update UI to show connected status
+                        updateConnectionStatus(true);
+                    }
+                } catch (e) {
+                    console.warn('Supabase config invalid, using localStorage');
+                }
+            }
+            if (!useSupabase) {
+                updateConnectionStatus(false);
+            }
+        }
+
+        function updateConnectionStatus(connected) {
+            const badge = document.querySelector('.learning-badge');
+            if (badge) {
+                if (connected) {
+                    badge.innerHTML = '🟢 Database Connected';
+                    badge.style.background = 'rgba(16, 185, 129, 0.3)';
+                } else {
+                    badge.innerHTML = '🟡 Demo Mode (localStorage)';
+                    badge.style.background = 'rgba(245, 158, 11, 0.3)';
+                    badge.style.cursor = 'pointer';
+                    badge.onclick = () => window.location.href = 'setup.html';
+                    badge.title = 'Click to connect database';
+                }
+            }
+        }
+
+        // ============================================
+        // MODAL SYSTEM
+        // ============================================
+        let modalResolve = null;
+
+        function showModal(options) {
+            return new Promise((resolve) => {
+                modalResolve = resolve;
+                document.getElementById('modalIcon').textContent = options.icon || '💬';
+                document.getElementById('modalTitle').textContent = options.title || '';
+                document.getElementById('modalMessage').innerHTML = options.message || '';
+
+                const buttonsHtml = options.buttons.map((btn, i) =>
+                    `<button class="modal-btn ${btn.class || 'secondary'}" onclick="closeModal(${i})">${btn.text}</button>`
+                ).join('');
+                document.getElementById('modalButtons').innerHTML = buttonsHtml;
+
+                document.getElementById('modalOverlay').classList.add('show');
+            });
+        }
+
+        function closeModal(buttonIndex) {
+            document.getElementById('modalOverlay').classList.remove('show');
+            if (modalResolve) {
+                modalResolve(buttonIndex);
+                modalResolve = null;
+            }
+        }
+
+        // Close modal on overlay click
+        document.getElementById('modalOverlay').addEventListener('click', (e) => {
+            if (e.target.id === 'modalOverlay') closeModal(-1);
+        });
+
+        // ============================================
+        // DATA STORAGE
+        // ============================================
+        let learningDB = JSON.parse(localStorage.getItem('apex_ai_learning') || '{"interactions":[],"stats":{"approved":0,"edited":0,"rejected":0}}');
+        let pendingQueue = [];
+        let currentFilter = 'all';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            initSupabase();
+            await loadPendingQueue();
+            await loadLearningStats();
+            updateStats();
+            renderQueue();
+            setupFilters();
+        });
+
+        // Load pending queue
+        async function loadPendingQueue() {
+            if (useSupabase) {
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('ai_interactions')
+                        .select('*')
+                        .eq('action', 'pending')
+                        .order('created_at', { ascending: false });
+
+                    if (!error && data) {
+                        // Transform Supabase data to local format
+                        pendingQueue = data.map(row => ({
+                            id: row.id,
+                            type: row.interaction_type,
+                            timestamp: row.created_at,
+                            product: row.product,
+                            market: row.market,
+                            language: row.language,
+                            channel: row.channel,
+                            confidence: row.confidence_score,
+                            customer: row.patterns_detected?.customer || {},
+                            aiDraft: row.ai_draft,
+                            aiDraftEN: row.ai_draft_translated
+                        }));
+                        return;
+                    }
+                } catch (e) {
+                    console.warn('Supabase load failed, falling back to localStorage');
+                }
+            }
+
+            // Fallback to localStorage
+            pendingQueue = JSON.parse(localStorage.getItem('apex_ai_pending') || '[]');
+            if (pendingQueue.length === 0) {
+                addDemoItems();
+            }
+        }
+
+        // Load learning stats from Supabase
+        async function loadLearningStats() {
+            if (useSupabase) {
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('ai_interactions')
+                        .select('action')
+                        .neq('action', 'pending');
+
+                    if (!error && data) {
+                        learningDB.stats = {
+                            approved: data.filter(r => r.action === 'approved').length,
+                            edited: data.filter(r => r.action === 'edited').length,
+                            rejected: data.filter(r => r.action === 'rejected').length
+                        };
+                        return;
+                    }
+                } catch (e) {
+                    console.warn('Stats load failed');
+                }
+            }
+        }
+
+        // Save pending queue (localStorage only - Supabase is source of truth)
+        function savePendingQueue() {
+            localStorage.setItem('apex_ai_pending', JSON.stringify(pendingQueue));
+        }
+
+        // Save learning DB
+        function saveLearningDB() {
+            localStorage.setItem('apex_ai_learning', JSON.stringify(learningDB));
+        }
+
+        // Save interaction to Supabase
+        async function saveInteractionToSupabase(item, action, finalDraft, rejectReason) {
+            if (!useSupabase) return;
+
+            try {
+                // First, create or update customer record
+                let customerId = null;
+                if (item.customer?.email) {
+                    const { data: existingCustomer } = await supabaseClient
+                        .from('customers')
+                        .select('id')
+                        .eq('email', item.customer.email)
+                        .single();
+
+                    if (existingCustomer) {
+                        customerId = existingCustomer.id;
+                    } else {
+                        const { data: newCustomer } = await supabaseClient
+                            .from('customers')
+                            .insert({
+                                name: item.customer.name,
+                                email: item.customer.email,
+                                type: 'retail',
+                                market: item.market,
+                                source: item.channel,
+                                status: 'new'
+                            })
+                            .select('id')
+                            .single();
+
+                        if (newCustomer) customerId = newCustomer.id;
+                    }
+                }
+
+                // If this is a demo item (starts with 'demo-'), insert new record
+                // Otherwise update existing record
+                if (item.id.startsWith('demo-')) {
+                    // Insert new AI interaction
+                    await supabaseClient.from('ai_interactions').insert({
+                        customer_id: customerId,
+                        interaction_type: item.type,
+                        channel: item.channel,
+                        market: item.market,
+                        product: item.product,
+                        language: item.language,
+                        ai_draft: item.aiDraft,
+                        ai_draft_translated: item.aiDraftEN,
+                        confidence_score: item.confidence,
+                        action: action,
+                        action_at: new Date().toISOString(),
+                        final_draft: finalDraft,
+                        reject_reason: rejectReason,
+                        patterns_detected: { customer: item.customer }
+                    });
+                } else {
+                    // Update existing record
+                    await supabaseClient.from('ai_interactions').update({
+                        action: action,
+                        action_at: new Date().toISOString(),
+                        final_draft: finalDraft,
+                        reject_reason: rejectReason
+                    }).eq('id', item.id);
+                }
+
+                console.log(`Saved to Supabase: ${action}`);
+            } catch (e) {
+                console.error('Supabase save error:', e);
+            }
+        }
+
+        // Add demo items for testing
+        function addDemoItems() {
+            const demoItems = [
+                {
+                    id: 'demo-1',
+                    type: 'lead_response',
+                    timestamp: new Date().toISOString(),
+                    product: 'tv',
+                    market: 'uae',
+                    language: 'english',
+                    channel: 'whatsapp',
+                    confidence: 15,
+                    customer: {
+                        name: 'Ahmed Al-Rashid',
+                        message: 'Hi, I saw your outdoor TV enclosure. How much for the 75 inch model? And does it work in Dubai summer heat?'
+                    },
+                    aiDraft: `Hello Ahmed,
+
+Thank you for your interest in Apex Enclosures.
+
+The 75" model is AED 10,500, which includes:
+- Full weatherproof protection (rain, dust, humidity)
+- Active cooling system rated for temperatures up to 55°C
+- 5-year warranty
+- Professional installation
+
+To answer your question - yes, it's designed specifically for Gulf summers. The cooling system activates automatically to protect your TV in extreme heat.
+
+Would you like to arrange a site visit, or do you have any other questions?
+
+Best regards,
+Richard Foulkes
+Apex Enclosures`
+                },
+                {
+                    id: 'demo-2',
+                    type: 'follow_up',
+                    timestamp: new Date(Date.now() - 3600000).toISOString(),
+                    product: 'pool',
+                    market: 'uae',
+                    language: 'english',
+                    channel: 'email',
+                    confidence: 22,
+                    customer: {
+                        name: 'Dubai Pools LLC',
+                        email: 'info@dubaipools.ae',
+                        message: `Hi Richard,
+
+Thanks for sending over the quote for the pool enclosures. We're still reviewing internally but have a few questions:
+1. What's the lead time for 10 units?
+2. Do you offer installation support?
+3. Can we see a sample unit first?
+
+Regards,
+Mohammed
+Dubai Pools LLC`
+                    },
+                    aiDraft: `Subject: RE: Apex Pool Enclosure Quote - Your Questions
+
+Dear Mohammed,
+
+Great to hear from you! Happy to answer your questions:
+
+1. **Lead time for 10 units:** 2-3 weeks from order confirmation
+2. **Installation support:** Yes, we provide full installation guidance. For contractors, we can also do a training session at your office.
+3. **Sample unit:** Absolutely! We can arrange a demo unit for you to inspect. Would you like us to bring it to your office or a job site?
+
+As a reminder, your 10-unit order qualifies for 15% contractor discount.
+
+Let me know a good time to bring the demo unit over.
+
+Best regards,
+Richard Foulkes
+Apex Enclosures
++971 50 559 8675`
+                },
+                {
+                    id: 'demo-3',
+                    type: 'quote',
+                    timestamp: new Date(Date.now() - 7200000).toISOString(),
+                    product: 'tv',
+                    market: 'saudi',
+                    language: 'english',
+                    channel: 'email',
+                    confidence: 8,
+                    customer: {
+                        name: 'Red Sea Hotels Group',
+                        email: 'procurement@redseahotels.sa',
+                        message: `Dear Apex Team,
+
+We are Red Sea Hotels Group operating 12 properties across the Red Sea coast. We're looking to install outdoor TVs at pool areas and beach clubs across our properties.
+
+Could you provide a quote for approximately 50 units (65" size) with volume pricing?
+
+We would also need:
+- Delivery to multiple locations
+- Installation services
+- Extended warranty options
+
+Please advise on next steps.
+
+Best regards,
+Fatima Al-Harbi
+Procurement Manager
+Red Sea Hotels Group`
+                    },
+                    aiDraft: `Subject: Apex TV Enclosure Quote - Red Sea Hotels Group
+
+Dear Fatima,
+
+Thank you for your inquiry regarding outdoor TV enclosures for your properties. We're excited about the opportunity to work with Red Sea Hotels Group.
+
+Based on your requirements, I've prepared a quote for 50 units across your 12 properties:
+
+QUOTE SUMMARY:
+- 50x ATE-65 (65" enclosures) @ SAR 8,500 each
+- Bulk discount: 20%
+- Discounted price: SAR 6,800 each
+- Total: SAR 340,000 (excl. VAT)
+
+INCLUDES:
+- Delivery to all 12 properties
+- Professional installation at each location
+- 5-year warranty (standard)
+- Dedicated account manager
+
+PAYMENT TERMS:
+- 50% deposit on order confirmation
+- 50% on delivery completion
+
+This quote is valid for 30 days.
+
+Shall we schedule a call to discuss customization options or arrange a site visit to your flagship property?
+
+Best regards,
+Richard Foulkes
+Apex Enclosures`
+                },
+                {
+                    id: 'demo-4',
+                    type: 'outreach',
+                    timestamp: new Date(Date.now() - 10800000).toISOString(),
+                    product: 'pool',
+                    market: 'spain',
+                    language: 'spanish',
+                    channel: 'email',
+                    confidence: 5,
+                    customer: {
+                        name: 'Piscinas Costa del Sol',
+                        email: 'comercial@piscinascostadelsol.es',
+                        message: '[Cold outreach - no incoming message]',
+                        messageEN: '[Cold outreach - no incoming message]'
+                    },
+                    aiDraft: `Asunto: Colaboración con Apex - Cubiertas Acústicas para Equipos de Piscina
+
+Estimado equipo de Piscinas Costa del Sol,
+
+Me pongo en contacto desde Apex Enclosures. Fabricamos cubiertas acústicas para equipos de piscina que reducen el ruido de bombas y filtros en un 70-80%.
+
+¿Por qué contactamos?
+Vimos su trabajo en la Costa del Sol y creemos que nuestros productos podrían agregar valor a sus instalaciones premium.
+
+Nuestra propuesta:
+- Cubiertas modulares de aluminio (APE Series)
+- Diseño arquitectónico - se ven bien, no como cajas industriales
+- Precios de contratista con márgenes atractivos
+- Enviamos a toda España
+
+¿Tendría 15 minutos esta semana para una llamada introductoria?
+
+Saludos cordiales,
+Richard Foulkes
+Apex Enclosures`,
+                    aiDraftEN: `Subject: Partnership with Apex - Acoustic Pool Equipment Covers
+
+Dear Piscinas Costa del Sol team,
+
+I'm reaching out from Apex Enclosures. We manufacture acoustic covers for pool equipment that reduce pump and filter noise by 70-80%.
+
+Why are we contacting you?
+We saw your work on the Costa del Sol and believe our products could add value to your premium installations.
+
+Our offering:
+- Modular aluminum covers (APE Series)
+- Architectural design - looks good, not like industrial boxes
+- Contractor pricing with attractive margins
+- We ship throughout Spain
+
+Would you have 15 minutes this week for an introductory call?
+
+Best regards,
+Richard Foulkes
+Apex Enclosures`
+                },
+                {
+                    id: 'demo-5',
+                    type: 'lead_response',
+                    timestamp: new Date(Date.now() - 14400000).toISOString(),
+                    product: 'tv',
+                    market: 'france',
+                    language: 'french',
+                    channel: 'email',
+                    confidence: 12,
+                    customer: {
+                        name: 'Jean-Pierre Dubois',
+                        email: 'jp.dubois@gmail.com',
+                        message: `Bonjour,
+
+J'ai trouvé votre site en cherchant des solutions pour protéger ma TV sur la terrasse de ma villa à Nice.
+
+Nous avons un grand espace extérieur avec une pergola et je souhaite installer une TV 75 pouces pour regarder le sport avec mes amis.
+
+Pouvez-vous me dire:
+- Le prix pour une protection 75 pouces?
+- Est-ce que ça résiste à la chaleur méditerranéenne?
+- Livrez-vous en France?
+
+Merci d'avance,
+Jean-Pierre Dubois`,
+                        messageEN: `Hello,
+
+I found your site while looking for solutions to protect my TV on the terrace of my villa in Nice.
+
+We have a large outdoor space with a pergola and I want to install a 75-inch TV to watch sports with my friends.
+
+Can you tell me:
+- The price for 75-inch protection?
+- Does it withstand Mediterranean heat?
+- Do you deliver to France?
+
+Thanks in advance,
+Jean-Pierre Dubois`
+                    },
+                    aiDraft: `Objet: Votre demande concernant les boîtiers TV extérieurs Apex
+
+Bonjour Jean-Pierre,
+
+Merci pour votre intérêt pour les boîtiers TV extérieurs Apex.
+
+Pour votre terrasse à Nice, je recommande notre modèle ATE-75 (75 pouces):
+- Prix: 2 850 € (livraison incluse en France)
+- Protection IP55 contre les intempéries
+- Système de refroidissement actif pour les étés méditerranéens
+- Garantie 5 ans
+
+Caractéristiques clés:
+- Fonctionne avec n'importe quelle TV (vous fournissez la TV)
+- Refroidissement automatique jusqu'à 55°C de température ambiante
+- Design architectural discret
+
+Souhaitez-vous que je vous envoie une fiche technique détaillée ou organiser un appel pour discuter de vos besoins?
+
+Cordialement,
+Richard Foulkes
+Apex Enclosures`,
+                    aiDraftEN: `Subject: Your inquiry about Apex outdoor TV enclosures
+
+Hello Jean-Pierre,
+
+Thank you for your interest in Apex outdoor TV enclosures.
+
+For your terrace in Nice, I recommend our ATE-75 model (75 inches):
+- Price: €2,850 (delivery included to France)
+- IP55 weatherproof protection
+- Active cooling system for Mediterranean summers
+- 5-year warranty
+
+Key features:
+- Works with any TV (you provide the TV)
+- Automatic cooling up to 55°C ambient temperature
+- Discreet architectural design
+
+Would you like me to send you detailed specifications or arrange a call to discuss your needs?
+
+Best regards,
+Richard Foulkes
+Apex Enclosures`
+                },
+                {
+                    id: 'demo-6',
+                    type: 'lead_response',
+                    timestamp: new Date(Date.now() - 18000000).toISOString(),
+                    product: 'tv',
+                    market: 'uae',
+                    language: 'arabic',
+                    channel: 'whatsapp',
+                    confidence: 18,
+                    customer: {
+                        name: 'محمد الكثيري',
+                        message: 'السلام عليكم، أريد معرفة أسعار صناديق التلفزيون الخارجية. هل تعمل في الحرارة الشديدة؟',
+                        messageEN: 'Peace be upon you, I want to know the prices of outdoor TV enclosures. Do they work in extreme heat?'
+                    },
+                    aiDraft: `وعليكم السلام محمد،
+
+شكراً لتواصلك مع أبيكس للحماية الخارجية.
+
+نعم، منتجاتنا مصممة خصيصاً لمناخ الخليج الحار!
+
+أسعارنا:
+• ATE-55 (55 بوصة): 7,000 درهم
+• ATE-65 (65 بوصة): 8,500 درهم
+• ATE-75 (75 بوصة): 10,500 درهم
+• ATE-85 (85 بوصة): 14,000 درهم
+
+جميع الموديلات تشمل:
+✓ نظام تبريد يعمل حتى 55 درجة مئوية
+✓ حماية IP55 ضد المطر والغبار
+✓ ضمان 5 سنوات
+✓ تركيب مجاني في الإمارات
+
+هل تريد أن أرسل لك عرض سعر مفصل لمقاس معين؟
+
+مع أطيب التحيات،
+فريق أبيكس`,
+                    aiDraftEN: `Peace be upon you Mohammed,
+
+Thank you for contacting Apex Outdoor Protection.
+
+Yes, our products are specifically designed for the hot Gulf climate!
+
+Our prices:
+• ATE-55 (55 inch): AED 7,000
+• ATE-65 (65 inch): AED 8,500
+• ATE-75 (75 inch): AED 10,500
+• ATE-85 (85 inch): AED 14,000
+
+All models include:
+✓ Cooling system works up to 55°C
+✓ IP55 protection against rain and dust
+✓ 5-year warranty
+✓ Free installation in UAE
+
+Would you like me to send you a detailed quote for a specific size?
+
+Best regards,
+Apex Team`
+                },
+                {
+                    id: 'demo-7',
+                    type: 'support',
+                    timestamp: new Date(Date.now() - 21600000).toISOString(),
+                    product: 'tv',
+                    market: 'uae',
+                    language: 'english',
+                    channel: 'email',
+                    confidence: 25,
+                    customer: {
+                        name: 'Sarah Mitchell',
+                        email: 's.mitchell@emirates.com',
+                        message: `Subject: Fan noise issue on ATE-75 enclosure
+
+Hi Apex team,
+
+I purchased an ATE-75 enclosure about 6 months ago for my villa in Arabian Ranches.
+
+Lately I've noticed the fans are making quite a lot of noise, especially in the afternoon when it's hot. It's bothering us when we're trying to relax by the pool.
+
+Is this normal? Should I be concerned? The TV seems to be working fine but the noise is annoying.
+
+Please advise.
+
+Thanks,
+Sarah Mitchell`
+                    },
+                    aiDraft: `Subject: RE: Fan noise issue
+
+Hi Sarah,
+
+Thanks for letting us know about the fan noise.
+
+Good news - what you're hearing is actually normal! The fans speed up automatically on hot afternoons to keep your TV cool. It's doing exactly what it should.
+
+That said, if it seems louder than usual, a few quick things to check:
+1. Make sure nothing's blocking the vents at the bottom or top
+2. Give the filter a quick clean (pull out the drawer at the bottom)
+3. Check nothing's fallen onto the unit that might be rattling
+
+If you've tried those and it still seems too loud, I'm happy to pop round and take a look - completely free under your warranty.
+
+Just let me know:
+- Does the noise happen all the time or just when it's hot?
+- What day works for you if you'd like me to visit?
+
+Cheers,
+Richard
+Apex Enclosures`
+                },
+                {
+                    id: 'demo-8',
+                    type: 'quote',
+                    timestamp: new Date(Date.now() - 25200000).toISOString(),
+                    product: 'pool',
+                    market: 'saudi',
+                    language: 'arabic',
+                    channel: 'email',
+                    confidence: 10,
+                    customer: {
+                        name: 'شركة أحواض الرياض',
+                        email: 'sales@riyadhpools.sa',
+                        message: `السلام عليكم،
+
+نحن شركة أحواض الرياض، متخصصون في بناء وصيانة المسابح في منطقة الرياض. لدينا حوالي 15 مشروع سنوياً.
+
+كثير من عملائنا يشتكون من صوت المضخات والفلاتر. هل لديكم حلول لتخفيف الضوضاء؟
+
+نحتاج عرض أسعار للمقاولين إذا توفر.
+
+مع التحية،
+قسم المبيعات
+شركة أحواض الرياض`,
+                        messageEN: `Peace be upon you,
+
+We are Riyadh Pools Company, specialized in building and maintaining pools in the Riyadh area. We have about 15 projects per year.
+
+Many of our clients complain about pump and filter noise. Do you have solutions to reduce noise?
+
+We need a contractor quote if available.
+
+Regards,
+Sales Department
+Riyadh Pools Company`
+                    },
+                    aiDraft: `الموضوع: عرض أسعار خاص - صناديق معدات المسابح من أبيكس
+
+السادة الكرام في شركة أحواض الرياض،
+
+شكراً لاهتمامكم بمنتجات أبيكس لحماية معدات المسابح.
+
+بناءً على حجم أعمالكم (15 مشروع سنوياً)، نقدم لكم برنامج شراكة خاص:
+
+عرض الأسعار للمقاولين:
+━━━━━━━━━━━━━━━━━━
+• APE-BASE (صندوق المضخة): 1,800 ريال ← 1,530 ريال (خصم 15%)
+• APE-EXT-A (وحدة الفلتر): 1,200 ريال ← 1,020 ريال
+• APE-CHILL (صندوق المبرد): 5,500 ريال ← 4,675 ريال
+
+المميزات:
+✓ تخفيض الضوضاء 70-80%
+✓ تصميم معماري أنيق
+✓ مناسب لأحواض المياه المالحة (ستانلس 316)
+✓ ضمان 3 سنوات
+
+شروط الدفع:
+• 30% مقدم عند الطلب
+• 70% عند التسليم
+
+هل يمكننا ترتيب اتصال لمناقشة احتياجاتكم؟
+
+مع خالص التقدير،
+فريق أبيكس`,
+                    aiDraftEN: `Subject: Special Quote - Apex Pool Equipment Enclosures
+
+Dear Riyadh Pools Company team,
+
+Thank you for your interest in Apex pool equipment protection products.
+
+Based on your business volume (15 projects per year), we offer you a special partnership program:
+
+Contractor Pricing:
+━━━━━━━━━━━━━━━━━━
+• APE-BASE (pump enclosure): SAR 1,800 → SAR 1,530 (15% off)
+• APE-EXT-A (filter unit): SAR 1,200 → SAR 1,020
+• APE-CHILL (chiller enclosure): SAR 5,500 → SAR 4,675
+
+Features:
+✓ 70-80% noise reduction
+✓ Elegant architectural design
+✓ Suitable for saltwater pools (316 stainless steel)
+✓ 3-year warranty
+
+Payment Terms:
+• 30% deposit on order
+• 70% on delivery
+
+Can we arrange a call to discuss your needs?
+
+Best regards,
+Apex Team`
+                },
+                {
+                    id: 'demo-9',
+                    type: 'outreach',
+                    timestamp: new Date(Date.now() - 28800000).toISOString(),
+                    product: 'tv',
+                    market: 'france',
+                    language: 'french',
+                    channel: 'linkedin',
+                    confidence: 6,
+                    customer: {
+                        name: 'Côte d\'Azur Smart Homes',
+                        email: 'contact@casmarthomes.fr',
+                        message: '[Cold outreach - no incoming message]',
+                        messageEN: '[Cold outreach - no incoming message]'
+                    },
+                    aiDraft: `Bonjour,
+
+Je me permets de vous contacter concernant une opportunité de partenariat avec Apex Enclosures.
+
+Nous fabriquons des boîtiers de protection pour TV extérieurs, parfaitement adaptés aux installations domotiques haut de gamme que vous réalisez sur la Côte d'Azur.
+
+Pourquoi Apex pour vos projets?
+━━━━━━━━━━━━━━━━━━━━━━━━
+• Protection IP55 - résiste à la pluie et aux jets d'eau
+• Refroidissement actif jusqu'à 55°C
+• Design discret et moderne
+• Compatible avec toutes les marques TV
+
+Programme Partenaire:
+• 15-20% de remise sur le prix public
+• Support technique dédié
+• Livraison sous 7-10 jours en France
+
+Seriez-vous disponible pour un appel de 15 minutes cette semaine? Je serais ravi de vous présenter nos solutions en détail.
+
+Cordialement,
+Richard Foulkes
+Apex Enclosures
++971 50 559 8675`,
+                    aiDraftEN: `Hello,
+
+I'm reaching out regarding a partnership opportunity with Apex Enclosures.
+
+We manufacture outdoor TV protective enclosures, perfectly suited to the high-end home automation installations you do on the French Riviera.
+
+Why Apex for your projects?
+━━━━━━━━━━━━━━━━━━━━━━━━
+• IP55 protection - resists rain and water jets
+• Active cooling up to 55°C
+• Discreet, modern design
+• Compatible with all TV brands
+
+Partner Program:
+• 15-20% discount off retail price
+• Dedicated technical support
+• 7-10 day delivery to France
+
+Would you be available for a 15-minute call this week? I'd be happy to present our solutions in detail.
+
+Best regards,
+Richard Foulkes
+Apex Enclosures
++971 50 559 8675`
+                }
+            ];
+
+            pendingQueue = [...demoItems, ...pendingQueue];
+            savePendingQueue();
+            renderQueue();
+            updateStats();
+        }
+
+        // Render queue
+        function renderQueue() {
+            const container = document.getElementById('queueContainer');
+            const emptyState = document.getElementById('emptyState');
+
+            const filtered = pendingQueue.filter(item => {
+                // Type filter
+                if (currentFilter !== 'all' && item.type !== currentFilter) return false;
+                // Product filter
+                if (currentProductFilter && item.product !== currentProductFilter) return false;
+                // Market filter
+                if (currentMarketFilter && item.market !== currentMarketFilter) return false;
+                return true;
+            });
+
+            // Update header to show active filters
+            updateFilterIndicator();
+
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            container.innerHTML = filtered.map(item => renderQueueItem(item)).join('');
+        }
+
+        function updateFilterIndicator() {
+            const filters = [];
+            if (currentFilter !== 'all') {
+                const labels = { lead_response: 'Leads', follow_up: 'Follow-ups', quote: 'Quotes', outreach: 'Outreach', support: 'Support' };
+                filters.push(labels[currentFilter] || currentFilter);
+            }
+            if (currentProductFilter) {
+                filters.push(currentProductFilter === 'tv' ? 'TV Enclosures' : 'Pool Enclosures');
+            }
+            if (currentMarketFilter) {
+                const markets = { uae: 'UAE', saudi: 'Saudi', spain: 'Spain', france: 'France' };
+                filters.push(markets[currentMarketFilter]);
+            }
+
+            const header = document.querySelector('.content-header h2');
+            if (filters.length > 0) {
+                header.innerHTML = `Approval Queue <span style="font-size: 0.8rem; font-weight: normal; color: #6b7280;"> — ${filters.join(' + ')}</span>`;
+            } else {
+                header.textContent = 'Approval Queue';
+            }
+        }
+
+        // Render single queue item
+        function renderQueueItem(item) {
+            const typeLabels = {
+                'lead_response': 'Lead Response',
+                'follow_up': 'Follow-up',
+                'quote': 'Quote',
+                'outreach': 'Outreach',
+                'support': 'Support'
+            };
+
+            const confidenceClass = item.confidence < 30 ? 'low' : item.confidence < 70 ? 'medium' : 'high';
+            const marketFlags = { uae: '🇦🇪', saudi: '🇸🇦', spain: '🇪🇸', france: '🇫🇷' };
+            const languageNames = { english: 'English', arabic: 'Arabic', french: 'French', spanish: 'Spanish' };
+            const isNonEnglish = item.language !== 'english';
+
+            // Build customer message section
+            let customerSection = '';
+            const isColdOutreach = item.type === 'outreach' || item.customer.message?.includes('[Cold outreach');
+
+            if (item.customer.message && !isColdOutreach) {
+                if (isNonEnglish && item.customer.messageEN) {
+                    // Non-English with translation - show English first, then original
+                    customerSection = `
+                        <div class="message-section">
+                            <div class="message-label">📨 Customer Message <span class="lang-badge">${languageNames[item.language]}</span></div>
+                            <div class="message-label" style="margin-top: 0.5rem; font-size: 0.75rem;">🇬🇧 English Translation:</div>
+                            <div class="customer-message english">${item.customer.messageEN}</div>
+                            <details style="margin-top: 0.5rem;">
+                                <summary style="cursor: pointer; color: #6b7280; font-size: 0.85rem;">View original ${languageNames[item.language]}</summary>
+                                <div class="customer-message foreign" style="margin-top: 0.5rem;">${item.customer.message}</div>
+                            </details>
+                        </div>
+                    `;
+                } else {
+                    customerSection = `
+                        <div class="message-section">
+                            <div class="message-label">📨 Customer Message</div>
+                            <div class="customer-message">${item.customer.message}</div>
+                        </div>
+                    `;
+                }
+            } else {
+                // Cold outreach or no message - just show context
+                customerSection = `
+                    <div class="context-row">
+                        ${item.customer.email ? `<div class="context-item"><label>Email</label><span>${item.customer.email}</span></div>` : ''}
+                        ${isColdOutreach ? `<div class="context-item"><label>Type</label><span>Cold Outreach (no incoming message)</span></div>` : ''}
+                        ${item.customer.context && !isColdOutreach ? `<div class="context-item"><label>Context</label><span>${item.customer.context}</span></div>` : ''}
+                    </div>
+                `;
+            }
+
+            // Build AI draft section
+            let aiSection = '';
+            if (isNonEnglish && item.aiDraftEN) {
+                aiSection = `
+                    <div class="message-section">
+                        <div class="message-label">🇬🇧 AI Draft (English - for your review)</div>
+                        <div class="ai-draft english" id="draft-en-${item.id}">${item.aiDraftEN}</div>
+                        <details class="foreign-draft">
+                            <summary>View ${languageNames[item.language]} version (what customer will receive)</summary>
+                            <div class="ai-draft foreign" id="draft-${item.id}">${item.aiDraft}</div>
+                        </details>
+                    </div>
+                `;
+            } else {
+                aiSection = `
+                    <div class="message-section">
+                        <div class="message-label">AI Draft Response</div>
+                        <div class="ai-draft" id="draft-${item.id}">${item.aiDraft}</div>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="queue-item" id="item-${item.id}">
+                    <div class="queue-item-header">
+                        <div class="queue-item-meta">
+                            <div class="queue-item-type">
+                                <span class="type-badge ${item.type}">${typeLabels[item.type]}</span>
+                                ${item.customer.name}
+                            </div>
+                            <div class="queue-item-context">
+                                ${item.channel} • ${new Date(item.timestamp).toLocaleString()}
+                                ${isNonEnglish ? `• <span class="lang-indicator">${languageNames[item.language]}</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="queue-item-badges">
+                            <span class="product-badge ${item.product}">${item.product === 'tv' ? '📺 TV' : '🏊 Pool'}</span>
+                            <span class="market-badge">${marketFlags[item.market]}</span>
+                            <div class="confidence">
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill ${confidenceClass}" style="width: ${item.confidence}%"></div>
+                                </div>
+                                <span>${item.confidence}%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="queue-item-body">
+                        ${customerSection}
+                        ${aiSection}
+                    </div>
+
+                    <div class="queue-item-actions" id="actions-${item.id}">
+                        <button class="action-btn approve" onclick="approveItem('${item.id}')">
+                            ✓ Approve & Send
+                        </button>
+                        <button class="action-btn edit" onclick="editItem('${item.id}')">
+                            ✏️ Edit
+                        </button>
+                        <button class="action-btn reject" onclick="rejectItem('${item.id}')">
+                            ✗ Reject
+                        </button>
+                        <div class="action-info">
+                            <span>💡</span> Your feedback trains the AI
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Approve item
+        async function approveItem(id) {
+            const item = pendingQueue.find(i => i.id === id);
+            if (!item) return;
+
+            // Save to Supabase
+            await saveInteractionToSupabase(item, 'approved', item.aiDraft, null);
+
+            // Record learning (localStorage backup)
+            learningDB.interactions.push({
+                ...item,
+                action: 'approved',
+                actionTimestamp: new Date().toISOString(),
+                finalDraft: item.aiDraft
+            });
+            learningDB.stats.approved++;
+            saveLearningDB();
+
+            // Remove from queue
+            pendingQueue = pendingQueue.filter(i => i.id !== id);
+            savePendingQueue();
+
+            // Animate removal
+            const element = document.getElementById(`item-${id}`);
+            element.style.opacity = '0';
+            element.style.transform = 'translateX(100px)';
+            setTimeout(() => {
+                renderQueue();
+                updateStats();
+            }, 300);
+
+            showToast('Approved and sent! AI is learning from this.', 'success');
+        }
+
+        // Edit item
+        // Store original text for cancel
+        let editOriginals = {};
+
+        function editItem(id) {
+            const item = pendingQueue.find(i => i.id === id);
+            if (!item) return;
+
+            // Find the right draft element (could be draft-en-{id} for non-English or draft-{id})
+            let draftEl = document.getElementById(`draft-en-${id}`) || document.getElementById(`draft-${id}`);
+            const actionsEl = document.getElementById(`actions-${id}`);
+
+            if (!draftEl) {
+                showToast('Could not find draft to edit', 'error');
+                return;
+            }
+
+            // Store original for cancel
+            editOriginals[id] = item.aiDraftEN || item.aiDraft;
+            const currentText = editOriginals[id];
+
+            draftEl.classList.add('editable');
+            draftEl.innerHTML = `<textarea id="edit-${id}" style="width:100%; min-height:200px; padding:1rem; border:none; font-size:0.95rem; font-family:inherit; resize:vertical;">${currentText}</textarea>`;
+            document.getElementById(`edit-${id}`).focus();
+
+            actionsEl.innerHTML = `
+                <button class="action-btn save" onclick="saveEdit('${id}')">
+                    💾 Save & Send
+                </button>
+                <button class="action-btn cancel" onclick="cancelEdit('${id}')">
+                    ✕ Cancel
+                </button>
+            `;
+        }
+
+        // Save edit
+        async function saveEdit(id) {
+            const item = pendingQueue.find(i => i.id === id);
+            if (!item) return;
+
+            const editedText = document.getElementById(`edit-${id}`).value;
+
+            // Save to Supabase
+            await saveInteractionToSupabase(item, 'edited', editedText, null);
+
+            // Record learning with edit (localStorage backup)
+            learningDB.interactions.push({
+                ...item,
+                action: 'edited',
+                actionTimestamp: new Date().toISOString(),
+                originalDraft: item.aiDraftEN || item.aiDraft,
+                finalDraft: editedText
+            });
+            learningDB.stats.edited++;
+            saveLearningDB();
+
+            // Remove from queue
+            pendingQueue = pendingQueue.filter(i => i.id !== id);
+            savePendingQueue();
+
+            delete editOriginals[id];
+            renderQueue();
+            updateStats();
+            showToast('Saved with edits! AI is learning your preferences.', 'success');
+        }
+
+        // Cancel edit
+        function cancelEdit(id) {
+            delete editOriginals[id];
+            renderQueue();
+            showToast('Edit cancelled', 'info');
+        }
+
+        // Reject item
+        async function rejectItem(id) {
+            const item = pendingQueue.find(i => i.id === id);
+            if (!item) return;
+
+            const result = await showModal({
+                icon: '🚫',
+                title: 'Reject this response?',
+                message: `
+                    <p style="margin-bottom: 1rem;">This helps the AI learn what NOT to say.</p>
+                    <input type="text" id="rejectReason" placeholder="Optional: Why is this wrong?"
+                           style="width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.95rem;">
+                `,
+                buttons: [
+                    { text: 'Cancel', class: 'secondary' },
+                    { text: 'Reject', class: 'danger' }
+                ]
+            });
+
+            if (result !== 1) return; // User cancelled
+
+            const reason = document.getElementById('rejectReason')?.value || 'Not specified';
+
+            // Save to Supabase
+            await saveInteractionToSupabase(item, 'rejected', null, reason);
+
+            // Record learning (localStorage backup)
+            learningDB.interactions.push({
+                ...item,
+                action: 'rejected',
+                actionTimestamp: new Date().toISOString(),
+                rejectReason: reason
+            });
+            learningDB.stats.rejected++;
+            saveLearningDB();
+
+            // Remove from queue
+            pendingQueue = pendingQueue.filter(i => i.id !== id);
+            savePendingQueue();
+
+            renderQueue();
+            updateStats();
+            showToast('Rejected. AI will avoid similar responses.', 'error');
+        }
+
+        // Update stats
+        function updateStats() {
+            document.getElementById('pendingCount').textContent = pendingQueue.length;
+            document.getElementById('allBadge').textContent = pendingQueue.length;
+
+            const today = new Date().toDateString();
+            const approvedToday = learningDB.interactions.filter(i =>
+                i.action === 'approved' && new Date(i.actionTimestamp).toDateString() === today
+            ).length;
+            document.getElementById('approvedToday').textContent = approvedToday;
+
+            const total = learningDB.interactions.length;
+            document.getElementById('totalLearned').textContent = total;
+            document.getElementById('learnedResponses').textContent = total;
+
+            if (total > 0) {
+                const editRate = Math.round((learningDB.stats.edited / total) * 100);
+                const rejectRate = Math.round((learningDB.stats.rejected / total) * 100);
+                document.getElementById('editRate').textContent = editRate + '%';
+                document.getElementById('rejectRate').textContent = rejectRate + '%';
+
+                // Calculate average confidence of approved items
+                const approved = learningDB.interactions.filter(i => i.action === 'approved');
+                if (approved.length > 0) {
+                    const avgConf = Math.round(approved.reduce((sum, i) => sum + i.confidence, 0) / approved.length);
+                    document.getElementById('avgConfidence').textContent = avgConf + '%';
+                }
+            }
+        }
+
+        // Current filter state
+        let currentProductFilter = null;
+        let currentMarketFilter = null;
+
+        // Setup filters
+        function setupFilters() {
+            // Queue type filters
+            document.querySelectorAll('.sidebar-link[data-filter]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Clear only queue filter active states
+                    document.querySelectorAll('.sidebar-link[data-filter]').forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                    currentFilter = link.dataset.filter;
+                    renderQueue();
+                });
+            });
+
+            // Product filters
+            document.querySelectorAll('.sidebar-link[data-product]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const wasActive = link.classList.contains('active');
+                    // Toggle - clicking again clears filter
+                    document.querySelectorAll('.sidebar-link[data-product]').forEach(l => l.classList.remove('active'));
+                    if (!wasActive) {
+                        link.classList.add('active');
+                        currentProductFilter = link.dataset.product;
+                    } else {
+                        currentProductFilter = null;
+                    }
+                    renderQueue();
+                });
+            });
+
+            // Market filters
+            document.querySelectorAll('.sidebar-link[data-market]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const wasActive = link.classList.contains('active');
+                    // Toggle - clicking again clears filter
+                    document.querySelectorAll('.sidebar-link[data-market]').forEach(l => l.classList.remove('active'));
+                    if (!wasActive) {
+                        link.classList.add('active');
+                        currentMarketFilter = link.dataset.market;
+                    } else {
+                        currentMarketFilter = null;
+                    }
+                    renderQueue();
+                });
+            });
+
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+            });
+        }
+
+        // Show history
+        async function showHistory() {
+            await showModal({
+                icon: '📊',
+                title: 'Learning History',
+                message: `
+                    <div style="text-align: left; background: #f8fafc; padding: 1rem; border-radius: 8px;">
+                        <p><strong>Total interactions:</strong> ${learningDB.interactions.length}</p>
+                        <p style="color: #10b981;"><strong>Approved:</strong> ${learningDB.stats.approved}</p>
+                        <p style="color: #f59e0b;"><strong>Edited:</strong> ${learningDB.stats.edited}</p>
+                        <p style="color: #ef4444;"><strong>Rejected:</strong> ${learningDB.stats.rejected}</p>
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.85rem; color: #6b7280;">Export data to see full conversation details.</p>
+                `,
+                buttons: [
+                    { text: 'Close', class: 'secondary' },
+                    { text: 'Export Data', class: 'primary' }
+                ]
+            }).then(result => {
+                if (result === 1) exportData();
+            });
+        }
+
+        // Export data
+        function exportData() {
+            const data = JSON.stringify(learningDB, null, 2);
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `apex-ai-learning-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            showToast('Learning data exported!', 'success');
+        }
+
+        // Toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type} show`;
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // ========== CLAUDE API INTEGRATION ==========
+        const BACKEND_URL = 'http://localhost:3001';
+        let claudeConnected = false;
+        let pendingDraft = null;
+
+        // Check Claude backend status on load
+        async function checkClaudeStatus() {
+            const statusEl = document.getElementById('aiStatus');
+            try {
+                const response = await fetch(`${BACKEND_URL}/health`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.hasApiKey) {
+                        statusEl.classList.add('connected');
+                        statusEl.title = 'Claude AI: Connected';
+                        claudeConnected = true;
+                    } else {
+                        statusEl.title = 'Claude AI: No API key configured';
+                    }
+                }
+            } catch (err) {
+                statusEl.title = 'Claude AI: Backend not running';
+            }
+        }
+
+        // Open new enquiry modal
+        function openNewEnquiryModal() {
+            document.getElementById('newEnquiryModal').classList.add('show');
+            // Reset form
+            document.getElementById('newCustomerName').value = '';
+            document.getElementById('newCustomerEmail').value = '';
+            document.getElementById('newCustomerMessage').value = '';
+            document.getElementById('aiGeneratingStatus').style.display = 'none';
+            document.getElementById('aiDraftPreviewContainer').style.display = 'none';
+            document.getElementById('generateAiBtn').style.display = '';
+            document.getElementById('addToQueueBtn').style.display = 'none';
+            pendingDraft = null;
+        }
+
+        // Close new enquiry modal
+        function closeNewEnquiryModal() {
+            document.getElementById('newEnquiryModal').classList.remove('show');
+        }
+
+        // Generate AI response via backend
+        async function generateAiResponse() {
+            const customerName = document.getElementById('newCustomerName').value.trim();
+            const customerEmail = document.getElementById('newCustomerEmail').value.trim();
+            const customerMessage = document.getElementById('newCustomerMessage').value.trim();
+            const product = document.getElementById('newProduct').value;
+            const market = document.getElementById('newMarket').value;
+            const language = document.getElementById('newLanguage').value;
+            const type = document.getElementById('newType').value;
+
+            if (!customerMessage) {
+                showToast('Please enter a customer message', 'error');
+                return;
+            }
+
+            if (!claudeConnected) {
+                showToast('Claude AI not connected. Go to Setup to configure.', 'error');
+                return;
+            }
+
+            // Show generating status
+            document.getElementById('aiGeneratingStatus').style.display = 'block';
+            document.getElementById('aiDraftPreviewContainer').style.display = 'none';
+            document.getElementById('generateAiBtn').disabled = true;
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/generate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        customerMessage,
+                        customerName: customerName || 'Unknown',
+                        customerEmail: customerEmail || 'Unknown',
+                        product,
+                        market,
+                        language,
+                        type,
+                        channel: 'email'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    // Show the draft
+                    document.getElementById('aiDraftPreview').textContent = data.draft;
+                    document.getElementById('draftConfidence').textContent = data.confidence;
+                    document.getElementById('aiDraftPreviewContainer').style.display = 'block';
+                    document.getElementById('generateAiBtn').style.display = 'none';
+                    document.getElementById('addToQueueBtn').style.display = '';
+
+                    // Store pending draft
+                    pendingDraft = {
+                        draft: data.draft,
+                        confidence: data.confidence,
+                        customerName,
+                        customerEmail,
+                        customerMessage,
+                        product,
+                        market,
+                        language,
+                        type
+                    };
+
+                    showToast('AI response generated!', 'success');
+                } else {
+                    showToast(data.error || 'Failed to generate response', 'error');
+                }
+            } catch (err) {
+                showToast('Cannot reach backend server', 'error');
+            } finally {
+                document.getElementById('aiGeneratingStatus').style.display = 'none';
+                document.getElementById('generateAiBtn').disabled = false;
+            }
+        }
+
+        // Add generated enquiry to queue
+        function addToQueue() {
+            if (!pendingDraft) return;
+
+            const newItem = {
+                id: 'new-' + Date.now(),
+                type: pendingDraft.type,
+                timestamp: new Date().toISOString(),
+                product: pendingDraft.product,
+                market: pendingDraft.market,
+                language: pendingDraft.language,
+                channel: 'email',
+                confidence: pendingDraft.confidence,
+                customer: {
+                    name: pendingDraft.customerName || 'Unknown',
+                    email: pendingDraft.customerEmail || 'Unknown',
+                    message: pendingDraft.customerMessage
+                },
+                aiDraft: pendingDraft.draft
+            };
+
+            // Add to queue
+            pendingQueue.unshift(newItem);
+            renderQueue();
+            closeNewEnquiryModal();
+            showToast('Enquiry added to queue!', 'success');
+        }
+
+        // Initialize Claude status check
+        setTimeout(checkClaudeStatus, 500);
+    </script>
+</body>
+</html>

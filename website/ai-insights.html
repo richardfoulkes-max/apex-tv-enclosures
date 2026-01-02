@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Learning Insights | Apex Enclosures</title>
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --primary-dark: #6d28d9;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --bg: #f5f3ff;
+            --card: #ffffff;
+            --text: #1e1b4b;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+        }
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 { font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .header-nav { display: flex; gap: 1rem; }
+        .header-nav a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .header-nav a:hover { background: rgba(255,255,255,0.1); color: white; }
+        .header-nav a.active { background: rgba(255,255,255,0.2); color: white; }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .stat-card .label {
+            font-size: 0.8rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .stat-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .stat-card .change {
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+        .stat-card .change.positive { color: var(--success); }
+        .stat-card .change.negative { color: var(--danger); }
+
+        /* Section */
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .section h2 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Charts */
+        .chart-container {
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            gap: 0.5rem;
+            padding: 1rem 0;
+        }
+        .chart-bar {
+            flex: 1;
+            background: var(--primary);
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .chart-bar:hover { opacity: 0.8; }
+        .chart-bar .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .chart-bar:hover .tooltip { opacity: 1; }
+        .chart-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-top: 0.5rem;
+        }
+
+        /* Progress bars */
+        .progress-item {
+            margin-bottom: 1rem;
+        }
+        .progress-item:last-child { margin-bottom: 0; }
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.375rem;
+            font-size: 0.9rem;
+        }
+        .progress-bar {
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s;
+        }
+        .progress-fill.green { background: var(--success); }
+        .progress-fill.yellow { background: var(--warning); }
+        .progress-fill.red { background: var(--danger); }
+        .progress-fill.blue { background: var(--info); }
+        .progress-fill.purple { background: var(--primary); }
+
+        /* Patterns Table */
+        .patterns-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .patterns-table th {
+            text-align: left;
+            padding: 0.75rem;
+            background: var(--bg);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        .patterns-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+        .patterns-table tr:last-child td { border-bottom: none; }
+        .pattern-tag {
+            display: inline-block;
+            padding: 0.125rem 0.5rem;
+            background: var(--bg);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 0.25rem;
+        }
+        .confidence-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .confidence-badge.high { background: #d1fae5; color: #047857; }
+        .confidence-badge.medium { background: #fef3c7; color: #b45309; }
+        .confidence-badge.low { background: #fee2e2; color: #b91c1c; }
+
+        /* Recent Activity */
+        .activity-list { list-style: none; }
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .activity-item:last-child { border-bottom: none; }
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .activity-icon.approved { background: #d1fae5; }
+        .activity-icon.edited { background: #dbeafe; }
+        .activity-icon.rejected { background: #fee2e2; }
+        .activity-content { flex: 1; }
+        .activity-title { font-weight: 500; margin-bottom: 0.25rem; }
+        .activity-meta { font-size: 0.8rem; color: var(--muted); }
+
+        /* Two Column */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        /* Recommendations */
+        .recommendation {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+        .recommendation:last-child { margin-bottom: 0; }
+        .recommendation .icon {
+            font-size: 1.5rem;
+        }
+        .recommendation h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+        .recommendation p {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .two-col { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .header-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>📊 AI Learning Insights</h1>
+            <nav class="header-nav">
+                <a href="index.html">Dashboard</a>
+                <a href="ai-queue.html">Approval Queue</a>
+                <a href="ai-insights.html" class="active">Insights</a>
+                <a href="partner-crm.html">Partner CRM</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Top Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="label">Total Interactions</div>
+                <div class="value" id="totalInteractions">0</div>
+                <div class="change positive" id="interactionsChange">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Approval Rate</div>
+                <div class="value" id="approvalRate">--%</div>
+                <div class="change" id="approvalChange">Of all reviewed items</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Edit Rate</div>
+                <div class="value" id="editRate">--%</div>
+                <div class="change" id="editChange">Responses modified before sending</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">AI Readiness</div>
+                <div class="value" id="readiness">--</div>
+                <div class="change" id="readinessChange">Estimated auto-approval threshold</div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="two-col">
+            <div class="section">
+                <h2>📈 Daily Activity (Last 7 Days)</h2>
+                <div class="chart-container" id="dailyChart">
+                    <!-- Bars inserted by JS -->
+                </div>
+                <div class="chart-labels">
+                    <span id="chartStart">-</span>
+                    <span id="chartEnd">Today</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📊 Response Distribution</h2>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span>Approved (sent as-is)</span>
+                        <span id="approvedPct">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill green" id="approvedBar" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span>Edited (modified before sending)</span>
+                        <span id="editedPct">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill yellow" id="editedBar" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span>Rejected (not sent)</span>
+                        <span id="rejectedPct">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill red" id="rejectedBar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learned Patterns -->
+        <div class="section">
+            <h2>🎓 Learned Patterns</h2>
+            <p style="color: var(--muted); margin-bottom: 1rem; font-size: 0.9rem;">
+                These patterns are derived from your approved responses. Higher confidence = more consistent approvals.
+            </p>
+            <table class="patterns-table">
+                <thead>
+                    <tr>
+                        <th>Pattern</th>
+                        <th>Type</th>
+                        <th>Examples</th>
+                        <th>Confidence</th>
+                    </tr>
+                </thead>
+                <tbody id="patternsTable">
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: var(--muted);">
+                            Approve more interactions to see patterns emerge...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Two Column Bottom -->
+        <div class="two-col">
+            <!-- Recent Activity -->
+            <div class="section">
+                <h2>🕐 Recent Activity</h2>
+                <ul class="activity-list" id="activityList">
+                    <li class="activity-item">
+                        <div style="text-align: center; color: var(--muted); width: 100%; padding: 2rem;">
+                            No activity yet. Start reviewing items in the queue!
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="section">
+                <h2>💡 Recommendations</h2>
+                <div id="recommendations">
+                    <div class="recommendation">
+                        <div class="icon">🚀</div>
+                        <div>
+                            <h4>Keep Reviewing</h4>
+                            <p>The AI needs 50-100 interactions to start recognizing patterns reliably.</p>
+                        </div>
+                    </div>
+                    <div class="recommendation">
+                        <div class="icon">✏️</div>
+                        <div>
+                            <h4>Edit Don't Reject</h4>
+                            <p>When possible, edit responses instead of rejecting. This teaches the AI your preferences.</p>
+                        </div>
+                    </div>
+                    <div class="recommendation">
+                        <div class="icon">📝</div>
+                        <div>
+                            <h4>Add Rejection Reasons</h4>
+                            <p>When rejecting, explain why. This helps the AI avoid similar mistakes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- By Category -->
+        <div class="section">
+            <h2>📋 Performance by Category</h2>
+            <div class="two-col" style="gap: 2rem;">
+                <div>
+                    <h4 style="margin-bottom: 1rem; color: var(--muted); font-size: 0.85rem;">BY ACTION TYPE</h4>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span>Lead Responses</span>
+                            <span id="leadPct">--</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill purple" id="leadBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span>Follow-ups</span>
+                            <span id="followupPct">--</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill purple" id="followupBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span>Quotes</span>
+                            <span id="quotePct">--</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill purple" id="quoteBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span>Outreach</span>
+                            <span id="outreachPct">--</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill purple" id="outreachBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1rem; color: var(--muted); font-size: 0.85rem;">BY MARKET</h4>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span>🇦🇪 UAE</span>
+                            <span id="uaePct">--</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill blue" id="uaeBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span>🇸🇦 Saudi Arabia</span>
+                            <span id="saudiPct">--</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill blue" id="saudiBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span>🇪🇸 Spain</span>
+                            <span id="spainPct">--</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill blue" id="spainBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span>🇫🇷 France</span>
+                            <span id="francePct">--</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill blue" id="franceBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load learning data
+        let learningDB = JSON.parse(localStorage.getItem('apex_ai_learning') || '{"interactions":[],"stats":{"approved":0,"edited":0,"rejected":0}}');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStats();
+            renderDailyChart();
+            renderDistribution();
+            renderPatterns();
+            renderActivity();
+            renderCategoryStats();
+            updateRecommendations();
+        });
+
+        function updateStats() {
+            const total = learningDB.interactions.length;
+            const { approved, edited, rejected } = learningDB.stats;
+
+            document.getElementById('totalInteractions').textContent = total;
+            document.getElementById('interactionsChange').textContent = total > 0 ? `+${total} learned` : 'No interactions yet';
+
+            if (total > 0) {
+                const approvalPct = Math.round((approved / total) * 100);
+                const editPct = Math.round((edited / total) * 100);
+
+                document.getElementById('approvalRate').textContent = approvalPct + '%';
+                document.getElementById('editRate').textContent = editPct + '%';
+
+                // Readiness calculation (more approved + less edited = higher readiness)
+                const readiness = Math.min(100, Math.round((approved * 2 - edited - rejected * 2) / total * 50 + 50));
+                document.getElementById('readiness').textContent = readiness > 70 ? 'Ready' : readiness > 40 ? 'Learning' : 'Training';
+                document.getElementById('readinessChange').textContent = `${readiness}% confidence score`;
+            }
+        }
+
+        function renderDailyChart() {
+            const container = document.getElementById('dailyChart');
+            const days = [];
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                days.push(date.toDateString());
+            }
+
+            // Count interactions per day
+            const counts = days.map(day => {
+                return learningDB.interactions.filter(i =>
+                    new Date(i.actionTimestamp).toDateString() === day
+                ).length;
+            });
+
+            const maxCount = Math.max(...counts, 1);
+
+            container.innerHTML = counts.map((count, i) => {
+                const height = (count / maxCount) * 100;
+                const dayName = new Date(days[i]).toLocaleDateString('en', { weekday: 'short' });
+                return `
+                    <div class="chart-bar" style="height: ${Math.max(height, 5)}%;">
+                        <span class="tooltip">${dayName}: ${count}</span>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('chartStart').textContent = new Date(days[0]).toLocaleDateString('en', { month: 'short', day: 'numeric' });
+        }
+
+        function renderDistribution() {
+            const total = learningDB.interactions.length || 1;
+            const { approved, edited, rejected } = learningDB.stats;
+
+            const approvedPct = Math.round((approved / total) * 100);
+            const editedPct = Math.round((edited / total) * 100);
+            const rejectedPct = Math.round((rejected / total) * 100);
+
+            document.getElementById('approvedPct').textContent = approvedPct + '%';
+            document.getElementById('editedPct').textContent = editedPct + '%';
+            document.getElementById('rejectedPct').textContent = rejectedPct + '%';
+
+            document.getElementById('approvedBar').style.width = approvedPct + '%';
+            document.getElementById('editedBar').style.width = editedPct + '%';
+            document.getElementById('rejectedBar').style.width = rejectedPct + '%';
+        }
+
+        function renderPatterns() {
+            const tbody = document.getElementById('patternsTable');
+
+            if (learningDB.interactions.length < 3) {
+                return; // Keep placeholder message
+            }
+
+            // Extract patterns from approved/edited interactions
+            const approved = learningDB.interactions.filter(i => i.action === 'approved' || i.action === 'edited');
+
+            // Group by type
+            const typeGroups = {};
+            approved.forEach(i => {
+                if (!typeGroups[i.type]) typeGroups[i.type] = [];
+                typeGroups[i.type].push(i);
+            });
+
+            const patterns = Object.entries(typeGroups).map(([type, items]) => {
+                const confidence = Math.min(95, 30 + items.length * 10);
+                return {
+                    pattern: `${type.replace('_', ' ')} responses`,
+                    type: type,
+                    examples: items.length,
+                    confidence: confidence
+                };
+            });
+
+            if (patterns.length === 0) {
+                return;
+            }
+
+            tbody.innerHTML = patterns.map(p => `
+                <tr>
+                    <td>${p.pattern.charAt(0).toUpperCase() + p.pattern.slice(1)}</td>
+                    <td><span class="pattern-tag">${p.type}</span></td>
+                    <td>${p.examples} approved</td>
+                    <td>
+                        <span class="confidence-badge ${p.confidence > 70 ? 'high' : p.confidence > 40 ? 'medium' : 'low'}">
+                            ${p.confidence}%
+                        </span>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderActivity() {
+            const list = document.getElementById('activityList');
+
+            if (learningDB.interactions.length === 0) return;
+
+            const recent = learningDB.interactions.slice(-10).reverse();
+
+            list.innerHTML = recent.map(i => {
+                const actionIcons = { approved: '✓', edited: '✏️', rejected: '✗' };
+                const actionLabels = { approved: 'Approved', edited: 'Edited', rejected: 'Rejected' };
+
+                return `
+                    <li class="activity-item">
+                        <div class="activity-icon ${i.action}">
+                            ${actionIcons[i.action]}
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">${actionLabels[i.action]}: ${i.type.replace('_', ' ')} to ${i.customer?.name || 'Customer'}</div>
+                            <div class="activity-meta">
+                                ${i.product === 'tv' ? '📺' : '🏊'} ${i.market?.toUpperCase()} •
+                                ${new Date(i.actionTimestamp).toLocaleString()}
+                            </div>
+                        </div>
+                    </li>
+                `;
+            }).join('');
+        }
+
+        function renderCategoryStats() {
+            const interactions = learningDB.interactions;
+            if (interactions.length === 0) return;
+
+            // By type
+            const types = ['lead_response', 'follow_up', 'quote', 'outreach'];
+            types.forEach(type => {
+                const typeItems = interactions.filter(i => i.type === type);
+                const approved = typeItems.filter(i => i.action === 'approved').length;
+                const total = typeItems.length || 1;
+                const pct = Math.round((approved / total) * 100);
+
+                const id = type.replace('_response', '').replace('_up', 'up');
+                const el = document.getElementById(id + 'Pct');
+                const bar = document.getElementById(id + 'Bar');
+                if (el) el.textContent = `${approved}/${typeItems.length}`;
+                if (bar) bar.style.width = pct + '%';
+            });
+
+            // By market
+            const markets = ['uae', 'saudi', 'spain', 'france'];
+            markets.forEach(market => {
+                const marketItems = interactions.filter(i => i.market === market);
+                const approved = marketItems.filter(i => i.action === 'approved').length;
+                const total = marketItems.length || 1;
+                const pct = Math.round((approved / total) * 100);
+
+                const el = document.getElementById(market + 'Pct');
+                const bar = document.getElementById(market + 'Bar');
+                if (el) el.textContent = `${approved}/${marketItems.length}`;
+                if (bar) bar.style.width = pct + '%';
+            });
+        }
+
+        function updateRecommendations() {
+            const total = learningDB.interactions.length;
+            const container = document.getElementById('recommendations');
+
+            if (total > 50) {
+                container.innerHTML = `
+                    <div class="recommendation">
+                        <div class="icon">🎉</div>
+                        <div>
+                            <h4>Great Progress!</h4>
+                            <p>You've reviewed ${total} interactions. The AI is learning your style well.</p>
+                        </div>
+                    </div>
+                    <div class="recommendation">
+                        <div class="icon">⚡</div>
+                        <div>
+                            <h4>Consider Auto-Approval</h4>
+                            <p>High-confidence responses could be auto-approved. Ready for Phase 2?</p>
+                        </div>
+                    </div>
+                `;
+            } else if (total > 20) {
+                container.innerHTML = `
+                    <div class="recommendation">
+                        <div class="icon">📈</div>
+                        <div>
+                            <h4>Making Progress</h4>
+                            <p>${total} interactions reviewed. ${50 - total} more until patterns become reliable.</p>
+                        </div>
+                    </div>
+                    <div class="recommendation">
+                        <div class="icon">🎯</div>
+                        <div>
+                            <h4>Focus on Variety</h4>
+                            <p>Review different types (leads, follow-ups, quotes) to build comprehensive learning.</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

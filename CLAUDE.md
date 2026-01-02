@@ -106,12 +106,19 @@ Air path: Bottom intake → Double-layer labyrinth → Filter → Diffuser plate
 ### File Structure
 ```
 website/                    ← Website (v5.2.2 IP55 - fully updated)
+├── index.html              ← Dashboard (links to all tools)
+├── ai-queue.html           ← AI Director approval queue
+├── ai-insights.html        ← AI learning analytics
+├── partner-crm.html        ← Partner CRM tool
 ├── designs.html
 ├── specification.html
 ├── bom-detailed.html
 ├── engineering-analysis.html
 ├── control-logic.html
 └── archive/
+
+ai-director/                ← AI Director system (learning AI)
+└── system-prompt.md        ← Full AI system prompt for Apex
 
 fusion-scripts/             ← 3D models
 ├── ATE-75-Enclosure.scad   ← OpenSCAD parametric model
@@ -150,6 +157,40 @@ roundtable-ai/              ← Engineering validation briefs
 7. Open folder for user to verify before sending
 
 ## Recent Work History
+
+### Session: 2026-01-01 (Late) - AI Director Learning System v1.0
+
+**Built Phase 1 of AI Director - the learning AI system that handles customer inquiries:**
+
+**Core Concept:**
+- AI starts by asking for approval before sending any response
+- Human reviews, approves/edits/rejects each AI draft
+- System learns from corrections over time
+- Eventually automates high-confidence responses
+
+**Files created:**
+- `website/ai-queue.html` - Approval queue interface for reviewing AI-drafted responses
+- `website/ai-insights.html` - Learning analytics dashboard (approval rates, patterns, readiness)
+- `ai-director/system-prompt.md` - Complete AI Director system prompt with product knowledge
+
+**AI Director Features:**
+- Multi-market support: UAE, Saudi Arabia, Spain, France (currencies, languages)
+- Product catalog: ATE Series (TV enclosures) + APE Series (Pool enclosures)
+- Pricing tiers: Retail, Partner (15-20% discount), Commercial (custom)
+- Escalation rules: >AED 25K deals, angry customers, custom requests
+- Response templates: Greetings, pricing, quotes, follow-ups
+- Learning database: Stores all interactions for pattern recognition
+
+**Dashboard Integration:**
+- Added "AI Director" section to main dashboard (index.html)
+- Navigation links between AI Queue, Insights, CRM, and Dashboard
+
+**Future Phases:**
+- Phase 2: Pattern recognition and confidence scoring
+- Phase 3: Auto-approval for high-confidence actions
+- Phase 4: Real Claude API integration for live responses
+
+---
 
 ### Session: 2026-01-01 (PM) - APE Series Pool Equipment Enclosures v1.0
 
