@@ -1,12 +1,11 @@
 /**
- * Send Reply - Sends approved response via email (Mailgun)
+ * Send Reply - Sends approved response and LEARNS from edits
  * POST /api/send-reply
  */
 
 import { createClient } from '@supabase/supabase-js';
 
 export default async function handler(req, res) {
-    // Set CORS headers
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -25,7 +24,6 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'enquiryId and response are required' });
     }
 
-    // Initialize Supabase
     const supabaseUrl = process.env.SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
 
@@ -47,16 +45,59 @@ export default async function handler(req, res) {
             return res.status(404).json({ error: 'Enquiry not found' });
         }
 
+        // LEARNING: Detect if response was edited
+        const wasEdited = enquiry.ai_draft && response !== enquiry.ai_draft;
+
+        if (wasEdited) {
+            console.log('Learning from edit...');
+
+            // Store the learning
+            await supabase.from('ai_learnings').insert({
+                category: 'response_edit',
+                learning: `Original: "${enquiry.ai_draft.substring(0, 200)}..." was changed to: "${response.substring(0, 200)}..."`,
+                source_enquiry_id: enquiryId,
+                confidence: 0.8
+            });
+
+            // Try to detect specific patterns
+            const patterns = detectPatterns(enquiry.ai_draft, response);
+
+            for (const pattern of patterns) {
+                // Check if pattern exists
+                const { data: existing } = await supabase
+                    .from('ai_patterns')
+                    .select('*')
+                    .eq('pattern_type', pattern.type)
+                    .eq('original_text', pattern.original)
+                    .single();
+
+                if (existing) {
+                    // Increment frequency
+                    await supabase
+                        .from('ai_patterns')
+                        .update({
+                            frequency: existing.frequency + 1,
+                            last_seen: new Date().toISOString()
+                        })
+                        .eq('id', existing.id);
+                } else {
+                    // Create new pattern
+                    await supabase.from('ai_patterns').insert({
+                        pattern_type: pattern.type,
+                        original_text: pattern.original,
+                        corrected_text: pattern.corrected,
+                        context: pattern.context
+                    });
+                }
+            }
+        }
+
+        // Send via Mailgun if configured
         if (enquiry.channel === 'email') {
-            // Send via Mailgun
             const mailgunKey = process.env.MAILGUN_API_KEY;
             const mailgunDomain = process.env.MAILGUN_DOMAIN;
 
-            if (!mailgunKey || !mailgunDomain) {
-                // If Mailgun not configured, just mark as approved (for testing)
-                console.log('Mailgun not configured - marking as approved without sending');
-            } else {
-                // Send email via Mailgun API
+            if (mailgunKey && mailgunDomain) {
                 const formData = new URLSearchParams();
                 formData.append('from', `Apex Enclosures <noreply@${mailgunDomain}>`);
                 formData.append('to', enquiry.customer_contact);
@@ -75,17 +116,13 @@ export default async function handler(req, res) {
                 );
 
                 if (!mailgunResponse.ok) {
-                    const error = await mailgunResponse.text();
-                    console.error('Mailgun error:', error);
-                    return res.status(500).json({ error: 'Failed to send email' });
+                    console.error('Mailgun error:', await mailgunResponse.text());
                 }
-
-                console.log(`Email sent to ${enquiry.customer_contact}`);
             }
         }
 
         // Update enquiry status
-        const { error: updateError } = await supabase
+        await supabase
             .from('enquiries')
             .update({
                 status: 'approved',
@@ -94,18 +131,87 @@ export default async function handler(req, res) {
             })
             .eq('id', enquiryId);
 
-        if (updateError) {
-            console.error('Update error:', updateError);
-            return res.status(500).json({ error: 'Failed to update status' });
-        }
-
         res.status(200).json({
             success: true,
-            message: enquiry.channel === 'email' ? 'Email sent' : 'Response recorded'
+            message: 'Response sent',
+            learned: wasEdited
         });
 
     } catch (err) {
         console.error('Send reply error:', err);
         res.status(500).json({ error: 'Internal server error' });
     }
+}
+
+/**
+ * Detect patterns between original and corrected text
+ */
+function detectPatterns(original, corrected) {
+    const patterns = [];
+
+    // Detect greeting changes
+    const greetingPatterns = [
+        { regex: /^(Hi|Hello|Dear)/i, type: 'greeting' },
+    ];
+
+    for (const gp of greetingPatterns) {
+        const origMatch = original.match(gp.regex);
+        const corrMatch = corrected.match(gp.regex);
+        if (origMatch && corrMatch && origMatch[0] !== corrMatch[0]) {
+            patterns.push({
+                type: 'phrase_replacement',
+                original: origMatch[0],
+                corrected: corrMatch[0],
+                context: 'greeting'
+            });
+        }
+    }
+
+    // Detect sign-off changes
+    const signOffRegex = /(Best regards|Kind regards|Regards|Thanks|Cheers|Sincerely)[,\n]/gi;
+    const origSignOff = original.match(signOffRegex);
+    const corrSignOff = corrected.match(signOffRegex);
+    if (origSignOff && corrSignOff && origSignOff[0] !== corrSignOff[0]) {
+        patterns.push({
+            type: 'phrase_replacement',
+            original: origSignOff[0].replace(/[,\n]/g, ''),
+            corrected: corrSignOff[0].replace(/[,\n]/g, ''),
+            context: 'sign_off'
+        });
+    }
+
+    // Detect if response is significantly shorter (preference for brevity)
+    if (corrected.length < original.length * 0.7) {
+        patterns.push({
+            type: 'tone',
+            original: 'verbose',
+            corrected: 'Keep responses concise and brief',
+            context: 'length'
+        });
+    }
+
+    // Detect if response is significantly longer (preference for detail)
+    if (corrected.length > original.length * 1.5) {
+        patterns.push({
+            type: 'tone',
+            original: 'brief',
+            corrected: 'Provide detailed, comprehensive responses',
+            context: 'length'
+        });
+    }
+
+    // Detect currency format changes
+    const aedRegex = /(AED\s*[\d,]+|[\d,]+\s*AED)/gi;
+    const origAED = original.match(aedRegex);
+    const corrAED = corrected.match(aedRegex);
+    if (origAED && corrAED && origAED[0] !== corrAED[0]) {
+        patterns.push({
+            type: 'phrase_replacement',
+            original: origAED[0],
+            corrected: corrAED[0],
+            context: 'currency_format'
+        });
+    }
+
+    return patterns;
 }

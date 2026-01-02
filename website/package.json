@@ -4,6 +4,7 @@
   "description": "Apex Enclosures website with AI Director serverless functions",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
-    "@supabase/supabase-js": "^2.39.0"
+    "@supabase/supabase-js": "^2.39.0",
+    "openai": "^4.20.0"
   }
 }
