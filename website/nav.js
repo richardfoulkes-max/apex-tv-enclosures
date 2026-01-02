@@ -1,23 +1,16 @@
-// Apex Enclosures - Sidebar Navigation Component
-// Include this script in any page to add the sidebar navigation
+// Apex Enclosures - Product Development Sidebar Navigation
+// Include this script in Product Development pages only
+// For Sales pages, use sales-nav.js instead
 
 (function() {
-    // Navigation structure
+    // Navigation structure - Product Development focused
     const navStructure = {
-        websites: {
-            label: 'Websites',
-            icon: '🌐',
-            items: [
-                { href: 'retail/index.html', label: 'Retail (Consumers)' },
-                { href: 'partner/index.html', label: 'Partner Portal' },
-                { href: 'commercial/index.html', label: 'Commercial (B2B)' }
-            ]
-        },
         dashboard: {
             label: 'Dashboard',
             icon: '📊',
             items: [
-                { href: 'index.html', label: 'Home' },
+                { href: 'product-dashboard.html', label: 'Product Dashboard' },
+                { href: 'index.html', label: 'Main Dashboard' },
                 { href: 'project-tracker.html', label: 'Project Tracker' }
             ]
         },
@@ -48,27 +41,14 @@
                 { href: 'china-suppliers.html', label: 'China Suppliers' }
             ]
         },
-        sales: {
-            label: 'Sales & Partners',
-            icon: '🤝',
-            items: [
-                { href: 'partner-program.html', label: 'Partner Program' },
-                { href: 'target-partners.html', label: 'Target Partners' },
-                { href: 'contractors.html', label: 'UAE Contractors' },
-                { href: 'b2b-targets.html', label: 'B2B Targets' },
-                { href: 'partner-crm.html', label: 'Partner CRM' },
-                { href: 'quote-calculator.html', label: 'Quote Calculator' }
-            ]
-        },
         market: {
-            label: 'Market & Competition',
+            label: 'Market Research',
             icon: '📈',
             items: [
                 { href: 'market-research.html', label: 'Market Research' },
                 { href: 'competitor-analysis.html', label: 'Competitor Analysis' },
                 { href: 'competitor-comparison.html', label: 'Competitor Comparison' },
-                { href: 'product-opportunities.html', label: 'Product Opportunities' },
-                { href: 'go-to-market.html', label: 'Go-To-Market' }
+                { href: 'product-opportunities.html', label: 'Product Opportunities' }
             ]
         },
         financial: {
@@ -310,9 +290,9 @@
         <button class="apex-mobile-toggle" onclick="toggleApexSidebar()">☰</button>
         <nav class="apex-sidebar">
             <div class="apex-sidebar-header">
-                <a href="${basePath}index.html" class="apex-sidebar-logo">
-                    <span class="apex-sidebar-logo-icon">A</span>
-                    Apex Enclosures
+                <a href="${basePath}product-dashboard.html" class="apex-sidebar-logo">
+                    <span class="apex-sidebar-logo-icon">P</span>
+                    Product Dev
                 </a>
             </div>
     `;
