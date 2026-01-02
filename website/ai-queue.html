@@ -2220,7 +2220,9 @@ Apex Enclosures
         }
 
         // ========== CLAUDE API INTEGRATION ==========
-        const BACKEND_URL = 'http://localhost:3001';
+        // Use relative URLs for Vercel Serverless Functions (same domain)
+        // Falls back to localhost for local development
+        const BACKEND_URL = window.location.hostname === 'localhost' ? 'http://localhost:3001' : '';
         let claudeConnected = false;
         let pendingDraft = null;
 

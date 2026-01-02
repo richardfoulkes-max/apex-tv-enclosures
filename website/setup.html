@@ -475,7 +475,8 @@ npm start</pre>
         }
 
         // Claude API Functions
-        const BACKEND_URL = 'http://localhost:3001';
+        // Use relative URLs for Vercel Serverless Functions (same domain)
+        const BACKEND_URL = window.location.hostname === 'localhost' ? 'http://localhost:3001' : '';
 
         function setClaudeStatus(state, text) {
             const dot = document.getElementById('claudeStatusDot');

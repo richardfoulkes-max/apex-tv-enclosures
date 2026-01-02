@@ -1,0 +1,8 @@
+{
+  "name": "apex-enclosures-website",
+  "version": "1.0.0",
+  "description": "Apex Enclosures website with AI Director serverless functions",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0"
+  }
+}
