@@ -158,6 +158,56 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
+### Session: 2026-01-02 (PM) - Orders Pipeline + Auto Follow-ups
+
+**Built complete order management system with automated follow-ups:**
+
+**Orders Pipeline (orders.html):**
+- 6-stage Kanban board: Quote → Deposit → Production → Shipped → Delivered → Lost
+- One-click to advance orders through pipeline
+- Pipeline value tracking (total AED in active orders)
+- Auto-timestamps when orders move stages
+
+**Auto Follow-up System (/api/auto-followups.js):**
+- 8 automatic reminder rules based on time in status:
+  - Quote: 3 days (check questions), 7 days (expiring), 14 days (expired)
+  - Deposit: 7 days (timeline update), 14 days (confirm production)
+  - Production: 21 days (check status)
+  - Shipped: 3/7 days (confirm delivery)
+- Runs automatically when Orders page loads
+
+**Lead Temperature Tags:**
+- Click badge to set: 🔥 Hot, 🌡️ Warm, ❄️ Cold, 💀 Dead
+- Hot leads counter in header for prioritization
+
+**Win/Loss Tracking:**
+- Mark as Lost modal with reasons: Too expensive, Competitor, No response, Project cancelled, Bad timing, DIY
+- Lost reason displayed on card in Lost column
+- Enables pattern analysis over time
+
+**Quote Calculator Integration:**
+- Updated to save quotes to Supabase
+- Auto-creates enquiry + order when submitted
+- Links quotes to AI Queue and Orders Pipeline
+
+**Competitive Analysis:**
+- Compared AI Director to Respond.io ($79-279/mo), WATI ($49-99/mo), Intercom, Zendesk
+- AI Director advantages: Lower cost (~$5-20/mo), better AI (Claude), learning system (RAG), order tracking
+- Competitor advantages: Plug-and-play channels, team features, scale
+
+**Files created:**
+- `website/orders.html` - Orders Pipeline UI
+- `website/api/orders.js` - Orders CRUD
+- `website/api/follow-ups.js` - Follow-ups CRUD
+- `website/api/auto-followups.js` - Auto-generate reminders
+
+**Database tables added:**
+- `orders` - Order pipeline tracking
+- `follow_ups` - Reminder system
+- Columns: `lead_temperature`, `lost_reason`, `lost_at`
+
+---
+
 ### Session: 2026-01-01 (Late) - AI Director Learning System v1.0
 
 **Built Phase 1 of AI Director - the learning AI system that handles customer inquiries:**
