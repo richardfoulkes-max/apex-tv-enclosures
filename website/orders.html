@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders Pipeline - Apex Enclosures</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f1f5f9;
+            color: #0f172a;
+            line-height: 1.5;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0d9488 0%, #0a7169 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 { font-size: 1.5rem; }
+        .header-stats {
+            display: flex;
+            gap: 2rem;
+        }
+        .stat { text-align: center; }
+        .stat-value { font-size: 1.5rem; font-weight: 700; }
+        .stat-label { font-size: 0.75rem; opacity: 0.8; }
+
+        .alerts-bar {
+            background: #fef3c7;
+            border-bottom: 1px solid #f59e0b;
+            padding: 0.75rem 2rem;
+            display: none;
+        }
+        .alerts-bar.has-alerts { display: flex; gap: 1rem; align-items: center; }
+        .alert-badge {
+            background: #dc2626;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .alert-text { color: #92400e; font-size: 0.9rem; }
+
+        .container {
+            padding: 1.5rem 2rem;
+        }
+
+        /* Pipeline */
+        .pipeline {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .pipeline-column {
+            background: #e2e8f0;
+            border-radius: 12px;
+            min-height: 400px;
+        }
+
+        .column-header {
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid;
+        }
+        .column-header .count {
+            background: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .col-quote .column-header { border-color: #64748b; }
+        .col-deposit .column-header { border-color: #f59e0b; }
+        .col-production .column-header { border-color: #3b82f6; }
+        .col-shipped .column-header { border-color: #8b5cf6; }
+        .col-delivered .column-header { border-color: #10b981; }
+
+        .column-cards {
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        /* Order Card */
+        .order-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .order-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 0.5rem;
+        }
+        .order-name {
+            font-weight: 600;
+            color: #0f172a;
+        }
+        .order-size {
+            background: #f1f5f9;
+            padding: 0.125rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .order-amount {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0d9488;
+            margin: 0.5rem 0;
+        }
+
+        .order-meta {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .order-followup {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: #fef3c7;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: #92400e;
+        }
+        .order-followup.overdue {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        .order-actions button {
+            flex: 1;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-advance {
+            background: #0d9488;
+            color: white;
+        }
+        .btn-advance:hover { background: #0a7169; }
+        .btn-followup {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+        .btn-followup:hover { background: #e2e8f0; }
+
+        /* Follow-ups Section */
+        .followups-section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .followups-section h2 {
+            font-size: 1rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .followup-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .followup-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: start;
+        }
+        .followup-card.overdue {
+            border-color: #dc2626;
+            background: #fef2f2;
+        }
+        .followup-card.today {
+            border-color: #f59e0b;
+            background: #fffbeb;
+        }
+
+        .followup-check {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #d1d5db;
+            border-radius: 50%;
+            cursor: pointer;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .followup-check:hover {
+            border-color: #10b981;
+            background: #d1fae5;
+        }
+
+        .followup-content { flex: 1; }
+        .followup-customer {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .followup-note {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        .followup-due {
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        .followup-due.overdue { color: #dc2626; font-weight: 600; }
+        .followup-due.today { color: #f59e0b; font-weight: 600; }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+
+        .modal {
+            background: white;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-header h3 { font-size: 1.25rem; }
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #64748b;
+        }
+
+        .modal-body { padding: 1.5rem; }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #0d9488;
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+        }
+
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+        .modal-footer button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .btn-cancel {
+            background: white;
+            border: 1px solid #d1d5db;
+            color: #374151;
+        }
+        .btn-save {
+            background: #0d9488;
+            border: none;
+            color: white;
+        }
+        .btn-save:hover { background: #0a7169; }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .quick-action {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .quick-action:hover {
+            border-color: #0d9488;
+            background: #f0fdfa;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+        }
+
+        .back-link {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .back-link:hover { color: white; }
+
+        @media (max-width: 1200px) {
+            .pipeline {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .pipeline {
+                grid-template-columns: 1fr;
+            }
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <a href="index.html" class="back-link">← Dashboard</a>
+            <h1>Orders Pipeline</h1>
+        </div>
+        <div class="header-stats">
+            <div class="stat">
+                <div class="stat-value" id="totalOrders">0</div>
+                <div class="stat-label">Active Orders</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="pipelineValue">AED 0</div>
+                <div class="stat-label">Pipeline Value</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="dueToday">0</div>
+                <div class="stat-label">Follow-ups Due</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alerts-bar" id="alertsBar">
+        <span class="alert-badge" id="overdueCount">0 Overdue</span>
+        <span class="alert-text">You have overdue follow-ups that need attention</span>
+    </div>
+
+    <div class="container">
+        <div class="quick-actions">
+            <button class="quick-action" onclick="showNewOrderModal()">+ New Order</button>
+            <button class="quick-action" onclick="showNewFollowupModal()">+ Add Follow-up</button>
+            <button class="quick-action" onclick="loadData()">↻ Refresh</button>
+        </div>
+
+        <!-- Follow-ups Section -->
+        <div class="followups-section" id="followupsSection" style="display: none;">
+            <h2>Follow-ups Due</h2>
+            <div class="followup-list" id="followupList"></div>
+        </div>
+
+        <!-- Pipeline -->
+        <div class="pipeline">
+            <div class="pipeline-column col-quote">
+                <div class="column-header">
+                    <span>Quote</span>
+                    <span class="count" id="countQuote">0</span>
+                </div>
+                <div class="column-cards" id="colQuote"></div>
+            </div>
+
+            <div class="pipeline-column col-deposit">
+                <div class="column-header">
+                    <span>Deposit Paid</span>
+                    <span class="count" id="countDeposit">0</span>
+                </div>
+                <div class="column-cards" id="colDeposit"></div>
+            </div>
+
+            <div class="pipeline-column col-production">
+                <div class="column-header">
+                    <span>In Production</span>
+                    <span class="count" id="countProduction">0</span>
+                </div>
+                <div class="column-cards" id="colProduction"></div>
+            </div>
+
+            <div class="pipeline-column col-shipped">
+                <div class="column-header">
+                    <span>Shipped</span>
+                    <span class="count" id="countShipped">0</span>
+                </div>
+                <div class="column-cards" id="colShipped"></div>
+            </div>
+
+            <div class="pipeline-column col-delivered">
+                <div class="column-header">
+                    <span>Delivered</span>
+                    <span class="count" id="countDelivered">0</span>
+                </div>
+                <div class="column-cards" id="colDelivered"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Order Modal -->
+    <div class="modal-overlay" id="newOrderModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>New Order</h3>
+                <button class="modal-close" onclick="closeModal('newOrderModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Customer Name</label>
+                    <input type="text" class="form-input" id="orderCustomerName" placeholder="John Smith">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" id="orderEmail" placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" class="form-input" id="orderPhone" placeholder="+971 50 123 4567">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Enclosure Size</label>
+                    <select class="form-select" id="orderSize">
+                        <option value="55">55" - AED 7,000</option>
+                        <option value="65">65" - AED 8,500</option>
+                        <option value="75" selected>75" - AED 10,500</option>
+                        <option value="85">85" - AED 14,000</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">
+                        <input type="checkbox" id="orderIncludeTv"> Include TV Bundle
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">
+                        <input type="checkbox" id="orderIncludeInstall"> Include Installation
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Total (AED)</label>
+                    <input type="number" class="form-input" id="orderTotalAed" placeholder="10500">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Notes</label>
+                    <textarea class="form-textarea" id="orderNotes" rows="3" placeholder="Any notes about this order..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal('newOrderModal')">Cancel</button>
+                <button class="btn-save" onclick="createOrder()">Create Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Follow-up Modal -->
+    <div class="modal-overlay" id="newFollowupModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Add Follow-up</h3>
+                <button class="modal-close" onclick="closeModal('newFollowupModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Link to Order</label>
+                    <select class="form-select" id="followupOrderId">
+                        <option value="">Select an order...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Due Date</label>
+                    <input type="date" class="form-input" id="followupDueDate">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Type</label>
+                    <select class="form-select" id="followupType">
+                        <option value="call">Call</option>
+                        <option value="email">Email</option>
+                        <option value="whatsapp">WhatsApp</option>
+                        <option value="check_in">Check In</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Note</label>
+                    <textarea class="form-textarea" id="followupNote" rows="3" placeholder="What needs to be done..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal('newFollowupModal')">Cancel</button>
+                <button class="btn-save" onclick="createFollowup()">Add Follow-up</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = window.location.hostname === 'localhost'
+            ? 'http://localhost:3000/api'
+            : '/api';
+
+        let orders = [];
+        let followUps = [];
+
+        // Load data
+        async function loadData() {
+            try {
+                // Load orders
+                const ordersRes = await fetch(`${API_BASE}/orders`);
+                const ordersData = await ordersRes.json();
+                orders = ordersData.orders || [];
+
+                // Load follow-ups
+                const followupsRes = await fetch(`${API_BASE}/follow-ups`);
+                const followupsData = await followupsRes.json();
+                followUps = followupsData.followUps || [];
+
+                renderPipeline();
+                renderFollowups(followupsData.categorized);
+                updateStats(followupsData.counts);
+                populateOrderSelect();
+
+            } catch (err) {
+                console.error('Failed to load data:', err);
+            }
+        }
+
+        // Render pipeline
+        function renderPipeline() {
+            const columns = {
+                quote: document.getElementById('colQuote'),
+                deposit: document.getElementById('colDeposit'),
+                production: document.getElementById('colProduction'),
+                shipped: document.getElementById('colShipped'),
+                delivered: document.getElementById('colDelivered')
+            };
+
+            // Clear columns
+            Object.values(columns).forEach(col => col.innerHTML = '');
+
+            // Count by status
+            const counts = { quote: 0, deposit: 0, production: 0, shipped: 0, delivered: 0 };
+
+            orders.forEach(order => {
+                const status = order.status || 'quote';
+                counts[status]++;
+
+                const card = createOrderCard(order);
+                if (columns[status]) {
+                    columns[status].appendChild(card);
+                }
+            });
+
+            // Update counts
+            document.getElementById('countQuote').textContent = counts.quote;
+            document.getElementById('countDeposit').textContent = counts.deposit;
+            document.getElementById('countProduction').textContent = counts.production;
+            document.getElementById('countShipped').textContent = counts.shipped;
+            document.getElementById('countDelivered').textContent = counts.delivered;
+        }
+
+        // Create order card
+        function createOrderCard(order) {
+            const card = document.createElement('div');
+            card.className = 'order-card';
+            card.onclick = () => showOrderDetail(order);
+
+            const nextStatus = getNextStatus(order.status);
+            const orderFollowups = followUps.filter(f => f.order_id === order.id && !f.completed_at);
+            const nextFollowup = orderFollowups[0];
+
+            let followupHtml = '';
+            if (nextFollowup) {
+                const isOverdue = nextFollowup.due_date < new Date().toISOString().split('T')[0];
+                followupHtml = `
+                    <div class="order-followup ${isOverdue ? 'overdue' : ''}">
+                        ${isOverdue ? '⚠️ Overdue: ' : '📅 '}${nextFollowup.note || nextFollowup.type}
+                    </div>
+                `;
+            }
+
+            card.innerHTML = `
+                <div class="order-header">
+                    <span class="order-name">${order.customer_name || 'Unknown'}</span>
+                    <span class="order-size">${order.size || 75}"</span>
+                </div>
+                <div class="order-amount">AED ${(order.total_aed || 0).toLocaleString()}</div>
+                <div class="order-meta">
+                    ${order.include_tv ? '📺 TV Bundle' : ''}
+                    ${order.include_install ? '🔧 Install' : ''}
+                </div>
+                ${followupHtml}
+                <div class="order-actions" onclick="event.stopPropagation()">
+                    ${nextStatus ? `<button class="btn-advance" onclick="advanceOrder('${order.id}', '${nextStatus}')">→ ${capitalize(nextStatus)}</button>` : ''}
+                    <button class="btn-followup" onclick="quickFollowup('${order.id}')">+ Follow-up</button>
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Get next status in pipeline
+        function getNextStatus(current) {
+            const pipeline = ['quote', 'deposit', 'production', 'shipped', 'delivered'];
+            const index = pipeline.indexOf(current || 'quote');
+            return index < pipeline.length - 1 ? pipeline[index + 1] : null;
+        }
+
+        // Advance order to next status
+        async function advanceOrder(orderId, newStatus) {
+            try {
+                await fetch(`${API_BASE}/orders`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id: orderId, status: newStatus })
+                });
+                loadData();
+            } catch (err) {
+                console.error('Failed to advance order:', err);
+            }
+        }
+
+        // Render follow-ups
+        function renderFollowups(categorized) {
+            const section = document.getElementById('followupsSection');
+            const list = document.getElementById('followupList');
+
+            const dueItems = [...(categorized?.overdue || []), ...(categorized?.today || []), ...(categorized?.upcoming || []).slice(0, 5)];
+
+            if (dueItems.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+
+            section.style.display = 'block';
+            list.innerHTML = '';
+
+            dueItems.forEach(f => {
+                const today = new Date().toISOString().split('T')[0];
+                const isOverdue = f.due_date < today;
+                const isToday = f.due_date === today;
+
+                const card = document.createElement('div');
+                card.className = `followup-card ${isOverdue ? 'overdue' : ''} ${isToday ? 'today' : ''}`;
+
+                const customerName = f.orders?.customer_name || f.enquiries?.customer_name || 'Unknown';
+
+                card.innerHTML = `
+                    <div class="followup-check" onclick="completeFollowup('${f.id}')">✓</div>
+                    <div class="followup-content">
+                        <div class="followup-customer">${customerName}</div>
+                        <div class="followup-note">${f.note || f.type}</div>
+                        <div class="followup-due ${isOverdue ? 'overdue' : ''} ${isToday ? 'today' : ''}">
+                            ${isOverdue ? '⚠️ Overdue: ' : isToday ? '📅 Today: ' : ''}${formatDate(f.due_date)}
+                        </div>
+                    </div>
+                `;
+
+                list.appendChild(card);
+            });
+        }
+
+        // Complete follow-up
+        async function completeFollowup(id) {
+            try {
+                await fetch(`${API_BASE}/follow-ups`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id, completed: true })
+                });
+                loadData();
+            } catch (err) {
+                console.error('Failed to complete follow-up:', err);
+            }
+        }
+
+        // Update stats
+        function updateStats(counts) {
+            const activeOrders = orders.filter(o => o.status !== 'delivered' && o.status !== 'cancelled').length;
+            const pipelineValue = orders
+                .filter(o => o.status !== 'delivered' && o.status !== 'cancelled')
+                .reduce((sum, o) => sum + (o.total_aed || 0), 0);
+            const dueToday = (counts?.overdue || 0) + (counts?.today || 0);
+
+            document.getElementById('totalOrders').textContent = activeOrders;
+            document.getElementById('pipelineValue').textContent = `AED ${pipelineValue.toLocaleString()}`;
+            document.getElementById('dueToday').textContent = dueToday;
+
+            // Alerts bar
+            const alertsBar = document.getElementById('alertsBar');
+            if (counts?.overdue > 0) {
+                alertsBar.classList.add('has-alerts');
+                document.getElementById('overdueCount').textContent = `${counts.overdue} Overdue`;
+            } else {
+                alertsBar.classList.remove('has-alerts');
+            }
+        }
+
+        // Populate order select for follow-up modal
+        function populateOrderSelect() {
+            const select = document.getElementById('followupOrderId');
+            select.innerHTML = '<option value="">Select an order...</option>';
+            orders.forEach(o => {
+                const option = document.createElement('option');
+                option.value = o.id;
+                option.textContent = `${o.customer_name} - ${o.size}" (${o.status})`;
+                select.appendChild(option);
+            });
+        }
+
+        // Modal functions
+        function showNewOrderModal() {
+            document.getElementById('newOrderModal').classList.add('active');
+        }
+
+        function showNewFollowupModal(orderId = null) {
+            if (orderId) {
+                document.getElementById('followupOrderId').value = orderId;
+            }
+            // Set default date to tomorrow
+            const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+            document.getElementById('followupDueDate').value = tomorrow;
+            document.getElementById('newFollowupModal').classList.add('active');
+        }
+
+        function quickFollowup(orderId) {
+            showNewFollowupModal(orderId);
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        // Create order
+        async function createOrder() {
+            const order = {
+                customer_name: document.getElementById('orderCustomerName').value,
+                customer_email: document.getElementById('orderEmail').value,
+                customer_phone: document.getElementById('orderPhone').value,
+                size: parseInt(document.getElementById('orderSize').value),
+                include_tv: document.getElementById('orderIncludeTv').checked,
+                include_install: document.getElementById('orderIncludeInstall').checked,
+                total_aed: parseInt(document.getElementById('orderTotalAed').value) || 0,
+                total_usd: Math.round((parseInt(document.getElementById('orderTotalAed').value) || 0) / 3.67),
+                notes: document.getElementById('orderNotes').value
+            };
+
+            if (!order.customer_name) {
+                alert('Please enter customer name');
+                return;
+            }
+
+            try {
+                await fetch(`${API_BASE}/orders`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(order)
+                });
+                closeModal('newOrderModal');
+                loadData();
+            } catch (err) {
+                console.error('Failed to create order:', err);
+                alert('Failed to create order');
+            }
+        }
+
+        // Create follow-up
+        async function createFollowup() {
+            const followup = {
+                order_id: document.getElementById('followupOrderId').value || null,
+                due_date: document.getElementById('followupDueDate').value,
+                type: document.getElementById('followupType').value,
+                note: document.getElementById('followupNote').value
+            };
+
+            if (!followup.due_date) {
+                alert('Please select a due date');
+                return;
+            }
+
+            if (!followup.order_id) {
+                alert('Please select an order');
+                return;
+            }
+
+            try {
+                await fetch(`${API_BASE}/follow-ups`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(followup)
+                });
+                closeModal('newFollowupModal');
+                loadData();
+            } catch (err) {
+                console.error('Failed to create follow-up:', err);
+                alert('Failed to create follow-up');
+            }
+        }
+
+        // Show order detail (placeholder)
+        function showOrderDetail(order) {
+            alert(`Order: ${order.customer_name}\nStatus: ${order.status}\nTotal: AED ${order.total_aed?.toLocaleString()}`);
+        }
+
+        // Helpers
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function formatDate(dateStr) {
+            return new Date(dateStr).toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'short'
+            });
+        }
+
+        // Initialize
+        loadData();
+    </script>
+<script src="nav.js"></script>
+</body>
+</html>

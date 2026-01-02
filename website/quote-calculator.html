@@ -826,11 +826,12 @@
         }
 
         // Submit quote request
-        function submitQuote() {
+        async function submitQuote() {
             const firstName = document.getElementById('firstName').value;
             const lastName = document.getElementById('lastName').value;
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
+            const notes = document.getElementById('notes').value;
 
             if (!firstName || !lastName || !email || !phone) {
                 alert('Please fill in all required fields');
@@ -842,33 +843,78 @@
             if (quote.includeTv) total += quote.tvPrice;
             if (quote.includeInstall) total += quote.installPrice;
             total += quote.shippingPrice;
+            const totalAED = Math.round(total * 3.67);
 
-            // Create email body
-            const subject = `Quote Request - ${quote.size}" Outdoor TV Enclosure`;
-            const body = `
-New Quote Request
-
-Customer: ${firstName} ${lastName}
-Email: ${email}
-Phone: ${phone}
-Region: ${quote.region.toUpperCase()}
+            // Build quote message
+            const message = `Quote Request - ${quote.size}" Outdoor TV Enclosure
 
 Configuration:
 - ${quote.size}" Enclosure: $${quote.enclosurePrice}
 ${quote.includeTv ? `- Samsung QLED TV: $${quote.tvPrice}` : '- No TV (enclosure only)'}
 ${quote.includeInstall ? '- Professional Installation: $350' : '- Self Install'}
-${quote.shippingPrice > 0 ? `- Shipping: $${quote.shippingPrice}` : ''}
+${quote.shippingPrice > 0 ? `- Shipping to ${quote.region.toUpperCase()}: $${quote.shippingPrice}` : '- UAE (Free Delivery)'}
 
-TOTAL: $${total.toLocaleString()} (AED ${Math.round(total * 3.67).toLocaleString()})
+TOTAL: $${total.toLocaleString()} (AED ${totalAED.toLocaleString()})
 Deposit Required: $${Math.round(total / 2).toLocaleString()}
 
-Notes: ${document.getElementById('notes').value || 'None'}
-            `.trim();
+Notes: ${notes || 'None'}`;
 
-            // Open email client
-            window.location.href = `mailto:apexenclosures@icloud.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            // Save to Supabase via API
+            const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:3000/api' : '/api';
 
-            alert('Quote request submitted! Check your email to send.');
+            try {
+                // Create enquiry with quote details
+                const enquiryRes = await fetch(`${API_BASE}/enquiries`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        customerName: `${firstName} ${lastName}`,
+                        customerEmail: email,
+                        subject: `Quote Request - ${quote.size}" Enclosure`,
+                        message: message
+                    })
+                });
+
+                const enquiryData = await enquiryRes.json();
+
+                // Create order linked to enquiry
+                const orderRes = await fetch(`${API_BASE}/orders`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        enquiry_id: enquiryData.enquiry?.id || null,
+                        customer_name: `${firstName} ${lastName}`,
+                        customer_email: email,
+                        customer_phone: phone,
+                        size: quote.size,
+                        include_tv: quote.includeTv,
+                        include_install: quote.includeInstall,
+                        region: quote.region,
+                        total_usd: total,
+                        total_aed: totalAED,
+                        notes: notes
+                    })
+                });
+
+                const orderData = await orderRes.json();
+
+                if (orderData.success) {
+                    alert(`Quote saved! Order #${orderData.order.id.slice(0,8)} created.\n\nWe'll contact you shortly at ${email}.`);
+
+                    // Optionally also send email notification
+                    const subject = `Quote Request - ${quote.size}" Outdoor TV Enclosure`;
+                    window.location.href = `mailto:apexenclosures@icloud.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message + '\n\nPhone: ' + phone)}`;
+                } else {
+                    throw new Error('Failed to save');
+                }
+
+            } catch (err) {
+                console.error('Failed to save quote:', err);
+                // Fallback to email only
+                const subject = `Quote Request - ${quote.size}" Outdoor TV Enclosure`;
+                window.location.href = `mailto:apexenclosures@icloud.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message + '\n\nPhone: ' + phone)}`;
+                alert('Quote request submitted via email.');
+            }
         }
 
         // Download PDF quote
