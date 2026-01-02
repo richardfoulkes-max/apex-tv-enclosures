@@ -21,7 +21,11 @@ export default async function handler(req, res) {
     const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
 
     if (!supabaseUrl || !supabaseKey) {
-        return res.status(500).json({ error: 'Server configuration error' });
+        return res.status(500).json({
+            error: 'Server configuration error',
+            hasUrl: !!supabaseUrl,
+            hasKey: !!supabaseKey
+        });
     }
 
     const supabase = createClient(supabaseUrl, supabaseKey);
@@ -39,7 +43,7 @@ export default async function handler(req, res) {
 
             if (error) {
                 console.error('Fetch error:', error);
-                return res.status(500).json({ error: 'Failed to fetch enquiries' });
+                return res.status(500).json({ error: 'Failed to fetch enquiries', details: error.message, code: error.code });
             }
 
             res.status(200).json({ enquiries: data || [] });
