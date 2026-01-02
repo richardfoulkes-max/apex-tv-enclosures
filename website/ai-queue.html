@@ -1069,39 +1069,40 @@
             setupFilters();
         });
 
-        // Load pending queue
+        // Load pending queue from API
         async function loadPendingQueue() {
-            if (useSupabase) {
-                try {
-                    const { data, error } = await supabaseClient
-                        .from('ai_interactions')
-                        .select('*')
-                        .eq('action', 'pending')
-                        .order('created_at', { ascending: false });
-
-                    if (!error && data) {
-                        // Transform Supabase data to local format
-                        pendingQueue = data.map(row => ({
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/enquiries`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.enquiries && data.enquiries.length > 0) {
+                        // Transform API data to queue format
+                        pendingQueue = data.enquiries.map(row => ({
                             id: row.id,
-                            type: row.interaction_type,
+                            type: 'lead_response',
                             timestamp: row.created_at,
-                            product: row.product,
-                            market: row.market,
-                            language: row.language,
-                            channel: row.channel,
-                            confidence: row.confidence_score,
-                            customer: row.patterns_detected?.customer || {},
-                            aiDraft: row.ai_draft,
-                            aiDraftEN: row.ai_draft_translated
+                            product: 'tv',
+                            market: 'uae',
+                            language: 'english',
+                            channel: row.channel || 'email',
+                            confidence: row.ai_confidence || 50,
+                            customer: {
+                                name: row.customer_name || 'Unknown',
+                                email: row.customer_contact,
+                                message: row.message
+                            },
+                            subject: row.subject,
+                            aiDraft: row.ai_draft
                         }));
+                        console.log(`Loaded ${pendingQueue.length} enquiries from API`);
                         return;
                     }
-                } catch (e) {
-                    console.warn('Supabase load failed, falling back to localStorage');
                 }
+            } catch (e) {
+                console.warn('API load failed:', e);
             }
 
-            // Fallback to localStorage
+            // Fallback to localStorage demo data
             pendingQueue = JSON.parse(localStorage.getItem('apex_ai_pending') || '[]');
             if (pendingQueue.length === 0) {
                 addDemoItems();
@@ -1939,8 +1940,27 @@ Apex Enclosures
             const item = pendingQueue.find(i => i.id === id);
             if (!item) return;
 
-            // Save to Supabase
-            await saveInteractionToSupabase(item, 'approved', item.aiDraft, null);
+            // Send reply via API
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/send-reply`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        enquiryId: id,
+                        response: item.aiDraft
+                    })
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    showToast(error.error || 'Failed to send reply', 'error');
+                    return;
+                }
+            } catch (e) {
+                console.error('Send error:', e);
+                showToast('Failed to send reply', 'error');
+                return;
+            }
 
             // Record learning (localStorage backup)
             learningDB.interactions.push({
@@ -1954,7 +1974,6 @@ Apex Enclosures
 
             // Remove from queue
             pendingQueue = pendingQueue.filter(i => i.id !== id);
-            savePendingQueue();
 
             // Animate removal
             const element = document.getElementById(`item-${id}`);
@@ -1965,7 +1984,7 @@ Apex Enclosures
                 updateStats();
             }, 300);
 
-            showToast('Approved and sent! AI is learning from this.', 'success');
+            showToast('Approved and sent!', 'success');
         }
 
         // Edit item
