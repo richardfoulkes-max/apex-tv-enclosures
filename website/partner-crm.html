@@ -1214,6 +1214,7 @@
                         </div>
                     </div>
                     <div class="detail-actions">
+                        <button class="btn btn-primary btn-small" onclick="scheduleMeeting(${p.id})">📅 Schedule Meeting</button>
                         <button class="btn btn-outline btn-small" onclick="editPartnerField('status')">Update Status</button>
                         <button class="btn btn-danger btn-small" onclick="deletePartner(${p.id})">Delete</button>
                     </div>
@@ -1494,6 +1495,30 @@
             renderDetail();
         }
 
+        function scheduleMeeting(id) {
+            const p = partners.find(p => p.id === id);
+            if (!p) return;
+
+            // Get primary contact email
+            const primaryContact = p.contacts?.find(c => c.isPrimary) || p.contacts?.[0];
+            const email = primaryContact?.email || '';
+            const contactName = primaryContact?.name || '';
+
+            // Build Google Calendar URL
+            const title = encodeURIComponent(`Meeting: ${p.companyName}`);
+            const details = encodeURIComponent(`Meeting with ${p.companyName}${contactName ? ' (' + contactName + ')' : ''}\n\nNotes:\n${p.notes || ''}`);
+            const location = encodeURIComponent(p.address || '');
+
+            let calUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}`;
+            if (location) calUrl += `&location=${location}`;
+            if (email) calUrl += `&add=${encodeURIComponent(email)}`;
+
+            window.open(calUrl, '_blank');
+
+            // Log activity
+            addActivityDirect('meeting', `Scheduled meeting via calendar`);
+        }
+
         function deletePartner(id) {
             if (!confirm('Delete this partner? This cannot be undone.')) return;
             partners = partners.filter(p => p.id !== id);
@@ -1508,6 +1533,25 @@
             p.notes = document.getElementById('partnerNotes').value;
             saveData();
             savePartnerToSupabase(p);
+        }
+
+        function addActivityDirect(type, description) {
+            const p = partners.find(p => p.id === selectedPartnerId);
+            if (!p) return;
+
+            const activity = {
+                id: Date.now(),
+                type: type,
+                description: description,
+                timestamp: new Date().toISOString()
+            };
+
+            p.activities = p.activities || [];
+            p.activities.push(activity);
+            p.lastContact = activity.timestamp;
+            saveData();
+            savePartnerToSupabase(p);
+            renderDetail();
         }
 
         function addActivity() {
