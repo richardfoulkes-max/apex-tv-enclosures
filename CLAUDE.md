@@ -158,13 +158,12 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
-### Session: 2026-01-03 (Late Night) - CRM Filter Dropdown + Calendar Integration
+### Session: 2026-01-03 (Late Night) - CRM + Calendar + Business Planning
 
 **CRM contact type filter (partner-crm.html):**
 - Removed overflowing tabs (couldn't see Retail on narrow screens)
-- Added dropdown filter instead: All Contacts / Manufacturing / Partners / Commercial / Retail
-- Changed categories from contractor → manufacturing
-- Updated all planning pages (contractors, target-partners, b2b-targets) with new categories
+- Added dropdown filter: All Contacts / Manufacturing / Partners / Commercial / Retail
+- Updated planning pages (contractors, target-partners, b2b-targets) with new categories
 
 **Supabase CRM migration:**
 - Created migrations/migration-crm.sql for partners + partner_activities tables
@@ -173,20 +172,24 @@ roundtable-ai/              ← Engineering validation briefs
 **Header standardization:**
 - Fixed inconsistent header sizes/colors across Sales & Ops pages
 - Standardized: padding 1.25rem 2rem, h1 1.5rem, colors #6366f1/#4f46e5
-- Removed redundant header-nav from orders.html and ai-insights.html
 
 **Schedule Meeting button (CRM):**
-- Added "Schedule Meeting" button to partner detail view
-- Opens Google Calendar with partner details pre-filled (name, email, address, notes)
-- Logs meeting activity automatically
+- Added button to partner detail view - opens Google Calendar pre-filled
 - **Issue:** Button not visible for user - needs debugging
 
-**Pending:**
-- Debug Schedule Meeting button visibility
-- Set up business domain + Google Workspace when ready
-- Add booking links to website pages
+**Business planning discussions:**
+- 75" enclosure profit: ~$1,500-1,800 net per unit (55-65% margin)
+- Liability protection: Product liability insurance, LLC formation, manufacturer indemnification, warranty terms, QC docs
+- Google Workspace for business email/calendar - deferred for later
 
-**Commits:** 9135b0a, 88fc856, 4419b23, 576c24f
+**Side project - Model Direct:**
+- Created MVP concept for transparent modeling booking marketplace
+- Solves Anna's problem: hidden agent fees (agents take 60% disguised as 25%)
+- Features: Transparent pricing, escrow payments, cancellation protection, AI matching
+- UK competitor analysis: Traditional agencies, Starnow, Mandy, Backstage, etc.
+- Published: https://richardfoulkes-max.github.io/model-marketplace/
+
+**Commits:** 9135b0a, 88fc856, 4419b23, 576c24f, 85c73d4
 
 ---
 
