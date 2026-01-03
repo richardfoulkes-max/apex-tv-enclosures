@@ -158,6 +158,38 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
+### Session: 2026-01-03 - Navigation System Reorganization
+
+**Split navigation into Sales vs Product areas:**
+
+**Created sales-nav.js (horizontal nav bar for Sales pages):**
+- Grouped navigation: Core (Dashboard/Queue/Orders/Insights), Partners (CRM/Program/Targets/Contractors/B2B), Tools (Quotes/BD Plan/GTM/Settings)
+- Apex logo links back to main dashboard
+- Active state highlighting for current page
+- 14 pages updated to use sales-nav.js
+
+**Updated nav.js (sidebar for Product pages only):**
+- Removed Sales & Partners section (now in sales-nav.js)
+- Dashboard section links to product-dashboard.html
+- Sidebar header now shows "Product Dev" with P icon
+- Added product-dashboard.html to use this nav
+
+**Customer-facing pages cleaned up:**
+- Removed nav.js from retail/partner/commercial pages
+- These shouldn't show internal navigation to customers
+
+**Pages using sales-nav.js:**
+- ai-dashboard, ai-queue, orders, ai-insights, partner-crm
+- quote-calculator, partner-program, target-partners
+- contractors, b2b-targets, bd-plan, go-to-market, setup
+
+**Pages using nav.js (Product sidebar):**
+- product-dashboard, specification, designs, bom-detailed
+- engineering-analysis, control-logic, wiring-diagram
+- testing-plan, qc-checklist, manufacturer-rfq, etc.
+
+---
+
 ### Session: 2026-01-02 (Evening) - Lead Capture + Dashboard Reorganization
 
 **Dashboard Reorganization:**
