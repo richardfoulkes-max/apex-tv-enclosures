@@ -44,17 +44,6 @@
             height: 60px;
         }
         .header h1 { font-size: 1.25rem; }
-        .header-nav { display: flex; gap: 0.5rem; margin-left: 1.5rem; }
-        .header-nav a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            padding: 0.4rem 0.75rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            transition: all 0.2s;
-        }
-        .header-nav a:hover { background: rgba(255,255,255,0.15); color: white; }
-        .header-nav a.active { background: rgba(255,255,255,0.25); color: white; }
         .header-stats { display: flex; gap: 1.5rem; }
         .stat { text-align: center; }
         .stat-value { font-size: 1.25rem; font-weight: 700; }
@@ -436,16 +425,7 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <div style="display:flex;align-items:center;">
-            <h1>Apex CRM</h1>
-            <nav class="header-nav">
-                <a href="ai-dashboard.html">Dashboard</a>
-                <a href="ai-queue.html">Queue</a>
-                <a href="orders.html">Orders</a>
-                <a href="ai-insights.html">Insights</a>
-                <a href="partner-crm.html" class="active">CRM</a>
-            </nav>
-        </div>
+        <h1>Apex CRM</h1>
         <div class="header-stats">
             <div class="stat"><div class="stat-value" id="totalPartners">0</div><div class="stat-label">Total</div></div>
             <div class="stat"><div class="stat-value" id="activeDeals">0</div><div class="stat-label">Active</div></div>
