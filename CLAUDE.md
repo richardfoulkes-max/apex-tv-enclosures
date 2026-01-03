@@ -158,6 +158,33 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
+### Session: 2026-01-03 (PM) - DigiScreens Dispute Analysis
+
+**Analyzed Apollo Desert Series unit vs marketing claims:**
+
+**Fan Count Discrepancy:**
+- Brochure claims: 3 axial + 2 cross-flow = 5 fans
+- Actual unit: 5 axial + 4 cross-flow = 9 fans
+- Discrepancy doesn't help mis-selling case (user got MORE fans)
+
+**Fundamental Design Flaw Identified:**
+- Apollo uses thermostat control (on/off at 30°C), not PWM
+- In Dubai conditions (regularly >30°C even in shade/December), fans run at 100% constantly
+- Even "quieter fans" won't solve the problem - constant operation defeats purpose
+- Apex design uses PWM = graduated speed control = fans idle quietly when possible
+
+**Dispute Response:**
+- Drafted response to Leonie's offer (fly David to Dubai with quieter fans)
+- Politely declined offer, explained fundamental design issue
+- Requested full refund including installation costs
+- Saved to: `/03-Projects/Apex TV Enclosures/DigiScreens Dispute/response_2026-01-03.md`
+
+**Dashboard Update:**
+- Added DigiScreens dispute to projects-home.html Personal Projects section
+- Updated project counts (Total: 11, Personal: 3)
+
+---
+
 ### Session: 2026-01-03 - Navigation System Reorganization
 
 **Split navigation into Sales vs Product areas:**

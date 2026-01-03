@@ -14,19 +14,17 @@
             background: #f8fafc;
         }
 
-        /* Document Navigation */
-        .doc-nav {
-            background: linear-gradient(135deg, #0d9488 0%, #0a7169 100%);
-            padding: 1rem 2rem;
-            border-bottom: 1px solid #e2e8f0;
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            padding: 1.25rem 2rem;
         }
-        .doc-nav h3 {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 0.75rem;
-        }
+        .page-header h1 { color: white; font-size: 1.5rem; margin: 0; }
+        .page-header .subtitle { color: rgba(255,255,255,0.85); margin: 0.25rem 0 0 0; font-size: 0.9rem; }
+
+        /* Hidden old nav */
+        .doc-nav { display: none; }
         .doc-nav-grid {
             display: flex;
             gap: 0.75rem;
@@ -44,21 +42,21 @@
             transition: all 0.2s ease;
         }
         .doc-nav .doc-card:hover { background: rgba(255,255,255,0.2); }
-        .doc-nav .doc-card.active { background: white; color: #0d9488; }
+        .doc-nav .doc-card.active { background: white; color: #6366f1; }
 
         .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
 
-        h1 { color: #0d9488; font-size: 28pt; margin-bottom: 0.5rem; }
+        h1 { color: #6366f1; font-size: 28pt; margin-bottom: 0.5rem; }
         .subtitle { color: #64748b; font-size: 14pt; margin-bottom: 2rem; }
 
         h2 {
-            color: #0d9488;
+            color: #6366f1;
             font-size: 18pt;
-            border-bottom: 3px solid #0d9488;
+            border-bottom: 3px solid #6366f1;
             padding-bottom: 0.5rem;
             margin: 2.5rem 0 1.5rem;
         }
-        h2.commercial { border-color: #059669; color: #059669; }
+        h2.commercial { border-color: #6366f1; color: #6366f1; }
         h2.residential { border-color: #7c3aed; color: #7c3aed; }
         h2.channels { border-color: #d97706; color: #d97706; }
         h2.marketing { border-color: #dc2626; color: #dc2626; }
@@ -86,14 +84,14 @@
         .summary-card .number {
             font-size: 32pt;
             font-weight: 700;
-            color: #0d9488;
+            color: #6366f1;
         }
         .summary-card .label {
             font-size: 10pt;
             color: #64748b;
             margin-top: 0.25rem;
         }
-        .summary-card.green .number { color: #059669; }
+        .summary-card.green .number { color: #6366f1; }
         .summary-card.purple .number { color: #7c3aed; }
         .summary-card.orange .number { color: #d97706; }
 
@@ -117,12 +115,12 @@
             justify-content: space-between;
             align-items: center;
         }
-        .segment-header.hotels { background: linear-gradient(135deg, #059669, #047857); }
+        .segment-header.hotels { background: linear-gradient(135deg, #6366f1, #4f46e5); }
         .segment-header.restaurants { background: linear-gradient(135deg, #0284c7, #0369a1); }
         .segment-header.sports { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
         .segment-header.events { background: linear-gradient(135deg, #d97706, #b45309); }
         .segment-header.villas { background: linear-gradient(135deg, #7c3aed, #5b21b6); }
-        .segment-header.developers { background: linear-gradient(135deg, #0d9488, #0a7169); }
+        .segment-header.developers { background: linear-gradient(135deg, #6366f1, #4f46e5); }
         .segment-header h4 { font-size: 14pt; }
         .segment-header .size { font-size: 11pt; opacity: 0.9; }
         .segment-body { padding: 1.5rem; }
@@ -141,9 +139,9 @@
             border-radius: 12px;
             padding: 1.5rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            border-left: 4px solid #0d9488;
+            border-left: 4px solid #6366f1;
         }
-        .channel-card.priority-1 { border-color: #059669; }
+        .channel-card.priority-1 { border-color: #6366f1; }
         .channel-card.priority-2 { border-color: #0284c7; }
         .channel-card.priority-3 { border-color: #7c3aed; }
         .channel-card h4 {
@@ -160,7 +158,7 @@
             display: inline-block;
             margin-bottom: 0.75rem;
         }
-        .channel-card .type.direct { background: #059669; }
+        .channel-card .type.direct { background: #6366f1; }
         .channel-card .type.partner { background: #0284c7; }
         .channel-card .type.referral { background: #7c3aed; }
         .channel-card p { font-size: 10pt; color: #64748b; margin-bottom: 0.75rem; }
@@ -189,7 +187,7 @@
             border-bottom: 1px solid #e2e8f0;
         }
         .action-table th {
-            background: #0d9488;
+            background: #6366f1;
             color: white;
             font-weight: 600;
         }
@@ -207,7 +205,7 @@
 
         /* Stats Box */
         .stats-box {
-            background: linear-gradient(135deg, #0d9488 0%, #0a7169 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
             color: white;
             border-radius: 12px;
             padding: 2rem;
@@ -268,7 +266,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
         .contact-list h4 {
-            color: #0d9488;
+            color: #6366f1;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
             border-bottom: 2px solid #e2e8f0;
@@ -288,7 +286,7 @@
         }
         .contact-action {
             font-size: 9pt;
-            color: #0d9488;
+            color: #6366f1;
             text-decoration: none;
         }
 
@@ -336,9 +334,11 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="page-header">
         <h1>Go-to-Market Strategy</h1>
         <p class="subtitle">UAE & Saudi Arabia - Commercial and Residential Demand Analysis</p>
+    </div>
+    <div class="container">
 
         <!-- Executive Summary -->
         <div class="summary-grid">
@@ -689,7 +689,7 @@
         <!-- MARKETING PLAN -->
         <h2 class="marketing">Marketing Plan</h2>
 
-        <div class="highlight-box" style="background: #dcfce7; border-color: #059669;">
+        <div class="highlight-box" style="background: #dcfce7; border-color: #6366f1;">
             <h4 style="color: #166534;">Leverage Your Real Estate Broker Contacts</h4>
             <ul style="color: #166534;">
                 <li><strong>Handover Referral Program:</strong> 5-10% commission on each sale referred at villa handover</li>
@@ -905,6 +905,6 @@
             Last updated: December 2025 | Apex Enclosures
         </p>
     </div>
-<script src="sales-nav.js"></script>
+<script src="nav.js"></script>
 </body>
 </html>

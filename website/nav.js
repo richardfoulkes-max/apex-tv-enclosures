@@ -1,17 +1,74 @@
-// Apex Enclosures - Product Development Sidebar Navigation
-// Include this script in Product Development pages only
-// For Sales pages, use sales-nav.js instead
+// Apex Enclosures - Context-Aware Sidebar Navigation
+// Shows Sales OR Product nav based on current page
 
 (function() {
-    // Navigation structure - Product Development focused
-    const navStructure = {
+    // Sales & Operations pages
+    const salesPages = [
+        'ai-dashboard.html',
+        'ai-queue.html',
+        'orders.html',
+        'ai-insights.html',
+        'project-tracker.html',
+        'partner-crm.html',
+        'partner-program.html',
+        'target-partners.html',
+        'contractors.html',
+        'b2b-targets.html',
+        'quote-calculator.html',
+        'bd-plan.html',
+        'go-to-market.html',
+        'setup.html'
+    ];
+
+    // Sales Navigation Structure
+    const salesNav = {
         dashboard: {
             label: 'Dashboard',
             icon: '📊',
             items: [
-                { href: 'product-dashboard.html', label: 'Product Dashboard' },
-                { href: 'index.html', label: 'Main Dashboard' },
-                { href: 'project-tracker.html', label: 'Project Tracker' }
+                { href: 'ai-dashboard.html', label: 'Sales Dashboard' },
+                { href: 'project-tracker.html', label: 'Command Center' },
+                { href: 'bd-plan.html', label: 'BD Plan' },
+                { href: 'go-to-market.html', label: 'Go to Market' }
+            ]
+        },
+        queue: {
+            label: 'Operations',
+            icon: '📥',
+            items: [
+                { href: 'ai-queue.html', label: 'AI Queue' },
+                { href: 'orders.html', label: 'Orders Pipeline' },
+                { href: 'ai-insights.html', label: 'AI Insights' }
+            ]
+        },
+        partners: {
+            label: 'Partners',
+            icon: '🤝',
+            items: [
+                { href: 'partner-crm.html', label: 'Partner CRM' },
+                { href: 'partner-program.html', label: 'Partner Program' },
+                { href: 'target-partners.html', label: 'Target Partners' },
+                { href: 'contractors.html', label: 'Contractors' },
+                { href: 'b2b-targets.html', label: 'B2B Targets' }
+            ]
+        },
+        tools: {
+            label: 'Tools',
+            icon: '🛠️',
+            items: [
+                { href: 'quote-calculator.html', label: 'Quote Calculator' },
+                { href: 'setup.html', label: 'Settings' }
+            ]
+        }
+    };
+
+    // Product Development Navigation Structure
+    const productNav = {
+        dashboard: {
+            label: 'Dashboard',
+            icon: '📊',
+            items: [
+                { href: 'product-dashboard.html', label: 'Product Dashboard' }
             ]
         },
         engineering: {
@@ -73,27 +130,31 @@
         }
     };
 
-    // Determine base path for links (handle subdirectories)
+    // Determine current page and context
     const pathname = window.location.pathname;
     const isInSubdir = pathname.includes('/legal/') || pathname.includes('/retail/') || pathname.includes('/partner/') || pathname.includes('/commercial/');
     const basePath = isInSubdir ? '../' : '';
-
-    // Get current page filename
-    const currentPath = window.location.pathname;
-    const currentPage = currentPath.split('/').pop() || 'index.html';
+    const currentPage = pathname.split('/').pop() || 'index.html';
     const currentFullPath = isInSubdir ? 'legal/' + currentPage : currentPage;
+
+    // Determine if we're in Sales or Product context
+    const isSalesContext = salesPages.includes(currentPage);
+    const navStructure = isSalesContext ? salesNav : productNav;
+    const contextLabel = isSalesContext ? 'Sales & Ops' : 'Product Dev';
+    const contextColor = isSalesContext ? '#6366f1' : '#0d9488';
+    const switchHref = 'index.html';
+    const switchLabel = 'Main Dashboard';
 
     // Inject CSS
     const styles = `
-        /* Sidebar Navigation Styles */
         :root {
-            --nav-width: 260px;
-            --nav-bg: #f8fafc;
-            --nav-border: #e2e8f0;
-            --nav-text: #64748b;
-            --nav-text-hover: #0f172a;
-            --nav-accent: #0d9488;
-            --nav-section-bg: #ffffff;
+            --nav-width: 240px;
+            --nav-bg: #1a1a2e;
+            --nav-border: #2d2d44;
+            --nav-text: #a0a0b0;
+            --nav-text-hover: #ffffff;
+            --nav-accent: ${contextColor};
+            --nav-divider: #3d3d5c;
         }
 
         body {
@@ -111,6 +172,8 @@
             overflow-y: auto;
             z-index: 1000;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
         }
 
         .apex-sidebar.restoring-scroll {
@@ -118,14 +181,14 @@
         }
 
         .apex-sidebar-header {
-            padding: 1.25rem 1rem;
+            padding: 1rem;
             border-bottom: 1px solid var(--nav-border);
-            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+            background: linear-gradient(135deg, ${contextColor} 0%, ${contextColor}dd 100%);
         }
 
         .apex-sidebar-logo {
             color: #ffffff;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             text-decoration: none;
             display: flex;
@@ -134,50 +197,60 @@
         }
 
         .apex-sidebar-logo-icon {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             background: #ffffff;
             border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #0d9488;
+            color: ${contextColor};
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+        }
+
+        .apex-sidebar-context {
+            font-size: 0.7rem;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        .apex-nav-content {
+            flex: 1;
+            overflow-y: auto;
         }
 
         .apex-nav-section {
-            border-bottom: 1px solid var(--nav-border);
+            border-bottom: none;
         }
 
         .apex-nav-section-header {
-            padding: 0.75rem 1rem;
+            padding: 0.6rem 1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
             cursor: pointer;
             color: var(--nav-text);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.03em;
             transition: all 0.2s;
             user-select: none;
         }
 
         .apex-nav-section-header:hover {
-            background: var(--nav-section-bg);
             color: var(--nav-text-hover);
         }
 
         .apex-nav-section-header .icon {
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         .apex-nav-section-header .arrow {
             margin-left: auto;
             transition: transform 0.2s;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
         }
 
         .apex-nav-section.collapsed .arrow {
@@ -189,40 +262,69 @@
         }
 
         .apex-nav-items {
-            padding: 0.25rem 0 0.5rem 0;
-            background: var(--nav-section-bg);
+            padding: 0 0 0.5rem 0;
         }
 
         .apex-nav-item {
             display: block;
-            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            padding: 0.4rem 1rem 0.4rem 2.25rem;
             color: var(--nav-text);
             text-decoration: none;
-            font-size: 0.85rem;
-            transition: all 0.2s;
-            border-left: 3px solid transparent;
+            font-size: 0.8rem;
+            transition: all 0.15s;
+            border-left: 2px solid transparent;
         }
 
         .apex-nav-item:hover {
             color: var(--nav-text-hover);
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.03);
         }
 
         .apex-nav-item.active {
             color: var(--nav-accent);
-            background: rgba(13, 148, 136, 0.1);
+            background: rgba(99, 102, 241, 0.1);
             border-left-color: var(--nav-accent);
         }
 
-        /* Mobile toggle */
+        .apex-sidebar-footer {
+            padding: 1rem;
+            border-top: 1px solid var(--nav-border);
+            background: rgba(0,0,0,0.2);
+        }
+
+        .apex-switch-context {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.6rem 0.8rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--nav-border);
+            border-radius: 6px;
+            color: var(--nav-text);
+            text-decoration: none;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .apex-switch-context:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--nav-text-hover);
+            border-color: var(--nav-accent);
+        }
+
+        .apex-switch-icon {
+            font-size: 1rem;
+        }
+
+        /* Mobile */
         .apex-mobile-toggle {
             display: none;
             position: fixed;
             top: 1rem;
             left: 1rem;
             z-index: 1001;
-            background: #0d9488;
-            border: 1px solid #0f766e;
+            background: ${contextColor};
+            border: none;
             border-radius: 8px;
             padding: 0.75rem;
             cursor: pointer;
@@ -231,55 +333,33 @@
         }
 
         @media (max-width: 900px) {
-            body {
-                margin-left: 0 !important;
-            }
-
+            body { margin-left: 0 !important; }
             .apex-sidebar {
                 transform: translateX(-100%);
                 transition: transform 0.3s;
             }
-
-            .apex-sidebar.open {
-                transform: translateX(0);
-            }
-
-            .apex-mobile-toggle {
-                display: block;
-            }
-
+            .apex-sidebar.open { transform: translateX(0); }
+            .apex-mobile-toggle { display: block; }
             .apex-sidebar-overlay {
                 display: none;
                 position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
+                top: 0; left: 0; right: 0; bottom: 0;
                 background: rgba(0,0,0,0.5);
                 z-index: 999;
             }
-
-            .apex-sidebar-overlay.open {
-                display: block;
-            }
+            .apex-sidebar-overlay.open { display: block; }
         }
 
-        /* Hide old navigation if present */
+        /* Hide old nav */
         body > nav:not(.apex-sidebar),
-        .nav,
-        .doc-nav,
+        .nav, .doc-nav, .sales-nav,
         nav[style*="background: #111"],
         nav[style*="background:#111"] {
             display: none !important;
         }
-
-        /* Fix container margins for pages with old styles */
-        .container {
-            margin-left: 0 !important;
-        }
+        .container { margin-left: 0 !important; }
     `;
 
-    // Create and inject style element
     const styleEl = document.createElement('style');
     styleEl.textContent = styles;
     document.head.appendChild(styleEl);
@@ -290,19 +370,21 @@
         <button class="apex-mobile-toggle" onclick="toggleApexSidebar()">☰</button>
         <nav class="apex-sidebar">
             <div class="apex-sidebar-header">
-                <a href="${basePath}product-dashboard.html" class="apex-sidebar-logo">
-                    <span class="apex-sidebar-logo-icon">P</span>
-                    Product Dev
+                <a href="${basePath}index.html" class="apex-sidebar-logo">
+                    <span class="apex-sidebar-logo-icon">A</span>
+                    <div>
+                        Apex Enclosures
+                        <div class="apex-sidebar-context">${contextLabel}</div>
+                    </div>
                 </a>
             </div>
+            <div class="apex-nav-content">
     `;
 
     // Add sections
     Object.entries(navStructure).forEach(([key, section]) => {
-        // Check if any item in this section is active
         const hasActive = section.items.some(item => {
-            const itemPath = item.href;
-            return itemPath === currentFullPath ||
+            return item.href === currentFullPath ||
                    (isInSubdir && item.href.startsWith('legal/') && item.href.replace('legal/', '') === currentPage);
         });
 
@@ -317,36 +399,34 @@
         `;
 
         section.items.forEach(item => {
-            let href = basePath + item.href;
+            const href = basePath + item.href;
             const isActive = item.href === currentFullPath ||
                            (isInSubdir && item.href.startsWith('legal/') && item.href.replace('legal/', '') === currentPage);
-
-            sidebarHTML += `
-                <a href="${href}" class="apex-nav-item${isActive ? ' active' : ''}">${item.label}</a>
-            `;
+            sidebarHTML += `<a href="${href}" class="apex-nav-item${isActive ? ' active' : ''}">${item.label}</a>`;
         });
 
-        sidebarHTML += `
-                </div>
-            </div>
-        `;
+        sidebarHTML += `</div></div>`;
     });
 
-    sidebarHTML += '</nav>';
+    sidebarHTML += `
+            </div>
+            <div class="apex-sidebar-footer">
+                <a href="${basePath}${switchHref}" class="apex-switch-context">
+                    <span class="apex-switch-icon">🏠</span>
+                    ${switchLabel}
+                </a>
+            </div>
+        </nav>
+    `;
 
-    // Inject sidebar into page
     document.body.insertAdjacentHTML('afterbegin', sidebarHTML);
 
     // Toggle functions
     window.toggleApexSection = function(sectionKey, event) {
-        if (event) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
+        if (event) { event.preventDefault(); event.stopPropagation(); }
         const section = document.querySelector(`.apex-nav-section[data-section="${sectionKey}"]`);
         if (section) {
             section.classList.toggle('collapsed');
-            // Save state to localStorage
             const collapsed = JSON.parse(localStorage.getItem('apexNavCollapsed') || '{}');
             collapsed[sectionKey] = section.classList.contains('collapsed');
             localStorage.setItem('apexNavCollapsed', JSON.stringify(collapsed));
@@ -358,43 +438,29 @@
         document.querySelector('.apex-sidebar-overlay').classList.toggle('open');
     };
 
-    // Restore collapsed state from localStorage
+    // Restore collapsed state
     const savedCollapsed = JSON.parse(localStorage.getItem('apexNavCollapsed') || '{}');
     Object.entries(savedCollapsed).forEach(([key, isCollapsed]) => {
         const section = document.querySelector(`.apex-nav-section[data-section="${key}"]`);
-        if (section) {
-            // Don't override if section has active item
-            const hasActive = section.querySelector('.apex-nav-item.active');
-            if (!hasActive) {
-                section.classList.toggle('collapsed', isCollapsed);
-            }
+        if (section && !section.querySelector('.apex-nav-item.active')) {
+            section.classList.toggle('collapsed', isCollapsed);
         }
     });
 
-    // Save sidebar scroll position before navigating
+    // Scroll position handling
     const sidebar = document.querySelector('.apex-sidebar');
     document.querySelectorAll('.apex-nav-item').forEach(link => {
-        link.addEventListener('click', function() {
-            localStorage.setItem('apexNavScrollPos', sidebar.scrollTop);
-        });
+        link.addEventListener('click', () => localStorage.setItem('apexNavScrollPos', sidebar.scrollTop));
     });
 
-    // Restore sidebar scroll position after DOM is fully ready
     const savedScrollPos = localStorage.getItem('apexNavScrollPos');
     if (savedScrollPos && sidebar) {
         const targetScroll = parseInt(savedScrollPos, 10);
-        // Hide sidebar while restoring scroll to prevent visual jump
         sidebar.classList.add('restoring-scroll');
-
-        // Restore scroll position
         sidebar.scrollTop = targetScroll;
-
-        // Show sidebar after scroll is set
         requestAnimationFrame(() => {
             sidebar.scrollTop = targetScroll;
-            requestAnimationFrame(() => {
-                sidebar.classList.remove('restoring-scroll');
-            });
+            requestAnimationFrame(() => sidebar.classList.remove('restoring-scroll'));
         });
     }
 })();
