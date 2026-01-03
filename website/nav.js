@@ -35,15 +35,15 @@
             icon: '💼',
             items: [
                 { href: 'partner-crm.html', label: 'Apex CRM' },
-                { href: 'ai-queue.html', label: 'AI Queue' },
-                { href: 'bd-plan.html', label: 'BD Plan' },
-                { href: 'go-to-market.html', label: 'Go to Market' }
+                { href: 'ai-queue.html', label: 'AI Queue' }
             ]
         },
         planning: {
             label: 'Planning',
             icon: '🎯',
             items: [
+                { href: 'bd-plan.html', label: 'BD Plan' },
+                { href: 'go-to-market.html', label: 'Go to Market' },
                 { href: 'target-partners.html', label: 'Target Partners' },
                 { href: 'contractors.html', label: 'Contractors' },
                 { href: 'b2b-targets.html', label: 'Commercial Targets' }
