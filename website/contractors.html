@@ -725,8 +725,8 @@
             <div class="crm-modal-field">
                 <label>Contact Type</label>
                 <select id="crmContactType">
-                    <option value="contractor">Contractor</option>
                     <option value="partner">Partner</option>
+                    <option value="manufacturing">Manufacturing</option>
                     <option value="commercial">Commercial</option>
                     <option value="retail">Retail</option>
                 </select>
@@ -795,7 +795,7 @@
             document.getElementById('crmCompanyName').value = name;
             document.getElementById('crmWebsite').value = website;
             document.getElementById('crmRegion').value = region;
-            document.getElementById('crmContactType').value = 'contractor';
+            document.getElementById('crmContactType').value = 'partner';
             document.getElementById('crmPartnerType').value = 'AV Integrator';
             document.getElementById('crmNotes').value = 'Added from Contractors planning page';
             document.getElementById('crmModal').classList.add('active');

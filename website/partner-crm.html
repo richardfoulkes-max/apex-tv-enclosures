@@ -376,39 +376,9 @@
             width: calc(100% - 2rem);
         }
 
-        /* Contact Type Tabs */
-        .type-tabs {
-            display: flex;
-            gap: 0.25rem;
-            padding: 0.5rem 1rem;
-            background: #f1f5f9;
-            border-bottom: 1px solid var(--border);
-        }
-        .type-tab {
-            padding: 0.5rem 1rem;
-            border: none;
-            background: transparent;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            transition: all 0.2s;
-        }
-        .type-tab:hover { background: white; color: var(--text); }
-        .type-tab.active { background: white; color: var(--accent); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .type-tab .count {
-            display: inline-block;
-            background: var(--border);
-            padding: 0.1rem 0.4rem;
-            border-radius: 10px;
-            font-size: 0.7rem;
-            margin-left: 0.3rem;
-        }
-        .type-tab.active .count { background: rgba(37, 99, 235, 0.15); }
-
+        /* Contact Type Badges */
+        .badge-contact-manufacturing { background: #fef3c7; color: #92400e; }
         .badge-contact-partner { background: #dbeafe; color: #1e40af; }
-        .badge-contact-contractor { background: #fef3c7; color: #92400e; }
         .badge-contact-commercial { background: #e0e7ff; color: #4f46e5; }
         .badge-contact-retail { background: #dcfce7; color: #166534; }
 
@@ -438,20 +408,19 @@
     <div class="main-container">
         <!-- Left Panel - Partner List -->
         <div class="list-panel">
-            <!-- Contact Type Tabs -->
-            <div class="type-tabs" id="typeTabs">
-                <button class="type-tab active" data-type="" onclick="setContactTypeFilter('')">All <span class="count" id="countAll">0</span></button>
-                <button class="type-tab" data-type="partner" onclick="setContactTypeFilter('partner')">Partners <span class="count" id="countPartner">0</span></button>
-                <button class="type-tab" data-type="contractor" onclick="setContactTypeFilter('contractor')">Contractors <span class="count" id="countContractor">0</span></button>
-                <button class="type-tab" data-type="commercial" onclick="setContactTypeFilter('commercial')">Commercial <span class="count" id="countCommercial">0</span></button>
-                <button class="type-tab" data-type="retail" onclick="setContactTypeFilter('retail')">Retail <span class="count" id="countRetail">0</span></button>
-            </div>
             <div class="list-header">
                 <div class="search-box">
                     <input type="text" class="search-input" id="searchInput" placeholder="Search partners..." oninput="renderList()">
                     <button class="btn btn-primary btn-icon" onclick="showNewPartnerModal()">+</button>
                 </div>
                 <div class="filter-row">
+                    <select class="filter-select" id="contactTypeFilter" onchange="setContactTypeFilter(this.value)">
+                        <option value="">All Contacts</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="partner">Partners</option>
+                        <option value="commercial">Commercial</option>
+                        <option value="retail">Retail</option>
+                    </select>
                     <select class="filter-select" id="typeFilter" onchange="renderList()">
                         <option value="">All Types</option>
                         <option value="Fabricator">Fabricator</option>
@@ -511,8 +480,8 @@
                     <div class="form-group">
                         <label class="form-label">Contact Type *</label>
                         <select class="form-select" id="newContactType" required>
+                            <option value="manufacturing">Manufacturing</option>
                             <option value="partner">Partner</option>
-                            <option value="contractor">Contractor</option>
                             <option value="commercial">Commercial</option>
                             <option value="retail">Retail</option>
                         </select>
@@ -666,7 +635,7 @@
         // ============ DATA LAYER ============
         let partners = [];
         let selectedPartnerId = null;
-        let contactTypeFilter = ''; // '', 'partner', 'contractor', 'commercial', 'retail'
+        let contactTypeFilter = ''; // '', 'manufacturing', 'partner', 'commercial', 'retail'
 
         // Activity type labels
         const activityTypes = {
@@ -1162,7 +1131,7 @@
                 const typeClass = 'badge-type-' + p.partnerType.toLowerCase().replace(/[\s\/]+/g, '-');
                 const statusClass = 'badge-status-' + p.status.toLowerCase().replace(/\s+/g, '-');
                 const contactTypeClass = 'badge-contact-' + (p.contactType || 'partner');
-                const contactTypeLabel = { partner: 'Partner', contractor: 'Contractor', commercial: 'Commercial', retail: 'Retail' }[p.contactType] || 'Partner';
+                const contactTypeLabel = { manufacturing: 'Manufacturing', partner: 'Partner', commercial: 'Commercial', retail: 'Retail' }[p.contactType] || 'Partner';
                 const primaryContact = p.contacts?.find(c => c.isPrimary) || p.contacts?.[0];
 
                 return `
@@ -1187,31 +1156,11 @@
         // Contact type filter
         function setContactTypeFilter(type) {
             contactTypeFilter = type;
-
-            // Update tab active states
-            document.querySelectorAll('.type-tab').forEach(tab => {
-                tab.classList.toggle('active', tab.dataset.type === type);
-            });
-
             renderList();
         }
 
-        // Update contact type counts
-        function updateTypeCounts() {
-            const counts = {
-                all: partners.length,
-                partner: partners.filter(p => p.contactType === 'partner').length,
-                contractor: partners.filter(p => p.contactType === 'contractor').length,
-                commercial: partners.filter(p => p.contactType === 'commercial').length,
-                retail: partners.filter(p => p.contactType === 'retail').length
-            };
-
-            document.getElementById('countAll').textContent = counts.all;
-            document.getElementById('countPartner').textContent = counts.partner;
-            document.getElementById('countContractor').textContent = counts.contractor;
-            document.getElementById('countCommercial').textContent = counts.commercial;
-            document.getElementById('countRetail').textContent = counts.retail;
-        }
+        // Update contact type counts (no-op, tabs removed)
+        function updateTypeCounts() {}
 
         function updateStats() {
             document.getElementById('totalPartners').textContent = partners.length;
@@ -1249,7 +1198,7 @@
             const typeClass = 'badge-type-' + p.partnerType.toLowerCase().replace(/[\s\/]+/g, '-');
             const statusClass = 'badge-status-' + p.status.toLowerCase().replace(/\s+/g, '-');
             const contactTypeClass = 'badge-contact-' + (p.contactType || 'partner');
-            const contactTypeLabel = { partner: 'Partner', contractor: 'Contractor', commercial: 'Commercial', retail: 'Retail' }[p.contactType] || 'Partner';
+            const contactTypeLabel = { manufacturing: 'Manufacturing', partner: 'Partner', commercial: 'Commercial', retail: 'Retail' }[p.contactType] || 'Partner';
 
             const html = `
                 <button class="btn btn-outline back-btn" onclick="closeDetail()" style="margin-bottom: 1rem;">&larr; Back</button>
