@@ -158,6 +158,38 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
+### Session: 2026-01-03 (Late Night) - CRM Filter Dropdown + Calendar Integration
+
+**CRM contact type filter (partner-crm.html):**
+- Removed overflowing tabs (couldn't see Retail on narrow screens)
+- Added dropdown filter instead: All Contacts / Manufacturing / Partners / Commercial / Retail
+- Changed categories from contractor → manufacturing
+- Updated all planning pages (contractors, target-partners, b2b-targets) with new categories
+
+**Supabase CRM migration:**
+- Created migrations/migration-crm.sql for partners + partner_activities tables
+- User ran ALTER TABLE to add contact_type column to existing partners table
+
+**Header standardization:**
+- Fixed inconsistent header sizes/colors across Sales & Ops pages
+- Standardized: padding 1.25rem 2rem, h1 1.5rem, colors #6366f1/#4f46e5
+- Removed redundant header-nav from orders.html and ai-insights.html
+
+**Schedule Meeting button (CRM):**
+- Added "Schedule Meeting" button to partner detail view
+- Opens Google Calendar with partner details pre-filled (name, email, address, notes)
+- Logs meeting activity automatically
+- **Issue:** Button not visible for user - needs debugging
+
+**Pending:**
+- Debug Schedule Meeting button visibility
+- Set up business domain + Google Workspace when ready
+- Add booking links to website pages
+
+**Commits:** 9135b0a, 88fc856, 4419b23, 576c24f
+
+---
+
 ### Session: 2026-01-03 (Night) - Unified CRM + Navigation Restructure
 
 **Navigation restructure (nav.js):**
