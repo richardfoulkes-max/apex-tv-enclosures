@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Apex Enclosures</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16162a 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 400px;
+            overflow: hidden;
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .login-logo {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 28px;
+            font-weight: 700;
+            color: #6366f1;
+        }
+
+        .login-header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .login-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .login-form {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 0.875rem;
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-login:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-message {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .success-message {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #16a34a;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .toggle-mode {
+            text-align: center;
+            padding: 1rem 2rem 2rem;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .toggle-mode a {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toggle-mode a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .divider span {
+            padding: 0 1rem;
+        }
+
+        .demo-credentials {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .demo-credentials h4 {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-credentials p {
+            font-size: 0.85rem;
+            color: #374151;
+            margin: 0.25rem 0;
+        }
+
+        .demo-credentials code {
+            background: #e2e8f0;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        /* Sign up form additions */
+        .signup-fields {
+            display: none;
+        }
+
+        .signup-fields.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="login-logo">A</div>
+            <h1>Apex Enclosures</h1>
+            <p>Sales & Operations Portal</p>
+        </div>
+
+        <form class="login-form" id="authForm">
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+
+            <div class="signup-fields" id="signupFields">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="John Smith">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="you@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password" required>
+            </div>
+
+            <button type="submit" class="btn-login" id="submitBtn">Sign In</button>
+        </form>
+
+        <div class="toggle-mode">
+            <span id="toggleText">Don't have an account?</span>
+            <a href="#" id="toggleLink" onclick="toggleMode(event)">Create one</a>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        const SUPABASE_URL = 'https://emrtqdzdsoafjwynsxhi.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtcnRxZHpkc29hZmp3eW5zeGhpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU4NTMyMTYsImV4cCI6MjA1MTQyOTIxNn0.4p0rFpMwqkGGCPW4Y6Yj_4jGCBMkbZ6LjvB1bV6VrBA';
+
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        let isSignUp = false;
+
+        // Check if already logged in
+        async function checkExistingSession() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (session?.user) {
+                redirectAfterLogin();
+            }
+        }
+
+        function redirectAfterLogin() {
+            const redirect = sessionStorage.getItem('redirectAfterLogin') || 'ai-dashboard.html';
+            sessionStorage.removeItem('redirectAfterLogin');
+            window.location.href = redirect;
+        }
+
+        function toggleMode(e) {
+            e.preventDefault();
+            isSignUp = !isSignUp;
+
+            const signupFields = document.getElementById('signupFields');
+            const submitBtn = document.getElementById('submitBtn');
+            const toggleText = document.getElementById('toggleText');
+            const toggleLink = document.getElementById('toggleLink');
+
+            if (isSignUp) {
+                signupFields.classList.add('show');
+                submitBtn.textContent = 'Create Account';
+                toggleText.textContent = 'Already have an account?';
+                toggleLink.textContent = 'Sign in';
+            } else {
+                signupFields.classList.remove('show');
+                submitBtn.textContent = 'Sign In';
+                toggleText.textContent = "Don't have an account?";
+                toggleLink.textContent = 'Create one';
+            }
+
+            // Clear messages
+            document.getElementById('errorMessage').classList.remove('show');
+            document.getElementById('successMessage').classList.remove('show');
+        }
+
+        function showError(message) {
+            const errorEl = document.getElementById('errorMessage');
+            errorEl.textContent = message;
+            errorEl.classList.add('show');
+            document.getElementById('successMessage').classList.remove('show');
+        }
+
+        function showSuccess(message) {
+            const successEl = document.getElementById('successMessage');
+            successEl.textContent = message;
+            successEl.classList.add('show');
+            document.getElementById('errorMessage').classList.remove('show');
+        }
+
+        document.getElementById('authForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const name = document.getElementById('name').value;
+            const submitBtn = document.getElementById('submitBtn');
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = isSignUp ? 'Creating...' : 'Signing in...';
+
+            try {
+                if (isSignUp) {
+                    // Sign up
+                    const { data, error } = await supabaseClient.auth.signUp({
+                        email,
+                        password,
+                        options: {
+                            data: { full_name: name }
+                        }
+                    });
+
+                    if (error) throw error;
+
+                    // Create profile
+                    if (data.user) {
+                        await supabaseClient.from('profiles').insert({
+                            id: data.user.id,
+                            email: email,
+                            full_name: name,
+                            role: 'sales'
+                        });
+                    }
+
+                    showSuccess('Account created! Check your email to confirm, then sign in.');
+                    submitBtn.textContent = 'Create Account';
+                    submitBtn.disabled = false;
+
+                } else {
+                    // Sign in
+                    const { data, error } = await supabaseClient.auth.signInWithPassword({
+                        email,
+                        password
+                    });
+
+                    if (error) throw error;
+
+                    // Update last login
+                    if (data.user) {
+                        await supabaseClient.from('profiles').upsert({
+                            id: data.user.id,
+                            email: email,
+                            last_login: new Date().toISOString()
+                        });
+                    }
+
+                    redirectAfterLogin();
+                }
+
+            } catch (error) {
+                showError(error.message || 'An error occurred');
+                submitBtn.disabled = false;
+                submitBtn.textContent = isSignUp ? 'Create Account' : 'Sign In';
+            }
+        });
+
+        // Check session on load
+        checkExistingSession();
+    </script>
+</body>
+</html>

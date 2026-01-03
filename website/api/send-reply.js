@@ -18,7 +18,7 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const { enquiryId, response } = req.body;
+    const { enquiryId, response, user_id, user_name } = req.body;
 
     if (!enquiryId || !response) {
         return res.status(400).json({ error: 'enquiryId and response are required' });
@@ -121,13 +121,15 @@ export default async function handler(req, res) {
             }
         }
 
-        // Update enquiry status
+        // Update enquiry status with user tracking
         await supabase
             .from('enquiries')
             .update({
                 status: 'approved',
                 approved_at: new Date().toISOString(),
-                response_sent: response
+                response_sent: response,
+                processed_by_user_id: user_id || null,
+                processed_by_name: user_name || null
             })
             .eq('id', enquiryId);
 

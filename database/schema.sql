@@ -2,6 +2,46 @@
 -- Run this in Supabase SQL Editor
 
 -- ============================================
+-- USER PROFILES TABLE (Supabase Auth integration)
+-- ============================================
+CREATE TABLE profiles (
+    id UUID REFERENCES auth.users(id) ON DELETE CASCADE PRIMARY KEY,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+
+    -- User info
+    email TEXT,
+    full_name TEXT,
+    avatar_url TEXT,
+
+    -- Role
+    role TEXT DEFAULT 'sales' CHECK (role IN ('admin', 'sales', 'viewer')),
+
+    -- Activity tracking
+    last_login TIMESTAMP WITH TIME ZONE
+);
+
+-- Enable RLS for profiles
+ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
+
+-- Users can read all profiles (for displaying names)
+CREATE POLICY "Profiles are viewable by authenticated users" ON profiles
+    FOR SELECT TO authenticated USING (true);
+
+-- Users can update their own profile
+CREATE POLICY "Users can update their own profile" ON profiles
+    FOR UPDATE TO authenticated USING (auth.uid() = id);
+
+-- Users can insert their own profile
+CREATE POLICY "Users can insert their own profile" ON profiles
+    FOR INSERT TO authenticated WITH CHECK (auth.uid() = id);
+
+-- Auto-update timestamp for profiles
+CREATE TRIGGER profiles_updated_at
+    BEFORE UPDATE ON profiles
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+-- ============================================
 -- CUSTOMERS TABLE
 -- ============================================
 CREATE TABLE customers (

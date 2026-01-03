@@ -1159,6 +1159,10 @@
         async function saveInteractionToSupabase(item, action, finalDraft, rejectReason) {
             if (!useSupabase) return;
 
+            // Get current user info
+            const userId = window.currentUser?.id || null;
+            const userName = window.currentUser?.email?.split('@')[0] || 'Unknown';
+
             try {
                 // First, create or update customer record
                 let customerId = null;
@@ -1204,18 +1208,24 @@
                         ai_draft_translated: item.aiDraftEN,
                         confidence_score: item.confidence,
                         action: action,
+                        action_by: userName,
                         action_at: new Date().toISOString(),
                         final_draft: finalDraft,
                         reject_reason: rejectReason,
-                        patterns_detected: { customer: item.customer }
+                        patterns_detected: { customer: item.customer },
+                        approved_by_user_id: userId,
+                        approved_by_name: userName
                     });
                 } else {
                     // Update existing record
                     await supabaseClient.from('ai_interactions').update({
                         action: action,
+                        action_by: userName,
                         action_at: new Date().toISOString(),
                         final_draft: finalDraft,
-                        reject_reason: rejectReason
+                        reject_reason: rejectReason,
+                        approved_by_user_id: userId,
+                        approved_by_name: userName
                     }).eq('id', item.id);
                 }
 
@@ -1953,6 +1963,10 @@ Apex Enclosures
             const item = pendingQueue.find(i => i.id === id);
             if (!item) return;
 
+            // Get current user info (set by auth-guard.js)
+            const userId = window.currentUser?.id || null;
+            const userName = window.currentUser?.email?.split('@')[0] || 'Unknown';
+
             // Send reply via API
             try {
                 const response = await fetch(`${BACKEND_URL}/api/send-reply`, {
@@ -1960,7 +1974,9 @@ Apex Enclosures
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         enquiryId: id,
-                        response: item.aiDraft
+                        response: item.aiDraft,
+                        user_id: userId,
+                        user_name: userName
                     })
                 });
 
@@ -2405,5 +2421,7 @@ Apex Enclosures
         setTimeout(checkClaudeStatus, 500);
     </script>
     <script src="nav.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth-guard.js"></script>
 </body>
 </html>

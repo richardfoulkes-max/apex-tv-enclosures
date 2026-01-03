@@ -158,6 +158,33 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
+### Session: 2026-01-03 (Evening) - Unified Navigation + Purple Color Scheme
+
+**Created unified context-aware navigation system:**
+- Single nav.js detects current page and shows appropriate sidebar
+- Sales & Ops pages: Purple (#6366f1) sidebar with Dashboard, Operations, Partners, Tools
+- Product Dev pages: Teal (#0d9488) sidebar with Engineering, Manufacturing, Market, Financial, Legal
+- Main dashboard (index.html) now standalone hub without sidebar
+- Footer button to return to Main Dashboard from either context
+
+**Fixed color consistency across all Sales & Ops pages:**
+- Updated 14 pages to use purple color scheme
+- Added purple page headers to: b2b-targets, target-partners, bd-plan, go-to-market, partner-program
+- Fixed fixed-header positioning (left: 240px) for sidebar on: partner-crm, ai-queue, orders, manufacturer-rfq
+
+**Navigation reorganization:**
+- Moved BD Plan and Go to Market under Dashboard section
+- Moved Command Center (project-tracker) to Sales & Ops
+- Removed obsolete sales-nav.js (merged into nav.js)
+
+**Partnership:**
+- Created partnership-term-sheet.md for potential UK sales partner
+- 50/50 equity split with performance vesting milestones
+
+**Deployed:** Committed and pushed to Vercel (apex-tv-enclosures.vercel.app)
+
+---
+
 ### Session: 2026-01-03 (PM) - DigiScreens Dispute Analysis
 
 **Analyzed Apollo Desert Series unit vs marketing claims:**

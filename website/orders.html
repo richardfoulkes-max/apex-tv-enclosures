@@ -801,6 +801,13 @@
                 `;
             }
 
+            // User attribution
+            let userAttrHtml = '';
+            if (order.created_by_name || order.updated_by_name) {
+                const userName = order.updated_by_name || order.created_by_name;
+                userAttrHtml = `<div class="order-meta" style="font-size: 0.7rem; color: #94a3b8;">👤 ${userName}</div>`;
+            }
+
             card.innerHTML = `
                 <div class="order-header">
                     <span class="order-name">${order.customer_name || 'Unknown'}</span>
@@ -820,6 +827,7 @@
                     ${order.include_tv ? '📺 TV' : ''}
                     ${order.include_install ? '🔧 Install' : ''}
                 </div>
+                ${userAttrHtml}
                 ${lostReasonHtml}
                 ${followupHtml}
                 ${actionsHtml}
@@ -839,11 +847,19 @@
         // Set temperature
         async function setTemperature(orderId, temp) {
             document.querySelectorAll('.temp-selector').forEach(el => el.classList.remove('active'));
+            const userId = window.currentUser?.id || null;
+            const userName = window.currentUser?.email?.split('@')[0] || 'Unknown';
+
             try {
                 await fetch(`${API_BASE}/orders`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id: orderId, lead_temperature: temp })
+                    body: JSON.stringify({
+                        id: orderId,
+                        lead_temperature: temp,
+                        user_id: userId,
+                        user_name: userName
+                    })
                 });
                 loadData();
             } catch (err) {
@@ -864,6 +880,8 @@
             const orderId = document.getElementById('lostOrderId').value;
             const reason = document.getElementById('lostReason').value;
             const notes = document.getElementById('lostNotes').value;
+            const userId = window.currentUser?.id || null;
+            const userName = window.currentUser?.email?.split('@')[0] || 'Unknown';
 
             try {
                 await fetch(`${API_BASE}/orders`, {
@@ -873,7 +891,9 @@
                         id: orderId,
                         status: 'cancelled',
                         lost_reason: reason,
-                        notes: notes ? `Lost: ${notes}` : undefined
+                        notes: notes ? `Lost: ${notes}` : undefined,
+                        user_id: userId,
+                        user_name: userName
                     })
                 });
                 closeModal('lostModal');
@@ -892,11 +912,20 @@
 
         // Advance order to next status
         async function advanceOrder(orderId, newStatus) {
+            // Get current user info
+            const userId = window.currentUser?.id || null;
+            const userName = window.currentUser?.email?.split('@')[0] || 'Unknown';
+
             try {
                 await fetch(`${API_BASE}/orders`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id: orderId, status: newStatus })
+                    body: JSON.stringify({
+                        id: orderId,
+                        status: newStatus,
+                        user_id: userId,
+                        user_name: userName
+                    })
                 });
                 loadData();
             } catch (err) {
@@ -1023,6 +1052,10 @@
 
         // Create order
         async function createOrder() {
+            // Get current user info (set by auth-guard.js)
+            const userId = window.currentUser?.id || null;
+            const userName = window.currentUser?.email?.split('@')[0] || 'Unknown';
+
             const order = {
                 customer_name: document.getElementById('orderCustomerName').value,
                 customer_email: document.getElementById('orderEmail').value,
@@ -1032,7 +1065,10 @@
                 include_install: document.getElementById('orderIncludeInstall').checked,
                 total_aed: parseInt(document.getElementById('orderTotalAed').value) || 0,
                 total_usd: Math.round((parseInt(document.getElementById('orderTotalAed').value) || 0) / 3.67),
-                notes: document.getElementById('orderNotes').value
+                notes: document.getElementById('orderNotes').value,
+                // User tracking
+                user_id: userId,
+                user_name: userName
             };
 
             if (!order.customer_name) {
@@ -1115,5 +1151,7 @@
         init();
     </script>
 <script src="nav.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth-guard.js"></script>
 </body>
 </html>

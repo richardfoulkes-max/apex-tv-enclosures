@@ -83,7 +83,10 @@ export default async function handler(req, res) {
             region,
             total_usd,
             total_aed,
-            notes
+            notes,
+            // User tracking
+            user_id,
+            user_name
         } = req.body;
 
         try {
@@ -101,7 +104,10 @@ export default async function handler(req, res) {
                     total_usd,
                     total_aed,
                     status: 'quote',
-                    notes
+                    notes,
+                    // User tracking
+                    created_by_user_id: user_id || null,
+                    created_by_name: user_name || null
                 })
                 .select()
                 .single();
@@ -141,7 +147,7 @@ export default async function handler(req, res) {
 
     // PATCH - Update order
     } else if (req.method === 'PATCH') {
-        const { id, status, notes, lead_temperature, lost_reason, ...updates } = req.body;
+        const { id, status, notes, lead_temperature, lost_reason, user_id, user_name, ...updates } = req.body;
 
         if (!id) {
             return res.status(400).json({ error: 'Order id is required' });
@@ -149,6 +155,10 @@ export default async function handler(req, res) {
 
         try {
             const updateData = { ...updates };
+
+            // Track who made the update
+            if (user_id) updateData.updated_by_user_id = user_id;
+            if (user_name) updateData.updated_by_name = user_name;
 
             if (status) {
                 updateData.status = status;
