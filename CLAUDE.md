@@ -158,6 +158,39 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
+### Session: 2026-01-03 (Night) - Unified CRM + Navigation Restructure
+
+**Navigation restructure (nav.js):**
+- Reorganized Sales & Ops sidebar with cleaner sections:
+  - Dashboard: Dashboard, Command Center
+  - Business Development: Apex CRM, AI Queue, BD Plan, Go to Market
+  - Planning: Target Partners, Contractors, Commercial Targets
+  - Operations: Orders Pipeline, AI Insights
+  - Tools: Quote Calculator, Partner Program, Settings
+- Moved AI Queue from Operations to Business Development
+
+**Apex CRM (partner-crm.html):**
+- Renamed "Partner CRM" to "Apex CRM"
+- Added contactType field: partner, contractor, commercial, retail
+- Added type filter tabs at top (All/Partners/Contractors/Commercial/Retail)
+- Contact type badge shows on list items and detail view
+- Tab counts show number of contacts per type
+- Updated data version to v6 with migration for existing data
+
+**Add to CRM buttons on planning pages:**
+- contractors.html: "+ CRM" button on each contractor card
+- target-partners.html: "+ CRM" button on each partner item
+- b2b-targets.html: "+ CRM" column added to all tables
+- Modal pre-fills contactType based on source page:
+  - contractors.html → contactType: 'contractor'
+  - target-partners.html → contactType: 'partner'
+  - b2b-targets.html → contactType: 'commercial'
+- Button shows checkmark after successful add
+
+**Deployed:** Committed (fae9b57) and pushed to Vercel
+
+---
+
 ### Session: 2026-01-03 (Evening) - Unified Navigation + Purple Color Scheme
 
 **Created unified context-aware navigation system:**
