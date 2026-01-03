@@ -433,5 +433,196 @@ Apex Enclosures
 <script src="nav.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="auth-guard.js"></script>
+
+    <!-- Add to CRM functionality -->
+    <style>
+        .add-to-crm-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.25rem 0.5rem;
+            background: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .add-to-crm-btn:hover { background: #4f46e5; }
+        .add-to-crm-btn.added { background: #10b981; }
+        .crm-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .crm-modal-overlay.active { display: flex; }
+        .crm-modal {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            max-width: 450px;
+            width: 90%;
+        }
+        .crm-modal h3 { margin-bottom: 1rem; }
+        .crm-modal-field { margin-bottom: 0.75rem; }
+        .crm-modal-field label { display: block; font-size: 0.75rem; font-weight: 600; color: #64748b; margin-bottom: 0.25rem; text-transform: uppercase; }
+        .crm-modal-field input, .crm-modal-field select { width: 100%; padding: 0.5rem; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.9rem; }
+        .crm-modal-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
+        .crm-modal-actions button { padding: 0.6rem 1.25rem; border-radius: 6px; font-weight: 500; cursor: pointer; border: none; }
+        .crm-modal-actions .primary { background: #6366f1; color: white; }
+        .crm-modal-actions .secondary { background: #f1f5f9; color: #0f172a; }
+        td.crm-action { text-align: center; width: 80px; }
+    </style>
+
+    <div class="crm-modal-overlay" id="crmModal">
+        <div class="crm-modal">
+            <h3>Add to Apex CRM</h3>
+            <div class="crm-modal-field">
+                <label>Company Name</label>
+                <input type="text" id="crmCompanyName">
+            </div>
+            <div class="crm-modal-field">
+                <label>Contact Type</label>
+                <select id="crmContactType">
+                    <option value="commercial">Commercial</option>
+                    <option value="partner">Partner</option>
+                    <option value="contractor">Contractor</option>
+                    <option value="retail">Retail</option>
+                </select>
+            </div>
+            <div class="crm-modal-field">
+                <label>Business Type</label>
+                <select id="crmPartnerType">
+                    <option value="Hospitality">Hospitality</option>
+                    <option value="Developer">Developer</option>
+                    <option value="Distributor">Distributor</option>
+                    <option value="Contractor">Contractor</option>
+                </select>
+            </div>
+            <div class="crm-modal-field">
+                <label>Region</label>
+                <select id="crmRegion">
+                    <option value="UAE">UAE</option>
+                    <option value="GCC">GCC (Saudi)</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="crm-modal-field">
+                <label>Notes</label>
+                <input type="text" id="crmNotes" placeholder="From B2B targets page">
+            </div>
+            <div class="crm-modal-actions">
+                <button class="primary" onclick="saveToCrm()">Add to CRM</button>
+                <button class="secondary" onclick="closeCrmModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add CRM column to each table
+        document.querySelectorAll('table').forEach(table => {
+            // Add header
+            const headerRow = table.querySelector('thead tr');
+            if (headerRow) {
+                const th = document.createElement('th');
+                th.textContent = 'Action';
+                th.style.width = '80px';
+                headerRow.appendChild(th);
+            }
+
+            // Add button to each row
+            table.querySelectorAll('tbody tr').forEach(row => {
+                const cells = row.querySelectorAll('td');
+                if (cells.length > 0) {
+                    const name = cells[0]?.textContent?.trim() || '';
+                    const location = cells[1]?.textContent?.trim() || '';
+                    const notes = cells[cells.length - 1]?.textContent?.trim() || '';
+                    const isSaudi = location.toLowerCase().includes('saudi') ||
+                                   location.toLowerCase().includes('riyadh') ||
+                                   location.toLowerCase().includes('jeddah') ||
+                                   location.toLowerCase().includes('ksa');
+
+                    const td = document.createElement('td');
+                    td.className = 'crm-action';
+                    const btn = document.createElement('button');
+                    btn.className = 'add-to-crm-btn';
+                    btn.innerHTML = '+ CRM';
+                    btn.onclick = () => {
+                        openCrmModal(name, location, notes, isSaudi ? 'GCC' : 'UAE');
+                        currentBtn = btn;
+                    };
+                    td.appendChild(btn);
+                    row.appendChild(td);
+                }
+            });
+        });
+
+        let currentBtn = null;
+
+        function openCrmModal(name, location, notes, region) {
+            document.getElementById('crmCompanyName').value = name;
+            document.getElementById('crmRegion').value = region;
+            document.getElementById('crmContactType').value = 'commercial';
+            document.getElementById('crmPartnerType').value = 'Hospitality';
+            document.getElementById('crmNotes').value = 'Added from B2B Targets - ' + location + ' - ' + notes;
+            document.getElementById('crmModal').classList.add('active');
+        }
+
+        function closeCrmModal() {
+            document.getElementById('crmModal').classList.remove('active');
+        }
+
+        function saveToCrm() {
+            const newPartner = {
+                id: Date.now(),
+                companyName: document.getElementById('crmCompanyName').value,
+                contactType: document.getElementById('crmContactType').value,
+                partnerType: document.getElementById('crmPartnerType').value,
+                region: document.getElementById('crmRegion').value,
+                website: '',
+                linkedInUrl: '',
+                address: '',
+                leadSource: 'planning_page',
+                status: 'Not Contacted',
+                priority: 'Medium',
+                dealValue: 0,
+                productsInterested: [],
+                expectedCloseDate: '',
+                winProbability: 0,
+                lostReason: '',
+                followupDate: '',
+                notes: document.getElementById('crmNotes').value,
+                contacts: [],
+                activities: [],
+                createdAt: new Date().toISOString(),
+                lastContact: null
+            };
+
+            // Load existing CRM data
+            let partners = JSON.parse(localStorage.getItem('apexCrmData') || '[]');
+            partners.push(newPartner);
+            localStorage.setItem('apexCrmData', JSON.stringify(partners));
+
+            // Update button
+            if (currentBtn) {
+                currentBtn.innerHTML = '✓';
+                currentBtn.classList.add('added');
+                currentBtn.disabled = true;
+            }
+
+            closeCrmModal();
+            alert(`${newPartner.companyName} added to Apex CRM!`);
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeCrmModal();
+        });
+    </script>
 </body>
 </html>

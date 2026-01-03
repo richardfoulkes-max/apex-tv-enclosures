@@ -26,30 +26,35 @@
             label: 'Dashboard',
             icon: '📊',
             items: [
-                { href: 'ai-dashboard.html', label: 'Sales Dashboard' },
-                { href: 'project-tracker.html', label: 'Command Center' },
+                { href: 'ai-dashboard.html', label: 'Dashboard' },
+                { href: 'project-tracker.html', label: 'Command Center' }
+            ]
+        },
+        bd: {
+            label: 'Business Development',
+            icon: '💼',
+            items: [
+                { href: 'partner-crm.html', label: 'Apex CRM' },
+                { href: 'ai-queue.html', label: 'AI Queue' },
                 { href: 'bd-plan.html', label: 'BD Plan' },
                 { href: 'go-to-market.html', label: 'Go to Market' }
             ]
         },
-        queue: {
+        planning: {
+            label: 'Planning',
+            icon: '🎯',
+            items: [
+                { href: 'target-partners.html', label: 'Target Partners' },
+                { href: 'contractors.html', label: 'Contractors' },
+                { href: 'b2b-targets.html', label: 'Commercial Targets' }
+            ]
+        },
+        operations: {
             label: 'Operations',
             icon: '📥',
             items: [
-                { href: 'ai-queue.html', label: 'AI Queue' },
                 { href: 'orders.html', label: 'Orders Pipeline' },
                 { href: 'ai-insights.html', label: 'AI Insights' }
-            ]
-        },
-        partners: {
-            label: 'Partners',
-            icon: '🤝',
-            items: [
-                { href: 'partner-crm.html', label: 'Partner CRM' },
-                { href: 'partner-program.html', label: 'Partner Program' },
-                { href: 'target-partners.html', label: 'Target Partners' },
-                { href: 'contractors.html', label: 'Contractors' },
-                { href: 'b2b-targets.html', label: 'B2B Targets' }
             ]
         },
         tools: {
@@ -57,6 +62,7 @@
             icon: '🛠️',
             items: [
                 { href: 'quote-calculator.html', label: 'Quote Calculator' },
+                { href: 'partner-program.html', label: 'Partner Program' },
                 { href: 'setup.html', label: 'Settings' }
             ]
         }

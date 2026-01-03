@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex Enclosures - Partner CRM</title>
+    <title>Apex CRM - Apex Enclosures</title>
     <style>
         :root {
             --primary: #1e3a5f;
@@ -387,6 +387,42 @@
             width: calc(100% - 2rem);
         }
 
+        /* Contact Type Tabs */
+        .type-tabs {
+            display: flex;
+            gap: 0.25rem;
+            padding: 0.5rem 1rem;
+            background: #f1f5f9;
+            border-bottom: 1px solid var(--border);
+        }
+        .type-tab {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+        .type-tab:hover { background: white; color: var(--text); }
+        .type-tab.active { background: white; color: var(--accent); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .type-tab .count {
+            display: inline-block;
+            background: var(--border);
+            padding: 0.1rem 0.4rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            margin-left: 0.3rem;
+        }
+        .type-tab.active .count { background: rgba(37, 99, 235, 0.15); }
+
+        .badge-contact-partner { background: #dbeafe; color: #1e40af; }
+        .badge-contact-contractor { background: #fef3c7; color: #92400e; }
+        .badge-contact-commercial { background: #e0e7ff; color: #4f46e5; }
+        .badge-contact-retail { background: #dcfce7; color: #166534; }
+
         /* Responsive */
         @media (max-width: 900px) {
             .list-panel { width: 100%; position: absolute; z-index: 50; height: 100%; }
@@ -401,7 +437,7 @@
     <!-- Header -->
     <header class="header">
         <div style="display:flex;align-items:center;">
-            <h1>Partner CRM</h1>
+            <h1>Apex CRM</h1>
             <nav class="header-nav">
                 <a href="ai-dashboard.html">Dashboard</a>
                 <a href="ai-queue.html">Queue</a>
@@ -422,6 +458,14 @@
     <div class="main-container">
         <!-- Left Panel - Partner List -->
         <div class="list-panel">
+            <!-- Contact Type Tabs -->
+            <div class="type-tabs" id="typeTabs">
+                <button class="type-tab active" data-type="" onclick="setContactTypeFilter('')">All <span class="count" id="countAll">0</span></button>
+                <button class="type-tab" data-type="partner" onclick="setContactTypeFilter('partner')">Partners <span class="count" id="countPartner">0</span></button>
+                <button class="type-tab" data-type="contractor" onclick="setContactTypeFilter('contractor')">Contractors <span class="count" id="countContractor">0</span></button>
+                <button class="type-tab" data-type="commercial" onclick="setContactTypeFilter('commercial')">Commercial <span class="count" id="countCommercial">0</span></button>
+                <button class="type-tab" data-type="retail" onclick="setContactTypeFilter('retail')">Retail <span class="count" id="countRetail">0</span></button>
+            </div>
             <div class="list-header">
                 <div class="search-box">
                     <input type="text" class="search-input" id="searchInput" placeholder="Search partners..." oninput="renderList()">
@@ -485,17 +529,12 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">Type *</label>
-                        <select class="form-select" id="newPartnerType" required>
-                            <option value="Fabricator">Fabricator</option>
-                            <option value="AV Integrator">AV Integrator</option>
-                            <option value="Pool/Landscape">Pool/Landscape</option>
-                            <option value="Hospitality">Hospitality</option>
-                            <option value="Designer">Designer</option>
-                            <option value="Developer">Developer</option>
-                            <option value="Distributor">Distributor</option>
-                            <option value="Contractor">Contractor</option>
-                            <option value="Other">Other</option>
+                        <label class="form-label">Contact Type *</label>
+                        <select class="form-select" id="newContactType" required>
+                            <option value="partner">Partner</option>
+                            <option value="contractor">Contractor</option>
+                            <option value="commercial">Commercial</option>
+                            <option value="retail">Retail</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -509,6 +548,20 @@
                             <option value="Other">Other</option>
                         </select>
                     </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 0.75rem;">
+                    <label class="form-label">Business Type *</label>
+                    <select class="form-select" id="newPartnerType" required>
+                        <option value="Fabricator">Fabricator</option>
+                        <option value="AV Integrator">AV Integrator</option>
+                        <option value="Pool/Landscape">Pool/Landscape</option>
+                        <option value="Hospitality">Hospitality</option>
+                        <option value="Designer">Designer</option>
+                        <option value="Developer">Developer</option>
+                        <option value="Distributor">Distributor</option>
+                        <option value="Contractor">Contractor</option>
+                        <option value="Other">Other</option>
+                    </select>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
@@ -650,6 +703,7 @@
         // ============ DATA LAYER ============
         let partners = [];
         let selectedPartnerId = null;
+        let contactTypeFilter = ''; // '', 'partner', 'contractor', 'commercial', 'retail'
 
         // Activity type labels
         const activityTypes = {
@@ -668,6 +722,7 @@
             {
                 id: 1,
                 companyName: 'Al Shurooq',
+                contactType: 'partner',
                 partnerType: 'Fabricator',
                 region: 'UAE',
                 website: 'https://alshurooq.ae',
@@ -697,6 +752,7 @@
             {
                 id: 2,
                 companyName: 'Eurotech FZCO',
+                contactType: 'partner',
                 partnerType: 'Fabricator',
                 region: 'UAE',
                 website: 'https://eurotech-metal.com',
@@ -724,6 +780,7 @@
             {
                 id: 3,
                 companyName: 'Al Amazon Industries',
+                contactType: 'partner',
                 partnerType: 'Fabricator',
                 region: 'UAE',
                 website: 'https://www.alamazonuae.com',
@@ -751,6 +808,7 @@
             {
                 id: 4,
                 companyName: 'KDM Steel',
+                contactType: 'partner',
                 partnerType: 'Fabricator',
                 region: 'China',
                 website: 'https://www.kdmsteel.com',
@@ -779,6 +837,7 @@
             {
                 id: 5,
                 companyName: 'Flezco',
+                contactType: 'partner',
                 partnerType: 'Fabricator',
                 region: 'GCC',
                 website: 'https://www.flezco.com',
@@ -807,6 +866,7 @@
             {
                 id: 101,
                 companyName: 'Pulse Cinemas Middle East',
+                contactType: 'partner',
                 partnerType: 'AV Integrator',
                 region: 'UAE',
                 website: 'https://www.pulsecinemas.com',
@@ -830,6 +890,7 @@
             {
                 id: 102,
                 companyName: 'Almoe AV Systems',
+                contactType: 'partner',
                 partnerType: 'AV Integrator',
                 region: 'UAE',
                 website: 'https://www.almoe.com',
@@ -855,6 +916,7 @@
             {
                 id: 103,
                 companyName: 'Emaar Properties',
+                contactType: 'commercial',
                 partnerType: 'Developer',
                 region: 'UAE',
                 website: 'https://www.emaar.com',
@@ -878,6 +940,7 @@
             {
                 id: 104,
                 companyName: 'Bishop Design',
+                contactType: 'partner',
                 partnerType: 'Designer',
                 region: 'UAE',
                 website: 'https://www.bishopdesign.com',
@@ -901,6 +964,7 @@
             {
                 id: 105,
                 companyName: 'Desert Dreams Landscaping',
+                contactType: 'contractor',
                 partnerType: 'Pool/Landscape',
                 region: 'UAE',
                 website: '',
@@ -952,6 +1016,7 @@
                         partners = partnersData.map(p => ({
                             id: p.id,
                             companyName: p.company_name,
+                            contactType: p.contact_type || 'partner',
                             partnerType: p.partner_type,
                             region: p.region,
                             website: p.website,
@@ -1001,13 +1066,19 @@
             const stored = localStorage.getItem('apexCrmData');
             const version = localStorage.getItem('apexCrmVersion');
 
-            if (version !== 'v5' || !stored) {
-                // Initialize with new data structure
+            if (version !== 'v6' || !stored) {
+                // Initialize with new data structure (v6 adds contactType)
                 partners = initialPartners;
                 saveData();
-                localStorage.setItem('apexCrmVersion', 'v5');
+                localStorage.setItem('apexCrmVersion', 'v6');
             } else {
                 partners = JSON.parse(stored);
+                // Ensure all partners have contactType (migration)
+                partners.forEach(p => {
+                    if (!p.contactType) {
+                        p.contactType = 'partner'; // Default for existing partners
+                    }
+                });
             }
         }
 
@@ -1026,6 +1097,7 @@
 
                 const partnerData = {
                     company_name: partner.companyName,
+                    contact_type: partner.contactType || 'partner',
                     partner_type: partner.partnerType,
                     region: partner.region,
                     website: partner.website,
@@ -1103,6 +1175,9 @@
             const regionFilter = document.getElementById('regionFilter').value;
 
             let filtered = partners.filter(p => {
+                // Contact type filter (from tabs)
+                if (contactTypeFilter && p.contactType !== contactTypeFilter) return false;
+                // Search
                 if (search && !p.companyName.toLowerCase().includes(search) &&
                     !p.notes?.toLowerCase().includes(search)) return false;
                 if (typeFilter && p.partnerType !== typeFilter) return false;
@@ -1123,6 +1198,8 @@
             const listHtml = filtered.map(p => {
                 const typeClass = 'badge-type-' + p.partnerType.toLowerCase().replace(/[\s\/]+/g, '-');
                 const statusClass = 'badge-status-' + p.status.toLowerCase().replace(/\s+/g, '-');
+                const contactTypeClass = 'badge-contact-' + (p.contactType || 'partner');
+                const contactTypeLabel = { partner: 'Partner', contractor: 'Contractor', commercial: 'Commercial', retail: 'Retail' }[p.contactType] || 'Partner';
                 const primaryContact = p.contacts?.find(c => c.isPrimary) || p.contacts?.[0];
 
                 return `
@@ -1130,6 +1207,7 @@
                         <div class="partner-name">${p.companyName}</div>
                         <div class="partner-meta">${primaryContact?.name || 'No contact'} &middot; ${p.region}</div>
                         <div class="partner-badges">
+                            <span class="badge ${contactTypeClass}">${contactTypeLabel}</span>
                             <span class="badge ${typeClass}">${p.partnerType}</span>
                             <span class="badge ${statusClass}">${p.status}</span>
                             ${p.priority === 'High' ? '<span class="badge badge-priority-high">High</span>' : ''}
@@ -1140,6 +1218,36 @@
 
             document.getElementById('partnerList').innerHTML = listHtml || '<div style="padding: 2rem; text-align: center; color: var(--text-muted);">No partners found</div>';
             updateStats();
+            updateTypeCounts();
+        }
+
+        // Contact type filter
+        function setContactTypeFilter(type) {
+            contactTypeFilter = type;
+
+            // Update tab active states
+            document.querySelectorAll('.type-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.type === type);
+            });
+
+            renderList();
+        }
+
+        // Update contact type counts
+        function updateTypeCounts() {
+            const counts = {
+                all: partners.length,
+                partner: partners.filter(p => p.contactType === 'partner').length,
+                contractor: partners.filter(p => p.contactType === 'contractor').length,
+                commercial: partners.filter(p => p.contactType === 'commercial').length,
+                retail: partners.filter(p => p.contactType === 'retail').length
+            };
+
+            document.getElementById('countAll').textContent = counts.all;
+            document.getElementById('countPartner').textContent = counts.partner;
+            document.getElementById('countContractor').textContent = counts.contractor;
+            document.getElementById('countCommercial').textContent = counts.commercial;
+            document.getElementById('countRetail').textContent = counts.retail;
         }
 
         function updateStats() {
@@ -1177,6 +1285,8 @@
 
             const typeClass = 'badge-type-' + p.partnerType.toLowerCase().replace(/[\s\/]+/g, '-');
             const statusClass = 'badge-status-' + p.status.toLowerCase().replace(/\s+/g, '-');
+            const contactTypeClass = 'badge-contact-' + (p.contactType || 'partner');
+            const contactTypeLabel = { partner: 'Partner', contractor: 'Contractor', commercial: 'Commercial', retail: 'Retail' }[p.contactType] || 'Partner';
 
             const html = `
                 <button class="btn btn-outline back-btn" onclick="closeDetail()" style="margin-bottom: 1rem;">&larr; Back</button>
@@ -1185,6 +1295,7 @@
                     <div>
                         <div class="detail-title">${p.companyName}</div>
                         <div class="detail-subtitle">
+                            <span class="badge ${contactTypeClass}">${contactTypeLabel}</span>
                             <span class="badge ${typeClass}">${p.partnerType}</span>
                             <span class="badge ${statusClass}">${p.status}</span>
                             <span class="badge badge-priority-${p.priority.toLowerCase()}">${p.priority} Priority</span>
@@ -1388,6 +1499,7 @@
             const newPartner = {
                 id: Date.now(),
                 companyName: document.getElementById('newCompanyName').value,
+                contactType: document.getElementById('newContactType').value,
                 partnerType: document.getElementById('newPartnerType').value,
                 region: document.getElementById('newRegion').value,
                 website: document.getElementById('newWebsite').value || '',
