@@ -5,7 +5,7 @@
     // === PASSWORD PROTECTION FOR INTERNAL PAGES ===
     const PROTECTED_PAGES = [
         // Sales & Ops
-        'ai-dashboard.html', 'ai-queue.html', 'orders.html', 'ai-insights.html',
+        'ai-dashboard.html', 'ai-queue.html', 'orders.html', 'factory-orders.html', 'ai-insights.html',
         'project-tracker.html', 'partner-crm.html', 'partner-program.html',
         'target-partners.html', 'contractors.html', 'b2b-targets.html',
         'quote-calculator.html', 'bd-plan.html', 'go-to-market.html', 'setup.html',
@@ -85,6 +85,7 @@
         'ai-dashboard.html',
         'ai-queue.html',
         'orders.html',
+        'factory-orders.html',
         'ai-insights.html',
         'project-tracker.html',
         'partner-crm.html',
@@ -136,6 +137,7 @@
             icon: '📥',
             items: [
                 { href: 'orders.html', label: 'Orders Pipeline' },
+                { href: 'factory-orders.html', label: 'Factory Orders' },
                 { href: 'ai-insights.html', label: 'AI Insights' }
             ]
         },

@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory Orders - Apex Enclosures</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .main-container {
+            margin-left: 240px;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 768px) {
+            .main-container { margin-left: 0; padding: 1rem; padding-top: 60px; }
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.25rem 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .page-header { display: none; }
+        }
+
+        .page-header h1 { font-size: 1.5rem; font-weight: 600; }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover { background: #f1f5f9; }
+
+        .btn-secondary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary:hover { background: var(--primary-dark); }
+
+        .btn-success { background: var(--success); color: white; }
+        .btn-warning { background: var(--warning); color: white; }
+        .btn-danger { background: var(--danger); color: white; }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-outline:hover { background: var(--bg); }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .stat-value.success { color: var(--success); }
+        .stat-value.warning { color: var(--warning); }
+        .stat-value.info { color: var(--info); }
+
+        /* Table */
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h2 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 0.875rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: #f8fafc;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--muted);
+        }
+
+        tr:hover { background: #fafafa; }
+        tr:last-child td { border-bottom: none; }
+
+        .po-number {
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .po-number:hover { text-decoration: underline; }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-draft { background: #e2e8f0; color: #475569; }
+        .status-sent { background: #dbeafe; color: #1d4ed8; }
+        .status-in_production { background: #fef3c7; color: #b45309; }
+        .status-shipped { background: #d1fae5; color: #047857; }
+        .status-received { background: #10b981; color: white; }
+        .status-cancelled { background: #fee2e2; color: #dc2626; }
+
+        .payment-badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .payment-unpaid { background: #fee2e2; color: #dc2626; }
+        .payment-deposit_paid { background: #fef3c7; color: #b45309; }
+        .payment-paid { background: #d1fae5; color: #047857; }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--muted);
+        }
+
+        .empty-state h3 { margin-bottom: 0.5rem; color: var(--text); }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 { font-size: 1.125rem; }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--muted);
+        }
+
+        .modal-body { padding: 1.5rem; }
+
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.375rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.625rem 0.875rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.875rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        /* Line Items */
+        .line-items-table {
+            margin-top: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .line-items-table th,
+        .line-items-table td {
+            padding: 0.625rem 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        .line-items-table input {
+            width: 100%;
+            padding: 0.375rem 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+
+        .line-items-table .qty-input { width: 60px; text-align: center; }
+        .line-items-table .price-input { width: 100px; text-align: right; }
+
+        .add-line-btn {
+            margin-top: 0.5rem;
+            color: var(--primary);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .add-line-btn:hover { text-decoration: underline; }
+
+        .remove-line-btn {
+            color: var(--danger);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .totals-section {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.375rem 0;
+        }
+
+        .total-row.grand-total {
+            font-weight: 700;
+            font-size: 1.125rem;
+            border-top: 2px solid var(--border);
+            padding-top: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        /* PO Detail View */
+        .detail-view {
+            display: none;
+        }
+
+        .detail-view.active {
+            display: block;
+        }
+
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .detail-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .detail-section {
+            background: var(--card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 1.25rem;
+        }
+
+        .detail-section h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .detail-row:last-child { border-bottom: none; }
+
+        .detail-label { color: var(--muted); font-size: 0.875rem; }
+        .detail-value { font-weight: 500; }
+
+        /* Print Styles */
+        .print-only { display: none; }
+
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block; }
+            .main-container { margin-left: 0; padding: 0; }
+            .modal { max-width: 100%; box-shadow: none; }
+            body { background: white; }
+        }
+
+        /* Timeline */
+        .timeline {
+            margin-top: 1rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            position: relative;
+        }
+
+        .timeline-item:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 24px;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+        }
+
+        .timeline-dot.pending { background: var(--border); }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-title { font-weight: 500; }
+        .timeline-date { font-size: 0.8rem; color: var(--muted); }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="page-header no-print">
+            <h1>Factory Orders</h1>
+            <button class="btn btn-primary" onclick="showCreateModal()">+ New PO</button>
+        </div>
+
+        <!-- List View -->
+        <div id="listView">
+            <!-- Stats -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">Total POs</div>
+                    <div class="stat-value" id="statTotal">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">In Production</div>
+                    <div class="stat-value warning" id="statProduction">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Pending Delivery</div>
+                    <div class="stat-value info" id="statPending">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Spent</div>
+                    <div class="stat-value success" id="statSpent">$0</div>
+                </div>
+            </div>
+
+            <!-- PO Table -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Purchase Orders</h2>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <select class="form-control" style="width: auto;" id="statusFilter" onchange="renderPOList()">
+                            <option value="">All Status</option>
+                            <option value="draft">Draft</option>
+                            <option value="sent">Sent</option>
+                            <option value="in_production">In Production</option>
+                            <option value="shipped">Shipped</option>
+                            <option value="received">Received</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="poTableContainer">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>PO Number</th>
+                                <th>Supplier</th>
+                                <th>Items</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Payment</th>
+                                <th>Expected</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="poTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detail View -->
+        <div id="detailView" class="detail-view">
+            <div class="detail-header no-print">
+                <div>
+                    <button class="btn btn-outline" onclick="showListView()">← Back to List</button>
+                    <h1 style="margin-top: 0.5rem;" id="detailPONumber">APEX-PO-001</h1>
+                </div>
+                <div class="detail-actions" id="detailActions">
+                    <!-- Dynamic actions -->
+                </div>
+            </div>
+
+            <div class="detail-grid">
+                <div class="detail-section">
+                    <h3>Order Details</h3>
+                    <div id="detailOrderInfo"></div>
+                </div>
+                <div class="detail-section">
+                    <h3>Supplier</h3>
+                    <div id="detailSupplierInfo"></div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 1.5rem;">
+                <div class="card-header">
+                    <h2>Line Items</h2>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>SKU</th>
+                            <th>Description</th>
+                            <th>Color</th>
+                            <th style="text-align: center;">Qty</th>
+                            <th style="text-align: right;">Unit Cost</th>
+                            <th style="text-align: right;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detailLineItems"></tbody>
+                    <tfoot id="detailTotals"></tfoot>
+                </table>
+            </div>
+
+            <div class="detail-grid">
+                <div class="detail-section">
+                    <h3>Timeline</h3>
+                    <div id="detailTimeline"></div>
+                </div>
+                <div class="detail-section">
+                    <h3>Linked Customer Orders</h3>
+                    <div id="detailLinkedOrders"></div>
+                </div>
+            </div>
+
+            <div class="detail-section" style="margin-top: 1.5rem;">
+                <h3>Notes</h3>
+                <div id="detailNotes" style="white-space: pre-wrap;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create/Edit PO Modal -->
+    <div class="modal-overlay" id="poModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalTitle">New Purchase Order</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="poForm" onsubmit="savePO(event)">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>PO Number</label>
+                            <input type="text" class="form-control" id="poNumber" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" class="form-control" id="poDate" required>
+                        </div>
+                    </div>
+
+                    <h3 style="margin: 1.5rem 0 1rem; font-size: 0.9rem; color: var(--muted);">SUPPLIER</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Supplier Name</label>
+                            <select class="form-control" id="supplierSelect" onchange="updateSupplier()">
+                                <option value="">Select supplier...</option>
+                                <option value="eurotech">Eurotech Metal (UAE)</option>
+                                <option value="kdm">KDM Steel (China)</option>
+                                <option value="custom">Custom...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Contact Name</label>
+                            <input type="text" class="form-control" id="supplierContact">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" id="supplierEmail">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="text" class="form-control" id="supplierPhone">
+                        </div>
+                    </div>
+
+                    <h3 style="margin: 1.5rem 0 1rem; font-size: 0.9rem; color: var(--muted);">LINE ITEMS</h3>
+                    <div class="line-items-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>SKU</th>
+                                    <th>Description</th>
+                                    <th>Color</th>
+                                    <th style="width: 70px;">Qty</th>
+                                    <th style="width: 110px;">Unit Cost</th>
+                                    <th style="width: 100px;">Total</th>
+                                    <th style="width: 40px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="lineItemsBody">
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="button" class="add-line-btn" onclick="addLineItem()">+ Add Line Item</button>
+
+                    <div class="totals-section">
+                        <div class="total-row">
+                            <span>Subtotal</span>
+                            <span id="subtotalDisplay">$0.00</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Shipping</span>
+                            <span><input type="number" class="form-control" id="shippingCost" value="0" style="width: 100px; text-align: right;" onchange="calculateTotals()"></span>
+                        </div>
+                        <div class="total-row grand-total">
+                            <span>Total</span>
+                            <span id="grandTotalDisplay">$0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="form-row" style="margin-top: 1.5rem;">
+                        <div class="form-group">
+                            <label>Currency</label>
+                            <select class="form-control" id="currency">
+                                <option value="USD">USD ($)</option>
+                                <option value="AED">AED (د.إ)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Expected Delivery</label>
+                            <input type="date" class="form-control" id="expectedDelivery">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Notes</label>
+                        <textarea class="form-control" id="poNotes" rows="3" placeholder="Special instructions, requirements..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-secondary">Save PO</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Print PO Modal -->
+    <div class="modal-overlay" id="printModal">
+        <div class="modal" style="max-width: 700px;">
+            <div class="modal-header no-print">
+                <h2>Purchase Order</h2>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-secondary" onclick="window.print()">Print / Save PDF</button>
+                    <button class="btn btn-outline" onclick="copyPOToClipboard()">Copy for Email</button>
+                    <button class="modal-close" onclick="closePrintModal()">&times;</button>
+                </div>
+            </div>
+            <div class="modal-body" id="printContent">
+                <!-- Printable PO content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Status Modal -->
+    <div class="modal-overlay" id="statusModal">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2>Update Status</h2>
+                <button class="modal-close" onclick="closeStatusModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>New Status</label>
+                    <select class="form-control" id="newStatus">
+                        <option value="draft">Draft</option>
+                        <option value="sent">Sent to Supplier</option>
+                        <option value="in_production">In Production</option>
+                        <option value="shipped">Shipped</option>
+                        <option value="received">Received</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="form-group" id="dateField" style="display: none;">
+                    <label id="dateLabel">Date</label>
+                    <input type="date" class="form-control" id="statusDate">
+                </div>
+                <div class="form-group">
+                    <label>Notes (optional)</label>
+                    <textarea class="form-control" id="statusNotes" rows="2"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeStatusModal()">Cancel</button>
+                <button class="btn btn-secondary" onclick="updateStatus()">Update</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2>Record Payment</h2>
+                <button class="modal-close" onclick="closePaymentModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Payment Type</label>
+                    <select class="form-control" id="paymentType">
+                        <option value="deposit_paid">Deposit</option>
+                        <option value="paid">Full Payment</option>
+                    </select>
+                </div>
+                <div class="form-group" id="depositAmountGroup">
+                    <label>Deposit Amount</label>
+                    <input type="number" class="form-control" id="depositAmount" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label>Payment Date</label>
+                    <input type="date" class="form-control" id="paymentDate">
+                </div>
+                <div class="form-group">
+                    <label>Reference (optional)</label>
+                    <input type="text" class="form-control" id="paymentRef" placeholder="Bank transfer ref, check #...">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closePaymentModal()">Cancel</button>
+                <button class="btn btn-success" onclick="recordPayment()">Record Payment</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data
+        const DATA_KEY = 'apex_factory_orders';
+        const DATA_VERSION = 'v1';
+        let purchaseOrders = [];
+        let editingPOId = null;
+        let viewingPOId = null;
+        let lineItemCounter = 0;
+
+        // Supplier presets
+        const suppliers = {
+            eurotech: {
+                name: 'Eurotech Metal',
+                contact: '',
+                email: 'info@eurotech-metal.com',
+                phone: ''
+            },
+            kdm: {
+                name: 'KDM Steel',
+                contact: '',
+                email: 'sales@kdmsteel.com',
+                phone: '+86-13175970882'
+            }
+        };
+
+        // Product catalog
+        const products = [
+            { sku: 'ATE-55', description: 'TV Enclosure 55"', defaultCost: 550 },
+            { sku: 'ATE-65', description: 'TV Enclosure 65"', defaultCost: 600 },
+            { sku: 'ATE-75', description: 'TV Enclosure 75"', defaultCost: 650 },
+            { sku: 'ATE-85', description: 'TV Enclosure 85"', defaultCost: 750 },
+            { sku: 'ATE-86', description: 'TV Enclosure 86"', defaultCost: 780 },
+            { sku: 'APE-BASE', description: 'Pool Enclosure Base', defaultCost: 180 },
+            { sku: 'APE-EXT-A', description: 'Pool Extension A', defaultCost: 95 },
+            { sku: 'SPARE-FAN', description: 'Delta AFB1412HH-A Fan', defaultCost: 25 },
+            { sku: 'SPARE-FILTER', description: 'MERV 8 Filter Pack (3)', defaultCost: 8 },
+            { sku: 'CUSTOM', description: 'Custom Item', defaultCost: 0 }
+        ];
+
+        // Colors
+        const colors = [
+            { value: 'RAL 9005', label: 'Matte Black (RAL 9005)' },
+            { value: 'RAL 7032', label: 'Stone Grey (RAL 7032)' },
+            { value: 'RAL 1013', label: 'Oyster White (RAL 1013)' },
+            { value: 'RAL 1015', label: 'Light Ivory (RAL 1015)' },
+            { value: 'RAL 7044', label: 'Silk Grey (RAL 7044)' },
+            { value: 'RAL 7016', label: 'Anthracite (RAL 7016)' },
+            { value: 'RAL 8019', label: 'Grey Brown (RAL 8019)' },
+            { value: 'Custom', label: 'Custom RAL' }
+        ];
+
+        // Init
+        function init() {
+            loadData();
+            renderPOList();
+            updateStats();
+        }
+
+        function loadData() {
+            const saved = localStorage.getItem(DATA_KEY);
+            if (saved) {
+                const data = JSON.parse(saved);
+                purchaseOrders = data.orders || [];
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem(DATA_KEY, JSON.stringify({
+                version: DATA_VERSION,
+                orders: purchaseOrders
+            }));
+        }
+
+        function generatePONumber() {
+            const year = new Date().getFullYear().toString().slice(-2);
+            const month = String(new Date().getMonth() + 1).padStart(2, '0');
+            const count = purchaseOrders.length + 1;
+            return `APEX-PO-${year}${month}-${String(count).padStart(3, '0')}`;
+        }
+
+        // Stats
+        function updateStats() {
+            document.getElementById('statTotal').textContent = purchaseOrders.length;
+            document.getElementById('statProduction').textContent = purchaseOrders.filter(p => p.status === 'in_production').length;
+            document.getElementById('statPending').textContent = purchaseOrders.filter(p => ['sent', 'in_production', 'shipped'].includes(p.status)).length;
+
+            const totalSpent = purchaseOrders
+                .filter(p => p.paymentStatus === 'paid')
+                .reduce((sum, p) => sum + (p.total || 0), 0);
+            document.getElementById('statSpent').textContent = '$' + totalSpent.toLocaleString();
+        }
+
+        // List View
+        function renderPOList() {
+            const filter = document.getElementById('statusFilter').value;
+            let filtered = purchaseOrders;
+            if (filter) {
+                filtered = purchaseOrders.filter(p => p.status === filter);
+            }
+
+            // Sort by date descending
+            filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+            const tbody = document.getElementById('poTableBody');
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8">
+                            <div class="empty-state">
+                                <h3>No Purchase Orders</h3>
+                                <p>Create your first PO to get started</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(po => `
+                <tr>
+                    <td>
+                        <span class="po-number" onclick="viewPO('${po.id}')">${po.poNumber}</span>
+                    </td>
+                    <td>${po.supplier?.name || '-'}</td>
+                    <td>${po.items?.length || 0} item${(po.items?.length || 0) !== 1 ? 's' : ''}</td>
+                    <td><strong>${formatCurrency(po.total, po.currency)}</strong></td>
+                    <td><span class="status-badge status-${po.status}">${formatStatus(po.status)}</span></td>
+                    <td><span class="payment-badge payment-${po.paymentStatus}">${formatPayment(po.paymentStatus)}</span></td>
+                    <td>${po.expectedDelivery ? formatDate(po.expectedDelivery) : '-'}</td>
+                    <td>
+                        <button class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="viewPO('${po.id}')">View</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function formatStatus(status) {
+            const labels = {
+                draft: 'Draft',
+                sent: 'Sent',
+                in_production: 'In Production',
+                shipped: 'Shipped',
+                received: 'Received',
+                cancelled: 'Cancelled'
+            };
+            return labels[status] || status;
+        }
+
+        function formatPayment(status) {
+            const labels = {
+                unpaid: 'Unpaid',
+                deposit_paid: 'Deposit Paid',
+                paid: 'Paid'
+            };
+            return labels[status] || status;
+        }
+
+        function formatCurrency(amount, currency = 'USD') {
+            if (currency === 'AED') {
+                return 'AED ' + (amount || 0).toLocaleString();
+            }
+            return '$' + (amount || 0).toLocaleString();
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return '-';
+            return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        // Create/Edit Modal
+        function showCreateModal() {
+            editingPOId = null;
+            document.getElementById('modalTitle').textContent = 'New Purchase Order';
+            document.getElementById('poNumber').value = generatePONumber();
+            document.getElementById('poDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('supplierSelect').value = '';
+            document.getElementById('supplierContact').value = '';
+            document.getElementById('supplierEmail').value = '';
+            document.getElementById('supplierPhone').value = '';
+            document.getElementById('shippingCost').value = '0';
+            document.getElementById('currency').value = 'USD';
+            document.getElementById('expectedDelivery').value = '';
+            document.getElementById('poNotes').value = '';
+
+            // Reset line items
+            lineItemCounter = 0;
+            document.getElementById('lineItemsBody').innerHTML = '';
+            addLineItem();
+
+            calculateTotals();
+            document.getElementById('poModal').classList.add('active');
+        }
+
+        function showEditModal(id) {
+            const po = purchaseOrders.find(p => p.id === id);
+            if (!po) return;
+
+            editingPOId = id;
+            document.getElementById('modalTitle').textContent = 'Edit Purchase Order';
+            document.getElementById('poNumber').value = po.poNumber;
+            document.getElementById('poDate').value = po.createdAt;
+            document.getElementById('supplierSelect').value = 'custom';
+            document.getElementById('supplierContact').value = po.supplier?.contact || '';
+            document.getElementById('supplierEmail').value = po.supplier?.email || '';
+            document.getElementById('supplierPhone').value = po.supplier?.phone || '';
+            document.getElementById('shippingCost').value = po.shipping || 0;
+            document.getElementById('currency').value = po.currency || 'USD';
+            document.getElementById('expectedDelivery').value = po.expectedDelivery || '';
+            document.getElementById('poNotes').value = po.notes || '';
+
+            // Load line items
+            lineItemCounter = 0;
+            document.getElementById('lineItemsBody').innerHTML = '';
+            (po.items || []).forEach(item => {
+                addLineItem(item);
+            });
+
+            if ((po.items || []).length === 0) {
+                addLineItem();
+            }
+
+            calculateTotals();
+            document.getElementById('poModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('poModal').classList.remove('active');
+        }
+
+        function updateSupplier() {
+            const sel = document.getElementById('supplierSelect').value;
+            if (suppliers[sel]) {
+                document.getElementById('supplierContact').value = suppliers[sel].contact;
+                document.getElementById('supplierEmail').value = suppliers[sel].email;
+                document.getElementById('supplierPhone').value = suppliers[sel].phone;
+            }
+        }
+
+        // Line Items
+        function addLineItem(item = null) {
+            const idx = lineItemCounter++;
+            const tbody = document.getElementById('lineItemsBody');
+
+            const skuOptions = products.map(p =>
+                `<option value="${p.sku}" data-cost="${p.defaultCost}" ${item?.sku === p.sku ? 'selected' : ''}>${p.sku}</option>`
+            ).join('');
+
+            const colorOptions = colors.map(c =>
+                `<option value="${c.value}" ${item?.color === c.value ? 'selected' : ''}>${c.label}</option>`
+            ).join('');
+
+            const row = document.createElement('tr');
+            row.id = `line-${idx}`;
+            row.innerHTML = `
+                <td>
+                    <select class="form-control" id="sku-${idx}" onchange="updateLineItem(${idx})">
+                        ${skuOptions}
+                    </select>
+                </td>
+                <td>
+                    <input type="text" class="form-control" id="desc-${idx}" value="${item?.description || products[0].description}" placeholder="Description">
+                </td>
+                <td>
+                    <select class="form-control" id="color-${idx}">
+                        ${colorOptions}
+                    </select>
+                </td>
+                <td>
+                    <input type="number" class="form-control qty-input" id="qty-${idx}" value="${item?.quantity || 1}" min="1" onchange="calculateTotals()">
+                </td>
+                <td>
+                    <input type="number" class="form-control price-input" id="cost-${idx}" value="${item?.unitCost || products[0].defaultCost}" step="0.01" onchange="calculateTotals()">
+                </td>
+                <td style="text-align: right;" id="lineTotal-${idx}">$${((item?.quantity || 1) * (item?.unitCost || products[0].defaultCost)).toFixed(2)}</td>
+                <td>
+                    <button type="button" class="remove-line-btn" onclick="removeLine(${idx})">×</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+
+            if (item) {
+                document.getElementById(`sku-${idx}`).value = item.sku;
+                document.getElementById(`desc-${idx}`).value = item.description;
+                document.getElementById(`color-${idx}`).value = item.color || 'RAL 9005';
+            }
+
+            calculateTotals();
+        }
+
+        function updateLineItem(idx) {
+            const sku = document.getElementById(`sku-${idx}`).value;
+            const product = products.find(p => p.sku === sku);
+            if (product) {
+                document.getElementById(`desc-${idx}`).value = product.description;
+                document.getElementById(`cost-${idx}`).value = product.defaultCost;
+                calculateTotals();
+            }
+        }
+
+        function removeLine(idx) {
+            const row = document.getElementById(`line-${idx}`);
+            if (row) row.remove();
+            calculateTotals();
+        }
+
+        function calculateTotals() {
+            let subtotal = 0;
+            const rows = document.querySelectorAll('#lineItemsBody tr');
+
+            rows.forEach(row => {
+                const idx = row.id.replace('line-', '');
+                const qty = parseFloat(document.getElementById(`qty-${idx}`)?.value) || 0;
+                const cost = parseFloat(document.getElementById(`cost-${idx}`)?.value) || 0;
+                const lineTotal = qty * cost;
+
+                const lineTotalEl = document.getElementById(`lineTotal-${idx}`);
+                if (lineTotalEl) {
+                    lineTotalEl.textContent = '$' + lineTotal.toFixed(2);
+                }
+                subtotal += lineTotal;
+            });
+
+            const shipping = parseFloat(document.getElementById('shippingCost')?.value) || 0;
+            const grandTotal = subtotal + shipping;
+
+            document.getElementById('subtotalDisplay').textContent = '$' + subtotal.toFixed(2);
+            document.getElementById('grandTotalDisplay').textContent = '$' + grandTotal.toFixed(2);
+
+            return { subtotal, shipping, grandTotal };
+        }
+
+        function getLineItems() {
+            const items = [];
+            const rows = document.querySelectorAll('#lineItemsBody tr');
+
+            rows.forEach(row => {
+                const idx = row.id.replace('line-', '');
+                const sku = document.getElementById(`sku-${idx}`)?.value;
+                const desc = document.getElementById(`desc-${idx}`)?.value;
+                const color = document.getElementById(`color-${idx}`)?.value;
+                const qty = parseFloat(document.getElementById(`qty-${idx}`)?.value) || 0;
+                const cost = parseFloat(document.getElementById(`cost-${idx}`)?.value) || 0;
+
+                if (sku && qty > 0) {
+                    items.push({
+                        sku,
+                        description: desc,
+                        color,
+                        quantity: qty,
+                        unitCost: cost,
+                        total: qty * cost
+                    });
+                }
+            });
+
+            return items;
+        }
+
+        function savePO(e) {
+            e.preventDefault();
+
+            const totals = calculateTotals();
+            const items = getLineItems();
+
+            const po = {
+                id: editingPOId || 'po-' + Date.now(),
+                poNumber: document.getElementById('poNumber').value,
+                createdAt: document.getElementById('poDate').value,
+                status: 'draft',
+                supplier: {
+                    name: document.getElementById('supplierSelect').selectedOptions[0]?.text.includes('Select')
+                        ? document.getElementById('supplierContact').value
+                        : document.getElementById('supplierSelect').selectedOptions[0]?.text.split(' (')[0],
+                    contact: document.getElementById('supplierContact').value,
+                    email: document.getElementById('supplierEmail').value,
+                    phone: document.getElementById('supplierPhone').value
+                },
+                items,
+                subtotal: totals.subtotal,
+                shipping: totals.shipping,
+                total: totals.grandTotal,
+                currency: document.getElementById('currency').value,
+                expectedDelivery: document.getElementById('expectedDelivery').value,
+                notes: document.getElementById('poNotes').value,
+                paymentStatus: 'unpaid',
+                timeline: [{
+                    action: 'created',
+                    date: new Date().toISOString(),
+                    note: 'PO created'
+                }]
+            };
+
+            if (editingPOId) {
+                const existing = purchaseOrders.find(p => p.id === editingPOId);
+                if (existing) {
+                    po.status = existing.status;
+                    po.paymentStatus = existing.paymentStatus;
+                    po.timeline = existing.timeline;
+                    po.sentAt = existing.sentAt;
+                    po.receivedAt = existing.receivedAt;
+                }
+                const idx = purchaseOrders.findIndex(p => p.id === editingPOId);
+                purchaseOrders[idx] = po;
+            } else {
+                purchaseOrders.push(po);
+            }
+
+            saveData();
+            closeModal();
+            renderPOList();
+            updateStats();
+
+            if (!editingPOId) {
+                viewPO(po.id);
+            }
+        }
+
+        // Detail View
+        function viewPO(id) {
+            const po = purchaseOrders.find(p => p.id === id);
+            if (!po) return;
+
+            viewingPOId = id;
+            document.getElementById('listView').style.display = 'none';
+            document.getElementById('detailView').classList.add('active');
+
+            document.getElementById('detailPONumber').textContent = po.poNumber;
+
+            // Actions
+            let actions = `
+                <button class="btn btn-outline" onclick="showEditModal('${id}')">Edit</button>
+                <button class="btn btn-secondary" onclick="showPrintModal('${id}')">Print / Email</button>
+            `;
+
+            if (po.status === 'draft') {
+                actions += `<button class="btn btn-success" onclick="markAsSent('${id}')">Mark as Sent</button>`;
+            } else if (po.status !== 'received' && po.status !== 'cancelled') {
+                actions += `<button class="btn btn-warning" onclick="showStatusModal('${id}')">Update Status</button>`;
+            }
+
+            if (po.paymentStatus !== 'paid') {
+                actions += `<button class="btn btn-success" onclick="showPaymentModal('${id}')">Record Payment</button>`;
+            }
+
+            if (po.status !== 'cancelled') {
+                actions += `<button class="btn btn-danger" onclick="cancelPO('${id}')">Cancel</button>`;
+            }
+
+            document.getElementById('detailActions').innerHTML = actions;
+
+            // Order Info
+            document.getElementById('detailOrderInfo').innerHTML = `
+                <div class="detail-row">
+                    <span class="detail-label">Status</span>
+                    <span class="detail-value"><span class="status-badge status-${po.status}">${formatStatus(po.status)}</span></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Payment</span>
+                    <span class="detail-value"><span class="payment-badge payment-${po.paymentStatus}">${formatPayment(po.paymentStatus)}</span></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Created</span>
+                    <span class="detail-value">${formatDate(po.createdAt)}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Expected Delivery</span>
+                    <span class="detail-value">${formatDate(po.expectedDelivery)}</span>
+                </div>
+                ${po.receivedAt ? `
+                <div class="detail-row">
+                    <span class="detail-label">Received</span>
+                    <span class="detail-value">${formatDate(po.receivedAt)}</span>
+                </div>
+                ` : ''}
+            `;
+
+            // Supplier Info
+            document.getElementById('detailSupplierInfo').innerHTML = `
+                <div class="detail-row">
+                    <span class="detail-label">Company</span>
+                    <span class="detail-value">${po.supplier?.name || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Contact</span>
+                    <span class="detail-value">${po.supplier?.contact || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Email</span>
+                    <span class="detail-value">${po.supplier?.email ? `<a href="mailto:${po.supplier.email}">${po.supplier.email}</a>` : '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Phone</span>
+                    <span class="detail-value">${po.supplier?.phone || '-'}</span>
+                </div>
+            `;
+
+            // Line Items
+            document.getElementById('detailLineItems').innerHTML = (po.items || []).map(item => `
+                <tr>
+                    <td><strong>${item.sku}</strong></td>
+                    <td>${item.description}</td>
+                    <td>${item.color || '-'}</td>
+                    <td style="text-align: center;">${item.quantity}</td>
+                    <td style="text-align: right;">${formatCurrency(item.unitCost, po.currency)}</td>
+                    <td style="text-align: right;"><strong>${formatCurrency(item.total, po.currency)}</strong></td>
+                </tr>
+            `).join('');
+
+            // Totals
+            document.getElementById('detailTotals').innerHTML = `
+                <tr>
+                    <td colspan="5" style="text-align: right;">Subtotal</td>
+                    <td style="text-align: right;">${formatCurrency(po.subtotal, po.currency)}</td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="text-align: right;">Shipping</td>
+                    <td style="text-align: right;">${formatCurrency(po.shipping, po.currency)}</td>
+                </tr>
+                <tr style="font-weight: 700; font-size: 1.1rem;">
+                    <td colspan="5" style="text-align: right;">Total</td>
+                    <td style="text-align: right;">${formatCurrency(po.total, po.currency)}</td>
+                </tr>
+            `;
+
+            // Timeline
+            const timeline = po.timeline || [];
+            document.getElementById('detailTimeline').innerHTML = timeline.length > 0
+                ? `<div class="timeline">${timeline.map((t, i) => `
+                    <div class="timeline-item">
+                        <div class="timeline-dot">${i + 1}</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">${t.action.charAt(0).toUpperCase() + t.action.slice(1).replace(/_/g, ' ')}</div>
+                            <div class="timeline-date">${formatDate(t.date)}${t.note ? ' - ' + t.note : ''}</div>
+                        </div>
+                    </div>
+                `).join('')}</div>`
+                : '<p style="color: var(--muted);">No timeline events yet</p>';
+
+            // Linked Orders
+            document.getElementById('detailLinkedOrders').innerHTML = (po.linkedOrders || []).length > 0
+                ? (po.linkedOrders || []).map(orderId => `<div style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">${orderId}</div>`).join('')
+                : '<p style="color: var(--muted);">No linked customer orders</p>';
+
+            // Notes
+            document.getElementById('detailNotes').textContent = po.notes || 'No notes';
+        }
+
+        function showListView() {
+            viewingPOId = null;
+            document.getElementById('listView').style.display = 'block';
+            document.getElementById('detailView').classList.remove('active');
+        }
+
+        // Status Updates
+        function markAsSent(id) {
+            const po = purchaseOrders.find(p => p.id === id);
+            if (!po) return;
+
+            po.status = 'sent';
+            po.sentAt = new Date().toISOString();
+            po.timeline = po.timeline || [];
+            po.timeline.push({
+                action: 'sent',
+                date: new Date().toISOString(),
+                note: 'Sent to supplier'
+            });
+
+            saveData();
+            viewPO(id);
+            updateStats();
+        }
+
+        function showStatusModal(id) {
+            viewingPOId = id;
+            const po = purchaseOrders.find(p => p.id === id);
+            if (!po) return;
+
+            document.getElementById('newStatus').value = po.status;
+            document.getElementById('statusNotes').value = '';
+            document.getElementById('statusDate').value = new Date().toISOString().split('T')[0];
+
+            document.getElementById('statusModal').classList.add('active');
+            updateStatusDateField();
+
+            document.getElementById('newStatus').onchange = updateStatusDateField;
+        }
+
+        function updateStatusDateField() {
+            const status = document.getElementById('newStatus').value;
+            const dateField = document.getElementById('dateField');
+            const dateLabel = document.getElementById('dateLabel');
+
+            if (['shipped', 'received'].includes(status)) {
+                dateField.style.display = 'block';
+                dateLabel.textContent = status === 'shipped' ? 'Ship Date' : 'Received Date';
+            } else {
+                dateField.style.display = 'none';
+            }
+        }
+
+        function closeStatusModal() {
+            document.getElementById('statusModal').classList.remove('active');
+        }
+
+        function updateStatus() {
+            const po = purchaseOrders.find(p => p.id === viewingPOId);
+            if (!po) return;
+
+            const newStatus = document.getElementById('newStatus').value;
+            const notes = document.getElementById('statusNotes').value;
+            const date = document.getElementById('statusDate').value;
+
+            po.status = newStatus;
+            po.timeline = po.timeline || [];
+            po.timeline.push({
+                action: newStatus,
+                date: date || new Date().toISOString(),
+                note: notes
+            });
+
+            if (newStatus === 'received') {
+                po.receivedAt = date || new Date().toISOString();
+            }
+
+            saveData();
+            closeStatusModal();
+            viewPO(viewingPOId);
+            updateStats();
+        }
+
+        function cancelPO(id) {
+            if (!confirm('Are you sure you want to cancel this PO?')) return;
+
+            const po = purchaseOrders.find(p => p.id === id);
+            if (!po) return;
+
+            po.status = 'cancelled';
+            po.timeline = po.timeline || [];
+            po.timeline.push({
+                action: 'cancelled',
+                date: new Date().toISOString(),
+                note: 'PO cancelled'
+            });
+
+            saveData();
+            viewPO(id);
+            updateStats();
+        }
+
+        // Payment
+        function showPaymentModal(id) {
+            viewingPOId = id;
+            const po = purchaseOrders.find(p => p.id === id);
+            if (!po) return;
+
+            document.getElementById('paymentType').value = 'deposit_paid';
+            document.getElementById('depositAmount').value = Math.round(po.total * 0.3);
+            document.getElementById('paymentDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('paymentRef').value = '';
+
+            document.getElementById('paymentModal').classList.add('active');
+
+            document.getElementById('paymentType').onchange = function() {
+                document.getElementById('depositAmountGroup').style.display =
+                    this.value === 'deposit_paid' ? 'block' : 'none';
+            };
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.remove('active');
+        }
+
+        function recordPayment() {
+            const po = purchaseOrders.find(p => p.id === viewingPOId);
+            if (!po) return;
+
+            const type = document.getElementById('paymentType').value;
+            const date = document.getElementById('paymentDate').value;
+            const ref = document.getElementById('paymentRef').value;
+
+            po.paymentStatus = type;
+            po.timeline = po.timeline || [];
+
+            if (type === 'deposit_paid') {
+                const amount = parseFloat(document.getElementById('depositAmount').value) || 0;
+                po.depositAmount = amount;
+                po.depositPaidAt = date;
+                po.timeline.push({
+                    action: 'deposit_paid',
+                    date: date,
+                    note: `Deposit of ${formatCurrency(amount, po.currency)} paid${ref ? ' (Ref: ' + ref + ')' : ''}`
+                });
+            } else {
+                po.paidAt = date;
+                po.timeline.push({
+                    action: 'paid',
+                    date: date,
+                    note: `Full payment of ${formatCurrency(po.total, po.currency)}${ref ? ' (Ref: ' + ref + ')' : ''}`
+                });
+            }
+
+            saveData();
+            closePaymentModal();
+            viewPO(viewingPOId);
+            updateStats();
+        }
+
+        // Print Modal
+        function showPrintModal(id) {
+            const po = purchaseOrders.find(p => p.id === id);
+            if (!po) return;
+
+            const itemRows = (po.items || []).map(item => `
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">${item.sku}</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">${item.description}</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">${item.color || '-'}</td>
+                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">${item.quantity}</td>
+                    <td style="padding: 8px; border: 1px solid #ddd; text-align: right;">${formatCurrency(item.unitCost, po.currency)}</td>
+                    <td style="padding: 8px; border: 1px solid #ddd; text-align: right;">${formatCurrency(item.total, po.currency)}</td>
+                </tr>
+            `).join('');
+
+            document.getElementById('printContent').innerHTML = `
+                <div style="font-family: Arial, sans-serif; max-width: 650px; margin: 0 auto; padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px;">
+                        <div>
+                            <h1 style="margin: 0; color: #1a1a2e; font-size: 24px;">PURCHASE ORDER</h1>
+                            <p style="margin: 5px 0; color: #666; font-size: 18px;">${po.poNumber}</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p style="margin: 0; font-weight: bold;">Apex Enclosures</p>
+                            <p style="margin: 5px 0; color: #666;">Dubai, UAE</p>
+                            <p style="margin: 5px 0; color: #666;">info@apexenclosures.com</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 40px; margin-bottom: 30px;">
+                        <div style="flex: 1;">
+                            <h3 style="margin: 0 0 10px; color: #666; font-size: 12px; text-transform: uppercase;">Supplier</h3>
+                            <p style="margin: 0; font-weight: bold;">${po.supplier?.name || '-'}</p>
+                            ${po.supplier?.contact ? `<p style="margin: 5px 0;">${po.supplier.contact}</p>` : ''}
+                            ${po.supplier?.email ? `<p style="margin: 5px 0;">${po.supplier.email}</p>` : ''}
+                            ${po.supplier?.phone ? `<p style="margin: 5px 0;">${po.supplier.phone}</p>` : ''}
+                        </div>
+                        <div style="flex: 1; text-align: right;">
+                            <p style="margin: 5px 0;"><strong>Date:</strong> ${formatDate(po.createdAt)}</p>
+                            <p style="margin: 5px 0;"><strong>Expected Delivery:</strong> ${formatDate(po.expectedDelivery)}</p>
+                            <p style="margin: 5px 0;"><strong>Currency:</strong> ${po.currency}</p>
+                        </div>
+                    </div>
+
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                        <thead>
+                            <tr style="background: #f5f5f5;">
+                                <th style="padding: 10px 8px; border: 1px solid #ddd; text-align: left;">SKU</th>
+                                <th style="padding: 10px 8px; border: 1px solid #ddd; text-align: left;">Description</th>
+                                <th style="padding: 10px 8px; border: 1px solid #ddd; text-align: left;">Color</th>
+                                <th style="padding: 10px 8px; border: 1px solid #ddd; text-align: center;">Qty</th>
+                                <th style="padding: 10px 8px; border: 1px solid #ddd; text-align: right;">Unit Price</th>
+                                <th style="padding: 10px 8px; border: 1px solid #ddd; text-align: right;">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${itemRows}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" style="padding: 8px; border: 1px solid #ddd; text-align: right;">Subtotal</td>
+                                <td style="padding: 8px; border: 1px solid #ddd; text-align: right;">${formatCurrency(po.subtotal, po.currency)}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" style="padding: 8px; border: 1px solid #ddd; text-align: right;">Shipping</td>
+                                <td style="padding: 8px; border: 1px solid #ddd; text-align: right;">${formatCurrency(po.shipping, po.currency)}</td>
+                            </tr>
+                            <tr style="font-weight: bold; background: #f5f5f5;">
+                                <td colspan="5" style="padding: 10px 8px; border: 1px solid #ddd; text-align: right;">TOTAL</td>
+                                <td style="padding: 10px 8px; border: 1px solid #ddd; text-align: right;">${formatCurrency(po.total, po.currency)}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    ${po.notes ? `
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="margin: 0 0 10px; color: #666; font-size: 12px; text-transform: uppercase;">Notes</h3>
+                        <p style="margin: 0; white-space: pre-wrap; background: #f9f9f9; padding: 10px; border-radius: 4px;">${po.notes}</p>
+                    </div>
+                    ` : ''}
+
+                    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd;">
+                        <p style="margin: 0; color: #666; font-size: 12px;">Please confirm receipt of this order and expected delivery date.</p>
+                        <p style="margin: 10px 0 0; color: #666; font-size: 12px;">Payment terms as per agreement.</p>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('printModal').classList.add('active');
+        }
+
+        function closePrintModal() {
+            document.getElementById('printModal').classList.remove('active');
+        }
+
+        function copyPOToClipboard() {
+            const po = purchaseOrders.find(p => p.id === viewingPOId);
+            if (!po) return;
+
+            const itemLines = (po.items || []).map(item =>
+                `- ${item.quantity}x ${item.sku} - ${item.description} (${item.color || 'Matte Black'}) @ ${formatCurrency(item.unitCost, po.currency)} = ${formatCurrency(item.total, po.currency)}`
+            ).join('\n');
+
+            const text = `PURCHASE ORDER: ${po.poNumber}
+
+From: Apex Enclosures
+To: ${po.supplier?.name || '-'}
+
+Date: ${formatDate(po.createdAt)}
+Expected Delivery: ${formatDate(po.expectedDelivery)}
+
+ITEMS:
+${itemLines}
+
+Subtotal: ${formatCurrency(po.subtotal, po.currency)}
+Shipping: ${formatCurrency(po.shipping, po.currency)}
+TOTAL: ${formatCurrency(po.total, po.currency)}
+
+${po.notes ? `Notes:\n${po.notes}\n\n` : ''}Please confirm receipt of this order and expected delivery date.
+
+Best regards,
+Apex Enclosures`;
+
+            navigator.clipboard.writeText(text).then(() => {
+                alert('PO copied to clipboard! Paste into your email.');
+            });
+        }
+
+        // Init
+        init();
+    </script>
+    <script src="nav.js"></script>
+</body>
+</html>
