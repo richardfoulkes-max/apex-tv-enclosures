@@ -3,836 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ATE-75 Detailed Design - Apex TV Enclosures</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>ATE-75 Design Gallery - Apex TV Enclosures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0d9488;
-            --primary-light: #e8ebf7;
             --text: #0f172a;
             --text-muted: #64748b;
             --bg: #ffffff;
             --bg-alt: #f8fafc;
             --border: #e2e8f0;
             --success: #059669;
-            --warning: #d97706;
-            --danger: #dc2626;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: var(--bg-alt); color: var(--text); line-height: 1.6; }
 
-        .doc-nav { background: linear-gradient(135deg, #0d9488 0%, #0a7169 100%); padding: 1rem 2rem; }
-        .doc-nav h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(255,255,255,0.7); margin-bottom: 0.75rem; }
-        .doc-nav-grid { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-        .doc-card { background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; color: white; border: 1px solid rgba(255,255,255,0.2); font-size: 0.85rem; font-weight: 500; }
-        .doc-card:hover { background: rgba(255,255,255,0.2); }
-        .doc-card.active { background: white; color: var(--primary); }
-
         header { background: white; padding: 2rem; border-bottom: 1px solid var(--border); }
-        .header-content { max-width: 1600px; margin: 0 auto; }
+        .header-content { max-width: 1400px; margin: 0 auto; }
         header h1 { font-size: 1.75rem; color: var(--primary); }
         header .subtitle { color: var(--text-muted); }
+        .version-badge { display: inline-block; background: var(--success); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-left: 0.5rem; }
 
-        .container { max-width: 1600px; margin: 0 auto; padding: 2rem; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
 
-        .design-section { background: white; border-radius: 12px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .design-section h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; border-bottom: 3px solid var(--primary); padding-bottom: 0.5rem; }
-        .design-section h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: var(--text); }
+        .section { background: white; border-radius: 12px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .section h2 { font-size: 1.4rem; color: var(--primary); margin-bottom: 1rem; border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem; }
+        .section h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: var(--text); }
 
-        .drawing-container { background: #fafafa; border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; overflow-x: auto; }
-        .drawing-container svg { display: block; margin: 0 auto; }
+        .render-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin: 1.5rem 0; }
+        .render-card { background: #fafafa; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+        .render-card img { width: 100%; height: auto; display: block; }
+        .render-card .caption { padding: 1rem; border-top: 1px solid var(--border); }
+        .render-card .caption h4 { font-size: 1rem; margin-bottom: 0.25rem; }
+        .render-card .caption p { font-size: 0.85rem; color: var(--text-muted); }
 
-        .view-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; margin: 1rem 0; }
-        .view-box { background: #fafafa; border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; }
-        .view-box h4 { font-size: 0.9rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; text-align: center; letter-spacing: 0.5px; }
+        .hero-render { margin: 1.5rem 0; }
+        .hero-render img { width: 100%; max-width: 1200px; height: auto; display: block; margin: 0 auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
 
-        .parts-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
-        .parts-table th, .parts-table td { padding: 0.6rem 0.8rem; text-align: left; border: 1px solid var(--border); }
-        .parts-table th { background: var(--bg-alt); font-weight: 600; }
-        .parts-table tr:hover { background: #f8fafc; }
-        .part-num { background: var(--primary); color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 600; font-size: 0.8rem; }
+        .specs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0; }
+        .spec-card { background: var(--bg-alt); padding: 1rem; border-radius: 8px; text-align: center; }
+        .spec-card .value { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .spec-card .label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
 
-        @media print { .doc-nav { display: none; } }
+        .feature-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin: 1rem 0; }
+        .feature-item { display: flex; gap: 0.75rem; padding: 0.75rem; background: var(--bg-alt); border-radius: 8px; }
+        .feature-icon { font-size: 1.25rem; }
+        .feature-text h5 { font-size: 0.9rem; margin-bottom: 0.25rem; }
+        .feature-text p { font-size: 0.8rem; color: var(--text-muted); }
+
+        .note-box { background: #f0fdf4; border-left: 4px solid var(--success); padding: 1rem; margin: 1rem 0; font-size: 0.9rem; border-radius: 0 8px 8px 0; }
     </style>
 </head>
 <body>
-    <nav class="doc-nav">
-        <h3>Manufacturing Documentation</h3>
-        <div class="doc-nav-grid">
-            <a href="index.html" class="doc-card">Website</a>
-            <a href="specification.html" class="doc-card">Specification</a>
-            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
-            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
-            <a href="control-logic.html" class="doc-card">Control Logic</a>
-            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
-            <a href="market-research.html" class="doc-card">Market Research</a>
-            <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
-            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
-            <a href="engineering-analysis.html" class="doc-card">Engineering Analysis</a>
-            <a href="testing-plan.html" class="doc-card">Testing Plan</a>
-            <a href="china-suppliers.html" class="doc-card">China Suppliers</a>
-            <a href="go-to-market.html" class="doc-card">Go-to-Market</a>
-            <a href="tv-compatibility.html" class="doc-card">TV Compatibility</a>
-            <a href="audio-noise-video.html" class="doc-card">Audio &amp; Video</a>
-            <a href="designs.html" class="doc-card">Designs</a>
-            <a href="contractors.html" class="doc-card">Contractors</a>
-            <a href="compliance-guide.html" class="doc-card">Compliance Guide</a>
-            <a href="global-pricing.html" class="doc-card">Global Pricing</a>
-            <a href="financial-forecast.html" class="doc-card">Financial Forecast</a>
-            <a href="competitor-analysis.html" class="doc-card">Competitors</a>
-            <a href="legal-risk.html" class="doc-card">Legal Risk</a>
-            <a href="retail/index.html" class="doc-card">Retail</a>
-            <a href="partner/index.html" class="doc-card">Partner</a>
-            <a href="commercial/index.html" class="doc-card">Commercial</a>
-            <a href="partner-crm.html" class="doc-card">Partner CRM</a>
-        </div>
-    </nav>
-
     <header>
         <div class="header-content">
-            <h1>ATE-75 Detailed Design Package</h1>
-            <p class="subtitle">Complete exploded assembly and multi-angle visualization | 1709 × 1084 × 135mm</p>
+            <h1>ATE-75 Design Gallery <span class="version-badge">v5.3.0</span></h1>
+            <p class="subtitle">Integrated Bezel Ventilation Design | 1760 × 1120 × 160mm | IP55 Rated</p>
         </div>
     </header>
 
     <div class="container">
 
-        <!-- ========== REALISTIC PRODUCT VIEWS ========== -->
-        <div class="design-section">
-            <h2>Product Visualization</h2>
-            <p>Realistic renderings showing the ATE-75 as it will appear when manufactured.</p>
-
-            <div class="view-grid">
-                <div class="view-box">
-                    <h4>Front View - Closed</h4>
-                    <svg viewBox="0 0 500 380" width="100%" height="320">
-                        <!-- Background/environment hint -->
-                        <defs>
-                            <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:0.3"/>
-                                <stop offset="100%" style="stop-color:#E0F4FF;stop-opacity:0.3"/>
-                            </linearGradient>
-                            <linearGradient id="frameGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#2a2a2a"/>
-                                <stop offset="50%" style="stop-color:#0f172a"/>
-                                <stop offset="100%" style="stop-color:#f8fafc"/>
-                            </linearGradient>
-                            <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#1a365d;stop-opacity:0.6"/>
-                                <stop offset="100%" style="stop-color:#2d4a7c;stop-opacity:0.4"/>
-                            </linearGradient>
-                            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-                                <feDropShadow dx="4" dy="8" stdDeviation="8" flood-opacity="0.3"/>
-                            </filter>
-                        </defs>
-
-                        <!-- Main enclosure frame -->
-                        <rect x="50" y="40" width="400" height="280" rx="6" fill="url(#frameGrad)" stroke="#111" stroke-width="2" filter="url(#shadow)"/>
-
-                        <!-- Glass panel -->
-                        <rect x="62" y="52" width="376" height="256" rx="2" fill="url(#glassGrad)" stroke="#e2e8f0" stroke-width="1"/>
-
-                        <!-- Glass reflection -->
-                        <polygon points="62,52 200,52 120,150 62,150" fill="white" fill-opacity="0.08"/>
-                        <polygon points="300,52 438,52 438,120 360,180" fill="white" fill-opacity="0.05"/>
-
-                        <!-- Screen visible through glass -->
-                        <rect x="72" y="72" width="356" height="216" rx="1" fill="#0f0f0f"/>
-
-                        <!-- Screen content hint (subtle) -->
-                        <rect x="82" y="82" width="336" height="196" fill="#111"/>
-                        <text x="250" y="185" text-anchor="middle" font-size="24" fill="#e2e8f0" font-weight="300">75" DISPLAY</text>
-
-                        <!-- Frame corner details -->
-                        <rect x="50" y="40" width="25" height="25" rx="3" fill="#222"/>
-                        <rect x="425" y="40" width="25" height="25" rx="3" fill="#222"/>
-                        <rect x="50" y="295" width="25" height="25" rx="3" fill="#222"/>
-                        <rect x="425" y="295" width="25" height="25" rx="3" fill="#222"/>
-
-                        <!-- Subtle bezel highlight -->
-                        <line x1="50" y1="42" x2="450" y2="42" stroke="#444" stroke-width="1"/>
-                        <line x1="52" y1="40" x2="52" y2="320" stroke="#444" stroke-width="1"/>
-
-                        <!-- Model label -->
-                        <text x="250" y="360" text-anchor="middle" font-size="12" fill="#666">ATE-75 | FRONT VIEW | MATTE BLACK FINISH</text>
-                    </svg>
+        <!-- Quick Specs -->
+        <div class="section">
+            <h2>Key Specifications</h2>
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <div class="value">1760mm</div>
+                    <div class="label">Width</div>
                 </div>
-
-                <div class="view-box">
-                    <h4>3/4 View - Perspective</h4>
-                    <svg viewBox="0 0 500 380" width="100%" height="320">
-                        <defs>
-                            <linearGradient id="sideGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" style="stop-color:#1a1a1a"/>
-                                <stop offset="100%" style="stop-color:#333"/>
-                            </linearGradient>
-                            <linearGradient id="topGrad" x1="0%" y1="100%" x2="0%" y2="0%">
-                                <stop offset="0%" style="stop-color:#252525"/>
-                                <stop offset="100%" style="stop-color:#3a3a3a"/>
-                            </linearGradient>
-                        </defs>
-
-                        <!-- Back edge (visible at top-right) -->
-                        <polygon points="100,60 400,35 435,55 135,80" fill="#1a1a1a" stroke="#111" stroke-width="1"/>
-
-                        <!-- Top face (shallow depth) -->
-                        <polygon points="100,60 135,80 435,55 400,35" fill="url(#topGrad)" stroke="#111" stroke-width="1.5"/>
-
-                        <!-- Fan grilles on top -->
-                        <ellipse cx="180" cy="68" rx="15" ry="5" fill="#444" stroke="#333" stroke-width="1"/>
-                        <ellipse cx="260" cy="62" rx="15" ry="5" fill="#444" stroke="#333" stroke-width="1"/>
-                        <ellipse cx="340" cy="56" rx="15" ry="5" fill="#444" stroke="#333" stroke-width="1"/>
-
-                        <!-- Right side face (narrow - showing depth) -->
-                        <polygon points="400,35 435,55 435,310 400,330" fill="url(#sideGrad)" stroke="#111" stroke-width="1.5"/>
-
-                        <!-- Ventilation slots on side -->
-                        <line x1="408" y1="80" x2="428" y2="75" stroke="#444" stroke-width="2"/>
-                        <line x1="408" y1="100" x2="428" y2="95" stroke="#444" stroke-width="2"/>
-                        <line x1="408" y1="120" x2="428" y2="115" stroke="#444" stroke-width="2"/>
-
-                        <!-- Front face (main visible face) -->
-                        <polygon points="135,80 435,55 435,310 135,335" fill="#0f172a" stroke="#111" stroke-width="2"/>
-
-                        <!-- Glass panel on front -->
-                        <polygon points="148,92 422,68 422,298 148,322" fill="url(#glassGrad)" stroke="#444" stroke-width="1"/>
-
-                        <!-- Glass reflection -->
-                        <polygon points="148,92 250,82 220,180 148,190" fill="white" fill-opacity="0.08"/>
-
-                        <!-- Screen visible through glass -->
-                        <polygon points="158,102 412,80 412,288 158,310" fill="#0a0a0a"/>
-
-                        <!-- Corner mounting brackets -->
-                        <polygon points="135,80 155,78 158,95 138,97" fill="#333"/>
-                        <polygon points="435,55 415,57 412,73 432,71" fill="#333"/>
-                        <polygon points="135,335 155,333 158,318 138,320" fill="#333"/>
-                        <polygon points="435,310 415,308 412,293 432,295" fill="#333"/>
-
-                        <!-- Hinge indication on left -->
-                        <circle cx="140" cy="140" r="4" fill="#444"/>
-                        <circle cx="140" cy="275" r="4" fill="#444"/>
-
-                        <!-- Model label -->
-                        <text x="250" y="365" text-anchor="middle" font-size="12" fill="#666">ATE-75 | 3/4 PERSPECTIVE | IP66 RATED</text>
-                    </svg>
+                <div class="spec-card">
+                    <div class="value">1120mm</div>
+                    <div class="label">Height</div>
                 </div>
-            </div>
-
-            <div class="view-grid">
-                <div class="view-box">
-                    <h4>Rear View</h4>
-                    <svg viewBox="0 0 500 380" width="100%" height="320">
-                        <!-- Main rear panel -->
-                        <rect x="50" y="40" width="400" height="280" rx="4" fill="#d4d4d4" stroke="#999" stroke-width="2" filter="url(#shadow)"/>
-
-                        <!-- Panel lines/texture -->
-                        <line x1="50" y1="100" x2="450" y2="100" stroke="#bbb" stroke-width="1"/>
-                        <line x1="50" y1="260" x2="450" y2="260" stroke="#bbb" stroke-width="1"/>
-
-                        <!-- Fan modules (top) -->
-                        <g id="fan-array">
-                            <circle cx="130" cy="70" r="28" fill="#0f172a" stroke="#e2e8f0" stroke-width="2"/>
-                            <circle cx="130" cy="70" r="22" fill="#2a2a2a"/>
-                            <circle cx="130" cy="70" r="8" fill="#444"/>
-
-                            <circle cx="210" cy="70" r="28" fill="#0f172a" stroke="#e2e8f0" stroke-width="2"/>
-                            <circle cx="210" cy="70" r="22" fill="#2a2a2a"/>
-                            <circle cx="210" cy="70" r="8" fill="#444"/>
-
-                            <circle cx="290" cy="70" r="28" fill="#0f172a" stroke="#e2e8f0" stroke-width="2"/>
-                            <circle cx="290" cy="70" r="22" fill="#2a2a2a"/>
-                            <circle cx="290" cy="70" r="8" fill="#444"/>
-
-                            <circle cx="370" cy="70" r="28" fill="#0f172a" stroke="#e2e8f0" stroke-width="2"/>
-                            <circle cx="370" cy="70" r="22" fill="#2a2a2a"/>
-                            <circle cx="370" cy="70" r="8" fill="#444"/>
-                        </g>
-                        <text x="250" y="115" text-anchor="middle" font-size="9" fill="#666">80mm PWM EXHAUST FANS × 4</text>
-
-                        <!-- VESA mount pattern -->
-                        <rect x="175" y="145" width="150" height="90" rx="3" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6,3"/>
-                        <circle cx="195" cy="165" r="6" fill="#666"/>
-                        <circle cx="305" cy="165" r="6" fill="#666"/>
-                        <circle cx="195" cy="215" r="6" fill="#666"/>
-                        <circle cx="305" cy="215" r="6" fill="#666"/>
-                        <text x="250" y="250" text-anchor="middle" font-size="10" fill="#666">VESA 600×400</text>
-
-                        <!-- Electronics enclosure -->
-                        <rect x="70" y="140" width="80" height="100" rx="4" fill="#e2e8f0" stroke="#222" stroke-width="2"/>
-                        <rect x="78" y="150" width="64" height="25" fill="#0f172a"/>
-                        <circle cx="85" cy="162" r="3" fill="#059669"/>
-                        <circle cx="95" cy="162" r="3" fill="#f59e0b"/>
-                        <text x="110" y="200" text-anchor="middle" font-size="8" fill="#999">CONTROL</text>
-                        <text x="110" y="212" text-anchor="middle" font-size="8" fill="#999">MODULE</text>
-
-                        <!-- Cable entry -->
-                        <circle cx="110" cy="280" r="12" fill="#0f172a" stroke="#444" stroke-width="2"/>
-                        <text x="110" y="305" text-anchor="middle" font-size="8" fill="#666">IP66 GLAND</text>
-
-                        <!-- Intake grille (bottom) -->
-                        <rect x="180" y="275" width="200" height="35" rx="2" fill="#e0e0e0" stroke="#999" stroke-width="1"/>
-                        <g stroke="#aaa" stroke-width="2">
-                            <line x1="200" y1="280" x2="200" y2="305"/>
-                            <line x1="225" y1="280" x2="225" y2="305"/>
-                            <line x1="250" y1="280" x2="250" y2="305"/>
-                            <line x1="275" y1="280" x2="275" y2="305"/>
-                            <line x1="300" y1="280" x2="300" y2="305"/>
-                            <line x1="325" y1="280" x2="325" y2="305"/>
-                            <line x1="350" y1="280" x2="350" y2="305"/>
-                        </g>
-                        <text x="280" y="325" text-anchor="middle" font-size="9" fill="#666">LABYRINTH INTAKE</text>
-
-                        <!-- Serial/model plate -->
-                        <rect x="350" y="140" width="80" height="40" rx="2" fill="#f5f5f5" stroke="#ccc" stroke-width="1"/>
-                        <text x="390" y="157" text-anchor="middle" font-size="8" font-weight="600" fill="#e2e8f0">APEX</text>
-                        <text x="390" y="170" text-anchor="middle" font-size="10" font-weight="700" fill="#0d9488">ATE-75</text>
-
-                        <!-- Model label -->
-                        <text x="250" y="360" text-anchor="middle" font-size="12" fill="#666">ATE-75 | REAR VIEW | SERVICE ACCESS PANEL</text>
-                    </svg>
+                <div class="spec-card">
+                    <div class="value">160mm</div>
+                    <div class="label">Depth</div>
                 </div>
-
-                <div class="view-box">
-                    <h4>Door Open - Service Position</h4>
-                    <svg viewBox="0 0 500 380" width="100%" height="320">
-                        <!-- Fixed frame/body -->
-                        <rect x="200" y="50" width="250" height="280" rx="4" fill="#d4d4d4" stroke="#999" stroke-width="2"/>
-
-                        <!-- Internal cavity visible -->
-                        <rect x="210" y="60" width="230" height="260" fill="#0f172a"/>
-
-                        <!-- TV inside (visible) -->
-                        <rect x="220" y="90" width="210" height="200" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
-                        <rect x="225" y="95" width="200" height="165" fill="#111"/>
-                        <text x="325" y="180" text-anchor="middle" font-size="11" fill="#444">75" TV INSTALLED</text>
-
-                        <!-- VESA mount visible behind TV -->
-                        <rect x="280" y="140" width="90" height="60" fill="#666" stroke="#555" stroke-width="1"/>
-
-                        <!-- Door swung open (left side) -->
-                        <g transform="rotate(-70, 200, 190)">
-                            <rect x="50" y="50" width="150" height="280" rx="4" fill="#0f172a" stroke="#111" stroke-width="2"/>
-                            <!-- Glass on door -->
-                            <rect x="58" y="58" width="134" height="264" rx="2" fill="url(#glassGrad)" stroke="#e2e8f0" stroke-width="1"/>
-                            <!-- Frame edge -->
-                            <rect x="50" y="50" width="8" height="280" fill="#2a2a2a"/>
-                        </g>
-
-                        <!-- Hinges -->
-                        <circle cx="200" cy="90" r="8" fill="#666" stroke="#444" stroke-width="2"/>
-                        <circle cx="200" cy="290" r="8" fill="#666" stroke="#444" stroke-width="2"/>
-
-                        <!-- Gas strut -->
-                        <line x1="120" y1="100" x2="180" y2="70" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/>
-                        <circle cx="120" cy="100" r="6" fill="#d97706"/>
-                        <circle cx="180" cy="70" r="6" fill="#d97706"/>
-                        <text x="130" y="130" font-size="8" fill="#f59e0b">GAS STRUT</text>
-
-                        <!-- Electronics module (visible in frame) -->
-                        <rect x="395" y="120" width="50" height="80" fill="#e2e8f0" stroke="#222" stroke-width="1"/>
-                        <text x="420" y="165" text-anchor="middle" font-size="7" fill="#999">CTRL</text>
-
-                        <!-- Wiring visible -->
-                        <path d="M 420,200 Q 400,220 380,250 T 350,290" fill="none" stroke="#dc2626" stroke-width="2"/>
-                        <path d="M 420,200 Q 400,215 385,240 T 360,280" fill="none" stroke="#0f172a" stroke-width="2"/>
-
-                        <!-- Door open angle indicator -->
-                        <path d="M 200,190 L 200,140" stroke="#0d9488" stroke-width="1" stroke-dasharray="4,2"/>
-                        <path d="M 200,190 L 160,160" stroke="#0d9488" stroke-width="1" stroke-dasharray="4,2"/>
-                        <text x="175" y="155" font-size="9" fill="#0d9488">70°</text>
-
-                        <!-- Model label -->
-                        <text x="250" y="360" text-anchor="middle" font-size="12" fill="#666">ATE-75 | DOOR OPEN | TV SERVICE POSITION</text>
-                    </svg>
+                <div class="spec-card">
+                    <div class="value">~38kg</div>
+                    <div class="label">Weight (empty)</div>
                 </div>
-            </div>
-
-            <div class="view-grid">
-                <div class="view-box">
-                    <h4>Side Profile</h4>
-                    <svg viewBox="0 0 300 380" width="100%" height="320">
-                        <!-- Side view of enclosure -->
-                        <rect x="100" y="50" width="100" height="260" rx="4" fill="#0f172a" stroke="#111" stroke-width="2" filter="url(#shadow)"/>
-
-                        <!-- Glass front edge -->
-                        <rect x="100" y="50" width="8" height="260" fill="#2d4a7c" fill-opacity="0.5" stroke="#e2e8f0" stroke-width="1"/>
-
-                        <!-- Top detail -->
-                        <rect x="100" y="50" width="100" height="15" fill="#2a2a2a"/>
-                        <!-- Fan indication on top -->
-                        <ellipse cx="150" cy="57" rx="15" ry="4" fill="#f8fafc"/>
-
-                        <!-- Rear panel edge -->
-                        <rect x="192" y="50" width="8" height="260" fill="#d4d4d4" stroke="#999" stroke-width="1"/>
-
-                        <!-- Internal cavity indication -->
-                        <rect x="110" y="70" width="80" height="220" fill="none" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,2"/>
-
-                        <!-- TV profile inside -->
-                        <rect x="115" y="90" width="50" height="180" fill="#f8fafc" stroke="#222" stroke-width="1"/>
-                        <text x="140" y="185" text-anchor="middle" font-size="8" fill="#444" transform="rotate(-90, 140, 185)">TV 65mm</text>
-
-                        <!-- Airflow arrows -->
-                        <defs>
-                            <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                                <polygon points="0 0, 10 3.5, 0 7" fill="#0d9488"/>
-                            </marker>
-                        </defs>
-                        <path d="M 175,290 L 175,200 L 175,80 L 175,55" fill="none" stroke="#0d9488" stroke-width="2" marker-end="url(#arrow)"/>
-                        <text x="210" y="175" font-size="9" fill="#0d9488">AIRFLOW</text>
-
-                        <!-- Dimensions -->
-                        <line x1="80" y1="50" x2="80" y2="310" stroke="#666" stroke-width="1"/>
-                        <line x1="75" y1="50" x2="85" y2="50" stroke="#666" stroke-width="1"/>
-                        <line x1="75" y1="310" x2="85" y2="310" stroke="#666" stroke-width="1"/>
-                        <text x="65" y="185" text-anchor="middle" font-size="10" fill="#666" transform="rotate(-90, 65, 185)">1084mm</text>
-
-                        <line x1="100" y1="330" x2="200" y2="330" stroke="#666" stroke-width="1"/>
-                        <line x1="100" y1="325" x2="100" y2="335" stroke="#666" stroke-width="1"/>
-                        <line x1="200" y1="325" x2="200" y2="335" stroke="#666" stroke-width="1"/>
-                        <text x="150" y="350" text-anchor="middle" font-size="10" fill="#666">135mm</text>
-
-                        <!-- Model label -->
-                        <text x="150" y="370" text-anchor="middle" font-size="11" fill="#666">SIDE PROFILE</text>
-                    </svg>
+                <div class="spec-card">
+                    <div class="value">80mm</div>
+                    <div class="label">Top/Bottom Bezels</div>
                 </div>
-
-                <div class="view-box">
-                    <h4>Installation Context</h4>
-                    <svg viewBox="0 0 500 380" width="100%" height="320">
-                        <!-- Wall -->
-                        <rect x="0" y="0" width="500" height="380" fill="#f5f0e6"/>
-                        <rect x="0" y="300" width="500" height="80" fill="#8B7355"/>
-
-                        <!-- Wall texture lines -->
-                        <g stroke="#e8e0d0" stroke-width="1">
-                            <line x1="0" y1="50" x2="500" y2="50"/>
-                            <line x1="0" y1="100" x2="500" y2="100"/>
-                            <line x1="0" y1="150" x2="500" y2="150"/>
-                            <line x1="0" y1="200" x2="500" y2="200"/>
-                            <line x1="0" y1="250" x2="500" y2="250"/>
-                        </g>
-
-                        <!-- Enclosure mounted on wall -->
-                        <rect x="75" y="60" width="350" height="220" rx="6" fill="#0f172a" stroke="#111" stroke-width="2" filter="url(#shadow)"/>
-
-                        <!-- Glass -->
-                        <rect x="85" y="70" width="330" height="200" rx="2" fill="url(#glassGrad)" stroke="#e2e8f0" stroke-width="1"/>
-
-                        <!-- Screen showing content -->
-                        <rect x="95" y="85" width="310" height="170" fill="#f8fafc"/>
-                        <rect x="100" y="90" width="300" height="160" fill="#111"/>
-
-                        <!-- Sample screen content -->
-                        <rect x="110" y="100" width="140" height="80" fill="#1e3a5f"/>
-                        <rect x="260" y="100" width="130" height="35" fill="#2d4a3d"/>
-                        <rect x="260" y="145" width="130" height="35" fill="#4a3d2d"/>
-                        <text x="180" y="200" font-size="10" fill="#666">MENU DISPLAY</text>
-                        <rect x="110" y="190" width="290" height="50" fill="#0f172a"/>
-
-                        <!-- Outdoor furniture hint -->
-                        <rect x="350" y="310" width="100" height="60" rx="4" fill="#6B4423" stroke="#5a3a1d" stroke-width="2"/>
-                        <ellipse cx="400" cy="340" rx="35" ry="8" fill="#8B5A2B"/>
-
-                        <!-- Plant -->
-                        <ellipse cx="60" cy="320" rx="25" ry="15" fill="#228B22"/>
-                        <rect x="50" y="320" width="20" height="40" fill="#8B4513"/>
-
-                        <!-- Context label -->
-                        <rect x="150" y="340" width="200" height="30" rx="4" fill="white" fill-opacity="0.9"/>
-                        <text x="250" y="360" text-anchor="middle" font-size="11" fill="#e2e8f0">OUTDOOR TERRACE INSTALLATION</text>
-                    </svg>
+                <div class="spec-card">
+                    <div class="value">IP55</div>
+                    <div class="label">Weather Rating</div>
                 </div>
             </div>
         </div>
 
-        <!-- ========== COMPLETE EXPLODED ASSEMBLY ========== -->
-        <div class="design-section">
-            <h2>Complete Exploded Assembly</h2>
-            <p>All 23 components shown in assembly sequence with part numbers.</p>
-
-            <div class="drawing-container">
-                <svg viewBox="0 0 1200 900" width="100%" height="800">
-                    <defs>
-                        <marker id="partArrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-                            <polygon points="0 0, 8 3, 0 6" fill="#666"/>
-                        </marker>
-                    </defs>
-
-                    <!-- Title -->
-                    <text x="600" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="#0d9488">ATE-75 EXPLODED ASSEMBLY - ALL COMPONENTS</text>
-                    <text x="600" y="50" text-anchor="middle" font-size="12" fill="#666">23 Parts | Assembly Sequence: Bottom → Top, Rear → Front</text>
-
-                    <!-- ===== LAYER 1: REAR PANEL & STRUCTURE ===== -->
-
-                    <!-- P1: Rear Panel -->
-                    <g id="P1">
-                        <rect x="400" y="400" width="300" height="200" fill="#d4d4d4" stroke="#999" stroke-width="2"/>
-                        <text x="550" y="510" text-anchor="middle" font-size="12" fill="#666">REAR PANEL</text>
-                        <!-- VESA holes -->
-                        <circle cx="480" cy="470" r="5" fill="#666"/>
-                        <circle cx="620" cy="470" r="5" fill="#666"/>
-                        <circle cx="480" cy="530" r="5" fill="#666"/>
-                        <circle cx="620" cy="530" r="5" fill="#666"/>
-                        <!-- Fan cutouts -->
-                        <circle cx="450" cy="430" r="20" fill="#64748b"/>
-                        <circle cx="510" cy="430" r="20" fill="#64748b"/>
-                        <circle cx="590" cy="430" r="20" fill="#64748b"/>
-                        <circle cx="650" cy="430" r="20" fill="#64748b"/>
-                        <!-- Intake cutout -->
-                        <rect x="460" y="560" width="180" height="25" fill="#64748b"/>
-                    </g>
-                    <line x1="400" y1="500" x2="320" y2="500" stroke="#666" stroke-width="1" marker-end="url(#partArrow)"/>
-                    <text x="240" y="495" font-size="11" fill="#e2e8f0"><tspan class="part-num" fill="#0d9488" font-weight="700">P1</tspan> Rear Panel</text>
-                    <text x="240" y="510" font-size="9" fill="#666">2mm AL 5052-H32</text>
-
-                    <!-- P2: Top Panel -->
-                    <g id="P2">
-                        <polygon points="400,280 700,280 720,300 420,300" fill="#c0c0c0" stroke="#999" stroke-width="2"/>
-                        <!-- Fan holes -->
-                        <ellipse cx="455" cy="290" rx="18" ry="5" fill="#64748b"/>
-                        <ellipse cx="515" cy="290" rx="18" ry="5" fill="#64748b"/>
-                        <ellipse cx="595" cy="290" rx="18" ry="5" fill="#64748b"/>
-                        <ellipse cx="655" cy="290" rx="18" ry="5" fill="#64748b"/>
-                    </g>
-                    <line x1="550" y1="280" x2="550" y2="220" stroke="#666" stroke-width="1" marker-end="url(#partArrow)"/>
-                    <text x="550" y="200" text-anchor="middle" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P2</tspan> Top Panel</text>
-                    <text x="550" y="215" text-anchor="middle" font-size="9" fill="#666">2mm AL + Fan Grilles</text>
-
-                    <!-- P3: Bottom Panel -->
-                    <g id="P3">
-                        <polygon points="400,620 700,620 720,640 420,640" fill="#c0c0c0" stroke="#999" stroke-width="2"/>
-                        <!-- Intake grille -->
-                        <rect x="470" y="625" width="160" height="10" fill="#64748b"/>
-                    </g>
-                    <line x1="550" y1="640" x2="550" y2="700" stroke="#666" stroke-width="1" marker-end="url(#partArrow)"/>
-                    <text x="550" y="720" text-anchor="middle" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P3</tspan> Bottom Panel</text>
-                    <text x="550" y="735" text-anchor="middle" font-size="9" fill="#666">2mm AL + Intake Grille</text>
-
-                    <!-- P4: Left Side Panel -->
-                    <g id="P4">
-                        <polygon points="380,300 400,280 400,620 380,640" fill="#b8b8b8" stroke="#999" stroke-width="2"/>
-                    </g>
-                    <line x1="380" y1="460" x2="320" y2="400" stroke="#666" stroke-width="1" marker-end="url(#partArrow)"/>
-                    <text x="240" y="390" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P4</tspan> Left Side</text>
-                    <text x="240" y="405" font-size="9" fill="#666">2mm AL</text>
-
-                    <!-- P5: Right Side Panel -->
-                    <g id="P5">
-                        <polygon points="720,300 700,280 700,620 720,640" fill="#b8b8b8" stroke="#999" stroke-width="2"/>
-                    </g>
-                    <line x1="720" y1="460" x2="780" y2="400" stroke="#666" stroke-width="1" marker-end="url(#partArrow)"/>
-                    <text x="790" y="390" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P5</tspan> Right Side</text>
-                    <text x="790" y="405" font-size="9" fill="#666">2mm AL</text>
-
-                    <!-- ===== LAYER 2: INTERNAL COMPONENTS ===== -->
-
-                    <!-- P6: VESA Mount Bracket -->
-                    <g id="P6">
-                        <rect x="470" y="350" width="160" height="80" fill="#777" stroke="#555" stroke-width="2"/>
-                        <circle cx="490" cy="370" r="6" fill="#444"/>
-                        <circle cx="610" cy="370" r="6" fill="#444"/>
-                        <circle cx="490" cy="410" r="6" fill="#444"/>
-                        <circle cx="610" cy="410" r="6" fill="#444"/>
-                        <text x="550" y="395" text-anchor="middle" font-size="9" fill="#e2e8f0">VESA 600×400</text>
-                    </g>
-                    <line x1="630" y1="350" x2="730" y2="280" stroke="#666" stroke-width="1" marker-end="url(#partArrow)"/>
-                    <text x="740" y="270" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P6</tspan> VESA Bracket</text>
-                    <text x="740" y="285" font-size="9" fill="#666">3mm Steel, Powder Coat</text>
-
-                    <!-- P7-P10: Fans -->
-                    <g id="fans">
-                        <rect x="100" y="80" width="50" height="50" fill="#222" stroke="#111" stroke-width="2"/>
-                        <circle cx="125" cy="105" r="20" fill="#e2e8f0"/>
-                        <circle cx="125" cy="105" r="8" fill="#444"/>
-                        <text x="125" y="145" text-anchor="middle" font-size="9" fill="#e2e8f0">P7</text>
-
-                        <rect x="160" y="80" width="50" height="50" fill="#222" stroke="#111" stroke-width="2"/>
-                        <circle cx="185" cy="105" r="20" fill="#e2e8f0"/>
-                        <circle cx="185" cy="105" r="8" fill="#444"/>
-                        <text x="185" y="145" text-anchor="middle" font-size="9" fill="#e2e8f0">P8</text>
-
-                        <rect x="220" y="80" width="50" height="50" fill="#222" stroke="#111" stroke-width="2"/>
-                        <circle cx="245" cy="105" r="20" fill="#e2e8f0"/>
-                        <circle cx="245" cy="105" r="8" fill="#444"/>
-                        <text x="245" y="145" text-anchor="middle" font-size="9" fill="#e2e8f0">P9</text>
-
-                        <rect x="280" y="80" width="50" height="50" fill="#222" stroke="#111" stroke-width="2"/>
-                        <circle cx="305" cy="105" r="20" fill="#e2e8f0"/>
-                        <circle cx="305" cy="105" r="8" fill="#444"/>
-                        <text x="305" y="145" text-anchor="middle" font-size="9" fill="#e2e8f0">P10</text>
-                    </g>
-                    <text x="215" y="65" text-anchor="middle" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P7-P10</tspan> PWM Fans × 4</text>
-                    <text x="215" y="165" text-anchor="middle" font-size="9" fill="#666">80mm, 12V, 4-pin PWM</text>
-
-                    <!-- P11: Fan Grille Assembly -->
-                    <g id="P11">
-                        <rect x="100" y="180" width="230" height="30" fill="#444" stroke="#e2e8f0" stroke-width="1"/>
-                        <g stroke="#666" stroke-width="1">
-                            <line x1="120" y1="185" x2="120" y2="205"/>
-                            <line x1="150" y1="185" x2="150" y2="205"/>
-                            <line x1="180" y1="185" x2="180" y2="205"/>
-                            <line x1="210" y1="185" x2="210" y2="205"/>
-                            <line x1="240" y1="185" x2="240" y2="205"/>
-                            <line x1="270" y1="185" x2="270" y2="205"/>
-                            <line x1="300" y1="185" x2="300" y2="205"/>
-                        </g>
-                    </g>
-                    <text x="215" y="225" text-anchor="middle" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P11</tspan> Exhaust Rain Cowl</text>
-                    <text x="215" y="240" text-anchor="middle" font-size="9" fill="#666">IP66 Protected, 40mm Overhang</text>
-
-                    <!-- P12: Intake Grille -->
-                    <g id="P12">
-                        <rect x="100" y="750" width="200" height="40" fill="#ddd" stroke="#999" stroke-width="1"/>
-                        <g stroke="#aaa" stroke-width="2">
-                            <line x1="120" y1="755" x2="120" y2="785"/>
-                            <line x1="150" y1="755" x2="150" y2="785"/>
-                            <line x1="180" y1="755" x2="180" y2="785"/>
-                            <line x1="210" y1="755" x2="210" y2="785"/>
-                            <line x1="240" y1="755" x2="240" y2="785"/>
-                            <line x1="270" y1="755" x2="270" y2="785"/>
-                        </g>
-                    </g>
-                    <text x="200" y="810" text-anchor="middle" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P12</tspan> Labyrinth Intake</text>
-                    <text x="200" y="825" text-anchor="middle" font-size="9" fill="#666">IP66, Internal Baffles</text>
-
-                    <!-- P13: Electronics Enclosure -->
-                    <g id="P13">
-                        <rect x="900" y="350" width="100" height="130" fill="#222" stroke="#111" stroke-width="2" rx="4"/>
-                        <rect x="910" y="360" width="80" height="40" fill="#059669" stroke="#047857" stroke-width="1"/>
-                        <text x="950" y="385" text-anchor="middle" font-size="8" fill="#fff">PCB</text>
-                        <rect x="910" y="410" width="80" height="30" fill="#444" stroke="#e2e8f0" stroke-width="1"/>
-                        <text x="950" y="430" text-anchor="middle" font-size="8" fill="#ccc">PSU</text>
-                        <rect x="910" y="450" width="80" height="20" fill="#e2e8f0"/>
-                        <text x="950" y="464" text-anchor="middle" font-size="7" fill="#999">TERMINALS</text>
-                    </g>
-                    <text x="950" y="335" text-anchor="middle" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P13</tspan> Electronics Module</text>
-                    <text x="950" y="500" text-anchor="middle" font-size="9" fill="#666">Controller + PSU + Wiring</text>
-
-                    <!-- P14: Temperature Sensor -->
-                    <g id="P14">
-                        <rect x="900" y="520" width="60" height="25" fill="#f59e0b" stroke="#d97706" stroke-width="1" rx="3"/>
-                        <circle cx="915" cy="532" r="5" fill="#fff"/>
-                        <text x="945" y="537" font-size="8" fill="#fff">NTC</text>
-                    </g>
-                    <text x="930" y="560" text-anchor="middle" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P14</tspan> Temp Sensor</text>
-                    <text x="930" y="575" text-anchor="middle" font-size="9" fill="#666">10K NTC Thermistor</text>
-
-                    <!-- P15: Cable Gland -->
-                    <g id="P15">
-                        <ellipse cx="930" cy="620" rx="20" ry="15" fill="#e2e8f0" stroke="#222" stroke-width="2"/>
-                        <ellipse cx="930" cy="620" rx="10" ry="8" fill="#111"/>
-                    </g>
-                    <text x="930" y="655" text-anchor="middle" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P15</tspan> Cable Gland</text>
-                    <text x="930" y="670" text-anchor="middle" font-size="9" fill="#666">IP68 M25</text>
-
-                    <!-- ===== LAYER 3: DOOR ASSEMBLY ===== -->
-
-                    <!-- P16: Door Frame -->
-                    <g id="P16">
-                        <rect x="750" y="500" width="200" height="280" fill="#0f172a" stroke="#111" stroke-width="2" rx="4"/>
-                        <rect x="762" y="512" width="176" height="256" fill="none" stroke="#e2e8f0" stroke-width="1"/>
-                        <text x="850" y="650" text-anchor="middle" font-size="10" fill="#555">DOOR FRAME</text>
-                    </g>
-                    <line x1="750" y1="640" x2="700" y2="620" stroke="#666" stroke-width="1" marker-end="url(#partArrow)"/>
-                    <text x="700" y="600" text-anchor="end" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P16</tspan> Door Frame</text>
-                    <text x="700" y="615" text-anchor="end" font-size="9" fill="#666">2mm AL, Hinged</text>
-
-                    <!-- P17: Glass Panel -->
-                    <g id="P17">
-                        <rect x="1000" y="500" width="180" height="250" fill="#4a90d9" fill-opacity="0.3" stroke="#666" stroke-width="2"/>
-                        <polygon points="1000,500 1060,500 1030,580 1000,580" fill="white" fill-opacity="0.1"/>
-                        <text x="1090" y="630" text-anchor="middle" font-size="10" fill="#666">6mm GLASS</text>
-                    </g>
-                    <text x="1090" y="485" text-anchor="middle" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P17</tspan> Tempered Glass</text>
-                    <text x="1090" y="765" text-anchor="middle" font-size="9" fill="#666">6mm, Anti-Reflective Coating</text>
-
-                    <!-- P18: Glass Retention Clips -->
-                    <g id="P18">
-                        <rect x="1000" y="770" width="25" height="10" fill="#666" stroke="#444" stroke-width="1"/>
-                        <rect x="1040" y="770" width="25" height="10" fill="#666" stroke="#444" stroke-width="1"/>
-                        <rect x="1080" y="770" width="25" height="10" fill="#666" stroke="#444" stroke-width="1"/>
-                        <rect x="1120" y="770" width="25" height="10" fill="#666" stroke="#444" stroke-width="1"/>
-                    </g>
-                    <text x="1072" y="800" text-anchor="middle" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P18</tspan> Glass Clips × 8</text>
-                    <text x="1072" y="815" text-anchor="middle" font-size="9" fill="#666">Stainless Steel</text>
-
-                    <!-- P19: EPDM Gasket -->
-                    <g id="P19">
-                        <rect x="100" y="280" width="180" height="15" fill="#0f172a" stroke="#e2e8f0" stroke-width="1" rx="3"/>
-                        <text x="190" y="292" text-anchor="middle" font-size="8" fill="#666">CONTINUOUS SEAL</text>
-                    </g>
-                    <text x="190" y="270" text-anchor="middle" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P19</tspan> EPDM Gasket</text>
-                    <text x="190" y="310" text-anchor="middle" font-size="9" fill="#666">10×15mm, Channel Mount</text>
-
-                    <!-- P20: Hinges -->
-                    <g id="P20">
-                        <rect x="100" y="340" width="40" height="60" fill="#64748b" stroke="#666" stroke-width="2" rx="4"/>
-                        <circle cx="120" cy="355" r="8" fill="#666"/>
-                        <circle cx="120" cy="385" r="8" fill="#666"/>
-
-                        <rect x="150" y="340" width="40" height="60" fill="#64748b" stroke="#666" stroke-width="2" rx="4"/>
-                        <circle cx="170" cy="355" r="8" fill="#666"/>
-                        <circle cx="170" cy="385" r="8" fill="#666"/>
-                    </g>
-                    <text x="145" y="330" text-anchor="middle" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P20</tspan> Hinges × 2</text>
-                    <text x="145" y="415" text-anchor="middle" font-size="9" fill="#666">SS316 Concealed</text>
-
-                    <!-- P21: Gas Struts -->
-                    <g id="P21">
-                        <line x1="100" y1="450" x2="180" y2="430" stroke="#f59e0b" stroke-width="8" stroke-linecap="round"/>
-                        <circle cx="100" cy="450" r="8" fill="#d97706"/>
-                        <circle cx="180" cy="430" r="8" fill="#d97706"/>
-                    </g>
-                    <text x="140" y="475" text-anchor="middle" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P21</tspan> Gas Struts × 2</text>
-                    <text x="140" y="490" text-anchor="middle" font-size="9" fill="#666">150N, 250mm Stroke</text>
-
-                    <!-- P22: Cam Locks -->
-                    <g id="P22">
-                        <circle cx="115" cy="530" r="15" fill="#666" stroke="#444" stroke-width="2"/>
-                        <rect x="110" y="522" width="10" height="16" fill="#444"/>
-
-                        <circle cx="165" cy="530" r="15" fill="#666" stroke="#444" stroke-width="2"/>
-                        <rect x="160" y="522" width="10" height="16" fill="#444"/>
-                    </g>
-                    <text x="140" y="565" text-anchor="middle" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P22</tspan> Cam Locks × 2</text>
-                    <text x="140" y="580" text-anchor="middle" font-size="9" fill="#666">Keyed Alike</text>
-
-                    <!-- P23: Hardware Pack -->
-                    <g id="P23">
-                        <rect x="100" y="610" width="120" height="70" fill="#f5f5f5" stroke="#ccc" stroke-width="1" rx="4"/>
-                        <circle cx="120" cy="635" r="5" fill="#64748b"/>
-                        <circle cx="140" cy="635" r="5" fill="#64748b"/>
-                        <circle cx="160" cy="635" r="5" fill="#64748b"/>
-                        <rect x="115" y="650" width="30" height="8" fill="#64748b"/>
-                        <rect x="155" y="650" width="30" height="8" fill="#64748b"/>
-                        <text x="160" y="675" text-anchor="middle" font-size="8" fill="#666">M5 × 40+</text>
-                    </g>
-                    <text x="160" y="600" text-anchor="middle" font-size="11" fill="#e2e8f0"><tspan fill="#0d9488" font-weight="700">P23</tspan> Hardware Pack</text>
-                    <text x="160" y="695" text-anchor="middle" font-size="9" fill="#666">SS316 Fasteners, Anchors</text>
-
-                    <!-- Assembly flow arrows -->
-                    <path d="M 350,500 C 380,500 380,400 410,400" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="8,4"/>
-                    <path d="M 550,250 L 550,280" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="8,4"/>
-                    <path d="M 550,620 L 550,640" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="8,4"/>
-                    <path d="M 700,500 C 730,500 730,550 760,550" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="8,4"/>
-
-                </svg>
+        <!-- Hero Image - Front View -->
+        <div class="section">
+            <h2>External View</h2>
+            <p>Clean "picture frame" aesthetic with flush front face. No protruding deflector - ventilation slots recessed 30-40mm behind bezel face.</p>
+            <div class="hero-render">
+                <img src="images/ate-75-v530-front.png" alt="ATE-75 v5.3.0 Front 3/4 View">
             </div>
-
-            <h3>Complete Parts List</h3>
-            <table class="parts-table">
-                <thead>
-                    <tr>
-                        <th>Part #</th>
-                        <th>Description</th>
-                        <th>Material</th>
-                        <th>Dimensions</th>
-                        <th>Qty</th>
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td><span class="part-num">P1</span></td><td>Rear Panel</td><td>AL 5052-H32</td><td>1709 × 1084 × 2mm</td><td>1</td><td>VESA pattern, fan & intake cutouts</td></tr>
-                    <tr><td><span class="part-num">P2</span></td><td>Top Panel</td><td>AL 5052-H32</td><td>1709 × 135 × 2mm</td><td>1</td><td>4× Ø92mm fan cutouts</td></tr>
-                    <tr><td><span class="part-num">P3</span></td><td>Bottom Panel</td><td>AL 5052-H32</td><td>1709 × 135 × 2mm</td><td>1</td><td>Intake grille cutout</td></tr>
-                    <tr><td><span class="part-num">P4</span></td><td>Left Side Panel</td><td>AL 5052-H32</td><td>135 × 1084 × 2mm</td><td>1</td><td>Hinge mounting holes</td></tr>
-                    <tr><td><span class="part-num">P5</span></td><td>Right Side Panel</td><td>AL 5052-H32</td><td>135 × 1084 × 2mm</td><td>1</td><td>—</td></tr>
-                    <tr><td><span class="part-num">P6</span></td><td>VESA Mount Bracket</td><td>Steel, PC</td><td>640 × 440 × 3mm</td><td>1</td><td>VESA 600×400, adjustable arms</td></tr>
-                    <tr><td><span class="part-num">P7-P10</span></td><td>PWM Cooling Fans</td><td>PBT Frame</td><td>80 × 80 × 25mm</td><td>4</td><td>12V, 4-pin PWM, 35CFM each</td></tr>
-                    <tr><td><span class="part-num">P11</span></td><td>Exhaust Rain Cowl</td><td>AL 5052-H32</td><td>400 × 100 × 40mm</td><td>1</td><td>IP66, 40mm overhang</td></tr>
-                    <tr><td><span class="part-num">P12</span></td><td>Labyrinth Intake Grille</td><td>AL 5052-H32</td><td>300 × 60 × 30mm</td><td>1</td><td>IP66, internal baffles</td></tr>
-                    <tr><td><span class="part-num">P13</span></td><td>Electronics Enclosure</td><td>AL, PC</td><td>120 × 80 × 60mm</td><td>1</td><td>Contains P14, PCB, PSU</td></tr>
-                    <tr><td><span class="part-num">P14</span></td><td>Temperature Sensor</td><td>—</td><td>10K NTC</td><td>1</td><td>1m cable length</td></tr>
-                    <tr><td><span class="part-num">P15</span></td><td>Cable Gland</td><td>Nylon PA66</td><td>M25 IP68</td><td>1</td><td>8-16mm cable range</td></tr>
-                    <tr><td><span class="part-num">P16</span></td><td>Door Frame</td><td>AL 5052-H32</td><td>1689 × 1064 × 2mm</td><td>1</td><td>Glass rebate 8mm</td></tr>
-                    <tr><td><span class="part-num">P17</span></td><td>Tempered Glass</td><td>Glass</td><td>1660 × 940 × 6mm</td><td>1</td><td>AR coating both sides</td></tr>
-                    <tr><td><span class="part-num">P18</span></td><td>Glass Retention Clips</td><td>SS 316</td><td>25 × 15 × 2mm</td><td>8</td><td>Mechanical retention</td></tr>
-                    <tr><td><span class="part-num">P19</span></td><td>EPDM Door Gasket</td><td>EPDM</td><td>10 × 15mm, ~5m</td><td>1</td><td>Continuous channel mount</td></tr>
-                    <tr><td><span class="part-num">P20</span></td><td>Concealed Hinges</td><td>SS 316</td><td>100mm</td><td>2</td><td>180° opening, soft-close</td></tr>
-                    <tr><td><span class="part-num">P21</span></td><td>Gas Struts</td><td>Steel/N2</td><td>150N, 250mm</td><td>2</td><td>Hold door at 70°</td></tr>
-                    <tr><td><span class="part-num">P22</span></td><td>Cam Locks</td><td>Zinc alloy</td><td>Quarter-turn</td><td>2</td><td>Keyed alike, chrome</td></tr>
-                    <tr><td><span class="part-num">P23</span></td><td>Hardware Pack</td><td>SS 316</td><td>Various</td><td>1</td><td>M5 screws, rivnuts, anchors</td></tr>
-                </tbody>
-            </table>
+            <div class="note-box">
+                <strong>Design Highlight:</strong> The v5.3.0 integrated bezel design eliminates the protruding exhaust deflector. Wider 80mm top/bottom bezels contain recessed ventilation slots that maintain IP55 rating while achieving a sleek, modern appearance.
+            </div>
         </div>
 
-        <!-- ========== ASSEMBLY SEQUENCE ========== -->
-        <div class="design-section">
-            <h2>Assembly Sequence</h2>
-
-            <div class="view-grid">
-                <div class="view-box">
-                    <h4>Step 1: Shell Assembly</h4>
-                    <svg viewBox="0 0 300 200" width="100%" height="180">
-                        <rect x="50" y="30" width="200" height="140" fill="#d4d4d4" stroke="#999" stroke-width="2"/>
-                        <rect x="50" y="30" width="200" height="15" fill="#c0c0c0" stroke="#999" stroke-width="1"/>
-                        <rect x="50" y="155" width="200" height="15" fill="#c0c0c0" stroke="#999" stroke-width="1"/>
-                        <rect x="50" y="30" width="15" height="140" fill="#b8b8b8" stroke="#999" stroke-width="1"/>
-                        <rect x="235" y="30" width="15" height="140" fill="#b8b8b8" stroke="#999" stroke-width="1"/>
-                        <text x="150" y="110" text-anchor="middle" font-size="10" fill="#666">P1 + P2 + P3 + P4 + P5</text>
-                        <text x="150" y="185" text-anchor="middle" font-size="9" fill="#e2e8f0">Weld/rivet shell panels</text>
-                    </svg>
+        <!-- Internal View -->
+        <div class="section">
+            <h2>Internal View (Glass Removed)</h2>
+            <p>Shows the interior construction with thermal management system, VESA mount, and service components.</p>
+            <div class="hero-render">
+                <img src="images/ate-75-v530-internal.png" alt="ATE-75 v5.3.0 Internal View">
+            </div>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="feature-icon">🌀</div>
+                    <div class="feature-text">
+                        <h5>3× Delta AFB1412HH-A Fans</h5>
+                        <p>140mm high-static pressure fans, 165-195 CFM total</p>
+                    </div>
                 </div>
-
-                <div class="view-box">
-                    <h4>Step 2: Internal Components</h4>
-                    <svg viewBox="0 0 300 200" width="100%" height="180">
-                        <rect x="50" y="30" width="200" height="140" fill="#d4d4d4" stroke="#999" stroke-width="2"/>
-                        <!-- VESA -->
-                        <rect x="100" y="70" width="100" height="60" fill="#777" stroke="#555" stroke-width="1"/>
-                        <text x="150" y="105" text-anchor="middle" font-size="8" fill="#e2e8f0">P6</text>
-                        <!-- Electronics -->
-                        <rect x="180" y="80" width="50" height="60" fill="#222" stroke="#111" stroke-width="1"/>
-                        <text x="205" y="115" text-anchor="middle" font-size="7" fill="#999">P13</text>
-                        <!-- Fans -->
-                        <g>
-                            <circle cx="90" cy="50" r="12" fill="#e2e8f0"/>
-                            <circle cx="120" cy="50" r="12" fill="#e2e8f0"/>
-                            <circle cx="150" cy="50" r="12" fill="#e2e8f0"/>
-                            <circle cx="180" cy="50" r="12" fill="#e2e8f0"/>
-                        </g>
-                        <text x="135" y="35" text-anchor="middle" font-size="7" fill="#e2e8f0">P7-P10</text>
-                        <text x="150" y="185" text-anchor="middle" font-size="9" fill="#e2e8f0">Install VESA, fans, electronics</text>
-                    </svg>
+                <div class="feature-item">
+                    <div class="feature-icon">📺</div>
+                    <div class="feature-text">
+                        <h5>VESA Mount System</h5>
+                        <p>400×400 / 600×400 adjustable, 6mm reinforcement plate</p>
+                    </div>
                 </div>
-
-                <div class="view-box">
-                    <h4>Step 3: Door Assembly</h4>
-                    <svg viewBox="0 0 300 200" width="100%" height="180">
-                        <!-- Door frame -->
-                        <rect x="80" y="30" width="140" height="140" fill="#0f172a" stroke="#111" stroke-width="2"/>
-                        <!-- Glass -->
-                        <rect x="90" y="40" width="120" height="120" fill="#4a90d9" fill-opacity="0.3" stroke="#666" stroke-width="1"/>
-                        <!-- Gasket indication -->
-                        <rect x="85" y="35" width="130" height="5" fill="#e2e8f0"/>
-                        <rect x="85" y="160" width="130" height="5" fill="#e2e8f0"/>
-                        <text x="150" y="105" text-anchor="middle" font-size="9" fill="#666">P16 + P17 + P18 + P19</text>
-                        <text x="150" y="185" text-anchor="middle" font-size="9" fill="#e2e8f0">Assemble door with glass & gasket</text>
-                    </svg>
+                <div class="feature-item">
+                    <div class="feature-icon">🔧</div>
+                    <div class="feature-text">
+                        <h5>Perforated Diffuser Plate</h5>
+                        <p>8mm holes, 40% open area for even airflow</p>
+                    </div>
                 </div>
-
-                <div class="view-box">
-                    <h4>Step 4: Final Assembly</h4>
-                    <svg viewBox="0 0 300 200" width="100%" height="180">
-                        <!-- Complete unit -->
-                        <rect x="80" y="30" width="140" height="140" fill="#0f172a" stroke="#111" stroke-width="2"/>
-                        <rect x="88" y="38" width="124" height="124" fill="#4a90d9" fill-opacity="0.3" stroke="#666" stroke-width="1"/>
-                        <!-- Hinges -->
-                        <circle cx="80" cy="60" r="6" fill="#666"/>
-                        <circle cx="80" cy="140" r="6" fill="#666"/>
-                        <!-- Locks -->
-                        <circle cx="220" cy="80" r="5" fill="#666"/>
-                        <circle cx="220" cy="120" r="5" fill="#666"/>
-                        <text x="150" y="105" text-anchor="middle" font-size="9" fill="#fff">COMPLETE</text>
-                        <text x="150" y="185" text-anchor="middle" font-size="9" fill="#e2e8f0">Attach door, hinges, locks, struts</text>
-                    </svg>
+                <div class="feature-item">
+                    <div class="feature-icon">🎛️</div>
+                    <div class="feature-text">
+                        <h5>PWM Controller</h5>
+                        <p>Temperature-based fan speed control (30-45°C ramp)</p>
+                    </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Exploded View -->
+        <div class="section">
+            <h2>Exploded Component View</h2>
+            <p>Complete breakdown of all major components and assemblies.</p>
+            <div class="hero-render">
+                <img src="images/ate-75-v530-exploded.png" alt="ATE-75 v5.3.0 Exploded View">
+            </div>
+            <h3>Component List</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="feature-icon">🖼️</div>
+                    <div class="feature-text">
+                        <h5>Main Frame</h5>
+                        <p>5052-H32 aluminum, 3mm thickness, powder coated</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🪟</div>
+                    <div class="feature-text">
+                        <h5>Glass Panel</h5>
+                        <p>6mm laminated (3+3), AR coated, continuous channel retention</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⬆️</div>
+                    <div class="feature-text">
+                        <h5>Top Bezel Insert</h5>
+                        <p>80mm with recessed exhaust slots, 3× fan mounting</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⬇️</div>
+                    <div class="feature-text">
+                        <h5>Bottom Bezel / Service Door</h5>
+                        <p>80mm with recessed intake slots, hinged access, 4 latches</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔲</div>
+                    <div class="feature-text">
+                        <h5>Rear Panel</h5>
+                        <p>2mm aluminum, 30mm standoff forms rear plenum</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🕳️</div>
+                    <div class="feature-text">
+                        <h5>Diffuser Plate</h5>
+                        <p>Perforated panel, equalizes airflow distribution</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🧹</div>
+                    <div class="feature-text">
+                        <h5>Filter Drawer</h5>
+                        <p>MERV 8 standard, gasketed for IP55 seal</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔩</div>
+                    <div class="feature-text">
+                        <h5>Hardware</h5>
+                        <p>316 stainless steel fasteners, marine grade</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thermal Design -->
+        <div class="section">
+            <h2>Thermal Management</h2>
+            <div class="note-box">
+                <strong>Airflow Path:</strong> Bottom bezel slots → MERV 8 filter → Diffuser plate → 30mm rear plenum → TV back → 3× Delta fans → Top bezel slots (exhaust)
+            </div>
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <div class="value">165-195</div>
+                    <div class="label">CFM Airflow</div>
+                </div>
+                <div class="spec-card">
+                    <div class="value">55°C</div>
+                    <div class="label">Design Ambient</div>
+                </div>
+                <div class="spec-card">
+                    <div class="value">550W</div>
+                    <div class="label">Heat Load (TV + Solar)</div>
+                </div>
+                <div class="spec-card">
+                    <div class="value">50-80%</div>
+                    <div class="label">Thermal Margin (Wall)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Links -->
+        <div class="section">
+            <h2>Related Documentation</h2>
+            <div class="feature-list">
+                <a href="specification.html" class="feature-item" style="text-decoration: none; color: inherit;">
+                    <div class="feature-icon">📋</div>
+                    <div class="feature-text">
+                        <h5>Full Specification</h5>
+                        <p>Complete technical specification document</p>
+                    </div>
+                </a>
+                <a href="designs.html" class="feature-item" style="text-decoration: none; color: inherit;">
+                    <div class="feature-icon">📐</div>
+                    <div class="feature-text">
+                        <h5>Technical Drawings</h5>
+                        <p>SVG cross-sections and detailed dimensions</p>
+                    </div>
+                </a>
+                <a href="bom-detailed.html" class="feature-item" style="text-decoration: none; color: inherit;">
+                    <div class="feature-icon">📦</div>
+                    <div class="feature-text">
+                        <h5>Bill of Materials</h5>
+                        <p>Complete component list with pricing</p>
+                    </div>
+                </a>
+                <a href="eurotech-rfq.html" class="feature-item" style="text-decoration: none; color: inherit;">
+                    <div class="feature-icon">📄</div>
+                    <div class="feature-text">
+                        <h5>Manufacturer RFQ</h5>
+                        <p>Prototype request document</p>
+                    </div>
+                </a>
             </div>
         </div>
 
     </div>
-<script src="nav.js"></script>
+
+    <script src="nav.js"></script>
 </body>
 </html>
