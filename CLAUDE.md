@@ -195,6 +195,25 @@ nav.js injects: body { margin-left: 240px !important; }
 
 ## Recent Work History
 
+### Session: 2026-01-05 (Midday) - Vertical Rail Mounting System Documentation
+
+**Updated Internal TV Mounting System (specification.html):**
+- Changed from flat VESA plate to vertical rail system based on Apollo reference images
+- Section 4.8 now documents two completely separate mounting systems:
+  - **A. Internal TV Mount:** Vertical rails (800mm, M6 holes every 25mm) + TV brackets → TV's VESA holes
+  - **B. External Wall Mount:** Rear panel VESA plate for articulating wall bracket
+- Added "Key Concept" callout box explaining the two independent systems
+- Added "How it works" flow diagrams for each system
+- Added new "TV Mounting Brackets" spec card (L-shaped brackets connect TV to rails)
+- Updated SVG Figure 2 to show vertical rails with proper hole pattern
+
+**Also updated design-detailed.html:**
+- Changed mounting description to "Vertical rail system inside enclosure"
+
+**Commits:** `3bafd70`, `fac9cbf`
+
+---
+
 ### Session: 2026-01-05 (Morning) - Color Configurator + Mounting Best Practices
 
 **Color Configurator (color-configurator.html):**
