@@ -295,27 +295,33 @@
             </thead>
             <tbody>
                 <tr>
-                    <td class="source">Noctua NF-A14 PWM (x3)</td>
-                    <td>140mm, 300-1500 RPM, 82.5 CFM</td>
-                    <td class="good">24.6 dBA max (per fan)</td>
-                    <td>Premium quiet fan, ball bearing, 150,000hr life</td>
+                    <td class="source">Delta AFB1412HH-A (x3)</td>
+                    <td>140mm, 4.8 mmH₂O, ~250 CFM total</td>
+                    <td class="warning">Industrial fan - but see below</td>
+                    <td>High static pressure for filtered system</td>
                 </tr>
                 <tr>
-                    <td class="source">With Low-Noise Adapter</td>
-                    <td>Max 1200 RPM</td>
-                    <td class="good">~19-20 dBA (per fan)</td>
-                    <td>Included with Noctua, reduces max speed</td>
+                    <td class="source">At PWM 20% (idle)</td>
+                    <td>V = 0.7 m/s slot velocity</td>
+                    <td class="good">≤30 dBA @ 1m</td>
+                    <td>Near silent - keeps air moving</td>
                 </tr>
                 <tr>
-                    <td class="source">At PWM 30% (30°C ambient)</td>
-                    <td>~450 RPM</td>
-                    <td class="good">~12-14 dBA (per fan)</td>
-                    <td>Normal evening operation</td>
+                    <td class="source">At PWM 40% (quiet mode)</td>
+                    <td>V = 1.4 m/s slot velocity</td>
+                    <td class="good">≤34 dBA @ 1m</td>
+                    <td>Normal evening viewing</td>
                 </tr>
                 <tr>
-                    <td class="source">At PWM 100% (50°C+ ambient)</td>
-                    <td>1500 RPM</td>
-                    <td class="warning">~28-30 dBA combined</td>
+                    <td class="source">At PWM 60% (normal)</td>
+                    <td>V = 2.1 m/s slot velocity</td>
+                    <td class="good">≤38 dBA @ 1m</td>
+                    <td>Warm day operation</td>
+                </tr>
+                <tr>
+                    <td class="source">At PWM 100% (emergency)</td>
+                    <td>V = 3.4 m/s slot velocity</td>
+                    <td class="warning">≤48 dBA @ 1m</td>
                     <td>Peak summer midday only</td>
                 </tr>
             </tbody>
@@ -336,10 +342,15 @@
                     <div class="value" style="color: #059669;">20 dBA</div>
                     <div class="label" style="color: #059669;">Rustling leaves</div>
                 </div>
-                <div class="noise-marker" style="left: 28%;">
+                <div class="noise-marker" style="left: 34%;">
                     <div class="dot" style="border-color: #059669; border-width: 4px;"></div>
-                    <div class="value" style="color: #059669; font-size: 14pt;">24.6 dBA</div>
-                    <div class="label" style="color: #059669;">ATE-75 MAX</div>
+                    <div class="value" style="color: #059669; font-size: 14pt;">≤34 dBA</div>
+                    <div class="label" style="color: #059669;">ATE-75 QUIET</div>
+                </div>
+                <div class="noise-marker" style="left: 48%;">
+                    <div class="dot" style="border-color: #d97706; border-width: 3px;"></div>
+                    <div class="value" style="color: #d97706; font-size: 11pt;">≤48 dBA</div>
+                    <div class="label" style="color: #d97706;">ATE-75 MAX</div>
                 </div>
                 <div class="noise-marker" style="left: 40%;">
                     <div class="dot"></div>
@@ -373,8 +384,8 @@
         </div>
 
         <div class="solution-box">
-            <h4>Noise Summary: Virtually Silent</h4>
-            <p><strong>At 24.6 dBA maximum</strong>, the ATE-75 fans are quieter than rustling leaves. During evening viewing (30°C ambient), fans run at ~30% speed producing only 12-14 dBA - essentially inaudible over any TV audio or outdoor ambient noise. The enclosure will NOT disturb neighbors or viewing experience.</p>
+            <h4>Noise Summary: Quiet Most of the Time</h4>
+            <p><strong>Design philosophy: "Quiet most of the time, audible only in thermal emergencies."</strong> At 40% PWM (quiet mode), the ATE-75 produces ≤34 dBA - similar to a whisper or rustling leaves. Even at 60% PWM (normal daytime), noise stays ≤38 dBA. Only during extreme heat (100% PWM emergency mode) does noise reach ≤48 dBA - still quieter than normal conversation. The Delta fans provide high static pressure (4.8 mmH₂O) needed for filtered airflow, with PWM control ensuring quiet operation 90%+ of the time.</p>
         </div>
 
         <!-- AUDIO SOLUTIONS -->
