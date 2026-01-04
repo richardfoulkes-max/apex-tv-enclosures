@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eurotech Meeting - Thursday</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #1a1a2e;
+            --accent: #4f46e5;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            margin-bottom: 2rem;
+        }
+
+        .section {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .item-title {
+            font-weight: 500;
+        }
+
+        .item-note {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-top: 0.25rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.5rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: #f1f5f9;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .highlight {
+            background: #fef3c7;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--warning);
+            margin-top: 1rem;
+        }
+
+        .highlight-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .tag-warning {
+            background: var(--warning);
+            color: #78350f;
+        }
+
+        @media print {
+            body { padding: 1rem; }
+            .section { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Eurotech Factory Meeting</h1>
+        <p class="subtitle">Thursday - Designer Discussion</p>
+
+        <!-- What to Bring -->
+        <div class="section">
+            <div class="section-title">📋 What to Bring</div>
+            <ul class="checklist">
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Phone/iPad with spec page open</div>
+                        <div class="item-note">This page + the Product Overview page</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Tape measure</div>
+                        <div class="item-note">To verify dimensions if they have samples</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">75" TV dimensions printed/noted</div>
+                        <div class="item-note">Samsung 75" = 1676 x 959 x 26mm (screen area)</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Business cards</div>
+                        <div class="item-note">If you have them</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Notebook for sketches</div>
+                        <div class="item-note">They may draw ideas - capture them</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Photos of competitor products</div>
+                        <div class="item-note">Apollo, TV Shield - show what exists</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Thermal Controller -->
+        <div class="section">
+            <div class="section-title">🌡️ Fan Controller Specs (Tell Designer)</div>
+            <table>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td>Fans start</td>
+                    <td><strong>30°C</strong></td>
+                    <td>Minimum speed (~20% PWM)</td>
+                </tr>
+                <tr>
+                    <td>Full speed</td>
+                    <td><strong>50°C</strong></td>
+                    <td>100% PWM</td>
+                </tr>
+                <tr>
+                    <td>Fan off below</td>
+                    <td><strong>28°C</strong></td>
+                    <td>Hysteresis to prevent cycling</td>
+                </tr>
+                <tr>
+                    <td>PWM frequency</td>
+                    <td><strong>25kHz</strong></td>
+                    <td>Standard for 4-pin fans</td>
+                </tr>
+                <tr>
+                    <td>Channels</td>
+                    <td><strong>3</strong></td>
+                    <td>One per Delta fan</td>
+                </tr>
+            </table>
+
+            <div class="highlight">
+                <div class="highlight-title">Key Points for Designer:</div>
+                <ul style="margin-left: 1.25rem; margin-top: 0.5rem;">
+                    <li>Sensor placement: Near TV exhaust, not ambient air</li>
+                    <li>Fail-safe: Fans go 100% if sensor fails</li>
+                    <li>Can use off-the-shelf controller (~$10-20)</li>
+                    <li>You specify behavior, they handle implementation</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Questions to Ask -->
+        <div class="section">
+            <div class="section-title">❓ Questions to Ask</div>
+            <ul class="checklist">
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">What aluminum grade do you typically use?</div>
+                        <div class="item-note">We spec 5052-H32 for corrosion resistance</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Can you do powder coating in-house?</div>
+                        <div class="item-note">Matte black, RAL 9005 or similar</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">What's your typical lead time for a prototype?</div>
+                        <div class="item-note">We want to test before bulk order</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Do you source glass or should we supply?</div>
+                        <div class="item-note">8mm laminated (4+4) with low-iron option</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Can you integrate fans + controller?</div>
+                        <div class="item-note">Or do we source separately?</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">What's the MOQ for production?</div>
+                        <div class="item-note">And price break at 10, 50, 100 units?</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Do you provide CAD files with prototype?</div>
+                        <div class="item-note">We need production drawings for IP</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Red Flags -->
+        <div class="section">
+            <div class="section-title">🚩 Watch For</div>
+            <ul class="checklist">
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Vague timeline answers</div>
+                        <div class="item-note">Should be specific: "3 weeks for prototype"</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">No questions about your specs</div>
+                        <div class="item-note">Good designers ask clarifying questions</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Unwilling to share past work</div>
+                        <div class="item-note">Ask to see similar enclosures they've made</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Pushing different materials without reason</div>
+                        <div class="item-note">Should explain trade-offs, not just "we always use X"</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- After Meeting -->
+        <div class="section">
+            <div class="section-title">✅ After the Meeting</div>
+            <ul class="checklist">
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Send follow-up email same day</div>
+                        <div class="item-note">Thank them, summarize key points, confirm next steps</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Share spec document if they don't have it</div>
+                        <div class="item-note">Link to online spec or PDF</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Request formal quote in writing</div>
+                        <div class="item-note">Prototype cost + timeline + production pricing</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox"></div>
+                    <div class="item-content">
+                        <div class="item-title">Compare with China quotes</div>
+                        <div class="item-note">KDM Steel quote for reference</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</body>
+</html>

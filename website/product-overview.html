@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATE-75 Product Overview</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #1a1a2e;
+            --accent: #4f46e5;
+            --bg: #ffffff;
+            --card: #f8fafc;
+            --text: #1e293b;
+            --muted: #64748b;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .header .subtitle {
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero-box {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .hero-box h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .hero-box p {
+            color: var(--muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .spec-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .spec-card .value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .spec-card .label {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .feature {
+            background: var(--card);
+            border-radius: 10px;
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .dimensions-diagram {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .dimension-box {
+            display: inline-block;
+            border: 3px solid var(--accent);
+            padding: 2rem 3rem;
+            position: relative;
+            margin: 1rem;
+        }
+
+        .dim-label {
+            position: absolute;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 4px;
+        }
+
+        .dim-width { top: -12px; left: 50%; transform: translateX(-50%); }
+        .dim-height { right: -60px; top: 50%; transform: translateY(-50%); }
+        .dim-depth { bottom: -12px; right: -10px; }
+
+        .airflow-simple {
+            background: linear-gradient(to top, #dbeafe, #fef3c7, #fee2e2);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .airflow-arrow {
+            font-size: 2rem;
+            margin: 0.5rem 0;
+        }
+
+        .airflow-label {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .materials-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .materials-table th,
+        .materials-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .materials-table th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .materials-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .callout {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1rem 0;
+        }
+
+        .callout-title {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 0.25rem;
+        }
+
+        .callout p {
+            color: #78350f;
+            font-size: 0.95rem;
+        }
+
+        .sizes-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .size-box {
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem 0.5rem;
+            text-align: center;
+        }
+
+        .size-box.active {
+            border-color: var(--accent);
+            background: #eef2ff;
+        }
+
+        .size-box .size {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .size-box .dims {
+            font-size: 0.7rem;
+            color: var(--muted);
+            margin-top: 0.25rem;
+        }
+
+        @media (max-width: 600px) {
+            .sizes-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media print {
+            .header { padding: 1rem; }
+            .container { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ATE-75 Outdoor TV Enclosure</h1>
+        <p class="subtitle">75" Weatherproof Enclosure - Design Overview v5.2.2</p>
+    </div>
+
+    <div class="container">
+        <!-- What It Is -->
+        <div class="hero-box">
+            <h2>What We're Building</h2>
+            <p>A weatherproof aluminum enclosure that protects any standard 75" TV for outdoor use. Active cooling keeps the TV safe in Dubai's extreme heat. IP55 rated - handles rain, dust, and hose cleaning.</p>
+        </div>
+
+        <!-- Key Specs at a Glance -->
+        <div class="specs-grid">
+            <div class="spec-card">
+                <div class="value">1760mm</div>
+                <div class="label">Width</div>
+            </div>
+            <div class="spec-card">
+                <div class="value">1040mm</div>
+                <div class="label">Height</div>
+            </div>
+            <div class="spec-card">
+                <div class="value">160mm</div>
+                <div class="label">Depth</div>
+            </div>
+            <div class="spec-card">
+                <div class="value">IP55</div>
+                <div class="label">Weather Rating</div>
+            </div>
+            <div class="spec-card">
+                <div class="value">3 Fans</div>
+                <div class="label">Active Cooling</div>
+            </div>
+            <div class="spec-card">
+                <div class="value">~45kg</div>
+                <div class="label">Weight (empty)</div>
+            </div>
+        </div>
+
+        <!-- Size Variants -->
+        <div class="section">
+            <h3 class="section-title">Size Range</h3>
+            <div class="sizes-grid">
+                <div class="size-box">
+                    <div class="size">43"</div>
+                    <div class="dims">1050 × 650</div>
+                </div>
+                <div class="size-box">
+                    <div class="size">55"</div>
+                    <div class="dims">1320 × 800</div>
+                </div>
+                <div class="size-box">
+                    <div class="size">65"</div>
+                    <div class="dims">1540 × 920</div>
+                </div>
+                <div class="size-box active">
+                    <div class="size">75"</div>
+                    <div class="dims">1760 × 1040</div>
+                </div>
+                <div class="size-box">
+                    <div class="size">86"</div>
+                    <div class="dims">2000 × 1180</div>
+                </div>
+            </div>
+            <p style="color: var(--muted); font-size: 0.9rem; text-align: center; margin-top: 0.5rem;">Starting with 75" prototype. Same design scales to all sizes.</p>
+        </div>
+
+        <!-- How It Works -->
+        <div class="section">
+            <h3 class="section-title">How Cooling Works</h3>
+            <div class="airflow-simple">
+                <div class="airflow-label">Hot Air Out</div>
+                <div class="airflow-arrow">⬆️ ⬆️ ⬆️</div>
+                <div style="font-size: 1.5rem; margin: 1rem 0;">📺 TV</div>
+                <div style="color: var(--muted); margin-bottom: 0.5rem;">30mm air gap behind TV</div>
+                <div class="airflow-arrow">⬆️ ⬆️ ⬆️</div>
+                <div class="airflow-label">Cool Air In (filtered)</div>
+            </div>
+            <p style="color: var(--muted); text-align: center; margin-top: 1rem;">
+                3 fans pull air from bottom, across the TV's back, and exhaust out top.<br>
+                Automatic speed control based on temperature (30-50°C range).
+            </p>
+        </div>
+
+        <!-- Key Design Features -->
+        <div class="section">
+            <h3 class="section-title">Key Design Features</h3>
+            <div class="feature-list">
+                <div class="feature">
+                    <div class="feature-title">🔒 Hinged Service Door</div>
+                    <p>Bottom bezel opens for fan/filter access without removing glass.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">🪟 8mm Laminated Glass</div>
+                    <p>Safety glass (4+4) in continuous channel - won't shatter if broken.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">💨 Filtered Intake</div>
+                    <p>MERV 8 filter + insect mesh. Easy-pull drawer for cleaning.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">☔ Rain Protection</div>
+                    <p>Labyrinth baffles on intake, 75mm deflector on exhaust. IP55 rated.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">📺 Universal VESA Mount</div>
+                    <p>Through-bolted with 6mm reinforcement plate. Fits any TV.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">🔌 Sealed Cable Entry</div>
+                    <p>IP-rated glands for power and HDMI. Located on bottom panel.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Materials -->
+        <div class="section">
+            <h3 class="section-title">Materials</h3>
+            <table class="materials-table">
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Material</th>
+                        <th>Why</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Frame & Panels</td>
+                        <td>5052-H32 Aluminum (2mm)</td>
+                        <td>Corrosion resistant, strong, lightweight</td>
+                    </tr>
+                    <tr>
+                        <td>Glass</td>
+                        <td>8mm Laminated (4+4)</td>
+                        <td>Safety rated, won't shatter</td>
+                    </tr>
+                    <tr>
+                        <td>Gaskets</td>
+                        <td>EPDM (closed cell)</td>
+                        <td>UV/heat resistant, IP55 seal</td>
+                    </tr>
+                    <tr>
+                        <td>Fasteners</td>
+                        <td>316 Stainless Steel</td>
+                        <td>Salt/chlorine resistant</td>
+                    </tr>
+                    <tr>
+                        <td>Finish</td>
+                        <td>Powder Coat (RAL 9005)</td>
+                        <td>Durable matte black, UV stable</td>
+                    </tr>
+                    <tr>
+                        <td>Fans</td>
+                        <td>Delta AFB1412HH-A (140mm)</td>
+                        <td>High static pressure, long life, PWM</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Important Callouts -->
+        <div class="section">
+            <h3 class="section-title">Design Priorities</h3>
+
+            <div class="callout">
+                <div class="callout-title">Thermal Performance is Critical</div>
+                <p>Must handle 55°C ambient + solar load. This is why we need 3 high-static fans and proper airflow path - not just vents.</p>
+            </div>
+
+            <div class="callout">
+                <div class="callout-title">Serviceability Matters</div>
+                <p>Filters need cleaning, fans may need replacing. Hinged door means no glass removal for service.</p>
+            </div>
+
+            <div class="callout">
+                <div class="callout-title">IP55 Throughout</div>
+                <p>Every joint, every cable entry, every hinge must maintain the IP55 seal. This isn't just rain - it's garden hose cleaning.</p>
+            </div>
+        </div>
+
+        <!-- What We Need from Manufacturer -->
+        <div class="section">
+            <h3 class="section-title">What We Need</h3>
+            <div class="feature-list">
+                <div class="feature">
+                    <div class="feature-title">1. Prototype</div>
+                    <p>One working unit to validate design, test thermal performance, show to customers.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">2. Production Drawings</div>
+                    <p>CAD files (DXF/STEP) become our property. Need for IP and future production.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">3. Pricing Structure</div>
+                    <p>Prototype cost, plus pricing at 10, 50, 100 units. Lead times for each.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">4. Component Sourcing</div>
+                    <p>Do you source glass, fans, controller? Or do we supply?</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
