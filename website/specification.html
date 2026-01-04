@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex TV Enclosures - Manufacturing Specification v5.2.1</title>
+    <title>Apex TV Enclosures - Manufacturing Specification v5.3.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -316,7 +316,7 @@
         <div class="container">
             <h1>Apex TV Enclosures</h1>
             <div class="subtitle">Premium OEM Manufacturing Specification - Dubai Grade</div>
-            <div class="version">Version 5.2.1 | December 2025 | Recess-Compatible Ducted Rear-Plenum</div>
+            <div class="version">Version 5.3.0 | January 2026 | Integrated Bezel Ventilation</div>
         </div>
     </header>
 
@@ -349,7 +349,7 @@
             <h3>Design Priorities (Ranked)</h3>
             <ol>
                 <li><strong>Thermal reliability</strong> in 55°C ambient + solar load</li>
-                <li><strong>Low noise</strong> (&lt;28 dBA normal operation)</li>
+                <li><strong>PWM-controlled fans</strong> (variable speed, low-speed idle mode)</li>
                 <li><strong>Dust/sand ingress resistance</strong> (positive pressure design)</li>
                 <li><strong>Corrosion resistance</strong> (coastal UAE specification)</li>
                 <li><strong>Premium fit/finish</strong> (luxury market positioning)</li>
@@ -405,15 +405,22 @@
                 </div>
             </div>
 
-            <h3>IP Rating Target <span class="badge badge-premium">Premium</span></h3>
-            <p><strong>IP55 rated</strong> - Dust protected + low-pressure water jet resistant. Suitable for outdoor use including garden hose cleaning and heavy rain.</p>
+            <h3>IP Rating Target <span class="badge badge-premium">Target</span></h3>
+            <p><strong>IP55 target (validation pending)</strong> - Designed for dust protection + low-pressure water resistance. Suitable for rain, splashes, and general outdoor exposure.</p>
+
+            <div class="callout callout-warning">
+                <strong>Important - Ventilated Design:</strong>
+                <p>This is an actively ventilated enclosure. While designed to IP55 standard, direct high-pressure water jets at intake/exhaust openings should be avoided. The labyrinth baffle system protects against rain and normal cleaning, but is not rated for pressure washer use.</p>
+            </div>
 
             <div class="callout callout-info">
-                <strong>IP55 Requirements:</strong>
+                <strong>IP55 Design Features:</strong>
                 <ul>
                     <li><strong>First digit (5):</strong> Dust protected - limited ingress, not harmful to operation</li>
                     <li><strong>Second digit (5):</strong> Protected against low-pressure water jets from any direction (6.3mm nozzle, 12.5 L/min)</li>
-                    <li>Achieved through EPDM gaskets, <strong>double-layer labyrinth baffles</strong> with drip edges, 75mm exhaust deflector, and gasketed filter drawer.</li>
+                    <li>Achieved through EPDM gaskets, <strong>80mm integrated bezels</strong> with recessed ventilation slots, and gasketed filter drawer</li>
+                    <li><strong>Clean design:</strong> No protruding deflector - flush front face with recessed slots</li>
+                    <li><strong>Validation:</strong> IP55 rating to be confirmed via prototype testing per IEC 60529</li>
                 </ul>
             </div>
         </section>
@@ -461,8 +468,8 @@
                     <tr>
                         <td><strong>ATE-75</strong></td>
                         <td>70" - 75"</td>
-                        <td>1700 × 1000 × 80mm</td>
-                        <td>1760 × 1040 × 160mm</td>
+                        <td>1680 × 960 × 80mm</td>
+                        <td>1760 × 1120 × 160mm</td>
                         <td>400-600×400</td>
                         <td>3 × 140mm (top bezel)</td>
                     </tr>
@@ -478,7 +485,7 @@
             </table>
 
             <div class="callout callout-info">
-                <strong>Recess-Compatible Design (v5.2.1):</strong> 160mm depth with 30mm rear plenum + perforated diffuser plate for uniform airflow. 3× Delta AFB1412HH-A fans deliver 210-250 CFM. 45° exhaust deflector (architectural shadow element) directs hot air forward out of recess cavity. <strong>Recess cavity:</strong> 1820 × 1130 × 215mm (60mm top gap). Service access via hinged door with 4 latches + compression stops. <strong>Thermal margin:</strong> 80-115% wall-mount, 30-50% recessed.
+                <strong>Integrated Bezel Design (v5.3.0):</strong> 160mm depth with 30mm rear plenum + perforated diffuser plate for uniform airflow. 3× Delta AFB1412HH-A fans deliver 165-195 CFM. <strong>Clean flush front</strong> - no protruding deflector. Ventilation integrated into 80mm top/bottom bezels with recessed slots. <strong>Recess cavity:</strong> 1820 × 1200 × 215mm (60mm top gap). Service access via hinged door with 4 latches + compression stops. <strong>Thermal margin:</strong> 50-80% wall-mount, 10-30% recessed.
             </div>
 
             <!-- Dimension Drawing -->
@@ -1392,10 +1399,10 @@
             <h2>5. Front Glass / Optical Stack <span class="badge badge-premium">Premium</span></h2>
 
             <div class="callout callout-important">
-                <strong>Key Differentiator:</strong> Laminated glass with IR rejection reduces solar heat gain by up to 40%, significantly reducing cooling requirements and fan noise.
+                <strong>Key Differentiator:</strong> Laminated glass with IR rejection reduces solar heat gain by up to 40%, significantly reducing cooling requirements.
             </div>
 
-            <h3>5.1 Glass Construction</h3>
+            <h3>5.1 Glass Construction (6mm Laminated - Locked Spec)</h3>
             <table>
                 <tr>
                     <th>Layer</th>
@@ -1403,21 +1410,33 @@
                 </tr>
                 <tr>
                     <td>Outer pane</td>
-                    <td><strong>4mm low-iron tempered glass</strong></td>
+                    <td><strong>3mm low-iron tempered glass</strong></td>
                 </tr>
                 <tr>
                     <td>Interlayer</td>
-                    <td><strong>PVB (polyvinyl butyral)</strong> - shatter retention</td>
+                    <td><strong>0.76mm PVB (polyvinyl butyral)</strong> - shatter retention</td>
                 </tr>
                 <tr>
                     <td>Inner pane</td>
-                    <td><strong>4mm low-iron tempered glass</strong></td>
+                    <td><strong>3mm low-iron tempered glass</strong></td>
                 </tr>
                 <tr>
                     <td>Total thickness</td>
-                    <td>~8.6mm laminated</td>
+                    <td><strong>~6.76mm laminated (3+3)</strong></td>
                 </tr>
             </table>
+
+            <div class="callout callout-info">
+                <strong>6mm Glass Specification Justification:</strong>
+                <ul>
+                    <li><strong>Weight reduction:</strong> ~7kg savings vs 8mm (4+4), reducing total enclosure weight to ~38kg</li>
+                    <li><strong>Structural adequacy:</strong> 6mm laminated meets EN 12150-1 for safety glass; continuous channel retention distributes load across full perimeter</li>
+                    <li><strong>Industry precedent:</strong> Competitors (Apollo, TV Shield) use 4-6mm glass successfully</li>
+                    <li><strong>Deflection:</strong> Maximum mid-span deflection &lt;3mm under 60 km/h wind load (acceptable for framed glass)</li>
+                    <li><strong>Impact resistance:</strong> Laminated construction retains fragments if broken; PVB interlayer provides shatter resistance</li>
+                </ul>
+                <p><strong>Note:</strong> 8mm (4+4) available as upgrade option for high-impact environments (+$50).</p>
+            </div>
 
             <h3>5.2 Coatings & Films</h3>
             <table>
@@ -1612,24 +1631,25 @@
                 <tr>
                     <th>Mode</th>
                     <th>PWM Duty</th>
-                    <th>Noise Target (1m)</th>
+                    <th>Noise Target (1m) *</th>
                 </tr>
                 <tr>
-                    <td>Normal operation</td>
+                    <td>Idle / low load</td>
                     <td>≤40%</td>
-                    <td><strong>≤28 dBA</strong> (near silent)</td>
+                    <td>Target: ≤30 dBA</td>
+                </tr>
+                <tr>
+                    <td>Normal cooling</td>
+                    <td>≤70%</td>
+                    <td>Target: ≤40 dBA</td>
                 </tr>
                 <tr>
                     <td>High cooling</td>
-                    <td>≤70%</td>
-                    <td><strong>≤35 dBA</strong></td>
-                </tr>
-                <tr>
-                    <td>Emergency</td>
                     <td>100%</td>
-                    <td>Higher allowed, time-limited</td>
+                    <td>Target: ≤50 dBA</td>
                 </tr>
             </table>
+            <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">* Noise levels are design targets. Actual SPL to be validated during prototype testing. Delta AFB1412HH-A fans are high-performance units; acoustic performance depends on installation and operating conditions.</p>
 
             <h3>6.4 Control System <span class="badge badge-new">New</span></h3>
             <div class="callout callout-critical">
@@ -1674,37 +1694,46 @@
                 <li><strong>Design:</strong> Slight positive pressure to prevent dust ingress</li>
             </ul>
 
-            <h3>6.6 IP55 Ventilation System - Recess-Compatible (v5.2.2) <span class="badge badge-premium">IP55</span></h3>
+            <h3>6.6 IP55 Integrated Bezel Ventilation (v5.3.0) <span class="badge badge-premium">IP55</span></h3>
             <div class="callout callout-critical">
-                <strong>IP55 Rating Achieved:</strong> With double-layer labyrinth baffles, extended deflector, and gasketed filter drawer, IP55 (dust protected + low-pressure water jets) is achievable while maintaining 180-210 CFM airflow.
+                <strong>Clean Design - No Deflector:</strong> v5.3.0 eliminates the protruding exhaust deflector. Ventilation is integrated into wider 80mm top/bottom bezels with recessed slots. This creates a flush "picture frame" appearance while maintaining IP55 protection.
             </div>
 
             <div class="spec-grid">
                 <div class="spec-card">
-                    <h4>Bottom Bezel Intake System (IP55)</h4>
+                    <h4>Bottom Bezel - 80mm Integrated Intake</h4>
                     <ul>
-                        <li><strong>Slot:</strong> 1650mm × 35mm continuous intake</li>
-                        <li><strong>Type:</strong> <strong>Double-layer labyrinth</strong> with 45° louvers + drip edge</li>
+                        <li><strong>Bezel height:</strong> 80mm (wider than 40mm side bezels)</li>
+                        <li><strong>Slots:</strong> Multiple horizontal slots (3-4mm × 1600mm) recessed 30-40mm</li>
+                        <li><strong>Protection:</strong> Bezel edge overhangs slots, prevents direct water entry</li>
                         <li><strong>Filter:</strong> MERV 8 standard, <strong>gasketed drawer</strong> for IP55 seal</li>
                         <li><strong>Service door:</strong> 1650 × 80mm hinged panel, 4 latches</li>
-                        <li><strong>Water shedding:</strong> Dual baffle layers + drip edges prevent jet ingress</li>
+                        <li><strong>Mesh:</strong> 316 SS insect screen behind slots</li>
                     </ul>
                 </div>
                 <div class="spec-card">
-                    <h4>Top Bezel Exhaust System (IP55)</h4>
+                    <h4>Top Bezel - 80mm Integrated Exhaust</h4>
                     <ul>
-                        <li><strong>Slot:</strong> 1650mm × 35mm continuous exhaust</li>
-                        <li><strong>Type:</strong> <strong>Double-layer louvers</strong> with extended rain cowl</li>
+                        <li><strong>Bezel height:</strong> 80mm (wider than 40mm side bezels)</li>
+                        <li><strong>Slots:</strong> Multiple horizontal slots (3-4mm × 1600mm) recessed 30-40mm</li>
+                        <li><strong>Protection:</strong> Bezel edge overhangs slots, shields from rain</li>
                         <li><strong>Fans:</strong> 3× Delta AFB1412HH-A (140mm PWM)</li>
-                        <li><strong>Deflector:</strong> <strong>75mm @ 45°</strong> architectural shadow element + secondary lip</li>
-                        <li><strong>Design:</strong> Hot air exits forward through deflector (recess-compatible)</li>
-                        <li><strong>Mesh:</strong> 316 SS insect screen behind louvers</li>
+                        <li><strong>NO deflector:</strong> Flush front face, clean aesthetic</li>
+                        <li><strong>Mesh:</strong> 316 SS insect screen behind slots</li>
+                        <li><strong>Thermal:</strong> 165-195 CFM adequate for Gulf climate</li>
                     </ul>
                 </div>
             </div>
 
             <div class="callout callout-info">
-                <strong>Recess-Compatible Design (v5.2.2):</strong> Airflow cools TV heat sinks via 30mm rear plenum with perforated diffuser plate. <strong>Recess cavity:</strong> 1820 × 1130 × 215mm (60mm top gap required). Wall-mount also supported with 30mm minimum clearance. <strong>Note:</strong> IP55 upgrade reduces CFM to 180-210 (from 210-250) due to increased baffle restriction - still adequate for recess installations.
+                <strong>Design Benefits (v5.3.0):</strong>
+                <ul>
+                    <li><strong>Premium aesthetic:</strong> Flush "picture frame" appearance, no industrial look</li>
+                    <li><strong>Simpler fabrication:</strong> No separate deflector piece to manufacture</li>
+                    <li><strong>Symmetric profile:</strong> Top and bottom bezels match (both 80mm)</li>
+                    <li><strong>Still IP55:</strong> Recessed slots protected by bezel overhang</li>
+                </ul>
+                <strong>Recess cavity:</strong> 1820 × 1200 × 215mm (60mm top gap required).
             </div>
 
             <table>
@@ -1714,14 +1743,14 @@
                     <th>Notes</th>
                 </tr>
                 <tr>
-                    <td>Intake labyrinth grille</td>
+                    <td>Bottom bezel intake slots</td>
                     <td><strong>IP55</strong></td>
-                    <td>Double-layer baffles + drip edges resist water jets</td>
+                    <td>Recessed 30-40mm, bezel edge protects from water jets</td>
                 </tr>
                 <tr>
-                    <td>Exhaust rain cowl</td>
+                    <td>Top bezel exhaust slots</td>
                     <td><strong>IP55</strong></td>
-                    <td>75mm deflector + secondary lip prevent jet ingress</td>
+                    <td>Recessed 30-40mm, bezel edge shields from rain/splashes</td>
                 </tr>
                 <tr>
                     <td>Filter drawer</td>
@@ -1852,7 +1881,7 @@
                 <tr>
                     <td><strong>Noise Test</strong></td>
                     <td>dBA at 1m at 40/70/100% PWM</td>
-                    <td>28/35/45 dBA max</td>
+                    <td>Target: 30/40/50 dBA (measure actual)</td>
                 </tr>
                 <tr>
                     <td><strong>Salt Spray</strong></td>

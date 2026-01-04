@@ -15,7 +15,7 @@
         'designs.html', 'ai-image-prompts.html', 'bom-detailed.html',
         'engineering-analysis.html', 'control-logic.html', 'wiring-diagram.html',
         'tv-compatibility.html', 'audio-noise-video.html', 'testing-plan.html',
-        'qc-checklist.html', 'compliance-guide.html', 'manufacturer-rfq.html',
+        'qc-checklist.html', 'compliance-guide.html', 'cavity-requirements.html', 'manufacturer-rfq.html',
         'china-suppliers.html', 'market-research.html', 'competitor-analysis.html',
         'competitor-comparison.html', 'product-opportunities.html',
         'financial-forecast.html', 'landed-cost-calculator.html', 'global-pricing.html',
@@ -184,6 +184,7 @@
                 { href: 'testing-plan.html', label: 'Testing Plan' },
                 { href: 'qc-checklist.html', label: 'QC Checklist' },
                 { href: 'compliance-guide.html', label: 'Compliance Guide' },
+                { href: 'cavity-requirements.html', label: 'Cavity Requirements' },
                 { href: 'manufacturer-rfq.html', label: 'RFQ Package' },
                 { href: 'china-suppliers.html', label: 'China Suppliers' }
             ]

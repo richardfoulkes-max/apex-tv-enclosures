@@ -94,8 +94,8 @@
 
     <header>
         <div class="header-content">
-            <h1>Engineering Designs - ATE Series (v5.2.2 IP55)</h1>
-            <p class="subtitle">CAD-grade specifications for outdoor TV enclosures - Recess-Compatible Ducted Plenum Architecture</p>
+            <h1>Engineering Designs - ATE Series (v5.3.0 IP55)</h1>
+            <p class="subtitle">CAD-grade specifications for outdoor TV enclosures - Integrated Bezel Ventilation Design</p>
         </div>
     </header>
 
@@ -103,8 +103,8 @@
 
         <!-- ========== ATE-75 TV ENCLOSURE ========== -->
         <div class="design-section">
-            <h2>ATE-75: Outdoor TV Enclosure (75") - Recess-Compatible v5.2.2 IP55</h2>
-            <p><strong>Design Intent:</strong> IP55 weatherproof enclosure for commercial 75" TVs in Gulf region outdoor environments. IP55 ducted rear-plenum thermal management with double-layer labyrinth intake, 75mm exhaust deflector, and perforated diffuser plate provides direct cooling of TV heat sinks while protecting against low-pressure water jets (garden hose safe). Compatible with both wall-mount AND recessed installations.</p>
+            <h2>ATE-75: Outdoor TV Enclosure (75") - Integrated Bezel Design v5.3.0 IP55</h2>
+            <p><strong>Design Intent:</strong> IP55 weatherproof enclosure for commercial 75" TVs in Gulf region outdoor environments. <strong>v5.3.0 eliminates the protruding exhaust deflector</strong> in favor of integrated 80mm top/bottom bezels with recessed ventilation slots. Clean "picture frame" aesthetic with flush front face. Ducted rear-plenum thermal management with perforated diffuser plate provides direct cooling of TV heat sinks. Compatible with both wall-mount AND recessed installations.</p>
 
             <h3>1. Global Parameters</h3>
             <table class="param-table">
@@ -112,46 +112,50 @@
                 <tr><td><code>TV_MAX_WIDTH</code></td><td>1675 mm</td><td>75" TV typical</td></tr>
                 <tr><td><code>TV_MAX_HEIGHT</code></td><td>960 mm</td><td>75" TV typical</td></tr>
                 <tr><td><code>TV_MAX_DEPTH</code></td><td>65 mm</td><td>Excludes stand</td></tr>
-                <tr><td><code>BEZEL_WIDTH</code></td><td>35 mm</td><td>Contains intake/exhaust slots</td></tr>
+                <tr><td><code>TOP_BOTTOM_BEZEL</code></td><td>80 mm</td><td>Wider bezels with integrated recessed vents</td></tr>
+                <tr><td><code>SIDE_BEZEL</code></td><td>40 mm</td><td>Standard frame profile</td></tr>
                 <tr><td><code>REAR_PLENUM</code></td><td>30 mm + diffuser</td><td>Perforated plate (8mm holes, 40% open)</td></tr>
                 <tr><td><code>CLEARANCE_REAR</code></td><td>25 mm</td><td>Cables + VESA mount</td></tr>
                 <tr><td><code>WALL_THICKNESS</code></td><td>3.0 mm</td><td>Aluminium 5052-H32</td></tr>
-                <tr><td><code>GLASS_THICKNESS</code></td><td>8 mm</td><td>Laminated (3+3), anti-reflective</td></tr>
-                <tr><td><code>FAN_MODEL</code></td><td>Delta AFB1412HH-A</td><td>3× 140mm, 180-210 CFM total (locked spec, reduced for IP55)</td></tr>
+                <tr><td><code>GLASS_THICKNESS</code></td><td>6 mm</td><td>Laminated (3+3mm), anti-reflective</td></tr>
+                <tr><td><code>FAN_MODEL</code></td><td>Delta AFB1412HH-A</td><td>3× 140mm, 165-195 CFM total</td></tr>
                 <tr><td><code>IP_RATING</code></td><td>IP55</td><td>Dust protected + low-pressure water jet resistant</td></tr>
                 <tr><td><code>PROFILE</code></td><td>Ducted Rear-Plenum</td><td>Bottom intake → Diffuser → 30mm plenum → Top exhaust</td></tr>
-                <tr><td><code>EXHAUST_DEFLECTOR</code></td><td>75mm @ 45° + secondary lip</td><td>IP55 architectural shadow element design</td></tr>
-                <tr><td><code>RECESS_CAVITY</code></td><td>1820 × 1130 × 215 mm</td><td>60mm top gap for exhaust (30mm sides/bottom)</td></tr>
+                <tr><td><code>VENTILATION</code></td><td>Integrated 80mm bezels</td><td>Recessed slots (30-40mm behind face), NO deflector</td></tr>
+                <tr><td><code>RECESS_CAVITY</code></td><td>1820 × 1200 × 215 mm</td><td>60mm top gap for exhaust (30mm sides/bottom)</td></tr>
             </table>
 
             <h3>2. Overall Dimensions</h3>
             <table class="param-table">
                 <tr><th>View</th><th>Dimension</th><th>Value</th></tr>
-                <tr><td>External</td><td>W × H × D</td><td>1760 × 1040 × 160 mm</td></tr>
-                <tr><td>Internal cavity</td><td>W × H × D</td><td>1690 × 970 × 125 mm</td></tr>
-                <tr><td>Glass visible area</td><td>W × H</td><td>1690 × 970 mm</td></tr>
+                <tr><td>External</td><td>W × H × D</td><td>1760 × 1120 × 160 mm</td></tr>
+                <tr><td>Internal cavity</td><td>W × H × D</td><td>1680 × 960 × 125 mm</td></tr>
+                <tr><td>Glass visible area</td><td>W × H</td><td>1680 × 960 mm</td></tr>
                 <tr><td>Rear plenum</td><td>W × H × D</td><td>1650 × 900 × 30 mm + diffuser</td></tr>
-                <tr><td>Bottom intake slot</td><td>W × H</td><td>1650 × 30 mm</td></tr>
-                <tr><td>Top exhaust slot</td><td>W × H</td><td>1650 × 35 mm</td></tr>
+                <tr><td>Top bezel</td><td>Height</td><td>80 mm (integrated exhaust slots, recessed 30-40mm)</td></tr>
+                <tr><td>Bottom bezel</td><td>Height</td><td>80 mm (integrated intake slots, recessed 30-40mm)</td></tr>
+                <tr><td>Side bezels</td><td>Width</td><td>40 mm each</td></tr>
                 <tr><td>Service door</td><td>W × H</td><td>1650 × 80 mm (4 latches + compression stops)</td></tr>
-                <tr><td>Exhaust deflector</td><td>H × angle</td><td>50 mm @ 45° (architectural shadow element)</td></tr>
-                <tr><td>Recess cavity required</td><td>W × H × D</td><td>1820 × 1130 × 215 mm (60mm top gap)</td></tr>
+                <tr><td>Ventilation design</td><td>Style</td><td>Flush front - NO deflector - recessed slots in 80mm bezels</td></tr>
+                <tr><td>Recess cavity required</td><td>W × H × D</td><td>1820 × 1200 × 215 mm (60mm top gap)</td></tr>
                 <tr><td>Weight (empty)</td><td>—</td><td>~38 kg</td></tr>
                 <tr><td>Weight (with 75" TV)</td><td>—</td><td>~68 kg</td></tr>
             </table>
 
             <div class="success-box">
-                <strong>IP55 Recess-Compatible Design v5.2.2:</strong> 160mm depth with 30mm ducted rear plenum + perforated diffuser plate (8mm holes, 40% open). Air enters through IP55 double-layer labyrinth intake with drip edges, passes through gasketed MERV 8 filter drawer, flows through diffuser for even distribution, through 30mm channel behind TV (directly cooling heat sinks), then exhausts via 3× Delta AFB1412HH-A fans (180-210 CFM) through 75mm @ 45° deflector with secondary lip. <strong>Recess-compatible:</strong> 1820 × 1130 × 215mm cavity with 60mm top gap prevents exhaust recirculation. <strong>IP55:</strong> Garden hose cleanable.
+                <strong>Integrated Bezel Design v5.3.0:</strong> Clean "picture frame" aesthetic with NO protruding deflector. 80mm top/bottom bezels contain recessed ventilation slots (30-40mm behind face). Air enters through bottom bezel slots, passes through gasketed MERV 8 filter drawer, flows through perforated diffuser plate (8mm holes, 40% open) into 30mm rear plenum, directly cooling TV heat sinks, then exhausts via 3× Delta AFB1412HH-A fans (165-195 CFM) through top bezel slots. <strong>Recess-compatible:</strong> 1820 × 1200 × 215mm cavity with 60mm top gap. <strong>IP55:</strong> Bezel edges shield recessed slots from water jets and rain.
             </div>
 
-            <h3>3. v5.2.2 IP55 Recess-Compatible Technical Drawings</h3>
+            <h3>3. Technical Drawings</h3>
 
             <div class="note-box">
+                <strong>Note:</strong> The SVG drawings below show the v5.2.2 design (with deflector). <strong>v5.3.0</strong> replaces the protruding deflector with integrated 80mm bezels containing recessed ventilation slots. New drawings to be created for prototype.
+                <br><br>
                 <a href="archive/designs-legacy.html" style="color: #92400e;">View archived v1.0-v2.0 designs →</a>
             </div>
 
             <div class="success-box">
-                <strong>v5.2.2 Cross-Sections:</strong> These detailed technical drawings show the IP55 recess-compatible design with 30mm rear plenum + diffuser plate, 3× Delta AFB1412HH-A fans (180-210 CFM), 75mm exhaust deflector, and double-layer labyrinth intake baffles.
+                <strong>v5.3.0 Key Changes:</strong> Top/bottom bezels widened to 80mm (from 35-40mm). Exhaust deflector REMOVED. Ventilation slots recessed 30-40mm behind bezel face. Clean flush "picture frame" front appearance.
             </div>
 
             <!-- SIDE CROSS-SECTION -->
@@ -771,11 +775,11 @@
             </table>
 
             <div class="note-box">
-                <strong>Thermal Margin:</strong> At 55°C ambient + 550W load + 180-210 CFM forced cooling through IP55 double-layer labyrinth intake, 30mm rear plenum with diffuser plate, and 75mm exhaust deflector. Thermal margin is 60-90% wall-mounted or 20-40% recessed. Perforated diffuser plate ensures even airflow distribution across TV heat sinks. <strong>Passed ChatGPT engineering validation (PASS FOR PROTOTYPE).</strong>
+                <strong>Thermal Margin:</strong> At 55°C ambient + 550W load + 165-195 CFM forced cooling through IP55 double-layer labyrinth intake, 30mm rear plenum with diffuser plate, and single-layer labyrinth exhaust with 75mm deflector. Thermal margin is 55-85% wall-mounted or 15-35% recessed (~2-5°C higher due to exhaust labyrinth). Perforated diffuser plate ensures even airflow distribution across TV heat sinks. <strong>Passed ChatGPT engineering validation (PASS FOR PROTOTYPE).</strong>
             </div>
 
             <div class="success-box">
-                <strong>IP55 Rating:</strong> Continuous higher-durometer EPDM gasket seal, IP68 cable glands, double-layer labyrinth intake baffles with drip edges, 75mm exhaust deflector with secondary lip, gasketed filter drawer, hinged service door with 4 latches + compression stops. IP55 = dust protected + low-pressure water jet resistant (garden hose safe).
+                <strong>IP55 Rating:</strong> Continuous higher-durometer EPDM gasket seal, IP68 cable glands, double-layer labyrinth intake baffles with drip edges, single-layer labyrinth exhaust (45° outward louvers) with 75mm deflector, gasketed filter drawer, hinged service door with 4 latches + compression stops. IP55 = dust protected + low-pressure water jet resistant (garden hose safe + pool splash protected).
             </div>
         </div>
 
@@ -836,7 +840,7 @@
             </table>
 
             <div class="success-box">
-                <strong>v5.2.2 IP55 Recess-Compatible:</strong> All sizes feature the IP55 ducted rear-plenum airflow design with Delta AFB1412HH-A fans in top bezel, double-layer labyrinth intake baffles, 75mm exhaust deflector, 30mm rear air channel + diffuser plate, 4-latch hinged service door with higher-durometer EPDM, gasketed MERV 8 filter drawer. Compatible with both wall-mount AND recessed installations (60mm top gap required for recess). Garden hose cleanable.
+                <strong>v5.2.2 IP55 Recess-Compatible:</strong> All sizes feature the IP55 ducted rear-plenum airflow design with Delta AFB1412HH-A fans in top bezel, double-layer labyrinth intake baffles, single-layer labyrinth exhaust with 75mm deflector, 30mm rear air channel + diffuser plate, 4-latch hinged service door with higher-durometer EPDM, gasketed MERV 8 filter drawer. Compatible with both wall-mount AND recessed installations (60mm top gap required for recess). Garden hose cleanable + pool splash protected.
             </div>
 
             <div class="note-box">

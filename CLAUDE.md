@@ -12,7 +12,7 @@
 
 ## Project Overview
 Apex Enclosures business project - outdoor enclosures for Gulf region.
-- **Product 1:** TV Enclosures (ATE Series) - 75" prototype in development, v5.2.2 IP55
+- **Product 1:** TV Enclosures (ATE Series) - 75" prototype in development, v5.3.0 IP55
 - **Product 2:** Pool Equipment Enclosures (APE Series) - v1.0 engineering complete
 
 ## GitHub Repository
@@ -23,7 +23,7 @@ https://github.com/richardfoulkes-max/apex-tv-enclosures (private)
 
 ---
 
-## Current Design State (v5.2.1 Recess-Compatible - VALIDATED)
+## Current Design State (v5.3.0 Integrated Bezel - CURRENT)
 
 ### Design Version History
 | Version | Architecture | Status | Notes |
@@ -35,7 +35,9 @@ https://github.com/richardfoulkes-max/apex-tv-enclosures (private)
 | v5.0 | Ducted rear plenum, 180mm depth | VALIDATED | Roundtable AI: PASS FOR PROTOTYPE |
 | v5.1 | v5.0 + 3rd fan provision | SUPERSEDED | Production de-risk update |
 | v5.2 | 160mm depth, 3 active fans | SUPERSEDED | Recess-compatible base design |
-| **v5.2.1** | **v5.2 + engineering fixes** | **VALIDATED** | ChatGPT: PASS FOR PROTOTYPE |
+| v5.2.1 | v5.2 + engineering fixes | SUPERSEDED | ChatGPT: PASS FOR PROTOTYPE |
+| v5.2.2 | IP55 upgrade + exhaust labyrinth | SUPERSEDED | Pool splash protection |
+| **v5.3.0** | **Integrated bezel ventilation** | **CURRENT** | No deflector, clean aesthetic |
 
 ### Why v5.0? (Design Evolution via Roundtable AI)
 
@@ -65,47 +67,51 @@ https://github.com/richardfoulkes-max/apex-tv-enclosures (private)
 - **45° exhaust deflector** - architectural shadow element design
 - **4 latches + compression stops** on service door for IP54 seal
 
-**v5.2.2 CURRENT Design (IP55 Upgrade):**
+**v5.3.0 CURRENT Design (Integrated Bezel Ventilation):**
 - All v5.2.1 features PLUS:
 - **IP55 rated** - protected against low-pressure water jets (garden hose safe)
-- **Double-layer labyrinth baffles** on intake with drip edges
-- **75mm exhaust deflector** (was 50mm) with secondary lip
+- **NO DEFLECTOR** - clean flush "picture frame" aesthetic
+- **80mm top/bottom bezels** - wider bezels contain recessed ventilation slots
+- **40mm side bezels** - standard frame profile
+- **Recessed slots** - 30-40mm behind bezel face for IP55 protection
 - **Gasketed filter drawer** for IP55 seal
 - **Higher-durometer EPDM gaskets** throughout
-- **180-210 CFM** (reduced from 210-250 due to baffle restriction)
+- **165-195 CFM** (adequate for Gulf climate)
 
-### v5.2.2 Key Specifications (ATE-75)
+### v5.3.0 Key Specifications (ATE-75)
 | Parameter | Value | Notes |
 |-----------|-------|-------|
-| External dimensions | 1760 × 1040 × **160mm** | Recess-compatible |
-| Exhaust deflector | **75mm @ 45° + secondary lip** | IP55 rain protection |
-| Intake baffles | **Double-layer labyrinth** | IP55 jet resistant |
+| External dimensions | 1760 × **1120** × **160mm** | Taller due to 80mm bezels |
+| Top/bottom bezels | **80mm each** | Integrated recessed ventilation slots |
+| Side bezels | **40mm each** | Standard frame profile |
+| Ventilation | **Recessed slots** | 30-40mm behind bezel face, NO deflector |
 | Rear plenum | **30mm + diffuser** | Perforated plate equalizes flow |
-| Fans | **3× Delta AFB1412HH-A** | 180-210 CFM, 4.8 mmH₂O static |
+| Fans | **3× Delta AFB1412HH-A** | 165-195 CFM, 4.8 mmH₂O static |
 | Glass | **6mm laminated (3+3)** | Continuous channel retention |
 | Service door | 1650 × 80mm, **4 latches** | Higher-durometer EPDM |
 | Filter | **MERV 8 standard** | Gasketed drawer (IP55) |
 | VESA | Through-bolted, 6mm plate | 75kg @ 3× safety factor |
 | **IP rating** | **IP55** | Jet resistant, hose-cleanable |
-| **Recess cavity** | **1820 × 1130 × 215mm** | 60mm top gap |
+| **Recess cavity** | **1820 × 1200 × 215mm** | 60mm top gap |
 
-### Thermal Design (v5.2.2)
+### Thermal Design (v5.3.0)
 ```
-Air path: Bottom intake → Double-layer labyrinth → Filter → Diffuser plate →
-          30mm rear plenum → TV back → 3× Delta fans → 75mm Deflector out
+Air path: Bottom bezel slots → Filter → Diffuser plate →
+          30mm rear plenum → TV back → 3× Delta fans → Top bezel slots out
 ```
-- **Target:** 180-210 CFM at 55°C ambient + solar
+- **Target:** 165-195 CFM at 55°C ambient + solar
 - **Heat load:** 550W (300W TV + 250W solar gain)
-- **Margin:** ~60-90% wall-mount, 20-40% recess (adequate)
+- **Margin:** ~50-80% wall-mount, 10-30% recess (adequate)
+- **Design benefit:** Clean flush front - no protruding deflector
 
-### BOM Summary (v5.2.2 - estimates)
-- **BOM Cost:** $662.13 (includes IR extender + cleaning kit)
-- **Target FOB:** $580-650
+### BOM Summary (v5.3.0 - estimates)
+- **BOM Cost:** $662.13 (materials only, includes IR extender + cleaning kit)
+- **FOB Price:** ~$900 (BOM + labor + factory margin)
 - **Retail:** AED 10,500 (~$2,860)
 
 ### File Structure
 ```
-website/                    ← Website (v5.2.2 IP55 - fully updated)
+website/                    ← Website (v5.3.0 IP55 - fully updated)
 ├── index.html              ← Dashboard (links to all tools)
 ├── ai-queue.html           ← AI Director approval queue
 ├── ai-insights.html        ← AI learning analytics
@@ -157,6 +163,131 @@ roundtable-ai/              ← Engineering validation briefs
 7. Open folder for user to verify before sending
 
 ## Recent Work History
+
+### Session: 2026-01-04 (Night) - v5.3.0 Integrated Bezel Design
+
+**Major Design Update - Removed Deflector:**
+- User requested removal of protruding exhaust deflector for cleaner aesthetic
+- Implemented "Integrated Wide Top Bezel" solution:
+  - **80mm top/bottom bezels** (was 40mm) with recessed ventilation slots
+  - **40mm side bezels** unchanged
+  - Slots recessed 30-40mm behind bezel face for IP55 protection
+  - Clean flush "picture frame" appearance - no protruding elements
+- Height increased: 1040mm → **1120mm** (to accommodate wider bezels)
+
+**Files Updated to v5.3.0:**
+- specification.html - New IP55 integrated bezel ventilation section
+- eurotech-rfq.html - Updated dimensions, bezel specs, ventilation design
+- designs.html - Parameters updated (note: SVG drawings still show v5.2.2 deflector)
+- manufacturer-rfq.html - Bezel specs, thermal system references
+- CLAUDE.md - Version history, key specs, thermal design section
+
+**Generated:**
+- Eurotech-RFQ-75inch-v5.3.0.pdf for Thursday meeting
+
+**AI Image Generation (Gemini):**
+- Created detailed prompts for v5.3.0 design renders
+- Iterated on external front view (corrected vents, proportions)
+- Iterated on internal view (corrected fan count: 4→3, proper sizes)
+- Created exploded view prompt with component labels
+- Started documenting prompts to ai-image-prompts.html (incomplete)
+
+**Pending:**
+- Update ai-image-prompts.html with all v5.3.0 prompts
+- Create rear view prompt
+- Update SVG drawings in designs.html to match v5.3.0
+
+---
+
+### Session: 2026-01-04 (Evening) - Clean RFQ + Customer Website Brief
+
+**Clean Manufacturer RFQ Created:**
+- Created eurotech-rfq.html - focused 3-page document for Eurotech meeting
+- 75" prototype only, essential fabrication details
+- Removed PWM controller code (we supply controller, they don't need code)
+- Dimensions, materials (5052-H32), thermal system, service door, mounting
+- Fixed BOM header: 55" → 75"
+
+**Eurotech Email Sent:**
+- Generated Eurotech-RFQ-75inch-v5.2.2.pdf from clean HTML
+- Created email reply to Walid with PDF attached
+- User sent email - meeting confirmed for Thursday
+
+**Customer Website Design Brief (replit-design-brief.md):**
+- Comprehensive 13-section brief for Replit to build customer-facing site
+- Covers: company overview, target markets, product line, competitive positioning
+- Pages needed: Homepage, Product, How It Works, Industries, FAQ, Contact
+- Functionality: WhatsApp integration, quote forms, mobile-first
+- Tone/messaging guidelines, visual direction, technical requirements
+- Success metrics: understand in 5 sec, trust in 30 sec, act in 60 sec
+
+**Fin AI Research:**
+- Investigated fin.ai (Intercom's AI customer service agent)
+- Pricing: $0.99 per resolved conversation
+- Added as future add-on in design brief (not v1)
+- Design note: keep bottom-right corner flexible for WhatsApp OR Fin chat
+
+**Files Created:**
+- website/eurotech-rfq.html (NEW - clean manufacturer RFQ)
+- Eurotech-RFQ-75inch-v5.2.2.pdf (sent to Walid)
+- replit-design-brief.md (NEW - customer website brief)
+
+---
+
+### Session: 2026-01-04 (Afternoon) - ChatGPT Feedback Review + Eurotech Meeting Prep
+
+**ChatGPT review identified 4 major documentation gaps - all fixed:**
+
+1. **IP Rating Caveat (specification.html):**
+   - Changed from claim to "IP55 target (validation pending)"
+   - Added ventilated design warning: avoid direct jets at intake/exhaust
+   - Noise claims changed to "design targets" with disclaimer
+
+2. **Installer Cavity Requirements (NEW: cavity-requirements.html):**
+   - Created comprehensive installer guide for recess installations
+   - Dimension tables for all models (ATE-55 through ATE-85)
+   - 60mm minimum top gap requirement emphasized
+   - Standoff frame concept with SVG diagram
+   - Added to Manufacturing section in nav.js
+
+3. **TV Liability Boundaries (warranty-policy.html):**
+   - New Section 2 "TV & Equipment Liability"
+   - Clear table: what Apex IS vs IS NOT responsible for
+   - "What happens if TV overheats?" section with clear position
+   - Risk acknowledgment clauses
+   - Recommendations (TV insurance, compatible models)
+
+4. **BOM Pricing Structure (bom-detailed.html):**
+   - Fixed impossible FOB < BOM error
+   - New structure: BOM $662 + Labor $75 + QC $25 + Overhead $20 = $782 factory cost
+   - Factory margin ~15% → FOB ~$900
+   - Volume pricing: $1,100-1,200 (prototype) → $750 (200+ units)
+
+**Competitor Pricing Correction (MAJOR DISCOVERY):**
+- Found actual DigiScreens/Apollo price list (Aug 2023)
+- 75": AED 14,740 (not AED 7,000 as previously thought!)
+- **Apex is 29% CHEAPER than competition**, not more expensive
+- Updated: market-research.html, competitor-analysis.html, competitor-comparison.html
+
+**Eurotech Meeting Prep:**
+- Updated manufacturer-rfq.html: IP66 → IP55 throughout
+- Regenerated all PDFs from updated HTML sources
+- Combined into single: Apex-Technical-Package-v5.2.2.pdf (507KB)
+  - Specification + BOM + Control Logic + Wiring
+- Created email draft to Walid (walid.mohamed@eurotech-metal.com)
+
+**Files Created/Modified:**
+- website/cavity-requirements.html (NEW)
+- website/specification.html (IP55 caveat, noise targets, glass justification)
+- website/legal/warranty-policy.html (TV liability section)
+- website/bom-detailed.html (pricing structure)
+- website/manufacturer-rfq.html (IP55 update)
+- website/market-research.html (DigiScreens pricing)
+- website/competitor-analysis.html (DigiScreens pricing)
+- website/competitor-comparison.html (pricing corrections)
+- Apex-Technical-Package-v5.2.2.pdf (combined)
+
+---
 
 ### Session: 2026-01-04 (Late Night) - Factory Orders System
 
