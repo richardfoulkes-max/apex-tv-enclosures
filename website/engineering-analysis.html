@@ -88,23 +88,23 @@
         <div class="summary-grid">
             <div class="summary-card pass">
                 <div class="value">PASS</div>
-                <div class="label">Wall Mount (80-115%)</div>
+                <div class="label">Wall Mount (50-80%)</div>
             </div>
             <div class="summary-card pass">
                 <div class="value">PASS</div>
-                <div class="label">Recessed Mount (30-50%)</div>
+                <div class="label">Recessed Mount (10-30%)</div>
             </div>
             <div class="summary-card pass">
                 <div class="value">PASS</div>
-                <div class="label">60mm Top Gap</div>
+                <div class="label">20mm Top Gap</div>
             </div>
             <div class="summary-card pass">
-                <div class="value">210-250</div>
+                <div class="value">165-195</div>
                 <div class="label">CFM Airflow</div>
             </div>
             <div class="summary-card pass">
                 <div class="value">PASS</div>
-                <div class="label">IP54 Seal (4 Latches)</div>
+                <div class="label">IP55 Seal (4 Latches)</div>
             </div>
         </div>
 
@@ -128,12 +128,12 @@
                 <tr>
                     <td><strong>Exhaust Location</strong></td>
                     <td>Front bezel - top slot (4× 60mm fans)</td>
-                    <td>Front bezel - top slot (3× Delta AFB1412HH-A) + 45° deflector</td>
+                    <td>Front bezel - 80mm top bezel with recessed exhaust slots (3× Delta 140mm) - NO deflector</td>
                 </tr>
                 <tr>
                     <td><strong>Airflow Path</strong></td>
                     <td>Front-bottom → Up behind glass → Front-top</td>
-                    <td>Bottom → Diffuser → 30mm rear plenum → Top deflector (cools TV directly)</td>
+                    <td>Bottom passive intake → Diffuser → 30mm rear plenum → Front exhaust (cools TV directly)</td>
                 </tr>
                 <tr>
                     <td><strong>Wall Mount</strong></td>
@@ -393,167 +393,211 @@ Rear cavity internal:                <span class="warning">75-80°C</span>
         </div>
 
         <!-- Section 4: Mounting Scenarios -->
-        <h2>4. Mounting Scenario Validation</h2>
+        <h2>4. Mounting Scenario Validation (v5.3.0)</h2>
+
+        <div class="note">
+            <strong>v5.3.0 Front Exhaust Design:</strong> Air enters through passive intake at BOTTOM bezel (pulled by negative pressure), flows through enclosure past TV, and exhausts FORWARD through TOP bezel via 3× Delta 140mm fans. This "front exhaust" design works in any mounting configuration because exhaust goes into the room, not into the wall cavity.
+        </div>
 
         <h3>4.1 Wall Mount (Standard)</h3>
         <div class="diagram-box">
-            <svg viewBox="0 0 400 250" width="100%" height="200">
+            <svg viewBox="0 0 400 280" width="100%" height="220">
+                <defs>
+                    <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                        <polygon points="0 0, 8 3, 0 6" fill="#2563eb"/>
+                    </marker>
+                    <marker id="arrowRed" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                        <polygon points="0 0, 8 3, 0 6" fill="#dc2626"/>
+                    </marker>
+                </defs>
+
                 <rect x="300" y="30" width="80" height="190" fill="#e5e7eb" stroke="#9ca3af"/>
                 <text x="340" y="130" text-anchor="middle" font-size="9" fill="#6b7280">WALL</text>
 
                 <rect x="100" y="50" width="180" height="150" fill="#1e293b" stroke="#0d9488" stroke-width="3" rx="4"/>
-                <text x="190" y="130" text-anchor="middle" font-size="12" fill="#fff">ENCLOSURE</text>
+                <text x="190" y="120" text-anchor="middle" font-size="11" fill="#fff">ENCLOSURE</text>
+                <text x="190" y="135" text-anchor="middle" font-size="9" fill="#94a3b8">160mm depth</text>
 
-                <!-- Air arrows -->
-                <path d="M50 190 L95 190" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
-                <path d="M110 55 L110 20 L50 20" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowRed)"/>
+                <!-- Bottom bezel - passive intake -->
+                <rect x="100" y="185" width="180" height="15" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+                <text x="190" y="195" text-anchor="middle" font-size="7" fill="#2563eb">80mm Intake Bezel</text>
 
-                <text x="40" y="195" text-anchor="end" font-size="9" fill="#2563eb">IN</text>
-                <text x="40" y="25" text-anchor="end" font-size="9" fill="#dc2626">OUT</text>
+                <!-- Top bezel - 3× exhaust fans -->
+                <rect x="100" y="50" width="180" height="15" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+                <text x="190" y="60" text-anchor="middle" font-size="7" fill="#16a34a">80mm Exhaust (3× fans)</text>
 
-                <!-- Gap indicators -->
-                <line x1="280" y1="50" x2="280" y2="200" stroke="#0d9488" stroke-dasharray="3"/>
-                <text x="290" y="130" font-size="8" fill="#0d9488">150mm</text>
+                <!-- Air arrows - IN from bottom, OUT to front -->
+                <path d="M50 195 L95 195" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
+                <path d="M190 50 L190 20 L50 20" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowRed)"/>
 
-                <text x="190" y="230" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">✓ PASS - Full airflow</text>
+                <text x="40" y="200" text-anchor="end" font-size="9" fill="#2563eb">IN (passive)</text>
+                <text x="40" y="25" text-anchor="end" font-size="9" fill="#16a34a">OUT (3× fans)</text>
+
+                <text x="190" y="250" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">✓ PASS - Full airflow, 50-80% margin</text>
             </svg>
         </div>
 
-        <h3>4.2 Recessed Mount (Previously Failed)</h3>
+        <h3>4.2 Recessed Mount (v5.3.0 Validated)</h3>
         <div class="diagram-box">
-            <svg viewBox="0 0 400 250" width="100%" height="200">
-                <!-- Recess -->
-                <rect x="80" y="30" width="300" height="190" fill="#e5e7eb" stroke="#9ca3af"/>
-                <text x="350" y="130" text-anchor="middle" font-size="9" fill="#6b7280" transform="rotate(90,350,130)">RECESS</text>
+            <svg viewBox="0 0 400 280" width="100%" height="220">
+                <!-- Recess cavity -->
+                <rect x="80" y="30" width="300" height="200" fill="#e5e7eb" stroke="#9ca3af"/>
+                <text x="350" y="130" text-anchor="middle" font-size="8" fill="#6b7280" transform="rotate(90,350,130)">CAVITY</text>
 
                 <rect x="100" y="50" width="180" height="150" fill="#1e293b" stroke="#0d9488" stroke-width="3" rx="4"/>
-                <text x="190" y="130" text-anchor="middle" font-size="12" fill="#fff">ENCLOSURE</text>
+                <text x="190" y="120" text-anchor="middle" font-size="11" fill="#fff">ENCLOSURE</text>
+                <text x="190" y="135" text-anchor="middle" font-size="9" fill="#94a3b8">160mm depth</text>
 
-                <!-- Air arrows - FRONT STILL WORKS -->
-                <path d="M50 190 L95 190" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
-                <path d="M110 55 L110 20 L50 20" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowRed)"/>
+                <!-- 20mm top gap -->
+                <line x1="100" y1="45" x2="280" y2="45" stroke="#0d9488" stroke-width="1" stroke-dasharray="3"/>
+                <text x="310" y="48" font-size="8" fill="#0d9488">20mm gap</text>
 
-                <text x="40" y="195" text-anchor="end" font-size="9" fill="#2563eb">IN</text>
-                <text x="40" y="25" text-anchor="end" font-size="9" fill="#dc2626">OUT</text>
+                <!-- Bottom bezel -->
+                <rect x="100" y="185" width="180" height="15" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
 
-                <!-- Blocked rear (doesn't matter now) -->
-                <rect x="280" y="50" width="100" height="150" fill="#fca5a5" fill-opacity="0.3"/>
-                <text x="330" y="130" text-anchor="middle" font-size="8" fill="#666" transform="rotate(90,330,130)">Rear blocked</text>
-                <text x="330" y="175" text-anchor="middle" font-size="8" fill="#16a34a">(doesn't matter!)</text>
+                <!-- Top bezel -->
+                <rect x="100" y="50" width="180" height="15" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
 
-                <text x="190" y="235" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">✓ PASS - Front breathing works!</text>
+                <!-- Air arrows - FRONT exhaust works! -->
+                <path d="M50 195 L95 195" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
+                <path d="M190 50 L190 20 L50 20" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowRed)"/>
+
+                <text x="40" y="200" text-anchor="end" font-size="9" fill="#2563eb">IN</text>
+                <text x="40" y="25" text-anchor="end" font-size="9" fill="#16a34a">OUT (forward)</text>
+
+                <!-- Rear doesn't matter callout -->
+                <text x="260" y="130" text-anchor="middle" font-size="8" fill="#059669">Rear blocked OK!</text>
+                <text x="260" y="145" text-anchor="middle" font-size="7" fill="#059669">Exhaust goes forward</text>
+
+                <text x="190" y="255" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">✓ PASS - Front exhaust = no cavity heat buildup</text>
             </svg>
         </div>
 
-        <h3>4.3 Flush Mount (Zero Clearance)</h3>
+        <h3>4.3 Flush Mount (Minimal Clearance)</h3>
         <div class="diagram-box">
-            <svg viewBox="0 0 400 250" width="100%" height="200">
-                <!-- Wall surface -->
-                <rect x="80" y="30" width="20" height="190" fill="#d1d5db" stroke="#9ca3af"/>
-                <rect x="280" y="30" width="20" height="190" fill="#d1d5db" stroke="#9ca3af"/>
-                <rect x="80" y="30" width="220" height="20" fill="#d1d5db" stroke="#9ca3af"/>
-                <rect x="80" y="200" width="220" height="20" fill="#d1d5db" stroke="#9ca3af"/>
+            <svg viewBox="0 0 400 280" width="100%" height="220">
+                <!-- Flush cavity -->
+                <rect x="80" y="30" width="20" height="200" fill="#d1d5db" stroke="#9ca3af"/>
+                <rect x="280" y="30" width="20" height="200" fill="#d1d5db" stroke="#9ca3af"/>
+                <rect x="80" y="30" width="220" height="15" fill="#d1d5db" stroke="#9ca3af"/>
+                <rect x="80" y="215" width="220" height="15" fill="#d1d5db" stroke="#9ca3af"/>
                 <text x="350" y="130" text-anchor="middle" font-size="9" fill="#6b7280">FLUSH</text>
 
                 <rect x="100" y="50" width="180" height="150" fill="#1e293b" stroke="#0d9488" stroke-width="3" rx="4"/>
-                <text x="190" y="130" text-anchor="middle" font-size="12" fill="#fff">ENCLOSURE</text>
+                <text x="190" y="120" text-anchor="middle" font-size="11" fill="#fff">ENCLOSURE</text>
 
-                <!-- Air arrows - STILL WORKS -->
-                <path d="M50 190 L95 190" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
-                <path d="M110 55 L110 20 L50 20" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowRed)"/>
+                <!-- Bezels -->
+                <rect x="100" y="185" width="180" height="15" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+                <rect x="100" y="50" width="180" height="15" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
 
-                <text x="40" y="195" text-anchor="end" font-size="9" fill="#2563eb">IN</text>
-                <text x="40" y="25" text-anchor="end" font-size="9" fill="#dc2626">OUT</text>
+                <!-- Air arrows -->
+                <path d="M50 195 L95 195" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
+                <path d="M190 50 L190 20 L50 20" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowRed)"/>
 
-                <text x="190" y="240" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">✓ PASS - Only front exposed = still works!</text>
+                <text x="40" y="200" text-anchor="end" font-size="9" fill="#2563eb">IN</text>
+                <text x="40" y="25" text-anchor="end" font-size="9" fill="#16a34a">OUT</text>
+
+                <text x="190" y="255" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">✓ PASS - Only front face needed for airflow</text>
             </svg>
         </div>
 
         <div class="result-box result-pass">
-            <div class="verdict pass">ALL MOUNTING SCENARIOS: PASS</div>
-            <p>The front-breathing design works in <strong>any</strong> mounting configuration because it only requires the front face to be exposed to ambient air. This is always true - you can't view the TV if the front is blocked!</p>
+            <div class="verdict pass">ALL MOUNTING SCENARIOS: PASS (v5.3.0)</div>
+            <p><strong>Key v5.3.0 advantage:</strong> Front exhaust means hot air exits into the room, NOT into the wall cavity. This eliminates heat buildup behind the enclosure that plagued rear-exhaust designs. Only 20mm top gap needed (fitting tolerance), vs 60mm+ required by rear-exhaust competitors.</p>
         </div>
 
         <!-- Section 5: Structural -->
-        <h2>5. Structural Analysis - 120mm Profile</h2>
+        <h2>5. Structural Analysis - v5.3.0 (160mm Profile)</h2>
 
         <h3>5.1 Weight Impact</h3>
-        <div class="calc-box"><span class="comment">// === WEIGHT CHANGES ===</span>
-Previous (115mm depth):              ~41 kg empty, ~69 kg with TV
-New (120mm depth):                   ~43 kg empty, ~71 kg with TV
+        <div class="calc-box"><span class="comment">// === v5.3.0 WEIGHT ANALYSIS ===</span>
+v5.3.0 (160mm depth, 80mm bezels):   ~40 kg empty, ~68 kg with TV
 
-Delta:                               <span class="result">+2 kg (+3%)</span>
+<span class="comment">// === v5.3.0 BEZEL DIMENSIONS ===</span>
+Top bezel:                           80mm (contains recessed exhaust slots)
+Bottom bezel:                        80mm (contains recessed intake slots)
+Side bezels:                         40mm (standard frame profile)
 
-<span class="comment">// === WIDER BEZEL ===</span>
-Bezel width:                         35mm (was 20mm)
-Additional aluminum:                 ~0.5 kg
-Visual impact:                       Slightly chunkier frame
+<span class="comment">// === EXTERNAL DIMENSIONS ===</span>
+Width:                               1760mm
+Height:                              1120mm (taller due to 80mm bezels)
+Depth:                               160mm
 
-<span class="result">Structural requirements unchanged - same anchors, same ribs</span></div>
+<span class="result">Weight well within acceptable range for two-person installation</span></div>
 
         <h3>5.2 Bezel Strength</h3>
-        <div class="calc-box"><span class="comment">// === BEZEL WITH SLOTS ===</span>
-The wider 35mm bezel accommodates:
-- 15mm intake slot (bottom)
-- 20mm exhaust slot (top)
+        <div class="calc-box"><span class="comment">// === v5.3.0 INTEGRATED BEZEL VENTILATION ===</span>
+The 80mm top/bottom bezels accommodate:
+- Recessed ventilation slots (30-40mm behind bezel face)
+- IP55 labyrinth baffles
 - Structural frame members
+- MERV 8 gasketed filter drawer (bottom)
+- 3× Delta 140mm fan mounts (top)
 
-Remaining solid bezel:               35 - 15 = 20mm (bottom)
-                                     35 - 20 = 15mm (top)
+<span class="comment">// === STRUCTURAL REINFORCEMENT ===</span>
+80mm bezels provide:
+- Increased structural rigidity
+- Space for recessed slots (no protruding elements)
+- Internal frame rails for glass retention
+- Clean "picture frame" aesthetic
 
-<span class="comment">// === SLOT REINFORCEMENT ===</span>
-Slots are bridged by:
-- Angled louver blades (aluminum)
-- Internal frame rail behind slot
-- Glass retention channel
-
-<span class="result">Bezel structural integrity: MAINTAINED</span></div>
+<span class="result">Bezel structural integrity: EXCELLENT (wider = stronger)</span></div>
 
         <div class="result-box result-pass">
             <div class="verdict pass">STRUCTURAL ANALYSIS: PASS</div>
-            <p>The 120mm profile with 35mm bezel maintains structural integrity. Weight increase is minimal (+2kg). Same mounting hardware as v2.0.</p>
+            <p>The v5.3.0 160mm profile with 80mm integrated bezels provides excellent structural integrity. The wider bezels add strength while containing recessed ventilation. Same heavy-duty mounting hardware.</p>
         </div>
 
         <!-- Section 6: Component Changes -->
-        <h2>6. Component Specification Changes</h2>
+        <h2>6. Component Specification (v5.3.0)</h2>
 
         <h3>6.1 Fan Specification</h3>
         <table>
-            <tr><th>Parameter</th><th>v2.0 (Rear Exhaust)</th><th>v3.0 (Front-Breathing)</th></tr>
-            <tr><td>Fan Size</td><td>80mm × 80mm × 25mm</td><td><strong>60mm × 60mm × 15mm</strong></td></tr>
-            <tr><td>Quantity</td><td>4</td><td>4</td></tr>
-            <tr><td>Type</td><td>Axial (rear-mounted)</td><td><strong>Slim axial (top bezel)</strong></td></tr>
-            <tr><td>Example Part</td><td>Noctua NF-A8 PWM</td><td><strong>Noctua NF-A6x25 PWM</strong></td></tr>
-            <tr><td>CFM (free air)</td><td>32 CFM each</td><td>17 CFM each</td></tr>
-            <tr><td>Total System CFM</td><td>~100 CFM</td><td>~70 CFM (+ convection)</td></tr>
-            <tr><td>Noise</td><td>~20 dBA</td><td>~19 dBA</td></tr>
-            <tr><td>Price (each)</td><td>~$16</td><td>~$15</td></tr>
+            <tr><th>Parameter</th><th>v5.3.0 Specification</th></tr>
+            <tr><td>Fan Model</td><td><strong>Delta AFB1412HH-A (140mm PWM)</strong></td></tr>
+            <tr><td>Fan Size</td><td>140mm × 140mm × 25mm</td></tr>
+            <tr><td>Quantity</td><td><strong>3× (exhaust at top bezel)</strong></td></tr>
+            <tr><td>Type</td><td>High-static pressure axial</td></tr>
+            <tr><td>CFM (free air)</td><td>~72 CFM each</td></tr>
+            <tr><td>Static Pressure</td><td>4.8 mmH₂O</td></tr>
+            <tr><td>Total System CFM</td><td><strong>165-195 CFM</strong></td></tr>
+            <tr><td>Noise @ 50% PWM</td><td>~25 dBA</td></tr>
+            <tr><td>Price (each)</td><td>~$18</td></tr>
         </table>
 
-        <h3>6.2 New Components Required</h3>
+        <div class="note">
+            <strong>Negative Pressure System:</strong> 3× exhaust fans at TOP create negative pressure, pulling air IN through bottom passive intake (no intake fans needed).
+        </div>
+
+        <h3>6.2 Key Components</h3>
         <table>
-            <tr><th>Component</th><th>Specification</th><th>Purpose</th></tr>
-            <tr><td>Intake Louver Assembly</td><td>1700mm aluminum, angled blades</td><td>Water shedding + airflow</td></tr>
-            <tr><td>Exhaust Grille</td><td>1700mm mesh + fan mounts</td><td>Weather protection + fans</td></tr>
-            <tr><td>Internal Air Baffle</td><td>Aluminum sheet, directs flow</td><td>Ensures air passes over TV</td></tr>
-            <tr><td>Spacer Rails</td><td>25mm standoffs</td><td>Maintain glass-TV gap</td></tr>
+            <tr><th>Component</th><th>v5.3.0 Specification</th><th>Purpose</th></tr>
+            <tr><td>Top Bezel (80mm)</td><td>3× Delta 140mm fans + recessed exhaust slots</td><td>Forced exhaust (negative pressure)</td></tr>
+            <tr><td>Bottom Bezel (80mm)</td><td>Recessed intake slots + IP55 labyrinth baffles</td><td>Passive intake (air pulled in)</td></tr>
+            <tr><td>Filter Drawer</td><td>MERV 8, gasketed (IP55)</td><td>Dust/insect protection</td></tr>
+            <tr><td>Diffuser Plate</td><td>Perforated aluminum (8mm holes, 40% open)</td><td>Even airflow distribution</td></tr>
+            <tr><td>Rear Plenum</td><td>30mm depth behind TV</td><td>Direct heat sink cooling</td></tr>
+            <tr><td>Service Door</td><td>4 latches + higher-durometer EPDM gaskets</td><td>IP55 seal</td></tr>
         </table>
 
-        <h3>6.3 BOM Cost Impact</h3>
-        <div class="calc-box"><span class="comment">// === COST CHANGES ===</span>
-Fans:           4× $15 = $60    (was 4× $16 = $64)     <span class="result">-$4</span>
-Louver assembly:               ~$25 (new)              <span class="warning">+$25</span>
-Exhaust grille:                ~$18 (new)              <span class="warning">+$18</span>
-Air baffle:                    ~$8 (new)               <span class="warning">+$8</span>
-Spacer rails:                  ~$5 (new)               <span class="warning">+$5</span>
-Wider bezel (more Al):         ~$12                    <span class="warning">+$12</span>
+        <h3>6.3 BOM Summary (v5.3.0)</h3>
+        <div class="calc-box"><span class="comment">// === v5.3.0 BOM BREAKDOWN ===</span>
+Frame/Panel:                   ~$180
+Glass (6mm laminated):         ~$95
+Fans (3× Delta):               ~$54
+Filter + IP55 sealing:         ~$45
+Electronics + controller:      ~$65
+Service door + latches:        ~$58
+VESA + vertical rails:         ~$38
+Gaskets + hardware:            ~$42
+Accessories (IR, cleaning):    ~$23
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-<span class="result">Net BOM change:                +$64</span>
+<span class="result">BOM Total:                     ~$662</span>
 
-Previous BOM (v2.0):           $538
-New BOM (v3.0):                <span class="result">~$602</span>
-Unit cost with labor:          <span class="result">~$647</span>
-Target FOB:                    <span class="result">$680 - $720</span></div>
+Labor + QC + Overhead:         ~$120
+Factory margin (15%):          ~$117
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<span class="result">FOB Price:                     ~$900</span></div>
 
         <!-- Section 7: Condensation Management -->
         <h2>7. Condensation Management</h2>
@@ -711,30 +755,33 @@ Surface temperature < Dew point of surrounding air</div>
         <h3>8.1 Design Specifications Summary</h3>
         <table>
             <tr><th>Parameter</th><th>v5.3.0 Integrated Bezel</th></tr>
-            <tr><td>External Dimensions</td><td>1760 × 1040 × <strong>160mm</strong></td></tr>
-            <tr><td>Bezel Width</td><td><strong>35mm</strong></td></tr>
-            <tr><td>Intake</td><td>Bottom bezel filtered slot + MERV 8 filter</td></tr>
-            <tr><td>Exhaust</td><td>Top bezel (3× Delta AFB1412HH-A) + 45° deflector</td></tr>
-            <tr><td>Airflow</td><td>210-250 CFM forced (4.8 mmH₂O static)</td></tr>
-            <tr><td>Airflow Path</td><td>Bottom → Diffuser plate → 30mm rear plenum → Deflector out</td></tr>
+            <tr><td>External Dimensions</td><td>1760 × <strong>1120</strong> × <strong>160mm</strong></td></tr>
+            <tr><td>Top/Bottom Bezels</td><td><strong>80mm</strong> (contains recessed ventilation slots)</td></tr>
+            <tr><td>Side Bezels</td><td><strong>40mm</strong> (standard frame profile)</td></tr>
+            <tr><td>Intake</td><td>Bottom bezel recessed slots + MERV 8 gasketed filter (passive)</td></tr>
+            <tr><td>Exhaust</td><td>Top bezel recessed slots + 3× Delta AFB1412HH-A (NO deflector)</td></tr>
+            <tr><td>Airflow</td><td>165-195 CFM (negative pressure system)</td></tr>
+            <tr><td>Airflow Path</td><td>Bottom passive intake → Diffuser plate → 30mm rear plenum → Front exhaust</td></tr>
             <tr><td>Rear Plenum</td><td>30mm + perforated diffuser (8mm holes, 40% open)</td></tr>
-            <tr><td>Service Door</td><td>4 latches + EPDM compression stops (IP54)</td></tr>
-            <tr><td>Recess Cavity</td><td>1820 × 1130 × 215mm (60mm top gap)</td></tr>
+            <tr><td>Service Door</td><td>4 latches + higher-durometer EPDM gaskets (IP55)</td></tr>
+            <tr><td>Recess Cavity</td><td>1820 × <strong>1160</strong> × 215mm (<strong>20mm</strong> top gap)</td></tr>
             <tr><td>Weight</td><td>~68 kg (with TV)</td></tr>
-            <tr><td>Target FOB</td><td>$540 - $600</td></tr>
+            <tr><td>Target FOB</td><td>~$900</td></tr>
         </table>
 
         <h3>8.2 Advantages of v5.3.0 Integrated Bezel Design</h3>
         <div class="success-note">
             <strong>Why v5.3.0 is engineering-validated:</strong>
             <ol style="margin-top: 0.5rem;">
-                <li><strong>Recess-compatible:</strong> Works both wall-mounted AND recessed (1820 × 1130 × 215mm cavity)</li>
-                <li><strong>Diffuser plate:</strong> 8mm holes at 40% open ensures even airflow distribution</li>
-                <li><strong>High-static fans:</strong> 3× Delta AFB1412HH-A delivering 210-250 CFM @ 4.8 mmH₂O</li>
-                <li><strong>45° exhaust deflector:</strong> Architectural shadow element prevents recirculation</li>
-                <li><strong>4-latch service door:</strong> IP54 seal across 1650mm span with compression stops</li>
-                <li><strong>80-115% thermal margin (wall-mount):</strong> Excellent headroom at worst-case</li>
-                <li><strong>30-50% thermal margin (recessed):</strong> Acceptable with 60mm top gap</li>
+                <li><strong>Clean aesthetic:</strong> Flush "picture frame" front - NO protruding deflector or cowl</li>
+                <li><strong>Recess-compatible:</strong> Works wall-mounted AND recessed (1820 × 1160 × 215mm cavity)</li>
+                <li><strong>Front exhaust:</strong> Air exits forward into room, NOT into wall cavity (only 20mm top gap needed)</li>
+                <li><strong>Negative pressure:</strong> 3× exhaust fans pull air through (no intake fans needed)</li>
+                <li><strong>High-static fans:</strong> 3× Delta AFB1412HH-A delivering 165-195 CFM @ 4.8 mmH₂O</li>
+                <li><strong>IP55 rated:</strong> Jet-resistant (garden hose safe) with higher-durometer EPDM gaskets</li>
+                <li><strong>80mm integrated bezels:</strong> Recessed ventilation slots provide IP55 protection</li>
+                <li><strong>50-80% thermal margin (wall-mount):</strong> Excellent headroom at worst-case</li>
+                <li><strong>10-30% thermal margin (recessed):</strong> Adequate with 20mm fitting gap</li>
             </ol>
         </div>
 
@@ -743,37 +790,38 @@ Surface temperature < Dew point of surrounding air</div>
             <strong>Considerations:</strong>
             <ul>
                 <li><strong>Depth:</strong> 160mm (vs 147mm Apollo) - slightly deeper but recess-compatible</li>
-                <li><strong>Recess requirements:</strong> 1820 × 1130 × 215mm cavity with 60mm top gap</li>
-                <li><strong>IP54 rating:</strong> Realistic with active ventilation (not IP66)</li>
+                <li><strong>Height:</strong> 1120mm (80mm bezels add height vs previous 40mm designs)</li>
+                <li><strong>Recess requirements:</strong> 1820 × 1160 × 215mm cavity with 20mm fitting gap</li>
+                <li><strong>IP55 rating:</strong> Realistic with ventilated design (jet-resistant, not submersible)</li>
                 <li><strong>Weight:</strong> ~68 kg total - two-person install required</li>
-                <li><strong>Cost:</strong> FOB $540-600 - competitive with premium enclosures</li>
-                <li><strong>Exhaust deflector:</strong> 50mm @ 45° - engineered as architectural shadow element</li>
+                <li><strong>Cost:</strong> FOB ~$900 - premium positioning justified by clean design</li>
             </ul>
         </div>
 
         <div class="result-box result-pass">
-            <div class="verdict pass">v5.3.0 RECESS-COMPATIBLE: PASS FOR PROTOTYPE</div>
+            <div class="verdict pass">v5.3.0 INTEGRATED BEZEL: PASS FOR PROTOTYPE</div>
             <p><strong>Recommendation:</strong> Proceed to prototype build and thermal validation testing:</p>
             <ul>
-                <li>80-115% thermal margin wall-mounted, 30-50% recessed</li>
+                <li>50-80% thermal margin wall-mounted, 10-30% recessed</li>
                 <li>Direct heat sink cooling via 30mm rear plenum + diffuser plate</li>
-                <li>3× Delta AFB1412HH-A fans (210-250 CFM @ 4.8 mmH₂O)</li>
-                <li>45° exhaust deflector as architectural shadow element</li>
-                <li>4-latch service door for IP54 seal across 1650mm span</li>
+                <li>3× Delta AFB1412HH-A fans (165-195 CFM @ 4.8 mmH₂O)</li>
+                <li>Front exhaust through recessed bezel slots - NO deflector</li>
+                <li>4-latch service door for IP55 seal across 1650mm span</li>
+                <li>Clean "picture frame" aesthetic for premium market positioning</li>
             </ul>
-            <p style="margin-top: 1rem;"><strong>Watch Items (ChatGPT validation):</strong></p>
+            <p style="margin-top: 1rem;"><strong>Watch Items (prototype testing):</strong></p>
             <ol>
                 <li>Diffuser plate may be too open - validate pressure drop across plate</li>
                 <li>Delta fans loud at high PWM - test acoustic tonality, not just SPL</li>
                 <li>Full-sun thermal test: 55°C ambient + solar + 6 hours steady state</li>
-                <li>Recess worst-case: minimum gaps + 50% clogged filter</li>
+                <li>Recess worst-case: 20mm gap + 50% clogged filter</li>
                 <li>Fan failure test: one fan disconnected, run thermal again</li>
             </ol>
         </div>
 
         <footer style="text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid var(--border); color: var(--text-muted);">
-            <p>Apex TV Enclosures | Engineering Analysis v5.3.0 - Integrated Bezel Design | December 2025</p>
-            <p style="font-size: 0.85rem;">Design validated for both wall-mount AND recessed installation (60mm top gap required).</p>
+            <p>Apex TV Enclosures | Engineering Analysis v5.3.0 - Integrated Bezel Design | January 2026</p>
+            <p style="font-size: 0.85rem;">Design validated for both wall-mount AND recessed installation (20mm top gap for fitting tolerance).</p>
             <p style="font-size: 0.85rem; margin-top: 0.5rem;">Prototype thermal chamber testing required before mass production.</p>
         </footer>
     </div>
