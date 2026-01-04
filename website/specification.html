@@ -1703,34 +1703,121 @@
                 </tr>
             </table>
 
-            <div class="callout callout-info">
-                <strong>Standard Fan: Noctua NF-A14x25 G2 PWM</strong> — Premium quiet operation is non-negotiable. 2.56 mmH₂O static pressure, ~275 CFM (3×), 24.8 dBA max. Quieter operation prioritized over thermal headroom. <strong>Requires filter clog indicator and quarterly maintenance schedule.</strong>
+            <div class="callout callout-critical">
+                <strong>MANDATORY Fan: Delta AFB1412HH-A (140mm PWM)</strong> — High static pressure (4.8 mmH₂O) is non-negotiable for filtered enclosures. System pressure budget: 3.6-12.2 mmH₂O (MERV 8 filter + diffuser + plenum + slots). Lower-static "quiet" fans (e.g., Noctua 2.56 mmH₂O) will fail to deliver adequate airflow when filter loads. <strong>NO SUBSTITUTIONS without engineering approval.</strong>
             </div>
 
-            <h3>6.3 Noise Targets</h3>
+            <h3>6.3 Noise Mitigation Requirements <span class="badge badge-critical">MANDATORY</span></h3>
+            <p>High-static Delta fans enable noise mitigation through larger slot area + low PWM operation. This section is <strong>manufacturer-proof</strong> — requirements are binding, not guidance.</p>
+
+            <div class="spec-grid">
+                <div class="spec-card">
+                    <h4>A. Vibration Isolation <span class="badge badge-critical">Required</span></h4>
+                    <ul>
+                        <li><strong>Fan mounts:</strong> Silicone grommets or rubber standoffs (MANDATORY)</li>
+                        <li><strong>Material:</strong> Shore A 40-60 durometer</li>
+                        <li><strong>Contact:</strong> No metal-to-metal fan mounting</li>
+                        <li><strong>Part example:</strong> Noctua NA-SAV2 or equivalent</li>
+                    </ul>
+                </div>
+                <div class="spec-card">
+                    <h4>B. Slot Velocity Control <span class="badge badge-critical">Required</span></h4>
+                    <ul>
+                        <li><strong>Effective slot area:</strong> A<sub>eff</sub> ≥ 0.115 m² (1150 cm²)</li>
+                        <li><strong>Target velocity:</strong> V ≤ 2 m/s at 100% PWM</li>
+                        <li><strong>Calculation:</strong> A = Q / V = 0.13 m³/s / 2 m/s</li>
+                        <li><strong>Verification:</strong> Measure with smoke wand</li>
+                    </ul>
+                </div>
+                <div class="spec-card">
+                    <h4>C. Panel Resonance Control <span class="badge badge-critical">Required</span></h4>
+                    <ul>
+                        <li><strong>Panel thickness:</strong> ≥2.0mm aluminum (no thinner)</li>
+                        <li><strong>Stiffening ribs:</strong> Where span > 400mm</li>
+                        <li><strong>Damping:</strong> Butyl rubber pads on large panels (optional)</li>
+                        <li><strong>Test:</strong> Tap test - no ringing resonance</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4>D. PWM Control Philosophy <span class="badge badge-critical">Required</span></h4>
             <table>
                 <tr>
-                    <th>Mode</th>
-                    <th>PWM Duty</th>
-                    <th>Noise Target (1m) *</th>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                    <th>Rationale</th>
                 </tr>
                 <tr>
-                    <td>Idle / low load</td>
-                    <td>≤40%</td>
-                    <td>Target: ≤30 dBA</td>
+                    <td>Baseline PWM (idle)</td>
+                    <td><strong>20%</strong></td>
+                    <td>Minimum audible operation - keeps air moving</td>
+                </tr>
+                <tr>
+                    <td>Quiet ceiling</td>
+                    <td><strong>40% PWM</strong></td>
+                    <td>Target ≤35 dBA @ 1m - normal TV viewing</td>
                 </tr>
                 <tr>
                     <td>Normal cooling</td>
-                    <td>≤70%</td>
-                    <td>Target: ≤40 dBA</td>
+                    <td><strong>60% PWM</strong></td>
+                    <td>Target ≤45 dBA @ 1m - acceptable background</td>
                 </tr>
                 <tr>
-                    <td>High cooling</td>
-                    <td>100%</td>
-                    <td>Target: ≤50 dBA</td>
+                    <td>Full cooling</td>
+                    <td><strong>100% PWM</strong></td>
+                    <td>Target ≤55 dBA @ 1m - audible but tolerable</td>
+                </tr>
+                <tr>
+                    <td>Ramp rate</td>
+                    <td><strong>5%/sec max</strong></td>
+                    <td>Smooth transitions - no sudden speed changes</td>
                 </tr>
             </table>
-            <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">* Noise levels are design targets. Actual SPL to be validated during prototype testing. Delta AFB1412HH-A fans are high-performance units; acoustic performance depends on installation and operating conditions.</p>
+
+            <h4>E. Acoustic Acceptance Criteria</h4>
+            <table>
+                <tr>
+                    <th>Mode</th>
+                    <th>PWM</th>
+                    <th>Max SPL @ 1m</th>
+                    <th>Test Method</th>
+                </tr>
+                <tr>
+                    <td>Idle</td>
+                    <td>20%</td>
+                    <td><strong>≤30 dBA</strong></td>
+                    <td>Sound level meter, A-weighted</td>
+                </tr>
+                <tr>
+                    <td>Normal</td>
+                    <td>40%</td>
+                    <td><strong>≤35 dBA</strong></td>
+                    <td>Sound level meter, A-weighted</td>
+                </tr>
+                <tr>
+                    <td>Elevated</td>
+                    <td>60%</td>
+                    <td><strong>≤45 dBA</strong></td>
+                    <td>Sound level meter, A-weighted</td>
+                </tr>
+                <tr>
+                    <td>Maximum</td>
+                    <td>100%</td>
+                    <td><strong>≤55 dBA</strong></td>
+                    <td>Sound level meter, A-weighted</td>
+                </tr>
+            </table>
+            <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">Acoustic targets are <strong>binding acceptance criteria</strong>. Units failing SPL test must be reworked (check vibration isolation, slot area, panel damping). Delta AFB1412HH-A fans with proper isolation and slot sizing will meet these targets.</p>
+
+            <div class="callout callout-warning">
+                <strong>Manufacturing Notes (DO NOT SUBSTITUTE):</strong>
+                <ul>
+                    <li><strong>Fan model:</strong> Delta AFB1412HH-A ONLY (4.8 mmH₂O static pressure required)</li>
+                    <li><strong>Why not "quieter" fans:</strong> Lower static pressure fans (Noctua 2.56 mmH₂O) cannot overcome filter + system resistance, causing thermal failure</li>
+                    <li><strong>Noise solution:</strong> High-static fans + low PWM + vibration isolation + larger slots = quiet operation with headroom</li>
+                    <li><strong>Filter clog indicator:</strong> MANDATORY - differential pressure switch or CFM monitor</li>
+                </ul>
+            </div>
 
             <h3>6.4 Control System <span class="badge badge-new">New</span></h3>
             <div class="callout callout-critical">
