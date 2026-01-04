@@ -195,6 +195,37 @@ nav.js injects: body { margin-left: 240px !important; }
 
 ## Recent Work History
 
+### Session: 2026-01-05 (Morning) - Color Configurator + Mounting Best Practices
+
+**Color Configurator (color-configurator.html):**
+- Interactive live color preview using canvas-based pixel manipulation
+- Detects frame pixels (dark + low saturation) and recolors only the frame
+- Preserves glass reflections and background unchanged
+- RAL color swatches: Standard (black, grey), Premium (+$75), Custom (+$150)
+- Links to quote calculator with color pre-filled
+
+**RAL Color Renders Generated:**
+- `ate-75-v530-ral1015-ivory.png` - Light Ivory (warm sandstone beige)
+- `ate-75-v530-ral7032-grey.png` - Pebble Grey (neutral stone)
+
+**Apollo vs Apex Recess Comparison:**
+- Compared Apollo "Recessing an enclosure rev 3.pdf" to our cavity-requirements
+- Key finding: Apollo needs 30mm top gap (thermal critical), Apex v5.3.0 only needs 20mm (fitting tolerance)
+- Apex advantage: Front exhaust means no hot air into cavity
+
+**Mounting Best Practices Added (cavity-requirements.html):**
+- New Section 4: Mounting Best Practices (Preventing Tilt)
+- Articulating mount required for recess installations
+- Mount bracket toward TOP of enclosure (reduces tilt over time)
+- Use 10-12mm aluminum spacers (NOT nylon - will crush)
+- Loosen bracket tension for fluid movement
+- Power outlet placement: bottom half, max 60mm protrusion
+- Pro tip: Check installation after 1 week for settling
+
+**Commits:** `ec1534b`, `97dc726`, `7d9cc43`, `3ec2c69`
+
+---
+
 ### Session: 2026-01-05 (Night) - Fixed Engineering Page Layout
 
 **Root cause of white gap found and fixed:**
