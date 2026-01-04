@@ -158,6 +158,36 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
+### Session: 2026-01-04 - Full Project Audit (Glass Spec Update)
+
+**Glass specification update:**
+- Changed from 8mm laminated (4+4) to 6mm laminated (3+3)
+- Weight reduction: ~45kg → ~38kg (saves ~7kg with thinner glass)
+- Matches Apollo 75" competitor weight (37kg)
+
+**Files updated:**
+- industries/pool-areas.html, industries/restaurants-bars.html, industries/hotels-resorts.html
+- qc-checklist.html (4+4mm → 3+3mm)
+- specification.html, drawing-styles.html, landed-cost-calculator.html
+- product-overview.html, meeting-eurotech.html (already correct)
+
+**AUDIT.md updated:**
+- Added version history for all changes
+- Documented intentional 8mm refs (diffuser holes, rebates, fasteners)
+- Noted v5.2.1/v5.2.2 version discrepancies in some docs
+
+**Navigation update:**
+- Added product-overview.html and meeting-eurotech.html to Business Development nav
+- Both pages now have sidebar navigation
+
+**User questions answered:**
+- 43" model: Optional - start with 55"-86", add later if demand
+- Larger than 86": 98" possible but shipping costs spike - custom/commercial only
+
+**Commits:** a8e45d2, b53af22
+
+---
+
 ### Session: 2026-01-03 (Late Night) - CRM + Calendar + Business Planning
 
 **CRM contact type filter (partner-crm.html):**
