@@ -63,7 +63,7 @@ https://github.com/richardfoulkes-max/apex-tv-enclosures (private)
 - **160mm depth** (reduced from 180mm) to match Apollo cavity requirements
 - **30mm plenum + perforated diffuser plate** (8mm holes, 40% open)
 - **3× Delta AFB1412HH-A fans** delivering 210-250 CFM (locked model)
-- **60mm top gap** for recess (prevents exhaust recirculation)
+- **60mm top gap** for recess (rear exhaust required clearance)
 - **45° exhaust deflector** - architectural shadow element design
 - **4 latches + compression stops** on service door for IP54 seal
 
@@ -74,6 +74,8 @@ https://github.com/richardfoulkes-max/apex-tv-enclosures (private)
 - **80mm top/bottom bezels** - wider bezels contain recessed ventilation slots
 - **40mm side bezels** - standard frame profile
 - **Recessed slots** - 30-40mm behind bezel face for IP55 protection
+- **FRONT EXHAUST** - air exits forward into room, not into cavity
+- **20mm recess top gap** - fitting tolerance only (not thermal requirement)
 - **Gasketed filter drawer** for IP55 seal
 - **Higher-durometer EPDM gaskets** throughout
 - **165-195 CFM** (adequate for Gulf climate)
@@ -92,7 +94,7 @@ https://github.com/richardfoulkes-max/apex-tv-enclosures (private)
 | Filter | **MERV 8 standard** | Gasketed drawer (IP55) |
 | VESA | Through-bolted, 6mm plate | 75kg @ 3× safety factor |
 | **IP rating** | **IP55** | Jet resistant, hose-cleanable |
-| **Recess cavity** | **1820 × 1200 × 215mm** | 60mm top gap |
+| **Recess cavity** | **1820 × 1160 × 215mm** | 20mm top gap (front exhaust) |
 
 ### Thermal Design (v5.3.0)
 ```
@@ -163,6 +165,24 @@ roundtable-ai/              ← Engineering validation briefs
 7. Open folder for user to verify before sending
 
 ## Recent Work History
+
+### Session: 2026-01-05 (Continued) - Cavity Requirements v5.3.0 Update
+
+**Updated cavity-requirements.html for v5.3.0 front exhaust:**
+- Top gap reduced from 60mm to 20mm (fitting tolerance only)
+- Standoff frame now optional (no critical thermal clearance needed)
+- Updated all model dimensions to v5.3.0 specs
+- Changed "Common Mistake" warning to info box (flush top OK now)
+- Updated warranty conditions to focus on front bezel vents
+- Moved Cavity Requirements from Manufacturing to Engineering in nav
+
+**Key insight:** v5.3.0 exhausts air FORWARD through front bezel, not into cavity. This eliminates the 60mm top gap requirement that rear-exhaust designs needed.
+
+**Commits Pushed:**
+- `169f3d7` Update cavity-requirements.html for v5.3.0 front exhaust
+- `4e19a3a` Move Cavity Requirements to Engineering section
+
+---
 
 ### Session: 2026-01-05 (AM) - Navigation Fix + Render Saves
 
