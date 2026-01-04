@@ -1225,6 +1225,7 @@
                     <button class="tab active" onclick="switchTab('overview')">Overview</button>
                     <button class="tab" onclick="switchTab('contacts')">Contacts (${p.contacts?.length || 0})</button>
                     <button class="tab" onclick="switchTab('deal')">Deal</button>
+                    <button class="tab" onclick="switchTab('business')">Business</button>
                     <button class="tab" onclick="switchTab('activity')">Activity (${p.activities?.length || 0})</button>
                 </div>
 
@@ -1340,6 +1341,79 @@
                                     <strong>Lost Reason:</strong> ${p.lostReason}
                                 </div>
                             ` : ''}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Tab -->
+                <div class="tab-content" id="tab-business">
+                    <div class="card">
+                        <div class="card-header">
+                            <span>Business Information</span>
+                            <button class="btn btn-outline btn-small" onclick="showEditBusinessModal()">Edit</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Trade License</label>
+                                    <div class="form-value">${p.tradeLicense || '-'}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">TRN (Tax Registration)</label>
+                                    <div class="form-value">${p.trn || '-'}</div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Payment Terms</label>
+                                    <div class="form-value">${p.paymentTerms || '-'}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Credit Limit</label>
+                                    <div class="form-value">${p.creditLimit ? 'AED ' + p.creditLimit.toLocaleString() : '-'}</div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Contract Status</label>
+                                    <div class="form-value">${p.contractStatus || 'None'}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Contract Expiry</label>
+                                    <div class="form-value">${p.contractExpiry ? formatDate(p.contractExpiry) : '-'}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">Bank Details</div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Bank Name</label>
+                                    <div class="form-value">${p.bankName || '-'}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Account Name</label>
+                                    <div class="form-value">${p.bankAccountName || '-'}</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">IBAN</label>
+                                <div class="form-value" style="font-family: monospace;">${p.iban || '-'}</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">SWIFT/BIC</label>
+                                <div class="form-value" style="font-family: monospace;">${p.swiftCode || '-'}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">Billing Address</div>
+                        <div class="card-body">
+                            <div class="form-value" style="white-space: pre-line;">${p.billingAddress || 'Same as company address'}</div>
                         </div>
                     </div>
                 </div>
@@ -1704,6 +1778,123 @@
             document.getElementById('editCompanyModal').remove();
             renderDetail();
             renderList();
+        }
+
+        function showEditBusinessModal() {
+            const p = partners.find(p => p.id === selectedPartnerId);
+            if (!p) return;
+
+            const html = `
+                <div class="modal-overlay active" id="editBusinessModal" onclick="if(event.target===this)closeModal()">
+                    <div class="modal" style="max-width: 600px;">
+                        <div class="modal-header">
+                            <span class="modal-title">Edit Business Information</span>
+                            <button class="modal-close" onclick="closeModal()">&times;</button>
+                        </div>
+                        <form onsubmit="saveBusinessInfo(event)">
+                            <div style="max-height: 70vh; overflow-y: auto; padding-right: 0.5rem;">
+                                <h4 style="margin-bottom: 0.75rem; color: var(--primary);">Legal & Tax</h4>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Trade License Number</label>
+                                        <input type="text" class="form-input" id="editTradeLicense" value="${p.tradeLicense || ''}" placeholder="e.g., 123456">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">TRN (Tax Registration)</label>
+                                        <input type="text" class="form-input" id="editTrn" value="${p.trn || ''}" placeholder="e.g., 100123456700003">
+                                    </div>
+                                </div>
+
+                                <h4 style="margin: 1.25rem 0 0.75rem; color: var(--primary);">Payment</h4>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Payment Terms</label>
+                                        <select class="form-select" id="editPaymentTerms">
+                                            ${['', 'COD', 'Net 15', 'Net 30', 'Net 45', 'Net 60', 'Net 90', '50% Advance', 'Custom'].map(t =>
+                                                `<option value="${t}" ${p.paymentTerms === t ? 'selected' : ''}>${t || 'Not Set'}</option>`
+                                            ).join('')}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Credit Limit (AED)</label>
+                                        <input type="number" class="form-input" id="editCreditLimit" value="${p.creditLimit || ''}" placeholder="e.g., 50000">
+                                    </div>
+                                </div>
+
+                                <h4 style="margin: 1.25rem 0 0.75rem; color: var(--primary);">Contract</h4>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Contract Status</label>
+                                        <select class="form-select" id="editContractStatus">
+                                            ${['None', 'Negotiating', 'Active', 'Expired', 'Terminated'].map(s =>
+                                                `<option value="${s}" ${p.contractStatus === s ? 'selected' : ''}>${s}</option>`
+                                            ).join('')}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Contract Expiry</label>
+                                        <input type="date" class="form-input" id="editContractExpiry" value="${p.contractExpiry || ''}">
+                                    </div>
+                                </div>
+
+                                <h4 style="margin: 1.25rem 0 0.75rem; color: var(--primary);">Bank Details</h4>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Bank Name</label>
+                                        <input type="text" class="form-input" id="editBankName" value="${p.bankName || ''}" placeholder="e.g., Emirates NBD">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Account Name</label>
+                                        <input type="text" class="form-input" id="editBankAccountName" value="${p.bankAccountName || ''}" placeholder="Company name on account">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0.75rem;">
+                                    <label class="form-label">IBAN</label>
+                                    <input type="text" class="form-input" id="editIban" value="${p.iban || ''}" placeholder="e.g., AE070331234567890123456" style="font-family: monospace;">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0.75rem;">
+                                    <label class="form-label">SWIFT/BIC Code</label>
+                                    <input type="text" class="form-input" id="editSwift" value="${p.swiftCode || ''}" placeholder="e.g., EABORAEAXXX" style="font-family: monospace;">
+                                </div>
+
+                                <h4 style="margin: 1.25rem 0 0.75rem; color: var(--primary);">Billing Address</h4>
+                                <div class="form-group">
+                                    <textarea class="form-textarea" id="editBillingAddress" rows="3" placeholder="Leave blank to use company address">${p.billingAddress || ''}</textarea>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 0.5rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', html);
+        }
+
+        function saveBusinessInfo(e) {
+            e.preventDefault();
+            const p = partners.find(p => p.id === selectedPartnerId);
+            if (!p) return;
+
+            p.tradeLicense = document.getElementById('editTradeLicense').value;
+            p.trn = document.getElementById('editTrn').value;
+            p.paymentTerms = document.getElementById('editPaymentTerms').value;
+            p.creditLimit = parseInt(document.getElementById('editCreditLimit').value) || 0;
+            p.contractStatus = document.getElementById('editContractStatus').value;
+            p.contractExpiry = document.getElementById('editContractExpiry').value;
+            p.bankName = document.getElementById('editBankName').value;
+            p.bankAccountName = document.getElementById('editBankAccountName').value;
+            p.iban = document.getElementById('editIban').value;
+            p.swiftCode = document.getElementById('editSwift').value;
+            p.billingAddress = document.getElementById('editBillingAddress').value;
+
+            saveData();
+            savePartnerToSupabase(p);
+            document.getElementById('editBusinessModal').remove();
+            renderDetail();
         }
 
         function showEditDealModal() {

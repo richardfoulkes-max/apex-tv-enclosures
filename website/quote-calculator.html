@@ -503,10 +503,45 @@
                     </div>
                 </div>
 
+                <!-- Frame Color -->
+                <div class="card">
+                    <div class="card-header">
+                        <span>2. Frame Color</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="form-label">Select Color</label>
+                            <select class="form-select" id="colorSelect" onchange="updateColor()">
+                                <optgroup label="Standard Colors (Included)">
+                                    <option value="black" data-price="0" data-ral="RAL 9005">Matte Black - Default</option>
+                                    <option value="stone" data-price="0" data-ral="RAL 7032">Stone Grey - Garden friendly</option>
+                                </optgroup>
+                                <optgroup label="Premium Colors (+$75)">
+                                    <option value="oyster" data-price="75" data-ral="RAL 1013">Oyster White - Light stone walls</option>
+                                    <option value="ivory" data-price="75" data-ral="RAL 1015">Light Ivory - Cream/beige schemes</option>
+                                    <option value="silk" data-price="75" data-ral="RAL 7044">Silk Grey - Modern minimalist</option>
+                                    <option value="anthracite" data-price="75" data-ral="RAL 7016">Anthracite - Dark contemporary</option>
+                                    <option value="bronze" data-price="75" data-ral="RAL 8019">Bronze - Wood/warm tones</option>
+                                </optgroup>
+                                <optgroup label="Custom (+$150, 2-week lead time)">
+                                    <option value="custom" data-price="150" data-ral="Custom">Custom RAL Color</option>
+                                </optgroup>
+                            </select>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;" id="colorNote">
+                                RAL 9005 - Hides in shadows, matches most TVs
+                            </p>
+                            <div id="customRalInput" style="display: none; margin-top: 1rem;">
+                                <label class="form-label">Custom RAL Code</label>
+                                <input type="text" class="form-input" id="customRal" placeholder="e.g., RAL 7035" style="font-family: monospace;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- TV Bundle -->
                 <div class="card">
                     <div class="card-header">
-                        <span>2. Add TV Bundle (Optional)</span>
+                        <span>3. Add TV Bundle (Optional)</span>
                         <span style="font-size: 0.8rem; color: var(--success);">Save vs outdoor TVs</span>
                     </div>
                     <div class="card-body">
@@ -548,7 +583,7 @@
                 <!-- Installation -->
                 <div class="card">
                     <div class="card-header">
-                        <span>3. Installation Service (Optional)</span>
+                        <span>4. Installation Service (Optional)</span>
                     </div>
                     <div class="card-body">
                         <div class="toggle-option selected" onclick="toggleInstall(false)" id="noInstallOption">
@@ -573,7 +608,7 @@
                 <!-- Delivery Location -->
                 <div class="card">
                     <div class="card-header">
-                        <span>4. Delivery Location</span>
+                        <span>5. Delivery Location</span>
                     </div>
                     <div class="card-body">
                         <div class="form-group">
@@ -594,7 +629,7 @@
                 <!-- Contact Details -->
                 <div class="card">
                     <div class="card-header">
-                        <span>5. Your Details</span>
+                        <span>6. Your Details</span>
                     </div>
                     <div class="card-body">
                         <div class="form-group">
@@ -638,6 +673,10 @@
                         <div class="line-item">
                             <span class="label" id="enclosureLabel">75" Enclosure</span>
                             <span class="value" id="enclosurePrice">$1,899</span>
+                        </div>
+                        <div class="line-item" id="colorLine" style="display: none;">
+                            <span class="label" id="colorLabel">Color Upgrade</span>
+                            <span class="value" id="colorPriceDisplay">+$75</span>
                         </div>
                         <div class="line-item" id="tvLine">
                             <span class="label">Samsung QLED TV</span>
@@ -693,6 +732,9 @@
             size: 75,
             enclosurePrice: 1899,
             enclosurePriceAED: 7000,
+            colorName: 'Matte Black',
+            colorRal: 'RAL 9005',
+            colorPrice: 0,
             includeTv: true,
             tvPrice: 1200,
             includeInstall: false,
@@ -763,9 +805,37 @@
             updateQuote();
         }
 
+        // Update color
+        function updateColor() {
+            const select = document.getElementById('colorSelect');
+            const option = select.options[select.selectedIndex];
+            quote.colorPrice = parseInt(option.dataset.price);
+            quote.colorRal = option.dataset.ral;
+            quote.colorName = option.text.split(' - ')[0];
+
+            // Update color note
+            const notes = {
+                'black': 'RAL 9005 - Hides in shadows, matches most TVs',
+                'stone': 'RAL 7032 - Blends with natural stone and garden walls',
+                'oyster': 'RAL 1013 - Perfect for light stone or cream walls',
+                'ivory': 'RAL 1015 - Warm cream/beige Mediterranean look',
+                'silk': 'RAL 7044 - Clean, modern minimalist aesthetic',
+                'anthracite': 'RAL 7016 - Sophisticated dark contemporary',
+                'bronze': 'RAL 8019 - Complements wood and warm tones',
+                'custom': 'Specify your RAL code - we\'ll match any color'
+            };
+            document.getElementById('colorNote').textContent = notes[select.value] || '';
+
+            // Show/hide custom RAL input
+            document.getElementById('customRalInput').style.display = select.value === 'custom' ? 'block' : 'none';
+
+            updateQuote();
+        }
+
         // Update quote display
         function updateQuote() {
             let total = quote.enclosurePrice;
+            total += quote.colorPrice;
             if (quote.includeTv) total += quote.tvPrice;
             if (quote.includeInstall) total += quote.installPrice;
             total += quote.shippingPrice;
@@ -782,6 +852,16 @@
             // Update line items
             document.getElementById('enclosureLabel').textContent = `${quote.size}" Enclosure`;
             document.getElementById('enclosurePrice').textContent = `$${quote.enclosurePrice.toLocaleString()}`;
+
+            // Color line
+            const colorLine = document.getElementById('colorLine');
+            if (quote.colorPrice > 0) {
+                colorLine.style.display = 'flex';
+                document.getElementById('colorLabel').textContent = `${quote.colorName} (${quote.colorRal})`;
+                document.getElementById('colorPriceDisplay').textContent = `+$${quote.colorPrice}`;
+            } else {
+                colorLine.style.display = 'none';
+            }
 
             // TV line
             const tvLine = document.getElementById('tvLine');
@@ -840,16 +920,24 @@
 
             // Calculate total
             let total = quote.enclosurePrice;
+            total += quote.colorPrice;
             if (quote.includeTv) total += quote.tvPrice;
             if (quote.includeInstall) total += quote.installPrice;
             total += quote.shippingPrice;
             const totalAED = Math.round(total * 3.67);
+
+            // Get custom RAL if selected
+            const customRal = document.getElementById('customRal')?.value || '';
+            const colorDisplay = quote.colorPrice === 150 && customRal
+                ? `Custom (${customRal})`
+                : `${quote.colorName} (${quote.colorRal})`;
 
             // Build quote message
             const message = `Quote Request - ${quote.size}" Outdoor TV Enclosure
 
 Configuration:
 - ${quote.size}" Enclosure: $${quote.enclosurePrice}
+- Frame Color: ${colorDisplay}${quote.colorPrice > 0 ? ` (+$${quote.colorPrice})` : ' (included)'}
 ${quote.includeTv ? `- Samsung QLED TV: $${quote.tvPrice}` : '- No TV (enclosure only)'}
 ${quote.includeInstall ? '- Professional Installation: $350' : '- Self Install'}
 ${quote.shippingPrice > 0 ? `- Shipping to ${quote.region.toUpperCase()}: $${quote.shippingPrice}` : '- UAE (Free Delivery)'}
