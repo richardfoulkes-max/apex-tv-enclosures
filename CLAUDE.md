@@ -164,6 +164,30 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
+### Session: 2026-01-05 (AM) - Navigation Fix + Render Saves
+
+**Fixed Broken Navigation:**
+- Password protection in nav.js was preventing sidebar from displaying
+- Removed password gate code, restored nav.js to working state
+- Site now open (no password required) - sidebar works on all pages
+
+**Saved v5.3.0 Gemini Renders:**
+- `ate-75-v530-front.png` - External front 3/4 view
+- `ate-75-v530-internal.png` - Internal view with fans, VESA, diffuser
+- `ate-75-v530-exploded.png` - Exploded component breakdown with labels
+
+**Updated design-detailed.html:**
+- Replaced old SVG mockups with actual Gemini renders
+- Updated specs to v5.3.0 (1760×1120×160mm, 80mm bezels, IP55)
+- Clean gallery layout with key specs and feature lists
+
+**Commits Pushed:**
+- `e287730` Remove password protection from nav.js
+- `cf0aaab` Add v5.3.0 Gemini renders
+- `1d9655d` Update design-detailed.html with v5.3.0 renders
+
+---
+
 ### Session: 2026-01-05 (Early AM) - v5.3.0 Documentation Complete
 
 **Completed all v5.3.0 documentation updates:**
