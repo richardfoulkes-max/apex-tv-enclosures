@@ -2,13 +2,24 @@
 // Shows Sales OR Product nav based on current page
 
 (function() {
-    // === PASSWORD PROTECTION FOR SALES PAGES ===
+    // === PASSWORD PROTECTION FOR INTERNAL PAGES ===
     const PROTECTED_PAGES = [
+        // Sales & Ops
         'ai-dashboard.html', 'ai-queue.html', 'orders.html', 'ai-insights.html',
         'project-tracker.html', 'partner-crm.html', 'partner-program.html',
         'target-partners.html', 'contractors.html', 'b2b-targets.html',
         'quote-calculator.html', 'bd-plan.html', 'go-to-market.html', 'setup.html',
-        'product-overview.html', 'meeting-eurotech.html'
+        'product-overview.html', 'meeting-eurotech.html',
+        // Product Dev
+        'product-dashboard.html', 'specification.html', 'design-detailed.html',
+        'designs.html', 'ai-image-prompts.html', 'bom-detailed.html',
+        'engineering-analysis.html', 'control-logic.html', 'wiring-diagram.html',
+        'tv-compatibility.html', 'audio-noise-video.html', 'testing-plan.html',
+        'qc-checklist.html', 'compliance-guide.html', 'manufacturer-rfq.html',
+        'china-suppliers.html', 'market-research.html', 'competitor-analysis.html',
+        'competitor-comparison.html', 'product-opportunities.html',
+        'financial-forecast.html', 'landed-cost-calculator.html', 'global-pricing.html',
+        'legal-risk.html', 'engineering-drawings.html', 'drawing-styles.html'
     ];
 
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';

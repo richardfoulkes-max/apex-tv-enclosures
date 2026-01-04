@@ -102,7 +102,8 @@
             margin-bottom: 0.5rem;
             font-size: 0.9rem;
         }
-        input[type="text"] {
+        input[type="text"],
+        input[type="password"] {
             width: 100%;
             padding: 0.75rem 1rem;
             border: 2px solid var(--border);
@@ -112,14 +113,17 @@
             margin-bottom: 1rem;
             transition: border-color 0.2s;
         }
-        input[type="text"]:focus {
+        input[type="text"]:focus,
+        input[type="password"]:focus {
             outline: none;
             border-color: var(--primary);
         }
-        input[type="text"].valid {
+        input[type="text"].valid,
+        input[type="password"].valid {
             border-color: var(--success);
         }
-        input[type="text"].invalid {
+        input[type="text"].invalid,
+        input[type="password"].invalid {
             border-color: var(--danger);
         }
         .hint {
@@ -421,6 +425,56 @@ npm start</pre>
                 <div class="error-message" id="claudeErrorMsg"></div>
             </div>
         </div>
+        <!-- Security / Access Control -->
+        <div class="card" style="margin-top: 1.5rem;">
+            <h1>🔒 Security</h1>
+            <p class="subtitle">Manage access to internal pages</p>
+
+            <div class="status-card">
+                <div class="status-header">
+                    <div class="status-dot connected" id="authStatusDot"></div>
+                    <span id="authStatusText">Logged in</span>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <span class="step-number">1</span>
+                    <span>Change Password</span>
+                </div>
+                <div class="step-content" style="color: var(--text);">
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" id="currentPassword" placeholder="Enter current password">
+
+                    <label for="newPassword" style="margin-top: 1rem;">New Password</label>
+                    <input type="password" id="newPassword" placeholder="Enter new password">
+
+                    <label for="confirmPassword" style="margin-top: 1rem;">Confirm New Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm new password">
+                </div>
+            </div>
+
+            <div class="button-row">
+                <button class="btn btn-primary" onclick="changePassword()">
+                    Change Password
+                </button>
+                <button class="btn btn-secondary" onclick="logout()" style="background: #fee2e2; color: #991b1b;">
+                    Logout
+                </button>
+            </div>
+
+            <div class="success-message" id="authSuccessMsg"></div>
+            <div class="error-message" id="authErrorMsg"></div>
+
+            <div style="margin-top: 1.5rem; padding: 1rem; background: var(--bg); border-radius: 8px;">
+                <strong>Session Info:</strong>
+                <ul style="margin: 0.5rem 0 0 1.5rem; color: var(--muted); font-size: 0.9rem;">
+                    <li>Login expires after 30 days</li>
+                    <li>Protects all Sales & Ops and Product Dev pages</li>
+                    <li>Public pages (retail, industries) remain accessible</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -698,6 +752,82 @@ npm start</pre>
 
         // Check Zapier on page load
         setTimeout(checkZapierConfig, 700);
+
+        // === SECURITY / ACCESS CONTROL ===
+        function showAuthError(msg) {
+            const el = document.getElementById('authErrorMsg');
+            el.textContent = msg;
+            el.classList.add('show');
+            document.getElementById('authSuccessMsg').classList.remove('show');
+        }
+
+        function showAuthSuccess(msg) {
+            const el = document.getElementById('authSuccessMsg');
+            el.textContent = msg;
+            el.classList.add('show');
+            document.getElementById('authErrorMsg').classList.remove('show');
+        }
+
+        function changePassword() {
+            const currentPwd = document.getElementById('currentPassword').value;
+            const newPwd = document.getElementById('newPassword').value;
+            const confirmPwd = document.getElementById('confirmPassword').value;
+
+            // Get stored password (default: apex2025)
+            const storedPwd = localStorage.getItem('apexAdminPassword') || 'apex2025';
+
+            // Validate current password
+            if (currentPwd !== storedPwd) {
+                showAuthError('Current password is incorrect');
+                return;
+            }
+
+            // Validate new password
+            if (!newPwd || newPwd.length < 6) {
+                showAuthError('New password must be at least 6 characters');
+                return;
+            }
+
+            if (newPwd !== confirmPwd) {
+                showAuthError('New passwords do not match');
+                return;
+            }
+
+            // Save new password
+            localStorage.setItem('apexAdminPassword', newPwd);
+
+            // Clear form
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+
+            showAuthSuccess('Password changed successfully!');
+        }
+
+        function logout() {
+            localStorage.removeItem('apexAuth');
+            window.location.reload();
+        }
+
+        // Update auth status on load
+        function updateAuthStatus() {
+            const auth = JSON.parse(localStorage.getItem('apexAuth') || '{}');
+            const dot = document.getElementById('authStatusDot');
+            const text = document.getElementById('authStatusText');
+
+            if (auth.token && auth.timestamp) {
+                const loginDate = new Date(auth.timestamp);
+                const expiryDate = new Date(auth.timestamp + (30 * 24 * 60 * 60 * 1000));
+                dot.className = 'status-dot connected';
+                text.textContent = `Logged in since ${loginDate.toLocaleDateString()}`;
+            } else {
+                dot.className = 'status-dot disconnected';
+                text.textContent = 'Not logged in';
+            }
+        }
+
+        // Check auth status on page load
+        setTimeout(updateAuthStatus, 100);
     </script>
     <script src="nav.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
