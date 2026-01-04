@@ -158,6 +158,28 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
+### Session: 2026-01-04 (Evening) - Password Protection for Internal Pages
+
+**Password gate implementation (nav.js):**
+- Single password protects all Sales & Ops + Product Dev pages (32 pages total)
+- Default password: `apex2025`
+- Login persists for 30 days via localStorage
+- Password can be customized - stored in `apexAdminPassword` localStorage key
+
+**Security settings (setup.html):**
+- Added Security card with Change Password form
+- Validates current password, requires 6+ chars for new
+- Logout button clears session and shows login gate
+- Session status display (shows login date)
+
+**Protected pages:**
+- Sales & Ops: ai-dashboard, ai-queue, orders, ai-insights, project-tracker, partner-crm, partner-program, target-partners, contractors, b2b-targets, quote-calculator, bd-plan, go-to-market, setup, product-overview, meeting-eurotech
+- Product Dev: product-dashboard, specification, design-detailed, designs, ai-image-prompts, bom-detailed, engineering-analysis, control-logic, wiring-diagram, tv-compatibility, audio-noise-video, testing-plan, qc-checklist, compliance-guide, manufacturer-rfq, china-suppliers, market-research, competitor-analysis, competitor-comparison, product-opportunities, financial-forecast, landed-cost-calculator, global-pricing, legal-risk, engineering-drawings, drawing-styles
+
+**Commits:** 40af23d
+
+---
+
 ### Session: 2026-01-04 - Glass Spec Audit + Mobile Navigation Overhaul
 
 **Glass specification update:**
