@@ -158,6 +158,36 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
+### Session: 2026-01-04 (Late Night) - Factory Orders System
+
+**New Factory Orders page (factory-orders.html):**
+- Complete PO management system for tracking orders to manufacturers
+- PO creation with: line items, SKU dropdown, color selection, quantities, unit costs
+- Supplier presets (Eurotech Metal UAE, KDM Steel China) or custom
+- Status tracking: Draft → Sent → In Production → Shipped → Received
+- Payment tracking: Unpaid → Deposit Paid → Paid
+- Timeline of all status changes with dates/notes
+- Printable PO document generation (Print / Save PDF)
+- Copy-to-clipboard for emailing PO to factory
+- Dashboard stats: Total POs, In Production, Pending Delivery, Total Spent
+
+**Factory Orders ↔ Customer Orders linkage:**
+- PO creation modal shows pending customer orders with checkboxes
+- Select which customer orders the PO fulfills
+- PO detail view shows linked orders as clickable chips
+- Customer order cards in Orders Pipeline show PO badge
+- Badge shows PO number and status (color-coded)
+- Click badge to navigate to Factory Orders page
+- Added "🏭 Factory Orders" quick action to Orders Pipeline
+
+**Navigation:**
+- Added factory-orders.html to Operations section in nav.js
+- Added to protected pages list for password gate
+
+**Commits:** d10da60, ad7c4b0
+
+---
+
 ### Session: 2026-01-04 (Night) - Color Options, CRM Fields, BOM Accessories
 
 **Frame color options (specification.html + quote-calculator.html):**
