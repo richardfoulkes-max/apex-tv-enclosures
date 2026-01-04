@@ -158,33 +158,31 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
-### Session: 2026-01-04 - Full Project Audit (Glass Spec Update)
+### Session: 2026-01-04 - Glass Spec Audit + Mobile Navigation Overhaul
 
 **Glass specification update:**
 - Changed from 8mm laminated (4+4) to 6mm laminated (3+3)
 - Weight reduction: ~45kg → ~38kg (saves ~7kg with thinner glass)
-- Matches Apollo 75" competitor weight (37kg)
+- Updated all industry pages, qc-checklist, specification, drawing-styles
 
-**Files updated:**
-- industries/pool-areas.html, industries/restaurants-bars.html, industries/hotels-resorts.html
-- qc-checklist.html (4+4mm → 3+3mm)
-- specification.html, drawing-styles.html, landed-cost-calculator.html
-- product-overview.html, meeting-eurotech.html (already correct)
-
-**AUDIT.md updated:**
-- Added version history for all changes
-- Documented intentional 8mm refs (diffuser holes, rebates, fasteners)
-- Noted v5.2.1/v5.2.2 version discrepancies in some docs
+**Mobile navigation overhaul (nav.js):**
+- Added clean 50px top bar: hamburger menu | "Sales & Ops" | home icon
+- Page content pushed below bar (no overlap)
+- Sidebar slides in below the top bar on tap
+- Hidden page headers on mobile (redundant with nav bar)
+- Fixed CRM page layout (had position:fixed header + 60px margin)
+- Reset margin-top on .main-container for hidden fixed headers
 
 **Navigation update:**
 - Added product-overview.html and meeting-eurotech.html to Business Development nav
-- Both pages now have sidebar navigation
+- Cross-links between Product Overview ↔ Meeting Prep pages
 
 **User questions answered:**
 - 43" model: Optional - start with 55"-86", add later if demand
 - Larger than 86": 98" possible but shipping costs spike - custom/commercial only
+- PWA app: Not yet - browser works fine, revisit when team grows
 
-**Commits:** a8e45d2, b53af22
+**Commits:** a8e45d2, b53af22, 75b3c4e, 00e3f73, 53aef5f, 31629f3, ba9f618
 
 ---
 
