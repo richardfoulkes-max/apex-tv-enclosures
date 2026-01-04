@@ -327,33 +327,63 @@
         }
 
         /* Mobile */
-        .apex-mobile-toggle {
+        .apex-mobile-bar {
             display: none;
             position: fixed;
-            top: 1rem;
-            left: 1rem;
-            z-index: 1001;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
             background: ${contextColor};
+            z-index: 1001;
+            align-items: center;
+            padding: 0 1rem;
+            gap: 0.75rem;
+        }
+
+        .apex-mobile-toggle {
+            display: none;
+            background: rgba(255,255,255,0.15);
             border: none;
-            border-radius: 8px;
-            padding: 0.75rem;
+            border-radius: 6px;
+            padding: 0.5rem 0.6rem;
             cursor: pointer;
             color: #ffffff;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
+        }
+
+        .apex-mobile-title {
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            flex: 1;
+        }
+
+        .apex-mobile-home {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.4rem;
         }
 
         @media (max-width: 900px) {
-            body { margin-left: 0 !important; }
+            body {
+                margin-left: 0 !important;
+                padding-top: 50px !important;
+            }
+            .apex-mobile-bar { display: flex; }
+            .apex-mobile-toggle { display: block; }
             .apex-sidebar {
                 transform: translateX(-100%);
                 transition: transform 0.3s;
+                top: 50px;
+                height: calc(100vh - 50px);
             }
             .apex-sidebar.open { transform: translateX(0); }
-            .apex-mobile-toggle { display: block; }
             .apex-sidebar-overlay {
                 display: none;
                 position: fixed;
-                top: 0; left: 0; right: 0; bottom: 0;
+                top: 50px; left: 0; right: 0; bottom: 0;
                 background: rgba(0,0,0,0.5);
                 z-index: 999;
             }
@@ -377,7 +407,11 @@
     // Build sidebar HTML
     let sidebarHTML = `
         <div class="apex-sidebar-overlay" onclick="toggleApexSidebar()"></div>
-        <button class="apex-mobile-toggle" onclick="toggleApexSidebar()">☰</button>
+        <div class="apex-mobile-bar">
+            <button class="apex-mobile-toggle" onclick="toggleApexSidebar()">☰</button>
+            <span class="apex-mobile-title">${contextLabel}</span>
+            <a href="${basePath}index.html" class="apex-mobile-home">🏠</a>
+        </div>
         <nav class="apex-sidebar">
             <div class="apex-sidebar-header">
                 <a href="${basePath}index.html" class="apex-sidebar-logo">
