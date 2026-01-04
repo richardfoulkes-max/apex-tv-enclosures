@@ -17,7 +17,9 @@
         'quote-calculator.html',
         'bd-plan.html',
         'go-to-market.html',
-        'setup.html'
+        'setup.html',
+        'product-overview.html',
+        'meeting-eurotech.html'
     ];
 
     // Sales Navigation Structure
@@ -35,7 +37,9 @@
             icon: '💼',
             items: [
                 { href: 'partner-crm.html', label: 'Apex CRM' },
-                { href: 'ai-queue.html', label: 'AI Queue' }
+                { href: 'ai-queue.html', label: 'AI Queue' },
+                { href: 'product-overview.html', label: 'Product Overview' },
+                { href: 'meeting-eurotech.html', label: 'Eurotech Meeting' }
             ]
         },
         planning: {
