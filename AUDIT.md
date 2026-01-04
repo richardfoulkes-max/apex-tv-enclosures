@@ -2,7 +2,7 @@
 
 > **Purpose:** Single source of truth for all key facts. When changing any value, update this file AND all locations listed.
 >
-> **Last Updated:** 2025-12-31
+> **Last Updated:** 2026-01-04
 
 ---
 
@@ -31,7 +31,8 @@
 | **IP Rating** | IP55 | retail/index.html, retail/faq.html, industries/*.html, specification.html, designs.html, engineering-drawings.html |
 | **Temperature Rating** | 55°C ambient | retail/faq.html, industries/pool-areas.html, specification.html, designs.html |
 | **Warranty** | 2 years | retail/index.html, retail/faq.html, legal/warranty-policy.html |
-| **Glass** | 8mm laminated (4+4) | retail/faq.html, specification.html, designs.html |
+| **Glass** | 6mm laminated (3+3) | All pages (updated 2026-01-04) |
+| **Weight (75")** | ~38kg empty | product-overview.html, designs.html |
 | **Fans** | 3× Delta AFB1412HH-A | specification.html, designs.html, bom-detailed.html |
 | **Airflow** | 180-210 CFM | specification.html, designs.html (reduced from 210-250 for IP55) |
 | **Enclosure Depth** | 160mm | specification.html, designs.html |
@@ -190,7 +191,18 @@ When making changes, use this checklist:
 |-------|---------|----------|
 | IP55 vs IP66 in internal docs | Some internal docs still reference IP66 | Low (internal only) |
 | global-pricing.html pricing | Has different pricing structure than retail | Low (analysis doc) |
-| designs.html pricing table | Has 55"/65"/75"/86" with different AED prices | Medium (review needed) |
+| designs.html pricing table | Shows wholesale/partner pricing not retail | Low (internal doc) |
+| v5.2.1 vs v5.2.2 in headers | specification.html, engineering-analysis.html show v5.2.1 | Low (historical) |
+| 8mm refs in roundtable-ai/ | Old engineering briefs reference 8mm glass | Low (archived docs) |
+| 8mm refs in ATE-75-Spec files | Old manufacturer-rfq specs reference 8mm | Low (need update if reusing) |
+
+### Notes on "8mm" References That Are NOT Glass
+These are intentionally 8mm and should NOT be changed:
+- Diffuser plate holes: 8mm diameter (designs.html, engineering-analysis.html)
+- Door frame glass rebate: 8mm channel depth (design-detailed.html)
+- TV setback: 8mm behind glass plane (specification docs)
+- M8 fastener holes: 8mm diameter (various)
+- CSS padding/margins: 8mm (print styles - not product spec)
 
 ---
 
@@ -203,3 +215,10 @@ When making changes, use this checklist:
 | 2025-12-31 | Removed: 30-day guarantee, garden hose claims, competitor comparisons |
 | 2025-12-31 | Added: OLED warning, SYLVOX speaker recommendation |
 | 2025-12-31 | Replaced Neptune soundbar (US-only) with SYLVOX |
+| 2026-01-04 | **Glass spec update:** 8mm laminated (4+4) → 6mm laminated (3+3) |
+| 2026-01-04 | **Weight reduction:** 75" enclosure ~45kg → ~38kg (saves ~7kg with thinner glass) |
+| 2026-01-04 | Full audit: Updated all HTML pages with new glass/weight specs |
+| 2026-01-04 | Fixed: industries/pool-areas.html, industries/restaurants-bars.html, industries/hotels-resorts.html |
+| 2026-01-04 | Fixed: qc-checklist.html, specification.html, drawing-styles.html |
+| 2026-01-04 | Fixed: landed-cost-calculator.html weight reference |
+| 2026-01-04 | Note: Some v5.2.1 version refs remain in spec/engineering pages (historical) |

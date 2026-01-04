@@ -82,7 +82,7 @@ https://github.com/richardfoulkes-max/apex-tv-enclosures (private)
 | Intake baffles | **Double-layer labyrinth** | IP55 jet resistant |
 | Rear plenum | **30mm + diffuser** | Perforated plate equalizes flow |
 | Fans | **3× Delta AFB1412HH-A** | 180-210 CFM, 4.8 mmH₂O static |
-| Glass | **8mm laminated (4+4)** | Continuous channel retention |
+| Glass | **6mm laminated (3+3)** | Continuous channel retention |
 | Service door | 1650 × 80mm, **4 latches** | Higher-durometer EPDM |
 | Filter | **MERV 8 standard** | Gasketed drawer (IP55) |
 | VESA | Through-bolted, 6mm plate | 75kg @ 3× safety factor |
@@ -590,7 +590,7 @@ roundtable-ai/              ← Engineering validation briefs
    - Tortuous airflow path visualization
 
 4. **Front View:** Updated to v5.2.2 appearance
-   - 8mm laminated glass callout
+   - 6mm laminated glass callout
    - 4 service door latches (was 2 cam locks)
    - IP55 labyrinth intake appearance
    - 75mm deflector shadow element
@@ -634,7 +634,7 @@ roundtable-ai/              ← Engineering validation briefs
    - **Depth:** 180mm (50mm rear plenum)
    - **Fans:** 2×140mm high-static (140-160 CFM)
    - **Filter:** MERV 8 standard (not optional)
-   - **Glass:** 8mm laminated with continuous channel retention
+   - **Glass:** 6mm laminated with continuous channel retention
    - **Service:** Hinged door in bottom bezel
    - **VESA:** Through-bolted with 6mm reinforcement
    - **IP rating:** IP54 (realistic)

@@ -36,7 +36,7 @@ Weather-resistant enclosure for 75" commercial displays. **Ducted rear-plenum th
 | Body panels | 5052-H32 Aluminum | 3 mm |
 | VESA reinforcement | 5052-H32 Aluminum | 6 mm |
 | Internal stiffeners | 5052-H32 Aluminum | 2 mm |
-| Front glass | Laminated tempered | 8 mm (4+4) |
+| Front glass | Laminated tempered | 8 mm (3+3) |
 | Gaskets | EPDM (UV-stable, 70A) | 5 mm |
 | Glass retainer | Aluminum U-channel | 3 mm |
 
