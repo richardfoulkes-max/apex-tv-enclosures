@@ -99,9 +99,9 @@ Air path: Bottom intake → Double-layer labyrinth → Filter → Diffuser plate
 - **Margin:** ~60-90% wall-mount, 20-40% recess (adequate)
 
 ### BOM Summary (v5.2.2 - estimates)
-- **BOM Cost:** $638.63 (+$26 for IP55 upgrade)
-- **Target FOB:** $540-600
-- **Retail:** AED 7,000 (~$1,900)
+- **BOM Cost:** $662.13 (includes IR extender + cleaning kit)
+- **Target FOB:** $580-650
+- **Retail:** AED 10,500 (~$2,860)
 
 ### File Structure
 ```
@@ -157,6 +157,32 @@ roundtable-ai/              ← Engineering validation briefs
 7. Open folder for user to verify before sending
 
 ## Recent Work History
+
+### Session: 2026-01-04 (Night) - Color Options, CRM Fields, BOM Accessories
+
+**Frame color options (specification.html + quote-calculator.html):**
+- Standard Colors (included): Matte Black RAL 9005, Stone Grey RAL 7032
+- Premium Colors (+$75): Oyster White, Light Ivory, Silk Grey, Anthracite, Bronze
+- Custom RAL (+$150, 2-week lead time)
+- Quote calculator includes color selector with dynamic pricing
+
+**CRM business fields (partner-crm.html):**
+- Added Business tab with transaction fields:
+  - Trade License, TRN (Tax Registration Number)
+  - Payment Terms dropdown, Credit Limit
+  - Contract Status, Contract Expiry date
+  - Bank Details: Name, Account Name, IBAN, SWIFT
+  - Billing Address
+
+**BOM accessories (bom-detailed.html):**
+- Section 6 "Included Accessories": IR Extender System ($15), Glass Cleaning Kit ($8), Quick Start Card ($0.50)
+- Section 7 "Optional Accessories": Soundbar Bracket ($25/$75), Extended Warranty 3yr/5yr ($150/$300), Filter Pack ($8/$25), Anti-Glare Film ($35/$100)
+- Updated BOM total: $638.63 → $662.13
+- Updated FOB target: $540-600 → $580-650
+
+**Commits:** d4b13d2, 5c9f899
+
+---
 
 ### Session: 2026-01-04 (Evening) - Password Protection for Internal Pages
 
