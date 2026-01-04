@@ -86,7 +86,7 @@ https://github.com/richardfoulkes-max/apex-tv-enclosures (private)
 | External dimensions | 1760 × **1120** × **160mm** | Taller due to 80mm bezels |
 | Top/bottom bezels | **80mm each** | Integrated recessed ventilation slots |
 | Side bezels | **40mm each** | Standard frame profile |
-| Ventilation | **Recessed slots** | 30-40mm behind bezel face, NO deflector |
+| Ventilation | **12× 3mm slots** | A_eff ≥ 0.035 m², recessed 30-40mm, NO deflector |
 | Rear plenum | **30mm + diffuser** | Perforated plate equalizes flow |
 | Fans | **3× Delta AFB1412HH-A** | 165-195 CFM, 4.8 mmH₂O static |
 | Glass | **6mm laminated (3+3)** | Continuous channel retention |
@@ -107,9 +107,19 @@ Air path: Bottom bezel slots → Filter → Diffuser plate →
 - **Design benefit:** Clean flush front - no protruding deflector
 
 ### BOM Summary (v5.3.0 - estimates)
-- **BOM Cost:** $662.13 (materials only, includes IR extender + cleaning kit)
-- **FOB Price:** ~$900 (BOM + labor + factory margin)
+- **BOM Cost:** ~$642 (materials only, includes IR extender + cleaning kit)
+- **FOB Price:** ~$876 (BOM + labor + factory margin)
 - **Retail:** AED 10,500 (~$2,860)
+
+### Acoustic Performance (v5.3.0)
+| PWM | Slot Velocity | SPL @ 1m | Mode |
+|-----|---------------|----------|------|
+| 20% | 0.7 m/s | ≤30 dBA | Idle (near silent) |
+| 40% | 1.4 m/s | ≤34 dBA | Quiet mode |
+| 60% | 2.1 m/s | ≤38 dBA | Normal cooling |
+| 100% | 3.4 m/s | ≤48 dBA | Emergency (audible) |
+
+**Design intent:** Quiet most of the time (≤40% PWM), audible only in thermal emergencies.
 
 ### File Structure
 ```
@@ -194,6 +204,34 @@ nav.js injects: body { margin-left: 240px !important; }
 ---
 
 ## Recent Work History
+
+### Session: 2026-01-04 (Night) - Complete Thermal/Acoustic Engineering Overhaul
+
+**Fan Selection Reverted (ChatGPT Static Pressure Analysis):**
+- Noctua NF-A14x25 G2 PWM (2.56 mmH₂O) → Delta AFB1412HH-A (4.8 mmH₂O)
+- System pressure budget: 3.6-12.2 mmH₂O (MERV 8 + diffuser + plenum + slots)
+- Noctua inadequate - would "fall off a cliff" with filter load
+- BOM reduced $21 (Noctua $135 → Delta $114.40)
+
+**Mandatory Noise Mitigation Spec Added (specification.html §6.3):**
+- A. Vibration Isolation: Silicone grommets, Shore A 40-60, no metal-to-metal
+- B. Slot Design: 12× 3mm slots, A_eff ≥ 0.035 m²
+- C. Panel Resonance: ≥2.0mm aluminum, stiffening ribs where span >400mm
+- D. PWM Control: 20% baseline → 40% quiet → 60% normal → 100% max
+- E. Acoustic Acceptance: Binding dBA targets per PWM level
+- Manufacturing notes: NO SUBSTITUTIONS, slot count/gap mandatory
+
+**Slot Design Finalized (Option A - Premium Aesthetic):**
+- 12× horizontal slots, 3mm gap each, 1600mm wide
+- Gross area: 0.058 m² → A_eff ≥ 0.035 m² (after 0.6× losses)
+- Velocity: ≤2 m/s at 60% PWM (quiet mode ceiling)
+- dBA targets: ≤34 dBA @ 40% (quiet), ≤48 dBA @ 100% (max)
+
+**Key Insight:** "Quiet = high-static fans + low PWM + vibration isolation + larger slots"
+
+**Commits:** `398af66` (fan reversion), `1dd4bf6` (slot design)
+
+---
 
 ### Session: 2026-01-05 (Midday) - Vertical Rail Mounting System Documentation
 
