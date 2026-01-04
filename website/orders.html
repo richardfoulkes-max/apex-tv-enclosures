@@ -409,6 +409,26 @@
         }
         .back-link:hover { color: white; }
 
+        /* PO Badge */
+        .po-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: #e0e7ff;
+            color: #4338ca;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            text-decoration: none;
+            transition: background 0.15s;
+        }
+        .po-badge:hover { background: #c7d2fe; }
+        .po-badge.in-production { background: #fef3c7; color: #b45309; }
+        .po-badge.shipped { background: #d1fae5; color: #047857; }
+        .po-badge.received { background: #10b981; color: white; }
+
         @media (max-width: 1200px) {
             .pipeline {
                 grid-template-columns: repeat(3, 1fr);
@@ -457,6 +477,7 @@
         <div class="quick-actions">
             <button class="quick-action" onclick="showNewOrderModal()">+ New Order</button>
             <button class="quick-action" onclick="showNewFollowupModal()">+ Add Follow-up</button>
+            <a href="factory-orders.html" class="quick-action" style="text-decoration: none;">🏭 Factory Orders</a>
             <button class="quick-action" onclick="loadData()">↻ Refresh</button>
         </div>
 
@@ -653,6 +674,23 @@
 
         let orders = [];
         let followUps = [];
+        let factoryOrders = []; // From localStorage
+
+        // Load factory orders to show PO linkage
+        function loadFactoryOrders() {
+            const saved = localStorage.getItem('apex_factory_orders');
+            if (saved) {
+                const data = JSON.parse(saved);
+                factoryOrders = data.orders || [];
+            }
+        }
+
+        // Find PO that links to this order
+        function getLinkedPO(orderId) {
+            return factoryOrders.find(po =>
+                po.linkedOrders && po.linkedOrders.includes(orderId)
+            );
+        }
 
         // Temperature config
         const TEMPS = {
@@ -664,6 +702,7 @@
 
         // Run auto-followups then load data
         async function init() {
+            loadFactoryOrders(); // Load PO data for linkage display
             try {
                 // Generate any auto follow-ups
                 await fetch(`${API_BASE}/auto-followups`, { method: 'POST' });
@@ -788,6 +827,18 @@
                 userAttrHtml = `<div class="order-meta" style="font-size: 0.7rem; color: #94a3b8;">👤 ${userName}</div>`;
             }
 
+            // PO linkage
+            let poHtml = '';
+            const linkedPO = getLinkedPO(order.id);
+            if (linkedPO) {
+                const poStatusClass = linkedPO.status === 'in_production' ? 'in-production' :
+                                     linkedPO.status === 'shipped' ? 'shipped' :
+                                     linkedPO.status === 'received' ? 'received' : '';
+                poHtml = `<a href="factory-orders.html" class="po-badge ${poStatusClass}" onclick="event.stopPropagation()">
+                    🏭 ${linkedPO.poNumber} (${linkedPO.status.replace('_', ' ')})
+                </a>`;
+            }
+
             card.innerHTML = `
                 <div class="order-header">
                     <span class="order-name">${order.customer_name || 'Unknown'}</span>
@@ -808,6 +859,7 @@
                     ${order.include_install ? '🔧 Install' : ''}
                 </div>
                 ${userAttrHtml}
+                ${poHtml}
                 ${lostReasonHtml}
                 ${followupHtml}
                 ${actionsHtml}
