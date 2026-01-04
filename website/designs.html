@@ -21,13 +21,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: var(--bg-alt); color: var(--text); line-height: 1.6; }
 
-        .doc-nav { background: linear-gradient(135deg, #0d9488 0%, #0a7169 100%); padding: 1rem 2rem; }
-        .doc-nav h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(255,255,255,0.7); margin-bottom: 0.75rem; }
-        .doc-nav-grid { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-        .doc-card { background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; color: white; border: 1px solid rgba(255,255,255,0.2); font-size: 0.85rem; font-weight: 500; }
-        .doc-card:hover { background: rgba(255,255,255,0.2); }
-        .doc-card.active { background: white; color: var(--primary); }
-
         header { background: white; padding: 2rem; border-bottom: 1px solid var(--border); }
         .header-content { max-width: 1400px; margin: 0 auto; }
         header h1 { font-size: 1.75rem; color: var(--primary); }
@@ -56,42 +49,9 @@
         .success-box { background: #dcfce7; border-left: 4px solid var(--success); padding: 1rem; margin: 1rem 0; font-size: 0.9rem; }
         .danger-box { background: #fef2f2; border-left: 4px solid var(--danger); padding: 1rem; margin: 1rem 0; font-size: 0.9rem; }
 
-        @media print { .doc-nav { display: none; } }
     </style>
 </head>
 <body>
-    <nav class="doc-nav">
-        <h3>Manufacturing Documentation</h3>
-        <div class="doc-nav-grid">
-            <a href="index.html" class="doc-card">Website</a>
-            <a href="specification.html" class="doc-card">Specification</a>
-            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
-            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
-            <a href="control-logic.html" class="doc-card">Control Logic</a>
-            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
-            <a href="market-research.html" class="doc-card">Market Research</a>
-            <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
-            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
-            <a href="engineering-analysis.html" class="doc-card">Engineering Analysis</a>
-            <a href="testing-plan.html" class="doc-card">Testing Plan</a>
-            <a href="china-suppliers.html" class="doc-card">China Suppliers</a>
-            <a href="go-to-market.html" class="doc-card">Go-to-Market</a>
-            <a href="tv-compatibility.html" class="doc-card">TV Compatibility</a>
-            <a href="audio-noise-video.html" class="doc-card">Audio &amp; Video</a>
-            <a href="designs.html" class="doc-card active">Designs</a>
-            <a href="contractors.html" class="doc-card">Contractors</a>
-            <a href="compliance-guide.html" class="doc-card">Compliance Guide</a>
-            <a href="global-pricing.html" class="doc-card">Global Pricing</a>
-            <a href="financial-forecast.html" class="doc-card">Financial Forecast</a>
-            <a href="competitor-analysis.html" class="doc-card">Competitors</a>
-            <a href="legal-risk.html" class="doc-card">Legal Risk</a>
-            <a href="retail/index.html" class="doc-card">Retail</a>
-            <a href="partner/index.html" class="doc-card">Partner</a>
-            <a href="commercial/index.html" class="doc-card">Commercial</a>
-            <a href="partner-crm.html" class="doc-card">Partner CRM</a>
-        </div>
-    </nav>
-
     <header>
         <div class="header-content">
             <h1>Engineering Designs - ATE Series (v5.3.0 IP55)</h1>
