@@ -390,7 +390,7 @@
             .apex-sidebar-overlay.open { display: block; }
 
             /* Hide page headers on mobile - nav bar provides context */
-            .header, .page-header {
+            .header, .page-header, header.header, body > header {
                 display: none !important;
             }
             .container {
