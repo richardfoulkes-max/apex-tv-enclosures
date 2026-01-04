@@ -30,9 +30,9 @@
             background: linear-gradient(135deg, var(--primary), #0f766e);
             color: white;
             padding: 1.25rem 2rem;
-            margin-left: 240px;
+            margin: -2rem -2rem 2rem -2rem;
         }
-        @media (max-width: 768px) { .page-header { display: none; margin-left: 0; } }
+        @media (max-width: 768px) { .page-header { display: none; } }
         .page-header h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
         .page-header p { opacity: 0.9; font-size: 0.9rem; }
         h2 {
@@ -162,12 +162,11 @@
     </style>
 </head>
 <body>
-    <div class="page-header">
-        <h1>PWM Fan Control Logic</h1>
-        <p>Firmware Specification | Version 2.0</p>
-    </div>
-
     <div class="main-container">
+        <div class="page-header">
+            <h1>PWM Fan Control Logic</h1>
+            <p>Firmware Specification | Version 2.0</p>
+        </div>
         <h2>1. Control System Overview</h2>
         <p>The Apex thermal management system uses a microcontroller-based PWM fan controller to maintain optimal internal temperature while minimizing noise. Unlike simple on/off thermostat control, this system provides smooth, proportional fan speed adjustment.</p>
 
