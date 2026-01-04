@@ -96,7 +96,8 @@
                 { href: 'control-logic.html', label: 'Control Logic' },
                 { href: 'wiring-diagram.html', label: 'Wiring Diagram' },
                 { href: 'tv-compatibility.html', label: 'TV Compatibility' },
-                { href: 'audio-noise-video.html', label: 'Audio/Noise/Video' }
+                { href: 'audio-noise-video.html', label: 'Audio/Noise/Video' },
+                { href: 'cavity-requirements.html', label: 'Cavity Requirements' }
             ]
         },
         manufacturing: {
@@ -106,7 +107,6 @@
                 { href: 'testing-plan.html', label: 'Testing Plan' },
                 { href: 'qc-checklist.html', label: 'QC Checklist' },
                 { href: 'compliance-guide.html', label: 'Compliance Guide' },
-                { href: 'cavity-requirements.html', label: 'Cavity Requirements' },
                 { href: 'manufacturer-rfq.html', label: 'RFQ Package' },
                 { href: 'china-suppliers.html', label: 'China Suppliers' }
             ]
