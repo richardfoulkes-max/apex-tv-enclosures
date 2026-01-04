@@ -8,6 +8,7 @@
     <style>
         :root {
             --primary: #0d9488;
+            --primary-dark: #0f766e;
             --text: #0f172a;
             --text-muted: #64748b;
             --bg: #ffffff;
@@ -18,11 +19,19 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: var(--bg-alt); color: var(--text); line-height: 1.6; }
 
-        header { background: white; padding: 2rem; border-bottom: 1px solid var(--border); }
-        .header-content { max-width: 1400px; margin: 0 auto; }
-        header h1 { font-size: 1.75rem; color: var(--primary); }
-        header .subtitle { color: var(--text-muted); }
-        .version-badge { display: inline-block; background: var(--success); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-left: 0.5rem; }
+        .main-container { margin-left: 240px; padding: 2rem; }
+        @media (max-width: 768px) { .main-container { margin-left: 0; padding: 1rem; padding-top: 60px; } }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.25rem 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+        }
+        @media (max-width: 768px) { .page-header { display: none; } }
+        .page-header h1 { font-size: 1.5rem; font-weight: 600; }
+        .page-header p { opacity: 0.9; font-size: 0.9rem; margin-top: 0.25rem; }
+        .version-badge { display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; margin-left: 0.5rem; vertical-align: middle; }
 
         .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
 
@@ -55,14 +64,11 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
+    <div class="main-container">
+        <div class="page-header">
             <h1>ATE-75 Design Gallery <span class="version-badge">v5.3.0</span></h1>
-            <p class="subtitle">Integrated Bezel Ventilation Design | 1760 × 1120 × 160mm | IP55 Rated</p>
+            <p>Integrated Bezel Ventilation Design | 1760 × 1120 × 160mm | IP55 Rated</p>
         </div>
-    </header>
-
-    <div class="container">
 
         <!-- Quick Specs -->
         <div class="section">
