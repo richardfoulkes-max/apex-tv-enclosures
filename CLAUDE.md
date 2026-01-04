@@ -164,7 +164,49 @@ roundtable-ai/              ← Engineering validation briefs
 6. Regenerate PDFs from cleaned HTML sources
 7. Open folder for user to verify before sending
 
+## Critical CSS Layout Rules
+
+**IMPORTANT - nav.js handles sidebar margin:**
+```
+nav.js injects: body { margin-left: 240px !important; }
+```
+
+**DO NOT add `margin-left: 240px` to `.main-container`** - this creates double offset (480px gap)!
+
+**Correct page structure:**
+```html
+<body>
+    <div class="main-container">  <!-- NO margin-left here -->
+        <div class="page-header">  <!-- margin: -2rem -2rem 2rem -2rem -->
+            <h1>Title</h1>
+        </div>
+        <!-- content -->
+    </div>
+</body>
+```
+
+**Correct CSS:**
+```css
+.main-container { padding: 2rem; }  /* NO margin-left */
+.page-header { margin: -2rem -2rem 2rem -2rem; }  /* Extends into padding */
+```
+
+---
+
 ## Recent Work History
+
+### Session: 2026-01-05 (Night) - Fixed Engineering Page Layout
+
+**Root cause of white gap found and fixed:**
+- nav.js injects `body { margin-left: 240px !important; }`
+- Engineering pages also had `.main-container { margin-left: 240px; }`
+- This created DOUBLE offset = 480px gap between sidebar and content
+- Removed `margin-left` from all 11 Engineering pages
+- Commit: `8ffeb45`
+
+**Correct pattern documented above in "Critical CSS Layout Rules"**
+
+---
 
 ### Session: 2026-01-05 (Late) - Engineering Header Standardization
 
