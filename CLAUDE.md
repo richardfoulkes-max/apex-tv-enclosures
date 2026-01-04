@@ -107,9 +107,10 @@ Air path: Bottom bezel slots → Filter → Diffuser plate →
 - **Design benefit:** Clean flush front - no protruding deflector
 
 ### BOM Summary (v5.3.0 - estimates)
-- **BOM Cost:** ~$642 (materials only, includes IR extender + cleaning kit)
-- **FOB Price:** ~$876 (BOM + labor + factory margin)
+- **BOM Cost:** ~$637 (materials only, includes IR extender + cleaning kit)
+- **FOB Price:** ~$870 (BOM + labor + factory margin)
 - **Retail:** AED 10,500 (~$2,860)
+- **Note:** External wall mount NOT included - customer supplies based on wall type
 
 ### Acoustic Performance (v5.3.0)
 | PWM | Slot Velocity | SPL @ 1m | Mode |
@@ -204,6 +205,27 @@ nav.js injects: body { margin-left: 240px !important; }
 ---
 
 ## Recent Work History
+
+### Session: 2026-01-05 (Early AM) - BOM Wall Mount Cleanup
+
+**Removed external wall mount from BOM - customer supplies:**
+- User asked: "do we need this? this is for external to the wall mount I think?"
+- Correct - external wall mount depends on customer's wall type and preference
+
+**Changes:**
+- Removed from BOM: Articulating arm ($28-38), wall plate ($6-8), wall anchors ($4.80)
+- Added to BOM: Internal TV mounting (vertical rails $12, brackets $8, rear VESA plate $10, hardware $4)
+- BOM Total: $641.53 → $636.73
+- FOB Price: ~$876 → ~$870
+
+**What's included vs customer-supplied:**
+- INCLUDED: Internal vertical rails + TV brackets (mounts TV inside enclosure)
+- INCLUDED: Rear VESA plate (allows external wall mount attachment)
+- CUSTOMER SUPPLIES: Wall mount arm, wall plate, anchors (based on wall type)
+
+**Commit:** `5440a56` - Remove external wall mount from BOM - customer supplies
+
+---
 
 ### Session: 2026-01-04 (Late Night) - Comprehensive v5.3.0 Documentation Audit
 
