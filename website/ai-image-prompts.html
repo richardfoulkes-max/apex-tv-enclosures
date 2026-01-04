@@ -26,438 +26,521 @@
         .tag.lifestyle { background: #dcfce7; color: #166534; }
         .tag.detail { background: #f3e8ff; color: #7c3aed; }
         .tag.technical { background: #e2e8f0; color: #475569; }
+        .tag.verified { background: #dcfce7; color: #166534; font-weight: bold; }
+        .version-badge { background: #0d9488; color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>AI Image Generation Prompts</h1>
-        <p class="subtitle">Detailed prompts for DALL-E, Midjourney, or similar AI tools to create realistic product renders</p>
+        <h1>AI Image Generation Prompts <span class="version-badge">v5.3.0</span></h1>
+        <p class="subtitle">Verified prompts for Gemini/DALL-E to create accurate product renders of the Integrated Bezel Design</p>
 
         <div class="specs-box">
-            <h3>Product Specifications (ATE-75) - Front-Breathing Design v3.0</h3>
+            <h3>Product Specifications (ATE-75) - v5.3.0 Integrated Bezel Design</h3>
             <ul>
-                <li><strong>External Dimensions:</strong> 1760mm wide × 1040mm tall × 120mm deep (slim TV-like profile)</li>
-                <li><strong>Frame:</strong> Aluminum 5052-H32, 2.0mm thickness, matte black powder coat</li>
-                <li><strong>Frame Bezel:</strong> 35mm bezel width (accommodates airflow slots)</li>
-                <li><strong>Front Panel:</strong> 6mm laminated tempered glass, anti-reflective coating</li>
-                <li><strong>Ventilation (Front-Breathing):</strong>
+                <li><strong>External Dimensions:</strong> 1760mm wide x 1120mm tall x 160mm deep</li>
+                <li><strong>Frame:</strong> Aluminum 5052-H32, 3mm thickness, matte black powder coat (RAL 9005)</li>
+                <li><strong>Bezels:</strong> 80mm top/bottom (with recessed ventilation), 40mm sides</li>
+                <li><strong>Front Panel:</strong> 6mm laminated safety glass (3+3mm), continuous channel retention</li>
+                <li><strong>Ventilation (Integrated Bezel):</strong>
                     <ul>
-                        <li>Bottom bezel: Discrete intake slot (1700×15mm) with angled louvers - filters hidden inside</li>
-                        <li>Top bezel: Exhaust slot (1700×20mm) with 4 × 60mm slim fans behind louvers</li>
-                        <li>25mm air channel between glass and TV for vertical airflow</li>
+                        <li>Bottom bezel: Recessed horizontal slots (30-40mm behind face) - filtered intake</li>
+                        <li>Top bezel: Recessed horizontal slots (30-40mm behind face) - exhaust</li>
+                        <li>NO DEFLECTOR - clean flush "picture frame" front</li>
                     </ul>
                 </li>
-                <li><strong>Airflow:</strong> Bottom bezel intake → Up front air channel → Top bezel exhaust (~70 CFM + convection)</li>
-                <li><strong>Design:</strong> All ventilation hidden in 35mm bezel profile - looks like TV bezel accent lines</li>
-                <li><strong>Universal Mount:</strong> Works for wall-mount, recessed, and flush installations</li>
-                <li><strong>Door:</strong> Left-hinged with concealed hinges, gas strut support</li>
-                <li><strong>Locks:</strong> 2 × stainless steel cam locks on right edge</li>
-                <li><strong>Rating:</strong> IP66 weatherproof (dust-tight, water jet resistant)</li>
-                <li><strong>Mount:</strong> Universal VESA 200×200 to 600×400mm</li>
+                <li><strong>Cooling:</strong> 3x Delta AFB1412HH-A 140mm fans (165-195 CFM), rear plenum with diffuser plate</li>
+                <li><strong>Service Door:</strong> Bottom bezel hinged, 4x compression latches, gas strut support</li>
+                <li><strong>Rating:</strong> IP55 (dust protected, low-pressure water jets)</li>
+                <li><strong>Aesthetic:</strong> Clean flush front - looks like premium picture frame TV</li>
             </ul>
         </div>
 
-        <h2 style="background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); color: white; padding: 1rem; border-radius: 8px; border: none;">MASTER PROMPT - All Angles for Design Validation</h2>
+        <h2 style="background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); color: white; padding: 1rem; border-radius: 8px; border: none;">VERIFIED PROMPTS - v5.3.0 Renders</h2>
 
-        <div class="prompt-card" style="border: 3px solid #0d9488;">
-            <span class="tag" style="background: #fbbf24; color: #0f172a; font-weight: bold;">COPY THIS ONE</span>
-            <h3>Complete Design Sheet - 6 Views for Prototype Approval</h3>
-            <p class="use-case">Use for: Validating design appearance before manufacturing prototype</p>
-            <div class="prompt-text">Generate a product design sheet showing 6 views of the same outdoor TV enclosure:
+        <div class="prompt-card" style="border: 3px solid #16a34a;">
+            <span class="tag verified">VERIFIED</span>
+            <span class="tag hero">External View</span>
+            <h3>Front 3/4 View - Hero Shot</h3>
+            <p class="use-case">Use for: Website hero, marketing materials, product pages</p>
+            <div class="prompt-text">Photorealistic 3D product render of a premium outdoor TV enclosure, studio lighting, white background:
 
-PRODUCT: Premium outdoor TV enclosure - matte black aluminum with glass front
-STYLE: Like Samsung Frame TV or LG OLED Gallery - sleek, minimal, TV-like profile
-VERSION: Front-Breathing Design v3.0 (all airflow through front bezel)
+PRODUCT: Apex ATE-75 Outdoor TV Enclosure
+VERSION: v5.3.0 Integrated Bezel Design
+STYLE: Premium consumer electronics - like Samsung Frame TV or Bang & Olufsen
 
-CRITICAL DIMENSIONS:
-- Width: 1760mm (very wide, 16:9 aspect ratio)
-- Height: 1040mm
-- Depth: 120mm (SLIM like a wall-mounted TV)
-- Bezel: 35mm black frame around glass (wider to hide airflow slots)
-- MUST look like a premium TV, NOT an industrial box
+CRITICAL DIMENSIONS (must be accurate):
+- Width: 1760mm (very wide, 16:9 landscape)
+- Height: 1120mm (taller due to 80mm bezels)
+- Depth: 160mm (slim wall-mount profile)
+- Top/Bottom bezels: 80mm each (wider, contains ventilation)
+- Side bezels: 40mm each (standard frame)
 
-VIEW 1 - FRONT (full face):
-- Clean matte black bezel, 35mm wide, dark tinted glass
-- Bottom bezel: Very discrete horizontal intake slot - looks like accent line
-- Top bezel: Discrete exhaust slot with fine louvers - looks like speaker grille
-- Both slots are same matte black, blend into bezel design
-- Overall looks like a premium TV with thick attractive bezel
+FRONT APPEARANCE:
+- Clean matte black aluminum frame - "picture frame" aesthetic
+- Large dark-tinted glass panel (6mm laminated)
+- TV visible through glass, displaying colorful content
+- FLUSH FRONT - no protruding elements whatsoever
+- Looks like a premium framed TV, not industrial equipment
 
-VIEW 2 - TOP (looking down):
-- Shows depth of enclosure at 120mm
-- Exhaust louvers visible at front edge (angled upward)
-- Otherwise clean black surface
-- Smooth powder-coated finish
+BEZEL VENTILATION (CRITICAL - this is the key design feature):
+- Top bezel (80mm): Multiple thin horizontal slots RECESSED 30-40mm behind the bezel face
+- Bottom bezel (80mm): Multiple thin horizontal slots RECESSED 30-40mm behind the bezel face
+- Slots are 3-4mm wide, run most of the width
+- The bezel EDGE acts as a shield - you see INTO the bezel to see the slots
+- This creates depth/shadow where the slots are
+- NO PROTRUDING HOOD OR DEFLECTOR
 
-VIEW 3 - REAR (technical side):
-- CLEAN REAR - no fans (all airflow is on front!)
-- VESA mounting plate in center (silver metal)
-- Electronics compartment area at bottom
-- Cable entry glands (3 black circular)
-- Can be mounted flat against wall or into recess
+SIDE BEZELS:
+- 40mm width, plain matte black, no ventilation
 
-VIEW 4 - LEFT SIDE:
-- Shows slim 120mm depth profile
-- Shows front airflow path: intake at bottom bezel, exhaust at top bezel
-- 35mm bezel visible at front edge
-- Left-hinged door seam barely visible
-
-VIEW 5 - 3/4 FRONT-RIGHT:
-- Shows the TV-like profile at 30° angle
-- Bottom intake slot visible as subtle accent line
-- Top exhaust slot visible as fine louver pattern
-- 2 small stainless steel cam locks visible on right edge
-- Premium finish quality
-
-VIEW 6 - 3/4 REAR-LEFT:
-- Shows CLEAN rear panel - no vents
-- Wall mounting points visible
-- Shows how enclosure can mount flat against wall or into recess
-- Clean sealed design for recessed mounting
-
-STYLE REQUIREMENTS:
-- Premium consumer electronics aesthetic (NOT industrial equipment)
-- Samsung Frame TV / LG OLED Gallery reference
-- Airflow slots look intentional, like design accents
-- Would look at home mounted in a luxury Dubai villa
-- Works for wall-mount, recessed, or flush installations
-
-OUTPUT: 6 separate images in 2x3 grid layout
-BACKGROUND: White studio cyclorama
-LIGHTING: Soft product photography lighting
-QUALITY: 8K photorealistic render</div>
-            <button class="copy-btn" onclick="copyPrompt(this)">Copy Master Prompt</button>
-        </div>
-
-        <h2>Individual Product Photography Prompts</h2>
-
-        <div class="prompt-card">
-            <span class="tag hero">Hero Shot</span>
-            <span class="tag technical">3D Render</span>
-            <h3>Clean 3D Product Render - Full Unit</h3>
-            <p class="use-case">Use for: Primary product image, 3D visualization, website hero</p>
-            <div class="prompt-text">Photorealistic 3D product render, studio lighting, infinite white background:
-
-PRODUCT: Premium outdoor TV enclosure - weatherproof wall-mounted case designed to look like a large flat-screen television
-
-DESIGN PHILOSOPHY: This enclosure should look like a TV, NOT like industrial equipment. Clean lines, minimal visible hardware, sleek profile.
-
-EXACT DIMENSIONS (critical for correct proportions):
-- Width: 1760mm (1.76 meters) - very wide
-- Height: 1040mm (1.04 meters)
-- Depth: 120mm (slim, 12cm deep - similar to a wall-mounted TV)
-- Aspect ratio: approximately 1.7:1 (wide rectangle, landscape orientation)
-- The unit is MUCH wider than it is tall, like a TV
-
-OVERALL APPEARANCE:
-- Should look like a premium flat-screen TV mounted on a wall
-- 35mm bezel contains discrete ventilation slots (intake bottom, exhaust top)
-- Slots blend into bezel design like accent lines or speaker grilles
-
-FRAME CONSTRUCTION:
-- Material: Matte black powder-coated aluminum
-- Frame bezel: 35mm wide border around all edges (contains airflow slots)
-- Bottom bezel: Discrete horizontal intake slot (looks like accent line)
-- Top bezel: Discrete exhaust slot with fine louvers (looks like speaker grille)
-- Corners: Subtle reinforced corners, same matte black finish
-
-FRONT PANEL:
-- Single sheet of dark-tinted laminated tempered glass (6mm thick)
-- Glass is flush-mounted within the frame
-- Subtle reflection showing studio environment
-- Through the dark glass, a black TV screen shape is faintly visible
-- Looks like a large TV that is turned off
-
-TOP SURFACE:
-- Front edge has discrete exhaust louvers (angled upward) as part of bezel
-- Otherwise smooth and flat - same matte black finish as frame
-- Looks like the top edge of a premium flat-screen TV with soundbar grille
-
-RIGHT EDGE:
-- Two small stainless steel cam locks (20mm diameter)
-- Brushed steel finish, subtle and unobtrusive
-- Quarter-turn key slots visible
-
-LEFT EDGE:
-- Clean and smooth - hinges completely concealed
-- No visible hardware
-
-BOTTOM BEZEL:
-- Discrete horizontal intake slot - looks like accent line
-- Same matte black finish, blends into bezel design
-- Angled downward to shed water
-
-SURFACE FINISH:
-- Frame: Fine matte texture like Samsung Frame TV or LG OLED
-- Glass: Anti-reflective coating, dark smoke tint
-- Overall: Premium consumer electronics quality
+SERVICE DOOR (bottom):
+- Subtle horizontal seam line across bottom bezel
+- 4 small compression latches visible (stainless steel)
+- Hinges hidden on bottom edge
 
 CAMERA ANGLE:
 - 3/4 view from front-right
-- Approximately 25 degrees horizontal rotation
+- 25-30 degrees horizontal rotation
 - 15 degrees above center
-- Shows the slim 120mm profile depth clearly
+- Shows front face, top edge, and right edge
 - Full product in frame with 15% margin
 
 LIGHTING:
-- Main: Large softbox at 45 degrees camera-left
-- Fill: Reflected light from right
-- Rim: Subtle edge lighting to emphasize the slim depth
-- Shadow: Soft contact shadow on white ground plane
+- Large softbox at 45 degrees camera-left
+- Fill light from right
+- Subtle rim light to show depth
+- Soft shadow on white ground
 
-STYLE REFERENCE: Samsung Frame TV, LG OLED Gallery series, Sony Bravia, premium consumer TV marketing photography
-OUTPUT: 8K resolution, photorealistic materials, ray-traced reflections, emphasis on TV-like clean aesthetics</div>
+OUTPUT: 8K photorealistic, premium product photography quality</div>
             <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
         </div>
 
-        <div class="prompt-card">
-            <span class="tag hero">Hero Shot</span>
-            <h3>3/4 Perspective - Product Catalog</h3>
-            <p class="use-case">Use for: Website hero, product pages, marketing materials</p>
-            <div class="prompt-text">Commercial product photography, Canon EOS R5, 70mm lens, f/8, studio strobe lighting with large softbox at 45 degrees camera-left and fill card camera-right:
+        <div class="prompt-card" style="border: 3px solid #16a34a;">
+            <span class="tag verified">VERIFIED</span>
+            <span class="tag technical">Internal View</span>
+            <h3>Internal View - Glass Removed</h3>
+            <p class="use-case">Use for: Technical documentation, showing cooling system</p>
+            <div class="prompt-text">Photorealistic 3D product render showing the INTERIOR of an outdoor TV enclosure with front glass panel removed:
 
-Subject: Premium outdoor TV enclosure cabinet - FRONT-BREATHING DESIGN v3.0
-- Dimensions: Wide rectangular form factor, landscape orientation, approximately 1.7:1 aspect ratio, slim 120mm depth profile (noticeably thin like a wall-mounted TV)
-- Frame: Matte black powder-coated aluminum, fine texture like luxury electronics (similar to Samsung Frame TV finish), 35mm bezel border around glass
-- Front panel: Single sheet of dark-tinted laminated glass, subtle green edge tint visible, slight reflection showing studio environment, glass sits flush with frame
-- Top bezel: Discrete exhaust louvers visible as fine horizontal grille pattern (like a TV soundbar)
-- Bottom bezel: Discrete intake slot visible as subtle horizontal accent line
-- Right edge: Two brushed stainless steel cam locks visible, circular with quarter-turn slots
-- Left edge: Clean, hinges completely concealed
-- Corners: Subtle reinforced corners, same matte black finish
-- REAR IS CLEAN: No fans on back - all airflow is through front bezel (enables recessed mounting)
+PRODUCT: Apex ATE-75 interior view
+VERSION: v5.3.0
 
-Camera angle: 30 degrees from front-left, 15 degrees above center, showing front face, top edge, and left edge
-Background: Seamless white cyclorama, soft gradient shadow beneath unit
-Style reference: Apple product photography, Bang & Olufsen catalog imagery
-Output: 8K, photorealistic, sharp focus throughout, visible material texture grain</div>
+WHAT WE'RE SHOWING:
+- Front glass has been removed to reveal internal components
+- Looking straight into the enclosure from the front
+- All internal cooling and mounting systems visible
+
+FRAME (visible as border):
+- Matte black aluminum frame
+- 80mm top bezel, 80mm bottom bezel
+- 40mm side bezels
+- Frame depth is 160mm
+
+INTERNAL LAYOUT (from back to front):
+
+1. REAR WALL - DIFFUSER PLATE:
+- Perforated aluminum plate covering most of rear
+- 8mm diameter holes in grid pattern
+- 40% open area for airflow
+- Matte black finish
+- This sits 30mm in front of the actual rear panel
+
+2. THREE FANS (CRITICAL - exactly 3, not 4):
+- 3x Delta 140mm fans mounted in upper section
+- Arranged in a horizontal row
+- Fans are BEHIND the diffuser plate (seen through holes)
+- Black fan frames with dark blades
+- Spaced evenly across the width
+- These pull air UP and exhaust through top bezel
+
+3. VESA MOUNTING PLATE (center):
+- Silver/zinc colored reinforcement plate
+- Visible through diffuser plate holes
+- 400x400 / 600x400 hole pattern
+- 6mm thick, through-bolted
+- This is where the TV mounts inside
+
+4. BOTTOM SECTION:
+- Filter drawer area (MERV 8 filter location)
+- Cable routing space
+- Service access area
+
+5. GLASS CHANNEL (frame edge):
+- Continuous U-channel around frame opening
+- EPDM gasket visible (black rubber)
+- This is where glass panel seats
+
+INTERIOR FINISH:
+- All internal surfaces matte black
+- Clean, professional appearance
+- No exposed wiring (harness is routed neatly)
+
+CAMERA ANGLE:
+- Straight on, slightly from below (10 degrees up)
+- Shows depth into the enclosure
+- Full frame visible
+
+LIGHTING:
+- Even illumination to show all internal details
+- Some shadow depth to show the layered construction
+
+OUTPUT: 8K photorealistic, technical documentation quality</div>
             <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
         </div>
+
+        <div class="prompt-card" style="border: 3px solid #16a34a;">
+            <span class="tag verified">VERIFIED</span>
+            <span class="tag detail">Exploded View</span>
+            <h3>Exploded View - All Components</h3>
+            <p class="use-case">Use for: Technical docs, manufacturing, component overview</p>
+            <div class="prompt-text">Technical exploded view diagram of an outdoor TV enclosure showing all components separated:
+
+PRODUCT: Apex ATE-75 Exploded Assembly View
+VERSION: v5.3.0 Integrated Bezel Design
+STYLE: Technical illustration with clean labels
+
+COMPONENTS (from front to back, separated with gaps):
+
+1. FRONT GLASS PANEL (frontmost)
+- Label: "LAMINATED GLASS 6mm"
+- Large rectangular panel, slight green tint on edges
+- 1680 x 960mm visible area
+
+2. GLASS GASKET
+- Label: "EPDM GASKET"
+- Continuous black rubber U-channel frame
+- Sits between glass and frame
+
+3. MAIN FRAME (the enclosure body)
+- Label: "ALUMINUM FRAME 5052-H32"
+- The main housing showing:
+  - 80mm top bezel with recessed slots
+  - 80mm bottom bezel with recessed slots
+  - 40mm side bezels
+  - Internal cavity visible
+
+4. SERVICE DOOR (separated from bottom)
+- Label: "SERVICE DOOR"
+- Hinged panel from bottom bezel
+- Shows 4x compression latches
+- Gas strut attachment points
+
+5. FILTER DRAWER
+- Label: "FILTER DRAWER (MERV 8)"
+- Slides into bottom bezel
+- Gasketed edges for IP55 seal
+
+6. DIFFUSER PLATE
+- Label: "DIFFUSER PLATE"
+- Perforated aluminum panel
+- 8mm holes visible
+- Mounts 30mm from rear
+
+7. THREE FANS (shown as group)
+- Label: "3x DELTA 140mm FANS"
+- Three circular fan units
+- Mounted in upper rear section
+
+8. VESA MOUNTING PLATE
+- Label: "VESA MOUNT PLATE 6mm"
+- Reinforced mounting plate
+- Multiple hole patterns visible
+
+9. REAR PANEL
+- Label: "REAR PANEL"
+- Flat aluminum panel
+- Shows cable gland positions
+- Keyhole mounting slots at corners
+
+10. CABLE GLANDS (small components)
+- Label: "IP55 CABLE GLANDS x3"
+- Three black circular fittings
+
+LAYOUT:
+- Components spread out along depth axis (front to back)
+- Equal spacing between components
+- Slight 3/4 angle so depth relationships are clear
+
+LABELS:
+- Clean sans-serif font
+- Leader lines pointing to each component
+- Labels positioned to not overlap
+
+BACKGROUND: Pure white
+STYLE: Technical product illustration, CAD-like quality
+OUTPUT: 8K resolution, suitable for technical documentation</div>
+            <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <div class="prompt-card" style="border: 3px solid #16a34a;">
+            <span class="tag verified">VERIFIED</span>
+            <span class="tag technical">Rear View</span>
+            <h3>Rear View - Technical Documentation</h3>
+            <p class="use-case">Use for: Installation manuals, mounting guides, spec sheets</p>
+            <div class="prompt-text">Photorealistic 3D product render, technical documentation style, soft even studio lighting:
+
+PRODUCT: Rear panel view of premium outdoor TV enclosure
+VERSION: v5.3.0 Integrated Bezel Design
+
+CRITICAL DIMENSIONS:
+- Width: 1760mm (very wide, landscape orientation)
+- Height: 1120mm (includes 80mm top and bottom bezels)
+- Depth: 160mm (visible as edge thickness)
+
+REAR PANEL APPEARANCE:
+- Material: Matte black powder-coated aluminum (2mm sheet)
+- Surface: Fine texture, slight orange-peel typical of quality powder coat
+- Overall: CLEAN AND SEALED - no visible fans or vents on rear
+- The rear is completely flat - designed for flush wall or recess mounting
+
+CENTER - VESA MOUNTING SYSTEM:
+- Large reinforcement plate (approximately 500x450mm) - slightly lighter silver/zinc color
+- Multiple VESA hole patterns visible: 400x400mm and 600x400mm
+- M8 threaded inserts at each VESA position
+- Plate is 6mm thick aluminum, through-bolted to frame (bolt heads visible at corners)
+- This is the structural heart - rated for 75kg TV at 3x safety factor
+
+BOTTOM SECTION - CABLE ENTRY:
+- Three black circular cable glands in a row (20mm diameter each)
+- IP55 rated compression fittings with rubber grommets
+- Positioned 100mm from bottom edge, evenly spaced
+- These are the ONLY penetrations in the rear panel
+
+CORNER MOUNTING:
+- Four keyhole slots, one near each corner
+- Allow the entire enclosure to hang on wall-mounted screws
+- Reinforced with backing plates (subtle raised areas)
+
+PRODUCT LABEL (center-left area):
+- Small aluminum plate (approximately 80x50mm)
+- Laser-etched text showing:
+  - "APEX ENCLOSURES"
+  - "Model: ATE-75"
+  - "IP55"
+  - Serial number placeholder
+  - CE mark symbol
+
+EDGES VISIBLE:
+- Top edge: Shows the 80mm top bezel depth - exhaust slots face UP, not visible from rear
+- Bottom edge: Shows the 80mm bottom bezel - intake slots face DOWN
+- Side edges: 40mm bezel profile visible
+- All edges have clean folded/welded seams, ground smooth
+
+IMPORTANT - NO FANS ON REAR:
+- Unlike older designs, v5.3.0 has NO rear-mounted fans
+- All three 140mm fans are INTERNAL, exhausting through top bezel
+- This allows the enclosure to mount flush against walls or into recesses
+
+CAMERA ANGLE:
+- Directly perpendicular to rear surface (orthographic/flat view)
+- Perfectly centered, no perspective distortion
+- Full enclosure visible with 10% margin on all sides
+
+BACKGROUND: Pure white (#FFFFFF)
+LIGHTING: Flat, even illumination for technical documentation
+STYLE: Technical product photography, suitable for installation manuals
+OUTPUT: 8K resolution, sharp detail on all mounting hardware and labels</div>
+            <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <h2>Lifestyle & Marketing Prompts</h2>
 
         <div class="prompt-card">
             <span class="tag lifestyle">Lifestyle</span>
             <h3>Dubai Luxury Poolside</h3>
             <p class="use-case">Use for: Website hero, social media, brochures</p>
-            <div class="prompt-text">Architectural interior/exterior photography, Sony A7R IV, 24mm wide lens, f/5.6, golden hour natural light with warm color temperature (5200K):
+            <div class="prompt-text">Architectural interior/exterior photography, Sony A7R IV, 24mm wide lens, f/5.6, golden hour natural light:
 
 Setting: Ultra-luxury Dubai villa outdoor living space
 - Location: Covered outdoor lounge area adjacent to infinity pool
-- Architecture: Contemporary Arabic-modern fusion, white rendered walls, dark bronze metal accents, geometric mashrabiya screen details
-- Pool: Infinity edge, turquoise water, subtle steam rising in warm evening air
+- Architecture: Contemporary Arabic-modern fusion, white rendered walls, dark bronze metal accents
 
-Focal point: Wall-mounted outdoor TV enclosure
-- Position: Mounted on shaded white wall, 1.5 meters above floor level, centered in entertainment zone
-- Appearance: Matte black rectangular cabinet, glass front showing 75-inch TV displaying Formula 1 race with vibrant colors
-- Scale reference: Enclosure is approximately 1.8 meters wide, shown next to 2-meter-tall potted olive tree
+Focal point: Wall-mounted Apex outdoor TV enclosure
+- Position: Mounted on shaded white wall, 1.5 meters above floor level
+- Appearance: Matte black rectangular frame with wide bezels (80mm top/bottom)
+- Clean "picture frame" aesthetic - NO hood or deflector visible
+- 75-inch TV displaying Formula 1 race with vibrant colors through tinted glass
+- Enclosure looks like premium framed artwork or Samsung Frame TV
 
 Environment details:
-- Furniture: Luxury outdoor sectional sofa in cream performance fabric, teak coffee table
-- Flooring: Large format cream porcelain tiles
-- Lighting: Warm glow from recessed soffit lighting, sunset reflection in pool
-- Landscaping: Date palms, bougainvillea, manicured lawn visible beyond pool
-- Background: Dubai Marina skyline silhouette, soft focus
+- Furniture: Luxury outdoor sectional sofa in cream performance fabric
+- Pool: Infinity edge, turquoise water visible
+- Lighting: Warm glow from recessed soffit lighting, sunset reflection
+- Landscaping: Date palms, bougainvillea
 
 Mood: Aspirational luxury lifestyle, relaxed evening entertainment
-Style reference: Architectural Digest photo spreads, luxury real estate photography
-Output: 8K photorealistic, natural color grading, architectural photography composition with strong leading lines toward TV</div>
+Style reference: Architectural Digest, luxury real estate photography
+Output: 8K photorealistic, warm color grading</div>
             <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
         </div>
 
         <div class="prompt-card">
-            <span class="tag detail">Detail Shot</span>
-            <h3>Open Door Interior View</h3>
-            <p class="use-case">Use for: Product detail pages, installation guides</p>
-            <div class="prompt-text">Product detail photography, Canon 100mm macro lens, f/11, dual-point studio lighting for even illumination with minimal shadows:
+            <span class="tag lifestyle">Lifestyle</span>
+            <h3>Hotel Pool Bar Installation</h3>
+            <p class="use-case">Use for: B2B hospitality marketing, commercial pages</p>
+            <div class="prompt-text">Commercial hospitality photography, 35mm lens, late afternoon Mediterranean light:
 
-Subject: Outdoor TV enclosure with access door open 90 degrees
-- Door position: Hinged from left side, held open by stainless steel gas strut (visible at top-left), magnetic catch engaged
-- Door construction: Aluminum frame with laminated glass panel, full-perimeter EPDM gasket seal visible (black rubber, D-profile, continuous bead)
-- Interior visible:
-  * Samsung 75" QLED TV mounted inside (silver Samsung logo visible on bottom bezel)
-  * TV mounted on steel VESA bracket, slotted adjustment holes visible
-  * 20mm air gap visible between TV edges and enclosure walls
-  * Matte black painted interior surfaces
-  * Two cable pass-throughs with rubber grommets at bottom
-  * QR code sticker for product registration on interior wall
+Setting: 5-star resort pool bar, Dubai or Abu Dhabi
+- Location: Covered cabana structure beside resort pool
+- Architecture: Modern resort style, white fabric shade structure, teak decking
 
-Hardware details in focus:
-- Gas strut: Polished stainless steel cylinder, black end fittings, 250N rating visible on label
-- Cam lock: Open position showing latch mechanism, brushed steel face with quarter-turn slot
-- Hinge: Three-knuckle concealed hinge, stainless steel, precision engineering visible
+Multiple TV installation (commercial application):
+- Two Apex enclosures mounted side by side on rear wall
+- Each showing different content (sports, resort info)
+- Clean flush-front appearance - both look like premium framed displays
+- Wide 80mm bezels give substantial, quality appearance
+- Matte black frames complement resort aesthetic
 
-Camera angle: Slightly below center looking up into open cabinet at 20-degree angle
-Background: Neutral gray studio backdrop
-Style reference: IKEA assembly manual photography, Bosch appliance product shots
-Output: 8K, tack-sharp focus on gasket seal and hardware, shallow depth of field on TV screen</div>
-            <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
-        </div>
+Resort environment:
+- Pool loungers with white cushions in foreground
+- Guests relaxed (soft focus, not main subject)
+- Poolside bar visible
+- Late afternoon sun, blue sky
 
-        <div class="prompt-card">
-            <span class="tag technical">Technical</span>
-            <h3>Rear View - Documentation</h3>
-            <p class="use-case">Use for: Spec sheets, installation manuals, technical docs</p>
-            <div class="prompt-text">Technical product photography, overhead studio lighting, flat even illumination, minimal shadows, orthographic perspective:
-
-Subject: Rear panel view of outdoor TV enclosure
-- Overall: Rectangular matte black aluminum panel, 1760mm × 1040mm, visible sheet metal construction with folded edges
-- Surface: Fine powder coat texture, slight orange-peel pattern typical of industrial coating
-
-Component layout (top to bottom) - CLEAN SEALED REAR:
-- Upper section: CLEAN - no fans! (all airflow is on front bezel in v3.0 design)
-- Center-left: Product label plate (silver aluminum, laser-etched text showing model ATE-75-FB, serial number, IP66 rating, CE mark)
-- Center: Universal VESA mounting plate (400×400mm steel plate with multiple hole patterns, silver zinc plating)
-- Cable entry points: Three IP66-rated compression glands (black nylon, 20mm diameter) positioned bottom-left
-- Entire rear panel is SEALED - can be mounted flat against wall or into recess
-- Mounting: Four keyhole slots for wall mounting, one at each corner, reinforced with backing plates
-
-DESIGN NOTE: Front-Breathing v3.0 moves all ventilation to front bezel (intake bottom, exhaust top). This enables wall-mount, recessed, and flush installations.
-
-Technical callouts desired: Dimension arrows, component labels
-Camera angle: Perfectly perpendicular to rear surface, zero perspective distortion
-Background: Pure white (#FFFFFF)
-Style reference: Technical product manual illustrations, engineering documentation photography
-Output: 8K, flat lighting, maximum detail visibility, suitable for specification sheets</div>
+Mood: Premium hospitality, leisure, luxury travel
+Style: Four Seasons marketing quality
+Output: 8K photorealistic, vibrant natural colors</div>
             <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
         </div>
 
         <div class="prompt-card">
             <span class="tag lifestyle">Lifestyle</span>
             <h3>Outdoor Kitchen Installation</h3>
-            <p class="use-case">Use for: Website gallery, social media, partner materials</p>
-            <div class="prompt-text">Lifestyle architectural photography, Phase One IQ4, 35mm lens, f/8, mixed ambient and flash fill lighting, HDR capture:
+            <p class="use-case">Use for: Residential marketing, contractor materials</p>
+            <div class="prompt-text">Lifestyle architectural photography, evening setting:
 
-Setting: Luxury villa outdoor kitchen and entertainment pavilion, evening
-- Structure: Covered outdoor kitchen with exposed timber beam ceiling, stone column supports
-- Kitchen: Built-in stainless steel BBQ, granite countertops (absolute black), outdoor sink, bar seating
+Setting: Luxury villa outdoor kitchen pavilion
+- Covered outdoor kitchen with exposed timber beams
+- Built-in stainless steel BBQ, granite countertops
+- Linear gas fireplace below TV position
 
-Focal point: TV enclosure installation
-- Position: Mounted on stone-clad chimney breast above linear gas fireplace (flames visible)
-- Height: Center of screen at 1.6m from floor (comfortable standing viewing height)
-- Display: 75" TV showing nature documentary with vibrant colors (coral reef scene)
-- Enclosure appearance: Matte black frame contrasting with light gray stone, glass reflecting fireplace flames subtly
+Focal point: Apex enclosure above fireplace
+- Mounted on stone-clad chimney breast
+- TV displaying nature documentary through tinted glass
+- Clean picture-frame appearance with wide bezels
+- Matte black frame contrasts beautifully with light gray stone
+- Glass subtly reflecting fireplace flames
 
-Environmental context:
-- Time: Blue hour (just after sunset, deep blue sky visible)
-- Lighting: Warm under-counter LED strips, pendant lights over bar, fireplace glow, TV screen illumination
-- Furniture: Four leather and chrome bar stools, outdoor dining table set for dinner
-- Accessories: Wine glasses, serving platters suggesting entertaining
-- Landscaping: Olive trees in large terracotta pots, lavender borders, string lights in background
-- Weather indication: Clear sky, perhaps single star visible, warm evening atmosphere
+Environment:
+- Time: Blue hour (just after sunset)
+- Warm under-counter LED lighting
+- Outdoor dining table set for dinner
+- Wine glasses, suggesting entertaining
 
-Mood: Sophisticated outdoor entertaining, luxury lifestyle, warm hospitality
-Style reference: Luxury home builder marketing materials, Houzz featured photos
-Output: 8K photorealistic, warm color grading (slightly orange shadows, blue highlights), magazine-quality composition</div>
+Mood: Sophisticated outdoor entertaining
+Style: Luxury home builder marketing
+Output: 8K photorealistic, warm color grading</div>
+            <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <h2>Detail & Technical Prompts</h2>
+
+        <div class="prompt-card">
+            <span class="tag detail">Detail Shot</span>
+            <h3>Bezel Ventilation Close-up</h3>
+            <p class="use-case">Use for: Explaining the integrated bezel design, technical marketing</p>
+            <div class="prompt-text">Macro product photography showing ventilation detail:
+
+SUBJECT: Close-up of top bezel corner showing integrated ventilation
+
+WHAT TO SHOW:
+- Corner section of enclosure (top-right area)
+- 80mm top bezel in profile
+- RECESSED ventilation slots visible
+- Slots are 30-40mm BEHIND the bezel face
+- The bezel edge creates an overhang/shield
+- You're looking INTO the bezel gap to see the slots
+
+KEY DETAIL:
+- Multiple horizontal slots (3-4mm wide each)
+- Slots run horizontally across the bezel
+- Matte black finish throughout
+- The recession creates shadow depth
+- This design blocks water while allowing airflow
+
+ALSO VISIBLE:
+- Top surface of enclosure (flat, clean)
+- Small portion of front glass panel
+- Quality of powder coat finish
+- Precision of aluminum fabrication
+
+CAMERA:
+- Macro/close-up angle
+- Shows the DEPTH of the recessed slots
+- Approximately 45-degree angle to show both front and top
+
+LIGHTING: Studio lighting to show depth and shadow in the slot recess
+BACKGROUND: Shallow depth of field, neutral
+OUTPUT: 8K, showing premium build quality</div>
             <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
         </div>
 
         <div class="prompt-card">
             <span class="tag detail">Detail Shot</span>
-            <h3>Weather Resistance Macro</h3>
-            <p class="use-case">Use for: IP66 certification pages, quality messaging</p>
-            <div class="prompt-text">Extreme macro product photography, 1:1 magnification, focus stacking (12 images), ring light with diffusion:
+            <h3>Service Door Open</h3>
+            <p class="use-case">Use for: Installation guides, service documentation</p>
+            <div class="prompt-text">Product detail photography showing service access:
 
-Subject: Corner detail showing weatherproof construction
-- Primary focus: Junction of aluminum frame, glass panel, and EPDM gasket seal
-- Frame detail: Matte black powder coat surface texture at 10x magnification, showing fine particulate texture, no visible scratches or imperfections
-- Glass edge: 6mm laminated glass cross-section visible, showing two 3mm glass layers with 2mm PVB interlayer (slight green tint), polished edge
-- Gasket: Black EPDM rubber seal in compression, D-profile cross-section (12mm × 15mm), showing material density and compression against glass
+SUBJECT: Bottom of enclosure with service door open
 
-Weather demonstration:
-- Water droplets: Multiple water beads on powder coat surface, perfect spherical shape demonstrating hydrophobic properties
-- Droplet sizes: Varying from 2mm to 8mm diameter
-- Contact angle: Visible 90+ degree contact angle showing water beading, not sheeting
+WHAT TO SHOW:
+- Service door (full width of bottom bezel) hinged open
+- Door held at 90 degrees by gas struts
+- Interior access visible
 
-Additional visible details:
-- Frame corner: Welded and ground smooth, no visible seam
-- Mounting screw: Black oxide stainless steel hex head, seated flush
-- Dust: None visible (demonstrating IP66 dust-tight rating)
+SERVICE DOOR DETAILS:
+- 1650mm wide x 80mm tall panel
+- 316 stainless steel piano hinge along bottom edge
+- 4x compression latches (open position)
+- EPDM gasket seal visible around door perimeter
+- 2x gas struts supporting door (100N each)
 
-Background: Extreme shallow depth of field, neutral gray blur
-Style reference: Scientific material photography, IP rating test documentation imagery
-Output: 8K, extreme sharpness, laboratory photography quality, suitable for technical marketing</div>
-            <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
-        </div>
+INTERIOR VISIBLE THROUGH OPENING:
+- Filter drawer slot
+- Cable routing area
+- Bottom edge of diffuser plate above
+- Clean matte black interior surfaces
 
-        <h2>Additional Angles</h2>
+ENCLOSURE CONTEXT:
+- Shows this is the bottom bezel of the full unit
+- Glass panel and frame visible above
+- Wall mounting context if possible
 
-        <div class="prompt-card">
-            <span class="tag hero">Hero Shot</span>
-            <h3>Front View - Straight On</h3>
-            <p class="use-case">Use for: Size comparison charts, dimension diagrams</p>
-            <div class="prompt-text">Commercial product photography, medium format camera, 80mm lens, f/11, perfectly flat studio lighting:
-
-Subject: Outdoor TV enclosure - direct front view (TV-LIKE PROFILE)
-- Orientation: Perfectly centered, level, no perspective distortion
-- Dimensions visible: 1760mm width × 1040mm height, slim 115mm profile evident from frame shadow
-- Frame: 20mm slim matte black aluminum bezel on all sides, like a premium TV
-- Glass: Large rectangular panel filling frame, slight reflection of softbox visible, dark tint
-- Screen area: TV visible through glass, displaying solid gradient (purple to blue) to show color accuracy
-- Top edge: COMPLETELY CLEAN - no vents visible (all ventilation on rear)
-- Corners: Subtle reinforced corners, symmetrical
-
-Composition: Centered in frame with equal margins, approximately 10% padding on all sides
-Background: Pure white seamless backdrop
-Lighting: Large overhead softbox, no harsh shadows, even illumination
-Style reference: Samsung TV product shots, LG OLED marketing images
-Output: 8K, perfectly sharp, suitable for overlay graphics and dimension annotations</div>
+CAMERA: Low angle looking up at open door
+LIGHTING: Even illumination showing interior detail
+OUTPUT: 8K technical documentation quality</div>
             <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
         </div>
 
         <div class="prompt-card">
-            <span class="tag lifestyle">Lifestyle</span>
-            <h3>Beach Club / Hotel Pool</h3>
-            <p class="use-case">Use for: B2B hospitality marketing, commercial pages</p>
-            <div class="prompt-text">Commercial hospitality photography, Sony A1, 35mm lens, f/4, late afternoon Mediterranean light:
+            <span class="tag technical">Technical</span>
+            <h3>Front View - Orthographic</h3>
+            <p class="use-case">Use for: Dimension diagrams, size comparison</p>
+            <div class="prompt-text">Technical product photography, orthographic front view:
 
-Setting: 5-star resort beach club, Dubai or Abu Dhabi
-- Location: Covered cabana/pergola structure beside resort pool
-- Architecture: Modern resort style, white fabric tensile shade structure, teak decking, stainless steel and rope railings
+SUBJECT: Apex ATE-75 enclosure - direct front view
 
-Multiple TV installation (showing commercial application):
-- Configuration: Two outdoor TV enclosures mounted side by side on rear wall of cabana
-- Each unit: Matte black frame, 75-inch, one showing live sports (football match), one showing resort promotional content
-- Mounting: Flush to wall, approximately 2 meters from ground
+DIMENSIONS TO CONVEY:
+- 1760mm width (very wide, landscape)
+- 1120mm height
+- 80mm top bezel, 80mm bottom bezel
+- 40mm side bezels
 
-Resort environment:
-- Pool: Large resort pool in foreground, sun loungers with white cushions and umbrellas
-- Guests: Silhouettes of 2-3 people relaxed on loungers (not main focus, soft focus)
-- Staff: Waiter in background carrying drinks tray
-- Amenities: Poolside bar visible, towel station, tropical plantings
-- Sky: Clear blue with wispy clouds, late afternoon sun position
-- Water: Turquoise pool water with light reflections
+APPEARANCE:
+- Perfectly centered, level, no perspective
+- Matte black aluminum frame
+- Dark tinted glass panel
+- TV visible through glass showing gradient or test pattern
+- Top bezel: Subtle shadow where recessed slots are
+- Bottom bezel: Subtle shadow where recessed slots are
+- 4 compression latches visible on bottom bezel
+- Clean "picture frame" overall appearance
 
-Branding opportunity: Small "Apex Enclosures" logo visible on enclosure corner
-Mood: Premium hospitality, leisure, luxury travel
-Style reference: Four Seasons hotel marketing, Marriott Bonvoy campaign imagery
-Output: 8K photorealistic, vibrant but natural colors, hospitality marketing quality</div>
-            <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
-        </div>
-
-        <div class="prompt-card">
-            <span class="tag detail">Detail Shot</span>
-            <h3>Rear Exhaust System Close-up</h3>
-            <p class="use-case">Use for: Technical specs, thermal management messaging</p>
-            <div class="prompt-text">Technical product macro photography, 60mm macro lens, f/8, controlled studio lighting with rim light:
-
-Subject: Rear exhaust fan system detail (TV-LIKE PROFILE - all vents on rear)
-- Focus area: Two of the four 80mm exhaust fans on enclosure rear panel
-- Fan construction: Circular opening (80mm diameter), protective wire mesh (1mm stainless steel wire, 8mm grid), powder-coated frame ring
-- Mesh detail: Hexagonal pattern, visible fan blades behind, IP66 rain cowl with 40mm overhang above
-- Surface context: Matte black powder-coated aluminum rear panel, subtle texture visible
-
-Airflow indication:
-- Heat shimmer: Very subtle heat distortion exiting from rear (if possible to render)
-- Or alternative: Thin wisps of vapor/steam exiting to show active cooling
-
-Surrounding details:
-- Adjacent fan: Second 80mm fan grille visible but slightly soft focus
-- Label plate: Product sticker partially visible
-- VESA mount: Portion of mounting plate visible in background
-
-Lighting: Key light from upper left, rim light from behind to highlight grille edges
-Background: Shallow depth of field fading to neutral gray
-Style reference: Computer cooling product photography, Noctua fan marketing
-Output: 8K, sharp focus on primary fan, demonstrating thermal engineering quality (~100 CFM total cooling capacity)</div>
+CAMERA: Perfectly perpendicular, zero distortion
+BACKGROUND: Pure white
+LIGHTING: Flat, even, no shadows
+OUTPUT: 8K, suitable for dimension overlays</div>
             <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
         </div>
 
