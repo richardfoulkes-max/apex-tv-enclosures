@@ -14,34 +14,18 @@
             background: #f8fafc;
         }
 
-        .doc-nav {
-            background: linear-gradient(135deg, #0d9488 0%, #0a7169 100%);
-            padding: 1rem 2rem;
-        }
-        .doc-nav h3 {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 0.75rem;
-        }
-        .doc-nav-grid { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-        .doc-nav .doc-card {
-            background: rgba(255,255,255,0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            text-decoration: none;
-            color: white;
-            border: 1px solid rgba(255,255,255,0.2);
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        .doc-nav .doc-card:hover { background: rgba(255,255,255,0.2); }
-        .doc-nav .doc-card.active { background: white; color: #0d9488; }
+        .main-container { margin-left: 240px; padding: 2rem; max-width: 1400px; }
+        @media (max-width: 768px) { .main-container { margin-left: 0; padding: 1rem; padding-top: 60px; } }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        h1 { color: #0d9488; font-size: 28pt; margin-bottom: 0.5rem; }
-        .subtitle { color: #64748b; font-size: 14pt; margin-bottom: 2rem; }
+        .page-header {
+            background: linear-gradient(135deg, #0d9488, #0f766e);
+            color: white;
+            padding: 1.25rem 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+        }
+        @media (max-width: 768px) { .page-header { display: none; } }
+        .page-header h1 { font-size: 1.5rem; font-weight: 600; color: white; margin-bottom: 0.25rem; }
+        .page-header p { opacity: 0.9; font-size: 0.9rem; }
 
         h2 {
             color: #0d9488;
@@ -290,41 +274,11 @@
     </style>
 </head>
 <body>
-    <nav class="doc-nav">
-        <h3>Manufacturing Documentation</h3>
-        <div class="doc-nav-grid">
-            <a href="index.html" class="doc-card">Website</a>
-            <a href="specification.html" class="doc-card">Specification</a>
-            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
-            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
-            <a href="control-logic.html" class="doc-card">Control Logic</a>
-            <a href="qc-checklist.html" class="doc-card">QC Checklist</a>
-            <a href="market-research.html" class="doc-card">Market Research</a>
-            <a href="manufacturer-rfq.html" class="doc-card">RFQ Document</a>
-            <a href="project-tracker.html" class="doc-card">Project Tracker</a>
-            <a href="engineering-analysis.html" class="doc-card">Engineering Analysis</a>
-            <a href="testing-plan.html" class="doc-card">Testing Plan</a>
-            <a href="china-suppliers.html" class="doc-card">China Suppliers</a>
-            <a href="go-to-market.html" class="doc-card">Go-to-Market</a>
-            <a href="tv-compatibility.html" class="doc-card">TV Compatibility</a>
-            <a href="audio-noise-video.html" class="doc-card active">Audio &amp; Video</a>
-            <a href="designs.html" class="doc-card">Designs</a>
-            <a href="contractors.html" class="doc-card">Contractors</a>
-            <a href="compliance-guide.html" class="doc-card">Compliance Guide</a>
-            <a href="global-pricing.html" class="doc-card">Global Pricing</a>
-            <a href="financial-forecast.html" class="doc-card">Financial Forecast</a>
-            <a href="competitor-analysis.html" class="doc-card">Competitors</a>
-            <a href="legal-risk.html" class="doc-card">Legal Risk</a>
-            <a href="retail/index.html" class="doc-card">Retail</a>
-            <a href="partner/index.html" class="doc-card">Partner</a>
-            <a href="commercial/index.html" class="doc-card">Commercial</a>
-            <a href="partner-crm.html" class="doc-card">Partner CRM</a>
+    <div class="main-container">
+        <div class="page-header">
+            <h1>Audio, Noise & Video Strategy</h1>
+            <p>Fan noise analysis, outdoor audio solutions, and video marketing</p>
         </div>
-    </nav>
-
-    <div class="container">
-        <h1>Audio, Noise & Video Strategy</h1>
-        <p class="subtitle">Fan noise analysis, outdoor audio solutions, and video marketing for online sales</p>
 
         <!-- NOISE ANALYSIS -->
         <h2>Enclosure Noise Analysis</h2>

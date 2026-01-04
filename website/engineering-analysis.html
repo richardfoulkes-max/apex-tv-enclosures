@@ -8,6 +8,7 @@
     <style>
         :root {
             --primary: #0d9488;
+            --primary-dark: #0f766e;
             --text: #0f172a;
             --text-muted: #64748b;
             --bg: #ffffff;
@@ -19,12 +20,17 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        header { background: linear-gradient(135deg, #0d9488 0%, #0a7169 100%); color: white; padding: 3rem 2rem; }
-        header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-        header .subtitle { opacity: 0.9; }
-        header .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.85rem; margin-top: 1rem; margin-right: 0.5rem; }
-        header .badge.new { background: #fbbf24; color: #0f172a; }
+        .main-container { margin-left: 240px; padding: 2rem; max-width: 1400px; }
+        @media (max-width: 768px) { .main-container { margin-left: 0; padding: 1rem; padding-top: 60px; } }
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.25rem 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+        }
+        @media (max-width: 768px) { .page-header { display: none; } }
+        .page-header h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .page-header p { opacity: 0.9; font-size: 0.9rem; }
         h2 { color: var(--primary); font-size: 1.5rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--primary); }
         h3 { margin: 1.5rem 0 1rem; color: var(--text); }
         h4 { margin: 1rem 0 0.5rem; color: var(--text-muted); font-size: 0.95rem; }
@@ -67,31 +73,11 @@
     </style>
 </head>
 <body>
-    <nav class="doc-nav">
-        <h3>Manufacturing Documentation</h3>
-        <div class="doc-nav-grid">
-            <a href="index.html" class="doc-card">Website</a>
-            <a href="specification.html" class="doc-card">Specification</a>
-            <a href="designs.html" class="doc-card">Designs</a>
-            <a href="bom-detailed.html" class="doc-card">Bill of Materials</a>
-            <a href="wiring-diagram.html" class="doc-card">Wiring Diagram</a>
-            <a href="control-logic.html" class="doc-card">Control Logic</a>
-            <a href="engineering-analysis.html" class="doc-card active">Engineering Analysis</a>
-            <a href="testing-plan.html" class="doc-card">Testing Plan</a>
-        </div>
-    </nav>
-
-    <header>
-        <div class="container">
+    <div class="main-container">
+        <div class="page-header">
             <h1>Engineering Analysis v5.2.1</h1>
-            <div class="subtitle">Recess-Compatible Ducted Plenum | Wall-Mount + Recessed | 160mm Depth</div>
-            <div class="badge">Model: ATE-75</div>
-            <div class="badge new">VALIDATED: ChatGPT Pass for Prototype</div>
-            <div class="badge">December 2025</div>
+            <p>Recess-Compatible Ducted Plenum | Model ATE-75 | VALIDATED: Pass for Prototype</p>
         </div>
-    </header>
-
-    <div class="container">
         <!-- Design Evolution -->
         <div class="success-note">
             <strong>Design Evolution:</strong> The v5.2.1 recess-compatible design passed ChatGPT engineering validation (PASS FOR PROTOTYPE). Air enters through filtered bottom bezel intake, passes through perforated diffuser plate, flows through 30mm rear plenum behind TV (directly cooling heat sinks), then exhausts via 3× Delta AFB1412HH-A fans (210-250 CFM) through 45° deflector. Thermal margin 80-115% wall-mount, 30-50% recessed. Works both wall-mounted AND recessed (1820 × 1130 × 215mm cavity with 60mm top gap).
