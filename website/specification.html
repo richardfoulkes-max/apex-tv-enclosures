@@ -1205,29 +1205,27 @@
                     <rect x="180" y="200" width="30" height="100" fill="#64748b" stroke="#374151" stroke-width="1"/>
                     <text x="195" y="255" text-anchor="middle" font-size="7" fill="white" transform="rotate(-90, 195, 255)">VESA</text>
 
-                    <!-- Top exhaust fan -->
-                    <rect x="150" y="55" width="55" height="40" fill="#dcfce7" stroke="#16a34a" stroke-width="2" rx="4"/>
-                    <text x="177" y="75" text-anchor="middle" font-size="8" fill="#16a34a">Exhaust</text>
-                    <text x="177" y="87" text-anchor="middle" font-size="7" fill="#166534">140mm</text>
+                    <!-- Top exhaust - 3× fans in 80mm bezel -->
+                    <rect x="145" y="50" width="70" height="55" fill="#dcfce7" stroke="#16a34a" stroke-width="2" rx="4"/>
+                    <text x="180" y="68" text-anchor="middle" font-size="8" fill="#16a34a">3× Exhaust Fans</text>
+                    <text x="180" y="80" text-anchor="middle" font-size="7" fill="#166534">Delta 140mm PWM</text>
+                    <text x="180" y="92" text-anchor="middle" font-size="7" fill="#166534">165-195 CFM total</text>
 
-                    <!-- Rain cowl -->
-                    <path d="M145 50 L145 35 L215 35 L215 50" fill="none" stroke="#16a34a" stroke-width="2"/>
-                    <rect x="145" y="25" width="70" height="15" fill="#bbf7d0" stroke="#16a34a" stroke-width="1" rx="2"/>
-                    <text x="180" y="20" text-anchor="middle" font-size="8" fill="#16a34a">IP54 Rain Cowl</text>
+                    <!-- Recessed exhaust slots (no rain cowl) -->
+                    <rect x="145" y="25" width="70" height="25" fill="#bbf7d0" stroke="#16a34a" stroke-width="1" rx="2"/>
+                    <text x="180" y="42" text-anchor="middle" font-size="7" fill="#16a34a">Recessed Bezel Slots</text>
+                    <text x="180" y="15" text-anchor="middle" font-size="8" fill="#16a34a">80mm Top Bezel</text>
 
-                    <!-- Bottom intake fan -->
-                    <rect x="150" y="405" width="55" height="40" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="4"/>
-                    <text x="177" y="425" text-anchor="middle" font-size="8" fill="#2563eb">Intake</text>
-                    <text x="177" y="437" text-anchor="middle" font-size="7" fill="#1d4ed8">140mm</text>
+                    <!-- Bottom passive intake - NO FAN -->
+                    <rect x="145" y="395" width="70" height="55" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="4"/>
+                    <text x="180" y="413" text-anchor="middle" font-size="8" fill="#2563eb">Passive Intake</text>
+                    <text x="180" y="425" text-anchor="middle" font-size="7" fill="#1d4ed8">(No fans)</text>
+                    <text x="180" y="437" text-anchor="middle" font-size="7" fill="#1d4ed8">Negative pressure</text>
 
-                    <!-- Labyrinth grille -->
+                    <!-- Labyrinth grille + filter -->
                     <rect x="145" y="450" width="70" height="20" fill="#bfdbfe" stroke="#2563eb" stroke-width="1" rx="2"/>
                     <path d="M150 455 L150 465 L160 455 L160 465 L170 455 L170 465 L180 455 L180 465 L190 455 L190 465 L200 455 L200 465 L210 455" stroke="#2563eb" stroke-width="1" fill="none"/>
-                    <text x="180" y="480" text-anchor="middle" font-size="8" fill="#2563eb">IP54 Labyrinth Grille</text>
-
-                    <!-- Filter -->
-                    <rect x="145" y="395" width="70" height="10" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
-                    <text x="250" y="402" font-size="8" fill="#d97706">← Filter</text>
+                    <text x="180" y="480" text-anchor="middle" font-size="8" fill="#2563eb">IP55 Labyrinth + MERV 8 Filter</text>
 
                     <!-- Airflow arrows -->
                     <defs>
@@ -1282,25 +1280,25 @@
                         <text x="90" y="335" text-anchor="middle" font-size="9" fill="#1d4ed8">Coolest: Ambient</text>
                         <text x="90" y="348" text-anchor="middle" font-size="8" fill="#1d4ed8">Filtered air entry</text>
 
-                        <!-- Positive pressure note -->
-                        <rect x="10" y="365" width="160" height="30" fill="#f0fdf4" stroke="#059669" stroke-width="1" rx="4"/>
-                        <text x="90" y="378" text-anchor="middle" font-size="8" font-weight="600" fill="#059669">POSITIVE PRESSURE</text>
-                        <text x="90" y="390" text-anchor="middle" font-size="7" fill="#166534">Intake CFM > Exhaust CFM</text>
+                        <!-- Negative pressure note -->
+                        <rect x="10" y="365" width="160" height="30" fill="#dbeafe" stroke="#2563eb" stroke-width="1" rx="4"/>
+                        <text x="90" y="378" text-anchor="middle" font-size="8" font-weight="600" fill="#2563eb">NEGATIVE PRESSURE</text>
+                        <text x="90" y="390" text-anchor="middle" font-size="7" fill="#1d4ed8">Exhaust fans pull air through</text>
                     </g>
 
                     <!-- Component callouts on right -->
                     <g transform="translate(520, 50)">
                         <rect x="0" y="0" width="180" height="200" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" rx="4"/>
-                        <text x="90" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#374151">Airflow Design</text>
+                        <text x="90" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#374151">v5.3.0 Airflow Design</text>
 
-                        <text x="10" y="50" font-size="9" fill="#374151">• Bottom intake → Top exhaust</text>
-                        <text x="10" y="70" font-size="9" fill="#374151">• Natural convection assisted</text>
-                        <text x="10" y="90" font-size="9" fill="#374151">• Hot air rises to exhaust</text>
-                        <text x="10" y="110" font-size="9" fill="#374151">• Cool air drawn from bottom</text>
-                        <text x="10" y="130" font-size="9" fill="#374151">• Baffle directs across TV</text>
-                        <text x="10" y="150" font-size="9" fill="#374151">• No dead spots/hot pockets</text>
-                        <text x="10" y="175" font-size="9" font-weight="600" fill="#16a34a">• IP54 sealed intake/exhaust</text>
-                        <text x="10" y="192" font-size="9" font-weight="600" fill="#16a34a">• Rain cannot enter</text>
+                        <text x="10" y="50" font-size="9" fill="#374151">• 3× exhaust fans at TOP</text>
+                        <text x="10" y="70" font-size="9" fill="#374151">• Passive intake at BOTTOM</text>
+                        <text x="10" y="90" font-size="9" fill="#374151">• Negative pressure system</text>
+                        <text x="10" y="110" font-size="9" fill="#374151">• Hot air rises to exhaust</text>
+                        <text x="10" y="130" font-size="9" fill="#374151">• Cool air pulled from bottom</text>
+                        <text x="10" y="150" font-size="9" fill="#374151">• 165-195 CFM total flow</text>
+                        <text x="10" y="175" font-size="9" font-weight="600" fill="#16a34a">• IP55 recessed bezel slots</text>
+                        <text x="10" y="192" font-size="9" font-weight="600" fill="#16a34a">• Front exhaust (not into wall)</text>
                     </g>
 
                     <!-- Depth dimension -->
@@ -1313,7 +1311,7 @@
                     <text x="60" y="250" text-anchor="middle" font-size="10" fill="#374151">FRONT</text>
                     <text x="255" y="250" text-anchor="middle" font-size="10" fill="#374151">REAR</text>
                 </svg>
-                <div class="drawing-caption">Side cross-section showing vertical airflow path from bottom intake through TV zone to top exhaust. IP54 labyrinth grille at intake, rain cowl at exhaust.</div>
+                <div class="drawing-caption">Side cross-section showing v5.3.0 airflow: passive intake at bottom (no fans), 3× exhaust fans at top. Negative pressure pulls air through IP55 labyrinth grilles. Front exhaust via recessed bezel slots.</div>
             </div>
 
             <!-- NEW: Electronics Wiring Schematic -->
@@ -1571,22 +1569,26 @@
                     <text x="400" y="120" text-anchor="middle" font-size="9" fill="#dc2626">Hot Zone</text>
                     <text x="400" y="135" text-anchor="middle" font-size="9" fill="#dc2626">(PSU area)</text>
 
-                    <!-- Intake fans at bottom -->
-                    <g transform="translate(150, 320)">
-                        <rect x="0" y="0" width="60" height="60" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="4"/>
-                        <circle cx="30" cy="30" r="22" fill="none" stroke="#2563eb" stroke-width="2"/>
-                        <text x="30" y="75" text-anchor="middle" font-size="9" fill="#2563eb">Intake 1</text>
-                    </g>
-                    <g transform="translate(350, 320)">
-                        <rect x="0" y="0" width="60" height="60" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="4"/>
-                        <circle cx="30" cy="30" r="22" fill="none" stroke="#2563eb" stroke-width="2"/>
-                        <text x="30" y="75" text-anchor="middle" font-size="9" fill="#2563eb">Intake 2</text>
-                    </g>
+                    <!-- Passive intake at bottom (no fans) -->
+                    <rect x="150" y="340" width="300" height="50" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="4"/>
+                    <text x="300" y="360" text-anchor="middle" font-size="10" fill="#2563eb">Passive Intake (No Fans)</text>
+                    <text x="300" y="375" text-anchor="middle" font-size="8" fill="#1d4ed8">Negative pressure pulls air through labyrinth grilles</text>
 
-                    <!-- Exhaust fans at top -->
-                    <g transform="translate(250, 10)">
+                    <!-- 3× Exhaust fans at top -->
+                    <g transform="translate(130, 5)">
                         <rect x="0" y="0" width="60" height="40" fill="#dcfce7" stroke="#16a34a" stroke-width="2" rx="4"/>
-                        <text x="30" y="25" text-anchor="middle" font-size="9" fill="#16a34a">Exhaust</text>
+                        <circle cx="30" cy="20" r="15" fill="none" stroke="#16a34a" stroke-width="1"/>
+                        <text x="30" y="50" text-anchor="middle" font-size="8" fill="#16a34a">Fan 1</text>
+                    </g>
+                    <g transform="translate(270, 5)">
+                        <rect x="0" y="0" width="60" height="40" fill="#dcfce7" stroke="#16a34a" stroke-width="2" rx="4"/>
+                        <circle cx="30" cy="20" r="15" fill="none" stroke="#16a34a" stroke-width="1"/>
+                        <text x="30" y="50" text-anchor="middle" font-size="8" fill="#16a34a">Fan 2</text>
+                    </g>
+                    <g transform="translate(410, 5)">
+                        <rect x="0" y="0" width="60" height="40" fill="#dcfce7" stroke="#16a34a" stroke-width="2" rx="4"/>
+                        <circle cx="30" cy="20" r="15" fill="none" stroke="#16a34a" stroke-width="1"/>
+                        <text x="30" y="50" text-anchor="middle" font-size="8" fill="#16a34a">Fan 3</text>
                     </g>
 
                     <!-- Airflow arrows -->
@@ -1599,60 +1601,61 @@
                         </marker>
                     </defs>
 
-                    <!-- Intake arrows -->
-                    <path d="M180 380 L180 420 L180 450" stroke="#2563eb" stroke-width="3" fill="none" marker-end="url(#arrow-blue)" transform="rotate(180, 180, 415)"/>
-                    <path d="M380 380 L380 420 L380 450" stroke="#2563eb" stroke-width="3" fill="none" marker-end="url(#arrow-blue)" transform="rotate(180, 380, 415)"/>
+                    <!-- Intake arrow (passive - air pulled in) -->
+                    <path d="M300 420 L300 395" stroke="#2563eb" stroke-width="3" fill="none" marker-end="url(#arrow-blue)"/>
+                    <text x="300" y="440" text-anchor="middle" font-size="8" fill="#2563eb">Air pulled in by negative pressure</text>
 
                     <!-- Internal flow paths -->
-                    <path d="M180 310 C180 250, 280 200, 280 100" stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="6" marker-end="url(#arrow-green)"/>
-                    <path d="M380 310 C380 250, 320 200, 320 100" stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="6" marker-end="url(#arrow-green)"/>
+                    <path d="M200 330 C200 250, 160 150, 160 60" stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="6" marker-end="url(#arrow-green)"/>
+                    <path d="M300 330 C300 250, 300 150, 300 60" stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="6" marker-end="url(#arrow-green)"/>
+                    <path d="M400 330 C400 250, 440 150, 440 60" stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="6" marker-end="url(#arrow-green)"/>
 
-                    <!-- Exhaust arrow -->
-                    <path d="M280 50 L280 0" stroke="#16a34a" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
+                    <!-- Exhaust arrows (3 fans) -->
+                    <path d="M160 45 L160 0" stroke="#16a34a" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
+                    <path d="M300 45 L300 0" stroke="#16a34a" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
+                    <path d="M440 45 L440 0" stroke="#16a34a" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
 
-                    <!-- Baffle -->
+                    <!-- Baffle / Diffuser plate -->
                     <rect x="120" y="290" width="360" height="5" fill="#64748b"/>
-                    <text x="300" y="305" text-anchor="middle" font-size="9" fill="#64748b">Internal Baffle - Forces airflow across TV</text>
+                    <text x="300" y="305" text-anchor="middle" font-size="9" fill="#64748b">Perforated Diffuser Plate - Equalizes airflow</text>
 
                     <!-- Filter indication -->
-                    <rect x="140" y="380" width="80" height="15" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
-                    <rect x="340" y="380" width="80" height="15" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
-                    <text x="180" y="410" text-anchor="middle" font-size="8" fill="#d97706">Filter</text>
-                    <text x="380" y="410" text-anchor="middle" font-size="8" fill="#d97706">Filter</text>
+                    <rect x="180" y="395" width="240" height="10" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+                    <text x="300" y="410" text-anchor="middle" font-size="8" fill="#d97706">MERV 8 Filter (gasketed drawer)</text>
 
                     <!-- Legend -->
                     <g transform="translate(550, 80)">
                         <rect x="0" y="0" width="200" height="180" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" rx="4"/>
-                        <text x="100" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">Airflow Legend</text>
+                        <text x="100" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">v5.3.0 Airflow</text>
 
                         <rect x="15" y="40" width="20" height="20" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-                        <text x="45" y="55" font-size="10" fill="#1e293b">Filtered Intake</text>
+                        <text x="45" y="55" font-size="10" fill="#1e293b">Passive Intake</text>
 
                         <rect x="15" y="70" width="20" height="20" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
-                        <text x="45" y="85" font-size="10" fill="#1e293b">Exhaust (chimney)</text>
+                        <text x="45" y="85" font-size="10" fill="#1e293b">3× Exhaust Fans</text>
 
                         <line x1="15" y1="110" x2="35" y2="110" stroke="#3b82f6" stroke-width="2" stroke-dasharray="6"/>
                         <text x="45" y="115" font-size="10" fill="#1e293b">Airflow path</text>
 
                         <rect x="15" y="130" width="20" height="10" fill="#64748b"/>
-                        <text x="45" y="140" font-size="10" fill="#1e293b">Baffle</text>
+                        <text x="45" y="140" font-size="10" fill="#1e293b">Diffuser Plate</text>
 
                         <rect x="15" y="155" width="20" height="10" fill="#fef3c7" stroke="#d97706"/>
-                        <text x="45" y="165" font-size="10" fill="#1e293b">Replaceable Filter</text>
+                        <text x="45" y="165" font-size="10" fill="#1e293b">MERV 8 Filter</text>
                     </g>
 
                     <!-- Pressure indicator -->
                     <g transform="translate(550, 280)">
-                        <rect x="0" y="0" width="200" height="80" fill="#f0fdf4" stroke="#16a34a" stroke-width="1" rx="4"/>
-                        <text x="100" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">Positive Pressure</text>
-                        <text x="100" y="45" text-anchor="middle" font-size="10" fill="#166534">Intake CFM > Exhaust CFM</text>
-                        <text x="100" y="65" text-anchor="middle" font-size="10" fill="#166534">Dust cannot enter gaps</text>
+                        <rect x="0" y="0" width="200" height="80" fill="#dbeafe" stroke="#2563eb" stroke-width="1" rx="4"/>
+                        <text x="100" y="25" text-anchor="middle" font-size="11" font-weight="600" fill="#2563eb">Negative Pressure</text>
+                        <text x="100" y="45" text-anchor="middle" font-size="10" fill="#1d4ed8">Exhaust fans pull air through</text>
+                        <text x="100" y="65" text-anchor="middle" font-size="10" fill="#1d4ed8">165-195 CFM total flow</text>
                     </g>
                 </svg>
-                <div class="drawing-caption">Cross-section showing zoned airflow with positive pressure design. Airflow forced across TV hot zones.</div>
+                <div class="drawing-caption">v5.3.0 thermal design: 3× exhaust fans at top, passive intake at bottom. Negative pressure pulls air through IP55 labyrinth grilles and MERV 8 filter.</div>
             </div>
 
-            <h3>6.2 Fan Specification - Recess-Compatible Design (v5.2.1)</h3>
+            <h3>6.2 Fan Specification - v5.3.0 Integrated Bezel Design</h3>
             <table>
                 <tr>
                     <th>Parameter</th>

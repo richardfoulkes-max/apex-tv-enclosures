@@ -405,17 +405,10 @@
                 <rect x="260" y="200" width="180" height="120" fill="#cbd5e1" stroke="#475569" stroke-width="1" rx="4"/>
                 <text x="350" y="260" text-anchor="middle" font-size="9" fill="#475569">VESA 200-400</text>
 
-                <!-- Bottom intake area -->
+                <!-- Bottom PASSIVE intake area (no fans) -->
                 <rect x="60" y="380" width="580" height="50" fill="#dbeafe" stroke="#2563eb" stroke-width="1" stroke-dasharray="4" rx="4"/>
-                <text x="350" y="410" text-anchor="middle" font-size="9" fill="#2563eb">INTAKE ZONE - IP55 Labyrinth Grilles + Filters</text>
-
-                <!-- Intake Fan 1 -->
-                <circle cx="180" cy="405" r="40" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
-                <text x="180" y="408" text-anchor="middle" font-size="8" fill="#2563eb">Intake 1</text>
-
-                <!-- Intake Fan 2 -->
-                <circle cx="520" cy="405" r="40" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
-                <text x="520" y="408" text-anchor="middle" font-size="8" fill="#2563eb">Intake 2</text>
+                <text x="350" y="400" text-anchor="middle" font-size="9" fill="#2563eb">PASSIVE INTAKE - IP55 Labyrinth Grilles + MERV 8 Filter</text>
+                <text x="350" y="418" text-anchor="middle" font-size="8" fill="#1d4ed8">(No fans - negative pressure pulls air through)</text>
 
                 <!-- Electronics Zone - Left Side -->
                 <rect x="60" y="140" width="70" height="220" fill="#fef3c7" stroke="#d97706" stroke-width="1" rx="4"/>
@@ -495,7 +488,7 @@
             <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg">
                 <!-- Enclosure outline -->
                 <rect x="100" y="40" width="100" height="320" fill="#f8fafc" stroke="#374151" stroke-width="2" rx="4"/>
-                <text x="150" y="30" text-anchor="middle" font-size="9" fill="#374151">120mm Depth</text>
+                <text x="150" y="30" text-anchor="middle" font-size="9" fill="#374151">160mm Depth</text>
 
                 <!-- Wall -->
                 <rect x="210" y="40" width="15" height="320" fill="#9ca3af" stroke="#374151" stroke-width="1"/>
@@ -512,17 +505,19 @@
                 <rect x="115" y="90" width="50" height="200" fill="#1e293b" stroke="#0f172a" stroke-width="1" rx="2"/>
                 <text x="140" y="190" text-anchor="middle" font-size="8" fill="#94a3b8" transform="rotate(-90, 140, 190)">TV Display</text>
 
-                <!-- Top exhaust fan -->
-                <rect x="135" y="45" width="45" height="30" fill="#dcfce7" stroke="#16a34a" stroke-width="1" rx="4"/>
-                <text x="157" y="62" text-anchor="middle" font-size="7" fill="#16a34a">Exhaust</text>
+                <!-- Top exhaust - 3× fans -->
+                <rect x="125" y="45" width="65" height="35" fill="#dcfce7" stroke="#16a34a" stroke-width="1" rx="4"/>
+                <text x="157" y="60" text-anchor="middle" font-size="7" fill="#16a34a">3× Exhaust</text>
+                <text x="157" y="72" text-anchor="middle" font-size="6" fill="#166534">140mm PWM</text>
 
-                <!-- Rain cowl -->
-                <rect x="130" y="25" width="55" height="12" fill="#bbf7d0" stroke="#16a34a" stroke-width="1" rx="2"/>
-                <text x="157" y="18" text-anchor="middle" font-size="7" fill="#16a34a">IP55 Rain Cowl</text>
+                <!-- Recessed bezel slots (not rain cowl) -->
+                <rect x="120" y="25" width="75" height="15" fill="#bbf7d0" stroke="#16a34a" stroke-width="1" rx="2"/>
+                <text x="157" y="18" text-anchor="middle" font-size="6" fill="#16a34a">80mm Bezel - Recessed Slots</text>
 
-                <!-- Bottom intake fan -->
-                <rect x="135" y="325" width="45" height="30" fill="#dbeafe" stroke="#2563eb" stroke-width="1" rx="4"/>
-                <text x="157" y="342" text-anchor="middle" font-size="7" fill="#2563eb">Intake</text>
+                <!-- Bottom passive intake (no fan) -->
+                <rect x="125" y="315" width="65" height="40" fill="#dbeafe" stroke="#2563eb" stroke-width="1" rx="4"/>
+                <text x="157" y="332" text-anchor="middle" font-size="7" fill="#2563eb">Passive</text>
+                <text x="157" y="345" text-anchor="middle" font-size="6" fill="#1d4ed8">(no fans)</text>
 
                 <!-- Labyrinth grille -->
                 <rect x="130" y="360" width="55" height="15" fill="#bfdbfe" stroke="#2563eb" stroke-width="1" rx="2"/>
