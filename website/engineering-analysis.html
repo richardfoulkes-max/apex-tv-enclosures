@@ -26,7 +26,6 @@
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             padding: 1.25rem 2rem;
-            margin: -2rem -2rem 2rem -2rem;
         }
         @media (max-width: 768px) { .page-header { display: none; } }
         .page-header h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
@@ -73,11 +72,12 @@
     </style>
 </head>
 <body>
+    <div class="page-header">
+        <h1>Engineering Analysis v5.2.1</h1>
+        <p>Recess-Compatible Ducted Plenum | Model ATE-75 | VALIDATED: Pass for Prototype</p>
+    </div>
+
     <div class="main-container">
-        <div class="page-header">
-            <h1>Engineering Analysis v5.2.1</h1>
-            <p>Recess-Compatible Ducted Plenum | Model ATE-75 | VALIDATED: Pass for Prototype</p>
-        </div>
         <!-- Design Evolution -->
         <div class="success-note">
             <strong>Design Evolution:</strong> The v5.2.1 recess-compatible design passed ChatGPT engineering validation (PASS FOR PROTOTYPE). Air enters through filtered bottom bezel intake, passes through perforated diffuser plate, flows through 30mm rear plenum behind TV (directly cooling heat sinks), then exhausts via 3× Delta AFB1412HH-A fans (210-250 CFM) through 45° deflector. Thermal margin 80-115% wall-mount, 30-50% recessed. Works both wall-mounted AND recessed (1820 × 1130 × 215mm cavity with 60mm top gap).

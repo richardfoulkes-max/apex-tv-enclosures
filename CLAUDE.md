@@ -166,6 +166,28 @@ roundtable-ai/              ← Engineering validation briefs
 
 ## Recent Work History
 
+### Session: 2026-01-05 (Late) - Engineering Header Standardization
+
+**Standardized green gradient headers across all Engineering pages:**
+- User noted inconsistent headers: some green, some white, varying thicknesses
+- Updated 11 pages to use consistent teal gradient header pattern
+- CSS: `.page-header { background: linear-gradient(135deg, #0d9488, #0f766e); }`
+- Sidebar-aware: `.main-container { margin-left: 240px; padding: 2rem; }`
+- Mobile responsive: page headers hidden on small screens
+
+**Files updated:**
+- design-detailed.html (template - user approved)
+- designs.html, bom-detailed.html, ai-image-prompts.html
+- specification.html, engineering-analysis.html
+- control-logic.html, wiring-diagram.html, tv-compatibility.html
+- audio-noise-video.html, cavity-requirements.html (already had style)
+
+**Also removed redundant doc-nav sections** - now handled by nav.js sidebar
+
+**Commit:** `9bd8b70` - Standardize green gradient headers across all Engineering pages
+
+---
+
 ### Session: 2026-01-05 (Continued) - Cavity Requirements v5.3.0 Update
 
 **Updated cavity-requirements.html for v5.3.0 front exhaust:**
