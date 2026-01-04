@@ -82,58 +82,36 @@
         .preview-container {
             position: relative;
             width: 100%;
-            aspect-ratio: 16/10;
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             border-radius: 12px;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
+            min-height: 300px;
         }
 
-        .product-image-wrapper {
-            position: relative;
-            width: 90%;
-            max-width: 600px;
-        }
-
-        /* Base image (black frame) */
-        .product-base {
-            width: 100%;
+        #productCanvas {
+            max-width: 100%;
             height: auto;
-            display: block;
         }
 
-        /* Color overlay layer */
-        .color-overlay {
+        .loading-overlay {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: transparent;
-            mix-blend-mode: color;
-            pointer-events: none;
-            transition: background-color 0.3s ease;
+            right: 0;
+            bottom: 0;
+            background: rgba(255,255,255,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #64748b;
         }
 
-        /* Luminosity layer to preserve shadows */
-        .luminosity-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            mix-blend-mode: luminosity;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .luminosity-layer img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+        .loading-overlay.hidden {
+            display: none;
         }
 
         .preview-label {
@@ -217,6 +195,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.2s;
+            z-index: 10;
         }
 
         .swatch:hover .tooltip {
@@ -408,13 +387,8 @@
                 </div>
 
                 <div class="preview-container">
-                    <div class="product-image-wrapper">
-                        <img src="images/ate-75-v530-front.png" alt="Apex TV Enclosure" class="product-base" id="productImage">
-                        <div class="color-overlay" id="colorOverlay"></div>
-                        <div class="luminosity-layer" id="luminosityLayer">
-                            <img src="images/ate-75-v530-front.png" alt="">
-                        </div>
-                    </div>
+                    <canvas id="productCanvas"></canvas>
+                    <div class="loading-overlay" id="loadingOverlay">Loading...</div>
                 </div>
 
                 <div class="preview-label">
@@ -501,6 +475,93 @@
 
         let currentColor = colors.standard[0];
         let currentTier = 'standard';
+        let originalImageData = null;
+        let canvas, ctx;
+
+        // Initialize
+        async function init() {
+            canvas = document.getElementById('productCanvas');
+            ctx = canvas.getContext('2d');
+
+            await loadBaseImage();
+            initSwatches();
+        }
+
+        // Load the base black image
+        async function loadBaseImage() {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                img.onload = function() {
+                    // Set canvas size to match image
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+
+                    // Draw original image
+                    ctx.drawImage(img, 0, 0);
+
+                    // Store original pixel data
+                    originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+                    // Hide loading
+                    document.getElementById('loadingOverlay').classList.add('hidden');
+
+                    resolve();
+                };
+                img.onerror = reject;
+                img.src = 'images/ate-75-v530-front.png';
+            });
+        }
+
+        // Apply color to frame only
+        function applyFrameColor(hex) {
+            if (!originalImageData) return;
+
+            const targetColor = hexToRgb(hex);
+            const imageData = new ImageData(
+                new Uint8ClampedArray(originalImageData.data),
+                originalImageData.width,
+                originalImageData.height
+            );
+            const data = imageData.data;
+
+            // Process each pixel
+            for (let i = 0; i < data.length; i += 4) {
+                const r = data[i];
+                const g = data[i + 1];
+                const b = data[i + 2];
+                const a = data[i + 3];
+
+                // Skip transparent pixels
+                if (a < 10) continue;
+
+                // Calculate luminance
+                const luminance = (r * 0.299 + g * 0.587 + b * 0.114);
+
+                // Detect frame pixels:
+                // - Frame is dark (luminance < 80)
+                // - But not pure black background (luminance > 5)
+                // - And not the glass area (which has more variation)
+                const isFrame = luminance < 100 && luminance > 3;
+
+                // Also check if it's close to grey (frame has low saturation)
+                const max = Math.max(r, g, b);
+                const min = Math.min(r, g, b);
+                const saturation = max === 0 ? 0 : (max - min) / max;
+                const isLowSaturation = saturation < 0.3;
+
+                if (isFrame && isLowSaturation) {
+                    // Apply new color while preserving luminance
+                    const factor = luminance / 128; // Normalize around middle grey
+
+                    data[i] = Math.min(255, targetColor.r * factor);
+                    data[i + 1] = Math.min(255, targetColor.g * factor);
+                    data[i + 2] = Math.min(255, targetColor.b * factor);
+                }
+            }
+
+            ctx.putImageData(imageData, 0, 0);
+        }
 
         // Initialize swatches
         function initSwatches() {
@@ -551,8 +612,13 @@
             currentColor = color;
             currentTier = tier;
 
-            // Apply color overlay
-            applyColorOverlay(color.hex);
+            // Apply color to frame
+            if (color.hex === '#0A0A0A' || color.hex === '#000000') {
+                // Reset to original for black
+                ctx.putImageData(originalImageData, 0, 0);
+            } else {
+                applyFrameColor(color.hex);
+            }
 
             // Update UI
             document.getElementById('colorName').textContent = color.name;
@@ -563,29 +629,6 @@
 
             // Update price
             updatePrice(tier);
-        }
-
-        function applyColorOverlay(hex) {
-            const overlay = document.getElementById('colorOverlay');
-            const luminosity = document.getElementById('luminosityLayer');
-
-            // For black, remove overlay
-            if (hex === '#0A0A0A' || hex === '#000000') {
-                overlay.style.background = 'transparent';
-                luminosity.style.opacity = '0';
-                return;
-            }
-
-            // Apply color with blend mode
-            overlay.style.background = hex;
-
-            // For light colors, add luminosity layer to preserve detail
-            const brightness = getBrightness(hex);
-            if (brightness > 150) {
-                luminosity.style.opacity = '0.3';
-            } else {
-                luminosity.style.opacity = '0.15';
-            }
         }
 
         function getBrightness(hex) {
@@ -651,7 +694,7 @@
             currentColor = customColor;
             currentTier = 'custom';
 
-            applyColorOverlay(hex);
+            applyFrameColor(hex);
 
             document.getElementById('colorName').textContent = 'Custom Color';
             document.getElementById('ralCode').textContent = hex.toUpperCase();
@@ -679,8 +722,8 @@
             window.location.href = url;
         }
 
-        // Initialize
-        initSwatches();
+        // Initialize on load
+        init();
     </script>
 
     <script src="nav.js"></script>
