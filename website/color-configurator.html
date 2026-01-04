@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Configurator - Apex TV Enclosures</title>
+    <style>
+        :root {
+            --primary: #0d9488;
+            --primary-dark: #0f766e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .main-container {
+            padding: 2rem;
+            max-width: 1400px;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+                padding-top: 60px;
+            }
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.25rem 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                display: none;
+            }
+        }
+
+        .page-header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .page-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .configurator {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 1024px) {
+            .configurator {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Product Preview */
+        .preview-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .preview-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        /* Base image (black frame) */
+        .product-base {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Color overlay layer */
+        .color-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            mix-blend-mode: color;
+            pointer-events: none;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Luminosity layer to preserve shadows */
+        .luminosity-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            mix-blend-mode: luminosity;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .luminosity-layer img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .preview-label {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .preview-label .color-name {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 1.1rem;
+        }
+
+        .preview-label .ral-code {
+            color: #94a3b8;
+        }
+
+        /* Control Panel */
+        .control-panel {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .panel-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .panel-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .panel-section h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #64748b;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Color Swatches */
+        .color-swatches {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+
+        .swatch {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .swatch:hover {
+            transform: scale(1.1);
+            z-index: 1;
+        }
+
+        .swatch.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px white, 0 0 0 4px var(--primary);
+        }
+
+        .swatch .tooltip {
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .swatch:hover .tooltip {
+            opacity: 1;
+        }
+
+        /* Tier Labels */
+        .tier-label {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .tier-label.standard {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .tier-label.premium {
+            background: #f3e8ff;
+            color: #7c3aed;
+        }
+
+        .tier-label.custom {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        /* Custom Color Picker */
+        .custom-picker {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin-top: 0.75rem;
+        }
+
+        .custom-picker input[type="color"] {
+            width: 50px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .custom-picker input[type="text"] {
+            flex: 1;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .custom-picker input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Price Display */
+        .price-display {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .price-display .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .price-display .price.premium {
+            color: #7c3aed;
+        }
+
+        .price-display .price.custom {
+            color: #f59e0b;
+        }
+
+        .price-display .label {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        /* Selected Color Info */
+        .selected-info {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .selected-swatch {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            flex-shrink: 0;
+        }
+
+        .selected-details h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .selected-details p {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Note */
+        .note {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            text-align: center;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* Model selector */
+        .model-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .model-btn {
+            flex: 1;
+            padding: 0.5rem;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .model-btn.active {
+            border-color: var(--primary);
+            background: #f0fdfa;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .model-btn:hover:not(.active) {
+            border-color: #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="page-header">
+            <h1>Color Configurator</h1>
+            <p>Visualize your Apex enclosure in different frame colors</p>
+        </div>
+
+        <div class="configurator">
+            <!-- Preview Section -->
+            <div class="preview-section">
+                <div class="model-selector">
+                    <button class="model-btn active" data-model="75">ATE-75 (75")</button>
+                    <button class="model-btn" data-model="65">ATE-65 (65")</button>
+                    <button class="model-btn" data-model="55">ATE-55 (55")</button>
+                </div>
+
+                <div class="preview-container">
+                    <div class="product-image-wrapper">
+                        <img src="images/ate-75-v530-front.png" alt="Apex TV Enclosure" class="product-base" id="productImage">
+                        <div class="color-overlay" id="colorOverlay"></div>
+                        <div class="luminosity-layer" id="luminosityLayer">
+                            <img src="images/ate-75-v530-front.png" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-label">
+                    <div class="color-name" id="colorName">Matte Black</div>
+                    <div class="ral-code" id="ralCode">RAL 9005</div>
+                </div>
+            </div>
+
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <div class="panel-section">
+                    <h3>Selected Color</h3>
+                    <div class="selected-info">
+                        <div class="selected-swatch" id="selectedSwatch" style="background: #0A0A0A;"></div>
+                        <div class="selected-details">
+                            <h4 id="selectedName">Matte Black</h4>
+                            <p id="selectedRal">RAL 9005 - Standard</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <span class="tier-label standard">Standard - Included</span>
+                    <div class="color-swatches" id="standardColors">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <span class="tier-label premium">Premium +$75</span>
+                    <div class="color-swatches" id="premiumColors">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <span class="tier-label custom">Custom RAL +$150</span>
+                    <div class="custom-picker">
+                        <input type="color" id="customColorPicker" value="#B5B0A1">
+                        <input type="text" id="customHex" placeholder="#RRGGBB" value="#B5B0A1">
+                    </div>
+                    <p style="font-size: 0.75rem; color: #94a3b8; margin-top: 0.5rem;">
+                        Pick any color or enter a hex code. We'll match to closest RAL.
+                    </p>
+                </div>
+
+                <div class="panel-section">
+                    <h3>Color Upcharge</h3>
+                    <div class="price-display">
+                        <div class="price" id="priceDisplay">Included</div>
+                        <div class="label" id="priceLabel">Standard color - no extra cost</div>
+                    </div>
+                </div>
+
+                <button class="cta-button" onclick="requestQuote()">
+                    Request Quote with This Color
+                </button>
+
+                <p class="note">
+                    Preview is approximate. Request a sample chip for exact color matching.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Color definitions
+        const colors = {
+            standard: [
+                { name: 'Matte Black', ral: 'RAL 9005', hex: '#0A0A0A', isDefault: true },
+                { name: 'Pebble Grey', ral: 'RAL 7032', hex: '#B5B0A1' }
+            ],
+            premium: [
+                { name: 'Light Ivory', ral: 'RAL 1015', hex: '#E6D2B5' },
+                { name: 'Oyster White', ral: 'RAL 1013', hex: '#D1CBC1' },
+                { name: 'Silk Grey', ral: 'RAL 7044', hex: '#BDBDB0' },
+                { name: 'Anthracite', ral: 'RAL 7016', hex: '#3A3D3F' },
+                { name: 'Bronze', ral: 'RAL 8019', hex: '#6B4423' },
+                { name: 'Signal White', ral: 'RAL 9003', hex: '#ECECE7' },
+                { name: 'Beige', ral: 'RAL 1001', hex: '#D0B084' },
+                { name: 'Grey Beige', ral: 'RAL 7006', hex: '#756F61' }
+            ]
+        };
+
+        let currentColor = colors.standard[0];
+        let currentTier = 'standard';
+
+        // Initialize swatches
+        function initSwatches() {
+            const standardContainer = document.getElementById('standardColors');
+            const premiumContainer = document.getElementById('premiumColors');
+
+            colors.standard.forEach(color => {
+                standardContainer.appendChild(createSwatch(color, 'standard'));
+            });
+
+            colors.premium.forEach(color => {
+                premiumContainer.appendChild(createSwatch(color, 'premium'));
+            });
+
+            // Set default active
+            document.querySelector('.swatch').classList.add('active');
+        }
+
+        function createSwatch(color, tier) {
+            const swatch = document.createElement('div');
+            swatch.className = 'swatch';
+            swatch.style.background = color.hex;
+            swatch.dataset.hex = color.hex;
+            swatch.dataset.name = color.name;
+            swatch.dataset.ral = color.ral;
+            swatch.dataset.tier = tier;
+
+            // Add border for light colors
+            const brightness = getBrightness(color.hex);
+            if (brightness > 200) {
+                swatch.style.border = '1px solid #e2e8f0';
+            }
+
+            const tooltip = document.createElement('span');
+            tooltip.className = 'tooltip';
+            tooltip.textContent = color.name;
+            swatch.appendChild(tooltip);
+
+            swatch.onclick = () => selectColor(color, tier, swatch);
+            return swatch;
+        }
+
+        function selectColor(color, tier, swatchElement) {
+            // Update active state
+            document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+            if (swatchElement) swatchElement.classList.add('active');
+
+            currentColor = color;
+            currentTier = tier;
+
+            // Apply color overlay
+            applyColorOverlay(color.hex);
+
+            // Update UI
+            document.getElementById('colorName').textContent = color.name;
+            document.getElementById('ralCode').textContent = color.ral;
+            document.getElementById('selectedSwatch').style.background = color.hex;
+            document.getElementById('selectedName').textContent = color.name;
+            document.getElementById('selectedRal').textContent = `${color.ral} - ${tier.charAt(0).toUpperCase() + tier.slice(1)}`;
+
+            // Update price
+            updatePrice(tier);
+        }
+
+        function applyColorOverlay(hex) {
+            const overlay = document.getElementById('colorOverlay');
+            const luminosity = document.getElementById('luminosityLayer');
+
+            // For black, remove overlay
+            if (hex === '#0A0A0A' || hex === '#000000') {
+                overlay.style.background = 'transparent';
+                luminosity.style.opacity = '0';
+                return;
+            }
+
+            // Apply color with blend mode
+            overlay.style.background = hex;
+
+            // For light colors, add luminosity layer to preserve detail
+            const brightness = getBrightness(hex);
+            if (brightness > 150) {
+                luminosity.style.opacity = '0.3';
+            } else {
+                luminosity.style.opacity = '0.15';
+            }
+        }
+
+        function getBrightness(hex) {
+            const rgb = hexToRgb(hex);
+            return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
+        }
+
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : { r: 0, g: 0, b: 0 };
+        }
+
+        function updatePrice(tier) {
+            const priceEl = document.getElementById('priceDisplay');
+            const labelEl = document.getElementById('priceLabel');
+
+            priceEl.className = 'price';
+
+            if (tier === 'standard') {
+                priceEl.textContent = 'Included';
+                labelEl.textContent = 'Standard color - no extra cost';
+            } else if (tier === 'premium') {
+                priceEl.textContent = '+$75';
+                priceEl.classList.add('premium');
+                labelEl.textContent = 'Premium color upcharge';
+            } else {
+                priceEl.textContent = '+$150';
+                priceEl.classList.add('custom');
+                labelEl.textContent = 'Custom RAL + 2 week lead time';
+            }
+        }
+
+        // Custom color picker
+        document.getElementById('customColorPicker').addEventListener('input', function(e) {
+            const hex = e.target.value;
+            document.getElementById('customHex').value = hex.toUpperCase();
+            applyCustomColor(hex);
+        });
+
+        document.getElementById('customHex').addEventListener('input', function(e) {
+            let hex = e.target.value;
+            if (!hex.startsWith('#')) hex = '#' + hex;
+            if (/^#[0-9A-Fa-f]{6}$/.test(hex)) {
+                document.getElementById('customColorPicker').value = hex;
+                applyCustomColor(hex);
+            }
+        });
+
+        function applyCustomColor(hex) {
+            // Deselect swatches
+            document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+
+            const customColor = {
+                name: 'Custom Color',
+                ral: 'Custom RAL',
+                hex: hex
+            };
+
+            currentColor = customColor;
+            currentTier = 'custom';
+
+            applyColorOverlay(hex);
+
+            document.getElementById('colorName').textContent = 'Custom Color';
+            document.getElementById('ralCode').textContent = hex.toUpperCase();
+            document.getElementById('selectedSwatch').style.background = hex;
+            document.getElementById('selectedName').textContent = 'Custom Color';
+            document.getElementById('selectedRal').textContent = `${hex.toUpperCase()} - Custom`;
+
+            updatePrice('custom');
+        }
+
+        // Model selector
+        document.querySelectorAll('.model-btn').forEach(btn => {
+            btn.onclick = function() {
+                document.querySelectorAll('.model-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                // In future: swap product image for different sizes
+            };
+        });
+
+        // Request quote
+        function requestQuote() {
+            const model = document.querySelector('.model-btn.active').dataset.model;
+            const colorInfo = `${currentColor.name} (${currentColor.ral})`;
+            const url = `quote-calculator.html?model=ATE-${model}&color=${encodeURIComponent(colorInfo)}`;
+            window.location.href = url;
+        }
+
+        // Initialize
+        initSwatches();
+    </script>
+
+    <script src="nav.js"></script>
+</body>
+</html>

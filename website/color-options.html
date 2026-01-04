@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Options - Apex TV Enclosures</title>
+    <style>
+        :root {
+            --primary: #0d9488;
+            --primary-dark: #0f766e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .main-container {
+            padding: 2rem;
+            max-width: 1400px;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+                padding-top: 60px;
+            }
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.25rem 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                display: none;
+            }
+        }
+
+        .page-header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .page-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .intro {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .intro h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .color-tiers {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .tier {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .tier h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .tier.standard h3 { border-color: var(--primary); }
+        .tier.premium h3 { border-color: #8b5cf6; }
+        .tier.custom h3 { border-color: #f59e0b; }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .color-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .color-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .color-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #f1f5f9;
+        }
+
+        .color-card .placeholder {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .color-info {
+            padding: 1rem;
+        }
+
+        .color-info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .color-info .ral {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .color-swatch {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .swatch {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .hex {
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .color-info .price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .color-info .price.premium {
+            color: #8b5cf6;
+        }
+
+        .color-info .description {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+        }
+
+        .render-status {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+
+        .render-status.has-render {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .render-status.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .prompts-section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .prompts-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .prompt-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .prompt-box .label {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="page-header">
+            <div>
+                <h1>Color Options</h1>
+                <p>ATE-75 v5.3.0 Frame Color Variants</p>
+            </div>
+        </div>
+
+        <div class="intro">
+            <h2>Frame Color Selection</h2>
+            <p>All Apex TV enclosures feature powder-coated 5052-H32 aluminum frames. Choose from standard colors (included), premium colors (+$75), or custom RAL matching (+$150, 2-week lead time).</p>
+        </div>
+
+        <div class="color-tiers">
+            <!-- Standard Colors -->
+            <div class="tier standard">
+                <h3>Standard Colors (Included)</h3>
+                <div class="color-grid">
+                    <div class="color-card">
+                        <img src="images/ate-75-v530-front.png" alt="Matte Black">
+                        <div class="color-info">
+                            <h4>Matte Black</h4>
+                            <p class="ral">RAL 9005</p>
+                            <div class="color-swatch">
+                                <span class="swatch" style="background: #0A0A0A;"></span>
+                                <span class="hex">#0A0A0A</span>
+                            </div>
+                            <p class="price">Included</p>
+                            <p class="description">Classic choice. Minimizes frame visibility, focuses attention on screen.</p>
+                            <span class="render-status has-render">Render Available</span>
+                        </div>
+                    </div>
+
+                    <div class="color-card">
+                        <img src="images/ate-75-v530-ral7032-grey.png" alt="Pebble Grey">
+                        <div class="color-info">
+                            <h4>Pebble Grey</h4>
+                            <p class="ral">RAL 7032</p>
+                            <div class="color-swatch">
+                                <span class="swatch" style="background: #B5B0A1;"></span>
+                                <span class="hex">#B5B0A1</span>
+                            </div>
+                            <p class="price">Included</p>
+                            <p class="description">Neutral stone tone. Works with both warm and cool exteriors. Popular for Gulf region.</p>
+                            <span class="render-status has-render">Render Available</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Premium Colors -->
+            <div class="tier premium">
+                <h3>Premium Colors (+$75 / +AED 275)</h3>
+                <div class="color-grid">
+                    <div class="color-card">
+                        <img src="images/ate-75-v530-ral1015-ivory.png" alt="Light Ivory">
+                        <div class="color-info">
+                            <h4>Light Ivory</h4>
+                            <p class="ral">RAL 1015</p>
+                            <div class="color-swatch">
+                                <span class="swatch" style="background: #E6D2B5;"></span>
+                                <span class="hex">#E6D2B5</span>
+                            </div>
+                            <p class="price premium">+$75</p>
+                            <p class="description">Warm sandstone beige. Perfect match for desert/Mediterranean villa exteriors.</p>
+                            <span class="render-status has-render">Render Available</span>
+                        </div>
+                    </div>
+
+                    <div class="color-card">
+                        <div class="placeholder" style="background: #D1CBC1;">
+                            <span>Render Pending</span>
+                        </div>
+                        <div class="color-info">
+                            <h4>Oyster White</h4>
+                            <p class="ral">RAL 1013</p>
+                            <div class="color-swatch">
+                                <span class="swatch" style="background: #D1CBC1;"></span>
+                                <span class="hex">#D1CBC1</span>
+                            </div>
+                            <p class="price premium">+$75</p>
+                            <p class="description">Off-white with warm undertones. Softer than pure white, less stark.</p>
+                            <span class="render-status pending">Render Pending</span>
+                        </div>
+                    </div>
+
+                    <div class="color-card">
+                        <div class="placeholder" style="background: #BDBDB0;">
+                            <span>Render Pending</span>
+                        </div>
+                        <div class="color-info">
+                            <h4>Silk Grey</h4>
+                            <p class="ral">RAL 7044</p>
+                            <div class="color-swatch">
+                                <span class="swatch" style="background: #BDBDB0;"></span>
+                                <span class="hex">#BDBDB0</span>
+                            </div>
+                            <p class="price premium">+$75</p>
+                            <p class="description">Warm grey-beige (greige). Modern, sophisticated neutral.</p>
+                            <span class="render-status pending">Render Pending</span>
+                        </div>
+                    </div>
+
+                    <div class="color-card">
+                        <div class="placeholder" style="background: #3A3D3F;">
+                            <span style="color: #999;">Render Pending</span>
+                        </div>
+                        <div class="color-info">
+                            <h4>Anthracite Grey</h4>
+                            <p class="ral">RAL 7016</p>
+                            <div class="color-swatch">
+                                <span class="swatch" style="background: #3A3D3F;"></span>
+                                <span class="hex">#3A3D3F</span>
+                            </div>
+                            <p class="price premium">+$75</p>
+                            <p class="description">Dark charcoal grey. Modern alternative to black, less dust-visible.</p>
+                            <span class="render-status pending">Render Pending</span>
+                        </div>
+                    </div>
+
+                    <div class="color-card">
+                        <div class="placeholder" style="background: #6B4423;">
+                            <span style="color: #ccc;">Render Pending</span>
+                        </div>
+                        <div class="color-info">
+                            <h4>Bronze</h4>
+                            <p class="ral">RAL 8019 (Grey Brown)</p>
+                            <div class="color-swatch">
+                                <span class="swatch" style="background: #6B4423;"></span>
+                                <span class="hex">#6B4423</span>
+                            </div>
+                            <p class="price premium">+$75</p>
+                            <p class="description">Warm bronze/brown. Matches bronze window frames common in Gulf villas.</p>
+                            <span class="render-status pending">Render Pending</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom RAL -->
+            <div class="tier custom">
+                <h3>Custom RAL (+$150 / +AED 550, 2-week lead time)</h3>
+                <div class="color-grid">
+                    <div class="color-card">
+                        <div class="placeholder" style="background: linear-gradient(135deg, #E6D2B5, #B5B0A1, #3A3D3F, #6B4423);">
+                            <span style="color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">Any RAL Color</span>
+                        </div>
+                        <div class="color-info">
+                            <h4>Custom RAL Match</h4>
+                            <p class="ral">Any RAL Classic color</p>
+                            <p class="price" style="color: #f59e0b;">+$150</p>
+                            <p class="description">Perfect match to existing architecture. Provide RAL code from window frames, facade, or design spec. 2-week additional lead time.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Generation Prompts -->
+        <div class="prompts-section">
+            <h3>AI Image Generation Prompts</h3>
+            <p style="margin-bottom: 1rem; color: #64748b;">Use with existing black render as reference image for recoloring:</p>
+
+            <div class="prompt-box">
+                <span class="label">RAL 1015</span>
+Recolor this outdoor TV enclosure from matte black to RAL 1015 Light Ivory (warm sandstone beige, hex #E6D2B5).
+
+Keep everything else EXACTLY the same:
+- Same angle, lighting, shadows
+- Same dark tinted glass panel
+- Same recessed ventilation slots in top/bottom bezels
+- Same proportions and details
+- Same white/grey studio background
+
+Only change the aluminum frame color from black to warm cream/ivory beige. The stainless steel latches should remain silver. The result should look like a premium product render for a luxury villa market.</div>
+
+            <div class="prompt-box">
+                <span class="label">RAL 7032</span>
+Recolor this outdoor TV enclosure from matte black to RAL 7032 Pebble Grey (warm stone grey, hex #B5B0A1).
+
+Keep everything else EXACTLY the same:
+- Same angle, lighting, shadows
+- Same dark tinted glass panel
+- Same recessed ventilation slots in top/bottom bezels
+- Same proportions and details
+- Same white/grey studio background
+
+Only change the aluminum frame color from black to warm pebble grey (neutral stone tone with slight warmth). The stainless steel latches should remain silver. The result should look like a premium product render for a luxury villa market.</div>
+        </div>
+    </div>
+
+    <script src="nav.js"></script>
+</body>
+</html>
