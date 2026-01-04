@@ -393,6 +393,16 @@
             .header, .page-header, header.header, body > header {
                 display: none !important;
             }
+            /* Reset margins that account for hidden fixed headers */
+            .main-container, .content, main {
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+            /* Fix full-height layouts */
+            body {
+                height: auto !important;
+                overflow: auto !important;
+            }
             .container {
                 padding: 1rem !important;
             }
