@@ -389,22 +389,9 @@
             }
             .apex-sidebar-overlay.open { display: block; }
 
-            /* Simplify page headers on mobile */
+            /* Hide page headers on mobile - nav bar provides context */
             .header, .page-header {
-                padding: 1rem !important;
-                flex-direction: column !important;
-                align-items: flex-start !important;
-                gap: 0.5rem !important;
-            }
-            .header h1, .page-header h1 {
-                font-size: 1.25rem !important;
-            }
-            .header-right, .header-actions {
                 display: none !important;
-            }
-            .header-left p, .page-header p {
-                font-size: 0.8rem !important;
-                margin-top: 0 !important;
             }
             .container {
                 padding: 1rem !important;
