@@ -92,7 +92,7 @@
                 { href: 'designs.html', label: 'Design Gallery' },
                 { href: 'color-configurator.html', label: 'Color Configurator' },
                 { href: 'ai-image-prompts.html', label: 'AI Image Prompts' },
-                { href: 'bom-detailed.html', label: 'Bill of Materials' },
+                { href: 'bom-detailed.html', label: 'BOM (Internal)' },
                 { href: 'engineering-analysis.html', label: 'Engineering Analysis' },
                 { href: 'control-logic.html', label: 'Control Logic' },
                 { href: 'wiring-diagram.html', label: 'Wiring Diagram' },
@@ -105,6 +105,7 @@
             label: 'Manufacturing',
             icon: '🏭',
             items: [
+                { href: 'bom-manufacturer.html', label: 'Component List' },
                 { href: 'testing-plan.html', label: 'Testing Plan' },
                 { href: 'qc-checklist.html', label: 'QC Checklist' },
                 { href: 'compliance-guide.html', label: 'Compliance Guide' },
