@@ -205,19 +205,6 @@
             margin-top: 4px;
         }
 
-        /* Pool Section (hidden by default) */
-        .pool-section {
-            display: none;
-        }
-        .pool-section.active {
-            display: block;
-        }
-        .tv-section {
-            display: block;
-        }
-        .tv-section.hidden {
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -235,17 +222,12 @@
     </header>
 
     <div class="container">
-        <!-- Product Selector -->
+        <!-- Product Header -->
         <div class="product-selector">
-            <div class="product-tab active" onclick="showProduct('tv')">
+            <div class="product-tab active">
                 <h3>📺 TV Enclosures</h3>
                 <p>ATE Series - Outdoor TV Protection</p>
-                <span class="version">v5.2.2 IP55</span>
-            </div>
-            <div class="product-tab" onclick="showProduct('pool')">
-                <h3>🏊 Pool Equipment</h3>
-                <p>APE Series - Pump & Filter Enclosures</p>
-                <span class="version">v1.0</span>
+                <span class="version">v5.3.0 IP55</span>
             </div>
         </div>
 
@@ -254,7 +236,7 @@
             <!-- Stats -->
             <div class="stats-row">
                 <div class="stat-card">
-                    <div class="value">v5.2.2</div>
+                    <div class="value">v5.3.0</div>
                     <div class="label">Design Version</div>
                 </div>
                 <div class="stat-card">
@@ -421,68 +403,7 @@
             </div>
         </div>
 
-        <!-- Pool Equipment Section -->
-        <div id="pool-section" class="pool-section">
-            <!-- Stats -->
-            <div class="stats-row">
-                <div class="stat-card">
-                    <div class="value">v1.0</div>
-                    <div class="label">Design Version</div>
-                </div>
-                <div class="stat-card">
-                    <div class="value">Modular</div>
-                    <div class="label">Architecture</div>
-                </div>
-                <div class="stat-card">
-                    <div class="value">70-80%</div>
-                    <div class="label">Noise Reduction</div>
-                </div>
-                <div class="stat-card">
-                    <div class="value">Passive</div>
-                    <div class="label">Ventilation</div>
-                </div>
-                <div class="stat-card">
-                    <div class="value">$148</div>
-                    <div class="label">BASE Cost</div>
-                </div>
-                <div class="stat-card">
-                    <div class="value">$318</div>
-                    <div class="label">Full System</div>
-                </div>
-            </div>
-
-            <!-- Pool Docs -->
-            <div class="section">
-                <div class="section-header">
-                    <h2>Pool Enclosure Documentation</h2>
-                </div>
-                <div class="link-grid">
-                    <a href="pool-specification.html" class="link-card">
-                        <div class="link-icon">📐</div>
-                        <div>
-                            <h4>APE Specification</h4>
-                            <p>Modular pool equipment enclosure spec</p>
-                        </div>
-                    </a>
-                    <a href="pool-designs.html" class="link-card">
-                        <div class="link-icon">✏️</div>
-                        <div>
-                            <h4>Technical Drawings</h4>
-                            <p>Cross-sections, modular configurations</p>
-                        </div>
-                    </a>
-                    <a href="pool-bom.html" class="link-card">
-                        <div class="link-icon">📦</div>
-                        <div>
-                            <h4>Bill of Materials</h4>
-                            <p>Components for BASE, extensions, chiller variant</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Legal Docs (shared) -->
+        <!-- Legal Docs -->
         <div class="section">
             <div class="section-header">
                 <h2>Legal Documents</h2>
@@ -520,25 +441,6 @@
         </div>
     </div>
 
-    <script>
-        function showProduct(product) {
-            const tvSection = document.getElementById('tv-section');
-            const poolSection = document.getElementById('pool-section');
-            const tabs = document.querySelectorAll('.product-tab');
-
-            tabs.forEach(tab => tab.classList.remove('active'));
-
-            if (product === 'tv') {
-                tvSection.classList.remove('hidden');
-                poolSection.classList.remove('active');
-                tabs[0].classList.add('active');
-            } else {
-                tvSection.classList.add('hidden');
-                poolSection.classList.add('active');
-                tabs[1].classList.add('active');
-            }
-        }
-    </script>
     <script src="nav.js"></script>
 </body>
 </html>
