@@ -206,6 +206,45 @@ nav.js injects: body { margin-left: 240px !important; }
 
 ## Recent Work History
 
+### Session: 2026-01-08 (PM) - APE-HC Product Line + Eurotech Factory Visit
+
+**Visited Eurotech Metal Industries - confirmed as manufacturing partner:**
+- Factory tour confirmed manufacturing quality exceeds Apex requirements by ~5x
+- 2000+ hour salt spray test (industry standard is 500-1000 hours)
+- ISO 9001/14001/45001 certified since 2005
+- Reference clients: Schneider Electric, Camfil
+
+**Created Eurotech Profile Page (`eurotech-profile.html`):**
+- Full documentation of manufacturing capabilities
+- Quality certifications and salt spray test results
+- All color options: standard, premium (+AED 75), custom RAL (+AED 150)
+- Added to navigation under Manufacturing > Eurotech (Partner)
+
+**Split Pool Enclosures into Two Product Lines:**
+- **APE-P (Pump Enclosure):** Sealed design, 70-80% noise reduction, acoustic foam
+- **APE-HC (Heater/Chiller):** Louvered design, 50-60% noise reduction, airflow focus
+
+**Created APE-HC Documentation:**
+- `pool-chiller-specification.html` - 10-section spec for louvered heater/chiller enclosures
+- `pool-chiller-designs.html` - 4 SVG technical drawings (side section, front view, top view, gas heater variant)
+- `pool-chiller-bom.html` - Component costing for 4 models:
+  - APE-HC-M (Medium): $185 BOM, AED 3,500-4,500 retail
+  - APE-HC-L (Large): $225 BOM, AED 4,500-5,500 retail
+  - APE-HC-G (Gas): $155 BOM, AED 3,000-4,000 retail
+  - APE-HC-XL (Extra Large): $285 BOM, AED 6,000-7,500 retail
+
+**Key Design Differences APE-P vs APE-HC:**
+| Feature | APE-P (Pump) | APE-HC (Heater/Chiller) |
+|---------|--------------|-------------------------|
+| Panel design | Sealed + acoustic foam | Louvered for airflow |
+| Noise reduction | 70-80% | 50-60% |
+| IP rating | IP55 | IP44 |
+| Ventilation | Passive convection | 50%+ open area (louvers) |
+
+**Commits:** `421fe2b` - Add APE-HC (Heater/Chiller) product line and Eurotech profile
+
+---
+
 ### Session: 2026-01-08 - ATE-75 Prototype Design Pack SENT TO EUROTECH
 
 **Created comprehensive prototype design pack for Eurotech Metal Industries:**
