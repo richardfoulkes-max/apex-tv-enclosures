@@ -651,10 +651,11 @@
 
         // Initial data - migrated from old format
         const initialPartners = [
+            // ============ UAE MANUFACTURERS ============
             {
                 id: 1,
                 companyName: 'Al Shurooq',
-                contactType: 'partner',
+                contactType: 'manufacturing',
                 partnerType: 'Fabricator',
                 region: 'UAE',
                 website: 'https://alshurooq.ae',
@@ -683,36 +684,38 @@
             },
             {
                 id: 2,
-                companyName: 'Eurotech FZCO',
-                contactType: 'partner',
+                companyName: 'Eurotech Metal Industries',
+                contactType: 'manufacturing',
                 partnerType: 'Fabricator',
                 region: 'UAE',
                 website: 'https://eurotech-metal.com',
                 linkedInUrl: '',
-                address: 'JAFZA, Dubai, UAE',
+                address: 'JAFZA North, St.N306, Plot MO0625, PO Box 61196, Dubai, UAE',
                 leadSource: 'cold_outreach',
-                status: 'Contacted',
+                status: 'Meeting',
                 priority: 'High',
                 dealValue: 0,
                 productsInterested: ['75"'],
                 expectedCloseDate: '',
-                winProbability: 20,
+                winProbability: 60,
                 lostReason: '',
-                followupDate: '2025-01-02',
-                notes: 'Sheet metal, powder coating, panels. JAFZA Dubai location.',
+                followupDate: '2026-01-15',
+                notes: 'TOP PRIORITY - Sheet metal, powder coating, panels. JAFZA Dubai location. ATE-75 design pack sent Jan 8. Awaiting prototype quote/timeline.',
                 contacts: [
-                    { id: 1, name: '', title: '', email: 'general@eurotech-metal.com', phone: '+971 4 883 0333', isPrimary: true, isDecisionMaker: false }
+                    { id: 1, name: 'Guillaume Caupert', title: 'Head of Sales and Marketing', email: 'guillaume.caupert@eurotech-metal.com', phone: '+971 56 801 4290', isPrimary: true, isDecisionMaker: true }
                 ],
                 activities: [
-                    { id: 1, type: 'email_sent', description: 'RFQ sent via email', timestamp: '2025-12-24T20:00:00Z' }
+                    { id: 1, type: 'email_sent', description: 'RFQ sent via email', timestamp: '2025-12-24T20:00:00Z' },
+                    { id: 2, type: 'meeting', description: 'Meeting with Eurotech team', timestamp: '2026-01-04T10:00:00Z' },
+                    { id: 3, type: 'email_sent', description: 'ATE-75 Design Pack (14MB PDF) sent to Guillaume - comprehensive prototype manufacturing spec', timestamp: '2026-01-08T14:00:00Z' }
                 ],
                 createdAt: '2025-12-24T20:00:00Z',
-                lastContact: '2025-12-24T20:00:00Z'
+                lastContact: '2026-01-08T14:00:00Z'
             },
             {
                 id: 3,
                 companyName: 'Al Amazon Industries',
-                contactType: 'partner',
+                contactType: 'manufacturing',
                 partnerType: 'Fabricator',
                 region: 'UAE',
                 website: 'https://www.alamazonuae.com',
@@ -738,9 +741,169 @@
                 lastContact: '2025-12-24T08:00:00Z'
             },
             {
+                id: 6,
+                companyName: 'EmirFab',
+                contactType: 'manufacturing',
+                partnerType: 'Fabricator',
+                region: 'UAE',
+                website: '',
+                linkedInUrl: '',
+                address: 'UAE',
+                leadSource: 'cold_outreach',
+                status: 'Contacted',
+                priority: 'Medium',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 20,
+                lostReason: '',
+                followupDate: '2025-01-05',
+                notes: 'UAE fabricator - RFQ sent Dec 24',
+                contacts: [],
+                activities: [
+                    { id: 1, type: 'email_sent', description: 'RFQ sent via email', timestamp: '2025-12-24T08:00:00Z' }
+                ],
+                createdAt: '2025-12-24T08:00:00Z',
+                lastContact: '2025-12-24T08:00:00Z'
+            },
+            {
+                id: 7,
+                companyName: 'Rainbow',
+                contactType: 'manufacturing',
+                partnerType: 'Fabricator',
+                region: 'UAE',
+                website: '',
+                linkedInUrl: '',
+                address: 'UAE',
+                leadSource: 'cold_outreach',
+                status: 'Contacted',
+                priority: 'Medium',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 20,
+                lostReason: '',
+                followupDate: '2025-01-05',
+                notes: 'UAE fabricator - RFQ sent Dec 24',
+                contacts: [],
+                activities: [
+                    { id: 1, type: 'email_sent', description: 'RFQ sent via email', timestamp: '2025-12-24T08:00:00Z' }
+                ],
+                createdAt: '2025-12-24T08:00:00Z',
+                lastContact: '2025-12-24T08:00:00Z'
+            },
+            // ============ SAUDI MANUFACTURERS ============
+            {
+                id: 5,
+                companyName: 'Flezco',
+                contactType: 'manufacturing',
+                partnerType: 'Fabricator',
+                region: 'GCC',
+                website: 'https://www.flezco.com',
+                linkedInUrl: '',
+                address: 'Jeddah, Saudi Arabia',
+                leadSource: 'cold_outreach',
+                status: 'Contacted',
+                priority: 'High',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 25,
+                lostReason: '',
+                followupDate: '2025-01-02',
+                notes: 'HIGH FIT - Saudi Jeddah + nationwide. Sheet metal for enclosures, machinery panels.',
+                contacts: [
+                    { id: 1, name: '', title: '', email: 'hello@flezco.com', phone: '+966 50 830 4644', isPrimary: true, isDecisionMaker: false }
+                ],
+                activities: [
+                    { id: 1, type: 'email_sent', description: 'RFQ sent via email', timestamp: '2025-12-24T08:00:00Z' }
+                ],
+                createdAt: '2025-12-24T08:00:00Z',
+                lastContact: '2025-12-24T08:00:00Z'
+            },
+            {
+                id: 8,
+                companyName: 'SMF',
+                contactType: 'manufacturing',
+                partnerType: 'Fabricator',
+                region: 'GCC',
+                website: '',
+                linkedInUrl: '',
+                address: 'Saudi Arabia',
+                leadSource: 'cold_outreach',
+                status: 'Contacted',
+                priority: 'Medium',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 20,
+                lostReason: '',
+                followupDate: '2025-01-05',
+                notes: 'Saudi fabricator - RFQ sent Dec 24',
+                contacts: [],
+                activities: [
+                    { id: 1, type: 'email_sent', description: 'RFQ sent via email', timestamp: '2025-12-24T08:00:00Z' }
+                ],
+                createdAt: '2025-12-24T08:00:00Z',
+                lastContact: '2025-12-24T08:00:00Z'
+            },
+            {
+                id: 9,
+                companyName: 'Lucky',
+                contactType: 'manufacturing',
+                partnerType: 'Fabricator',
+                region: 'GCC',
+                website: '',
+                linkedInUrl: '',
+                address: 'Saudi Arabia',
+                leadSource: 'cold_outreach',
+                status: 'Contacted',
+                priority: 'Medium',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 20,
+                lostReason: '',
+                followupDate: '2025-01-05',
+                notes: 'Saudi fabricator - RFQ sent Dec 24',
+                contacts: [],
+                activities: [
+                    { id: 1, type: 'email_sent', description: 'RFQ sent via email', timestamp: '2025-12-24T08:00:00Z' }
+                ],
+                createdAt: '2025-12-24T08:00:00Z',
+                lastContact: '2025-12-24T08:00:00Z'
+            },
+            {
+                id: 10,
+                companyName: 'Prisma',
+                contactType: 'manufacturing',
+                partnerType: 'Fabricator',
+                region: 'GCC',
+                website: '',
+                linkedInUrl: '',
+                address: 'Saudi Arabia',
+                leadSource: 'cold_outreach',
+                status: 'Contacted',
+                priority: 'Medium',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 20,
+                lostReason: '',
+                followupDate: '2025-01-05',
+                notes: 'Saudi fabricator - RFQ sent Dec 24',
+                contacts: [],
+                activities: [
+                    { id: 1, type: 'email_sent', description: 'RFQ sent via email', timestamp: '2025-12-24T08:00:00Z' }
+                ],
+                createdAt: '2025-12-24T08:00:00Z',
+                lastContact: '2025-12-24T08:00:00Z'
+            },
+            // ============ CHINA MANUFACTURERS ============
+            {
                 id: 4,
                 companyName: 'KDM Steel',
-                contactType: 'partner',
+                contactType: 'manufacturing',
                 partnerType: 'Fabricator',
                 region: 'China',
                 website: 'https://www.kdmsteel.com',
@@ -767,32 +930,128 @@
                 lastContact: '2025-12-28T14:00:00Z'
             },
             {
-                id: 5,
-                companyName: 'Flezco',
-                contactType: 'partner',
+                id: 11,
+                companyName: 'Hofengfab',
+                contactType: 'manufacturing',
                 partnerType: 'Fabricator',
-                region: 'GCC',
-                website: 'https://www.flezco.com',
+                region: 'China',
+                website: 'https://hofengfab.com',
                 linkedInUrl: '',
-                address: 'Jeddah, Saudi Arabia',
+                address: 'Shenzhen, China',
                 leadSource: 'cold_outreach',
-                status: 'Contacted',
-                priority: 'High',
+                status: 'Not Contacted',
+                priority: 'Medium',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 30,
+                lostReason: '',
+                followupDate: '',
+                notes: 'Die-cast aluminum specialist, IP66/67, exports to Middle East. Pure OEM fabricator - SAFE to approach.',
+                contacts: [
+                    { id: 1, name: 'Vivian', title: 'Sales', email: 'vivian@hofengfab.com', phone: '', isPrimary: true, isDecisionMaker: false }
+                ],
+                activities: [],
+                createdAt: '2025-12-28T00:00:00Z',
+                lastContact: null
+            },
+            {
+                id: 12,
+                companyName: 'SKYT',
+                contactType: 'manufacturing',
+                partnerType: 'Fabricator',
+                region: 'China',
+                website: 'https://www.hbskyt.com',
+                linkedInUrl: '',
+                address: 'Hebei, China',
+                leadSource: 'cold_outreach',
+                status: 'Not Contacted',
+                priority: 'Medium',
                 dealValue: 0,
                 productsInterested: ['75"'],
                 expectedCloseDate: '',
                 winProbability: 25,
                 lostReason: '',
-                followupDate: '2025-01-02',
-                notes: 'HIGH FIT - Saudi Jeddah + nationwide. Sheet metal for enclosures, machinery panels.',
+                followupDate: '',
+                notes: 'Outdoor cabinets, telecom enclosures, OEM focus. Pure fabricator - SAFE to approach.',
                 contacts: [
-                    { id: 1, name: '', title: '', email: 'hello@flezco.com', phone: '+966 50 830 4644', isPrimary: true, isDecisionMaker: false }
+                    { id: 1, name: 'Wendy', title: 'Sales', email: 'Wendy@hbskyt.com', phone: '+86-15832266315', isPrimary: true, isDecisionMaker: false }
                 ],
-                activities: [
-                    { id: 1, type: 'email_sent', description: 'RFQ sent via email', timestamp: '2025-12-24T08:00:00Z' }
-                ],
-                createdAt: '2025-12-24T08:00:00Z',
-                lastContact: '2025-12-24T08:00:00Z'
+                activities: [],
+                createdAt: '2025-12-28T00:00:00Z',
+                lastContact: null
+            },
+            {
+                id: 13,
+                companyName: 'MaidaTech',
+                contactType: 'manufacturing',
+                partnerType: 'Fabricator',
+                region: 'China',
+                website: 'https://maidatechenclosure.com',
+                linkedInUrl: '',
+                address: 'Shenzhen, China',
+                leadSource: 'cold_outreach',
+                status: 'Not Contacted',
+                priority: 'Medium',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 25,
+                lostReason: '',
+                followupDate: '',
+                notes: '9+ years, custom aluminum enclosures, OEM/ODM. Pure fabricator - SAFE to approach.',
+                contacts: [],
+                activities: [],
+                createdAt: '2025-12-28T00:00:00Z',
+                lastContact: null
+            },
+            {
+                id: 14,
+                companyName: 'Hongfashunda',
+                contactType: 'manufacturing',
+                partnerType: 'Fabricator',
+                region: 'China',
+                website: 'https://enclosure-box-mould.com',
+                linkedInUrl: '',
+                address: 'Shenzhen, China',
+                leadSource: 'cold_outreach',
+                status: 'Not Contacted',
+                priority: 'Medium',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 25,
+                lostReason: '',
+                followupDate: '',
+                notes: 'ISO 9001, 2pc MOQ, aluminum extrusion. Pure fabricator - SAFE to approach.',
+                contacts: [],
+                activities: [],
+                createdAt: '2025-12-28T00:00:00Z',
+                lastContact: null
+            },
+            {
+                id: 15,
+                companyName: 'SZOMK',
+                contactType: 'manufacturing',
+                partnerType: 'Fabricator',
+                region: 'China',
+                website: 'https://chinaenclosure.com',
+                linkedInUrl: '',
+                address: 'Shenzhen, China',
+                leadSource: 'cold_outreach',
+                status: 'Not Contacted',
+                priority: 'Medium',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 25,
+                lostReason: '',
+                followupDate: '',
+                notes: '1000+ molds, cutouts/laser, low MOQ. Pure fabricator - SAFE to approach.',
+                contacts: [],
+                activities: [],
+                createdAt: '2025-12-28T00:00:00Z',
+                lastContact: null
             },
             // Sales Partners
             {
@@ -998,11 +1257,11 @@
             const stored = localStorage.getItem('apexCrmData');
             const version = localStorage.getItem('apexCrmVersion');
 
-            if (version !== 'v6' || !stored) {
-                // Initialize with new data structure (v6 adds contactType)
+            if (version !== 'v7' || !stored) {
+                // Initialize with new data structure (v7 adds all contacted manufacturers)
                 partners = initialPartners;
                 saveData();
-                localStorage.setItem('apexCrmVersion', 'v6');
+                localStorage.setItem('apexCrmVersion', 'v7');
             } else {
                 partners = JSON.parse(stored);
                 // Ensure all partners have contactType (migration)
