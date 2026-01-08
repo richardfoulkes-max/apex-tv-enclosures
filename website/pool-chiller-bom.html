@@ -23,14 +23,14 @@
 
         /* Header */
         .page-header {
-            background: linear-gradient(135deg, var(--accent), #d97706);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            padding: 2rem;
+            padding: 1.25rem 2rem;
             margin: -2rem -2rem 2rem -2rem;
-            border-radius: 0 0 16px 16px;
         }
-        .page-header h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
-        .page-header .subtitle { opacity: 0.9; font-size: 1rem; }
+        @media (max-width: 900px) { .page-header { display: none; } }
+        .page-header h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .page-header .subtitle { opacity: 0.9; font-size: 0.9rem; }
 
         /* Summary Cards */
         .summary-grid {
@@ -42,21 +42,19 @@
         @media (max-width: 900px) { .summary-grid { grid-template-columns: repeat(2, 1fr); } }
 
         .summary-card {
-            background: white;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 1.25rem;
             text-align: center;
-            border: 1px solid var(--border);
         }
         .summary-card .value {
             font-size: 1.75rem;
             font-weight: 700;
-            color: var(--accent);
         }
         .summary-card .label {
             font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 0.25rem;
+            opacity: 0.9;
         }
 
         /* Sections */
@@ -68,7 +66,7 @@
             border: 1px solid var(--border);
         }
         .section h2 {
-            color: var(--accent);
+            color: var(--primary-dark);
             font-size: 1.3rem;
             margin-bottom: 1.5rem;
             padding-bottom: 0.75rem;
@@ -83,22 +81,23 @@
 
         /* Tables */
         table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
-        th { background: #fef3c7; padding: 0.75rem; text-align: left; font-weight: 600; color: #92400e; border-bottom: 2px solid #fcd34d; }
+        th { background: var(--bg); padding: 0.75rem; text-align: left; font-weight: 600; color: var(--primary-dark); border-bottom: 2px solid var(--border); }
         td { padding: 0.75rem; border-bottom: 1px solid var(--border); }
-        tr:hover { background: #fffbeb; }
+        tr:hover { background: #f8fafc; }
 
-        .total-row { background: #fef3c7; font-weight: 600; }
-        .total-row td { border-top: 2px solid #fcd34d; }
+        .total-row { background: var(--primary); color: white; font-weight: 700; }
+        .total-row td { border: none; }
 
-        .subtotal-row { background: #f8fafc; font-weight: 500; }
+        .subtotal-row { background: #f0f9ff; font-weight: 600; }
+        .subtotal-row td { border-top: 2px solid var(--primary); }
 
         /* Right-align numbers */
         .num { text-align: right; }
 
         /* Notes */
         .note {
-            background: #f8fafc;
-            border-left: 4px solid var(--accent);
+            background: #e0f2fe;
+            border-left: 4px solid var(--primary);
             padding: 1rem;
             margin: 1rem 0;
             font-size: 0.9rem;
@@ -116,26 +115,17 @@
             padding: 1.25rem;
             border: 1px solid var(--border);
         }
-        .card h4 { color: var(--accent); margin-bottom: 0.5rem; }
+        .card h4 { color: var(--primary); margin-bottom: 0.5rem; }
         .card p { font-size: 0.85rem; margin: 0; }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border);
-            margin-top: 2rem;
-        }
     </style>
 </head>
 <body>
     <div class="main-container">
-        <header class="page-header">
+        <div class="page-header">
             <h1>APE-HC Series - Bill of Materials</h1>
-            <p class="subtitle">Component Costing for Heater/Chiller Enclosures</p>
-        </header>
+            <p class="subtitle">Component costing for louvered heater/chiller enclosures</p>
+        </div>
 
         <!-- Summary Cards -->
         <div class="summary-grid">
@@ -171,7 +161,7 @@
                     <th class="num">Total</th>
                 </tr>
                 <tr>
-                    <td colspan="5" style="background: #fef3c7; font-weight: 600;">Frame Structure</td>
+                    <td colspan="5" style="background: #f0f9ff; font-weight: 600; color: var(--primary);">Frame Structure</td>
                 </tr>
                 <tr>
                     <td>Corner posts (40x40x2mm angle)</td>
@@ -199,7 +189,7 @@
                     <td class="num">$64.00</td>
                 </tr>
                 <tr>
-                    <td colspan="5" style="background: #fef3c7; font-weight: 600;">Louvered Panels</td>
+                    <td colspan="5" style="background: #f0f9ff; font-weight: 600; color: var(--primary);">Louvered Panels</td>
                 </tr>
                 <tr>
                     <td>Side louvered panels (2.0mm)</td>
@@ -227,7 +217,7 @@
                     <td class="num">$72.00</td>
                 </tr>
                 <tr>
-                    <td colspan="5" style="background: #fef3c7; font-weight: 600;">Hardware</td>
+                    <td colspan="5" style="background: #f0f9ff; font-weight: 600; color: var(--primary);">Hardware</td>
                 </tr>
                 <tr>
                     <td>Piano hinge (316 SS)</td>
@@ -269,7 +259,7 @@
                     <td class="num">$41.00</td>
                 </tr>
                 <tr>
-                    <td colspan="5" style="background: #fef3c7; font-weight: 600;">Finish</td>
+                    <td colspan="5" style="background: #f0f9ff; font-weight: 600; color: var(--primary);">Finish</td>
                 </tr>
                 <tr>
                     <td>Powder coating (RAL 7016)</td>
@@ -548,10 +538,9 @@
             </table>
         </section>
 
-        <footer class="footer">
-            <p><strong>APE-HC Series Bill of Materials</strong> - Version 1.0</p>
-            <p>Apex Enclosures | January 2026</p>
-            <p style="font-size: 0.75rem; margin-top: 0.5rem;">Costs are estimates. Final pricing from Eurotech Metal Industries.</p>
+        <footer style="background: var(--primary-dark); color: white; padding: 1.5rem; text-align: center; margin-top: 2rem;">
+            <p style="opacity: 0.8;">APE-HC Series Heater/Chiller Enclosures - Apex Enclosures</p>
+            <p style="font-size: 0.85rem; opacity: 0.6;">Document Version: 1.0 | January 2026</p>
         </footer>
     </div>
     <script src="nav.js"></script>

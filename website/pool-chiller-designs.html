@@ -22,14 +22,14 @@
 
         /* Header */
         .page-header {
-            background: linear-gradient(135deg, var(--accent), #d97706);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            padding: 2rem;
+            padding: 1.25rem 2rem;
             margin: -2rem -2rem 2rem -2rem;
-            border-radius: 0 0 16px 16px;
         }
-        .page-header h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
-        .page-header .subtitle { opacity: 0.9; font-size: 1rem; }
+        @media (max-width: 900px) { .page-header { display: none; } }
+        .page-header h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .page-header .subtitle { opacity: 0.9; font-size: 0.9rem; }
 
         /* Sections */
         .section {
@@ -40,7 +40,7 @@
             border: 1px solid var(--border);
         }
         .section h2 {
-            color: var(--accent);
+            color: var(--primary-dark);
             font-size: 1.3rem;
             margin-bottom: 1.5rem;
             padding-bottom: 0.75rem;
@@ -66,7 +66,7 @@
 
         /* Tables */
         table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
-        th { background: var(--bg); padding: 0.75rem; text-align: left; font-weight: 600; color: var(--accent); border-bottom: 2px solid var(--border); }
+        th { background: var(--bg); padding: 0.75rem; text-align: left; font-weight: 600; color: var(--primary-dark); border-bottom: 2px solid var(--border); }
         td { padding: 0.75rem; border-bottom: 1px solid var(--border); }
 
         /* Legend */
@@ -91,23 +91,14 @@
             border-radius: 3px;
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border);
-            margin-top: 2rem;
-        }
     </style>
 </head>
 <body>
     <div class="main-container">
-        <header class="page-header">
-            <h1>APE-HC Series - Design Drawings</h1>
-            <p class="subtitle">Technical Drawings for Heater/Chiller Enclosures</p>
-        </header>
+        <div class="page-header">
+            <h1>APE-HC Series - Technical Drawings</h1>
+            <p class="subtitle">CAD-grade specifications for louvered heater/chiller enclosures</p>
+        </div>
 
         <!-- Drawing 1: Side Cross-Section -->
         <section class="section">
@@ -482,9 +473,9 @@
             </table>
         </section>
 
-        <footer class="footer">
-            <p><strong>APE-HC Series Design Drawings</strong> - Version 1.0</p>
-            <p>Apex Enclosures | January 2026</p>
+        <footer style="background: var(--primary-dark); color: white; padding: 2rem; text-align: center; margin-top: 2rem;">
+            <p style="opacity: 0.8;">APE-HC Series Heater/Chiller Enclosures - Apex Enclosures</p>
+            <p style="font-size: 0.85rem; opacity: 0.6;">Document Version: 1.0 | Last Updated: January 2026</p>
         </footer>
     </div>
     <script src="nav.js"></script>
