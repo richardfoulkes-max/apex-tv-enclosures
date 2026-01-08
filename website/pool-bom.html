@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pool Enclosure Bill of Materials | Apex Enclosures</title>
+    <style>
+        :root {
+            --primary: #0891b2;
+            --primary-dark: #0e7490;
+            --primary-light: #06b6d4;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #f0f9ff;
+            --card: #ffffff;
+            --border: #e0f2fe;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+        /* Layout */
+        .layout { display: flex; min-height: 100vh; }
+
+        /* Sidebar */
+        .sidebar { width: 240px; background: linear-gradient(180deg, var(--primary-dark) 0%, #065f46 100%); color: white; position: fixed; top: 0; left: 0; height: 100vh; overflow-y: auto; z-index: 100; }
+        .sidebar-header { padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .sidebar-header h1 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .sidebar-header p { font-size: 0.75rem; opacity: 0.7; }
+        .sidebar-nav { padding: 1rem 0; }
+        .sidebar-section { padding: 0.5rem 1.5rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(255,255,255,0.5); margin-top: 0.5rem; }
+        .sidebar-link { display: block; padding: 0.75rem 1.5rem; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: all 0.2s; border-left: 3px solid transparent; }
+        .sidebar-link:hover { background: rgba(255,255,255,0.1); color: white; }
+        .sidebar-link.active { background: rgba(255,255,255,0.15); color: white; border-left-color: #f59e0b; font-weight: 600; }
+        .sidebar-footer { padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; opacity: 0.6; position: absolute; bottom: 0; width: 100%; }
+
+        /* Main Content */
+        .main { flex: 1; margin-left: 240px; }
+
+        @media (max-width: 900px) {
+            .sidebar { width: 100%; height: auto; position: relative; }
+            .sidebar-footer { position: relative; }
+            .main { margin-left: 0; }
+            .layout { flex-direction: column; }
+        }
+
+        .container { max-width: 1100px; padding: 2rem; }
+
+        .header { text-align: center; margin-bottom: 2rem; }
+        .header h1 { font-size: 2rem; color: var(--primary-dark); margin-bottom: 0.5rem; }
+        .header .subtitle { color: var(--text-muted); font-size: 1rem; }
+        .header .version { display: inline-block; background: var(--primary); color: white; padding: 0.35rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem; }
+
+        .section { background: white; border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; border: 1px solid var(--border); }
+        .section h2 { color: var(--primary-dark); font-size: 1.3rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); }
+        .section h3 { color: var(--primary); font-size: 1.1rem; margin: 1.25rem 0 0.75rem; }
+        .section p { color: var(--text-muted); margin-bottom: 0.75rem; font-size: 0.95rem; }
+
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+        th { background: var(--bg); padding: 0.75rem; text-align: left; font-weight: 600; color: var(--primary-dark); border-bottom: 2px solid var(--border); }
+        td { padding: 0.75rem; border-bottom: 1px solid var(--border); }
+        tr:hover { background: #f8fafc; }
+
+        .bom-table td:nth-child(3), .bom-table td:nth-child(4), .bom-table td:nth-child(5) { text-align: right; }
+        .bom-table th:nth-child(3), .bom-table th:nth-child(4), .bom-table th:nth-child(5) { text-align: right; }
+
+        .subtotal-row { background: #f0f9ff; font-weight: 600; }
+        .subtotal-row td { border-top: 2px solid var(--primary); }
+
+        .total-row { background: var(--primary); color: white; font-weight: 700; }
+        .total-row td { border: none; }
+
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0; }
+        .summary-card { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 1.25rem; border-radius: 8px; text-align: center; }
+        .summary-card .value { font-size: 1.75rem; font-weight: 700; }
+        .summary-card .label { font-size: 0.85rem; opacity: 0.9; }
+
+        .note-box { background: #fffbeb; border-left: 4px solid var(--warning); padding: 1rem; margin: 1rem 0; font-size: 0.9rem; }
+        .info-box { background: #e0f2fe; border-left: 4px solid var(--primary); padding: 1rem; margin: 1rem 0; font-size: 0.9rem; }
+        .success-box { background: #dcfce7; border-left: 4px solid var(--success); padding: 1rem; margin: 1rem 0; font-size: 0.9rem; }
+
+        .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+        .badge-success { background: #d1fae5; color: #065f46; }
+        .badge-warning { background: #fef3c7; color: #92400e; }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            table { font-size: 0.8rem; }
+            th, td { padding: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <a href="index.html?product=pool" class="sidebar-header" style="text-decoration: none; color: inherit; display: block;">
+                <h1>Apex Pool Enclosures</h1>
+                <p>APE Series v1.0</p>
+            </a>
+            <nav class="sidebar-nav">
+                <div class="sidebar-section">Documentation</div>
+                <a href="pool-specification.html" class="sidebar-link">Specification</a>
+                <a href="pool-designs.html" class="sidebar-link">Technical Drawings</a>
+                <a href="pool-bom.html" class="sidebar-link active">Bill of Materials</a>
+                <a href="pool-market-research.html" class="sidebar-link">Market Research</a>
+                <a href="pool-engineering-analysis.html" class="sidebar-link">Engineering Analysis</a>
+                <a href="pool-acoustic-design.html" class="sidebar-link">Acoustic Design</a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Dubai, UAE</p>
+                <p>+971 50 559 8675</p>
+            </div>
+        </aside>
+        <main class="main">
+            <div class="container">
+        <div class="header">
+            <h1>APE Series - Bill of Materials</h1>
+            <p class="subtitle">Component costing for modular pool equipment enclosures</p>
+            <span class="version">APE v1.0 - January 2026</span>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="summary-grid">
+            <div class="summary-card">
+                <div class="value">$148</div>
+                <div class="label">APE-BASE BOM</div>
+            </div>
+            <div class="summary-card">
+                <div class="value">$78</div>
+                <div class="label">APE-EXT-A BOM</div>
+            </div>
+            <div class="summary-card">
+                <div class="value">$92</div>
+                <div class="label">APE-EXT-B BOM</div>
+            </div>
+            <div class="summary-card">
+                <div class="value">$265</div>
+                <div class="label">APE-CHILL BOM</div>
+            </div>
+        </div>
+
+        <!-- APE-BASE BOM -->
+        <div class="section">
+            <h2>APE-BASE Bill of Materials (600 × 600 × 800mm)</h2>
+            <p>Base module for single pool pump. All pricing in USD at 1000+ unit volume.</p>
+
+            <table class="bom-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Description</th>
+                        <th>Qty</th>
+                        <th>Unit Cost</th>
+                        <th>Extended</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Structure -->
+                    <tr><td colspan="5" style="background: #f0f9ff; font-weight: 600; color: var(--primary);">STRUCTURE</td></tr>
+                    <tr>
+                        <td>Frame panels</td>
+                        <td>5052-H32 Aluminum 3mm, laser cut + bent</td>
+                        <td>6</td>
+                        <td>$5.50</td>
+                        <td>$33.00</td>
+                    </tr>
+                    <tr>
+                        <td>Louver panels (top)</td>
+                        <td>5052-H32 Aluminum 2mm, louver formed</td>
+                        <td>1</td>
+                        <td>$8.00</td>
+                        <td>$8.00</td>
+                    </tr>
+                    <tr>
+                        <td>Louver panels (bottom)</td>
+                        <td>5052-H32 Aluminum 2mm, louver formed</td>
+                        <td>1</td>
+                        <td>$6.00</td>
+                        <td>$6.00</td>
+                    </tr>
+                    <tr>
+                        <td>Corner brackets</td>
+                        <td>5052-H32 Aluminum 3mm, welded</td>
+                        <td>8</td>
+                        <td>$1.20</td>
+                        <td>$9.60</td>
+                    </tr>
+                    <tr>
+                        <td>Tongue-groove rails</td>
+                        <td>Aluminum extrusion, connection system</td>
+                        <td>4</td>
+                        <td>$3.50</td>
+                        <td>$14.00</td>
+                    </tr>
+
+                    <!-- Acoustic -->
+                    <tr><td colspan="5" style="background: #fef3c7; font-weight: 600; color: #92400e;">ACOUSTIC SYSTEM</td></tr>
+                    <tr>
+                        <td>Acoustic foam (25mm)</td>
+                        <td>Closed-cell PE, Class O fire rated, PSA backing</td>
+                        <td>2.4 m²</td>
+                        <td>$8.00/m²</td>
+                        <td>$19.20</td>
+                    </tr>
+                    <tr>
+                        <td>Acoustic foam (50mm)</td>
+                        <td>Closed-cell PE, rear panel</td>
+                        <td>0.48 m²</td>
+                        <td>$14.00/m²</td>
+                        <td>$6.72</td>
+                    </tr>
+                    <tr>
+                        <td>Acoustic baffles</td>
+                        <td>Intake/exhaust labyrinth, foam blocks</td>
+                        <td>1 set</td>
+                        <td>$4.50</td>
+                        <td>$4.50</td>
+                    </tr>
+
+                    <!-- Hardware -->
+                    <tr><td colspan="5" style="background: #e0f2fe; font-weight: 600; color: #0369a1;">HARDWARE (316 SS)</td></tr>
+                    <tr>
+                        <td>Piano hinge</td>
+                        <td>316 SS, 600mm, PTFE bushings</td>
+                        <td>1</td>
+                        <td>$8.50</td>
+                        <td>$8.50</td>
+                    </tr>
+                    <tr>
+                        <td>Quick-release latches</td>
+                        <td>316 SS, compression type</td>
+                        <td>2</td>
+                        <td>$4.50</td>
+                        <td>$9.00</td>
+                    </tr>
+                    <tr>
+                        <td>Gas struts</td>
+                        <td>100N, 316 SS, ball-stud</td>
+                        <td>2</td>
+                        <td>$5.00</td>
+                        <td>$10.00</td>
+                    </tr>
+                    <tr>
+                        <td>Machine screws</td>
+                        <td>M5 × 12mm hex socket, 316 SS</td>
+                        <td>24</td>
+                        <td>$0.15</td>
+                        <td>$3.60</td>
+                    </tr>
+                    <tr>
+                        <td>Self-tapping screws</td>
+                        <td>M4 × 10mm, 316 SS</td>
+                        <td>48</td>
+                        <td>$0.08</td>
+                        <td>$3.84</td>
+                    </tr>
+                    <tr>
+                        <td>Nyloc nuts</td>
+                        <td>M5, 316 SS</td>
+                        <td>24</td>
+                        <td>$0.10</td>
+                        <td>$2.40</td>
+                    </tr>
+                    <tr>
+                        <td>Washers</td>
+                        <td>M5 flat, 316 SS</td>
+                        <td>48</td>
+                        <td>$0.05</td>
+                        <td>$2.40</td>
+                    </tr>
+
+                    <!-- Sealing -->
+                    <tr><td colspan="5" style="background: #dcfce7; font-weight: 600; color: #065f46;">SEALING</td></tr>
+                    <tr>
+                        <td>EPDM gasket</td>
+                        <td>Continuous channel, 60-70A</td>
+                        <td>2.4m</td>
+                        <td>$1.50/m</td>
+                        <td>$3.60</td>
+                    </tr>
+                    <tr>
+                        <td>Weather strip</td>
+                        <td>Module joint seals</td>
+                        <td>1.6m</td>
+                        <td>$1.20/m</td>
+                        <td>$1.92</td>
+                    </tr>
+                    <tr>
+                        <td>Drain grommet</td>
+                        <td>Silicone, 25mm ID</td>
+                        <td>1</td>
+                        <td>$0.80</td>
+                        <td>$0.80</td>
+                    </tr>
+
+                    <!-- Subtotal -->
+                    <tr class="subtotal-row">
+                        <td colspan="4">Subtotal - Components</td>
+                        <td>$147.08</td>
+                    </tr>
+
+                    <!-- Finishing -->
+                    <tr><td colspan="5" style="background: #f5f5f5; font-weight: 600;">FINISHING</td></tr>
+                    <tr>
+                        <td>Powder coating</td>
+                        <td>Marine-grade, RAL 7016, 1500hr salt spray</td>
+                        <td>2.9 m²</td>
+                        <td>Included</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>Assembly labor</td>
+                        <td>Foam bonding, hardware install, QC</td>
+                        <td>0.5 hr</td>
+                        <td>Included</td>
+                        <td>—</td>
+                    </tr>
+
+                    <!-- Total -->
+                    <tr class="total-row">
+                        <td colspan="4">APE-BASE Total BOM Cost</td>
+                        <td>$148.00</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-box">
+                <strong>Volume Pricing:</strong> Costs shown at 1000+ unit volume. Prototype pricing (5 units) typically 2-3× higher. Powder coating and assembly labor included in manufacturer's per-unit quote.
+            </div>
+        </div>
+
+        <!-- APE-EXT-A BOM -->
+        <div class="section">
+            <h2>APE-EXT-A Bill of Materials (300 × 600 × 800mm)</h2>
+            <p>Filter extension module. Smaller footprint = lower material costs.</p>
+
+            <table class="bom-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Description</th>
+                        <th>Qty</th>
+                        <th>Unit Cost</th>
+                        <th>Extended</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Frame panels</td>
+                        <td>5052-H32 Aluminum 3mm</td>
+                        <td>5</td>
+                        <td>$3.50</td>
+                        <td>$17.50</td>
+                    </tr>
+                    <tr>
+                        <td>Louver panels</td>
+                        <td>5052-H32 Aluminum 2mm</td>
+                        <td>2</td>
+                        <td>$4.00</td>
+                        <td>$8.00</td>
+                    </tr>
+                    <tr>
+                        <td>Connection rails</td>
+                        <td>Tongue-groove extrusion</td>
+                        <td>4</td>
+                        <td>$3.50</td>
+                        <td>$14.00</td>
+                    </tr>
+                    <tr>
+                        <td>Acoustic foam (25mm)</td>
+                        <td>Closed-cell PE, all surfaces</td>
+                        <td>1.6 m²</td>
+                        <td>$8.00/m²</td>
+                        <td>$12.80</td>
+                    </tr>
+                    <tr>
+                        <td>Piano hinge</td>
+                        <td>316 SS, 300mm</td>
+                        <td>1</td>
+                        <td>$5.00</td>
+                        <td>$5.00</td>
+                    </tr>
+                    <tr>
+                        <td>Quick-release latch</td>
+                        <td>316 SS</td>
+                        <td>1</td>
+                        <td>$4.50</td>
+                        <td>$4.50</td>
+                    </tr>
+                    <tr>
+                        <td>Gas strut</td>
+                        <td>80N, 316 SS</td>
+                        <td>1</td>
+                        <td>$4.50</td>
+                        <td>$4.50</td>
+                    </tr>
+                    <tr>
+                        <td>Hardware pack</td>
+                        <td>Screws, nuts, washers (316 SS)</td>
+                        <td>1</td>
+                        <td>$6.00</td>
+                        <td>$6.00</td>
+                    </tr>
+                    <tr>
+                        <td>Sealing kit</td>
+                        <td>EPDM gasket + weather strip</td>
+                        <td>1</td>
+                        <td>$5.50</td>
+                        <td>$5.50</td>
+                    </tr>
+
+                    <tr class="total-row">
+                        <td colspan="4">APE-EXT-A Total BOM Cost</td>
+                        <td>$77.80</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- APE-EXT-B BOM -->
+        <div class="section">
+            <h2>APE-EXT-B Bill of Materials (400 × 600 × 800mm)</h2>
+            <p>Automation extension module. Slightly larger than EXT-A for chlorinator + controller.</p>
+
+            <table class="bom-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Description</th>
+                        <th>Qty</th>
+                        <th>Unit Cost</th>
+                        <th>Extended</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Frame panels</td>
+                        <td>5052-H32 Aluminum 3mm</td>
+                        <td>5</td>
+                        <td>$4.20</td>
+                        <td>$21.00</td>
+                    </tr>
+                    <tr>
+                        <td>Louver panels</td>
+                        <td>5052-H32 Aluminum 2mm</td>
+                        <td>2</td>
+                        <td>$5.00</td>
+                        <td>$10.00</td>
+                    </tr>
+                    <tr>
+                        <td>Connection rails</td>
+                        <td>Tongue-groove extrusion</td>
+                        <td>4</td>
+                        <td>$3.50</td>
+                        <td>$14.00</td>
+                    </tr>
+                    <tr>
+                        <td>Acoustic foam (25mm)</td>
+                        <td>Closed-cell PE, all surfaces</td>
+                        <td>2.0 m²</td>
+                        <td>$8.00/m²</td>
+                        <td>$16.00</td>
+                    </tr>
+                    <tr>
+                        <td>Piano hinge</td>
+                        <td>316 SS, 400mm</td>
+                        <td>1</td>
+                        <td>$6.00</td>
+                        <td>$6.00</td>
+                    </tr>
+                    <tr>
+                        <td>Quick-release latches</td>
+                        <td>316 SS</td>
+                        <td>2</td>
+                        <td>$4.50</td>
+                        <td>$9.00</td>
+                    </tr>
+                    <tr>
+                        <td>Gas strut</td>
+                        <td>100N, 316 SS</td>
+                        <td>1</td>
+                        <td>$5.00</td>
+                        <td>$5.00</td>
+                    </tr>
+                    <tr>
+                        <td>Hardware pack</td>
+                        <td>Screws, nuts, washers (316 SS)</td>
+                        <td>1</td>
+                        <td>$6.00</td>
+                        <td>$6.00</td>
+                    </tr>
+                    <tr>
+                        <td>Sealing kit</td>
+                        <td>EPDM gasket + weather strip</td>
+                        <td>1</td>
+                        <td>$5.50</td>
+                        <td>$5.50</td>
+                    </tr>
+
+                    <tr class="total-row">
+                        <td colspan="4">APE-EXT-B Total BOM Cost</td>
+                        <td>$92.50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- APE-CHILL BOM -->
+        <div class="section">
+            <h2>APE-CHILL Bill of Materials (1200 × 600 × 1000mm)</h2>
+            <p>Pool chiller enclosure. Larger size + full louvered design = higher cost.</p>
+
+            <table class="bom-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Description</th>
+                        <th>Qty</th>
+                        <th>Unit Cost</th>
+                        <th>Extended</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Frame panels</td>
+                        <td>5052-H32 Aluminum 3mm (larger)</td>
+                        <td>5</td>
+                        <td>$12.00</td>
+                        <td>$60.00</td>
+                    </tr>
+                    <tr>
+                        <td>Louver panels (front)</td>
+                        <td>5052-H32 Aluminum 2mm, full louver</td>
+                        <td>1</td>
+                        <td>$28.00</td>
+                        <td>$28.00</td>
+                    </tr>
+                    <tr>
+                        <td>Louver panels (sides)</td>
+                        <td>5052-H32 Aluminum 2mm, full louver</td>
+                        <td>2</td>
+                        <td>$18.00</td>
+                        <td>$36.00</td>
+                    </tr>
+                    <tr>
+                        <td>Top panel (solid)</td>
+                        <td>5052-H32 Aluminum 3mm</td>
+                        <td>1</td>
+                        <td>$14.00</td>
+                        <td>$14.00</td>
+                    </tr>
+                    <tr>
+                        <td>Corner posts</td>
+                        <td>Aluminum extrusion, structural</td>
+                        <td>4</td>
+                        <td>$6.00</td>
+                        <td>$24.00</td>
+                    </tr>
+                    <tr>
+                        <td>Acoustic baffles</td>
+                        <td>Behind louvers, foam blocks</td>
+                        <td>1 set</td>
+                        <td>$18.00</td>
+                        <td>$18.00</td>
+                    </tr>
+                    <tr>
+                        <td>Rear foam (50mm)</td>
+                        <td>Closed-cell PE</td>
+                        <td>1.2 m²</td>
+                        <td>$14.00/m²</td>
+                        <td>$16.80</td>
+                    </tr>
+                    <tr>
+                        <td>Removable front panel</td>
+                        <td>Quick-release mounting</td>
+                        <td>1</td>
+                        <td>$12.00</td>
+                        <td>$12.00</td>
+                    </tr>
+                    <tr>
+                        <td>Panel latches</td>
+                        <td>316 SS quick-release</td>
+                        <td>4</td>
+                        <td>$4.50</td>
+                        <td>$18.00</td>
+                    </tr>
+                    <tr>
+                        <td>Hardware pack</td>
+                        <td>Screws, nuts, washers (316 SS)</td>
+                        <td>1</td>
+                        <td>$12.00</td>
+                        <td>$12.00</td>
+                    </tr>
+                    <tr>
+                        <td>Leveling feet</td>
+                        <td>Adjustable, 316 SS</td>
+                        <td>4</td>
+                        <td>$3.00</td>
+                        <td>$12.00</td>
+                    </tr>
+                    <tr>
+                        <td>Drain</td>
+                        <td>Floor grommet</td>
+                        <td>1</td>
+                        <td>$0.80</td>
+                        <td>$0.80</td>
+                    </tr>
+
+                    <tr class="total-row">
+                        <td colspan="4">APE-CHILL Total BOM Cost</td>
+                        <td>$251.60</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="note-box">
+                <strong>Chiller Module Note:</strong> Higher cost due to (1) larger size, (2) extensive louvered panels, and (3) more complex structure. Consider whether margin justifies separate product line.
+            </div>
+        </div>
+
+        <!-- Pricing Summary -->
+        <div class="section">
+            <h2>Pricing Summary & Targets</h2>
+
+            <table class="bom-table">
+                <thead>
+                    <tr>
+                        <th>Configuration</th>
+                        <th>BOM Cost</th>
+                        <th>FOB Target</th>
+                        <th>Retail (AED)</th>
+                        <th>Margin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>APE-BASE</strong> (pump only)</td>
+                        <td>$148</td>
+                        <td>$180-220</td>
+                        <td>1,500-2,000</td>
+                        <td>~70%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BASE + EXT-A</strong> (pump + filter)</td>
+                        <td>$226</td>
+                        <td>$280-340</td>
+                        <td>3,000-4,000</td>
+                        <td>~65%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BASE + EXT-A + EXT-B</strong> (full system)</td>
+                        <td>$318</td>
+                        <td>$400-480</td>
+                        <td>5,000-6,500</td>
+                        <td>~60%</td>
+                    </tr>
+                    <tr style="background: #fef3c7;">
+                        <td><strong>APE-CHILL</strong> (chiller standalone)</td>
+                        <td>$252</td>
+                        <td>$320-380</td>
+                        <td>4,000-5,500</td>
+                        <td>~55%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="success-box">
+                <strong>Margin Analysis:</strong> Pool enclosures have better margins than TV enclosures because:
+                <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                    <li>No expensive glass panel required</li>
+                    <li>No active electronics (fans, controllers, sensors)</li>
+                    <li>Simpler acoustic foam instead of thermal management</li>
+                    <li>Lower weight = lower shipping cost</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Supplier Sources -->
+        <div class="section">
+            <h2>Supplier Sources</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Supplier Type</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Aluminum sheet/extrusion</td>
+                        <td>Manufacturer-sourced</td>
+                        <td>KDM Steel, Hofengfab source locally</td>
+                    </tr>
+                    <tr>
+                        <td>Acoustic foam</td>
+                        <td>Alibaba suppliers</td>
+                        <td>Search: "closed cell acoustic foam fire rated"</td>
+                    </tr>
+                    <tr>
+                        <td>316 SS hardware</td>
+                        <td>Alibaba suppliers</td>
+                        <td>Verify 316 grade, not 304</td>
+                    </tr>
+                    <tr>
+                        <td>Gas struts</td>
+                        <td>Alibaba: Suspa, Stabilus clones</td>
+                        <td>Specify 316 SS body for marine use</td>
+                    </tr>
+                    <tr>
+                        <td>EPDM gaskets</td>
+                        <td>Alibaba suppliers</td>
+                        <td>Specify higher durometer for chemical resistance</td>
+                    </tr>
+                    <tr>
+                        <td>Powder coating</td>
+                        <td>Manufacturer in-house</td>
+                        <td>Verify 1500hr salt spray cert</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Comparison to Competitors -->
+        <div class="section">
+            <h2>Competitive Pricing Context</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Competitor</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>APE Equivalent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>The Acoustic Box (AU)</td>
+                        <td>Pool Pump Box</td>
+                        <td>~$1,849 AUD (~$1,200 USD)</td>
+                        <td>APE-BASE: $180-220 FOB</td>
+                    </tr>
+                    <tr>
+                        <td>NoisyPool (US)</td>
+                        <td>Quiet Pool Pump Enclosure</td>
+                        <td>$336-649 USD</td>
+                        <td>APE-BASE: $180-220 FOB</td>
+                    </tr>
+                    <tr>
+                        <td>Pool Filter Box (AU)</td>
+                        <td>Standard enclosure</td>
+                        <td>~$800 AUD (~$520 USD)</td>
+                        <td>APE-BASE: $180-220 FOB</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-box">
+                <strong>Market Opportunity:</strong> No competitors currently ship to UAE/GCC. Local pool contractors build custom enclosures at higher cost with no acoustic treatment. APE series fills this gap with manufactured quality at competitive pricing.
+            </div>
+        </div>
+
+    </div>
+
+    <footer style="background: var(--primary-dark); color: white; padding: 1.5rem; text-align: center; margin-top: 2rem;">
+        <p style="opacity: 0.8;">APE Series Pool Equipment Enclosures - Apex Enclosures</p>
+        <p style="font-size: 0.85rem; opacity: 0.6;">Document Version: 1.0 | January 2026</p>
+    </footer>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

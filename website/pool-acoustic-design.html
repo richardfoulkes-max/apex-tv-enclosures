@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acoustic Design Guide - Apex Pool Enclosures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0891b2;
+            --primary-dark: #0e7490;
+            --primary-light: #e0f2fe;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #f0f9ff;
+            --bg-alt: #ffffff;
+            --border: #e0f2fe;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+        /* Layout */
+        .layout { display: flex; min-height: 100vh; }
+
+        /* Sidebar */
+        .sidebar { width: 240px; background: linear-gradient(180deg, var(--primary-dark) 0%, #065f46 100%); color: white; position: fixed; top: 0; left: 0; height: 100vh; overflow-y: auto; z-index: 100; }
+        .sidebar-header { padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit; display: block; }
+        .sidebar-header h1 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .sidebar-header p { font-size: 0.75rem; opacity: 0.7; }
+        .sidebar-nav { padding: 1rem 0; }
+        .sidebar-section { padding: 0.5rem 1.5rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(255,255,255,0.5); margin-top: 0.5rem; }
+        .sidebar-link { display: block; padding: 0.75rem 1.5rem; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: all 0.2s; border-left: 3px solid transparent; }
+        .sidebar-link:hover { background: rgba(255,255,255,0.1); color: white; }
+        .sidebar-link.active { background: rgba(255,255,255,0.15); color: white; border-left-color: #f59e0b; font-weight: 600; }
+        .sidebar-footer { padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; opacity: 0.6; position: absolute; bottom: 0; width: 100%; }
+
+        /* Main Content */
+        .main { flex: 1; margin-left: 240px; }
+
+        @media (max-width: 900px) {
+            .sidebar { width: 100%; height: auto; position: relative; }
+            .sidebar-footer { position: relative; }
+            .main { margin-left: 0; }
+            .layout { flex-direction: column; }
+        }
+
+        header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; padding: 2rem; }
+        .header-content { max-width: 1200px; margin: 0 auto; }
+        header h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+        header .subtitle { opacity: 0.9; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+        h2 {
+            color: var(--primary-dark);
+            font-size: 1.4rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary);
+        }
+        h3 { margin: 1.5rem 0 1rem; color: var(--text); }
+
+        p { margin-bottom: 1rem; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+        th { background: var(--primary-light); font-weight: 600; color: var(--primary-dark); }
+
+        .principle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .principle-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .principle-card h4 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .principle-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .diagram-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .diagram-box svg { max-width: 100%; height: auto; }
+        .diagram-title { font-weight: 600; margin-bottom: 1rem; color: var(--primary-dark); }
+
+        .note {
+            background: var(--primary-light);
+            padding: 1rem;
+            border-left: 4px solid var(--primary);
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            border-radius: 0 8px 8px 0;
+        }
+        .note.warning {
+            background: #fef3c7;
+            border-left-color: var(--warning);
+        }
+
+        .db-scale {
+            display: flex;
+            margin: 1rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .db-level {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            color: white;
+            font-size: 0.85rem;
+        }
+        .db-level .value { font-size: 1.5rem; font-weight: 700; }
+
+        ul, ol { margin: 1rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <a href="index.html?product=pool" class="sidebar-header" style="text-decoration: none; color: inherit; display: block;">
+                <h1>Apex Pool Enclosures</h1>
+                <p>APE Series v1.0</p>
+            </a>
+            <nav class="sidebar-nav">
+                <div class="sidebar-section">Documentation</div>
+                <a href="pool-specification.html" class="sidebar-link">Specification</a>
+                <a href="pool-designs.html" class="sidebar-link">Technical Drawings</a>
+                <a href="pool-bom.html" class="sidebar-link">Bill of Materials</a>
+                <a href="pool-market-research.html" class="sidebar-link">Market Research</a>
+                <a href="pool-engineering-analysis.html" class="sidebar-link">Engineering Analysis</a>
+                <a href="pool-acoustic-design.html" class="sidebar-link active">Acoustic Design</a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Dubai, UAE</p>
+                <p>+971 50 559 8675</p>
+            </div>
+        </aside>
+        <main class="main">
+            <header>
+                <div class="header-content">
+                    <h1>Acoustic Design Guide</h1>
+                    <div class="subtitle">Technical principles for soundproofing pool heat pumps with ventilation</div>
+                </div>
+            </header>
+
+            <div class="container">
+
+                <h2>1. The Problem: Heat Pump Noise</h2>
+
+                <p>Pool heat pumps typically produce 55-65 dB(A) at 1 metre distance. In quiet residential settings, this can be intrusive, especially during evening use when ambient noise is lower.</p>
+
+                <div class="db-scale">
+                    <div class="db-level" style="background: #22c55e;">
+                        <div class="value">30</div>
+                        Whisper
+                    </div>
+                    <div class="db-level" style="background: #84cc16;">
+                        <div class="value">40</div>
+                        Library
+                    </div>
+                    <div class="db-level" style="background: #eab308;">
+                        <div class="value">50</div>
+                        Conversation
+                    </div>
+                    <div class="db-level" style="background: #f97316;">
+                        <div class="value">60</div>
+                        Heat Pump
+                    </div>
+                    <div class="db-level" style="background: #ef4444;">
+                        <div class="value">70</div>
+                        Vacuum
+                    </div>
+                </div>
+
+                <h3>Typical Heat Pump Noise Sources</h3>
+                <table>
+                    <tr>
+                        <th>Source</th>
+                        <th>Frequency</th>
+                        <th>Character</th>
+                        <th>Level</th>
+                    </tr>
+                    <tr>
+                        <td>Compressor</td>
+                        <td>100-250 Hz</td>
+                        <td>Low frequency hum</td>
+                        <td>55-60 dB</td>
+                    </tr>
+                    <tr>
+                        <td>Fan motor</td>
+                        <td>500-2000 Hz</td>
+                        <td>Whine/drone</td>
+                        <td>50-55 dB</td>
+                    </tr>
+                    <tr>
+                        <td>Air discharge</td>
+                        <td>250-4000 Hz</td>
+                        <td>Broadband whoosh</td>
+                        <td>55-62 dB</td>
+                    </tr>
+                    <tr>
+                        <td>Vibration</td>
+                        <td>50-200 Hz</td>
+                        <td>Rumble (structure-borne)</td>
+                        <td>Variable</td>
+                    </tr>
+                </table>
+
+                <h2>2. Acoustic Principles</h2>
+
+                <div class="principle-grid">
+                    <div class="principle-card">
+                        <h4>Mass Barrier</h4>
+                        <p>Heavy, dense materials block sound transmission. Our 2mm aluminium walls provide ~20 dB reduction at mid-frequencies.</p>
+                    </div>
+                    <div class="principle-card">
+                        <h4>Absorption</h4>
+                        <p>Porous materials convert sound energy to heat. 50mm mineral wool (NRC 0.85) absorbs sound inside the enclosure.</p>
+                    </div>
+                    <div class="principle-card">
+                        <h4>Path Length</h4>
+                        <p>Sound loses energy over distance. Labyrinth paths force sound through multiple turns, each reducing level by 3-6 dB.</p>
+                    </div>
+                    <div class="principle-card">
+                        <h4>Decoupling</h4>
+                        <p>Vibration isolation prevents structure-borne sound. Rubber mounts isolate the enclosure from ground transmission.</p>
+                    </div>
+                </div>
+
+                <h2>3. The Ventilation Challenge</h2>
+
+                <p>Heat pumps require continuous airflow (2000-6000 m³/hr) to operate efficiently. Blocking airflow causes equipment damage, but openings leak sound. The solution is <strong>acoustic louvres</strong> - ventilation paths designed to attenuate sound while allowing air passage.</p>
+
+                <div class="diagram-box">
+                    <div class="diagram-title">Acoustic Louvre Cross-Section</div>
+                    <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Frame -->
+                        <rect x="50" y="50" width="400" height="200" fill="none" stroke="#333" stroke-width="2"/>
+
+                        <!-- Louvre blades -->
+                        <g fill="#0891b2" stroke="#0e7490" stroke-width="1">
+                            <polygon points="50,70 150,85 150,95 50,80"/>
+                            <polygon points="50,110 150,125 150,135 50,120"/>
+                            <polygon points="50,150 150,165 150,175 50,160"/>
+                            <polygon points="50,190 150,205 150,215 50,200"/>
+                            <polygon points="50,230 150,245 150,250 50,240"/>
+                        </g>
+
+                        <!-- Mineral wool fill (hatched) -->
+                        <pattern id="wool2" patternUnits="userSpaceOnUse" width="6" height="6">
+                            <circle cx="3" cy="3" r="1.5" fill="#06b6d4" fill-opacity="0.6"/>
+                        </pattern>
+                        <polygon points="55,75 145,88 145,92 55,78" fill="url(#wool2)"/>
+                        <polygon points="55,115 145,128 145,132 55,118" fill="url(#wool2)"/>
+                        <polygon points="55,155 145,168 145,172 55,158" fill="url(#wool2)"/>
+                        <polygon points="55,195 145,208 145,212 55,198" fill="url(#wool2)"/>
+
+                        <!-- Air path arrows -->
+                        <defs>
+                            <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                                <polygon points="0 0, 8 3, 0 6" fill="#10b981"/>
+                            </marker>
+                        </defs>
+                        <path d="M 20,90 Q 100,100 160,95" stroke="#10b981" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+                        <path d="M 160,95 Q 200,95 200,130" stroke="#10b981" stroke-width="2" fill="none"/>
+                        <path d="M 200,130 Q 200,140 160,145" stroke="#10b981" stroke-width="2" fill="none"/>
+                        <path d="M 160,145 Q 100,150 100,180" stroke="#10b981" stroke-width="2" fill="none"/>
+                        <path d="M 100,180 Q 100,190 160,190" stroke="#10b981" stroke-width="2" fill="none"/>
+                        <path d="M 160,190 L 480,190" stroke="#10b981" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+                        <!-- Sound waves (blocked) -->
+                        <g stroke="#ef4444" stroke-width="1.5" fill="none" opacity="0.7">
+                            <path d="M 10,150 Q 25,140 25,150 Q 25,160 40,150"/>
+                            <path d="M 5,150 Q 15,135 15,150 Q 15,165 30,150"/>
+                        </g>
+                        <line x1="35" y1="135" x2="55" y2="165" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="35" y1="165" x2="55" y2="135" stroke="#ef4444" stroke-width="3"/>
+
+                        <!-- Labels -->
+                        <text x="250" y="40" text-anchor="middle" font-size="12" fill="#333">100mm blade depth</text>
+                        <text x="100" y="275" text-anchor="middle" font-size="11" fill="#0891b2">Acoustic blades with mineral wool</text>
+                        <text x="350" y="275" text-anchor="middle" font-size="11" fill="#10b981">Airflow exits after 4 direction changes</text>
+
+                        <!-- Dimension -->
+                        <line x1="50" y1="260" x2="150" y2="260" stroke="#333" stroke-width="1"/>
+                        <line x1="50" y1="255" x2="50" y2="265" stroke="#333" stroke-width="1"/>
+                        <line x1="150" y1="255" x2="150" y2="265" stroke="#333" stroke-width="1"/>
+                        <text x="100" y="258" text-anchor="middle" font-size="10">100mm</text>
+                    </svg>
+                </div>
+
+                <h3>Acoustic Louvre Performance</h3>
+                <table>
+                    <tr>
+                        <th>Blade Depth</th>
+                        <th>Attenuation (500 Hz)</th>
+                        <th>Attenuation (1000 Hz)</th>
+                        <th>Free Area</th>
+                    </tr>
+                    <tr>
+                        <td>50mm</td>
+                        <td>6-8 dB</td>
+                        <td>8-10 dB</td>
+                        <td>~50%</td>
+                    </tr>
+                    <tr>
+                        <td>100mm (APE-HC)</td>
+                        <td>12-15 dB</td>
+                        <td>15-18 dB</td>
+                        <td>~40%</td>
+                    </tr>
+                    <tr>
+                        <td>150mm</td>
+                        <td>18-20 dB</td>
+                        <td>20-25 dB</td>
+                        <td>~35%</td>
+                    </tr>
+                </table>
+
+                <div class="note warning">
+                    <strong>Trade-off:</strong> Deeper blades = more attenuation but less airflow. The APE-HC uses 100mm depth as the optimal balance for pool heat pumps.
+                </div>
+
+                <h2>4. APE-HC Acoustic Strategy</h2>
+
+                <h3>Multi-Layer Approach</h3>
+                <table>
+                    <tr>
+                        <th>Layer</th>
+                        <th>Component</th>
+                        <th>Attenuation</th>
+                        <th>Cumulative</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Acoustic louvre (intake)</td>
+                        <td>12-15 dB</td>
+                        <td>12-15 dB</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Internal absorption (walls)</td>
+                        <td>3-5 dB</td>
+                        <td>15-20 dB</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Acoustic louvre (exhaust)</td>
+                        <td>12-15 dB</td>
+                        <td>27-35 dB</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Mass barrier (flanking paths)</td>
+                        <td>15-20 dB</td>
+                        <td>-</td>
+                    </tr>
+                    <tr style="background: #dcfce7;">
+                        <td colspan="2"><strong>Practical Result</strong></td>
+                        <td colspan="2"><strong>15-20 dB overall reduction</strong></td>
+                    </tr>
+                </table>
+
+                <div class="note">
+                    <strong>Why not 35 dB?</strong> Real-world performance is limited by flanking paths (sound leaking around barriers), imperfect seals, and low-frequency content that's hard to attenuate with compact louvres. Our 18 dB target is achievable and meaningful.
+                </div>
+
+                <h2>5. Material Specifications</h2>
+
+                <h3>Mineral Wool Selection</h3>
+                <table>
+                    <tr>
+                        <th>Property</th>
+                        <th>Requirement</th>
+                        <th>APE-HC Spec</th>
+                    </tr>
+                    <tr>
+                        <td>Density</td>
+                        <td>40-60 kg/m³ (optimal absorption)</td>
+                        <td>48 kg/m³</td>
+                    </tr>
+                    <tr>
+                        <td>Thickness</td>
+                        <td>50mm minimum for broadband</td>
+                        <td>50mm</td>
+                    </tr>
+                    <tr>
+                        <td>NRC (Noise Reduction Coefficient)</td>
+                        <td>> 0.80</td>
+                        <td>0.85</td>
+                    </tr>
+                    <tr>
+                        <td>Water Resistance</td>
+                        <td>Hydrophobic treatment</td>
+                        <td>Yes - outdoor rated</td>
+                    </tr>
+                    <tr>
+                        <td>Fire Rating</td>
+                        <td>Non-combustible</td>
+                        <td>Euroclass A1</td>
+                    </tr>
+                </table>
+
+                <h3>Perforated Panel Design</h3>
+                <table>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Value</th>
+                        <th>Reason</th>
+                    </tr>
+                    <tr>
+                        <td>Open area</td>
+                        <td>23%</td>
+                        <td>Optimal for absorption efficiency</td>
+                    </tr>
+                    <tr>
+                        <td>Hole diameter</td>
+                        <td>3mm</td>
+                        <td>Small enough to protect wool, large enough for sound entry</td>
+                    </tr>
+                    <tr>
+                        <td>Hole pattern</td>
+                        <td>Staggered</td>
+                        <td>Even distribution of absorption</td>
+                    </tr>
+                    <tr>
+                        <td>Material</td>
+                        <td>1mm aluminium</td>
+                        <td>Durable, weather resistant, light</td>
+                    </tr>
+                </table>
+
+                <h2>6. Low Frequency Considerations</h2>
+
+                <p>Compressor hum (100-250 Hz) is the most challenging frequency to attenuate. At these wavelengths (1.4 - 3.4 metres), thin barriers and small louvres are less effective.</p>
+
+                <h3>Low Frequency Mitigation</h3>
+                <ul>
+                    <li><strong>Mass:</strong> 2mm aluminium walls help block low frequencies (mass law)</li>
+                    <li><strong>Vibration isolation:</strong> Rubber mounts prevent structure-borne transmission</li>
+                    <li><strong>Distance:</strong> Position enclosure away from bedrooms/living areas</li>
+                    <li><strong>Expectations:</strong> Accept ~10 dB reduction at low frequencies vs 18 dB at mid/high</li>
+                </ul>
+
+                <div class="note warning">
+                    <strong>Realistic Expectations:</strong> If the heat pump produces a prominent 125 Hz hum at 58 dB, expect reduction to ~48 dB - audible but not intrusive. For extreme low frequency problems, consider a concrete barrier wall in addition to the enclosure.
+                </div>
+
+                <h2>7. Testing & Validation</h2>
+
+                <h3>Recommended Test Protocol</h3>
+                <ol>
+                    <li>Measure heat pump noise without enclosure (1m distance, A-weighted)</li>
+                    <li>Install enclosure, repeat measurement at same position</li>
+                    <li>Calculate insertion loss (difference)</li>
+                    <li>Check at multiple angles (front, side, rear)</li>
+                    <li>Verify equipment operating temperature is within spec</li>
+                </ol>
+
+                <h3>Target Performance</h3>
+                <table>
+                    <tr>
+                        <th>Measurement</th>
+                        <th>Target</th>
+                        <th>Acceptable</th>
+                    </tr>
+                    <tr>
+                        <td>Overall insertion loss</td>
+                        <td>18 dB(A)</td>
+                        <td>15 dB(A)</td>
+                    </tr>
+                    <tr>
+                        <td>500 Hz insertion loss</td>
+                        <td>16 dB</td>
+                        <td>12 dB</td>
+                    </tr>
+                    <tr>
+                        <td>Equipment temp rise</td>
+                        <td>< 5°C</td>
+                        <td>< 10°C</td>
+                    </tr>
+                    <tr>
+                        <td>Airflow restriction</td>
+                        <td>< 10%</td>
+                        <td>< 20%</td>
+                    </tr>
+                </table>
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>

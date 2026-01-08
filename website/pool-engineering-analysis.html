@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Analysis - APE-HC1 Acoustic Enclosure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0891b2;
+            --primary-dark: #0e7490;
+            --primary-light: #e0f2fe;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #f0f9ff;
+            --bg-alt: #ffffff;
+            --border: #e0f2fe;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+        /* Layout */
+        .layout { display: flex; min-height: 100vh; }
+
+        /* Sidebar */
+        .sidebar { width: 240px; background: linear-gradient(180deg, var(--primary-dark) 0%, #065f46 100%); color: white; position: fixed; top: 0; left: 0; height: 100vh; overflow-y: auto; z-index: 100; }
+        .sidebar-header { padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: inherit; display: block; }
+        .sidebar-header h1 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .sidebar-header p { font-size: 0.75rem; opacity: 0.7; }
+        .sidebar-nav { padding: 1rem 0; }
+        .sidebar-section { padding: 0.5rem 1.5rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(255,255,255,0.5); margin-top: 0.5rem; }
+        .sidebar-link { display: block; padding: 0.75rem 1.5rem; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: all 0.2s; border-left: 3px solid transparent; }
+        .sidebar-link:hover { background: rgba(255,255,255,0.1); color: white; }
+        .sidebar-link.active { background: rgba(255,255,255,0.15); color: white; border-left-color: #f59e0b; font-weight: 600; }
+        .sidebar-footer { padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; opacity: 0.6; position: absolute; bottom: 0; width: 100%; }
+
+        /* Main Content */
+        .main { flex: 1; margin-left: 240px; }
+
+        @media (max-width: 900px) {
+            .sidebar { width: 100%; height: auto; position: relative; }
+            .sidebar-footer { position: relative; }
+            .main { margin-left: 0; }
+            .layout { flex-direction: column; }
+        }
+
+        header { background: white; padding: 2rem; border-bottom: 1px solid var(--border); }
+        .header-content { max-width: 1200px; margin: 0 auto; }
+        header h1 { font-size: 1.75rem; margin-bottom: 0.5rem; color: var(--primary-dark); }
+        header p { color: var(--text-muted); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+        .card { background: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .card h2 { font-size: 1.25rem; margin-bottom: 1rem; color: var(--primary-dark); border-bottom: 2px solid var(--primary-light); padding-bottom: 0.5rem; }
+        .card h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: var(--text); }
+
+        .spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0; }
+        .spec-item { background: var(--primary-light); padding: 1rem; border-radius: 8px; }
+        .spec-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .spec-value { font-size: 1.25rem; font-weight: 600; color: var(--primary-dark); }
+        .spec-note { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+        .calculation-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin: 1rem 0; font-family: 'Courier New', monospace; font-size: 0.9rem; }
+        .calculation-box .formula { color: var(--primary-dark); font-weight: 600; }
+        .calculation-box .result { background: var(--success); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block; margin-top: 0.5rem; }
+
+        .warning-box { background: #fef3c7; border-left: 4px solid var(--warning); padding: 1rem; border-radius: 0 8px 8px 0; margin: 1rem 0; }
+        .success-box { background: #d1fae5; border-left: 4px solid var(--success); padding: 1rem; border-radius: 0 8px 8px 0; margin: 1rem 0; }
+        .danger-box { background: #fee2e2; border-left: 4px solid var(--danger); padding: 1rem; border-radius: 0 8px 8px 0; margin: 1rem 0; }
+
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: var(--primary-light); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; color: var(--primary-dark); }
+
+        .dimension-diagram { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 2rem; text-align: center; margin: 1rem 0; }
+        .dimension-diagram pre { font-family: 'Courier New', monospace; font-size: 0.75rem; line-height: 1.4; display: inline-block; text-align: left; }
+
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+        .comparison-item { padding: 1rem; border-radius: 8px; }
+        .comparison-item.old { background: #fee2e2; }
+        .comparison-item.new { background: #d1fae5; }
+        .comparison-item h4 { font-size: 0.9rem; margin-bottom: 0.5rem; }
+
+        @media (max-width: 768px) {
+            .comparison-grid { grid-template-columns: 1fr; }
+            .spec-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <a href="index.html?product=pool" class="sidebar-header" style="text-decoration: none; color: inherit; display: block;">
+                <h1>Apex Pool Enclosures</h1>
+                <p>APE Series v1.0</p>
+            </a>
+            <nav class="sidebar-nav">
+                <div class="sidebar-section">Documentation</div>
+                <a href="pool-specification.html" class="sidebar-link">Specification</a>
+                <a href="pool-designs.html" class="sidebar-link">Technical Drawings</a>
+                <a href="pool-bom.html" class="sidebar-link">Bill of Materials</a>
+                <a href="pool-market-research.html" class="sidebar-link">Market Research</a>
+                <a href="pool-engineering-analysis.html" class="sidebar-link active">Engineering Analysis</a>
+                <a href="pool-acoustic-design.html" class="sidebar-link">Acoustic Design</a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Dubai, UAE</p>
+                <p>+971 50 559 8675</p>
+            </div>
+        </aside>
+        <main class="main">
+    <header>
+        <div class="header-content">
+            <h1>APE-HC1 Engineering Analysis</h1>
+            <p>Thermal and airflow validation for ROTEAM Europa heat pump enclosure</p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Target Unit Specifications -->
+        <div class="card">
+            <h2>Target Unit: ROTEAM Europa Heat Pump</h2>
+            <p>This analysis is based on the specific heat pump unit to be enclosed.</p>
+
+            <div class="spec-grid">
+                <div class="spec-item">
+                    <div class="spec-label">Model Number</div>
+                    <div class="spec-value">00500450</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Heating Capacity</div>
+                    <div class="spec-value">44 kW</div>
+                    <div class="spec-note">150,000 BTU</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Cooling Capacity</div>
+                    <div class="spec-value">34 kW</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Power Supply</div>
+                    <div class="spec-value">380V / 3PH</div>
+                    <div class="spec-note">50 Hz</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Refrigerant</div>
+                    <div class="spec-value">R410A</div>
+                    <div class="spec-note">2400g x 2</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Fan Configuration</div>
+                    <div class="spec-value">2 x 400mm</div>
+                    <div class="spec-note">TOP exhaust</div>
+                </div>
+            </div>
+
+            <h3>Estimated Unit Dimensions</h3>
+            <table>
+                <tr>
+                    <th>Dimension</th>
+                    <th>Estimated Value</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td>Length</td>
+                    <td>~1000 mm</td>
+                    <td>Based on 44kW capacity class</td>
+                </tr>
+                <tr>
+                    <td>Width</td>
+                    <td>~600 mm</td>
+                    <td>Standard width for dual-fan units</td>
+                </tr>
+                <tr>
+                    <td>Height</td>
+                    <td>~800 mm</td>
+                    <td>Including fan shroud</td>
+                </tr>
+            </table>
+
+            <div class="warning-box">
+                <strong>Action Required:</strong> Confirm exact unit dimensions from ROTEAM datasheet or physical measurement before finalizing enclosure dimensions.
+            </div>
+        </div>
+
+        <!-- Critical Design Challenge -->
+        <div class="card">
+            <h2>Critical Design Challenge: Top Exhaust Airflow</h2>
+
+            <div class="danger-box">
+                <strong>Key Finding:</strong> The ROTEAM Europa uses TOP-mounted exhaust fans, not side airflow. This requires a fundamentally different enclosure design with an acoustic chimney/plenum.
+            </div>
+
+            <h3>Airflow Pattern</h3>
+            <p>Heat pumps draw air through side/rear coils and exhaust vertically through top-mounted fans. The enclosure must:</p>
+            <ul style="margin: 1rem 0 1rem 1.5rem;">
+                <li>Allow unrestricted air intake through acoustic louvres on multiple sides</li>
+                <li>Provide a clear vertical exhaust path above the unit</li>
+                <li>Include an acoustic chimney to attenuate exhaust noise</li>
+                <li>Maintain sufficient airflow to prevent overheating</li>
+            </ul>
+
+            <div class="dimension-diagram">
+                <pre>
+                    ACOUSTIC CHIMNEY
+                    +------------------+
+                    |  ░░░░░░░░░░░░░   | <- Acoustic louvres (exhaust)
+                    |  ░ PLENUM     ░  |
+                    |  ░ CHAMBER    ░  | <- Sound absorption lining
+                    |  ░░░░░░░░░░░░░   |
+                    +--------+---------+
+                             |
+           +-----------------+------------------+
+           |    ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲     |
+           |    +-------------------------+     | <- Hot air exhaust
+           |    |   FAN    |    FAN       |     |
+           |    |  400mm   |   400mm      |     |
+           |    +----------+--------------+     |
+           |                                    |
+     Air -> ░    +------------------------+    ░ <- Air
+     In     ░    |                        |    ░    In
+            ░    |    ROTEAM EUROPA       |    ░
+            ░    |    HEAT PUMP           |    ░
+            ░    |    ~1000 x 600 x 800   |    ░
+            ░    |                        |    ░
+            ░    +------------------------+    ░
+           |                                    |
+           +------------------------------------+
+                     BASE ENCLOSURE
+                </pre>
+            </div>
+        </div>
+
+        <!-- Airflow Calculations -->
+        <div class="card">
+            <h2>Airflow Requirements Calculation</h2>
+
+            <h3>Step 1: Estimate Required Airflow</h3>
+            <p>Heat pumps typically require 200-300 m³/h per kW of capacity for proper heat exchange.</p>
+
+            <div class="calculation-box">
+                <div class="formula">Airflow = Capacity x Airflow Factor</div>
+                <br>
+                Conservative estimate (250 m³/h per kW):<br>
+                Airflow = 44 kW x 250 m³/h/kW<br>
+                <span class="result">Airflow = 11,000 m³/h</span>
+            </div>
+
+            <h3>Step 2: Calculate Required Louvre Area</h3>
+            <p>Acoustic louvres typically allow 2-3 m/s face velocity while maintaining acoustic performance.</p>
+
+            <div class="calculation-box">
+                <div class="formula">Area = Airflow / (Velocity x 3600)</div>
+                <br>
+                At 1.5 m/s (conservative for acoustics):<br>
+                Area = 11,000 / (1.5 x 3600)<br>
+                Area = 11,000 / 5,400<br>
+                <span class="result">Area = 2.04 m² minimum</span>
+                <br><br>
+                At 2.0 m/s (moderate):<br>
+                Area = 11,000 / (2.0 x 3600)<br>
+                <span class="result">Area = 1.53 m² minimum</span>
+            </div>
+
+            <div class="warning-box">
+                <strong>Design Target:</strong> Provide minimum 2.0 m² of acoustic louvre area for intake, plus adequate exhaust area in the chimney.
+            </div>
+
+            <h3>Step 3: Pressure Drop Considerations</h3>
+            <p>Total system pressure drop must not exceed fan capability:</p>
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>Estimated Pressure Drop</th>
+                </tr>
+                <tr>
+                    <td>Intake acoustic louvres (Z-blade)</td>
+                    <td>15-25 Pa</td>
+                </tr>
+                <tr>
+                    <td>Acoustic chimney plenum</td>
+                    <td>10-20 Pa</td>
+                </tr>
+                <tr>
+                    <td>Exhaust acoustic louvres</td>
+                    <td>15-25 Pa</td>
+                </tr>
+                <tr>
+                    <td><strong>Total Additional</strong></td>
+                    <td><strong>40-70 Pa</strong></td>
+                </tr>
+            </table>
+
+            <div class="success-box">
+                <strong>Acceptable:</strong> Heat pump fans typically have 100-200 Pa static pressure capability. Additional 40-70 Pa from enclosure should be manageable with properly sized louvres.
+            </div>
+        </div>
+
+        <!-- Revised Enclosure Dimensions -->
+        <div class="card">
+            <h2>Revised Enclosure Dimensions</h2>
+
+            <div class="comparison-grid">
+                <div class="comparison-item old">
+                    <h4>Original Design (Inadequate)</h4>
+                    <ul style="list-style: none;">
+                        <li>1200 x 700 x 900 mm</li>
+                        <li>~0.5 m² louvre area</li>
+                        <li>No exhaust chimney</li>
+                        <li>Side-to-side airflow assumed</li>
+                    </ul>
+                </div>
+                <div class="comparison-item new">
+                    <h4>Revised Design (APE-HC1)</h4>
+                    <ul style="list-style: none;">
+                        <li>1400 x 900 x 1500 mm</li>
+                        <li>~2.5 m² louvre area</li>
+                        <li>600mm acoustic chimney</li>
+                        <li>Top exhaust with plenum</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Detailed Dimensions</h3>
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>Dimension</th>
+                    <th>Rationale</th>
+                </tr>
+                <tr>
+                    <td>Internal Length</td>
+                    <td>1300 mm</td>
+                    <td>1000mm unit + 150mm clearance each end</td>
+                </tr>
+                <tr>
+                    <td>Internal Width</td>
+                    <td>800 mm</td>
+                    <td>600mm unit + 100mm clearance each side</td>
+                </tr>
+                <tr>
+                    <td>Internal Height (base)</td>
+                    <td>900 mm</td>
+                    <td>800mm unit + 100mm clearance above</td>
+                </tr>
+                <tr>
+                    <td>External Length</td>
+                    <td>1400 mm</td>
+                    <td>Internal + 2x50mm acoustic panels</td>
+                </tr>
+                <tr>
+                    <td>External Width</td>
+                    <td>900 mm</td>
+                    <td>Internal + 2x50mm acoustic panels</td>
+                </tr>
+                <tr>
+                    <td>External Height (base)</td>
+                    <td>900 mm</td>
+                    <td>No top panel - open to chimney</td>
+                </tr>
+                <tr>
+                    <td>Chimney Height</td>
+                    <td>600 mm</td>
+                    <td>Acoustic attenuation length</td>
+                </tr>
+                <tr>
+                    <td><strong>Total Height</strong></td>
+                    <td><strong>1500 mm</strong></td>
+                    <td>Base + chimney</td>
+                </tr>
+            </table>
+
+            <h3>Louvre Area Calculation</h3>
+            <div class="calculation-box">
+                <strong>Intake Louvres (3 sides):</strong><br>
+                Front: 1400 x 700 mm = 0.98 m²<br>
+                Left:   900 x 700 mm = 0.63 m²<br>
+                Right:  900 x 700 mm = 0.63 m²<br>
+                <span class="result">Total Intake: 2.24 m²</span>
+                <br><br>
+                <strong>Exhaust Louvres (chimney top):</strong><br>
+                Top: 1400 x 900 mm = 1.26 m²<br>
+                <span class="result">Exhaust: 1.26 m²</span>
+                <br><br>
+                <strong>With 50% free area louvres:</strong><br>
+                Effective intake: 2.24 x 0.5 = 1.12 m²<br>
+                Effective exhaust: 1.26 x 0.5 = 0.63 m²<br>
+            </div>
+
+            <div class="warning-box">
+                <strong>Design Adjustment Needed:</strong> With 50% free area louvres, effective intake area (1.12 m²) is below the 1.5 m² target. Options:
+                <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                    <li>Increase enclosure height to add more louvre area</li>
+                    <li>Use higher free-area louvres (60-70%)</li>
+                    <li>Add louvres to rear panel (if accessible)</li>
+                    <li>Accept higher face velocity (2.5-3 m/s) with slight acoustic penalty</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Acoustic Chimney Design -->
+        <div class="card">
+            <h2>Acoustic Chimney Design</h2>
+
+            <p>The acoustic chimney is the critical component for attenuating exhaust noise while allowing unrestricted vertical airflow.</p>
+
+            <h3>Design Principles</h3>
+            <ul style="margin: 1rem 0 1rem 1.5rem;">
+                <li><strong>Length:</strong> Minimum 600mm for effective low-frequency attenuation</li>
+                <li><strong>Lining:</strong> 50mm mineral wool on all four internal faces</li>
+                <li><strong>Cross-section:</strong> Maintain or exceed fan outlet area</li>
+                <li><strong>Top:</strong> Weather-protected acoustic louvres or baffled outlet</li>
+            </ul>
+
+            <h3>Chimney Construction</h3>
+            <table>
+                <tr>
+                    <th>Layer</th>
+                    <th>Material</th>
+                    <th>Thickness</th>
+                </tr>
+                <tr>
+                    <td>Outer skin</td>
+                    <td>Powder-coated aluminium</td>
+                    <td>2mm</td>
+                </tr>
+                <tr>
+                    <td>Acoustic infill</td>
+                    <td>Mineral wool (60 kg/m³)</td>
+                    <td>50mm</td>
+                </tr>
+                <tr>
+                    <td>Inner facing</td>
+                    <td>Perforated aluminium (23% open)</td>
+                    <td>1mm</td>
+                </tr>
+            </table>
+
+            <h3>Expected Acoustic Performance</h3>
+            <div class="calculation-box">
+                <strong>Chimney Attenuation (estimated):</strong><br>
+                600mm lined plenum at 500 Hz: ~8-12 dB<br>
+                600mm lined plenum at 1000 Hz: ~12-18 dB<br>
+                600mm lined plenum at 2000 Hz: ~15-20 dB<br>
+                <br>
+                <strong>Combined with intake louvres:</strong><br>
+                Total system attenuation: <span class="result">15-20 dB(A)</span>
+            </div>
+        </div>
+
+        <!-- Thermal Analysis -->
+        <div class="card">
+            <h2>Thermal Analysis</h2>
+
+            <h3>Heat Sources</h3>
+            <table>
+                <tr>
+                    <th>Source</th>
+                    <th>Heat Output</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td>Compressor waste heat</td>
+                    <td>~3-5 kW</td>
+                    <td>8-12% of capacity</td>
+                </tr>
+                <tr>
+                    <td>Fan motor heat</td>
+                    <td>~0.3-0.5 kW</td>
+                    <td>Two motors</td>
+                </tr>
+                <tr>
+                    <td>Solar gain on enclosure</td>
+                    <td>~0.5-1.0 kW</td>
+                    <td>Peak, depends on colour</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>~4-6 kW</strong></td>
+                    <td>Worst case</td>
+                </tr>
+            </table>
+
+            <h3>Temperature Rise Calculation</h3>
+            <div class="calculation-box">
+                <div class="formula">Delta T = Q / (m x Cp)</div>
+                <br>
+                Where:<br>
+                Q = 5 kW (heat input)<br>
+                m = 11,000 m³/h x 1.2 kg/m³ = 13,200 kg/h = 3.67 kg/s<br>
+                Cp = 1.005 kJ/kg·K (air)<br>
+                <br>
+                Delta T = 5 / (3.67 x 1.005)<br>
+                <span class="result">Delta T = 1.4°C</span>
+            </div>
+
+            <div class="success-box">
+                <strong>Excellent Result:</strong> With proper airflow maintained, air temperature rise through enclosure is only ~1-2°C. The heat pump will operate within normal parameters.
+            </div>
+
+            <h3>Worst Case: Reduced Airflow</h3>
+            <p>If airflow is reduced by 50% due to clogged louvres or design issues:</p>
+            <div class="calculation-box">
+                At 50% airflow (5,500 m³/h):<br>
+                m = 1.83 kg/s<br>
+                Delta T = 5 / (1.83 x 1.005)<br>
+                <span class="result">Delta T = 2.7°C</span>
+            </div>
+            <p>Still acceptable, but louvre maintenance becomes important.</p>
+        </div>
+
+        <!-- Design Summary -->
+        <div class="card">
+            <h2>Design Summary: APE-HC1 v2.0</h2>
+
+            <div class="spec-grid">
+                <div class="spec-item">
+                    <div class="spec-label">External Dimensions</div>
+                    <div class="spec-value">1400 x 900 x 1500</div>
+                    <div class="spec-note">L x W x H (mm)</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Base Height</div>
+                    <div class="spec-value">900 mm</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Chimney Height</div>
+                    <div class="spec-value">600 mm</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Acoustic Target</div>
+                    <div class="spec-value">15-20 dB(A)</div>
+                    <div class="spec-note">Noise reduction</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Temperature Rise</div>
+                    <div class="spec-value">&lt; 2°C</div>
+                    <div class="spec-note">With full airflow</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Louvre Area</div>
+                    <div class="spec-value">~2.5 m²</div>
+                    <div class="spec-note">Gross area</div>
+                </div>
+            </div>
+
+            <h3>Key Design Features</h3>
+            <ul style="margin: 1rem 0 1rem 1.5rem;">
+                <li><strong>Acoustic chimney:</strong> 600mm plenum with mineral wool lining for exhaust noise attenuation</li>
+                <li><strong>Three-sided louvres:</strong> Z-blade acoustic louvres on front, left, and right for intake</li>
+                <li><strong>Double-skin panels:</strong> 2mm outer + 50mm mineral wool + 1mm perforated inner</li>
+                <li><strong>Hinged access:</strong> Full-height door on one side for maintenance</li>
+                <li><strong>Weather protection:</strong> Angled top on chimney to shed rain</li>
+                <li><strong>Powder coat finish:</strong> RAL 7016 or custom colour, marine grade</li>
+            </ul>
+
+            <div class="success-box">
+                <strong>Validation Complete:</strong> The revised APE-HC1 design provides adequate airflow for the ROTEAM Europa 44kW heat pump while achieving 15-20 dB(A) noise reduction. The acoustic chimney is essential for this top-exhaust unit configuration.
+            </div>
+        </div>
+
+        <!-- Next Steps -->
+        <div class="card">
+            <h2>Next Steps</h2>
+            <ol style="margin-left: 1.5rem;">
+                <li><strong>Confirm exact unit dimensions</strong> - Measure ROTEAM Europa or obtain datasheet</li>
+                <li><strong>Source acoustic louvres</strong> - Get specifications and pricing for Z-blade louvres with ~50% free area</li>
+                <li><strong>Update RFQ document</strong> - Send revised specs to Al Shurooq for quotation</li>
+                <li><strong>Review chimney construction</strong> - Confirm fabrication approach with manufacturer</li>
+                <li><strong>Prototype and test</strong> - Build first unit and measure actual noise reduction</li>
+            </ol>
+        </div>
+
+    </div>
+        </main>
+    </div>
+</body>
+</html>

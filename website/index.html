@@ -300,6 +300,57 @@
             color: var(--primary);
             text-decoration: none;
         }
+
+        /* Product Tabs */
+        .product-tabs {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .product-tab {
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 24px;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-family: inherit;
+        }
+        .product-tab:hover {
+            border-color: var(--primary);
+        }
+        .product-tab.active {
+            border-color: var(--primary);
+            background: rgba(13, 148, 136, 0.05);
+        }
+        .product-tab .tab-icon {
+            font-size: 24px;
+        }
+        .product-tab .tab-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .product-tab .tab-version {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        @media (max-width: 600px) {
+            .product-tabs {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
@@ -316,62 +367,139 @@
     </header>
 
     <div class="container">
-        <div class="welcome">
-            <h2>Welcome back</h2>
-            <p>Choose an area to work in</p>
+        <!-- Product Tabs -->
+        <div class="product-tabs">
+            <button class="product-tab active" onclick="switchProduct('tv')">
+                <span class="tab-icon">📺</span>
+                <span class="tab-title">Apex TV Enclosure</span>
+                <span class="tab-version">v5.3.0</span>
+            </button>
+            <button class="product-tab" onclick="switchProduct('pool')">
+                <span class="tab-icon">🏊</span>
+                <span class="tab-title">Apex Pool Enclosures</span>
+                <span class="tab-version">v1.0</span>
+            </button>
         </div>
 
-        <div class="main-grid">
-            <a href="ai-dashboard.html" class="main-card sales">
-                <div class="card-icon">📊</div>
-                <h3>Sales & Operations</h3>
-                <p class="description">
-                    Manage customer enquiries, orders pipeline, partner relationships, and AI-assisted responses.
-                </p>
-                <div class="card-features">
-                    <span>AI Queue</span>
-                    <span>Orders</span>
-                    <span>CRM</span>
-                    <span>Quotes</span>
+        <!-- TV Section -->
+        <div id="tv-section">
+            <div class="stats-section">
+                <h3>TV Enclosure Status</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="value">v5.3.0</div>
+                        <div class="label">Design Version</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value">75"</div>
+                        <div class="label">Prototype Size</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value">IP55</div>
+                        <div class="label">Weather Rating</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value">160mm</div>
+                        <div class="label">Enclosure Depth</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value">$638</div>
+                        <div class="label">BOM Cost</div>
+                    </div>
                 </div>
-                <div class="card-arrow">→</div>
-            </a>
+            </div>
 
-            <a href="product-dashboard.html" class="main-card product">
-                <div class="card-icon">🔧</div>
-                <h3>Product Development</h3>
-                <p class="description">
-                    Engineering specifications, designs, manufacturing docs, testing plans, and supplier management.
-                </p>
-                <div class="card-features">
-                    <span>Specs</span>
-                    <span>BOMs</span>
-                    <span>Testing</span>
-                    <span>RFQs</span>
-                </div>
-                <div class="card-arrow">→</div>
-            </a>
+            <div class="main-grid">
+                <a href="ai-dashboard.html" class="main-card sales">
+                    <div class="card-icon">📊</div>
+                    <h3>Sales & Operations</h3>
+                    <p class="description">
+                        Manage customer enquiries, orders pipeline, partner relationships, and AI-assisted responses.
+                    </p>
+                    <div class="card-features">
+                        <span>AI Queue</span>
+                        <span>Orders</span>
+                        <span>CRM</span>
+                        <span>Quotes</span>
+                    </div>
+                    <div class="card-arrow">→</div>
+                </a>
+
+                <a href="product-dashboard.html" class="main-card product">
+                    <div class="card-icon">🔧</div>
+                    <h3>Product Development</h3>
+                    <p class="description">
+                        Engineering specifications, designs, manufacturing docs, testing plans, and supplier management.
+                    </p>
+                    <div class="card-features">
+                        <span>Specs</span>
+                        <span>BOMs</span>
+                        <span>Testing</span>
+                        <span>RFQs</span>
+                    </div>
+                    <div class="card-arrow">→</div>
+                </a>
+            </div>
         </div>
 
-        <div class="stats-section">
-            <h3>Product Status</h3>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="value">v5.2.2</div>
-                    <div class="label">Design Version</div>
+        <!-- Pool Section (hidden by default) -->
+        <div id="pool-section" style="display: none;">
+            <div class="stats-section">
+                <h3>Pool Enclosure Status</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="value">v1.0</div>
+                        <div class="label">Design Version</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value">Modular</div>
+                        <div class="label">System Type</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value">IP55</div>
+                        <div class="label">Weather Rating</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value">70-80%</div>
+                        <div class="label">Noise Reduction</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="value">~$318</div>
+                        <div class="label">Full System BOM</div>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="value">75"</div>
-                    <div class="label">Prototype Size</div>
-                </div>
-                <div class="stat-card">
-                    <div class="value">IP55</div>
-                    <div class="label">Weather Rating</div>
-                </div>
-                <div class="stat-card">
-                    <div class="value">160mm</div>
-                    <div class="label">Enclosure Depth</div>
-                </div>
+            </div>
+
+            <div class="main-grid">
+                <a href="ai-dashboard.html" class="main-card sales">
+                    <div class="card-icon">📊</div>
+                    <h3>Sales & Operations</h3>
+                    <p class="description">
+                        Manage customer enquiries, orders pipeline, partner relationships, and AI-assisted responses.
+                    </p>
+                    <div class="card-features">
+                        <span>AI Queue</span>
+                        <span>Orders</span>
+                        <span>CRM</span>
+                        <span>Quotes</span>
+                    </div>
+                    <div class="card-arrow">→</div>
+                </a>
+
+                <a href="pool-specification.html" class="main-card product">
+                    <div class="card-icon">🔧</div>
+                    <h3>Product Development</h3>
+                    <p class="description">
+                        Engineering specifications, designs, manufacturing docs, testing plans, and supplier management.
+                    </p>
+                    <div class="card-features">
+                        <span>Specs</span>
+                        <span>BOMs</span>
+                        <span>Acoustic</span>
+                        <span>RFQs</span>
+                    </div>
+                    <div class="card-arrow">→</div>
+                </a>
             </div>
         </div>
 
@@ -407,5 +535,43 @@
         <p>Apex Enclosures | <a href="mailto:apexenclosures@icloud.com">apexenclosures@icloud.com</a> | +971 50 559 8675</p>
     </footer>
 
+    <script>
+        function switchProduct(product, updateTab = true) {
+            // Update tabs
+            if (updateTab) {
+                document.querySelectorAll('.product-tab').forEach(tab => tab.classList.remove('active'));
+                if (event && event.currentTarget) {
+                    event.currentTarget.classList.add('active');
+                } else {
+                    // Find and activate the correct tab
+                    document.querySelectorAll('.product-tab').forEach(tab => {
+                        if (tab.textContent.toLowerCase().includes(product)) {
+                            tab.classList.add('active');
+                        }
+                    });
+                }
+            }
+
+            // Show/hide sections
+            document.getElementById('tv-section').style.display = product === 'tv' ? 'block' : 'none';
+            document.getElementById('pool-section').style.display = product === 'pool' ? 'block' : 'none';
+        }
+
+        // Check URL for product parameter on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const product = params.get('product');
+            if (product === 'pool') {
+                document.querySelectorAll('.product-tab').forEach(tab => tab.classList.remove('active'));
+                document.querySelectorAll('.product-tab').forEach(tab => {
+                    if (tab.textContent.toLowerCase().includes('pool')) {
+                        tab.classList.add('active');
+                    }
+                });
+                document.getElementById('tv-section').style.display = 'none';
+                document.getElementById('pool-section').style.display = 'block';
+            }
+        });
+    </script>
 </body>
 </html>
