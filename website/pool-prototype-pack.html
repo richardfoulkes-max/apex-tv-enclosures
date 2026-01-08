@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APE Series Pool Equipment Enclosure - Prototype Design Pack</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+        :root {
+            --primary: #0891b2;
+            --primary-dark: #0e7490;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e0f2fe;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            line-height: 1.5;
+            font-size: 11pt;
+            background: white;
+        }
+
+        /* Cover Page */
+        .cover-page {
+            page-break-after: always;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+            color: white;
+        }
+        .cover-logo {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 3px;
+        }
+        .cover-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+        }
+        .cover-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .cover-product {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+        }
+        .cover-info {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem 3rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+        }
+        .cover-info h3 { font-size: 1rem; margin-bottom: 1rem; opacity: 0.8; }
+        .cover-specs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            text-align: center;
+        }
+        .cover-spec-value { font-size: 1.5rem; font-weight: 700; }
+        .cover-spec-label { font-size: 0.85rem; opacity: 0.8; }
+        .cover-footer {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        .cover-version {
+            background: white;
+            color: var(--primary-dark);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 1rem;
+            display: inline-block;
+        }
+
+        /* Page breaks */
+        .page-break { page-break-after: always; }
+        .no-break { page-break-inside: avoid; }
+
+        /* Sections */
+        .section {
+            padding: 1rem 0;
+            page-break-inside: avoid;
+        }
+        .section-header {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1rem;
+            margin: 1.5rem 0 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 4px;
+        }
+        h2 {
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+            margin: 1.5rem 0 0.75rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid var(--border);
+        }
+        h3 {
+            color: var(--text);
+            font-size: 1rem;
+            margin: 1rem 0 0.5rem;
+        }
+        p { margin-bottom: 0.75rem; color: var(--text-muted); }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.75rem 0;
+            font-size: 0.9rem;
+        }
+        th, td {
+            padding: 0.5rem;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+        th {
+            background: #e0f2fe;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        .spec-table td:first-child { font-weight: 500; width: 40%; }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .card {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        .card h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        .card p { font-size: 0.85rem; margin: 0; }
+
+        /* Alerts */
+        .alert {
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin: 0.75rem 0;
+            font-size: 0.9rem;
+        }
+        .alert-info { background: #e0f2fe; border-left: 4px solid var(--primary); }
+        .alert-warning { background: #fef3c7; border-left: 4px solid var(--warning); }
+        .alert-success { background: #d1fae5; border-left: 4px solid var(--success); }
+
+        /* Lists */
+        ul, ol { margin: 0.5rem 0 0.75rem 1.25rem; }
+        li { margin-bottom: 0.25rem; }
+
+        /* Diagrams */
+        .diagram-container {
+            background: #fafafa;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .diagram-container svg { max-width: 100%; height: auto; }
+        .diagram-title {
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* Module visualization */
+        .module-viz {
+            display: flex;
+            gap: 0.25rem;
+            align-items: end;
+            justify-content: center;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        .module {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        .module.base { width: 100px; height: 130px; display: flex; flex-direction: column; justify-content: center; }
+        .module.ext { width: 50px; height: 130px; display: flex; flex-direction: column; justify-content: center; background: #06b6d4; }
+        .module.chiller { width: 160px; height: 160px; display: flex; flex-direction: column; justify-content: center; background: #f59e0b; }
+        .module .size { font-size: 0.65rem; opacity: 0.8; margin-top: 0.25rem; }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 0.75rem 0;
+            padding: 0.75rem;
+            background: #f8fafc;
+            border-radius: 6px;
+            font-size: 0.8rem;
+        }
+        .legend-item { display: flex; align-items: center; gap: 0.35rem; }
+        .legend-color { width: 16px; height: 16px; border-radius: 3px; }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-value { font-size: 1.5rem; font-weight: 700; }
+        .stat-label { font-size: 0.75rem; opacity: 0.9; }
+
+        /* TOC */
+        .toc {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .toc h3 { margin-bottom: 1rem; color: var(--primary-dark); }
+        .toc-list { list-style: none; margin: 0; padding: 0; }
+        .toc-list li {
+            padding: 0.35rem 0;
+            border-bottom: 1px dotted var(--border);
+            display: flex;
+            justify-content: space-between;
+        }
+        .toc-list li:last-child { border-bottom: none; }
+        .toc-section { font-weight: 600; color: var(--primary); margin-right: 0.5rem; }
+
+        /* Footer */
+        .doc-footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        /* Print-specific */
+        @media print {
+            body { font-size: 10pt; }
+            .cover-page { min-height: auto; padding: 3cm 1cm; }
+            .section-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .stat-card { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .alert { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div class="cover-page">
+    <div class="cover-logo">APEX</div>
+    <div class="cover-subtitle">E N C L O S U R E S</div>
+
+    <div class="cover-title">Prototype Design Pack</div>
+    <div class="cover-product">APE Series - Pool Equipment Enclosure</div>
+
+    <div class="cover-info">
+        <h3>KEY SPECIFICATIONS</h3>
+        <div class="cover-specs">
+            <div>
+                <div class="cover-spec-value">70-80%</div>
+                <div class="cover-spec-label">Noise Reduction</div>
+            </div>
+            <div>
+                <div class="cover-spec-value">Modular</div>
+                <div class="cover-spec-label">Expandable System</div>
+            </div>
+            <div>
+                <div class="cover-spec-value">316 SS</div>
+                <div class="cover-spec-label">Salt Pool Safe</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cover-version">Specification v1.0 - January 2026</div>
+
+    <div class="cover-footer">
+        <p>CONFIDENTIAL - For Manufacturing Prototype Only</p>
+        <p>Apex Enclosures | Dubai, UAE | +971 50 559 8675</p>
+    </div>
+</div>
+
+<!-- ==================== TABLE OF CONTENTS ==================== -->
+<div class="section">
+    <div class="section-header">Table of Contents</div>
+
+    <div class="toc">
+        <ul class="toc-list">
+            <li><span class="toc-section">1.</span> Executive Summary <span>3</span></li>
+            <li><span class="toc-section">2.</span> Module Dimensions & Configurations <span>4</span></li>
+            <li><span class="toc-section">3.</span> Technical Drawings <span>6</span></li>
+            <li><span class="toc-section">4.</span> Construction Details & Materials <span>10</span></li>
+            <li><span class="toc-section">5.</span> Acoustic System Design <span>12</span></li>
+            <li><span class="toc-section">6.</span> Ventilation & Thermal Design <span>14</span></li>
+            <li><span class="toc-section">7.</span> Service Access & Mounting <span>15</span></li>
+            <li><span class="toc-section">8.</span> Bill of Materials <span>16</span></li>
+            <li><span class="toc-section">9.</span> Quality Standards & Testing <span>19</span></li>
+            <li><span class="toc-section">10.</span> Prototype Requirements <span>20</span></li>
+        </ul>
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 1: EXECUTIVE SUMMARY ==================== -->
+<div class="section">
+    <div class="section-header">1. Executive Summary</div>
+
+    <p>The APE (Apex Pool Equipment) Series is a modular acoustic enclosure system designed to protect and silence pool equipment in the harsh Gulf climate. The system uses interlocking modules that can be combined to fit any equipment configuration.</p>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">70-80%</div>
+            <div class="stat-label">Noise Reduction</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">IP55</div>
+            <div class="stat-label">Weather Rating</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">316 SS</div>
+            <div class="stat-label">Hardware Grade</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">&lt;15 min</div>
+            <div class="stat-label">Assembly Time</div>
+        </div>
+    </div>
+
+    <h2>1.1 Key Specifications Summary</h2>
+    <table class="spec-table">
+        <tr><th>Parameter</th><th>Specification</th></tr>
+        <tr><td>Product Line</td><td>APE Series (Apex Pool Equipment)</td></tr>
+        <tr><td>System Type</td><td>Modular interlocking panels</td></tr>
+        <tr><td>Acoustic Performance</td><td>70-80% noise reduction (15-20 dB)</td></tr>
+        <tr><td>Weather Rating</td><td>IP55 (rain-proof, hose cleanable)</td></tr>
+        <tr><td>Temperature Rating</td><td>-10°C to +60°C ambient</td></tr>
+        <tr><td>Material - Frame</td><td>5052-H32 Aluminum (2.0-3.0mm)</td></tr>
+        <tr><td>Material - Fasteners</td><td>316 Stainless Steel (salt pool safe)</td></tr>
+        <tr><td>Material - Acoustic</td><td>25mm closed-cell foam (Class O fire rated)</td></tr>
+        <tr><td>Finish</td><td>Marine-grade powder coat (1500hr salt spray)</td></tr>
+        <tr><td>Assembly</td><td>Tool-free, single person, &lt;15 minutes</td></tr>
+        <tr><td>Warranty</td><td>10-year structural, 5-year acoustic</td></tr>
+    </table>
+
+    <h2>1.2 Design Philosophy</h2>
+    <div class="card-grid">
+        <div class="card">
+            <h4>Why Modular?</h4>
+            <p>Unlike TV enclosures (standardized sizes), pool equipment varies dramatically. A modular system with base units and extensions solves the "every setup is different" problem without requiring custom fabrication for each customer.</p>
+        </div>
+        <div class="card">
+            <h4>Why Acoustic?</h4>
+            <p>Pool pumps generate 65-80 dB at 1m - louder than a vacuum cleaner. In villa communities, noise complaints are common. Acoustic lining differentiates from DIY solutions and commands premium pricing.</p>
+        </div>
+    </div>
+
+    <h2>1.3 Target Market</h2>
+    <ul>
+        <li><strong>Primary:</strong> UAE/GCC luxury villa owners (Emirates Hills, Palm Jumeirah, Al Barari)</li>
+        <li><strong>Secondary:</strong> Hotel/resort pool areas, community pool managers</li>
+        <li><strong>Channel:</strong> Pool contractors (Medley Pool, Astralux), landscape architects</li>
+    </ul>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 2: MODULE DIMENSIONS ==================== -->
+<div class="section">
+    <div class="section-header">2. Module Dimensions & Configurations</div>
+
+    <h2>2.1 Modular System Visualization</h2>
+    <div class="module-viz">
+        <div class="module base">
+            <div>BASE</div>
+            <div class="size">600×600</div>
+        </div>
+        <div style="width: 15px; text-align: center; align-self: center; font-weight: bold;">+</div>
+        <div class="module ext">
+            <div>EXT-A</div>
+            <div class="size">300×600</div>
+        </div>
+        <div style="width: 15px; text-align: center; align-self: center; font-weight: bold;">+</div>
+        <div class="module ext">
+            <div>EXT-B</div>
+            <div class="size">400×600</div>
+        </div>
+        <div style="width: 30px;"></div>
+        <div class="module chiller">
+            <div>CHILLER</div>
+            <div class="size">1200×600</div>
+        </div>
+    </div>
+
+    <h2>2.2 Module Specifications</h2>
+    <table>
+        <tr>
+            <th>Module</th>
+            <th>Model</th>
+            <th>External (W×D×H)</th>
+            <th>Internal (W×D×H)</th>
+            <th>Fits</th>
+        </tr>
+        <tr>
+            <td><strong>Base Unit</strong></td>
+            <td>APE-BASE</td>
+            <td>600 × 600 × 800mm</td>
+            <td>550 × 550 × 750mm</td>
+            <td>Single pump (up to 3HP)</td>
+        </tr>
+        <tr>
+            <td><strong>Extension A</strong></td>
+            <td>APE-EXT-A</td>
+            <td>300 × 600 × 800mm</td>
+            <td>250 × 550 × 750mm</td>
+            <td>Cartridge filter OR chlorinator</td>
+        </tr>
+        <tr>
+            <td><strong>Extension B</strong></td>
+            <td>APE-EXT-B</td>
+            <td>400 × 600 × 800mm</td>
+            <td>350 × 550 × 750mm</td>
+            <td>Sand filter (up to 24")</td>
+        </tr>
+        <tr>
+            <td><strong>Extension C</strong></td>
+            <td>APE-EXT-C</td>
+            <td>500 × 600 × 800mm</td>
+            <td>450 × 550 × 750mm</td>
+            <td>Large sand filter (up to 30")</td>
+        </tr>
+        <tr>
+            <td><strong>Chiller Module</strong></td>
+            <td>APE-CHILL</td>
+            <td>1200 × 600 × 1000mm</td>
+            <td>1100 × 550 × 950mm</td>
+            <td>Pool chiller (louvered design)</td>
+        </tr>
+    </table>
+
+    <h2>2.3 Module Connection System</h2>
+    <div class="card-grid">
+        <div class="card">
+            <h4>Tongue-and-Groove Design</h4>
+            <ul>
+                <li>Interlocking aluminum channels on module edges</li>
+                <li>EPDM weather seal in groove (continuous bead)</li>
+                <li>No tools required - slide and lock</li>
+                <li>Can be disassembled for relocation</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Connection Specifications</h4>
+            <table class="spec-table" style="font-size: 0.85rem;">
+                <tr><td>Channel depth</td><td>15mm</td></tr>
+                <tr><td>Tongue width</td><td>12mm</td></tr>
+                <tr><td>Seal type</td><td>EPDM D-profile</td></tr>
+                <tr><td>Seal hardness</td><td>60 Shore A</td></tr>
+                <tr><td>Max modules connected</td><td>4 (any combination)</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <h2>2.4 Dimensional Tolerances</h2>
+    <table>
+        <tr><th>Dimension</th><th>Tolerance</th><th>Notes</th></tr>
+        <tr><td>External dimensions</td><td>±2mm</td><td>Critical for module alignment</td></tr>
+        <tr><td>Internal dimensions</td><td>±3mm</td><td>Must clear equipment</td></tr>
+        <tr><td>Connection channel</td><td>±0.5mm</td><td>Tight fit required for seal</td></tr>
+        <tr><td>Height (ground to top)</td><td>±5mm</td><td>Leveling feet compensate</td></tr>
+    </table>
+
+    <h2>2.5 Common Configurations</h2>
+    <table>
+        <tr>
+            <th>Configuration</th>
+            <th>Modules</th>
+            <th>Total Size (W×D×H)</th>
+            <th>Typical Use</th>
+        </tr>
+        <tr>
+            <td><strong>Compact</strong></td>
+            <td>BASE only</td>
+            <td>600 × 600 × 800mm</td>
+            <td>Pump only</td>
+        </tr>
+        <tr>
+            <td><strong>Standard</strong></td>
+            <td>BASE + EXT-A</td>
+            <td>900 × 600 × 800mm</td>
+            <td>Pump + cartridge filter</td>
+        </tr>
+        <tr>
+            <td><strong>Full</strong></td>
+            <td>BASE + EXT-B</td>
+            <td>1000 × 600 × 800mm</td>
+            <td>Pump + sand filter</td>
+        </tr>
+        <tr>
+            <td><strong>Complete</strong></td>
+            <td>BASE + EXT-B + EXT-A</td>
+            <td>1300 × 600 × 800mm</td>
+            <td>Pump + filter + chlorinator</td>
+        </tr>
+        <tr>
+            <td><strong>Chiller</strong></td>
+            <td>CHILL only</td>
+            <td>1200 × 600 × 1000mm</td>
+            <td>Pool chiller (standalone)</td>
+        </tr>
+    </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 3: TECHNICAL DRAWINGS ==================== -->
+<div class="section">
+    <div class="section-header">3. Technical Drawings</div>
+
+    <h2>3.1 Side Cross-Section - Acoustic System</h2>
+    <div class="diagram-container">
+        <div class="diagram-title">APE-BASE Side Cross-Section (Looking from Left)</div>
+        <svg viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background -->
+            <rect x="0" y="0" width="700" height="500" fill="#fafafa"/>
+
+            <!-- Ground line -->
+            <line x1="50" y1="430" x2="650" y2="430" stroke="#666" stroke-width="2" stroke-dasharray="10,5"/>
+            <text x="660" y="435" font-size="10" fill="#666">Ground</text>
+
+            <!-- Enclosure outer shell -->
+            <rect x="100" y="80" width="400" height="350" fill="none" stroke="#0e7490" stroke-width="3" rx="5"/>
+
+            <!-- Wall thickness (3mm aluminum) -->
+            <rect x="100" y="80" width="8" height="350" fill="#a0aec0"/>
+            <rect x="492" y="80" width="8" height="350" fill="#a0aec0"/>
+            <rect x="100" y="80" width="400" height="8" fill="#a0aec0"/>
+            <rect x="100" y="422" width="400" height="8" fill="#a0aec0"/>
+
+            <!-- Acoustic foam - 25mm layer -->
+            <rect x="108" y="88" width="25" height="334" fill="#fbbf24" opacity="0.7"/>
+            <rect x="467" y="88" width="25" height="334" fill="#fbbf24" opacity="0.7"/>
+            <rect x="108" y="88" width="384" height="25" fill="#fbbf24" opacity="0.7"/>
+            <!-- Back foam (50mm) -->
+            <rect x="133" y="113" width="50" height="309" fill="#f59e0b" opacity="0.7"/>
+
+            <!-- Interior cavity -->
+            <rect x="183" y="113" width="284" height="309" fill="#e0f2fe" opacity="0.5"/>
+
+            <!-- Pool pump representation -->
+            <ellipse cx="325" cy="300" rx="70" ry="50" fill="#64748b" opacity="0.8"/>
+            <text x="325" y="305" font-size="11" fill="white" text-anchor="middle">PUMP</text>
+
+            <!-- Pump motor -->
+            <rect x="390" y="265" width="50" height="70" fill="#475569" rx="5"/>
+            <text x="415" y="305" font-size="9" fill="white" text-anchor="middle">Motor</text>
+
+            <!-- Bottom louver intake -->
+            <rect x="200" y="422" width="200" height="12" fill="#0891b2"/>
+
+            <!-- Top louver exhaust -->
+            <rect x="200" y="68" width="200" height="12" fill="#0891b2"/>
+
+            <!-- Airflow arrows -->
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#10b981"/>
+                </marker>
+            </defs>
+            <path d="M 300 380 Q 300 300 300 150 L 300 100" stroke="#10b981" stroke-width="2" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="5,3"/>
+
+            <!-- Dimension lines -->
+            <line x1="100" y1="460" x2="500" y2="460" stroke="#666" stroke-width="1"/>
+            <line x1="100" y1="450" x2="100" y2="470" stroke="#666" stroke-width="1"/>
+            <line x1="500" y1="450" x2="500" y2="470" stroke="#666" stroke-width="1"/>
+            <text x="300" y="480" font-size="11" fill="#666" text-anchor="middle">600mm (Depth)</text>
+
+            <line x1="550" y1="80" x2="550" y2="430" stroke="#666" stroke-width="1"/>
+            <text x="580" y="260" font-size="11" fill="#666" transform="rotate(90, 580, 260)">800mm (Height)</text>
+
+            <!-- Foam callouts -->
+            <text x="55" y="200" font-size="9" fill="#f59e0b" text-anchor="end">25mm Foam</text>
+            <text x="158" y="240" font-size="9" fill="#f59e0b" text-anchor="middle">50mm</text>
+        </svg>
+    </div>
+
+    <div class="legend">
+        <div class="legend-item"><div class="legend-color" style="background: #a0aec0;"></div> 3mm Aluminum Shell</div>
+        <div class="legend-item"><div class="legend-color" style="background: #fbbf24;"></div> 25mm Acoustic Foam</div>
+        <div class="legend-item"><div class="legend-color" style="background: #f59e0b;"></div> 50mm Back Panel Foam</div>
+        <div class="legend-item"><div class="legend-color" style="background: #0891b2;"></div> Ventilation Louvers</div>
+        <div class="legend-item"><div class="legend-color" style="background: #10b981;"></div> Convection Airflow</div>
+    </div>
+
+    <h2>3.2 Top View - Modular Connection System</h2>
+    <div class="diagram-container">
+        <div class="diagram-title">APE Modular System - Top View (Extension Configuration)</div>
+        <svg viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="700" height="350" fill="#fafafa"/>
+
+            <!-- BASE MODULE -->
+            <rect x="50" y="80" width="180" height="180" fill="#e0f2fe" stroke="#0e7490" stroke-width="3" rx="5"/>
+            <text x="140" y="165" font-size="12" fill="#0e7490" text-anchor="middle" font-weight="600">APE-BASE</text>
+            <text x="140" y="185" font-size="10" fill="#64748b" text-anchor="middle">600 × 600mm</text>
+
+            <!-- Pump outline -->
+            <ellipse cx="140" cy="170" rx="40" ry="40" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+            <!-- EXTENSION A -->
+            <rect x="230" y="110" width="90" height="180" fill="#dcfce7" stroke="#10b981" stroke-width="3" rx="5"/>
+            <text x="275" y="195" font-size="11" fill="#10b981" text-anchor="middle" font-weight="600">EXT-A</text>
+            <text x="275" y="215" font-size="9" fill="#64748b" text-anchor="middle">300 × 600</text>
+
+            <!-- EXTENSION B -->
+            <rect x="320" y="100" width="110" height="180" fill="#fef3c7" stroke="#f59e0b" stroke-width="3" rx="5"/>
+            <text x="375" y="185" font-size="11" fill="#f59e0b" text-anchor="middle" font-weight="600">EXT-B</text>
+            <text x="375" y="205" font-size="9" fill="#64748b" text-anchor="middle">400 × 600</text>
+
+            <!-- Connection points -->
+            <rect x="225" y="140" width="10" height="35" fill="#0e7490"/>
+            <rect x="225" y="195" width="10" height="35" fill="#0e7490"/>
+
+            <!-- Detail box -->
+            <rect x="480" y="30" width="200" height="90" fill="white" stroke="#0e7490" stroke-width="2" rx="5"/>
+            <text x="580" y="50" font-size="10" fill="#0e7490" text-anchor="middle" font-weight="600">TONGUE-AND-GROOVE</text>
+            <rect x="500" y="65" width="25" height="40" fill="#e0f2fe" stroke="#0e7490" stroke-width="2"/>
+            <rect x="525" y="75" width="12" height="20" fill="#0e7490"/>
+            <rect x="537" y="65" width="25" height="40" fill="#dcfce7" stroke="#10b981" stroke-width="2"/>
+            <rect x="532" y="70" width="3" height="30" fill="#ef4444" opacity="0.7"/>
+            <text x="550" y="82" font-size="8" fill="#ef4444">EPDM</text>
+
+            <!-- Total dimension -->
+            <line x1="50" y1="50" x2="430" y2="50" stroke="#0e7490" stroke-width="2"/>
+            <text x="240" y="40" font-size="11" fill="#0e7490" text-anchor="middle" font-weight="600">Total: 1300mm (BASE + EXT-A + EXT-B)</text>
+
+            <!-- Individual dimensions -->
+            <text x="140" y="290" font-size="10" fill="#666" text-anchor="middle">600mm</text>
+            <text x="275" y="310" font-size="10" fill="#666" text-anchor="middle">300mm</text>
+            <text x="375" y="300" font-size="10" fill="#666" text-anchor="middle">400mm</text>
+        </svg>
+    </div>
+
+    <div class="alert alert-info">
+        <strong>Modular Connection System:</strong> Tongue-and-groove interlocking panels with EPDM weather seal at all joints. Single-person assembly without tools. Modules can be connected in any order depending on equipment configuration.
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="section">
+    <h2>3.3 Chiller Module - Louvered Design</h2>
+    <div class="diagram-container">
+        <div class="diagram-title">APE-CHILL - Pool Chiller Enclosure (Front Isometric View)</div>
+        <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="600" height="400" fill="#fafafa"/>
+
+            <!-- 3D side panel -->
+            <polygon points="420,70 500,40 500,320 420,350" fill="#0891b2" opacity="0.3" stroke="#0e7490" stroke-width="2"/>
+
+            <!-- 3D top panel -->
+            <polygon points="80,70 420,70 500,40 160,40" fill="#0891b2" opacity="0.2" stroke="#0e7490" stroke-width="2"/>
+
+            <!-- Front panel -->
+            <rect x="80" y="70" width="340" height="280" fill="#e0f2fe" stroke="#0e7490" stroke-width="3"/>
+
+            <!-- Louver slats -->
+            <g>
+                <rect x="95" y="90" width="310" height="10" fill="#0891b2" transform="skewY(-5)"/>
+                <rect x="95" y="115" width="310" height="10" fill="#0891b2" transform="skewY(-5)"/>
+                <rect x="95" y="140" width="310" height="10" fill="#0891b2" transform="skewY(-5)"/>
+                <rect x="95" y="165" width="310" height="10" fill="#0891b2" transform="skewY(-5)"/>
+                <rect x="95" y="190" width="310" height="10" fill="#0891b2" transform="skewY(-5)"/>
+                <rect x="95" y="215" width="310" height="10" fill="#0891b2" transform="skewY(-5)"/>
+                <rect x="95" y="240" width="310" height="10" fill="#0891b2" transform="skewY(-5)"/>
+                <rect x="95" y="265" width="310" height="10" fill="#0891b2" transform="skewY(-5)"/>
+                <rect x="95" y="290" width="310" height="10" fill="#0891b2" transform="skewY(-5)"/>
+                <rect x="95" y="315" width="310" height="10" fill="#0891b2" transform="skewY(-5)"/>
+            </g>
+
+            <!-- Frame -->
+            <rect x="80" y="70" width="12" height="280" fill="#0e7490"/>
+            <rect x="408" y="70" width="12" height="280" fill="#0e7490"/>
+            <rect x="80" y="70" width="340" height="12" fill="#0e7490"/>
+            <rect x="80" y="338" width="340" height="12" fill="#0e7490"/>
+
+            <!-- Chiller silhouette -->
+            <rect x="140" y="150" width="220" height="160" fill="#64748b" opacity="0.3" rx="8"/>
+            <text x="250" y="230" font-size="12" fill="#475569" text-anchor="middle" font-weight="500">POOL CHILLER</text>
+
+            <!-- Airflow arrows -->
+            <defs>
+                <marker id="airArrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                    <polygon points="0 0, 8 3, 0 6" fill="#10b981"/>
+                </marker>
+                <marker id="hotArrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                    <polygon points="0 0, 8 3, 0 6" fill="#ef4444"/>
+                </marker>
+            </defs>
+            <path d="M 40 180 L 75 180" stroke="#10b981" stroke-width="2" marker-end="url(#airArrow)"/>
+            <path d="M 40 250 L 75 250" stroke="#10b981" stroke-width="2" marker-end="url(#airArrow)"/>
+            <text x="30" y="220" font-size="9" fill="#10b981" text-anchor="end">Cool Air In</text>
+
+            <path d="M 455 180 L 520 180" stroke="#ef4444" stroke-width="2" marker-end="url(#hotArrow)"/>
+            <path d="M 455 250 L 520 250" stroke="#ef4444" stroke-width="2" marker-end="url(#hotArrow)"/>
+            <text x="540" y="220" font-size="9" fill="#ef4444">Hot Air Out</text>
+
+            <!-- Dimensions -->
+            <text x="250" y="380" font-size="11" fill="#666" text-anchor="middle">1200mm Width</text>
+            <text x="40" y="220" font-size="11" fill="#666" transform="rotate(-90, 40, 220)">1000mm Height</text>
+            <text x="470" y="340" font-size="10" fill="#666">600mm Depth</text>
+        </svg>
+    </div>
+
+    <div class="alert alert-warning">
+        <strong>Chiller Airflow Requirements:</strong> Pool chillers have compressors and condensers that require significant airflow (500-1000 CFM typically). The louvered design provides minimum 50% open area on three sides while still reducing noise by 50-60%. Check manufacturer clearance requirements before installation.
+    </div>
+
+    <h2>3.4 APE-CHILL Specifications</h2>
+    <table class="spec-table">
+        <tr><th>Parameter</th><th>Value</th><th>Notes</th></tr>
+        <tr><td>External dimensions</td><td>1200 × 600 × 1000mm</td><td>Fits most residential chillers</td></tr>
+        <tr><td>Open Area</td><td>≥50%</td><td>Required for compressor cooling</td></tr>
+        <tr><td>Louver angle</td><td>45°</td><td>Angled for weather + noise reduction</td></tr>
+        <tr><td>Noise Reduction</td><td>50-60%</td><td>Cannot match enclosed modules</td></tr>
+        <tr><td>Acoustic Treatment</td><td>Acoustic baffles behind louvers</td><td>Absorbs reflected sound</td></tr>
+        <tr><td>Access</td><td>Removable front panel</td><td>Full service access</td></tr>
+    </table>
+</div>
+
+<div class="page-break"></div>
+
+<div class="section">
+    <h2>3.5 Access Panel Detail</h2>
+    <div class="diagram-container">
+        <div class="diagram-title">APE-BASE Front Access Panel - Exploded View</div>
+        <svg viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="600" height="380" fill="#fafafa"/>
+
+            <!-- Main enclosure body -->
+            <rect x="350" y="50" width="200" height="280" fill="#e0f2fe" stroke="#0e7490" stroke-width="3" rx="5"/>
+            <text x="450" y="195" font-size="12" fill="#0e7490" text-anchor="middle" font-weight="600">ENCLOSURE</text>
+            <text x="450" y="210" font-size="10" fill="#64748b" text-anchor="middle">BODY</text>
+
+            <!-- Gasket channel -->
+            <rect x="355" y="55" width="5" height="270" fill="#ef4444"/>
+            <rect x="355" y="55" width="190" height="5" fill="#ef4444"/>
+            <rect x="355" y="320" width="190" height="5" fill="#ef4444"/>
+            <rect x="540" y="55" width="5" height="270" fill="#ef4444"/>
+
+            <text x="570" y="160" font-size="9" fill="#ef4444">EPDM</text>
+            <text x="570" y="172" font-size="9" fill="#ef4444">Gasket</text>
+
+            <!-- Front panel -->
+            <rect x="50" y="50" width="200" height="280" fill="#0891b2" opacity="0.2" stroke="#0e7490" stroke-width="3" rx="5"/>
+
+            <!-- Panel acoustic foam -->
+            <rect x="60" y="60" width="180" height="260" fill="#fbbf24" opacity="0.6"/>
+            <text x="150" y="170" font-size="11" fill="#92400e" text-anchor="middle">25mm Acoustic</text>
+            <text x="150" y="185" font-size="11" fill="#92400e" text-anchor="middle">Foam Lining</text>
+
+            <text x="150" y="220" font-size="12" fill="#0e7490" text-anchor="middle" font-weight="600">FRONT PANEL</text>
+
+            <!-- Hinge detail -->
+            <rect x="90" y="325" width="120" height="15" fill="#64748b"/>
+            <ellipse cx="115" cy="332" rx="12" ry="8" fill="#475569"/>
+            <ellipse cx="185" cy="332" rx="12" ry="8" fill="#475569"/>
+            <text x="275" y="360" font-size="9" fill="#64748b" text-anchor="middle">Piano Hinge (316 SS, full width)</text>
+
+            <!-- Latches -->
+            <rect x="70" y="55" width="30" height="18" fill="#475569" rx="3"/>
+            <rect x="200" y="55" width="30" height="18" fill="#475569" rx="3"/>
+            <text x="150" y="35" font-size="9" fill="#666" text-anchor="middle">Quick-Release Latches</text>
+
+            <!-- Latch receivers -->
+            <rect x="365" y="55" width="30" height="18" fill="#94a3b8" rx="3"/>
+            <rect x="495" y="55" width="30" height="18" fill="#94a3b8" rx="3"/>
+
+            <!-- Assembly arrow -->
+            <defs>
+                <marker id="assemblyArrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#0891b2"/>
+                </marker>
+            </defs>
+            <path d="M 260 190 L 340 190" stroke="#0891b2" stroke-width="3" marker-end="url(#assemblyArrow)"/>
+
+            <!-- Gas strut -->
+            <line x1="240" y1="100" x2="350" y2="70" stroke="#475569" stroke-width="3"/>
+            <circle cx="240" cy="100" r="5" fill="#64748b"/>
+            <circle cx="350" cy="70" r="5" fill="#64748b"/>
+            <text x="295" y="65" font-size="9" fill="#475569">Gas Strut</text>
+        </svg>
+    </div>
+
+    <h3>Access Panel Specifications</h3>
+    <table class="spec-table">
+        <tr><th>Component</th><th>Specification</th><th>Notes</th></tr>
+        <tr><td>Hinge Type</td><td>Piano hinge, full width</td><td>316 Stainless Steel, PTFE bushings</td></tr>
+        <tr><td>Hinge Location</td><td>Bottom edge</td><td>Panel lifts up, gas strut holds</td></tr>
+        <tr><td>Latches</td><td>2× Quick-release (BASE), 4× (larger)</td><td>Tool-free operation</td></tr>
+        <tr><td>Gas Struts</td><td>2× 100N</td><td>Holds panel at 90° open</td></tr>
+        <tr><td>Gasket</td><td>EPDM continuous channel</td><td>Higher durometer for chemical resistance</td></tr>
+        <tr><td>Seal Compression</td><td>3-5mm</td><td>Ensures IP55 rating</td></tr>
+        <tr><td>Panel Foam</td><td>25mm closed-cell</td><td>Bonded to interior surface</td></tr>
+    </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 4: CONSTRUCTION DETAILS ==================== -->
+<div class="section">
+    <div class="section-header">4. Construction Details & Materials</div>
+
+    <h2>4.1 Frame Material</h2>
+    <table class="spec-table">
+        <tr><th>Parameter</th><th>Specification</th></tr>
+        <tr><td>Alloy</td><td>5052-H32 Aluminum</td></tr>
+        <tr><td>Sheet thickness - panels</td><td>2.0mm</td></tr>
+        <tr><td>Sheet thickness - base frame</td><td>3.0mm</td></tr>
+        <tr><td>Extrusion - connection channels</td><td>6063-T5 (15×15mm profile)</td></tr>
+        <tr><td>Yield strength</td><td>193 MPa minimum</td></tr>
+        <tr><td>Corrosion resistance</td><td>Excellent (5xxx series marine grade)</td></tr>
+    </table>
+
+    <h2>4.2 Fasteners & Hardware</h2>
+    <div class="alert alert-warning">
+        <strong>316 Stainless Steel MANDATORY:</strong> Salt water pools are common in UAE. Standard 304 SS or zinc-plated fasteners will corrode within 6-12 months. 316 SS is essential for warranty validity.
+    </div>
+
+    <table>
+        <tr><th>Component</th><th>Material</th><th>Specification</th></tr>
+        <tr><td>Panel screws</td><td>316 SS</td><td>M5×12 pan head (internal)</td></tr>
+        <tr><td>Hinge pins</td><td>316 SS</td><td>5mm diameter</td></tr>
+        <tr><td>Hinge bodies</td><td>316 SS</td><td>Heavy-duty piano hinge style</td></tr>
+        <tr><td>Latch mechanisms</td><td>316 SS</td><td>Compression draw latch</td></tr>
+        <tr><td>Leveling feet</td><td>316 SS + HDPE pad</td><td>M10 thread, 30mm adjustment</td></tr>
+        <tr><td>Ground anchors (optional)</td><td>316 SS</td><td>M8 concrete anchor</td></tr>
+    </table>
+
+    <h2>4.3 Finish Specification</h2>
+    <table class="spec-table">
+        <tr><th>Parameter</th><th>Specification</th></tr>
+        <tr><td>Pre-treatment</td><td>Chromate conversion coating (MIL-DTL-5541)</td></tr>
+        <tr><td>Primer</td><td>Epoxy primer (optional, manufacturer discretion)</td></tr>
+        <tr><td>Top coat</td><td>Marine-grade polyester powder coat</td></tr>
+        <tr><td>Minimum thickness</td><td>80 microns</td></tr>
+        <tr><td>Standard color</td><td>RAL 7016 (Anthracite Grey)</td></tr>
+        <tr><td>Optional colors</td><td>RAL 9010 (White), RAL 7035 (Light Grey), RAL 6005 (Green)</td></tr>
+        <tr><td>Salt spray resistance</td><td>1500 hours minimum (ASTM B117)</td></tr>
+        <tr><td>UV resistance</td><td>5 years color retention (UAE conditions)</td></tr>
+    </table>
+
+    <h2>4.4 Gasket & Seal Materials</h2>
+    <table>
+        <tr><th>Location</th><th>Material</th><th>Specification</th></tr>
+        <tr><td>Module connections</td><td>EPDM</td><td>D-profile, 60 Shore A</td></tr>
+        <tr><td>Access door perimeter</td><td>EPDM</td><td>P-profile, 65 Shore A</td></tr>
+        <tr><td>Ventilation grilles</td><td>Silicone</td><td>Mesh-backed, UV stable</td></tr>
+        <tr><td>Cable entry grommets</td><td>NBR (Nitrile)</td><td>Oil/chemical resistant</td></tr>
+    </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 5: ACOUSTIC SYSTEM ==================== -->
+<div class="section">
+    <div class="section-header">5. Acoustic System Design</div>
+
+    <div class="alert alert-info">
+        <strong>Target: 70-80% noise reduction (15-20 dB)</strong><br>
+        Pool pump at 1m: 65-80 dB → Enclosed: 15-20 dB reduction → Result: 45-55 dB (normal conversation level)
+    </div>
+
+    <h2>5.1 Acoustic Foam Specification</h2>
+    <table class="spec-table">
+        <tr><th>Parameter</th><th>Specification</th></tr>
+        <tr><td>Material</td><td>Closed-cell polyethylene foam</td></tr>
+        <tr><td>Thickness</td><td>25mm (all internal surfaces)</td></tr>
+        <tr><td>Back panel thickness</td><td>50mm (maximum absorption opposite pump)</td></tr>
+        <tr><td>Density</td><td>30-35 kg/m³</td></tr>
+        <tr><td>NRC Rating</td><td>0.65-0.75 (Noise Reduction Coefficient)</td></tr>
+        <tr><td>Fire Rating</td><td>Class O (BS 476 Part 6 & 7)</td></tr>
+        <tr><td>Water Absorption</td><td>&lt;2% by volume (closed-cell)</td></tr>
+        <tr><td>Temperature Range</td><td>-40°C to +80°C</td></tr>
+        <tr><td>UV Resistance</td><td>Protected (internal use only)</td></tr>
+        <tr><td>Attachment</td><td>Industrial adhesive (pressure-sensitive)</td></tr>
+    </table>
+
+    <h2>5.2 Rain-Proof Acoustic Baffle Design</h2>
+    <p>All ventilation openings use downward-angled louvers that block rain while maintaining airflow and acoustic performance.</p>
+
+    <div class="card-grid">
+        <div class="card">
+            <h4>Intake Louvers (Bottom/Sides)</h4>
+            <ul>
+                <li><strong>Louvered design (30° downward angle)</strong></li>
+                <li>Double-layer with 25mm stagger</li>
+                <li>Drip edges on each louver blade</li>
+                <li>Foam-lined internal surfaces</li>
+                <li>Effective open area: 40%</li>
+                <li>Sound reduction: 15-20 dB</li>
+                <li><strong>Rain ingress: Zero</strong></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Exhaust Louvers (Top)</h4>
+            <ul>
+                <li><strong>Louvered design (45° downward angle)</strong></li>
+                <li>75mm deep louver blades</li>
+                <li>Foam strips on louver backs</li>
+                <li>Overlapping design blocks vertical rain</li>
+                <li>Sound reduction: 10-15 dB</li>
+                <li><strong>Rain ingress: Zero</strong></li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>5.3 Multi-Layer Acoustic Strategy</h2>
+    <table>
+        <tr><th>Layer</th><th>Component</th><th>Attenuation</th><th>Cumulative</th></tr>
+        <tr><td>1</td><td>Acoustic louvre (intake)</td><td>12-15 dB</td><td>12-15 dB</td></tr>
+        <tr><td>2</td><td>Internal absorption (walls)</td><td>3-5 dB</td><td>15-20 dB</td></tr>
+        <tr><td>3</td><td>Acoustic louvre (exhaust)</td><td>12-15 dB</td><td>27-35 dB</td></tr>
+        <tr><td>4</td><td>Mass barrier (flanking paths)</td><td>15-20 dB</td><td>-</td></tr>
+        <tr style="background: #d1fae5;"><td colspan="2"><strong>Practical Result</strong></td><td colspan="2"><strong>15-20 dB overall reduction</strong></td></tr>
+    </table>
+
+    <div class="alert alert-info">
+        <strong>Why not 35 dB?</strong> Real-world performance is limited by flanking paths (sound leaking around barriers), imperfect seals, and low-frequency content. Our 15-20 dB target is achievable and meaningful - it represents 70-80% perceived noise reduction.
+    </div>
+
+    <h2>5.4 Sound Transmission Paths</h2>
+    <table>
+        <tr><th>Path</th><th>Without Enclosure</th><th>With Enclosure</th><th>Reduction</th></tr>
+        <tr><td>Direct (through air)</td><td>65-80 dB</td><td>45-55 dB</td><td>20-25 dB</td></tr>
+        <tr><td>Structural (through ground)</td><td>N/A</td><td>N/A</td><td>Use anti-vibration pads</td></tr>
+        <tr><td>Ventilation openings</td><td>65-80 dB</td><td>50-60 dB</td><td>15-20 dB</td></tr>
+        <tr><td><strong>Overall</strong></td><td><strong>65-80 dB</strong></td><td><strong>45-55 dB</strong></td><td><strong>15-20 dB (70-80%)</strong></td></tr>
+    </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 6: VENTILATION ==================== -->
+<div class="section">
+    <div class="section-header">6. Ventilation & Thermal Design</div>
+
+    <h2>6.1 Thermal Load Analysis</h2>
+    <table class="spec-table">
+        <tr><th>Equipment</th><th>Heat Output</th><th>Notes</th></tr>
+        <tr><td>Pool pump (1.5 HP)</td><td>200-400W</td><td>Motor efficiency losses</td></tr>
+        <tr><td>Pool pump (3 HP)</td><td>400-800W</td><td>Larger motor</td></tr>
+        <tr><td>Variable speed pump</td><td>100-300W</td><td>More efficient</td></tr>
+        <tr><td>Salt chlorinator</td><td>50-100W</td><td>Electronics only</td></tr>
+        <tr><td>Automation controller</td><td>20-50W</td><td>Minimal</td></tr>
+        <tr><td><strong>Typical combined</strong></td><td><strong>300-600W</strong></td><td>Design case</td></tr>
+    </table>
+
+    <h2>6.2 Passive Ventilation System</h2>
+    <div class="alert alert-success">
+        <strong>No active fans required:</strong> Unlike TV enclosures, pool equipment enclosures use passive (convection) ventilation. Pump motors are designed to run in outdoor ambient conditions.
+    </div>
+
+    <div class="card-grid">
+        <div class="card">
+            <h4>Airflow Path</h4>
+            <pre style="font-size: 0.8rem; line-height: 1.4;">
+Ambient air
+    ↓
+[Bottom intake baffle]
+    ↓
+Equipment chamber
+(pump heats air)
+    ↓
+Hot air rises (convection)
+    ↓
+[Top exhaust louvers]
+    ↓
+Atmosphere
+            </pre>
+        </div>
+        <div class="card">
+            <h4>Ventilation Specifications</h4>
+            <table class="spec-table" style="font-size: 0.85rem;">
+                <tr><td>Intake area</td><td>400 cm² (effective)</td></tr>
+                <tr><td>Exhaust area</td><td>500 cm² (effective)</td></tr>
+                <tr><td>Natural airflow</td><td>~20-40 CFM (convection)</td></tr>
+                <tr><td>Max internal temp rise</td><td>+10-15°C above ambient</td></tr>
+                <tr><td>Pump motor rating</td><td>Typically Class F (155°C)</td></tr>
+                <tr><td>Safety margin</td><td>Adequate at 60°C ambient</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <h2>6.3 Rain & Humidity Management</h2>
+    <div class="alert alert-info">
+        <strong>IP55 Rain-Proof Design:</strong> Enclosure withstands rain from any direction and can be cleaned with a garden hose. No water enters the equipment chamber.
+    </div>
+
+    <table class="spec-table">
+        <tr><th>Protection Feature</th><th>Specification</th></tr>
+        <tr><td>Intake louvers</td><td>30° downward angle, double-layer with drip edges</td></tr>
+        <tr><td>Exhaust louvers</td><td>45° downward angle, 75mm overlap</td></tr>
+        <tr><td>Panel joints</td><td>Tongue-and-groove with EPDM weather seal</td></tr>
+        <tr><td>Access door</td><td>Continuous EPDM gasket, compression latches</td></tr>
+        <tr><td>Floor drainage</td><td>4× 10mm drain holes with mesh (condensation only)</td></tr>
+        <tr><td>Foam material</td><td>Closed-cell polyethylene (&lt;2% water absorption)</td></tr>
+    </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 7: SERVICE ACCESS ==================== -->
+<div class="section">
+    <div class="section-header">7. Service Access & Mounting</div>
+
+    <h2>7.1 Access Door Design</h2>
+    <p>Each module includes a full-height hinged access door for equipment service.</p>
+
+    <table class="spec-table">
+        <tr><th>Parameter</th><th>Specification</th></tr>
+        <tr><td>Door type</td><td>Full-height hinged panel</td></tr>
+        <tr><td>Opening</td><td>90% of module width</td></tr>
+        <tr><td>Hinge side</td><td>Left (default) or Right (specify at order)</td></tr>
+        <tr><td>Hinge type</td><td>Continuous piano hinge (316 SS)</td></tr>
+        <tr><td>Gas struts</td><td>Optional - holds door open</td></tr>
+        <tr><td>Latches</td><td>2× compression draw latches per door</td></tr>
+        <tr><td>Lock provision</td><td>Padlock hasp on each latch</td></tr>
+    </table>
+
+    <h2>7.2 Removable Panels</h2>
+    <ul>
+        <li><strong>Top panel:</strong> Fully removable for equipment installation/removal</li>
+        <li><strong>Back panel:</strong> Removable for wall-adjacent installations (backless option)</li>
+        <li><strong>Side panels:</strong> Fixed when modules connected, removable when standalone</li>
+    </ul>
+
+    <h2>7.3 Plumbing Access</h2>
+    <table>
+        <tr><th>Feature</th><th>Specification</th></tr>
+        <tr><td>Pipe knockouts</td><td>4× per module (50mm, 75mm, 100mm options)</td></tr>
+        <tr><td>Knockout locations</td><td>Back panel (bottom half) and side panels</td></tr>
+        <tr><td>Grommets</td><td>Split rubber grommets for existing pipes</td></tr>
+        <tr><td>Sealant</td><td>Silicone sealant around pipe penetrations</td></tr>
+    </table>
+
+    <h2>7.4 Ground Installation</h2>
+    <table class="spec-table">
+        <tr><th>Parameter</th><th>Specification</th></tr>
+        <tr><td>Base type</td><td>Integrated aluminum frame</td></tr>
+        <tr><td>Leveling</td><td>4× adjustable feet per module (±30mm)</td></tr>
+        <tr><td>Ground anchoring</td><td>Optional - 4× M8 concrete anchors per module</td></tr>
+        <tr><td>Surface requirement</td><td>Level concrete pad (±10mm)</td></tr>
+        <tr><td>Drainage</td><td>Pad should slope away from enclosure</td></tr>
+    </table>
+
+    <h2>7.5 Weight Specifications</h2>
+    <table>
+        <tr><th>Module</th><th>Empty Weight</th><th>With Equipment (typical)</th></tr>
+        <tr><td>APE-BASE</td><td>~25 kg</td><td>50-80 kg (with pump)</td></tr>
+        <tr><td>APE-EXT-A</td><td>~15 kg</td><td>30-50 kg (with filter)</td></tr>
+        <tr><td>APE-EXT-B</td><td>~18 kg</td><td>60-100 kg (with sand filter)</td></tr>
+        <tr><td>APE-CHILL</td><td>~35 kg</td><td>80-150 kg (with chiller)</td></tr>
+    </table>
+
+    <h2>7.6 Electrical Integration</h2>
+    <div class="alert alert-warning">
+        <strong>Electrical work must be performed by licensed electrician.</strong> Pool equipment operates at 220-240V AC. All electrical connections must comply with UAE ESMA regulations.
+    </div>
+
+    <table class="spec-table">
+        <tr><th>Parameter</th><th>Specification</th></tr>
+        <tr><td>Entry location</td><td>Back panel (bottom) or floor</td></tr>
+        <tr><td>Standard entries</td><td>2× M25 cable glands per module</td></tr>
+        <tr><td>Gland type</td><td>IP68 compression gland (nylon)</td></tr>
+        <tr><td>Cable range</td><td>10-18mm diameter</td></tr>
+        <tr><td>Blanking plugs</td><td>Supplied for unused entries</td></tr>
+    </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 8: BILL OF MATERIALS ==================== -->
+<div class="section">
+    <div class="section-header">8. Bill of Materials</div>
+
+    <p>Component breakdown for prototype manufacturing. All materials specified for Gulf climate durability.</p>
+
+    <h2>8.1 APE-BASE Bill of Materials (600 × 600 × 800mm)</h2>
+
+    <table>
+        <thead>
+            <tr><th>Category</th><th>Item</th><th>Description</th><th>Qty</th></tr>
+        </thead>
+        <tbody>
+            <tr><td colspan="4" style="background: #e0f2fe; font-weight: 600; color: #0e7490;">STRUCTURE</td></tr>
+            <tr><td>Structure</td><td>Frame panels</td><td>5052-H32 Aluminum 3mm, laser cut + bent</td><td>6</td></tr>
+            <tr><td>Structure</td><td>Louver panels (top)</td><td>5052-H32 Aluminum 2mm, louver formed</td><td>1</td></tr>
+            <tr><td>Structure</td><td>Louver panels (bottom)</td><td>5052-H32 Aluminum 2mm, louver formed</td><td>1</td></tr>
+            <tr><td>Structure</td><td>Corner brackets</td><td>5052-H32 Aluminum 3mm, welded</td><td>8</td></tr>
+            <tr><td>Structure</td><td>Tongue-groove rails</td><td>Aluminum extrusion, connection system</td><td>4</td></tr>
+
+            <tr><td colspan="4" style="background: #fef3c7; font-weight: 600; color: #92400e;">ACOUSTIC SYSTEM</td></tr>
+            <tr><td>Acoustic</td><td>Acoustic foam (25mm)</td><td>Closed-cell PE, Class O fire rated, PSA backing</td><td>2.4 m²</td></tr>
+            <tr><td>Acoustic</td><td>Acoustic foam (50mm)</td><td>Closed-cell PE, rear panel</td><td>0.48 m²</td></tr>
+            <tr><td>Acoustic</td><td>Acoustic baffles</td><td>Intake/exhaust labyrinth, foam blocks</td><td>1 set</td></tr>
+
+            <tr><td colspan="4" style="background: #e0f2fe; font-weight: 600; color: #0369a1;">HARDWARE (316 SS)</td></tr>
+            <tr><td>Hardware</td><td>Piano hinge</td><td>316 SS, 600mm, PTFE bushings</td><td>1</td></tr>
+            <tr><td>Hardware</td><td>Quick-release latches</td><td>316 SS, compression type</td><td>2</td></tr>
+            <tr><td>Hardware</td><td>Gas struts</td><td>100N, 316 SS, ball-stud</td><td>2</td></tr>
+            <tr><td>Hardware</td><td>Machine screws</td><td>M5 × 12mm hex socket, 316 SS</td><td>24</td></tr>
+            <tr><td>Hardware</td><td>Self-tapping screws</td><td>M4 × 10mm, 316 SS</td><td>48</td></tr>
+            <tr><td>Hardware</td><td>Nyloc nuts</td><td>M5, 316 SS</td><td>24</td></tr>
+            <tr><td>Hardware</td><td>Washers</td><td>M5 flat, 316 SS</td><td>48</td></tr>
+
+            <tr><td colspan="4" style="background: #dcfce7; font-weight: 600; color: #065f46;">SEALING</td></tr>
+            <tr><td>Sealing</td><td>EPDM gasket</td><td>Continuous channel, 60-70A</td><td>2.4m</td></tr>
+            <tr><td>Sealing</td><td>Weather strip</td><td>Module joint seals</td><td>1.6m</td></tr>
+            <tr><td>Sealing</td><td>Drain grommet</td><td>Silicone, 25mm ID</td><td>1</td></tr>
+
+            <tr><td colspan="4" style="background: #f5f5f5; font-weight: 600;">FINISHING</td></tr>
+            <tr><td>Finishing</td><td>Powder coating</td><td>Marine-grade, RAL 7016, 1500hr salt spray</td><td>2.9 m²</td></tr>
+            <tr><td>Finishing</td><td>Assembly labor</td><td>Foam bonding, hardware install, QC</td><td>0.5 hr</td></tr>
+        </tbody>
+    </table>
+
+    <h2>8.2 APE-EXT-A Bill of Materials (300 × 600 × 800mm)</h2>
+    <table>
+        <tr><th>Item</th><th>Description</th><th>Qty</th></tr>
+        <tr><td>Frame panels</td><td>5052-H32 Aluminum 3mm</td><td>5</td></tr>
+        <tr><td>Louver panels</td><td>5052-H32 Aluminum 2mm</td><td>2</td></tr>
+        <tr><td>Connection rails</td><td>Tongue-groove extrusion</td><td>4</td></tr>
+        <tr><td>Acoustic foam (25mm)</td><td>Closed-cell PE, all surfaces</td><td>1.6 m²</td></tr>
+        <tr><td>Piano hinge</td><td>316 SS, 300mm</td><td>1</td></tr>
+        <tr><td>Quick-release latch</td><td>316 SS</td><td>1</td></tr>
+        <tr><td>Gas strut</td><td>80N, 316 SS</td><td>1</td></tr>
+        <tr><td>Hardware pack</td><td>Screws, nuts, washers (316 SS)</td><td>1</td></tr>
+        <tr><td>Sealing kit</td><td>EPDM gasket + weather strip</td><td>1</td></tr>
+    </table>
+
+    <h2>8.3 APE-EXT-B Bill of Materials (400 × 600 × 800mm)</h2>
+    <table>
+        <tr><th>Item</th><th>Description</th><th>Qty</th></tr>
+        <tr><td>Frame panels</td><td>5052-H32 Aluminum 3mm</td><td>5</td></tr>
+        <tr><td>Louver panels</td><td>5052-H32 Aluminum 2mm</td><td>2</td></tr>
+        <tr><td>Connection rails</td><td>Tongue-groove extrusion</td><td>4</td></tr>
+        <tr><td>Acoustic foam (25mm)</td><td>Closed-cell PE, all surfaces</td><td>2.0 m²</td></tr>
+        <tr><td>Piano hinge</td><td>316 SS, 400mm</td><td>1</td></tr>
+        <tr><td>Quick-release latches</td><td>316 SS</td><td>2</td></tr>
+        <tr><td>Gas strut</td><td>100N, 316 SS</td><td>1</td></tr>
+        <tr><td>Hardware pack</td><td>Screws, nuts, washers (316 SS)</td><td>1</td></tr>
+        <tr><td>Sealing kit</td><td>EPDM gasket + weather strip</td><td>1</td></tr>
+    </table>
+</div>
+
+<div class="page-break"></div>
+
+<div class="section">
+    <h2>8.4 APE-CHILL Bill of Materials (1200 × 600 × 1000mm)</h2>
+    <table>
+        <tr><th>Item</th><th>Description</th><th>Qty</th></tr>
+        <tr><td>Frame panels</td><td>5052-H32 Aluminum 3mm (larger)</td><td>5</td></tr>
+        <tr><td>Louver panels (front)</td><td>5052-H32 Aluminum 2mm, full louver</td><td>1</td></tr>
+        <tr><td>Louver panels (sides)</td><td>5052-H32 Aluminum 2mm, full louver</td><td>2</td></tr>
+        <tr><td>Top panel (solid)</td><td>5052-H32 Aluminum 3mm</td><td>1</td></tr>
+        <tr><td>Corner posts</td><td>Aluminum extrusion, structural</td><td>4</td></tr>
+        <tr><td>Acoustic baffles</td><td>Behind louvers, foam blocks</td><td>1 set</td></tr>
+        <tr><td>Rear foam (50mm)</td><td>Closed-cell PE</td><td>1.2 m²</td></tr>
+        <tr><td>Removable front panel</td><td>Quick-release mounting</td><td>1</td></tr>
+        <tr><td>Panel latches</td><td>316 SS quick-release</td><td>4</td></tr>
+        <tr><td>Hardware pack</td><td>Screws, nuts, washers (316 SS)</td><td>1</td></tr>
+        <tr><td>Leveling feet</td><td>Adjustable, 316 SS</td><td>4</td></tr>
+        <tr><td>Drain</td><td>Floor grommet</td><td>1</td></tr>
+    </table>
+
+    <h2>8.5 Equipment Compatibility Reference</h2>
+    <table>
+        <tr><th>Equipment Type</th><th>Typical Size (W×D×H)</th><th>Required Module</th></tr>
+        <tr><td>Pentair IntelliFlo VSF</td><td>350×350×400mm</td><td>BASE</td></tr>
+        <tr><td>Hayward Super Pump</td><td>400×300×350mm</td><td>BASE</td></tr>
+        <tr><td>Jandy VS FloPro</td><td>350×350×450mm</td><td>BASE</td></tr>
+        <tr><td>Pentair Clean & Clear (150 sq ft)</td><td>300×300×700mm</td><td>EXT-A</td></tr>
+        <tr><td>Hayward ProGrid DE Filter</td><td>400×400×800mm</td><td>EXT-B</td></tr>
+        <tr><td>Pentair Sand Dollar (24")</td><td>650×650×750mm</td><td>EXT-B or EXT-C</td></tr>
+        <tr><td>Hayward AquaRite Salt System</td><td>200×150×400mm</td><td>EXT-A (with filter)</td></tr>
+        <tr><td>Zodiac ZS500 Chiller</td><td>900×400×700mm</td><td>CHILL</td></tr>
+    </table>
+
+    <h2>8.6 Supplier Sources</h2>
+    <table>
+        <tr><th>Component</th><th>Supplier Type</th><th>Notes</th></tr>
+        <tr><td>Aluminum sheet/extrusion</td><td>Manufacturer-sourced</td><td>Source locally to manufacturing</td></tr>
+        <tr><td>Acoustic foam</td><td>Specialty supplier</td><td>Specify: closed cell, fire rated</td></tr>
+        <tr><td>316 SS hardware</td><td>Fastener supplier</td><td>Verify 316 grade, not 304</td></tr>
+        <tr><td>Gas struts</td><td>OEM supplier</td><td>Specify 316 SS body for marine use</td></tr>
+        <tr><td>EPDM gaskets</td><td>Rubber supplier</td><td>Higher durometer for chemical resistance</td></tr>
+        <tr><td>Powder coating</td><td>Manufacturer in-house</td><td>Verify 1500hr salt spray cert</td></tr>
+    </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 9: QUALITY STANDARDS ==================== -->
+<div class="section">
+    <div class="section-header">9. Quality Standards & Testing</div>
+
+    <h2>9.1 Material Certifications Required</h2>
+    <table>
+        <tr><th>Component</th><th>Standard</th><th>Requirement</th></tr>
+        <tr><td>Aluminum sheet</td><td>ASTM B209</td><td>5052-H32, mill certificate</td></tr>
+        <tr><td>Stainless steel fasteners</td><td>ASTM A276</td><td>316 grade, certificate of compliance</td></tr>
+        <tr><td>Powder coating</td><td>ASTM B117</td><td>1500 hour salt spray test report</td></tr>
+        <tr><td>Acoustic foam</td><td>BS 476 Part 6/7</td><td>Class O fire rating certificate</td></tr>
+    </table>
+
+    <h2>9.2 Product Testing</h2>
+    <table>
+        <tr><th>Test</th><th>Standard</th><th>Acceptance Criteria</th></tr>
+        <tr><td>Acoustic performance</td><td>ISO 11546-1</td><td>≥70% noise reduction (15 dB)</td></tr>
+        <tr><td>Weather resistance</td><td>IP55 (IEC 60529)</td><td>Rain-proof, hose cleanable</td></tr>
+        <tr><td>Salt spray corrosion</td><td>ASTM B117</td><td>1500 hours, no red rust</td></tr>
+        <tr><td>UV exposure</td><td>ASTM G154</td><td>1000 hours, no chalking/cracking</td></tr>
+        <tr><td>Structural load</td><td>Internal test</td><td>100kg top load, no deformation</td></tr>
+    </table>
+
+    <h2>9.3 Manufacturing Quality</h2>
+    <ul>
+        <li>ISO 9001 certified manufacturer preferred</li>
+        <li>Incoming material inspection for all aluminum and fasteners</li>
+        <li>Dimensional inspection on 100% of connection channels</li>
+        <li>Visual inspection of powder coat finish (100%)</li>
+        <li>Assembly test of 10% sample (modules connect correctly)</li>
+    </ul>
+
+    <h2>9.4 Acoustic Testing Protocol</h2>
+    <ol>
+        <li>Measure heat pump noise without enclosure (1m distance, A-weighted)</li>
+        <li>Install enclosure, repeat measurement at same position</li>
+        <li>Calculate insertion loss (difference)</li>
+        <li>Check at multiple angles (front, side, rear)</li>
+        <li>Verify equipment operating temperature is within spec</li>
+    </ol>
+
+    <h3>Target Performance</h3>
+    <table>
+        <tr><th>Measurement</th><th>Target</th><th>Acceptable</th></tr>
+        <tr><td>Overall insertion loss</td><td>18 dB(A)</td><td>15 dB(A)</td></tr>
+        <tr><td>500 Hz insertion loss</td><td>16 dB</td><td>12 dB</td></tr>
+        <tr><td>Equipment temp rise</td><td>&lt; 5°C</td><td>&lt; 10°C</td></tr>
+        <tr><td>Airflow restriction</td><td>&lt; 10%</td><td>&lt; 20%</td></tr>
+    </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 10: PROTOTYPE REQUIREMENTS ==================== -->
+<div class="section">
+    <div class="section-header">10. Prototype Requirements</div>
+
+    <h2>10.1 Prototype Deliverables</h2>
+    <ul>
+        <li>1× APE-BASE unit (complete)</li>
+        <li>1× APE-EXT-A unit (complete)</li>
+        <li>1× APE-CHILL unit (complete)</li>
+        <li>Sample connection joint (for fit testing)</li>
+        <li>Finish samples (RAL 7016 on aluminum)</li>
+        <li>Acoustic foam sample (25mm)</li>
+    </ul>
+
+    <h2>10.2 Documentation Package Required</h2>
+    <table>
+        <tr><th>Document</th><th>Format</th><th>Required</th></tr>
+        <tr><td>Production drawings</td><td>DWG/DXF + PDF</td><td>Yes</td></tr>
+        <tr><td>Assembly instructions</td><td>PDF with photos</td><td>Yes</td></tr>
+        <tr><td>Material certificates</td><td>PDF</td><td>Yes</td></tr>
+        <tr><td>Test reports (salt spray)</td><td>PDF</td><td>Yes</td></tr>
+        <tr><td>Acoustic certification</td><td>PDF</td><td>Yes (after prototype)</td></tr>
+        <tr><td>Packing specification</td><td>PDF</td><td>Yes</td></tr>
+    </table>
+
+    <h2>10.3 Prototype Validation Checklist</h2>
+    <table>
+        <tr><th>Test</th><th>Method</th><th>Pass Criteria</th></tr>
+        <tr><td>Module fit</td><td>Connect all modules</td><td>Slides together without forcing, seals compress</td></tr>
+        <tr><td>Door operation</td><td>Open/close 50 cycles</td><td>Smooth operation, latches engage correctly</td></tr>
+        <tr><td>Weather seal</td><td>Garden hose test (5 min)</td><td>No water ingress to interior</td></tr>
+        <tr><td>Equipment fit</td><td>Install standard pump</td><td>Clearance on all sides, door closes</td></tr>
+        <tr><td>Noise reduction</td><td>Sound level meter</td><td>≥15 dB reduction at 1m</td></tr>
+        <tr><td>Thermal</td><td>Run pump 2 hours</td><td>Internal temp &lt;10°C above ambient</td></tr>
+        <tr><td>Finish quality</td><td>Visual inspection</td><td>No scratches, runs, or orange peel</td></tr>
+    </table>
+
+    <h2>10.4 Next Steps</h2>
+    <ol>
+        <li><strong>Review this document</strong> - Confirm dimensions, materials, and specifications</li>
+        <li><strong>Prepare quotation</strong> - Prototype quantity + production volume pricing</li>
+        <li><strong>Schedule kickoff meeting</strong> - Clarify any questions on design</li>
+        <li><strong>CAD development</strong> - Create production drawings</li>
+        <li><strong>Material sourcing</strong> - Order aluminum, fasteners, foam, gaskets</li>
+        <li><strong>Prototype fabrication</strong> - Build and finish units</li>
+        <li><strong>Testing & validation</strong> - Per checklist above</li>
+        <li><strong>Delivery</strong> - Ship to Dubai for field testing</li>
+    </ol>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<div class="doc-footer">
+    <p><strong>APE Series Pool Equipment Enclosure - Prototype Design Pack</strong></p>
+    <p>Apex Enclosures | Dubai, UAE | +971 50 559 8675</p>
+    <p>Document Version: 1.0 | January 2026</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem;">CONFIDENTIAL - For Manufacturing Partner Use Only</p>
+</div>
+
+</body>
+</html>
