@@ -22,31 +22,19 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
 
-        /* Layout */
-        .layout { display: flex; min-height: 100vh; }
+        /* Main Content - nav.js handles sidebar */
+        .main-container { padding: 2rem; }
+        @media (max-width: 900px) { .main-container { padding: 1rem; } }
 
-        /* Sidebar */
-        .sidebar { width: 240px; background: linear-gradient(180deg, var(--primary-dark) 0%, #065f46 100%); color: white; position: fixed; top: 0; left: 0; height: 100vh; overflow-y: auto; z-index: 100; }
-        .sidebar-header { padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .sidebar-header h1 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; }
-        .sidebar-header p { font-size: 0.75rem; opacity: 0.7; }
-        .sidebar-nav { padding: 1rem 0; }
-        .sidebar-section { padding: 0.5rem 1.5rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(255,255,255,0.5); margin-top: 0.5rem; }
-        .sidebar-link { display: block; padding: 0.75rem 1.5rem; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: all 0.2s; border-left: 3px solid transparent; }
-        .sidebar-link:hover { background: rgba(255,255,255,0.1); color: white; }
-        .sidebar-link.active { background: rgba(255,255,255,0.15); color: white; border-left-color: var(--accent); font-weight: 600; }
-        .sidebar-footer { padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; opacity: 0.6; position: absolute; bottom: 0; width: 100%; }
-
-        /* Main Content */
-        .main { flex: 1; margin-left: 240px; }
-        .container { max-width: 1100px; padding: 2rem; }
-
-        @media (max-width: 900px) {
-            .sidebar { width: 100%; height: auto; position: relative; }
-            .sidebar-footer { position: relative; }
-            .main { margin-left: 0; }
-            .layout { flex-direction: column; }
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.25rem 2rem;
+            margin: -2rem -2rem 2rem -2rem;
         }
+        @media (max-width: 900px) { .page-header { display: none; } }
+        .page-header h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .page-header p { opacity: 0.9; font-size: 0.9rem; }
 
         /* Header */
         .header { text-align: center; margin-bottom: 3rem; }
@@ -142,28 +130,12 @@
     </style>
 </head>
 <body>
-    <div class="layout">
-        <aside class="sidebar">
-            <a href="index.html?product=pool" class="sidebar-header" style="text-decoration: none; color: inherit; display: block;">
-                <h1>Apex Pool Enclosures</h1>
-                <p>APE Series v1.0</p>
-            </a>
-            <nav class="sidebar-nav">
-                <div class="sidebar-section">Documentation</div>
-                <a href="pool-specification.html" class="sidebar-link active">Specification</a>
-                <a href="pool-designs.html" class="sidebar-link">Technical Drawings</a>
-                <a href="pool-bom.html" class="sidebar-link">Bill of Materials</a>
-                <a href="pool-market-research.html" class="sidebar-link">Market Research</a>
-                <a href="pool-engineering-analysis.html" class="sidebar-link">Engineering Analysis</a>
-                <a href="pool-acoustic-design.html" class="sidebar-link">Acoustic Design</a>
-            </nav>
-            <div class="sidebar-footer">
-                <p>Dubai, UAE</p>
-                <p>+971 50 559 8675</p>
-            </div>
-        </aside>
-        <main class="main">
-            <div class="container">
+    <div class="main-container">
+        <div class="page-header">
+            <h1>APE-P Series - Pool Pump Enclosure</h1>
+            <p>Modular Acoustic Enclosure System for Pool Pumps & Filters</p>
+        </div>
+
         <header class="header">
             <h1>APE Series - Pool Equipment Enclosure</h1>
             <p class="subtitle">Modular Acoustic Enclosure System for Pool Pumps, Filters & Chillers</p>
@@ -883,12 +855,11 @@ Atmosphere</div>
             </table>
         </section>
 
-            <footer class="footer">
-                <p><strong>APE Series Pool Equipment Enclosure</strong> - Specification v1.0</p>
-                <p>Apex Enclosures | January 2026 | For Manufacturing RFQ</p>
-            </footer>
-            </div>
-        </main>
+        <footer class="footer">
+            <p><strong>APE Series Pool Equipment Enclosure</strong> - Specification v1.0</p>
+            <p>Apex Enclosures | January 2026 | For Manufacturing RFQ</p>
+        </footer>
     </div>
+    <script src="nav.js"></script>
 </body>
 </html>

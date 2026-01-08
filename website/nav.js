@@ -74,13 +74,13 @@
         }
     };
 
-    // Product Development Navigation Structure
-    const productNav = {
+    // TV Enclosure Navigation Structure
+    const tvNav = {
         dashboard: {
             label: 'Dashboard',
             icon: '📊',
             items: [
-                { href: 'product-dashboard.html', label: 'Product Dashboard' }
+                { href: 'index.html', label: 'Home' }
             ]
         },
         tvEnclosures: {
@@ -99,27 +99,6 @@
                 { href: 'tv-compatibility.html', label: 'TV Compatibility' },
                 { href: 'audio-noise-video.html', label: 'Audio/Noise/Video' },
                 { href: 'cavity-requirements.html', label: 'Cavity Requirements' }
-            ]
-        },
-        poolPump: {
-            label: 'APE-P - Pump Enclosure',
-            icon: '🔵',
-            items: [
-                { href: 'pool-specification.html', label: 'Specification' },
-                { href: 'pool-designs.html', label: 'Design Drawings' },
-                { href: 'pool-bom.html', label: 'BOM' },
-                { href: 'pool-acoustic-design.html', label: 'Acoustic Design' },
-                { href: 'pool-engineering-analysis.html', label: 'Engineering Analysis' },
-                { href: 'pool-prototype-pack.html', label: 'Prototype Pack' }
-            ]
-        },
-        poolChiller: {
-            label: 'APE-HC - Heater/Chiller',
-            icon: '❄️',
-            items: [
-                { href: 'pool-chiller-specification.html', label: 'Specification' },
-                { href: 'pool-chiller-designs.html', label: 'Design Drawings' },
-                { href: 'pool-chiller-bom.html', label: 'BOM' }
             ]
         },
         manufacturing: {
@@ -167,6 +146,55 @@
         }
     };
 
+    // Pool Enclosure Navigation Structure
+    const poolNav = {
+        dashboard: {
+            label: 'Dashboard',
+            icon: '📊',
+            items: [
+                { href: 'index.html', label: 'Home' }
+            ]
+        },
+        poolPump: {
+            label: 'APE-P - Pump Enclosure',
+            icon: '🔵',
+            items: [
+                { href: 'pool-specification.html', label: 'Specification' },
+                { href: 'pool-designs.html', label: 'Design Drawings' },
+                { href: 'pool-bom.html', label: 'BOM' },
+                { href: 'pool-acoustic-design.html', label: 'Acoustic Design' },
+                { href: 'pool-engineering-analysis.html', label: 'Engineering Analysis' },
+                { href: 'pool-prototype-pack.html', label: 'Prototype Pack' }
+            ]
+        },
+        poolChiller: {
+            label: 'APE-HC - Heater/Chiller',
+            icon: '❄️',
+            items: [
+                { href: 'pool-chiller-specification.html', label: 'Specification' },
+                { href: 'pool-chiller-designs.html', label: 'Design Drawings' },
+                { href: 'pool-chiller-bom.html', label: 'BOM' }
+            ]
+        },
+        poolManufacturing: {
+            label: 'Manufacturing',
+            icon: '🏭',
+            items: [
+                { href: 'eurotech-profile.html', label: 'Eurotech (Partner)' }
+            ]
+        },
+        poolMarket: {
+            label: 'Market Research',
+            icon: '📈',
+            items: [
+                { href: 'pool-market-research.html', label: 'Pool Market Research' }
+            ]
+        }
+    };
+
+    // Legacy alias for backwards compatibility
+    const productNav = tvNav;
+
     // Determine current page and context
     const pathname = window.location.pathname;
     const isInSubdir = pathname.includes('/legal/') || pathname.includes('/retail/') || pathname.includes('/partner/') || pathname.includes('/commercial/');
@@ -176,9 +204,10 @@
 
     // Determine if we're in Sales or Product context
     const isSalesContext = salesPages.includes(currentPage);
-    const navStructure = isSalesContext ? salesNav : productNav;
-    const contextLabel = isSalesContext ? 'Sales & Ops' : 'Product Dev';
-    const contextColor = isSalesContext ? '#6366f1' : '#0d9488';
+    const isPoolPage = currentPage.startsWith('pool-');
+    const navStructure = isSalesContext ? salesNav : (isPoolPage ? poolNav : tvNav);
+    const contextLabel = isSalesContext ? 'Sales & Ops' : (isPoolPage ? 'Pool Enclosures' : 'TV Enclosures');
+    const contextColor = isSalesContext ? '#6366f1' : (isPoolPage ? '#0891b2' : '#0d9488');
     const switchHref = 'index.html';
     const switchLabel = 'Main Dashboard';
 
@@ -476,9 +505,13 @@
             return item.href === currentFullPath ||
                    (isInSubdir && item.href.startsWith('legal/') && item.href.replace('legal/', '') === currentPage);
         });
+        // Pool enclosure sections always expanded to show sub-menus
+        const alwaysExpanded = ["poolPump", "poolChiller"];
+        const shouldExpand = hasActive || alwaysExpanded.includes(key);
+
 
         sidebarHTML += `
-            <div class="apex-nav-section${hasActive ? '' : ' collapsed'}" data-section="${key}">
+            <div class="apex-nav-section${shouldExpand ? '' : ' collapsed'}" data-section="${key}">
                 <div class="apex-nav-section-header" onclick="toggleApexSection('${key}', event)">
                     <span class="icon">${section.icon}</span>
                     <span>${section.label}</span>
@@ -527,11 +560,13 @@
         document.querySelector('.apex-sidebar-overlay').classList.toggle('open');
     };
 
-    // Restore collapsed state
+    // Restore collapsed state (but always expand pool enclosure sections)
+    const alwaysExpandedRestore = ['poolPump', 'poolChiller'];
     const savedCollapsed = JSON.parse(localStorage.getItem('apexNavCollapsed') || '{}');
     Object.entries(savedCollapsed).forEach(([key, isCollapsed]) => {
         const section = document.querySelector(`.apex-nav-section[data-section="${key}"]`);
-        if (section && !section.querySelector('.apex-nav-item.active')) {
+        // Skip restoring collapsed state for always-expanded sections
+        if (section && !section.querySelector('.apex-nav-item.active') && !alwaysExpandedRestore.includes(key)) {
             section.classList.toggle('collapsed', isCollapsed);
         }
     });
