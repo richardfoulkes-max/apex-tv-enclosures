@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APE-S Storage Enclosure Specification | Apex Enclosures</title>
+    <style>
+        :root {
+            --primary: #0891b2;
+            --primary-dark: #0e7490;
+            --primary-light: #06b6d4;
+            --accent: #f59e0b;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #f0f9ff;
+            --card: #ffffff;
+            --border: #e0f2fe;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+        .main-container { padding: 2rem; max-width: 1200px; }
+        @media (max-width: 900px) { .main-container { padding: 1rem; } }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.5rem 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+        }
+        @media (max-width: 900px) { .page-header { display: none; } }
+        .page-header h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .page-header p { opacity: 0.9; font-size: 0.9rem; }
+
+        /* Header */
+        .header { text-align: center; margin-bottom: 2rem; }
+        .header h1 { font-size: 2rem; color: var(--primary-dark); margin-bottom: 0.5rem; }
+        .header .subtitle { color: var(--text-muted); font-size: 1rem; }
+        .header .version { display: inline-block; background: var(--accent); color: white; padding: 0.35rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-top: 1rem; }
+
+        /* Section Styling */
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+        }
+        .section h2 {
+            color: var(--primary-dark);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+        .section h3 {
+            color: var(--text);
+            font-size: 1rem;
+            margin: 1.25rem 0 0.5rem;
+        }
+
+        /* Tables */
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        .spec-table th {
+            background: var(--bg);
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--primary);
+            border-bottom: 2px solid var(--border);
+        }
+        .spec-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .spec-table td:first-child {
+            font-weight: 500;
+            color: var(--text);
+            width: 35%;
+        }
+
+        /* Highlight Boxes */
+        .highlight {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border: 2px solid var(--success);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin: 1rem 0;
+        }
+        .highlight h4 {
+            color: #065f46;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .highlight p, .highlight li { color: #047857; margin: 0.25rem 0; font-size: 0.9rem; }
+
+        .warning {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin: 1rem 0;
+        }
+        .warning h4 { color: #92400e; margin-bottom: 0.5rem; }
+        .warning p { color: #78350f; margin: 0; font-size: 0.9rem; }
+
+        .problem-box {
+            background: linear-gradient(135deg, #fef2f2, #fecaca);
+            border: 2px solid var(--danger);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin: 1rem 0;
+        }
+        .problem-box h4 { color: #991b1b; margin-bottom: 0.5rem; }
+        .problem-box p, .problem-box li { color: #b91c1c; font-size: 0.9rem; margin: 0.25rem 0; }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .feature-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+        }
+        .feature-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .feature-card h4 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        /* Model Grid */
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .model-card {
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .model-card.recommended { border-color: var(--primary); }
+        .model-card .model-header {
+            background: var(--bg);
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .model-card.recommended .model-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+        .model-card .model-header h4 { margin: 0; font-size: 1.1rem; }
+        .model-card .model-header .size { font-size: 0.85rem; opacity: 0.8; margin-top: 0.25rem; }
+        .model-card .model-body { padding: 1rem; }
+        .model-card ul { list-style: none; padding: 0; margin: 0; }
+        .model-card li {
+            padding: 0.35rem 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+        }
+        .model-card li:last-child { border-bottom: none; }
+        .model-card li strong { color: var(--text); }
+
+        /* Comparison */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+        }
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        .comparison-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .comparison-table tr:nth-child(even) { background: #f8fafc; }
+        .comparison-table .good { color: var(--success); font-weight: 600; }
+        .comparison-table .bad { color: var(--danger); }
+        .comparison-table .apex-col { background: #ecfeff; }
+
+        /* Smart Features */
+        .smart-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        @media (max-width: 768px) { .smart-grid { grid-template-columns: 1fr; } }
+        .smart-card {
+            background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+            border: 1px solid #a78bfa;
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .smart-card .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .smart-card h4 { color: #5b21b6; font-size: 0.95rem; margin-bottom: 0.5rem; }
+        .smart-card p { color: #6d28d9; font-size: 0.8rem; margin: 0; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="page-header">
+            <h1>APE-S Storage Enclosure</h1>
+            <p>Climate-controlled poolside storage for cushions, towels, and accessories</p>
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <h1>APE-S Pool Storage Enclosure</h1>
+            <p class="subtitle">Premium Climate-Controlled Outdoor Storage</p>
+            <span class="version">CONCEPT v0.1 - In Development</span>
+        </div>
+
+        <!-- Section 1: Problem Statement -->
+        <section class="section">
+            <h2>1. The Problem We're Solving</h2>
+
+            <div class="problem-box">
+                <h4>Why Standard Deck Boxes Fail in the Gulf</h4>
+                <ul>
+                    <li><strong>Plastic degrades</strong> - UV and 50°C+ heat break down resin boxes within 2-3 years</li>
+                    <li><strong>Not truly sealed</strong> - Intentional ventilation gaps let in humid, salty air</li>
+                    <li><strong>No monitoring</strong> - You don't know there's a problem until cushions are moldy</li>
+                    <li><strong>Heat buildup</strong> - Dark plastic boxes can reach 70°C+ inside, damaging foam and fabrics</li>
+                    <li><strong>Corrosion</strong> - Metal hinges and latches rust within months near pools</li>
+                </ul>
+            </div>
+
+            <h3>The Science: Why Humidity Control Matters</h3>
+            <table class="spec-table">
+                <tr>
+                    <td>Safe humidity range</td>
+                    <td><strong>30-50% RH</strong> - Below this, materials dry out; above, mold grows</td>
+                </tr>
+                <tr>
+                    <td>Mold growth threshold</td>
+                    <td><strong>>60% RH</strong> - Mold spores activate and colonize fabrics</td>
+                </tr>
+                <tr>
+                    <td>Dubai average humidity</td>
+                    <td><strong>60-90% RH</strong> (higher near coast and pools)</td>
+                </tr>
+                <tr>
+                    <td>Temperature effect</td>
+                    <td>Every 10°C rise <strong>doubles</strong> mold growth rate</td>
+                </tr>
+            </table>
+
+            <div class="highlight">
+                <h4>💡 Apex Solution</h4>
+                <p>Seal out the environment completely (IP65), monitor conditions with smart sensors, and actively manage humidity with desiccant systems. Know there's a problem before it damages your belongings.</p>
+            </div>
+        </section>
+
+        <!-- Section 2: Design Philosophy -->
+        <section class="section">
+            <h2>2. Design Philosophy</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">🔒</div>
+                    <h4>Industrial-Grade Sealing</h4>
+                    <p>IP65 rated construction with continuous EPDM gaskets. Dust-tight and protected against water jets - far beyond typical deck boxes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📱</div>
+                    <h4>Smart Monitoring</h4>
+                    <p>Integrated temperature and humidity sensors with smartphone alerts. Know instantly when conditions exceed safe thresholds.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">💨</div>
+                    <h4>Active Humidity Control</h4>
+                    <p>Built-in desiccant chamber with indicator window. Optional powered ventilation activates when humidity rises.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🏭</div>
+                    <h4>Marine-Grade Construction</h4>
+                    <p>5052-H32 aluminum with 2000+ hour salt spray coating. Same quality as our equipment enclosures - built to last decades.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🌡️</div>
+                    <h4>Thermal Management</h4>
+                    <p>Light-colored reflective finish, double-wall construction with air gap insulation. Stays 15-20°C cooler than dark plastic boxes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🎨</div>
+                    <h4>Architectural Finish</h4>
+                    <p>Full RAL color palette to match villa architecture. Premium powder coating that won't fade, peel, or chalk.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Specifications -->
+        <section class="section">
+            <h2>3. Technical Specifications</h2>
+
+            <h3>3.1 Construction</h3>
+            <table class="spec-table">
+                <tr><td>Material</td><td>5052-H32 marine-grade aluminum, 2.0mm panels</td></tr>
+                <tr><td>Frame</td><td>5052-H32 aluminum, 3.0mm structural members</td></tr>
+                <tr><td>Finish</td><td>Powder coat, 80-100μm, 2000+ hr salt spray (C5-M)</td></tr>
+                <tr><td>IP Rating</td><td><strong>IP65</strong> - Dust tight, protected against water jets</td></tr>
+                <tr><td>Gaskets</td><td>EPDM continuous seal, UV and ozone resistant</td></tr>
+                <tr><td>Hardware</td><td>316 stainless steel (marine grade)</td></tr>
+                <tr><td>Hinges</td><td>Heavy-duty 316 SS with gas struts (soft close)</td></tr>
+                <tr><td>Latch</td><td>Compression latch with padlock provision</td></tr>
+            </table>
+
+            <h3>3.2 Smart Features</h3>
+            <table class="spec-table">
+                <tr><td>Sensor type</td><td>Temperature + Humidity (±0.3°C, ±2% RH accuracy)</td></tr>
+                <tr><td>Connectivity</td><td>Bluetooth 5.0 + WiFi gateway option</td></tr>
+                <tr><td>Alerts</td><td>Push notifications when T/RH exceed thresholds</td></tr>
+                <tr><td>Data logging</td><td>30-day on-device, unlimited cloud with gateway</td></tr>
+                <tr><td>Battery life</td><td>12+ months (replaceable CR2477)</td></tr>
+                <tr><td>Compatible sensors</td><td>SensorPush HT1, SwitchBot Meter, UbiBot WS1</td></tr>
+            </table>
+
+            <h3>3.3 Humidity Control System</h3>
+            <table class="spec-table">
+                <tr><td>Desiccant chamber</td><td>Built-in compartment for 500g silica gel or DampRid</td></tr>
+                <tr><td>Indicator window</td><td>Color-change visibility (blue = dry, pink = saturated)</td></tr>
+                <tr><td>Regeneration</td><td>Remove and microwave/oven dry, or replace</td></tr>
+                <tr><td>Active ventilation (optional)</td><td>12V DC fan, 10 CFM, activates at >55% RH</td></tr>
+                <tr><td>Target interior RH</td><td>35-50% (maintained passively or actively)</td></tr>
+            </table>
+
+            <h3>3.4 Interior Features</h3>
+            <table class="spec-table">
+                <tr><td>Floor</td><td>Elevated mesh rack (10mm clearance) for airflow</td></tr>
+                <tr><td>Walls</td><td>Reflective interior (reduces heat absorption)</td></tr>
+                <tr><td>Dividers</td><td>Optional removable dividers for organization</td></tr>
+                <tr><td>Lighting</td><td>Optional LED strip with magnetic door switch</td></tr>
+            </table>
+        </section>
+
+        <!-- Section 4: Model Range -->
+        <section class="section">
+            <h2>4. Model Range</h2>
+
+            <div class="model-grid">
+                <div class="model-card">
+                    <div class="model-header">
+                        <h4>APE-S-100</h4>
+                        <div class="size">Compact</div>
+                    </div>
+                    <div class="model-body">
+                        <ul>
+                            <li><strong>External:</strong> 800 × 500 × 500mm</li>
+                            <li><strong>Internal:</strong> ~100L capacity</li>
+                            <li><strong>Use:</strong> 4-6 cushions or towels</li>
+                            <li><strong>Weight:</strong> ~25kg empty</li>
+                            <li><strong>Sensor:</strong> Standard</li>
+                            <li><strong>Ventilation:</strong> Passive only</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="model-card recommended">
+                    <div class="model-header">
+                        <h4>APE-S-200</h4>
+                        <div class="size">Standard - Most Popular</div>
+                    </div>
+                    <div class="model-body">
+                        <ul>
+                            <li><strong>External:</strong> 1200 × 600 × 600mm</li>
+                            <li><strong>Internal:</strong> ~200L capacity</li>
+                            <li><strong>Use:</strong> Full lounge set cushions</li>
+                            <li><strong>Weight:</strong> ~40kg empty</li>
+                            <li><strong>Sensor:</strong> Standard</li>
+                            <li><strong>Ventilation:</strong> Passive + Active option</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="model-card">
+                    <div class="model-header">
+                        <h4>APE-S-350</h4>
+                        <div class="size">Large</div>
+                    </div>
+                    <div class="model-body">
+                        <ul>
+                            <li><strong>External:</strong> 1500 × 700 × 700mm</li>
+                            <li><strong>Internal:</strong> ~350L capacity</li>
+                            <li><strong>Use:</strong> Multiple sets + accessories</li>
+                            <li><strong>Weight:</strong> ~55kg empty</li>
+                            <li><strong>Sensor:</strong> Standard + 2nd zone option</li>
+                            <li><strong>Ventilation:</strong> Passive + Active option</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning">
+                <h4>⚠️ Bench Seat Option</h4>
+                <p>All models available with reinforced lid (5mm aluminum) rated for 150kg seating load. Add 10kg to unit weight and premium pricing.</p>
+            </div>
+        </section>
+
+        <!-- Section 5: Smart Monitoring -->
+        <section class="section">
+            <h2>5. Smart Monitoring System</h2>
+
+            <p>Every APE-S includes a pre-installed wireless sensor that connects to your smartphone. Set alerts and never worry about your stored items again.</p>
+
+            <div class="smart-grid">
+                <div class="smart-card">
+                    <div class="icon">📊</div>
+                    <h4>Real-Time Monitoring</h4>
+                    <p>See temperature and humidity at a glance. Historical charts show trends over days, weeks, months.</p>
+                </div>
+                <div class="smart-card">
+                    <div class="icon">🔔</div>
+                    <h4>Smart Alerts</h4>
+                    <p>Get push notifications if humidity exceeds 55% or temperature exceeds 45°C. Catch problems before damage occurs.</p>
+                </div>
+                <div class="smart-card">
+                    <div class="icon">🌐</div>
+                    <h4>Remote Access</h4>
+                    <p>With optional WiFi gateway, monitor from anywhere. Check on your villa while traveling.</p>
+                </div>
+            </div>
+
+            <h3>Compatible Sensor Options</h3>
+            <table class="spec-table">
+                <tr>
+                    <td>SensorPush HT1 (included)</td>
+                    <td>Compact, reliable, excellent app. 20-day on-device logging. Add G1 gateway for remote access.</td>
+                </tr>
+                <tr>
+                    <td>SwitchBot Meter (alternative)</td>
+                    <td>Swiss Sensirion sensor, IP65 rated. Integrates with SwitchBot smart home ecosystem.</td>
+                </tr>
+                <tr>
+                    <td>UbiBot WS1 (commercial)</td>
+                    <td>WiFi built-in, 300,000 data points storage. Best for multi-unit monitoring.</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Section 6: Comparison -->
+        <section class="section">
+            <h2>6. How We Compare</h2>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Plastic Deck Box</th>
+                        <th>Wooden Storage</th>
+                        <th class="apex-col">Apex APE-S</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Material</strong></td>
+                        <td>Resin/HDPE</td>
+                        <td>Teak/treated wood</td>
+                        <td class="apex-col good">Marine aluminum</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Weather sealing</strong></td>
+                        <td class="bad">Vented (intentionally)</td>
+                        <td class="bad">Gaps in construction</td>
+                        <td class="apex-col good">IP65 sealed</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Humidity control</strong></td>
+                        <td class="bad">None</td>
+                        <td class="bad">None</td>
+                        <td class="apex-col good">Sensor + desiccant</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Smart monitoring</strong></td>
+                        <td class="bad">None</td>
+                        <td class="bad">None</td>
+                        <td class="apex-col good">App + alerts</td>
+                    </tr>
+                    <tr>
+                        <td><strong>UV resistance</strong></td>
+                        <td class="bad">Degrades in 2-3 years</td>
+                        <td>Good if maintained</td>
+                        <td class="apex-col good">Powder coat, 10+ years</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Salt/chlorine resistance</strong></td>
+                        <td>Fair</td>
+                        <td class="bad">Poor (hardware rusts)</td>
+                        <td class="apex-col good">2000hr salt spray</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Interior temperature</strong></td>
+                        <td class="bad">70°C+ (dark colors)</td>
+                        <td>60°C+</td>
+                        <td class="apex-col good">45-50°C (insulated)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lifespan (Gulf climate)</strong></td>
+                        <td class="bad">2-4 years</td>
+                        <td>5-10 years (with care)</td>
+                        <td class="apex-col good">15-20+ years</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Color options</strong></td>
+                        <td>Limited (3-5)</td>
+                        <td>Natural only</td>
+                        <td class="apex-col good">Any RAL color</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Price range</strong></td>
+                        <td>AED 300-800</td>
+                        <td>AED 2,000-5,000</td>
+                        <td class="apex-col">AED 2,500-5,500</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight">
+                <h4>💰 Cost Per Year Analysis</h4>
+                <p>A AED 500 plastic box lasting 3 years = <strong>AED 167/year</strong></p>
+                <p>An Apex APE-S at AED 3,500 lasting 15 years = <strong>AED 233/year</strong></p>
+                <p>But factor in: no mold damage to cushions (AED 2,000-5,000 replacement cost), no maintenance, architectural appearance, smart monitoring peace of mind.</p>
+            </div>
+        </section>
+
+        <!-- Section 7: Best Practices -->
+        <section class="section">
+            <h2>7. Usage Best Practices</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">☀️</div>
+                    <h4>Dry Before Storing</h4>
+                    <p>Always ensure cushions are completely dry before storing. Even sealed storage can't remove moisture that's already in the fabric.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🔄</div>
+                    <h4>Check Desiccant Monthly</h4>
+                    <p>Look at the indicator window. If pink/saturated, regenerate (microwave 2-3 mins) or replace the silica gel.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📱</div>
+                    <h4>Set Alerts at 55% RH</h4>
+                    <p>This gives you time to act before mold conditions (60%+) develop. Check and refresh desiccant if alerts trigger frequently.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🌙</div>
+                    <h4>Ideal Storage Position</h4>
+                    <p>Place in shade or partial shade if possible. North-facing walls are best. Avoid direct afternoon sun exposure.</p>
+                </div>
+            </div>
+
+            <div class="warning">
+                <h4>⚠️ Not Suitable For</h4>
+                <p><strong>Food storage, flammable materials, or electronics.</strong> This enclosure is designed for soft goods (cushions, towels, pool toys) only. For pool chemicals, use dedicated chemical storage.</p>
+            </div>
+        </section>
+
+        <!-- Section 8: Preliminary Pricing -->
+        <section class="section">
+            <h2>8. Preliminary Pricing</h2>
+
+            <table class="spec-table">
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Base Price</th>
+                        <th>+ Bench Seat</th>
+                        <th>+ Active Vent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>APE-S-100 (100L)</td>
+                        <td>AED 2,500 - 3,000</td>
+                        <td>+AED 400</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>APE-S-200 (200L)</td>
+                        <td>AED 3,500 - 4,000</td>
+                        <td>+AED 500</td>
+                        <td>+AED 350</td>
+                    </tr>
+                    <tr>
+                        <td>APE-S-350 (350L)</td>
+                        <td>AED 4,500 - 5,500</td>
+                        <td>+AED 600</td>
+                        <td>+AED 350</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.85rem;">
+                <strong>Includes:</strong> Enclosure, SensorPush HT1 sensor, 500g silica gel starter pack, RAL 7016 (Anthracite Grey) finish.<br>
+                <strong>Options:</strong> Premium colors (+AED 75), Custom RAL (+AED 150), WiFi gateway (+AED 200), Interior LED (+AED 150).
+            </p>
+        </section>
+
+        <!-- Section 9: Research Sources -->
+        <section class="section">
+            <h2>9. Research & Development Notes</h2>
+
+            <h3>Key Findings from Market Research</h3>
+            <ul style="padding-left: 1.5rem; color: var(--text-muted);">
+                <li>Standard deck boxes use intentional ventilation to prevent condensation in temperate climates, but this allows humid Gulf air inside</li>
+                <li>Humidity above 60% enables mold growth; Gulf ambient humidity is typically 60-90%</li>
+                <li>IoT sensors (SensorPush, UbiBot, SwitchBot) provide affordable monitoring with 12+ month battery life</li>
+                <li>IP65/IP66 industrial enclosures demonstrate that proper gasket sealing is achievable</li>
+                <li>Silica gel desiccants are reusable (regenerate in microwave) and effective in enclosed spaces</li>
+                <li>No current market offering combines sealed construction + smart monitoring + active humidity control</li>
+            </ul>
+
+            <h3>Sources</h3>
+            <ul style="padding-left: 1.5rem; color: var(--text-muted); font-size: 0.85rem;">
+                <li><a href="https://mystackbox.com/humidity-proof-your-storage-tips-for-residents-in-tropical-climates/" target="_blank">MyStackBox - Humidity-Proof Storage in Tropical Climates</a></li>
+                <li><a href="https://www.sensorpush.com/" target="_blank">SensorPush - Smart Temperature & Humidity Sensors</a></li>
+                <li><a href="https://www.ubibot.com/" target="_blank">UbiBot - IoT Environmental Monitoring</a></li>
+                <li><a href="https://www.polycase.com/ip65-enclosures" target="_blank">Polycase - IP65 Enclosure Standards</a></li>
+                <li><a href="https://www.keter.com/en-us/outdoor-storage/deck-boxes/" target="_blank">Keter - Deck Box Construction</a></li>
+                <li><a href="https://www.shelterlogic.com/knowledge/how-to-prevent-and-eliminate-mold-outdoor-storage-building" target="_blank">ShelterLogic - Mold Prevention in Outdoor Storage</a></li>
+            </ul>
+        </section>
+
+        <!-- Section 10: Next Steps -->
+        <section class="section">
+            <h2>10. Development Roadmap</h2>
+
+            <table class="spec-table">
+                <tr>
+                    <td>Phase 1</td>
+                    <td>Finalize specifications, review with Eurotech for manufacturability</td>
+                </tr>
+                <tr>
+                    <td>Phase 2</td>
+                    <td>Prototype APE-S-200 (most popular size expected)</td>
+                </tr>
+                <tr>
+                    <td>Phase 3</td>
+                    <td>Environmental testing: seal integrity, sensor accuracy, desiccant effectiveness</td>
+                </tr>
+                <tr>
+                    <td>Phase 4</td>
+                    <td>Field trial (3 months) in Dubai conditions</td>
+                </tr>
+                <tr>
+                    <td>Phase 5</td>
+                    <td>Production specification and pricing finalization</td>
+                </tr>
+            </table>
+        </section>
+
+        <footer class="footer">
+            <p><strong>APE-S Pool Storage Enclosure</strong> - Concept Specification v0.1</p>
+            <p>Apex Enclosures | January 2026 | DRAFT - Subject to Change</p>
+        </footer>
+    </div>
+    <script src="nav.js"></script>
+</body>
+</html>

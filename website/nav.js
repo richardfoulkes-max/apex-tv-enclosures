@@ -176,6 +176,13 @@
                 { href: 'pool-chiller-bom.html', label: 'BOM' }
             ]
         },
+        poolStorage: {
+            label: 'APE-S - Storage Enclosure',
+            icon: '📦',
+            items: [
+                { href: 'pool-storage-specification.html', label: 'Specification' }
+            ]
+        },
         poolManufacturing: {
             label: 'Manufacturing',
             icon: '🏭',
@@ -187,7 +194,8 @@
             label: 'Market Research',
             icon: '📈',
             items: [
-                { href: 'pool-market-research.html', label: 'Pool Market Research' }
+                { href: 'pool-market-research.html', label: 'Pool Market Research' },
+                { href: 'pool-selling-points.html', label: 'Selling Points' }
             ]
         }
     };
@@ -506,7 +514,7 @@
                    (isInSubdir && item.href.startsWith('legal/') && item.href.replace('legal/', '') === currentPage);
         });
         // Pool enclosure sections always expanded to show sub-menus
-        const alwaysExpanded = ["poolPump", "poolChiller"];
+        const alwaysExpanded = ["poolPump", "poolChiller", "poolStorage"];
         const shouldExpand = hasActive || alwaysExpanded.includes(key);
 
 
@@ -561,7 +569,7 @@
     };
 
     // Restore collapsed state (but always expand pool enclosure sections)
-    const alwaysExpandedRestore = ['poolPump', 'poolChiller'];
+    const alwaysExpandedRestore = ['poolPump', 'poolChiller', 'poolStorage'];
     const savedCollapsed = JSON.parse(localStorage.getItem('apexNavCollapsed') || '{}');
     Object.entries(savedCollapsed).forEach(([key, isCollapsed]) => {
         const section = document.querySelector(`.apex-nav-section[data-section="${key}"]`);

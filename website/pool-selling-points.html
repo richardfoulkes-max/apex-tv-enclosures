@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pool Enclosure Selling Points | Apex Enclosures</title>
+    <style>
+        :root {
+            --primary: #0891b2;
+            --primary-dark: #0e7490;
+            --primary-light: #06b6d4;
+            --accent: #f59e0b;
+            --gold: #d4a853;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #f0f9ff;
+            --card: #ffffff;
+            --border: #e0f2fe;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+        .main-container { padding: 2rem; max-width: 1400px; }
+        @media (max-width: 900px) { .main-container { padding: 1rem; } }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.5rem 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+        }
+        @media (max-width: 900px) { .page-header { display: none; } }
+        .page-header h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .page-header p { opacity: 0.9; font-size: 0.9rem; }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #ffffff 0%, #ecfeff 100%);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 2px solid var(--primary-light);
+            text-align: center;
+        }
+        .hero h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+        .hero .tagline {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+        }
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .hero-badge {
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        /* Section Styling */
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+        .section h2 {
+            color: var(--primary-dark);
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .section h2 .icon { font-size: 1.5rem; }
+        .section h3 {
+            color: var(--text);
+            font-size: 1.1rem;
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        /* Selling Point Cards */
+        .selling-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .selling-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+        .selling-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(8, 145, 178, 0.15);
+        }
+        .selling-card .card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .selling-card h4 {
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .selling-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+        .selling-card .talk-track {
+            background: #ecfdf5;
+            border-left: 3px solid var(--success);
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            color: #065f46;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+        }
+        .selling-card .talk-track strong {
+            display: block;
+            font-style: normal;
+            color: var(--success);
+            font-size: 0.75rem;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .comparison-table tr:nth-child(even) { background: #f8fafc; }
+        .comparison-table .good { color: var(--success); font-weight: 600; }
+        .comparison-table .bad { color: #ef4444; }
+        .comparison-table .apex-col { background: #ecfeff; }
+
+        /* Product Comparison */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 768px) { .product-grid { grid-template-columns: 1fr; } }
+
+        .product-card {
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .product-card .product-header {
+            padding: 1rem 1.5rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .product-card.pump .product-header { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+        .product-card.chiller .product-header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); }
+        .product-card .product-header h4 { font-size: 1.1rem; margin: 0; }
+        .product-card .product-header .icon { font-size: 1.5rem; }
+        .product-card .product-body {
+            padding: 1.5rem;
+            background: white;
+        }
+        .product-card ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .product-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .product-card li:last-child { border-bottom: none; }
+        .product-card li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+        }
+        .product-card .use-case {
+            background: #f8fafc;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .product-card .use-case strong { color: var(--text); }
+
+        /* Color Section */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .color-swatch {
+            text-align: center;
+        }
+        .color-swatch .swatch {
+            width: 100%;
+            height: 60px;
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 0.5rem;
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 0.5rem;
+        }
+        .color-swatch .name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .color-swatch .code {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        /* Quality Highlight */
+        .quality-highlight {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .quality-highlight h4 {
+            color: #92400e;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .quality-highlight p {
+            color: #78350f;
+            margin: 0;
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 768px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+        .stat-box {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .stat-box .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .stat-box .label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Objection Handler */
+        .objection-card {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        .objection-card .objection {
+            color: #991b1b;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .objection-card .response {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+        .objection-card .response strong { color: var(--success); }
+
+        /* Science Box */
+        .science-box {
+            background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+            border: 1px solid #a78bfa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .science-box h4 {
+            color: #5b21b6;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .science-box p {
+            color: #4c1d95;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        .science-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .science-box li {
+            color: #5b21b6;
+            font-size: 0.85rem;
+            padding: 0.25rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .science-box li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #7c3aed;
+        }
+
+        /* Price Tiers */
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        @media (max-width: 768px) { .price-grid { grid-template-columns: 1fr; } }
+        .price-tier {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .price-tier .tier-header {
+            background: var(--bg);
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .price-tier .tier-header h5 {
+            margin: 0;
+            color: var(--primary-dark);
+        }
+        .price-tier .tier-header .price {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+        .price-tier .tier-body {
+            padding: 1rem;
+            background: white;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="page-header">
+            <h1>Pool Enclosure Selling Points</h1>
+            <p>Partner training guide and customer talk tracks for APE Series</p>
+        </div>
+
+        <!-- Hero -->
+        <div class="hero">
+            <h2>Transform Pool Equipment From Eyesore to Asset</h2>
+            <p class="tagline">Premium architectural enclosures that solve noise, access, and aesthetic problems while extending equipment life.</p>
+            <div class="hero-badges">
+                <span class="hero-badge">70-80% Noise Reduction</span>
+                <span class="hero-badge">10-Year Structural Warranty</span>
+                <span class="hero-badge">Made in UAE</span>
+                <span class="hero-badge">Any RAL Color</span>
+            </div>
+        </div>
+
+        <!-- Two Products -->
+        <div class="section">
+            <h2><span class="icon">📦</span> Two Products, Complete Coverage</h2>
+
+            <div class="product-grid">
+                <div class="product-card pump">
+                    <div class="product-header">
+                        <span class="icon">🔵</span>
+                        <h4>APE-P - Pump Enclosure</h4>
+                    </div>
+                    <div class="product-body">
+                        <ul>
+                            <li>Fully sealed acoustic design</li>
+                            <li>70-80% noise reduction</li>
+                            <li>25-50mm acoustic foam lining</li>
+                            <li>IP55 weather protection</li>
+                            <li>Hinged access panels (no tools)</li>
+                            <li>Internal LED lighting option</li>
+                        </ul>
+                        <div class="use-case">
+                            <strong>Best for:</strong> Pool pumps, salt chlorinators, automation controllers, filtration systems - equipment that doesn't need airflow
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card chiller">
+                    <div class="product-header">
+                        <span class="icon">❄️</span>
+                        <h4>APE-HC - Heater/Chiller Enclosure</h4>
+                    </div>
+                    <div class="product-body">
+                        <ul>
+                            <li>Louvered design for airflow</li>
+                            <li>50-60% noise reduction</li>
+                            <li>50%+ ventilation area</li>
+                            <li>IP44 weather protection</li>
+                            <li>Gas heater compatible</li>
+                            <li>Compressor-safe clearances</li>
+                        </ul>
+                        <div class="use-case">
+                            <strong>Best for:</strong> Heat pumps, pool chillers, gas heaters - equipment that needs air circulation for heat exchange
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Core Selling Points -->
+        <div class="section">
+            <h2><span class="icon">💎</span> Core Selling Points</h2>
+
+            <div class="selling-grid">
+                <div class="selling-card">
+                    <div class="card-icon">🔧</div>
+                    <h4>1. Instant Access, No Excavation</h4>
+                    <p>Above-ground design with hinged panels means technicians can service equipment in minutes, not hours. No digging, no damage to landscaping, no mess.</p>
+                    <div class="talk-track">
+                        <strong>Say to customer:</strong>
+                        "When your pump needs service, do you want to wait days for excavation - or have the technician open a panel and fix it immediately?"
+                    </div>
+                </div>
+
+                <div class="selling-card">
+                    <div class="card-icon">🔇</div>
+                    <h4>2. Silence the Noise</h4>
+                    <p>Pool pumps at 70+ dB make outdoor conversations impossible. Our acoustic foam reduces this to 45-50 dB - quieter than a normal conversation.</p>
+                    <div class="talk-track">
+                        <strong>Say to customer:</strong>
+                        "Imagine actually being able to have a conversation by your pool without shouting over the equipment noise."
+                    </div>
+                </div>
+
+                <div class="selling-card">
+                    <div class="card-icon">🌡️</div>
+                    <h4>3. Cooler = Longer Life</h4>
+                    <p>Underground or enclosed equipment runs 15-25°C hotter. Heat dramatically accelerates corrosion and component wear. Above-ground stays cooler.</p>
+                    <div class="talk-track">
+                        <strong>Say to customer:</strong>
+                        "Equipment buried in hot ground wears out faster. Above-ground stays cooler and lasts longer - it's simple physics."
+                    </div>
+                </div>
+
+                <div class="selling-card">
+                    <div class="card-icon">🎨</div>
+                    <h4>4. Match Any Architecture</h4>
+                    <p>Full RAL color palette means the enclosure becomes part of the landscape design, not an eyesore. Match villa walls, garden features, or pool surrounds.</p>
+                    <div class="talk-track">
+                        <strong>Say to customer:</strong>
+                        "What color are your boundary walls? We can match exactly - the enclosure will look like it was designed with your villa."
+                    </div>
+                </div>
+
+                <div class="selling-card">
+                    <div class="card-icon">🛡️</div>
+                    <h4>5. Protection From Elements</h4>
+                    <p>Direct sun, sandstorms, and rain damage exposed equipment. Our enclosure shields equipment while still allowing proper ventilation.</p>
+                    <div class="talk-track">
+                        <strong>Say to customer:</strong>
+                        "Your pool equipment is designed for temperate climates. In Dubai's sun and sand, it needs protection to last."
+                    </div>
+                </div>
+
+                <div class="selling-card">
+                    <div class="card-icon">✨</div>
+                    <h4>6. Premium Appearance</h4>
+                    <p>Transforms ugly equipment into a clean architectural feature. No more exposed pipes, wires, and machinery visible from entertaining areas.</p>
+                    <div class="talk-track">
+                        <strong>Say to customer:</strong>
+                        "Would you leave your AC compressor visible in your living room? Your pool area deserves the same consideration."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Science: Temperature & Corrosion -->
+        <div class="section">
+            <h2><span class="icon">🔬</span> The Science: Why Temperature Matters</h2>
+
+            <div class="science-box">
+                <h4>🌡️ Heat Accelerates Corrosion Exponentially</h4>
+                <p>Corrosion rate approximately doubles for every 10°C increase in temperature. In the Gulf region, this is critical:</p>
+                <ul>
+                    <li>Underground equipment pits can reach 55-65°C in summer</li>
+                    <li>Enclosed plant rooms without ventilation: 50-60°C</li>
+                    <li>Above-ground shaded enclosure: 40-45°C (ambient + slight rise)</li>
+                    <li>15-25°C cooler = 2-4× slower corrosion rate</li>
+                </ul>
+            </div>
+
+            <h3>Installation Method Comparison</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Factor</th>
+                        <th>Underground Pit</th>
+                        <th>Plant Room</th>
+                        <th class="apex-col">Apex Enclosure</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Operating Temperature</strong></td>
+                        <td class="bad">55-65°C</td>
+                        <td class="bad">50-60°C</td>
+                        <td class="apex-col good">40-45°C</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Relative Corrosion Rate</strong></td>
+                        <td class="bad">4× baseline</td>
+                        <td class="bad">3× baseline</td>
+                        <td class="apex-col good">1× baseline</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Service Access Time</strong></td>
+                        <td class="bad">2-4 hours (excavation)</td>
+                        <td>30-60 mins</td>
+                        <td class="apex-col good">5-10 mins</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Flooding Risk</strong></td>
+                        <td class="bad">High (common in UAE)</td>
+                        <td>Low</td>
+                        <td class="apex-col good">None</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ventilation</strong></td>
+                        <td class="bad">Poor (trapped heat)</td>
+                        <td>Variable</td>
+                        <td class="apex-col good">Designed airflow</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Noise Reduction</strong></td>
+                        <td>Good (buried)</td>
+                        <td class="bad">Poor (echoes)</td>
+                        <td class="apex-col good">70-80%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Visual Impact</strong></td>
+                        <td class="good">Hidden</td>
+                        <td class="bad">Industrial</td>
+                        <td class="apex-col good">Architectural</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="quality-highlight">
+                <h4>💡 Key Insight for Customers</h4>
+                <p>Underground pits were designed for temperate climates where soil stays cool. In the Gulf, ground temperatures can exceed 50°C in summer - hotter than the equipment's rated operating range. Above-ground with shade is actually the optimal solution here.</p>
+            </div>
+        </div>
+
+        <!-- Manufacturing Quality -->
+        <div class="section">
+            <h2><span class="icon">🏭</span> Manufacturing Quality</h2>
+
+            <p>All Apex enclosures are manufactured by <strong>Eurotech Metal Industries</strong> in Dubai - a world-class facility serving clients like Schneider Electric, Camfil, and major infrastructure projects across the Middle East.</p>
+
+            <div class="stats-row">
+                <div class="stat-box">
+                    <div class="number">2000+</div>
+                    <div class="label">Hours Salt Spray Testing</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">5×</div>
+                    <div class="label">Industry Standard</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">ISO</div>
+                    <div class="label">9001 / 14001 / 45001</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">10yr</div>
+                    <div class="label">Structural Warranty</div>
+                </div>
+            </div>
+
+            <div class="quality-highlight">
+                <h4>🏆 2000+ Hour Salt Spray Performance</h4>
+                <p>Eurotech's coating system achieves <strong>C5-M/C4-H corrosion resistance</strong> - the highest rating for marine and industrial environments. Industry standard is 500-1000 hours. This means Apex enclosures will withstand Dubai's coastal salt air, pool chemicals, and humidity for decades.</p>
+            </div>
+
+            <h3>Quality Certifications</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Standard</th>
+                        <th>What It Means</th>
+                        <th>Customer Benefit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>ISO 9001:2015</strong></td>
+                        <td>Quality management system</td>
+                        <td>Consistent, defect-free products</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ISO 14001:2015</strong></td>
+                        <td>Environmental management</td>
+                        <td>Sustainable manufacturing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ISO 45001:2018</strong></td>
+                        <td>Occupational health & safety</td>
+                        <td>Ethical supply chain</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ASTM B117</strong></td>
+                        <td>Salt spray test standard</td>
+                        <td>Verified corrosion resistance</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Color Options -->
+        <div class="section">
+            <h2><span class="icon">🎨</span> Color Options</h2>
+
+            <p>Every villa is different. Our enclosures can match any architectural style with our full RAL color range.</p>
+
+            <h3>Standard Colors (Included)</h3>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #383e42;">RAL 7016</div>
+                    <div class="name">Anthracite Grey</div>
+                    <div class="code">Default</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #f1f0ea; color: #666;">RAL 9010</div>
+                    <div class="name">Pure White</div>
+                    <div class="code">Popular</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #c8c8c8; color: #333;">RAL 7035</div>
+                    <div class="name">Light Grey</div>
+                    <div class="code">Clean look</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #0f0f0f;">RAL 9005</div>
+                    <div class="name">Jet Black</div>
+                    <div class="code">Modern</div>
+                </div>
+            </div>
+
+            <h3>Premium Colors (+AED 75)</h3>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #e0d1b8; color: #666;">RAL 1015</div>
+                    <div class="name">Light Ivory</div>
+                    <div class="code">Villa match</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #969992;">RAL 7030</div>
+                    <div class="name">Stone Grey</div>
+                    <div class="code">Natural</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #7d8471;">RAL 7033</div>
+                    <div class="name">Cement Grey</div>
+                    <div class="code">Concrete match</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #4a4d4f;">RAL 7021</div>
+                    <div class="name">Black Grey</div>
+                    <div class="code">Subtle dark</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #2f4538;">RAL 6005</div>
+                    <div class="name">Moss Green</div>
+                    <div class="code">Garden blend</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #7b5141;">RAL 8011</div>
+                    <div class="name">Nut Brown</div>
+                    <div class="code">Wood tone</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #80643f;">RAL 8001</div>
+                    <div class="name">Ochre Brown</div>
+                    <div class="code">Desert tone</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #3e3c32;">RAL 6006</div>
+                    <div class="name">Grey Olive</div>
+                    <div class="code">Landscape</div>
+                </div>
+            </div>
+
+            <h3>Custom RAL Colors (+AED 150)</h3>
+            <p>Any RAL color can be matched with 2-3 week lead time. Perfect for:</p>
+            <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                <li>Matching specific villa paint colors</li>
+                <li>Corporate branding for commercial installations</li>
+                <li>Architect-specified custom finishes</li>
+                <li>Dual-tone designs (different frame vs panel colors)</li>
+            </ul>
+        </div>
+
+        <!-- Objection Handling -->
+        <div class="section">
+            <h2><span class="icon">🛡️</span> Objection Handling</h2>
+
+            <div class="objection-card">
+                <div class="objection">❓ "It's expensive - I can just build a wall around the equipment"</div>
+                <div class="response">
+                    <strong>Response:</strong> A basic block wall costs AED 2,000-4,000 and gives you no noise reduction, no access panels, no ventilation design, and no color matching. Then you still hear the pump and need to knock down the wall for major service. Our enclosure costs similar but solves all the problems properly - plus you can move it if you ever relocate equipment.
+                </div>
+            </div>
+
+            <div class="objection-card">
+                <div class="objection">❓ "Underground pits keep everything hidden"</div>
+                <div class="response">
+                    <strong>Response:</strong> Underground works in temperate climates. In Dubai, ground temperatures exceed 50°C - that's hotter than equipment is designed to operate. Plus flooding is common, and every service call requires excavation. Our enclosure is shaded, cool, and opens in seconds.
+                </div>
+            </div>
+
+            <div class="objection-card">
+                <div class="objection">❓ "Can't you just put some acoustic panels around it?"</div>
+                <div class="response">
+                    <strong>Response:</strong> Acoustic panels need to fully enclose the equipment to work - any gap ruins the effect. And panels don't weather well outdoors. Our enclosure is a complete system: acoustic foam inside, weatherproof outside, designed airflow, and proper access. It's the difference between a proper solution and a workaround.
+                </div>
+            </div>
+
+            <div class="objection-card">
+                <div class="objection">❓ "The equipment already has a warranty - why do I need protection?"</div>
+                <div class="response">
+                    <strong>Response:</strong> Equipment warranties typically cover manufacturing defects, not environmental damage. UV degradation, sand infiltration, and heat stress aren't covered. Our enclosure protects against exactly those things, so your equipment actually lasts the full expected lifespan.
+                </div>
+            </div>
+
+            <div class="objection-card">
+                <div class="objection">❓ "Will this affect my equipment warranty?"</div>
+                <div class="response">
+                    <strong>Response:</strong> No - our enclosures are designed to meet or exceed manufacturer ventilation requirements. For heat pumps and chillers, our louvered design provides 50%+ open area - more than most manufacturers specify. We can provide documentation for warranty questions.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pricing Guide -->
+        <div class="section">
+            <h2><span class="icon">💰</span> Pricing Guide (Partner Reference)</h2>
+
+            <div class="price-grid">
+                <div class="price-tier">
+                    <div class="tier-header">
+                        <h5>APE-P Pump Enclosure</h5>
+                        <div class="price">Sealed acoustic design</div>
+                    </div>
+                    <div class="tier-body">
+                        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem;">
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">Single pump: AED 1,500-2,000</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">Pump + filter: AED 2,500-3,500</li>
+                            <li style="padding: 0.5rem 0;">Full system: AED 5,000-6,500</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="price-tier">
+                    <div class="tier-header">
+                        <h5>APE-HC Heater/Chiller</h5>
+                        <div class="price">Louvered ventilated design</div>
+                    </div>
+                    <div class="tier-body">
+                        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem;">
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">Medium (most heat pumps): AED 3,500-4,500</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">Large (commercial): AED 4,500-5,500</li>
+                            <li style="padding: 0.5rem 0;">Gas heater variant: AED 3,000-4,000</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="price-tier">
+                    <div class="tier-header">
+                        <h5>Add-Ons</h5>
+                        <div class="price">Optional upgrades</div>
+                    </div>
+                    <div class="tier-body">
+                        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem;">
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">Premium color: +AED 75</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">Custom RAL: +AED 150</li>
+                            <li style="padding: 0.5rem 0;">Internal LED: +AED 200</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.85rem;"><strong>Note:</strong> Installation not included. Partner margin 20-30% depending on volume.</p>
+        </div>
+
+        <!-- Target Customers -->
+        <div class="section">
+            <h2><span class="icon">🎯</span> Ideal Customers</h2>
+
+            <div class="selling-grid">
+                <div class="selling-card">
+                    <div class="card-icon">🏠</div>
+                    <h4>Villa Owners (New Pool)</h4>
+                    <p>Building a new pool and want the equipment done right from the start. Usually referred by pool contractor or landscape architect.</p>
+                    <div class="talk-track">
+                        <strong>Trigger question:</strong>
+                        "Where are you planning to put the pool equipment? Have you considered noise?"
+                    </div>
+                </div>
+
+                <div class="selling-card">
+                    <div class="card-icon">🔊</div>
+                    <h4>Noise-Frustrated Homeowners</h4>
+                    <p>Already have a pool but can't stand the pump noise. Often have tried DIY solutions. Willing to pay for a real fix.</p>
+                    <div class="talk-track">
+                        <strong>Trigger question:</strong>
+                        "How often do you actually use your pool area for entertaining? Does the noise affect that?"
+                    </div>
+                </div>
+
+                <div class="selling-card">
+                    <div class="card-icon">🏨</div>
+                    <h4>Hospitality / Commercial</h4>
+                    <p>Hotels, resorts, apartment buildings. Equipment noise is a guest complaint. Professional appearance matters.</p>
+                    <div class="talk-track">
+                        <strong>Trigger question:</strong>
+                        "Do you ever get complaints about equipment noise near the pool? What does that cost in guest satisfaction?"
+                    </div>
+                </div>
+
+                <div class="selling-card">
+                    <div class="card-icon">🔧</div>
+                    <h4>Pool Service Companies</h4>
+                    <p>Hate working on buried equipment. Can upsell enclosures with every pump replacement. Recurring access benefit.</p>
+                    <div class="talk-track">
+                        <strong>Trigger question:</strong>
+                        "How much time do you lose accessing buried equipment? What if every job was above-ground?"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p><strong>Apex Pool Enclosures</strong> - Partner Selling Guide v1.0</p>
+            <p>For internal use only | January 2026</p>
+        </footer>
+    </div>
+    <script src="nav.js"></script>
+</body>
+</html>
