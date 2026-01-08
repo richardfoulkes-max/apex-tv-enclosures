@@ -206,6 +206,40 @@ nav.js injects: body { margin-left: 240px !important; }
 
 ## Recent Work History
 
+### Session: 2026-01-08 - ATE-75 Prototype Design Pack SENT TO EUROTECH
+
+**Created comprehensive prototype design pack for Eurotech Metal Industries:**
+- `website/ate-75-prototype-pack.html` - PDF-ready design pack
+- `ATE-75-Design-Pack.pdf` (14MB) - Generated via Playwright, sent to Eurotech
+
+**Design Pack Contents (11 sections):**
+1. Cover page + 3 product renders (external, internal, exploded)
+2. Executive Summary - key features, target environment
+3. External Dimensions - all critical dimensions
+4. Design Philosophy - integrated bezel, airflow, thermal, acoustic
+5. Technical Drawings - 2 SVG drawings (side section, front view)
+6. Mechanical Construction - materials, door system, TV mounting
+7. Thermal System - Delta fans, slots, filter, PWM control
+8. Electrical System + Wiring Diagram - full schematic with wire schedule
+9. Sealing & IP55 - gaskets, design features
+10. BOM - all components (NO pricing per manufacturer request)
+11. Quality Standards & Prototype Validation Checklist
+
+**Excluded per customer request:**
+- Security locks (not needed for prototype)
+- Retail accessories (IR extender, cleaning kit, spare filter, keys)
+
+**PDF Generation Setup:**
+- Installed Playwright + Chromium for high-fidelity PDF generation
+- `generate-pdf.js` script - no file paths in footer, proper page breaks
+- `node generate-pdf.js` → outputs `ATE-75-Design-Pack.pdf`
+
+**Commits:** `cd6a4b6` - Add ATE-75 prototype design pack for Eurotech
+
+**Status:** Design pack sent to Eurotech - awaiting prototype quote/timeline
+
+---
+
 ### Session: 2026-01-05 (Early AM) - BOM Wall Mount Cleanup
 
 **Removed external wall mount from BOM - customer supplies:**

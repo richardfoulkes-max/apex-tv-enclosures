@@ -10,10 +10,26 @@
             margin: 15mm;
         }
         @media print {
-            body { font-size: 10pt; }
+            body { font-size: 9pt; }
             .page-break { page-break-before: always; }
             .no-break { page-break-inside: avoid; }
             .section-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+            /* Allow tables to break, but repeat headers */
+            thead { display: table-header-group; }
+            tr { page-break-inside: avoid; break-inside: avoid; }
+
+            /* Keep small elements together */
+            .spec-card { page-break-inside: avoid; break-inside: avoid; }
+            .callout { page-break-inside: avoid; break-inside: avoid; }
+            .drawing-container { page-break-inside: avoid; break-inside: avoid; }
+
+            /* Prevent widows/orphans */
+            p, li { orphans: 3; widows: 3; }
+
+            /* Tighter spacing */
+            h3 { margin-top: 1rem; margin-bottom: 0.5rem; }
+            table { margin: 0.5rem 0; }
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
