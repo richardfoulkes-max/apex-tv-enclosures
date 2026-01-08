@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APE Pool Series - Product Designs</title>
+    <style>
+        @page { size: A4; margin: 10mm; }
+        @media print {
+            .page-break { page-break-before: always; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        :root {
+            --primary: #0891b2;
+            --primary-dark: #0e7490;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #f8fafc;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: white; color: var(--text); line-height: 1.5; font-size: 10pt; }
+
+        .cover {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 3rem;
+        }
+        .cover h1 { font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 300; }
+        .cover .subtitle { font-size: 1.3rem; opacity: 0.9; margin-bottom: 2rem; }
+        .cover .logo { font-size: 1.2rem; font-weight: 600; letter-spacing: 2px; margin-bottom: 3rem; }
+        .cover .date { font-size: 0.9rem; opacity: 0.7; margin-top: 2rem; }
+
+        .content { padding: 1.5rem; max-width: 100%; }
+
+        h2 { color: var(--primary-dark); font-size: 1.4rem; margin: 1.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary); }
+        h3 { color: var(--text); font-size: 1.1rem; margin: 1.25rem 0 0.5rem; }
+        h4 { color: var(--primary); font-size: 0.95rem; margin: 1rem 0 0.5rem; }
+        p { margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.9rem; }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem 1.5rem;
+            margin: 0 -1.5rem 1rem -1.5rem;
+        }
+        .section-header h2 { color: white; border: none; margin: 0; padding: 0; }
+        .section-header p { color: rgba(255,255,255,0.9); margin: 0.25rem 0 0 0; }
+
+        .drawing-container {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .drawing-container svg { max-width: 100%; height: auto; }
+        .drawing-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; }
+
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+
+        .feature-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        .feature-card h4 { margin-top: 0; }
+        .feature-card p { margin: 0; font-size: 0.85rem; }
+
+        .spec-table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.85rem; }
+        .spec-table th { background: var(--primary); color: white; padding: 0.5rem; text-align: left; }
+        .spec-table td { padding: 0.5rem; border-bottom: 1px solid var(--border); }
+
+        .info-box {
+            background: #ecfeff;
+            border-left: 4px solid var(--primary);
+            padding: 0.75rem 1rem;
+            margin: 0.75rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .info-box h4 { color: var(--primary-dark); margin: 0 0 0.25rem 0; font-size: 0.9rem; }
+        .info-box p { margin: 0; font-size: 0.85rem; }
+
+        .tech-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        ul { margin: 0.5rem 0; padding-left: 1.25rem; }
+        li { margin-bottom: 0.2rem; color: var(--text-muted); font-size: 0.85rem; }
+
+        .footer { text-align: center; padding: 1rem; color: var(--text-muted); font-size: 0.75rem; border-top: 1px solid var(--border); margin-top: 1.5rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Cover -->
+    <div class="cover">
+        <div class="logo">APEX ENCLOSURES</div>
+        <h1>APE Pool Series</h1>
+        <div class="subtitle">Product Design Specifications</div>
+        <p style="opacity: 0.8; max-width: 500px;">Access mechanisms, monitoring systems, and detailed designs for all three pool enclosure products</p>
+        <div class="date">January 2026 | Version 1.0</div>
+    </div>
+
+    <!-- APE-P: Pump Enclosure -->
+    <div class="content page-break">
+        <div class="section-header">
+            <h2>1. APE-P Series - Pump Enclosure</h2>
+            <p>Lift-Top + Front Door Access Design</p>
+        </div>
+
+        <h3>Access Design Concept</h3>
+        <p>Maximum accessibility with <strong>dual-access system</strong>: lift-up roof for quick inspection and bi-fold front doors for full equipment access.</p>
+
+        <!-- Main Design Drawing - Closed -->
+        <div class="drawing-container">
+            <svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- Title -->
+                <text x="350" y="25" text-anchor="middle" font-size="14" font-weight="600" fill="#0e7490">APE-P-M Closed View (Front)</text>
+
+                <!-- Main enclosure body -->
+                <rect x="150" y="60" width="400" height="280" rx="8" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+
+                <!-- Roof panel (slightly raised look) -->
+                <rect x="145" y="50" width="410" height="25" rx="4" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
+
+                <!-- Gas strut indicators on sides -->
+                <circle cx="160" cy="62" r="4" fill="#f59e0b"/>
+                <circle cx="540" cy="62" r="4" fill="#f59e0b"/>
+
+                <!-- Front bi-fold doors - left -->
+                <rect x="160" y="85" width="185" height="245" rx="4" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+                <!-- Door fold line -->
+                <line x1="252" y1="85" x2="252" y2="330" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,2"/>
+                <!-- Left door handle -->
+                <rect x="330" y="195" width="8" height="40" rx="2" fill="#475569"/>
+
+                <!-- Front bi-fold doors - right -->
+                <rect x="355" y="85" width="185" height="245" rx="4" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+                <!-- Door fold line -->
+                <line x1="447" y1="85" x2="447" y2="330" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,2"/>
+                <!-- Right door handle -->
+                <rect x="362" y="195" width="8" height="40" rx="2" fill="#475569"/>
+
+                <!-- Ventilation grilles - bottom -->
+                <g fill="none" stroke="#64748b" stroke-width="1">
+                    <line x1="200" y1="315" x2="280" y2="315"/>
+                    <line x1="200" y1="320" x2="280" y2="320"/>
+                    <line x1="200" y1="325" x2="280" y2="325"/>
+                    <line x1="420" y1="315" x2="500" y2="315"/>
+                    <line x1="420" y1="320" x2="500" y2="320"/>
+                    <line x1="420" y1="325" x2="500" y2="325"/>
+                </g>
+
+                <!-- Smart sensor indicator -->
+                <rect x="520" y="95" width="25" height="15" rx="3" fill="#10b981"/>
+                <circle cx="537" cy="102" r="3" fill="white"/>
+
+                <!-- Padlock hasp -->
+                <rect x="345" y="240" width="10" height="15" rx="1" fill="#475569"/>
+                <circle cx="350" cy="250" r="3" fill="none" stroke="#475569" stroke-width="1"/>
+
+                <!-- Labels -->
+                <g font-size="9" fill="#64748b">
+                    <text x="350" y="365">1100mm (APE-P-M)</text>
+                    <!-- Gas strut labels -->
+                    <line x1="160" y1="62" x2="120" y2="45" stroke="#f59e0b" stroke-width="1"/>
+                    <text x="60" y="45" fill="#92400e">Gas strut</text>
+                    <!-- Smart sensor label -->
+                    <line x1="520" y1="102" x2="580" y2="102" stroke="#10b981" stroke-width="1"/>
+                    <text x="585" y="105" fill="#065f46">Smart sensor</text>
+                </g>
+
+                <!-- Dimensions -->
+                <g font-size="8" fill="#64748b">
+                    <!-- Width -->
+                    <line x1="150" y1="350" x2="550" y2="350" stroke="#64748b" stroke-width="1"/>
+                    <line x1="150" y1="345" x2="150" y2="355" stroke="#64748b" stroke-width="1"/>
+                    <line x1="550" y1="345" x2="550" y2="355" stroke="#64748b" stroke-width="1"/>
+                    <!-- Height -->
+                    <line x1="600" y1="50" x2="600" y2="340" stroke="#64748b" stroke-width="1"/>
+                    <line x1="595" y1="50" x2="605" y2="50" stroke="#64748b" stroke-width="1"/>
+                    <line x1="595" y1="340" x2="605" y2="340" stroke="#64748b" stroke-width="1"/>
+                    <text x="610" y="200" fill="#64748b" transform="rotate(90, 610, 200)">900mm</text>
+                </g>
+            </svg>
+            <div class="drawing-label">Figure 1.1: APE-P Front View - Closed Position</div>
+        </div>
+
+        <!-- Open View Drawing -->
+        <div class="drawing-container">
+            <svg viewBox="0 0 700 450" xmlns="http://www.w3.org/2000/svg">
+                <!-- Title -->
+                <text x="350" y="25" text-anchor="middle" font-size="14" font-weight="600" fill="#0e7490">APE-P-M Open View - Full Access</text>
+
+                <!-- Main enclosure body -->
+                <rect x="150" y="120" width="400" height="280" rx="8" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+
+                <!-- Lifted roof panel -->
+                <g transform="rotate(-70, 155, 120)">
+                    <rect x="145" y="110" width="410" height="25" rx="4" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
+                </g>
+
+                <!-- Gas struts extended -->
+                <line x1="160" y1="120" x2="120" y2="60" stroke="#f59e0b" stroke-width="3"/>
+                <circle cx="120" cy="60" r="5" fill="#f59e0b"/>
+                <line x1="540" y1="120" x2="500" y2="60" stroke="#f59e0b" stroke-width="3"/>
+
+                <!-- Open bi-fold doors - left side folded -->
+                <g transform="translate(100, 0)">
+                    <rect x="55" y="145" width="92" height="245" rx="4" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" transform="rotate(-15, 55, 145)"/>
+                </g>
+
+                <!-- Open bi-fold doors - right side folded -->
+                <g transform="translate(-100, 0)">
+                    <rect x="555" y="145" width="92" height="245" rx="4" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" transform="rotate(15, 647, 145)"/>
+                </g>
+
+                <!-- Interior visible - pump equipment -->
+                <rect x="180" y="300" width="120" height="80" rx="4" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+                <text x="240" y="345" text-anchor="middle" font-size="10" fill="white">PUMP</text>
+
+                <!-- Filter -->
+                <ellipse cx="400" cy="280" rx="50" ry="80" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2"/>
+                <text x="400" y="285" text-anchor="middle" font-size="10" fill="white">FILTER</text>
+
+                <!-- Chlorinator -->
+                <rect x="480" y="280" width="50" height="100" rx="4" fill="#10b981" stroke="#059669" stroke-width="2"/>
+                <text x="505" y="335" text-anchor="middle" font-size="8" fill="white">CHLOR</text>
+
+                <!-- Acoustic foam visible on interior walls -->
+                <rect x="155" y="125" width="10" height="270" fill="#fbbf24" opacity="0.5"/>
+                <rect x="535" y="125" width="10" height="270" fill="#fbbf24" opacity="0.5"/>
+
+                <!-- Interior sensor -->
+                <rect x="500" y="140" width="30" height="20" rx="3" fill="#10b981"/>
+                <text x="515" y="153" text-anchor="middle" font-size="7" fill="white">T/RH</text>
+
+                <!-- Labels -->
+                <g font-size="9" fill="#64748b">
+                    <text x="350" y="430" text-anchor="middle">Full interior access - roof up + doors folded</text>
+                    <!-- Foam label -->
+                    <line x1="155" y1="200" x2="100" y2="180" stroke="#fbbf24" stroke-width="1"/>
+                    <text x="30" y="183" fill="#92400e">25mm acoustic foam</text>
+                </g>
+            </svg>
+            <div class="drawing-label">Figure 1.2: APE-P Full Access Mode - Roof lifted on gas struts, bi-fold doors open</div>
+        </div>
+
+        <div class="grid-2">
+            <div class="feature-card">
+                <h4>Lift-Up Roof</h4>
+                <ul>
+                    <li>2× gas struts (250N each)</li>
+                    <li>Opens to 70° angle</li>
+                    <li>Quick visual inspection</li>
+                    <li>Access to top of equipment</li>
+                    <li>Auto-hold at open position</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h4>Bi-Fold Front Doors</h4>
+                <ul>
+                    <li>2× bi-fold panels (fold outward)</li>
+                    <li>Full-width opening</li>
+                    <li>Piano hinges (continuous)</li>
+                    <li>Compression latches for seal</li>
+                    <li>Padlock provision</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- APE-P Monitoring -->
+    <div class="content page-break">
+        <h3>Smart Monitoring System <span class="tech-badge">SMART</span></h3>
+
+        <div class="info-box">
+            <h4>Integrated Sensor Package</h4>
+            <p>Every APE-P includes a wireless sensor module monitoring temperature, humidity, and equipment status. Alerts via smartphone app if conditions exceed thresholds.</p>
+        </div>
+
+        <div class="grid-3">
+            <div class="feature-card">
+                <h4>Temperature</h4>
+                <p>Monitor interior temp. Alert if >50°C (pump overheating) or abnormal patterns.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Humidity</h4>
+                <p>Track moisture levels. Alert if >70% RH (potential leak or condensation issue).</p>
+            </div>
+            <div class="feature-card">
+                <h4>Door Status</h4>
+                <p>Reed switch detects if door left open. Security alert option.</p>
+            </div>
+        </div>
+
+        <h3>APE-P Size Options</h3>
+        <table class="spec-table">
+            <tr>
+                <th>Model</th>
+                <th>External (W×D×H)</th>
+                <th>Access Opening</th>
+                <th>Equipment Fit</th>
+            </tr>
+            <tr>
+                <td><strong>APE-P-S</strong></td>
+                <td>700 × 600 × 900mm</td>
+                <td>600mm wide doors</td>
+                <td>Single pump + chlorinator</td>
+            </tr>
+            <tr>
+                <td><strong>APE-P-M</strong></td>
+                <td>1100 × 600 × 900mm</td>
+                <td>1000mm wide doors</td>
+                <td>Pump + filter</td>
+            </tr>
+            <tr>
+                <td><strong>APE-P-L</strong></td>
+                <td>1500 × 600 × 900mm</td>
+                <td>1400mm wide doors</td>
+                <td>Complete pump room</td>
+            </tr>
+        </table>
+
+        <h3>Key Design Features</h3>
+        <div class="grid-2">
+            <div>
+                <h4>Acoustic Performance</h4>
+                <ul>
+                    <li>25mm closed-cell foam on all interior surfaces</li>
+                    <li>Compression seal on doors and roof</li>
+                    <li>Labyrinth ventilation (sound blocked, air flows)</li>
+                    <li><strong>70-80% noise reduction</strong></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Weather Protection</h4>
+                <ul>
+                    <li>IP55 rated (rain-proof)</li>
+                    <li>Raised floor (50mm) for drainage</li>
+                    <li>Drip edge on roof overhang</li>
+                    <li>EPDM gaskets throughout</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- APE-HC: Heater/Chiller -->
+    <div class="content page-break">
+        <div class="section-header">
+            <h2>2. APE-HC Series - Heater/Chiller Enclosure</h2>
+            <p>Louvered Design with Swing-Out Access Panel</p>
+        </div>
+
+        <h3>Access Design Concept</h3>
+        <p>Equipment requires maximum airflow, so design uses <strong>louvered panels</strong> on three sides with a <strong>full-height swing door</strong> for access. Removable top panel for crane lifting of heavy equipment.</p>
+
+        <!-- Main Design Drawing -->
+        <div class="drawing-container">
+            <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg">
+                <!-- Title -->
+                <text x="350" y="25" text-anchor="middle" font-size="14" font-weight="600" fill="#0e7490">APE-HC-M Design - Louvered Enclosure</text>
+
+                <!-- Main frame -->
+                <rect x="180" y="50" width="340" height="320" rx="4" fill="none" stroke="#64748b" stroke-width="3"/>
+
+                <!-- Top panel (removable) -->
+                <rect x="175" y="40" width="350" height="20" rx="4" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
+                <!-- Lift points -->
+                <circle cx="260" cy="50" r="5" fill="#f59e0b" stroke="#92400e" stroke-width="1"/>
+                <circle cx="440" cy="50" r="5" fill="#f59e0b" stroke="#92400e" stroke-width="1"/>
+
+                <!-- Left side louvers -->
+                <g fill="#94a3b8">
+                    <rect x="180" y="70" width="15" height="280" fill="#e2e8f0"/>
+                    <line x1="180" y1="80" x2="195" y2="85" stroke="#64748b" stroke-width="2"/>
+                    <line x1="180" y1="100" x2="195" y2="105" stroke="#64748b" stroke-width="2"/>
+                    <line x1="180" y1="120" x2="195" y2="125" stroke="#64748b" stroke-width="2"/>
+                    <line x1="180" y1="140" x2="195" y2="145" stroke="#64748b" stroke-width="2"/>
+                    <line x1="180" y1="160" x2="195" y2="165" stroke="#64748b" stroke-width="2"/>
+                    <line x1="180" y1="180" x2="195" y2="185" stroke="#64748b" stroke-width="2"/>
+                    <line x1="180" y1="200" x2="195" y2="205" stroke="#64748b" stroke-width="2"/>
+                    <line x1="180" y1="220" x2="195" y2="225" stroke="#64748b" stroke-width="2"/>
+                    <line x1="180" y1="240" x2="195" y2="245" stroke="#64748b" stroke-width="2"/>
+                    <line x1="180" y1="260" x2="195" y2="265" stroke="#64748b" stroke-width="2"/>
+                    <line x1="180" y1="280" x2="195" y2="285" stroke="#64748b" stroke-width="2"/>
+                    <line x1="180" y1="300" x2="195" y2="305" stroke="#64748b" stroke-width="2"/>
+                    <line x1="180" y1="320" x2="195" y2="325" stroke="#64748b" stroke-width="2"/>
+                </g>
+
+                <!-- Right side louvers -->
+                <g fill="#94a3b8">
+                    <rect x="505" y="70" width="15" height="280" fill="#e2e8f0"/>
+                    <line x1="505" y1="80" x2="520" y2="85" stroke="#64748b" stroke-width="2"/>
+                    <line x1="505" y1="100" x2="520" y2="105" stroke="#64748b" stroke-width="2"/>
+                    <line x1="505" y1="120" x2="520" y2="125" stroke="#64748b" stroke-width="2"/>
+                    <line x1="505" y1="140" x2="520" y2="145" stroke="#64748b" stroke-width="2"/>
+                    <line x1="505" y1="160" x2="520" y2="165" stroke="#64748b" stroke-width="2"/>
+                    <line x1="505" y1="180" x2="520" y2="185" stroke="#64748b" stroke-width="2"/>
+                    <line x1="505" y1="200" x2="520" y2="205" stroke="#64748b" stroke-width="2"/>
+                    <line x1="505" y1="220" x2="520" y2="225" stroke="#64748b" stroke-width="2"/>
+                    <line x1="505" y1="240" x2="520" y2="245" stroke="#64748b" stroke-width="2"/>
+                    <line x1="505" y1="260" x2="520" y2="265" stroke="#64748b" stroke-width="2"/>
+                    <line x1="505" y1="280" x2="520" y2="285" stroke="#64748b" stroke-width="2"/>
+                    <line x1="505" y1="300" x2="520" y2="305" stroke="#64748b" stroke-width="2"/>
+                    <line x1="505" y1="320" x2="520" y2="325" stroke="#64748b" stroke-width="2"/>
+                </g>
+
+                <!-- Front door (louvered) -->
+                <rect x="200" y="60" width="300" height="300" rx="4" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+                <!-- Front louvers -->
+                <g stroke="#64748b" stroke-width="1.5">
+                    <line x1="220" y1="80" x2="480" y2="85"/>
+                    <line x1="220" y1="100" x2="480" y2="105"/>
+                    <line x1="220" y1="120" x2="480" y2="125"/>
+                    <line x1="220" y1="140" x2="480" y2="145"/>
+                    <line x1="220" y1="160" x2="480" y2="165"/>
+                    <line x1="220" y1="180" x2="480" y2="185"/>
+                    <line x1="220" y1="200" x2="480" y2="205"/>
+                    <line x1="220" y1="220" x2="480" y2="225"/>
+                    <line x1="220" y1="240" x2="480" y2="245"/>
+                    <line x1="220" y1="260" x2="480" y2="265"/>
+                    <line x1="220" y1="280" x2="480" y2="285"/>
+                    <line x1="220" y1="300" x2="480" y2="305"/>
+                    <line x1="220" y1="320" x2="480" y2="325"/>
+                    <line x1="220" y1="340" x2="480" y2="345"/>
+                </g>
+
+                <!-- Door handle -->
+                <rect x="475" y="195" width="10" height="50" rx="2" fill="#475569"/>
+
+                <!-- Hinge indicators -->
+                <circle cx="205" cy="100" r="4" fill="#475569"/>
+                <circle cx="205" cy="210" r="4" fill="#475569"/>
+                <circle cx="205" cy="320" r="4" fill="#475569"/>
+
+                <!-- Smart sensor -->
+                <rect x="460" y="70" width="25" height="15" rx="3" fill="#10b981"/>
+
+                <!-- Airflow arrows -->
+                <g fill="#0891b2" opacity="0.7">
+                    <polygon points="155,180 170,190 155,200"/>
+                    <polygon points="545,180 530,190 545,200"/>
+                    <polygon points="340,35 350,20 360,35"/>
+                </g>
+
+                <!-- Labels -->
+                <g font-size="9" fill="#64748b">
+                    <text x="350" y="395" text-anchor="middle">1100mm × 650mm × 1000mm (APE-HC-M)</text>
+                    <text x="140" y="190" fill="#0891b2">AIR IN</text>
+                    <text x="550" y="190" fill="#0891b2">AIR IN</text>
+                    <text x="350" y="15" text-anchor="middle" fill="#0891b2">HOT AIR OUT</text>
+                    <!-- Lift point label -->
+                    <text x="350" y="55" text-anchor="middle" fill="#92400e">Crane lift points</text>
+                </g>
+            </svg>
+            <div class="drawing-label">Figure 2.1: APE-HC Front View - Louvered panels allow 50%+ airflow</div>
+        </div>
+
+        <!-- Open view -->
+        <div class="drawing-container">
+            <svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- Title -->
+                <text x="350" y="25" text-anchor="middle" font-size="14" font-weight="600" fill="#0e7490">APE-HC Access - Door Open</text>
+
+                <!-- Main frame -->
+                <rect x="250" y="50" width="250" height="300" rx="4" fill="none" stroke="#64748b" stroke-width="3"/>
+
+                <!-- Interior visible -->
+                <rect x="255" y="55" width="240" height="290" fill="#f8fafc"/>
+
+                <!-- Heat pump inside -->
+                <rect x="280" y="120" width="190" height="180" rx="8" fill="#dc2626" stroke="#991b1b" stroke-width="2"/>
+                <text x="375" y="200" text-anchor="middle" font-size="12" fill="white" font-weight="600">HEAT PUMP</text>
+                <text x="375" y="220" text-anchor="middle" font-size="9" fill="white">Up to 20kW</text>
+                <!-- Fan grille on heat pump -->
+                <circle cx="375" cy="260" r="35" fill="none" stroke="white" stroke-width="2"/>
+                <circle cx="375" cy="260" r="25" fill="none" stroke="white" stroke-width="1"/>
+                <circle cx="375" cy="260" r="15" fill="none" stroke="white" stroke-width="1"/>
+
+                <!-- Mounting platform -->
+                <rect x="270" y="310" width="210" height="30" fill="#475569"/>
+                <text x="375" y="330" text-anchor="middle" font-size="8" fill="white">VIBRATION-ISOLATED PLATFORM</text>
+
+                <!-- Interior sensor -->
+                <rect x="455" y="70" width="30" height="20" rx="3" fill="#10b981"/>
+                <text x="470" y="83" text-anchor="middle" font-size="7" fill="white">T/RH</text>
+
+                <!-- Door swung open -->
+                <g transform="rotate(-100, 250, 200)">
+                    <rect x="250" y="50" width="250" height="300" rx="4" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+                    <!-- Louvers on door -->
+                    <g stroke="#64748b" stroke-width="1">
+                        <line x1="270" y1="70" x2="480" y2="75"/>
+                        <line x1="270" y1="95" x2="480" y2="100"/>
+                        <line x1="270" y1="120" x2="480" y2="125"/>
+                        <line x1="270" y1="145" x2="480" y2="150"/>
+                        <line x1="270" y1="170" x2="480" y2="175"/>
+                        <line x1="270" y1="195" x2="480" y2="200"/>
+                        <line x1="270" y1="220" x2="480" y2="225"/>
+                        <line x1="270" y1="245" x2="480" y2="250"/>
+                        <line x1="270" y1="270" x2="480" y2="275"/>
+                        <line x1="270" y1="295" x2="480" y2="300"/>
+                        <line x1="270" y1="320" x2="480" y2="325"/>
+                    </g>
+                </g>
+
+                <!-- Labels -->
+                <g font-size="9" fill="#64748b">
+                    <text x="375" y="380" text-anchor="middle">Full-height door swings 100° for equipment access</text>
+                </g>
+            </svg>
+            <div class="drawing-label">Figure 2.2: APE-HC with door open - full access to heat pump</div>
+        </div>
+
+        <div class="grid-2">
+            <div class="feature-card">
+                <h4>Louvered Panels (3 sides)</h4>
+                <ul>
+                    <li>45° angled blades</li>
+                    <li>50%+ open area</li>
+                    <li>Blocks rain at angle</li>
+                    <li>Reduces noise 50-60%</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h4>Full-Height Swing Door</h4>
+                <ul>
+                    <li>Heavy-duty hinges (3×)</li>
+                    <li>100° opening angle</li>
+                    <li>Magnetic hold-open</li>
+                    <li>Louvered for airflow</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- APE-HC Monitoring -->
+    <div class="content page-break">
+        <h3>Smart Monitoring System <span class="tech-badge">SMART</span></h3>
+
+        <div class="info-box">
+            <h4>Equipment Performance Monitoring</h4>
+            <p>Critical for expensive heat pumps/chillers - monitor operating conditions and catch problems early.</p>
+        </div>
+
+        <div class="grid-3">
+            <div class="feature-card">
+                <h4>Ambient Temp</h4>
+                <p>Track enclosure temperature. Alert if >55°C (poor ventilation or equipment fault).</p>
+            </div>
+            <div class="feature-card">
+                <h4>Airflow Check</h4>
+                <p>Differential pressure sensor detects blocked louvers or restricted airflow.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Run Time</h4>
+                <p>Optional: track equipment running hours for maintenance scheduling.</p>
+            </div>
+        </div>
+
+        <h3>APE-HC Size Options</h3>
+        <table class="spec-table">
+            <tr>
+                <th>Model</th>
+                <th>External (W×D×H)</th>
+                <th>Max Equipment</th>
+                <th>Clearance</th>
+            </tr>
+            <tr>
+                <td><strong>APE-HC-S</strong></td>
+                <td>900 × 550 × 1000mm</td>
+                <td>Up to 12kW</td>
+                <td>250mm sides</td>
+            </tr>
+            <tr>
+                <td><strong>APE-HC-M</strong></td>
+                <td>1100 × 650 × 1000mm</td>
+                <td>Up to 20kW</td>
+                <td>300mm sides</td>
+            </tr>
+            <tr>
+                <td><strong>APE-HC-L</strong></td>
+                <td>1400 × 750 × 1100mm</td>
+                <td>Up to 35kW</td>
+                <td>400mm sides</td>
+            </tr>
+        </table>
+
+        <h3>Key Design Features</h3>
+        <div class="grid-2">
+            <div>
+                <h4>Removable Top Panel</h4>
+                <ul>
+                    <li>Crane lift points for heavy equipment</li>
+                    <li>Drop in heat pump from above</li>
+                    <li>Service access from top</li>
+                    <li>Bolted (not hinged) for security</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Equipment Platform</h4>
+                <ul>
+                    <li>Vibration-isolated mounts</li>
+                    <li>Adjustable height</li>
+                    <li>Condensate drain provision</li>
+                    <li>150kg+ load capacity</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- APE-S: Storage -->
+    <div class="content page-break">
+        <div class="section-header">
+            <h2>3. APE-S Series - Climate-Controlled Storage</h2>
+            <p>Top-Opening Lid with Peltier Dehumidification</p>
+        </div>
+
+        <h3>Access Design Concept</h3>
+        <p><strong>Top-opening lid</strong> on dual gas struts for easy cushion storage. Front panel includes hidden <strong>condensate drawer</strong> and <strong>status display</strong>. Optional bench-seat rated lid.</p>
+
+        <!-- Main Design Drawing -->
+        <div class="drawing-container">
+            <svg viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg">
+                <!-- Title -->
+                <text x="350" y="25" text-anchor="middle" font-size="14" font-weight="600" fill="#0e7490">APE-S-200 Design - Climate-Controlled Storage</text>
+
+                <!-- Main body -->
+                <rect x="150" y="100" width="400" height="220" rx="8" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+
+                <!-- Lid (closed) -->
+                <rect x="145" y="85" width="410" height="25" rx="6" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
+
+                <!-- Gas strut pivot points -->
+                <circle cx="180" cy="100" r="4" fill="#f59e0b"/>
+                <circle cx="520" cy="100" r="4" fill="#f59e0b"/>
+
+                <!-- Handle recess in lid -->
+                <rect x="300" y="90" width="100" height="12" rx="3" fill="#94a3b8"/>
+
+                <!-- Front panel details -->
+                <!-- Status display -->
+                <rect x="480" y="130" width="50" height="30" rx="4" fill="#1e293b"/>
+                <text x="505" y="140" text-anchor="middle" font-size="6" fill="#10b981">45% RH</text>
+                <text x="505" y="152" text-anchor="middle" font-size="6" fill="#fbbf24">28°C</text>
+
+                <!-- Condensate drawer -->
+                <rect x="170" y="280" width="80" height="25" rx="2" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+                <rect x="200" y="287" width="20" height="8" rx="1" fill="#94a3b8"/>
+
+                <!-- Peltier module location (hidden) -->
+                <rect x="530" y="200" width="15" height="80" fill="#0891b2" opacity="0.3"/>
+
+                <!-- Seal line -->
+                <rect x="155" y="105" width="390" height="3" fill="#475569" opacity="0.5"/>
+
+                <!-- Apex logo position -->
+                <text x="350" y="200" text-anchor="middle" font-size="16" fill="#94a3b8" font-weight="300">APEX</text>
+
+                <!-- Labels -->
+                <g font-size="9" fill="#64748b">
+                    <text x="350" y="355" text-anchor="middle">1200mm × 600mm × 600mm (APE-S-200)</text>
+
+                    <!-- Status display label -->
+                    <line x1="530" y1="145" x2="580" y2="145" stroke="#64748b"/>
+                    <text x="585" y="148">Smart display</text>
+
+                    <!-- Drawer label -->
+                    <line x1="170" y1="292" x2="130" y2="310" stroke="#64748b"/>
+                    <text x="70" y="313">Condensate drawer</text>
+
+                    <!-- Peltier label -->
+                    <line x1="537" y1="240" x2="580" y2="260" stroke="#0891b2"/>
+                    <text x="585" y="263" fill="#0891b2">Peltier module</text>
+
+                    <!-- Seal label -->
+                    <line x1="350" y1="106" x2="350" y2="70" stroke="#475569"/>
+                    <text x="350" y="65" text-anchor="middle" fill="#475569">IP65 seal</text>
+                </g>
+            </svg>
+            <div class="drawing-label">Figure 3.1: APE-S Closed View - Climate-controlled storage chest</div>
+        </div>
+
+        <!-- Open view -->
+        <div class="drawing-container">
+            <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg">
+                <!-- Title -->
+                <text x="350" y="25" text-anchor="middle" font-size="14" font-weight="600" fill="#0e7490">APE-S-200 Open - Cushion Storage Access</text>
+
+                <!-- Main body -->
+                <rect x="150" y="150" width="400" height="220" rx="8" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+
+                <!-- Interior -->
+                <rect x="160" y="160" width="380" height="200" fill="#f8fafc"/>
+
+                <!-- Cushions inside -->
+                <rect x="180" y="200" width="160" height="80" rx="8" fill="#3b82f6" opacity="0.6"/>
+                <rect x="200" y="240" width="160" height="80" rx="8" fill="#8b5cf6" opacity="0.6"/>
+                <rect x="360" y="220" width="100" height="100" rx="8" fill="#10b981" opacity="0.6"/>
+                <text x="350" y="290" text-anchor="middle" font-size="10" fill="#64748b">CUSHIONS</text>
+
+                <!-- Raised floor mesh -->
+                <line x1="160" y1="350" x2="540" y2="350" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3"/>
+
+                <!-- Interior sensor -->
+                <rect x="500" y="170" width="30" height="20" rx="3" fill="#10b981"/>
+                <text x="515" y="183" text-anchor="middle" font-size="7" fill="white">T/RH</text>
+
+                <!-- Lid open on gas struts -->
+                <g transform="rotate(-75, 150, 150)">
+                    <rect x="145" y="135" width="410" height="25" rx="6" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
+                </g>
+
+                <!-- Gas struts extended -->
+                <line x1="180" y1="150" x2="140" y2="80" stroke="#f59e0b" stroke-width="3"/>
+                <line x1="520" y1="150" x2="480" y2="80" stroke="#f59e0b" stroke-width="3"/>
+
+                <!-- Soft close indicator -->
+                <text x="160" y="75" font-size="8" fill="#92400e">Soft-close gas struts</text>
+
+                <!-- Labels -->
+                <g font-size="9" fill="#64748b">
+                    <text x="350" y="400" text-anchor="middle">Lid opens to 80° - auto-hold with soft close</text>
+                </g>
+            </svg>
+            <div class="drawing-label">Figure 3.2: APE-S Open - Easy access for cushion storage</div>
+        </div>
+
+        <div class="grid-2">
+            <div class="feature-card">
+                <h4>Top-Opening Lid</h4>
+                <ul>
+                    <li>2× gas struts (soft close)</li>
+                    <li>Opens to 80° angle</li>
+                    <li>Auto-hold at open position</li>
+                    <li>Continuous EPDM seal (IP65)</li>
+                    <li>Optional: 150kg bench seat rating</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h4>Front Panel Features</h4>
+                <ul>
+                    <li>Small status display (T/RH readout)</li>
+                    <li>Pull-out condensate drawer</li>
+                    <li>12V DC power inlet</li>
+                    <li>Optional solar connector</li>
+                    <li>Subtle Apex branding</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- APE-S Climate System -->
+    <div class="content page-break">
+        <h3>Peltier Climate Control System <span class="tech-badge">CLIMATE</span></h3>
+
+        <div class="info-box">
+            <h4>How It Works</h4>
+            <p>A thermoelectric (Peltier) module extracts moisture from the air inside the sealed enclosure. Condensate collects in a small drawer. The system activates automatically when humidity rises above 50% RH, maintaining ideal storage conditions.</p>
+        </div>
+
+        <div class="drawing-container">
+            <svg viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg">
+                <!-- Title -->
+                <text x="300" y="20" text-anchor="middle" font-size="12" font-weight="600" fill="#0e7490">Peltier Dehumidification System</text>
+
+                <!-- Enclosure outline -->
+                <rect x="50" y="40" width="500" height="180" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+
+                <!-- Humid air inside -->
+                <g fill="#3b82f6" opacity="0.3">
+                    <circle cx="150" cy="120" r="20"/>
+                    <circle cx="220" cy="100" r="15"/>
+                    <circle cx="180" cy="160" r="18"/>
+                    <circle cx="280" cy="140" r="12"/>
+                </g>
+                <text x="200" y="200" text-anchor="middle" font-size="9" fill="#3b82f6">Humid air</text>
+
+                <!-- Peltier module -->
+                <rect x="380" y="70" width="40" height="100" fill="#0891b2" stroke="#0e7490" stroke-width="2"/>
+                <text x="400" y="125" text-anchor="middle" font-size="8" fill="white" transform="rotate(-90, 400, 125)">PELTIER</text>
+
+                <!-- Cold side -->
+                <rect x="370" y="80" width="10" height="80" fill="#67e8f9"/>
+                <text x="355" y="120" text-anchor="end" font-size="7" fill="#0e7490">Cold</text>
+
+                <!-- Hot side (outside) -->
+                <rect x="420" y="80" width="10" height="80" fill="#fca5a5"/>
+                <text x="445" y="120" font-size="7" fill="#dc2626">Hot</text>
+
+                <!-- Heat sink outside -->
+                <rect x="430" y="60" width="60" height="120" fill="#fecaca" stroke="#dc2626" stroke-width="1"/>
+                <g stroke="#dc2626" stroke-width="1">
+                    <line x1="440" y1="60" x2="440" y2="180"/>
+                    <line x1="455" y1="60" x2="455" y2="180"/>
+                    <line x1="470" y1="60" x2="470" y2="180"/>
+                    <line x1="485" y1="60" x2="485" y2="180"/>
+                </g>
+
+                <!-- Condensate collection -->
+                <rect x="370" y="170" width="50" height="20" fill="#0ea5e9"/>
+                <text x="395" y="183" text-anchor="middle" font-size="7" fill="white">H₂O</text>
+
+                <!-- Drain to drawer -->
+                <line x1="395" y1="190" x2="395" y2="210" stroke="#0ea5e9" stroke-width="2"/>
+                <rect x="360" y="210" width="70" height="15" fill="#e2e8f0" stroke="#94a3b8"/>
+                <text x="395" y="220" text-anchor="middle" font-size="7" fill="#64748b">Drawer</text>
+
+                <!-- Air flow arrows -->
+                <g fill="#0891b2">
+                    <polygon points="300,120 320,110 320,130"/>
+                    <polygon points="330,120 350,110 350,130"/>
+                </g>
+
+                <!-- Sensor -->
+                <rect x="100" y="60" width="40" height="25" rx="4" fill="#10b981"/>
+                <text x="120" y="76" text-anchor="middle" font-size="7" fill="white">SENSOR</text>
+
+                <!-- Labels -->
+                <g font-size="8" fill="#64748b">
+                    <text x="300" y="240">Moisture condenses on cold plate → drains to drawer</text>
+                </g>
+            </svg>
+            <div class="drawing-label">Figure 3.3: Climate Control System Diagram</div>
+        </div>
+
+        <h3>APE-S Size Options</h3>
+        <table class="spec-table">
+            <tr>
+                <th>Model</th>
+                <th>External (W×D×H)</th>
+                <th>Capacity</th>
+                <th>Climate System</th>
+            </tr>
+            <tr>
+                <td><strong>APE-S-100</strong></td>
+                <td>800 × 500 × 500mm</td>
+                <td>~100L</td>
+                <td>Single Peltier</td>
+            </tr>
+            <tr>
+                <td><strong>APE-S-200</strong></td>
+                <td>1200 × 600 × 600mm</td>
+                <td>~200L</td>
+                <td>Single Peltier</td>
+            </tr>
+            <tr>
+                <td><strong>APE-S-350</strong></td>
+                <td>1500 × 700 × 700mm</td>
+                <td>~350L</td>
+                <td>Dual Peltier option</td>
+            </tr>
+        </table>
+
+        <h3>Climate System Specifications</h3>
+        <div class="grid-2">
+            <div>
+                <h4>Peltier Module</h4>
+                <ul>
+                    <li>12V DC, 20-25W power</li>
+                    <li>250-350ml/24hr extraction</li>
+                    <li>Silent operation (<25 dBA)</li>
+                    <li>No compressor, no vibration</li>
+                    <li>10+ year lifespan</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Smart Controls</h4>
+                <ul>
+                    <li>Auto-activate at >50% RH</li>
+                    <li>Target: 35-50% RH maintained</li>
+                    <li>App alerts if humidity rises</li>
+                    <li>Drawer-full indicator</li>
+                    <li>Power status monitoring</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>Power Options</h3>
+        <div class="grid-3">
+            <div class="feature-card">
+                <h4>Standard: 12V Adapter</h4>
+                <p>Included. Plug into outdoor-rated outlet.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Solar Panel</h4>
+                <p>10W panel on lid. Runs during sunny hours when most needed.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Battery Backup</h4>
+                <p>Optional 12V battery for overnight operation.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="content page-break">
+        <div class="section-header">
+            <h2>4. Design Summary</h2>
+            <p>Quick Reference for All Three Products</p>
+        </div>
+
+        <table class="spec-table">
+            <tr>
+                <th>Feature</th>
+                <th>APE-P (Pump)</th>
+                <th>APE-HC (Heater/Chiller)</th>
+                <th>APE-S (Storage)</th>
+            </tr>
+            <tr>
+                <td><strong>Primary Access</strong></td>
+                <td>Lift-up roof + bi-fold doors</td>
+                <td>Full-height swing door</td>
+                <td>Top-opening lid</td>
+            </tr>
+            <tr>
+                <td><strong>Secondary Access</strong></td>
+                <td>—</td>
+                <td>Removable top panel</td>
+                <td>Front condensate drawer</td>
+            </tr>
+            <tr>
+                <td><strong>Opening Mechanism</strong></td>
+                <td>Gas struts (roof) + hinges (doors)</td>
+                <td>Heavy-duty hinges</td>
+                <td>Gas struts (soft close)</td>
+            </tr>
+            <tr>
+                <td><strong>Sealing</strong></td>
+                <td>IP55 (compression seal)</td>
+                <td>IP44 (louvered - open)</td>
+                <td>IP65 (continuous EPDM)</td>
+            </tr>
+            <tr>
+                <td><strong>Climate Control</strong></td>
+                <td>Passive ventilation</td>
+                <td>Natural airflow (50%+ open)</td>
+                <td>Active Peltier dehumidifier</td>
+            </tr>
+            <tr>
+                <td><strong>Smart Monitoring</strong></td>
+                <td>Temp + humidity + door</td>
+                <td>Temp + airflow + door</td>
+                <td>Temp + humidity + power</td>
+            </tr>
+            <tr>
+                <td><strong>Sizes</strong></td>
+                <td>S / M / L</td>
+                <td>S / M / L</td>
+                <td>100 / 200 / 350</td>
+            </tr>
+        </table>
+
+        <h3>Common Smart Features Across All Products</h3>
+        <div class="info-box">
+            <h4>Apex Smart Sensor Module</h4>
+            <p>All enclosures include wireless sensor with:</p>
+            <ul>
+                <li><strong>Temperature monitoring</strong> (±0.3°C accuracy)</li>
+                <li><strong>Humidity monitoring</strong> (±2% RH accuracy)</li>
+                <li><strong>Smartphone app</strong> (iOS/Android) with push alerts</li>
+                <li><strong>12+ month battery life</strong> (CR2477 replaceable)</li>
+                <li><strong>Bluetooth 5.0</strong> + optional WiFi gateway for remote access</li>
+            </ul>
+        </div>
+
+        <h3>Next Steps</h3>
+        <ol>
+            <li>Review these designs and provide feedback on access mechanisms</li>
+            <li>Confirm smart monitoring features required for each product</li>
+            <li>Discuss aesthetic treatment (louver style, handle design, branding placement)</li>
+            <li>Proceed to detailed CAD drawings with Eurotech</li>
+        </ol>
+
+        <div class="footer">
+            <p><strong>APE Pool Series - Product Designs</strong></p>
+            <p>Apex Enclosures | January 2026 | Confidential</p>
+        </div>
+    </div>
+
+</body>
+</html>

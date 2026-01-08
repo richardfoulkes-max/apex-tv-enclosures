@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APE Pool Series - Design Brief for Tom</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+        @media print {
+            .page-break { page-break-before: always; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        :root {
+            --primary: #0891b2;
+            --primary-dark: #0e7490;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #f8fafc;
+            --border: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: white;
+            color: var(--text);
+            line-height: 1.5;
+            font-size: 11pt;
+        }
+
+        /* Cover Page */
+        .cover {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 3rem;
+        }
+        .cover h1 { font-size: 3rem; margin-bottom: 0.5rem; font-weight: 300; }
+        .cover .subtitle { font-size: 1.5rem; opacity: 0.9; margin-bottom: 2rem; }
+        .cover .for { font-size: 1.1rem; opacity: 0.8; margin-top: 3rem; }
+        .cover .date { font-size: 0.9rem; opacity: 0.7; margin-top: 0.5rem; }
+        .cover .logo { font-size: 1.2rem; font-weight: 600; letter-spacing: 2px; margin-bottom: 3rem; }
+
+        /* Content Pages */
+        .content { padding: 2rem; max-width: 800px; margin: 0 auto; }
+
+        h2 {
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        h3 { color: var(--text); font-size: 1.1rem; margin: 1.5rem 0 0.75rem; }
+        p { margin-bottom: 0.75rem; color: var(--text-muted); }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+        th { background: var(--primary); color: white; padding: 0.6rem 0.75rem; text-align: left; font-weight: 600; }
+        td { padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border); }
+        tr:nth-child(even) { background: #f8fafc; }
+
+        /* Cards */
+        .product-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin: 1rem 0;
+        }
+        .product-card h4 { color: var(--primary-dark); margin-bottom: 0.5rem; }
+        .product-card .badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: #ecfeff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .info-box h4 { color: var(--primary-dark); margin-bottom: 0.5rem; }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .warning-box h4 { color: #92400e; margin-bottom: 0.5rem; }
+
+        /* Grid */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+
+        /* Stats */
+        .stat { text-align: center; padding: 1rem; background: var(--bg); border-radius: 8px; }
+        .stat .number { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .stat .label { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* Lists */
+        ul { margin: 0.5rem 0; padding-left: 1.5rem; }
+        li { margin-bottom: 0.25rem; color: var(--text-muted); }
+        li strong { color: var(--text); }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        /* Section header */
+        .section-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem 1.5rem;
+            margin: 2rem -2rem 1.5rem -2rem;
+        }
+        .section-header h2 { color: white; border: none; margin: 0; padding: 0; }
+    </style>
+</head>
+<body>
+
+    <!-- Cover Page -->
+    <div class="cover">
+        <div class="logo">APEX ENCLOSURES</div>
+        <h1>APE Pool Series</h1>
+        <div class="subtitle">Design Brief for Aesthetics Development</div>
+        <div class="for">Prepared for: Tom & Design Team</div>
+        <div class="date">January 2026</div>
+    </div>
+
+    <!-- Page 2: Overview -->
+    <div class="content page-break">
+        <h2>Product Line Overview</h2>
+
+        <p>The APE (Apex Pool Equipment) Series consists of three distinct product lines, each addressing different pool area needs. All products share common construction quality and aesthetic language but have different functional requirements that affect their design.</p>
+
+        <div class="grid-3" style="margin: 1.5rem 0;">
+            <div class="stat">
+                <div class="number">APE-P</div>
+                <div class="label">Pump Enclosures<br>Sealed + Acoustic</div>
+            </div>
+            <div class="stat">
+                <div class="number">APE-HC</div>
+                <div class="label">Heater/Chiller<br>Louvered + Airflow</div>
+            </div>
+            <div class="stat">
+                <div class="number">APE-S</div>
+                <div class="label">Storage<br>Climate Controlled</div>
+            </div>
+        </div>
+
+        <h3>Target Market</h3>
+        <p>Luxury villa owners in the Gulf region (UAE, Saudi Arabia) who want their pool equipment and storage to look as good as the rest of their outdoor space. These customers pay AED 50,000+ for outdoor furniture sets - they don't want ugly plastic boxes or exposed equipment.</p>
+
+        <h3>Design Philosophy</h3>
+        <ul>
+            <li><strong>Architectural integration:</strong> Should look like it belongs in a luxury villa, not industrial equipment</li>
+            <li><strong>Clean lines:</strong> Minimal visible hardware, flush surfaces where possible</li>
+            <li><strong>Premium materials:</strong> Powder-coated aluminum, stainless steel accents</li>
+            <li><strong>Color matching:</strong> Full RAL palette to match villa architecture</li>
+        </ul>
+
+        <h3>Manufacturing Partner</h3>
+        <p><strong>Eurotech Metal Industries (UAE)</strong> - Sheet metal fabrication specialists with 2000+ hour salt spray coating capability. They build to our specs, so design freedom is high within aluminum sheet metal constraints.</p>
+
+        <div class="info-box">
+            <h4>Key Design Constraint</h4>
+            <p>All products are made from folded/welded aluminum sheet metal (2-3mm). Complex curves are possible but expensive. Flat panels with clean folds are preferred for cost efficiency.</p>
+        </div>
+    </div>
+
+    <!-- Page 3: APE-P Pump Enclosures -->
+    <div class="content page-break">
+        <div class="section-header">
+            <h2>1. APE-P Series - Pool Pump Enclosures</h2>
+        </div>
+
+        <p>Fully sealed acoustic enclosures that house pool pumps, filters, and chlorinators. The primary goal is <strong>noise reduction (70-80%)</strong> while protecting equipment from weather.</p>
+
+        <h3>Size Options</h3>
+        <table>
+            <tr>
+                <th>Model</th>
+                <th>External Dimensions</th>
+                <th>Internal Space</th>
+                <th>Typical Use</th>
+            </tr>
+            <tr>
+                <td><strong>APE-P-S</strong> (Small)</td>
+                <td>700 × 600 × 900mm</td>
+                <td>650 × 550 × 850mm</td>
+                <td>Single pump + compact chlorinator</td>
+            </tr>
+            <tr>
+                <td><strong>APE-P-M</strong> (Medium)</td>
+                <td>1100 × 600 × 900mm</td>
+                <td>1050 × 550 × 850mm</td>
+                <td>Pump + full-size filter</td>
+            </tr>
+            <tr>
+                <td><strong>APE-P-L</strong> (Large)</td>
+                <td>1500 × 600 × 900mm</td>
+                <td>1450 × 550 × 850mm</td>
+                <td>Complete pump room</td>
+            </tr>
+        </table>
+
+        <h3>Design-Critical Features</h3>
+
+        <div class="product-card">
+            <h4>Acoustic Sealing <span class="badge">CRITICAL</span></h4>
+            <p>Interior lined with 25mm closed-cell acoustic foam. All panel joints must seal completely - any gaps destroy acoustic performance. Consider how doors/panels meet the frame.</p>
+        </div>
+
+        <div class="product-card">
+            <h4>Passive Ventilation</h4>
+            <p>Equipment generates heat but no fan is needed. Ventilation via labyrinth baffles that allow airflow while blocking sound. These could be a design feature (visible grilles) or hidden.</p>
+        </div>
+
+        <div class="product-card">
+            <h4>Service Access</h4>
+            <p>Full-front door required for equipment access. Consider: swing door vs lift-off panel vs bi-fold. Door needs compression latches for acoustic seal + padlock provision for security.</p>
+        </div>
+
+        <div class="warning-box">
+            <h4>Design Consideration</h4>
+            <p>This is the "workhorse" product - most common configuration. Needs to look premium but pricing is sensitive. Overly complex designs will price us out of market.</p>
+        </div>
+
+        <h3>Technical Specs for Reference</h3>
+        <ul>
+            <li>IP55 rated (rain-proof, hose cleanable)</li>
+            <li>All fasteners: 316 stainless steel (salt pool compatible)</li>
+            <li>Height: 900mm (sits on ground or plinth)</li>
+            <li>Weight: 35-55kg depending on size</li>
+        </ul>
+    </div>
+
+    <!-- Page 4: APE-HC Heater/Chiller -->
+    <div class="content page-break">
+        <div class="section-header">
+            <h2>2. APE-HC Series - Heater/Chiller Enclosures</h2>
+        </div>
+
+        <p>These enclosures house heat pumps, pool chillers, or gas heaters. Unlike the pump enclosures, these <strong>require significant airflow</strong> for the equipment to operate. The design uses louvered panels rather than sealed construction.</p>
+
+        <div class="warning-box">
+            <h4>Key Difference from APE-P</h4>
+            <p>Heat pumps and chillers need 50%+ open area for airflow. This is NOT an acoustic enclosure - it's weather protection and aesthetic screening with moderate noise reduction (50-60%).</p>
+        </div>
+
+        <h3>Size Options</h3>
+        <table>
+            <tr>
+                <th>Model</th>
+                <th>External Dimensions</th>
+                <th>Clearance Required</th>
+                <th>Equipment Capacity</th>
+            </tr>
+            <tr>
+                <td><strong>APE-HC-S</strong> (Small)</td>
+                <td>900 × 550 × 1000mm</td>
+                <td>250mm sides, 300mm top</td>
+                <td>Up to 12kW</td>
+            </tr>
+            <tr>
+                <td><strong>APE-HC-M</strong> (Medium)</td>
+                <td>1100 × 650 × 1000mm</td>
+                <td>300mm sides, 300mm top</td>
+                <td>Up to 20kW</td>
+            </tr>
+            <tr>
+                <td><strong>APE-HC-L</strong> (Large)</td>
+                <td>1400 × 750 × 1100mm</td>
+                <td>400mm sides, 350mm top</td>
+                <td>Up to 35kW</td>
+            </tr>
+        </table>
+
+        <h3>Design-Critical Features</h3>
+
+        <div class="product-card">
+            <h4>Louvered Panels <span class="badge">CRITICAL</span></h4>
+            <p>Side and rear panels need louvers for airflow. Louver design is a major aesthetic opportunity - horizontal vs vertical, blade angle, spacing. Must achieve 50%+ open area while blocking rain at 45° angle.</p>
+        </div>
+
+        <div class="product-card">
+            <h4>Top Ventilation</h4>
+            <p>Heat rises - top panel needs ventilation. Could be louvered, mesh, or open with rain hood. This is highly visible so design matters.</p>
+        </div>
+
+        <div class="product-card">
+            <h4>Equipment Platform</h4>
+            <p>Heat pumps/chillers sit on internal platform (not directly on ground). Consider vibration isolation mounting points.</p>
+        </div>
+
+        <div class="info-box">
+            <h4>Design Opportunity</h4>
+            <p>The louver pattern is the signature visual element of this product. Distinctive louver design could become part of the Apex brand identity across the product line.</p>
+        </div>
+
+        <h3>Technical Specs for Reference</h3>
+        <ul>
+            <li>IP44 rated (splash resistant)</li>
+            <li>Open area: minimum 50% on ventilated panels</li>
+            <li>Height: 1000-1100mm (taller than pump enclosures)</li>
+            <li>Weight: 30-50kg empty</li>
+        </ul>
+    </div>
+
+    <!-- Page 5: APE-S Storage -->
+    <div class="content page-break">
+        <div class="section-header">
+            <h2>3. APE-S Series - Climate-Controlled Storage</h2>
+        </div>
+
+        <p>Premium outdoor storage for pool cushions, towels, and accessories. The unique selling point is <strong>integrated climate control</strong> - these aren't just waterproof boxes, they actively maintain optimal humidity to prevent mold and mildew.</p>
+
+        <h3>Size Options</h3>
+        <table>
+            <tr>
+                <th>Model</th>
+                <th>External Dimensions</th>
+                <th>Capacity</th>
+                <th>Typical Use</th>
+            </tr>
+            <tr>
+                <td><strong>APE-S-100</strong> (Compact)</td>
+                <td>800 × 500 × 500mm</td>
+                <td>~100L</td>
+                <td>4-6 cushions or towels</td>
+            </tr>
+            <tr>
+                <td><strong>APE-S-200</strong> (Standard)</td>
+                <td>1200 × 600 × 600mm</td>
+                <td>~200L</td>
+                <td>Full lounge set cushions</td>
+            </tr>
+            <tr>
+                <td><strong>APE-S-350</strong> (Large)</td>
+                <td>1500 × 700 × 700mm</td>
+                <td>~350L</td>
+                <td>Multiple sets + accessories</td>
+            </tr>
+        </table>
+
+        <h3>How the Climate Control Works</h3>
+
+        <div class="info-box">
+            <h4>Peltier Dehumidification System</h4>
+            <p>A small thermoelectric (Peltier) module built into the enclosure wall extracts moisture from the air. It's silent (no compressor), low power (20-25W), and maintenance-free. Condensate collects in a small drawer that's emptied periodically.</p>
+            <ul style="margin-top: 0.5rem;">
+                <li><strong>Sensor:</strong> Built-in temperature + humidity sensor with smartphone app</li>
+                <li><strong>Automatic:</strong> Activates when humidity exceeds 50% RH</li>
+                <li><strong>Power:</strong> 12V DC adapter (standard), solar panel option, or battery backup</li>
+                <li><strong>Extraction:</strong> 250-350ml per 24 hours</li>
+            </ul>
+        </div>
+
+        <h3>Design-Critical Features</h3>
+
+        <div class="product-card">
+            <h4>IP65 Sealing <span class="badge">CRITICAL</span></h4>
+            <p>Must be completely sealed (dust-tight + water jet protected). The whole point is keeping Gulf humidity OUT. Continuous EPDM gasket around lid opening.</p>
+        </div>
+
+        <div class="product-card">
+            <h4>Lid Design</h4>
+            <p>Top-opening lid with gas struts for soft close. Needs to support seating load (150kg) if bench seat option selected. Consider lift mechanism and hinge visibility.</p>
+        </div>
+
+        <div class="product-card">
+            <h4>Condensate Drawer</h4>
+            <p>Small pull-out drawer (hidden from main view) to empty collected moisture. Needs easy access but shouldn't be visible during normal use.</p>
+        </div>
+
+        <div class="product-card">
+            <h4>Status Indicators</h4>
+            <p>Small LED or indicator window showing system status (humidity level, power). Should be subtle/elegant, not industrial looking.</p>
+        </div>
+
+        <div class="warning-box">
+            <h4>Premium Positioning</h4>
+            <p>This is our highest-margin product (AED 5,000-11,000). It competes with designer outdoor furniture, not plastic deck boxes. The design needs to justify the premium price point.</p>
+        </div>
+    </div>
+
+    <!-- Page 6: Common Elements -->
+    <div class="content page-break">
+        <div class="section-header">
+            <h2>4. Common Design Elements</h2>
+        </div>
+
+        <p>All three product lines should share a common design language while respecting their functional differences.</p>
+
+        <h3>Materials & Finishes</h3>
+        <table>
+            <tr>
+                <th>Element</th>
+                <th>Material</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td>Panels</td>
+                <td>5052-H32 Aluminum (2.0mm)</td>
+                <td>Marine grade, won't corrode</td>
+            </tr>
+            <tr>
+                <td>Frame</td>
+                <td>5052-H32 Aluminum (3.0mm)</td>
+                <td>Structural members</td>
+            </tr>
+            <tr>
+                <td>Fasteners</td>
+                <td>316 Stainless Steel</td>
+                <td>Required for salt pool environments</td>
+            </tr>
+            <tr>
+                <td>Hinges</td>
+                <td>316 SS or concealed</td>
+                <td>Gas struts where needed</td>
+            </tr>
+            <tr>
+                <td>Finish</td>
+                <td>Powder coat (80-100μm)</td>
+                <td>2000hr salt spray rated</td>
+            </tr>
+            <tr>
+                <td>Gaskets</td>
+                <td>EPDM</td>
+                <td>UV and ozone resistant</td>
+            </tr>
+        </table>
+
+        <h3>Color Options</h3>
+        <p><strong>Standard (included):</strong> RAL 7016 Anthracite Grey, RAL 7035 Light Grey, RAL 9005 Jet Black</p>
+        <p><strong>Premium:</strong> RAL 1015 Light Ivory, RAL 7030 Stone Grey, RAL 7033 Cement Grey, RAL 8011 Nut Brown, plus others</p>
+        <p><strong>Custom:</strong> Any RAL color can be matched</p>
+
+        <h3>Hardware Considerations</h3>
+        <ul>
+            <li><strong>Latches:</strong> Compression latches for sealed products, standard latches for louvered</li>
+            <li><strong>Locks:</strong> Padlock provision on all products (security in common areas)</li>
+            <li><strong>Handles:</strong> Flush or integrated preferred over protruding handles</li>
+            <li><strong>Feet:</strong> Adjustable feet for uneven surfaces, or plinth mounting option</li>
+        </ul>
+
+        <h3>Brand Elements</h3>
+        <div class="info-box">
+            <h4>Opportunities for Brand Integration</h4>
+            <ul>
+                <li>Subtle Apex logo placement (laser etched or small badge)</li>
+                <li>Consistent handle/latch design across product lines</li>
+                <li>Signature louver pattern that could appear on all products</li>
+                <li>Common corner radius or edge treatment</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page 7: Design Questions -->
+    <div class="content page-break">
+        <div class="section-header">
+            <h2>5. Questions for Design Team</h2>
+        </div>
+
+        <p>Key decisions we'd like input on from the design team:</p>
+
+        <h3>Overall Aesthetic Direction</h3>
+        <ol>
+            <li>Should we pursue a <strong>minimalist/invisible</strong> approach (blend into background) or <strong>architectural statement</strong> approach (feature piece)?</li>
+            <li>How do we create visual coherence across the three very different product types?</li>
+            <li>What's the right balance between premium appearance and manufacturing cost?</li>
+        </ol>
+
+        <h3>Specific Design Elements</h3>
+        <ol>
+            <li><strong>Louver design:</strong> Horizontal vs vertical? Blade profile? Spacing? This could become a signature element.</li>
+            <li><strong>Corner treatment:</strong> Sharp corners, radiused corners, chamfered edges?</li>
+            <li><strong>Panel articulation:</strong> Flat panels or subtle reveals/shadow lines?</li>
+            <li><strong>Hardware visibility:</strong> Exposed stainless (industrial chic) or hidden (clean minimalist)?</li>
+            <li><strong>Logo/branding:</strong> Placement, size, method (etched, badge, embossed)?</li>
+        </ol>
+
+        <h3>Product-Specific Questions</h3>
+
+        <div class="product-card">
+            <h4>APE-P (Pump)</h4>
+            <ul>
+                <li>Door opening mechanism preference?</li>
+                <li>How to make ventilation grilles attractive?</li>
+            </ul>
+        </div>
+
+        <div class="product-card">
+            <h4>APE-HC (Heater/Chiller)</h4>
+            <ul>
+                <li>Louver pattern that provides 50%+ airflow while looking premium?</li>
+                <li>Top treatment (visible louvers vs hidden under overhang)?</li>
+            </ul>
+        </div>
+
+        <div class="product-card">
+            <h4>APE-S (Storage)</h4>
+            <ul>
+                <li>Lid opening mechanism - visible hinges or hidden?</li>
+                <li>How to integrate status indicators elegantly?</li>
+                <li>Bench seat variant - any design implications?</li>
+            </ul>
+        </div>
+
+        <h3>Next Steps</h3>
+        <p>We're open to your recommendations on all of the above. Once we align on direction, we can work with Eurotech to prototype. Happy to have a call to discuss any questions about functional requirements or constraints.</p>
+
+        <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg); border-radius: 8px; text-align: center;">
+            <p style="margin: 0; color: var(--text);"><strong>Contact:</strong> Richard Foulkes</p>
+            <p style="margin: 0.5rem 0 0 0;">richard@apexenclosures.ae</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>APE Pool Series Design Brief</strong> - Confidential</p>
+        <p>Apex Enclosures | January 2026</p>
+    </div>
+
+</body>
+</html>
