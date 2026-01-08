@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eurotech Metal Industries - Manufacturing Partner | Apex Enclosures</title>
+    <style>
+        :root {
+            --primary: #0d9488;
+            --primary-dark: #0f766e;
+            --primary-light: #14b8a6;
+            --accent: #f59e0b;
+            --gold: #d4a853;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --success: #10b981;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+        .main-container { padding: 2rem; max-width: 1200px; }
+
+        /* Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-dark), #065f46);
+            color: white;
+            padding: 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+            border-radius: 0 0 16px 16px;
+        }
+        .page-header h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+        .page-header .subtitle { opacity: 0.9; font-size: 1rem; }
+
+        /* Partner Badge */
+        .partner-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--gold), #c5942d);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
+
+        .hero-content h2 { color: var(--primary-dark); font-size: 1.5rem; margin-bottom: 1rem; }
+        .hero-content p { color: var(--text-muted); margin-bottom: 1rem; }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .stat-box {
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .stat-box .number {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .stat-box .label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Sections */
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+        .section h2 {
+            color: var(--primary-dark);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .section h2 .icon { font-size: 1.5rem; }
+        .section h3 { color: var(--text); font-size: 1.1rem; margin: 1.5rem 0 0.75rem; }
+        .section p { color: var(--text-muted); margin-bottom: 1rem; }
+
+        /* Certification Cards */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        @media (max-width: 768px) { .cert-grid { grid-template-columns: 1fr; } }
+
+        .cert-card {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .cert-card .cert-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .cert-card .cert-desc { font-size: 0.8rem; opacity: 0.9; }
+        .cert-card .cert-since { font-size: 0.7rem; opacity: 0.7; margin-top: 0.5rem; }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+        th { background: var(--bg); padding: 0.75rem; text-align: left; font-weight: 600; color: var(--primary); border-bottom: 2px solid var(--border); }
+        td { padding: 0.75rem; border-bottom: 1px solid var(--border); }
+        tr:hover { background: #f8fafc; }
+
+        /* Spec Table */
+        .spec-table th:first-child { width: 35%; }
+        .spec-table td:first-child { font-weight: 500; color: var(--text); }
+
+        /* Highlight Box */
+        .highlight {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border: 2px solid var(--success);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .highlight h4 {
+            color: #065f46;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .highlight p { color: #047857; margin: 0; }
+
+        /* Warning Box */
+        .standard-box {
+            background: #fffbeb;
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .standard-box h4 {
+            color: #92400e;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .standard-box p { color: #a16207; margin: 0; }
+
+        /* Grid layouts */
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+        @media (max-width: 768px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+        }
+        .card h4 { color: var(--primary-dark); margin-bottom: 0.5rem; font-size: 1rem; }
+        .card p { font-size: 0.85rem; margin: 0; color: var(--text-muted); }
+
+        /* Color Swatches */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .color-swatch {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: white;
+        }
+        .color-swatch .swatch {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.7);
+        }
+        .color-swatch .info {
+            padding: 0.75rem;
+            text-align: center;
+        }
+        .color-swatch .name { font-weight: 600; font-size: 0.85rem; color: var(--text); }
+        .color-swatch .code { font-size: 0.7rem; color: var(--text-muted); }
+
+        /* Lists */
+        ul { margin: 0.75rem 0; padding-left: 1.5rem; }
+        li { margin-bottom: 0.35rem; color: var(--text-muted); }
+        li strong { color: var(--text); }
+
+        /* Client Logos */
+        .client-grid {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 1.5rem;
+            background: var(--bg);
+            border-radius: 12px;
+            margin-top: 1rem;
+        }
+        .client-logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            padding: 1rem 1.5rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        /* Comparison Table */
+        .compare-good { background: #dcfce7; }
+        .compare-better { background: #bbf7d0; }
+        .compare-best { background: #86efac; font-weight: 600; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <header class="page-header">
+            <h1>Eurotech Metal Industries</h1>
+            <p class="subtitle">Premium Manufacturing Partner for Apex Enclosures</p>
+            <div class="partner-badge">
+                <span>&#127942;</span> Exclusive UAE Manufacturing Partner
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-content">
+                <h2>World-Class Sheet Metal Fabrication</h2>
+                <p>Founded in 2003, Eurotech Metal Industries is strategically located in Dubai's Jebel Ali Free Zone - the largest port in the Middle East. For over 20 years, they've set the bar high helping the most demanding customers with customized engineering solutions.</p>
+                <p>Eurotech manufactures for global brands including <strong>Schneider Electric</strong> and <strong>Camfil</strong> (world leader in air filtration), demonstrating their capability to meet the most stringent quality requirements.</p>
+                <p><strong>Visit date:</strong> January 2026 - Facility tour confirmed manufacturing capabilities exceed Apex requirements by approximately 5x.</p>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-box">
+                    <div class="number">20+</div>
+                    <div class="label">Years Experience</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">2000+</div>
+                    <div class="label">Hours Salt Spray</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">3</div>
+                    <div class="label">ISO Certifications</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ISO Certifications -->
+        <section class="section">
+            <h2><span class="icon">&#128203;</span> ISO Certifications</h2>
+            <p>Eurotech has maintained full ISO certification since 2005, demonstrating two decades of commitment to quality management, environmental responsibility, and occupational health & safety.</p>
+
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <div class="cert-name">ISO 9001:2015</div>
+                    <div class="cert-desc">Quality Management System</div>
+                    <div class="cert-since">Certified since 2005</div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-name">ISO 14001:2015</div>
+                    <div class="cert-desc">Environmental Management</div>
+                    <div class="cert-since">Certified since 2005</div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-name">ISO 45001:2018</div>
+                    <div class="cert-desc">Occupational Health & Safety</div>
+                    <div class="cert-since">Certified since 2005</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quality Standards -->
+        <section class="section">
+            <h2><span class="icon">&#127942;</span> Quality Standards</h2>
+
+            <div class="highlight">
+                <h4>&#9989; Industry-Leading Corrosion Resistance</h4>
+                <p>Eurotech recently passed the <strong>2000-hour mark</strong> in salt spray testing (ASTM B117), achieving C5M/C4H corrosion resistance classification. This is exceptional - industry standard is typically 500-1000 hours.</p>
+            </div>
+
+            <h3>Salt Spray Test Comparison</h3>
+            <table>
+                <tr>
+                    <th>Standard</th>
+                    <th>Hours Required</th>
+                    <th>Eurotech Performance</th>
+                    <th>Status</th>
+                </tr>
+                <tr class="compare-good">
+                    <td>Basic outdoor (C3)</td>
+                    <td>240 hours</td>
+                    <td>2000+ hours</td>
+                    <td>&#10004; 8x exceeded</td>
+                </tr>
+                <tr class="compare-good">
+                    <td>Marine industrial (C4)</td>
+                    <td>480 hours</td>
+                    <td>2000+ hours</td>
+                    <td>&#10004; 4x exceeded</td>
+                </tr>
+                <tr class="compare-better">
+                    <td>Severe marine (C5-M)</td>
+                    <td>720 hours</td>
+                    <td>2000+ hours</td>
+                    <td>&#10004; 2.8x exceeded</td>
+                </tr>
+                <tr class="compare-best">
+                    <td>Apex requirement</td>
+                    <td>1500 hours</td>
+                    <td>2000+ hours</td>
+                    <td>&#10004; Exceeds spec</td>
+                </tr>
+            </table>
+
+            <div class="standard-box">
+                <h4>&#128161; What This Means for Apex Products</h4>
+                <p>Eurotech's 2000+ hour salt spray performance ensures Apex enclosures will withstand Dubai's harsh coastal environment - salt air, humidity, and pool chemical exposure - with exceptional longevity. This supports our 10-year structural warranty with confidence.</p>
+            </div>
+        </section>
+
+        <!-- Manufacturing Capabilities -->
+        <section class="section">
+            <h2><span class="icon">&#128736;</span> Manufacturing Capabilities</h2>
+
+            <h3>Materials Processed</h3>
+            <div class="grid-3">
+                <div class="card">
+                    <h4>Aluminum</h4>
+                    <p>5052-H32, 6063-T5, and other grades. Primary material for Apex enclosures.</p>
+                </div>
+                <div class="card">
+                    <h4>Stainless Steel</h4>
+                    <p>304 and 316 grades for salt-resistant components and fasteners.</p>
+                </div>
+                <div class="card">
+                    <h4>Galvanized Steel</h4>
+                    <p>EG, CRCA, GI, and Aluzinc sheets for cost-effective applications.</p>
+                </div>
+                <div class="card">
+                    <h4>Copper</h4>
+                    <p>For electrical components and specialized applications.</p>
+                </div>
+                <div class="card">
+                    <h4>Polycarbonate</h4>
+                    <p>For transparent panels and covers where required.</p>
+                </div>
+                <div class="card">
+                    <h4>Custom Alloys</h4>
+                    <p>Capability to source and process specialty materials on request.</p>
+                </div>
+            </div>
+
+            <h3>Welding Capabilities</h3>
+            <table class="spec-table">
+                <tr><th>Technique</th><th>Application</th></tr>
+                <tr><td><strong>MIG Welding</strong></td><td>High-speed welding for aluminum frames and structural components</td></tr>
+                <tr><td><strong>TIG Welding</strong></td><td>Precision welding for visible seams and thin materials</td></tr>
+                <tr><td><strong>Spot Welding</strong></td><td>Swift bonds for sheet metal assembly</td></tr>
+                <tr><td><strong>Laser Welding</strong></td><td>Minimal heat impact, precision work on sensitive materials</td></tr>
+                <tr><td><strong>Stud Welding</strong></td><td>Fastener attachment without through-holes</td></tr>
+            </table>
+
+            <h3>Technology & Equipment</h3>
+            <ul>
+                <li><strong>CAD/CAM Integration:</strong> Full 3D design-to-manufacturing pipeline</li>
+                <li><strong>Laser Cutting:</strong> High-precision sheet cutting with clean edges</li>
+                <li><strong>CNC Bending:</strong> Accurate and repeatable forming operations</li>
+                <li><strong>Powder Coating Line:</strong> In-house coating with quality control</li>
+                <li><strong>ERP System:</strong> Efficient production tracking and quality assurance</li>
+            </ul>
+        </section>
+
+        <!-- Powder Coating & Finishes -->
+        <section class="section">
+            <h2><span class="icon">&#127912;</span> Powder Coating & Custom Finishes</h2>
+
+            <p>Eurotech operates a full in-house powder coating facility, allowing complete control over finish quality. They can match any RAL color and achieve various finish textures from matte to high gloss.</p>
+
+            <h3>Coating Specifications</h3>
+            <table class="spec-table">
+                <tr><th>Parameter</th><th>Eurotech Capability</th></tr>
+                <tr><td>Pre-treatment</td><td>Chromate conversion coating, phosphating</td></tr>
+                <tr><td>Coating type</td><td>Marine-grade polyester powder coat</td></tr>
+                <tr><td>Thickness</td><td>60-120 microns (controllable)</td></tr>
+                <tr><td>Color range</td><td>Full RAL palette + custom color matching</td></tr>
+                <tr><td>Finish options</td><td>Matte, satin, semi-gloss, high gloss, textured</td></tr>
+                <tr><td>Salt spray resistance</td><td>2000+ hours (exceeds C5-M)</td></tr>
+                <tr><td>UV resistance</td><td>5+ years outdoor exposure without chalking</td></tr>
+            </table>
+
+            <h3>Standard Apex Colors</h3>
+            <p>These colors are stocked and available with standard lead times:</p>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #383e42;">RAL 7016</div>
+                    <div class="info">
+                        <div class="name">Anthracite Grey</div>
+                        <div class="code">RAL 7016 (Default)</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #f1f0ea; color: #666;">RAL 9010</div>
+                    <div class="info">
+                        <div class="name">Pure White</div>
+                        <div class="code">RAL 9010</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #c8c8c8; color: #333;">RAL 7035</div>
+                    <div class="info">
+                        <div class="name">Light Grey</div>
+                        <div class="code">RAL 7035</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #0f0f0f;">RAL 9005</div>
+                    <div class="info">
+                        <div class="name">Jet Black</div>
+                        <div class="code">RAL 9005</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Premium Colors (+AED 75)</h3>
+            <p>Available with 1-2 week additional lead time:</p>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #e0d1b8; color: #666;">RAL 1015</div>
+                    <div class="info">
+                        <div class="name">Light Ivory</div>
+                        <div class="code">RAL 1015</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #969992; color: #fff;">RAL 7030</div>
+                    <div class="info">
+                        <div class="name">Stone Grey</div>
+                        <div class="code">RAL 7030</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #7d8471;">RAL 7033</div>
+                    <div class="info">
+                        <div class="name">Cement Grey</div>
+                        <div class="code">RAL 7033</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #4a4d4f;">RAL 7021</div>
+                    <div class="info">
+                        <div class="name">Black Grey</div>
+                        <div class="code">RAL 7021</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #2f4538;">RAL 6005</div>
+                    <div class="info">
+                        <div class="name">Moss Green</div>
+                        <div class="code">RAL 6005</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #7b5141;">RAL 8011</div>
+                    <div class="info">
+                        <div class="name">Nut Brown</div>
+                        <div class="code">RAL 8011</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #80643f;">RAL 8001</div>
+                    <div class="info">
+                        <div class="name">Ochre Brown</div>
+                        <div class="code">RAL 8001</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #3e3c32;">RAL 6006</div>
+                    <div class="info">
+                        <div class="name">Grey Olive</div>
+                        <div class="code">RAL 6006</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Custom RAL Colors (+AED 150)</h3>
+            <p>Any RAL color can be matched with 2-3 week lead time. Ideal for matching existing architecture or corporate colors. Minimum order may apply for very unusual colors.</p>
+
+            <h3>Special Finishes (Quote on Request)</h3>
+            <ul>
+                <li><strong>Textured finishes:</strong> Sand texture, leather texture, hammer tone</li>
+                <li><strong>Metallic finishes:</strong> Bronze metallic, champagne, silver</li>
+                <li><strong>Wood grain effect:</strong> Sublimation transfer for wood appearance</li>
+                <li><strong>Dual-tone:</strong> Different colors on frame vs panels</li>
+            </ul>
+        </section>
+
+        <!-- Services -->
+        <section class="section">
+            <h2><span class="icon">&#128260;</span> Full-Service Capability</h2>
+
+            <div class="grid-2">
+                <div>
+                    <h3>Design & Development</h3>
+                    <ul>
+                        <li>CAD/CAM design collaboration</li>
+                        <li>Design for manufacturability (DFM) review</li>
+                        <li>Prototype development</li>
+                        <li>3D drawing guided assembly</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Fabrication</h3>
+                    <ul>
+                        <li>Laser cutting</li>
+                        <li>CNC bending and forming</li>
+                        <li>Welding (MIG, TIG, Spot, Laser, Stud)</li>
+                        <li>Precision assembly</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Finishing</h3>
+                    <ul>
+                        <li>Surface pre-treatment</li>
+                        <li>Powder coating (any RAL color)</li>
+                        <li>Quality inspection</li>
+                        <li>Packaging for shipping</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Logistics</h3>
+                    <ul>
+                        <li>Jebel Ali Free Zone location</li>
+                        <li>Direct port access for export</li>
+                        <li>Local delivery within UAE</li>
+                        <li>International shipping coordination</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reference Clients -->
+        <section class="section">
+            <h2><span class="icon">&#128188;</span> Reference Clients</h2>
+
+            <p>Eurotech manufactures for global industry leaders with the most stringent quality requirements:</p>
+
+            <div class="client-grid">
+                <div class="client-logo">Schneider Electric&trade;</div>
+                <div class="client-logo">Camfil&trade;</div>
+            </div>
+
+            <div class="grid-2" style="margin-top: 1.5rem;">
+                <div class="card">
+                    <h4>Schneider Electric</h4>
+                    <p>Global leader in energy management and automation. Partnership since 2002, following highest manufacturing and design standards in line with Schneider brand commitment.</p>
+                </div>
+                <div class="card">
+                    <h4>Camfil</h4>
+                    <p>Swedish-based world leader in premium air filtration systems. Products manufactured for demanding environments including healthcare facilities where quality is critical.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact & Location -->
+        <section class="section">
+            <h2><span class="icon">&#128205;</span> Contact & Location</h2>
+
+            <div class="grid-2">
+                <div>
+                    <h3>Address</h3>
+                    <p>
+                        <strong>Eurotech Metal Industries</strong><br>
+                        JAFZA North, St. N306, Plot MO0625<br>
+                        PO Box 61196<br>
+                        Jebel Ali Free Zone<br>
+                        Dubai, United Arab Emirates
+                    </p>
+                </div>
+                <div>
+                    <h3>Contact</h3>
+                    <p>
+                        <strong>Primary Contact:</strong> Walid Mohamed<br>
+                        <strong>Email:</strong> walid.mohamed@eurotech-metal.com<br>
+                        <strong>Hours:</strong> 8am - 6pm, Monday - Friday<br>
+                        <strong>Website:</strong> <a href="https://www.eurotech-metal.com" target="_blank">eurotech-metal.com</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Eurotech -->
+        <section class="section">
+            <h2><span class="icon">&#10004;</span> Why Eurotech for Apex Enclosures</h2>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Quality Exceeds Requirements</h4>
+                    <p>2000+ hour salt spray performance is approximately 5x what we require. This means exceptional durability and supports our warranty with confidence.</p>
+                </div>
+                <div class="card">
+                    <h4>Local Manufacturing</h4>
+                    <p>Dubai-based production eliminates import duties, reduces lead times, and allows for rapid iteration during product development.</p>
+                </div>
+                <div class="card">
+                    <h4>Full-Service Capability</h4>
+                    <p>From design review through finished product - no need to coordinate multiple suppliers. Single point of responsibility.</p>
+                </div>
+                <div class="card">
+                    <h4>Color Flexibility</h4>
+                    <p>In-house powder coating means any RAL color is possible. Perfect for matching villa architecture or commercial branding.</p>
+                </div>
+                <div class="card">
+                    <h4>Proven Track Record</h4>
+                    <p>20+ years manufacturing for global brands like Schneider Electric. They understand quality-critical manufacturing.</p>
+                </div>
+                <div class="card">
+                    <h4>ISO Certified</h4>
+                    <p>Full ISO 9001, 14001, and 45001 certification since 2005. Documented quality management system in place.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p><strong>Eurotech Metal Industries</strong> - Manufacturing Partner Profile</p>
+            <p>Apex Enclosures | January 2026</p>
+            <p style="font-size: 0.75rem; margin-top: 0.5rem;">
+                Sources: <a href="https://www.eurotech-metal.com/absolute-quality" target="_blank">Eurotech Quality</a> |
+                <a href="https://www.eurotech-metal.com/about-us" target="_blank">About Eurotech</a> |
+                <a href="https://ae.linkedin.com/company/eurotechmetal" target="_blank">LinkedIn</a>
+            </p>
+        </footer>
+    </div>
+    <script src="nav.js"></script>
+</body>
+</html>

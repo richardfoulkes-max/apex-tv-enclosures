@@ -83,9 +83,9 @@
                 { href: 'product-dashboard.html', label: 'Product Dashboard' }
             ]
         },
-        engineering: {
-            label: 'Engineering',
-            icon: '⚙️',
+        tvEnclosures: {
+            label: 'ATE - TV Enclosures',
+            icon: '📺',
             items: [
                 { href: 'specification.html', label: 'Specification' },
                 { href: 'design-detailed.html', label: 'Design Details' },
@@ -101,10 +101,32 @@
                 { href: 'cavity-requirements.html', label: 'Cavity Requirements' }
             ]
         },
+        poolPump: {
+            label: 'APE-P - Pump Enclosure',
+            icon: '🔵',
+            items: [
+                { href: 'pool-specification.html', label: 'Specification' },
+                { href: 'pool-designs.html', label: 'Design Drawings' },
+                { href: 'pool-bom.html', label: 'BOM' },
+                { href: 'pool-acoustic-design.html', label: 'Acoustic Design' },
+                { href: 'pool-engineering-analysis.html', label: 'Engineering Analysis' },
+                { href: 'pool-prototype-pack.html', label: 'Prototype Pack' }
+            ]
+        },
+        poolChiller: {
+            label: 'APE-HC - Heater/Chiller',
+            icon: '❄️',
+            items: [
+                { href: 'pool-chiller-specification.html', label: 'Specification' },
+                { href: 'pool-chiller-designs.html', label: 'Design Drawings' },
+                { href: 'pool-chiller-bom.html', label: 'BOM' }
+            ]
+        },
         manufacturing: {
             label: 'Manufacturing',
             icon: '🏭',
             items: [
+                { href: 'eurotech-profile.html', label: 'Eurotech (Partner)' },
                 { href: 'bom-manufacturer.html', label: 'Component List' },
                 { href: 'testing-plan.html', label: 'Testing Plan' },
                 { href: 'qc-checklist.html', label: 'QC Checklist' },

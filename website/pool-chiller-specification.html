@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heater/Chiller Enclosure Specification | Apex Enclosures</title>
+    <style>
+        :root {
+            --primary: #0891b2;
+            --primary-dark: #0e7490;
+            --primary-light: #06b6d4;
+            --accent: #f59e0b;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #f0f9ff;
+            --card: #ffffff;
+            --border: #e0f2fe;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+        /* Layout */
+        .layout { display: flex; min-height: 100vh; }
+
+        /* Sidebar placeholder - loaded by nav.js */
+        .sidebar { width: 240px; }
+
+        /* Main Content */
+        .main { flex: 1; margin-left: 240px; }
+        .container { max-width: 1100px; padding: 2rem; }
+
+        @media (max-width: 900px) {
+            .sidebar { width: 100%; height: auto; position: relative; }
+            .main { margin-left: 0; }
+            .layout { flex-direction: column; }
+        }
+
+        /* Header */
+        .header { text-align: center; margin-bottom: 3rem; }
+        .header h1 { font-size: 2.25rem; color: var(--primary-dark); margin-bottom: 0.5rem; }
+        .header .subtitle { color: var(--text-muted); font-size: 1.1rem; }
+        .header .version { display: inline-block; background: var(--accent); color: white; padding: 0.35rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-top: 1rem; }
+
+        /* Table of Contents */
+        .toc { background: white; border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 2rem; border: 1px solid var(--border); }
+        .toc h2 { color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; }
+        .toc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem 2rem; }
+        .toc a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; display: block; padding: 0.25rem 0; }
+        .toc a:hover { color: var(--primary); }
+        .toc a span { color: var(--primary); font-weight: 600; margin-right: 0.5rem; }
+
+        /* Sections */
+        .section { background: white; border-radius: 12px; padding: 2rem; margin-bottom: 2rem; border: 1px solid var(--border); }
+        .section h2 { color: var(--primary); font-size: 1.4rem; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 0.75rem; }
+        .section h2 span { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+        .section h3 { color: var(--primary-dark); font-size: 1.1rem; margin: 1.5rem 0 0.75rem; }
+        .section h4 { color: var(--text); font-size: 1rem; margin: 1rem 0 0.5rem; }
+        .section p { color: var(--text-muted); margin-bottom: 1rem; }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+        th { background: var(--bg); padding: 0.75rem; text-align: left; font-weight: 600; color: var(--primary); border-bottom: 2px solid var(--border); }
+        td { padding: 0.75rem; border-bottom: 1px solid var(--border); }
+        tr:hover { background: #f8fafc; }
+
+        /* Spec tables */
+        .spec-table th:first-child { width: 40%; }
+        .spec-table td:first-child { font-weight: 500; color: var(--text); }
+
+        /* Grid layouts */
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+        /* Cards */
+        .card { background: #f8fafc; border-radius: 8px; padding: 1.25rem; border: 1px solid var(--border); }
+        .card h4 { color: var(--primary); margin-bottom: 0.5rem; }
+        .card p { font-size: 0.9rem; margin: 0; }
+
+        /* Stat cards */
+        .stat-card { text-align: center; padding: 1.5rem; background: linear-gradient(135deg, var(--accent), #d97706); color: white; border-radius: 8px; }
+        .stat-card .number { font-size: 2rem; font-weight: 700; }
+        .stat-card .label { font-size: 0.85rem; opacity: 0.9; }
+
+        /* Badges */
+        .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+        .badge-success { background: #d1fae5; color: #065f46; }
+        .badge-warning { background: #fef3c7; color: #92400e; }
+        .badge-danger { background: #fee2e2; color: #991b1b; }
+        .badge-info { background: #e0f2fe; color: #0369a1; }
+        .badge-primary { background: var(--accent); color: white; }
+
+        /* Alerts */
+        .alert { padding: 1rem 1.25rem; border-radius: 8px; margin: 1rem 0; display: flex; gap: 0.75rem; align-items: flex-start; }
+        .alert-info { background: #e0f2fe; border-left: 4px solid var(--primary); }
+        .alert-warning { background: #fef3c7; border-left: 4px solid var(--warning); }
+        .alert-success { background: #d1fae5; border-left: 4px solid var(--success); }
+        .alert-danger { background: #fee2e2; border-left: 4px solid var(--danger); }
+
+        /* Lists */
+        ul, ol { margin: 0.75rem 0; padding-left: 1.5rem; }
+        li { margin-bottom: 0.35rem; color: var(--text-muted); }
+        li strong { color: var(--text); }
+
+        /* Code/Spec blocks */
+        .spec-block { background: #1e293b; color: #e2e8f0; padding: 1.25rem; border-radius: 8px; font-family: 'Monaco', 'Menlo', monospace; font-size: 0.85rem; overflow-x: auto; margin: 1rem 0; white-space: pre; }
+
+        /* Dimension diagram */
+        .dimension-box { background: #f8fafc; border: 2px dashed var(--border); border-radius: 8px; padding: 2rem; text-align: center; margin: 1rem 0; }
+        .dimension-box .dims { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+        .dimension-box .label { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; }
+
+        /* Module visualization */
+        .module-viz { display: flex; gap: 0.5rem; align-items: end; justify-content: center; margin: 1.5rem 0; flex-wrap: wrap; }
+        .module { background: var(--accent); color: white; padding: 1rem; border-radius: 8px; text-align: center; font-weight: 600; }
+        .module.chiller { width: 200px; height: 200px; display: flex; flex-direction: column; justify-content: center; background: var(--accent); }
+        .module.heater { width: 180px; height: 180px; display: flex; flex-direction: column; justify-content: center; background: #dc2626; }
+        .module .name { font-size: 0.85rem; }
+        .module .size { font-size: 0.7rem; opacity: 0.8; margin-top: 0.25rem; }
+
+        /* Comparison table */
+        .compare-good { background: #d1fae5; }
+        .compare-bad { background: #fee2e2; }
+
+        /* Footer */
+        .footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <main class="main">
+            <div class="container">
+        <header class="header">
+            <h1>APE-HC Series - Heater/Chiller Enclosure</h1>
+            <p class="subtitle">Weather Protection Enclosures for Pool Heat Pumps, Gas Heaters & Chillers</p>
+            <span class="version">Specification v1.0 - January 2026</span>
+        </header>
+
+        <!-- Key Stats -->
+        <div class="grid-3" style="margin-bottom: 2rem;">
+            <div class="stat-card">
+                <div class="number">50-60%</div>
+                <div class="label">Noise Reduction</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">Louvered</div>
+                <div class="label">Airflow Design</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">316 SS</div>
+                <div class="label">Salt Pool Safe</div>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <div class="toc-grid">
+                <a href="#overview"><span>1</span> Design Overview</a>
+                <a href="#dimensions"><span>2</span> Module Dimensions</a>
+                <a href="#airflow"><span>3</span> Airflow Requirements</a>
+                <a href="#louvers"><span>4</span> Louver Design</a>
+                <a href="#construction"><span>5</span> Construction Details</a>
+                <a href="#access"><span>6</span> Service Access</a>
+                <a href="#mounting"><span>7</span> Mounting System</a>
+                <a href="#electrical"><span>8</span> Electrical Integration</a>
+                <a href="#configurations"><span>9</span> Size Configurations</a>
+                <a href="#quality"><span>10</span> Quality Standards</a>
+            </div>
+        </div>
+
+        <!-- Section 1: Design Overview -->
+        <section class="section" id="overview">
+            <h2><span>1</span> Design Overview</h2>
+
+            <div class="alert alert-warning">
+                <span style="font-size: 1.5rem;">&#9888;&#65039;</span>
+                <div>
+                    <strong>Key Difference from APE-P (Pump Enclosures)</strong><br>
+                    Heaters and chillers require significant airflow for operation. This enclosure provides <strong>weather protection and aesthetic screening</strong> rather than full acoustic sealing. Louvered panels allow required airflow while reducing noise by 50-60%.
+                </div>
+            </div>
+
+            <p>The APE-HC (Apex Pool Equipment - Heater/Chiller) Series provides weather protection and noise reduction for pool heating and cooling equipment. Unlike the sealed APE-P pump enclosures, these use louvered panels to maintain essential equipment airflow.</p>
+
+            <h3>1.1 Key Specifications Summary</h3>
+            <table class="spec-table">
+                <tr><th>Parameter</th><th>Specification</th></tr>
+                <tr><td>Product Line</td><td>APE-HC Series (Heater/Chiller)</td></tr>
+                <tr><td>System Type</td><td>Louvered weather protection enclosure</td></tr>
+                <tr><td>Acoustic Performance</td><td>50-60% noise reduction (louvered design)</td></tr>
+                <tr><td>Weather Rating</td><td>IP44 (splash resistant, rain protected)</td></tr>
+                <tr><td>Temperature Rating</td><td>-10&deg;C to +60&deg;C ambient</td></tr>
+                <tr><td>Material - Frame</td><td>5052-H32 Aluminum (2.0mm)</td></tr>
+                <tr><td>Material - Fasteners</td><td>316 Stainless Steel (salt pool safe)</td></tr>
+                <tr><td>Material - Acoustic</td><td>25mm foam strips behind louvers</td></tr>
+                <tr><td>Finish</td><td>Marine-grade powder coat (1500hr salt spray)</td></tr>
+                <tr><td>Assembly</td><td>Tool-free, single person, &lt;20 minutes</td></tr>
+                <tr><td>Warranty</td><td>10-year structural, 5-year finish</td></tr>
+            </table>
+
+            <h3>1.2 Design Philosophy</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Why Louvered?</h4>
+                    <p>Heat pumps and chillers require continuous airflow across condenser coils. Sealed enclosures would cause overheating and compressor failure. Angled louvers provide weather protection while maintaining airflow.</p>
+                </div>
+                <div class="card">
+                    <h4>Why 50-60% Noise Reduction?</h4>
+                    <p>Full 80% reduction is impossible with open airflow paths. However, louvers provide directional screening - noise is redirected away from living areas. Combined with foam strips, this achieves meaningful reduction.</p>
+                </div>
+            </div>
+
+            <h3>1.3 APE-P vs APE-HC Comparison</h3>
+            <table>
+                <tr><th>Feature</th><th>APE-P (Pump)</th><th>APE-HC (Heater/Chiller)</th></tr>
+                <tr><td>Panel Design</td><td>Sealed with acoustic foam</td><td>Louvered for airflow</td></tr>
+                <tr><td>Noise Reduction</td><td>70-80%</td><td>50-60%</td></tr>
+                <tr><td>IP Rating</td><td>IP55</td><td>IP44</td></tr>
+                <tr><td>Ventilation</td><td>Passive convection only</td><td>50%+ open area (louvers)</td></tr>
+                <tr><td>Equipment Type</td><td>Pumps, filters, chlorinators</td><td>Heat pumps, gas heaters, chillers</td></tr>
+                <tr><td>Roof Design</td><td>Solid with exhaust louvers</td><td>Open frame or louvered</td></tr>
+            </table>
+
+            <h3>1.4 Target Equipment</h3>
+            <ul>
+                <li><strong>Pool Heat Pumps:</strong> Zodiac, Pentair, Hayward, Jandy, Madimack</li>
+                <li><strong>Pool Chillers:</strong> Zodiac ZS500, Pentair UltraTemp, AquaCal</li>
+                <li><strong>Gas Heaters:</strong> Pentair MasterTemp, Hayward Universal H-Series, Raypak</li>
+                <li><strong>Heat/Cool Combos:</strong> Reversible heat pumps that heat and cool</li>
+            </ul>
+        </section>
+
+        <!-- Section 2: Module Dimensions -->
+        <section class="section" id="dimensions">
+            <h2><span>2</span> Module Dimensions</h2>
+
+            <h3>2.1 Module Visualization</h3>
+            <div class="module-viz">
+                <div class="module chiller">
+                    <div class="name">APE-HC-M</div>
+                    <div class="size">Medium Heat Pump</div>
+                    <div class="size">1000 x 600 x 900mm</div>
+                </div>
+                <div class="module chiller" style="width: 240px; height: 220px;">
+                    <div class="name">APE-HC-L</div>
+                    <div class="size">Large Chiller</div>
+                    <div class="size">1200 x 700 x 1000mm</div>
+                </div>
+                <div class="module heater" style="width: 160px; height: 200px;">
+                    <div class="name">APE-HC-G</div>
+                    <div class="size">Gas Heater</div>
+                    <div class="size">800 x 500 x 1000mm</div>
+                </div>
+            </div>
+
+            <h3>2.2 Module Specifications</h3>
+            <table>
+                <tr>
+                    <th>Module</th>
+                    <th>Model</th>
+                    <th>External (W x D x H)</th>
+                    <th>Internal Clearance</th>
+                    <th>Fits</th>
+                </tr>
+                <tr>
+                    <td><strong>Medium Heat Pump</strong></td>
+                    <td>APE-HC-M</td>
+                    <td>1000 x 600 x 900mm</td>
+                    <td>300mm sides, 200mm top</td>
+                    <td>Heat pumps up to 15kW</td>
+                </tr>
+                <tr>
+                    <td><strong>Large Chiller</strong></td>
+                    <td>APE-HC-L</td>
+                    <td>1200 x 700 x 1000mm</td>
+                    <td>350mm sides, 250mm top</td>
+                    <td>Chillers up to 25kW</td>
+                </tr>
+                <tr>
+                    <td><strong>Gas Heater</strong></td>
+                    <td>APE-HC-G</td>
+                    <td>800 x 500 x 1000mm</td>
+                    <td>250mm sides, 300mm top</td>
+                    <td>Gas heaters up to 400k BTU</td>
+                </tr>
+                <tr>
+                    <td><strong>Extra Large</strong></td>
+                    <td>APE-HC-XL</td>
+                    <td>1400 x 800 x 1100mm</td>
+                    <td>400mm sides, 300mm top</td>
+                    <td>Commercial chillers 30kW+</td>
+                </tr>
+            </table>
+
+            <h3>2.3 Clearance Requirements</h3>
+            <div class="alert alert-danger">
+                <span style="font-size: 1.5rem;">&#9888;&#65039;</span>
+                <div>
+                    <strong>Manufacturer Clearances Are Mandatory</strong><br>
+                    Heat pumps and chillers have specific clearance requirements in their manuals. The enclosure must provide AT MINIMUM the manufacturer's required clearances on all sides. Failure to do so will void equipment warranty and cause overheating.
+                </div>
+            </div>
+
+            <table>
+                <tr><th>Equipment Type</th><th>Typical Side Clearance</th><th>Typical Top Clearance</th><th>Notes</th></tr>
+                <tr><td>Heat Pumps (air-source)</td><td>300-450mm</td><td>500-600mm</td><td>Fan exhausts upward</td></tr>
+                <tr><td>Pool Chillers</td><td>300-400mm</td><td>500-600mm</td><td>Similar to heat pumps</td></tr>
+                <tr><td>Gas Heaters</td><td>150-300mm</td><td>300-500mm</td><td>Exhaust flue clearances vary</td></tr>
+            </table>
+        </section>
+
+        <!-- Section 3: Airflow Requirements -->
+        <section class="section" id="airflow">
+            <h2><span>3</span> Airflow Requirements</h2>
+
+            <div class="alert alert-info">
+                <span style="font-size: 1.5rem;">&#128168;</span>
+                <div>
+                    <strong>Airflow is Critical</strong><br>
+                    Heat pumps and chillers exchange heat with ambient air. Restricting airflow reduces efficiency by 10-30% and can cause compressor failure. The enclosure must allow free air circulation.
+                </div>
+            </div>
+
+            <h3>3.1 Heat Pump/Chiller Airflow Path</h3>
+            <div class="spec-block">Air drawn in through sides (condenser coils)
+        |
+        v
+Refrigerant absorbs/rejects heat
+        |
+        v
+Fan exhausts air upward (hot in cooling mode, cold in heating mode)
+        |
+        v
+Hot/cold air must escape freely through top</div>
+
+            <h3>3.2 Minimum Open Area Requirements</h3>
+            <table class="spec-table">
+                <tr><th>Location</th><th>Minimum Open Area</th><th>Louver Design</th></tr>
+                <tr><td>Side panels (intake)</td><td>50% of panel area</td><td>45-degree louvers, 25mm spacing</td></tr>
+                <tr><td>Top (exhaust)</td><td>70% open OR fully open frame</td><td>Optional: louvered top or open frame</td></tr>
+                <tr><td>Back panel</td><td>40% minimum if not against wall</td><td>Can be solid if 300mm+ from wall</td></tr>
+            </table>
+
+            <h3>3.3 Efficiency Impact</h3>
+            <table>
+                <tr><th>Airflow Restriction</th><th>Efficiency Loss</th><th>Risk</th></tr>
+                <tr class="compare-good"><td>0-10% restriction</td><td>0-5%</td><td>Acceptable</td></tr>
+                <tr class="compare-good"><td>10-20% restriction</td><td>5-10%</td><td>Marginal</td></tr>
+                <tr style="background: #fef3c7;"><td>20-30% restriction</td><td>10-20%</td><td>Warning - high energy bills</td></tr>
+                <tr class="compare-bad"><td>&gt;30% restriction</td><td>&gt;20%</td><td>Overheating risk - warranty void</td></tr>
+            </table>
+
+            <h3>3.4 Gas Heater Ventilation</h3>
+            <div class="alert alert-warning">
+                <span style="font-size: 1.5rem;">&#128293;</span>
+                <div>
+                    <strong>Gas Heater Special Requirements</strong><br>
+                    Gas heaters require combustion air intake and exhaust flue clearance. The enclosure must have adequate low-level ventilation for combustion air and clearance around the exhaust flue as per manufacturer specs.
+                </div>
+            </div>
+            <ul>
+                <li><strong>Combustion air:</strong> Low-level intake required (typically 100 cm&sup2; per 10kW)</li>
+                <li><strong>Flue clearance:</strong> Maintain manufacturer clearances (typically 300-600mm above flue)</li>
+                <li><strong>CO detection:</strong> Consider adding CO detector for enclosed gas heaters</li>
+            </ul>
+        </section>
+
+        <!-- Section 4: Louver Design -->
+        <section class="section" id="louvers">
+            <h2><span>4</span> Louver Design</h2>
+
+            <h3>4.1 Louver Specifications</h3>
+            <table class="spec-table">
+                <tr><th>Parameter</th><th>Specification</th></tr>
+                <tr><td>Blade angle</td><td>45 degrees (downward facing exterior)</td></tr>
+                <tr><td>Blade spacing</td><td>25mm center-to-center</td></tr>
+                <tr><td>Blade depth</td><td>40mm</td></tr>
+                <tr><td>Blade material</td><td>2.0mm aluminum (matching frame)</td></tr>
+                <tr><td>Free area</td><td>50-55% of panel area</td></tr>
+                <tr><td>Rain protection</td><td>Effective to 45-degree rain angle</td></tr>
+            </table>
+
+            <h3>4.2 Acoustic Treatment (Behind Louvers)</h3>
+            <p>While full acoustic sealing isn't possible, foam strips behind louvers provide meaningful noise reduction:</p>
+            <table class="spec-table">
+                <tr><th>Parameter</th><th>Specification</th></tr>
+                <tr><td>Material</td><td>Closed-cell polyethylene foam</td></tr>
+                <tr><td>Thickness</td><td>25mm strips between louver blades</td></tr>
+                <tr><td>Coverage</td><td>Attached to inner face of louver blades</td></tr>
+                <tr><td>Fire rating</td><td>Class O (BS 476)</td></tr>
+                <tr><td>Noise reduction contribution</td><td>Additional 5-10 dB</td></tr>
+            </table>
+
+            <h3>4.3 Rain and Weather Protection</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Rain Protection</h4>
+                    <ul>
+                        <li>45-degree louver angle sheds rain outward</li>
+                        <li>Drip edges on each blade</li>
+                        <li>No direct rain entry at angles up to 45&deg;</li>
+                        <li>Base drain holes for any condensation</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Sun Protection</h4>
+                    <ul>
+                        <li>Louvers shade equipment from direct sun</li>
+                        <li>Reduces solar heat gain on equipment</li>
+                        <li>Can extend equipment lifespan</li>
+                        <li>RAL 7016 dark finish absorbs less heat</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>4.4 Directional Noise Screening</h3>
+            <p>While the enclosure cannot fully contain noise (airflow paths remain open), louvered panels direct sound:</p>
+            <ul>
+                <li><strong>Front panel (toward living area):</strong> Dense louver pattern with maximum foam backing</li>
+                <li><strong>Side panels:</strong> Standard louver pattern</li>
+                <li><strong>Back panel (toward boundary):</strong> Can be solid if clearance allows (best noise reduction)</li>
+                <li><strong>Strategic positioning:</strong> Orient solid/dense side toward noise-sensitive areas</li>
+            </ul>
+        </section>
+
+        <!-- Section 5: Construction Details -->
+        <section class="section" id="construction">
+            <h2><span>5</span> Construction Details</h2>
+
+            <h3>5.1 Frame Material</h3>
+            <table class="spec-table">
+                <tr><th>Parameter</th><th>Specification</th></tr>
+                <tr><td>Alloy</td><td>5052-H32 Aluminum</td></tr>
+                <tr><td>Sheet thickness - panels</td><td>2.0mm</td></tr>
+                <tr><td>Sheet thickness - base frame</td><td>3.0mm</td></tr>
+                <tr><td>Corner posts</td><td>40 x 40 x 2mm aluminum angle</td></tr>
+                <tr><td>Yield strength</td><td>193 MPa minimum</td></tr>
+                <tr><td>Corrosion resistance</td><td>Excellent (5xxx series marine grade)</td></tr>
+            </table>
+
+            <h3>5.2 Fasteners & Hardware</h3>
+            <div class="alert alert-warning">
+                <span style="font-size: 1.5rem;">&#9888;&#65039;</span>
+                <div>
+                    <strong>316 Stainless Steel MANDATORY</strong><br>
+                    Salt water pools are common in UAE. Standard 304 SS or zinc-plated fasteners will corrode within 6-12 months. 316 SS is essential for warranty validity.
+                </div>
+            </div>
+
+            <table>
+                <tr><th>Component</th><th>Material</th><th>Specification</th></tr>
+                <tr><td>Panel screws</td><td>316 SS</td><td>M5 x 12 pan head</td></tr>
+                <tr><td>Hinge pins</td><td>316 SS</td><td>5mm diameter</td></tr>
+                <tr><td>Hinge bodies</td><td>316 SS</td><td>Heavy-duty barrel hinge</td></tr>
+                <tr><td>Latch mechanisms</td><td>316 SS</td><td>Toggle latch with padlock hasp</td></tr>
+                <tr><td>Leveling feet</td><td>316 SS + HDPE pad</td><td>M10 thread, 30mm adjustment</td></tr>
+            </table>
+
+            <h3>5.3 Finish Specification</h3>
+            <table class="spec-table">
+                <tr><th>Parameter</th><th>Specification</th></tr>
+                <tr><td>Pre-treatment</td><td>Chromate conversion coating</td></tr>
+                <tr><td>Top coat</td><td>Marine-grade polyester powder coat</td></tr>
+                <tr><td>Minimum thickness</td><td>80 microns</td></tr>
+                <tr><td>Standard color</td><td>RAL 7016 (Anthracite Grey)</td></tr>
+                <tr><td>Optional colors</td><td>RAL 9010 (White), RAL 7035 (Light Grey), RAL 6005 (Green)</td></tr>
+                <tr><td>Salt spray resistance</td><td>1500 hours minimum (ASTM B117)</td></tr>
+            </table>
+        </section>
+
+        <!-- Section 6: Service Access -->
+        <section class="section" id="access">
+            <h2><span>6</span> Service Access</h2>
+
+            <h3>6.1 Access Panel Design</h3>
+            <p>Heat pumps and chillers require periodic service access for:</p>
+            <ul>
+                <li>Filter cleaning (some models)</li>
+                <li>Refrigerant checks and top-ups</li>
+                <li>Control panel access</li>
+                <li>Electrical connections</li>
+            </ul>
+
+            <table class="spec-table">
+                <tr><th>Parameter</th><th>Specification</th></tr>
+                <tr><td>Access panel type</td><td>Full-height hinged door (front or side)</td></tr>
+                <tr><td>Opening size</td><td>Minimum 600mm width for technician access</td></tr>
+                <tr><td>Hinge type</td><td>Heavy-duty piano hinge (316 SS)</td></tr>
+                <tr><td>Hold-open</td><td>Gas strut or friction stay</td></tr>
+                <tr><td>Latches</td><td>2 x toggle latches with padlock provision</td></tr>
+            </table>
+
+            <h3>6.2 Removable Roof Option</h3>
+            <p>For major service or equipment replacement, the roof assembly can be fully removed:</p>
+            <ul>
+                <li>Roof secured with 8 x wing nuts (hand-removable)</li>
+                <li>Two-person lift (weight ~15-20kg)</li>
+                <li>Allows crane access for equipment replacement if needed</li>
+            </ul>
+        </section>
+
+        <!-- Section 7: Mounting System -->
+        <section class="section" id="mounting">
+            <h2><span>7</span> Mounting System</h2>
+
+            <h3>7.1 Ground Installation</h3>
+            <table class="spec-table">
+                <tr><th>Parameter</th><th>Specification</th></tr>
+                <tr><td>Base type</td><td>Open frame (allows equipment drainage)</td></tr>
+                <tr><td>Leveling</td><td>4 x adjustable feet per unit (+/- 30mm)</td></tr>
+                <tr><td>Anchoring</td><td>Optional concrete anchor points (4 per unit)</td></tr>
+                <tr><td>Surface requirement</td><td>Level concrete or paver pad</td></tr>
+                <tr><td>Drainage</td><td>Pad should slope away from equipment</td></tr>
+            </table>
+
+            <h3>7.2 Weight Specifications</h3>
+            <table>
+                <tr><th>Module</th><th>Empty Weight</th><th>With Equipment (typical)</th></tr>
+                <tr><td>APE-HC-M</td><td>35 kg</td><td>85-120 kg</td></tr>
+                <tr><td>APE-HC-L</td><td>45 kg</td><td>100-180 kg</td></tr>
+                <tr><td>APE-HC-G</td><td>30 kg</td><td>80-150 kg</td></tr>
+                <tr><td>APE-HC-XL</td><td>55 kg</td><td>150-250 kg</td></tr>
+            </table>
+
+            <h3>7.3 Placement Considerations</h3>
+            <ul>
+                <li><strong>Distance from pool:</strong> Minimum 3m (to reduce humidity exposure)</li>
+                <li><strong>Drainage:</strong> Position for condensate drainage away from enclosure</li>
+                <li><strong>Noise direction:</strong> Orient dense side toward bedrooms/living areas</li>
+                <li><strong>Service access:</strong> Ensure technician access on service side</li>
+                <li><strong>Wind direction:</strong> Avoid positioning exhaust into prevailing wind</li>
+            </ul>
+        </section>
+
+        <!-- Section 8: Electrical Integration -->
+        <section class="section" id="electrical">
+            <h2><span>8</span> Electrical Integration</h2>
+
+            <div class="alert alert-danger">
+                <span style="font-size: 1.5rem;">&#9889;</span>
+                <div>
+                    <strong>Electrical work must be performed by licensed electrician</strong><br>
+                    Heat pumps and gas heaters require dedicated electrical circuits. All connections must comply with UAE ESMA regulations.
+                </div>
+            </div>
+
+            <h3>8.1 Cable Entry Points</h3>
+            <table class="spec-table">
+                <tr><th>Parameter</th><th>Specification</th></tr>
+                <tr><td>Entry location</td><td>Back panel or base (per site requirements)</td></tr>
+                <tr><td>Cable glands</td><td>2 x IP68 compression glands (M25 + M32)</td></tr>
+                <tr><td>Conduit provision</td><td>Knockout for 25mm conduit</td></tr>
+            </table>
+
+            <h3>8.2 Typical Power Requirements</h3>
+            <table>
+                <tr><th>Equipment</th><th>Typical Power</th><th>Circuit</th></tr>
+                <tr><td>Small heat pump (up to 10kW)</td><td>2-3 kW</td><td>16A single phase</td></tr>
+                <tr><td>Medium heat pump (10-20kW)</td><td>3-5 kW</td><td>20A single phase</td></tr>
+                <tr><td>Large chiller (20kW+)</td><td>5-8 kW</td><td>32A or 3-phase</td></tr>
+                <tr><td>Gas heater (ignition only)</td><td>100-500W</td><td>10A (gas does the heating)</td></tr>
+            </table>
+        </section>
+
+        <!-- Section 9: Size Configurations -->
+        <section class="section" id="configurations">
+            <h2><span>9</span> Size Configurations</h2>
+
+            <h3>9.1 Standard Configurations</h3>
+            <table>
+                <tr>
+                    <th>Model</th>
+                    <th>External Size (W x D x H)</th>
+                    <th>Suitable Equipment</th>
+                    <th>Target Price (AED)</th>
+                </tr>
+                <tr>
+                    <td><strong>APE-HC-M</strong></td>
+                    <td>1000 x 600 x 900mm</td>
+                    <td>Heat pumps up to 15kW (residential)</td>
+                    <td>3,500-4,500</td>
+                </tr>
+                <tr>
+                    <td><strong>APE-HC-L</strong></td>
+                    <td>1200 x 700 x 1000mm</td>
+                    <td>Chillers up to 25kW</td>
+                    <td>4,500-5,500</td>
+                </tr>
+                <tr>
+                    <td><strong>APE-HC-G</strong></td>
+                    <td>800 x 500 x 1000mm</td>
+                    <td>Gas heaters up to 400k BTU</td>
+                    <td>3,000-4,000</td>
+                </tr>
+                <tr>
+                    <td><strong>APE-HC-XL</strong></td>
+                    <td>1400 x 800 x 1100mm</td>
+                    <td>Commercial chillers 30kW+</td>
+                    <td>6,000-7,500</td>
+                </tr>
+            </table>
+
+            <h3>9.2 Equipment Compatibility</h3>
+            <table>
+                <tr><th>Equipment</th><th>Typical Size</th><th>Recommended Module</th></tr>
+                <tr><td>Zodiac ZS500</td><td>840 x 330 x 600mm</td><td>APE-HC-M</td></tr>
+                <tr><td>Pentair UltraTemp 120</td><td>889 x 432 x 635mm</td><td>APE-HC-M</td></tr>
+                <tr><td>Madimack Elite 21</td><td>1050 x 400 x 760mm</td><td>APE-HC-L</td></tr>
+                <tr><td>Hayward HeatPro</td><td>838 x 406 x 660mm</td><td>APE-HC-M</td></tr>
+                <tr><td>Pentair MasterTemp 400</td><td>533 x 584 x 729mm</td><td>APE-HC-G</td></tr>
+                <tr><td>Hayward Universal H400</td><td>533 x 533 x 686mm</td><td>APE-HC-G</td></tr>
+            </table>
+        </section>
+
+        <!-- Section 10: Quality Standards -->
+        <section class="section" id="quality">
+            <h2><span>10</span> Quality Standards</h2>
+
+            <h3>10.1 Material Certifications</h3>
+            <table>
+                <tr><th>Component</th><th>Standard</th><th>Requirement</th></tr>
+                <tr><td>Aluminum sheet</td><td>ASTM B209</td><td>5052-H32, mill certificate</td></tr>
+                <tr><td>Stainless steel fasteners</td><td>ASTM A276</td><td>316 grade, CoC</td></tr>
+                <tr><td>Powder coating</td><td>ASTM B117</td><td>1500 hour salt spray test</td></tr>
+            </table>
+
+            <h3>10.2 Product Testing</h3>
+            <table>
+                <tr><th>Test</th><th>Standard</th><th>Acceptance Criteria</th></tr>
+                <tr><td>Weather resistance</td><td>IP44 (IEC 60529)</td><td>Splash resistant</td></tr>
+                <tr><td>Salt spray corrosion</td><td>ASTM B117</td><td>1500 hours, no red rust</td></tr>
+                <tr><td>UV exposure</td><td>ASTM G154</td><td>1000 hours, no chalking</td></tr>
+                <tr><td>Structural load</td><td>-</td><td>50kg lateral load, no deformation</td></tr>
+            </table>
+
+            <h3>10.3 Warranty Terms</h3>
+            <ul>
+                <li><strong>Structural warranty:</strong> 10 years against manufacturing defects</li>
+                <li><strong>Finish warranty:</strong> 5 years against peeling, flaking, or corrosion</li>
+                <li><strong>Exclusions:</strong> Damage from improper installation, exceeding equipment clearance requirements, or physical abuse</li>
+            </ul>
+        </section>
+
+            <footer class="footer">
+                <p><strong>APE-HC Series Heater/Chiller Enclosure</strong> - Specification v1.0</p>
+                <p>Apex Enclosures | January 2026 | For Manufacturing RFQ</p>
+            </footer>
+            </div>
+        </main>
+    </div>
+    <script src="nav.js"></script>
+</body>
+</html>
