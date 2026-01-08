@@ -1,0 +1,89 @@
+Part Number,Part Name,Material,Thickness (mm),Qty (S),Qty (M),Qty (L),Unit,Notes
+,,,,,,,
+,"=== STRUCTURAL FRAME ===",,,,,,,
+APE-HC-FR-01,Corner Post,5052-H32 Aluminum,3.0,4,4,4,EA,"40×40×1000mm (S/M), 40×40×1100mm (L)"
+APE-HC-FR-02,Bottom Rail - Long,5052-H32 Aluminum,3.0,2,2,2,EA,"40×40×(W+200)mm"
+APE-HC-FR-03,Bottom Rail - Short,5052-H32 Aluminum,3.0,2,2,2,EA,"40×40×(D+200)mm"
+APE-HC-FR-04,Top Rail - Long,5052-H32 Aluminum,3.0,2,2,2,EA,"40×40×(W+200)mm"
+APE-HC-FR-05,Top Rail - Short,5052-H32 Aluminum,3.0,2,2,2,EA,"40×40×(D+200)mm"
+APE-HC-FR-06,Top Cross Brace,5052-H32 Aluminum,3.0,2,2,3,EA,"20×40×(D+200)mm - Hood support"
+,,,,,,,
+,"=== PANELS ===",,,,,,,
+APE-HC-PN-01,Back Panel,5052-H32 Aluminum,2.0,1,1,1,EA,"(W-80)×(H-40)mm, powder coated"
+APE-HC-PN-02,Floor Panel,5052-H32 Aluminum,2.0,1,1,1,EA,"(W+200)×(D+200)mm, 1° slope, drain hole"
+APE-HC-PN-03,Door Panel,5052-H32 Aluminum,2.0,1,1,1,EA,"(W-100)×(H-100)mm, powder coated"
+APE-HC-PN-04,Door Frame,5052-H32 Aluminum,3.0,1,1,1,SET,"20×20mm L-section perimeter"
+,,,,,,,
+,"=== INTAKE MODULES ===",,,,,,,
+APE-HC-IM-01,Weather Louver Panel,5052-H32 Aluminum,2.0,2,2,2,EA,"(D-80)×(H-40)mm, 45° blades, 25mm spacing"
+APE-HC-IM-02,Internal Baffle,5052-H32 Aluminum,2.0,2,2,2,EA,"100×(H-100)mm vertical"
+APE-HC-IM-03,Baffle Insulation,Mineral Wool,25,2,2,2,EA,"48 kg/m³, 80×(H-150)mm"
+APE-HC-IM-04,Perforated Liner,5052-H32 Aluminum,1.0,2,2,2,EA,"23% open, 3mm holes, 80×(H-150)mm"
+APE-HC-IM-05,Debris Screen,316 SS Mesh,1.5,2,2,2,EA,"10mm aperture, removable frame"
+APE-HC-IM-06,Module Frame,5052-H32 Aluminum,2.0,2,2,2,SET,"C-channel perimeter"
+,,,,,,,
+,"=== DISCHARGE HOOD ===",,,,,,,
+APE-HC-HD-01,Hood Corner Post,5052-H32 Aluminum,3.0,4,4,4,EA,"40×40×300mm (S/M), 40×40×350mm (L)"
+APE-HC-HD-02,Hood Bottom Rail - Long,5052-H32 Aluminum,3.0,2,2,2,EA,"40×40×(W+200)mm"
+APE-HC-HD-03,Hood Bottom Rail - Short,5052-H32 Aluminum,3.0,2,2,2,EA,"40×40×(D+200)mm"
+APE-HC-HD-04,Hood Top Rail - Long,5052-H32 Aluminum,3.0,2,2,2,EA,"40×40×(W+200)mm"
+APE-HC-HD-05,Hood Top Rail - Short,5052-H32 Aluminum,3.0,2,2,2,EA,"40×40×(D+200)mm"
+APE-HC-HD-06,Hood Ceiling Panel,5052-H32 Aluminum,2.0,1,1,1,EA,"Solid panel, blocks direct upward sound"
+APE-HC-HD-07,Hood Ceiling Insulation,Mineral Wool,50,1,1,1,EA,"48 kg/m³, full ceiling coverage"
+APE-HC-HD-08,Hood Ceiling Liner,5052-H32 Aluminum,1.0,1,1,1,EA,"23% open, protects insulation"
+APE-HC-HD-09,Hood Front Wall,5052-H32 Aluminum,2.0,1,1,1,EA,"Solid with insulation backing"
+APE-HC-HD-10,Hood Back Wall,5052-H32 Aluminum,2.0,1,1,1,EA,"Solid with insulation backing"
+APE-HC-HD-11,Hood Wall Insulation,Mineral Wool,50,2,2,2,EA,"Front and back walls"
+APE-HC-HD-12,Hood Side Outlet Louver,5052-H32 Aluminum,2.0,2,2,4,EA,"Acoustic louvers, 45° blades"
+APE-HC-HD-13,Hood Lifting Eye,316 SS,8.0,4,4,4,EA,"M10 threaded, for crane removal"
+,,,,,,,
+,"=== ACOUSTIC MATERIALS ===",,,,,,,
+APE-HC-AC-01,Mineral Wool - Intake,Rockwool or equiv.,25,1.5,2.0,2.5,m²,"48 kg/m³ density, Class A1 fire"
+APE-HC-AC-02,Mineral Wool - Hood,Rockwool or equiv.,50,2.0,2.5,3.5,m²,"48 kg/m³ density, Class A1 fire"
+APE-HC-AC-03,Perforated Aluminum Liner,5052-H32 Aluminum,1.0,3.5,4.5,6.0,m²,"23% open area, 3mm dia holes"
+APE-HC-AC-04,Butyl Damping Mat,Butyl-based,2.0,2.0,3.0,4.0,m²,"Self-adhesive, for panel CLD"
+APE-HC-AC-05,Mass Loaded Vinyl (Optional),MLV,3.0,0.5,0.8,1.0,m²,"1 lb/ft² (4.9 kg/m²), door only"
+,,,,,,,
+,"=== SEALING & GASKETS ===",,,,,,,
+APE-HC-GK-01,Door Perimeter Gasket,EPDM Rubber,D-profile,4.5,5.0,6.0,m,"Continuous run, compression type"
+APE-HC-GK-02,Hood Seating Gasket,EPDM Foam,10×20,4.0,4.5,5.5,m,"Closed-cell, seals hood to frame"
+APE-HC-GK-03,Panel Edge Seal,Silicone,—,1,1,1,TUBE,"For intake module edges"
+APE-HC-GK-04,Cable Gland,Nylon,IP66,2,2,3,EA,"M20 or M25 as required"
+,,,,,,,
+,"=== HARDWARE - LATCHES ===",,,,,,,
+APE-HC-LT-01,Door Compression Latch,316 SS,—,3,3,4,EA,"Adjustable, padlock provision"
+APE-HC-LT-02,Hood Toggle Clamp,316 SS,—,4,4,6,EA,"Quick release, 200kg holding"
+APE-HC-LT-03,Door Hinge,316 SS,—,3,3,4,EA,"Heavy duty, 180° opening"
+APE-HC-LT-04,Intake Module Fastener,316 SS,M6,16,16,16,EA,"Hex head, for panel removal"
+,,,,,,,
+,"=== HARDWARE - FASTENERS ===",,,,,,,
+APE-HC-FS-01,Frame Bolt,316 SS,M8×25,48,56,64,EA,"Hex head, structural"
+APE-HC-FS-02,Frame Nut,316 SS,M8,48,56,64,EA,"Nyloc"
+APE-HC-FS-03,Frame Washer,316 SS,M8,96,112,128,EA,"Flat washer"
+APE-HC-FS-04,Panel Screw,316 SS,M5×12,80,100,120,EA,"Pan head, self-tapping"
+APE-HC-FS-05,Liner Rivet,Aluminum,4.0×10,120,150,200,EA,"Blind rivet, insulation liner"
+APE-HC-FS-06,Hood Mounting Bolt,316 SS,M10×30,8,8,12,EA,"For hood to frame"
+,,,,,,,
+,"=== VIBRATION CONTROL ===",,,,,,,
+APE-HC-VB-01,Anti-Vibration Mount,Rubber-Metal,M10,4,4,4,EA,"50-100kg capacity each, adjustable"
+APE-HC-VB-02,Mount Baseplate,316 SS,3.0,4,4,4,EA,"100×100mm, pre-drilled"
+APE-HC-VB-03,Flexible Pipe Connector,EPDM,—,2,2,2,EA,"For water lines, vibration isolation"
+,,,,,,,
+,"=== DRAINAGE ===",,,,,,,
+APE-HC-DR-01,Floor Drain,316 SS,—,1,1,1,EA,"25mm dia, removable plug"
+APE-HC-DR-02,Drain Pipe,PVC,25,1,1,1,EA,"300mm length, route to exterior"
+,,,,,,,
+,"=== FINISHING ===",,,,,,,
+APE-HC-FN-01,Powder Coating,Polyester,—,1,1,1,LOT,"2000hr salt spray rated"
+APE-HC-FN-02,Touch-up Paint,Polyester,—,1,1,1,CAN,"Color matched, field repairs"
+,,,,,,,
+,"=== ASSEMBLY HARDWARE ===",,,,,,,
+APE-HC-AS-01,Installation Template,—,—,1,1,1,EA,"For anti-vib mount positioning"
+APE-HC-AS-02,Assembly Instructions,—,—,1,1,1,EA,"Printed manual"
+APE-HC-AS-03,Warning Labels,Vinyl,—,1,1,1,SET,"DO NOT BLOCK AIRFLOW etc."
+,,,,,,,
+,"=== ESTIMATED WEIGHTS ===",,,,,,,
+,Base Enclosure (empty),,,45,60,80,kg,
+,Discharge Hood,,,25,32,40,kg,
+,Intake Modules (pair),,,15,18,25,kg,
+,TOTAL ASSEMBLY (empty),,,85,110,145,kg,

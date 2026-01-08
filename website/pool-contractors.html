@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APE Pool Series | Professional Enclosures for Pool Contractors</title>
+    <style>
+        :root {
+            --primary: #0891b2;
+            --primary-dark: #0e7490;
+            --primary-light: #06b6d4;
+            --secondary: #1e293b;
+            --accent: #f59e0b;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--text); line-height: 1.6; }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            text-decoration: none;
+        }
+        .nav-logo span { color: var(--text-muted); font-weight: 400; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: var(--text); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-cta {
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .nav-cta:hover { background: var(--primary-dark); }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--secondary) 0%, #334155 100%);
+            color: white;
+            padding: 8rem 2rem 5rem;
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
+        .hero p { font-size: 1.25rem; opacity: 0.9; max-width: 700px; margin: 0 auto 2rem; }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+        .hero-stat { text-align: center; }
+        .hero-stat .number { font-size: 2.5rem; font-weight: 700; color: var(--primary-light); }
+        .hero-stat .label { font-size: 0.9rem; opacity: 0.8; }
+
+        /* Container */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        /* Section */
+        .section { padding: 5rem 0; }
+        .section-dark { background: var(--secondary); color: white; }
+        .section-light { background: var(--bg); }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+        .section-dark .section-subtitle { color: rgba(255,255,255,0.7); }
+
+        /* Product Cards */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        @media (max-width: 900px) { .products-grid { grid-template-columns: 1fr; } }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        .product-header {
+            padding: 2rem;
+            text-align: center;
+        }
+        .product-header.pump { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; }
+        .product-header.chiller { background: linear-gradient(135deg, #10b981, #059669); color: white; }
+        .product-header.storage { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; }
+        .product-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .product-name { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .product-tagline { opacity: 0.9; font-size: 0.9rem; }
+        .product-body { padding: 1.5rem; }
+        .product-body h4 { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
+        .product-body ul { list-style: none; margin-bottom: 1.5rem; }
+        .product-body li { padding: 0.35rem 0; font-size: 0.9rem; color: var(--text); display: flex; align-items: center; gap: 0.5rem; }
+        .product-body li::before { content: "✓"; color: var(--success); font-weight: 700; }
+        .product-price {
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg);
+            border-radius: 8px;
+        }
+        .product-price .range { font-size: 1.25rem; font-weight: 700; color: var(--primary-dark); }
+        .product-price .note { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* Spec Tables */
+        .spec-section { margin: 4rem 0; }
+        .spec-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .spec-header .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .spec-header .icon.pump { background: #dbeafe; }
+        .spec-header .icon.chiller { background: #d1fae5; }
+        .spec-header .icon.storage { background: #ede9fe; }
+        .spec-header h3 { font-size: 1.5rem; }
+        .spec-header p { color: var(--text-muted); font-size: 0.9rem; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        th {
+            background: var(--secondary);
+            color: white;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        tr:hover { background: #f8fafc; }
+        .table-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        @media (max-width: 900px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+        .feature-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+        .section-dark .feature-icon { background: white; color: var(--primary); }
+        .feature-card h4 { margin-bottom: 0.5rem; }
+        .feature-card p { font-size: 0.85rem; color: var(--text-muted); }
+        .section-dark .feature-card p { color: rgba(255,255,255,0.7); }
+
+        /* Info Boxes */
+        .info-box {
+            background: #ecfeff;
+            border-left: 4px solid var(--primary);
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+        .info-box h4 { color: var(--primary-dark); margin-bottom: 0.5rem; }
+        .info-box p { margin: 0; font-size: 0.9rem; }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid var(--accent);
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+        .warning-box h4 { color: #92400e; margin-bottom: 0.5rem; }
+        .warning-box p { margin: 0; font-size: 0.9rem; color: #78350f; }
+
+        /* Two Column */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .card h3 { margin-bottom: 1rem; }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge-success { background: #d1fae5; color: #065f46; }
+        .badge-warning { background: #fef3c7; color: #92400e; }
+        .badge-info { background: #e0f2fe; color: #0369a1; }
+        .badge-primary { background: var(--primary); color: white; }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .cta-section h2 { font-size: 2rem; margin-bottom: 1rem; }
+        .cta-section p { opacity: 0.9; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .btn-white { background: white; color: var(--primary-dark); }
+        .btn-outline { background: transparent; color: white; border: 2px solid white; }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary);
+            color: white;
+            padding: 3rem 2rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+        @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+        .footer h4 { margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .footer p, .footer a { color: rgba(255,255,255,0.7); font-size: 0.9rem; text-decoration: none; display: block; margin-bottom: 0.5rem; }
+        .footer a:hover { color: white; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 2rem;
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        /* Sizing Calculator */
+        .size-guide {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .size-guide h4 { margin-bottom: 1rem; }
+        .size-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .size-option {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        .size-option:hover { border-color: var(--primary); }
+        .size-option.recommended { border-color: var(--primary); background: #ecfeff; }
+        .size-option .model { font-weight: 700; color: var(--primary-dark); margin-bottom: 0.25rem; }
+        .size-option .dims { font-size: 0.85rem; color: var(--text-muted); }
+        .size-option .use { font-size: 0.8rem; margin-top: 0.5rem; }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+        .tab {
+            padding: 0.5rem 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 6px 6px 0 0;
+        }
+        .tab.active {
+            color: var(--primary);
+            background: var(--bg);
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* Contractor Benefits */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        @media (max-width: 900px) { .benefits-grid { grid-template-columns: 1fr; } }
+        .benefit-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .benefit-card .icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+        .benefit-card h3 { margin-bottom: 0.75rem; }
+        .benefit-card p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Smart Features */
+        .smart-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        .smart-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: start;
+        }
+        .smart-card .icon {
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        .smart-card h4 { margin-bottom: 0.25rem; font-size: 1rem; }
+        .smart-card p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+        /* Spec Tabs */
+        .spec-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+        .spec-tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.25rem 2rem;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 160px;
+        }
+        .spec-tab:hover { border-color: var(--primary); }
+        .spec-tab.active {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+        .tab-icon { font-size: 1.75rem; margin-bottom: 0.5rem; }
+        .tab-label { font-weight: 700; font-size: 1.1rem; }
+        .tab-desc { font-size: 0.8rem; opacity: 0.8; }
+
+        /* Spec Content */
+        .spec-content { display: none; }
+        .spec-content.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .spec-hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            gap: 2rem;
+        }
+        .spec-hero.chiller { background: linear-gradient(135deg, #10b981, #059669); }
+        .spec-hero.storage { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+        .spec-hero-text h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .spec-hero-text p { opacity: 0.95; margin-bottom: 1rem; max-width: 500px; }
+        .spec-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .spec-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .spec-price-box {
+            background: rgba(255,255,255,0.15);
+            padding: 1.25rem 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .price-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; }
+        .price-range { font-size: 1.5rem; font-weight: 700; margin: 0.25rem 0; }
+        .price-note { font-size: 0.8rem; opacity: 0.7; }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 900px) { .spec-grid { grid-template-columns: 1fr; } }
+
+        .spec-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .spec-card h4 {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+        .spec-table {
+            width: 100%;
+            font-size: 0.85rem;
+        }
+        .spec-table th {
+            background: var(--bg);
+            color: var(--text);
+            font-weight: 600;
+            padding: 0.6rem 0.75rem;
+            text-align: left;
+        }
+        .spec-table td { padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border); }
+        .spec-table tr.highlight { background: #ecfeff; }
+        .spec-table tr.highlight td { border-color: #a5f3fc; }
+
+        .spec-list { display: flex; flex-direction: column; gap: 0.5rem; }
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.85rem;
+        }
+        .spec-row span:first-child { color: var(--text-muted); }
+        .spec-row span:last-child { font-weight: 500; text-align: right; }
+
+        .spec-note {
+            background: #ecfeff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+        }
+        .spec-warning {
+            background: #fef3c7;
+            border-left: 4px solid var(--accent);
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            color: #78350f;
+        }
+
+        /* Product Deep Dive Sections */
+        .product-section {
+            padding: 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .product-section:last-of-type { border-bottom: none; }
+
+        .product-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 500px;
+        }
+        @media (max-width: 900px) {
+            .product-hero { grid-template-columns: 1fr; }
+            .product-hero-image { min-height: 300px; }
+        }
+
+        .product-hero-content {
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .product-hero-content.pump { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); color: white; }
+        .product-hero-content.chiller { background: linear-gradient(135deg, #047857 0%, #10b981 100%); color: white; }
+        .product-hero-content.storage { background: linear-gradient(135deg, #5b21b6 0%, #8b5cf6 100%); color: white; }
+
+        .product-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+        .product-hero-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        .product-hero-content .tagline {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        .product-hero-price {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255,255,255,0.15);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+        .product-hero-price .label { font-size: 0.8rem; opacity: 0.8; }
+        .product-hero-price .amount { font-size: 1.5rem; font-weight: 700; }
+        .product-hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            color: var(--secondary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            width: fit-content;
+            transition: transform 0.2s;
+        }
+        .product-hero-cta:hover { transform: translateY(-2px); }
+
+        .product-hero-image {
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .image-placeholder {
+            text-align: center;
+            color: var(--text-muted);
+        }
+        .image-placeholder .icon { font-size: 4rem; margin-bottom: 1rem; opacity: 0.3; }
+        .image-placeholder p { font-size: 0.9rem; }
+        .image-gallery {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+        .gallery-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+        }
+        .gallery-dot.active { background: var(--primary); }
+
+        /* Problem/Solution */
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        @media (max-width: 900px) { .problem-solution { grid-template-columns: 1fr; } }
+
+        .problem-box, .solution-box {
+            padding: 3rem;
+        }
+        .problem-box {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+        }
+        .solution-box {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+        }
+        .problem-box h4, .solution-box h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .problem-box h4 { color: #dc2626; }
+        .solution-box h4 { color: #16a34a; }
+        .problem-box ul, .solution-box ul {
+            list-style: none;
+        }
+        .problem-box li, .solution-box li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        .problem-box li::before {
+            content: "✗";
+            position: absolute;
+            left: 0;
+            color: #ef4444;
+            font-weight: 700;
+        }
+        .solution-box li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #22c55e;
+            font-weight: 700;
+        }
+
+        /* Features Strip */
+        .features-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: white;
+        }
+        @media (max-width: 900px) { .features-strip { grid-template-columns: repeat(2, 1fr); } }
+
+        .feature-item {
+            padding: 2rem;
+            text-align: center;
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .feature-item:last-child { border-right: none; }
+        .feature-item .icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .feature-item h5 {
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        .feature-item p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Size Cards */
+        .sizes-section {
+            padding: 3rem;
+            background: var(--bg);
+        }
+        .sizes-section h3 {
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        .sizes-section > p {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        .size-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        @media (max-width: 900px) { .size-cards { grid-template-columns: 1fr; } }
+
+        .size-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 2px solid var(--border);
+            transition: all 0.2s;
+        }
+        .size-card:hover { border-color: var(--primary); }
+        .size-card.popular {
+            border-color: var(--primary);
+            position: relative;
+        }
+        .size-card.popular::before {
+            content: "MOST POPULAR";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 10px;
+        }
+        .size-card .model {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 0.25rem;
+        }
+        .size-card .dims {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+        .size-card .best-for {
+            background: var(--bg);
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        .size-card .price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .size-card .price span {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        /* Use Cases */
+        .use-cases {
+            padding: 3rem;
+            background: white;
+        }
+        .use-cases h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .use-case-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        @media (max-width: 900px) { .use-case-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        .use-case-card {
+            background: var(--bg);
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+        }
+        .use-case-card .image {
+            height: 80px;
+            background: linear-gradient(135deg, var(--border) 0%, #cbd5e1 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        .use-case-card p {
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Product Nav */
+        .product-nav {
+            position: sticky;
+            top: 60px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 0 2rem;
+        }
+        .product-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0;
+        }
+        .product-nav-link {
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        .product-nav-link:hover { color: var(--text); }
+        .product-nav-link.active { color: var(--primary); border-bottom-color: var(--primary); }
+        .product-nav-link.pump:hover, .product-nav-link.pump.active { color: #3b82f6; border-bottom-color: #3b82f6; }
+        .product-nav-link.chiller:hover, .product-nav-link.chiller.active { color: #10b981; border-bottom-color: #10b981; }
+        .product-nav-link.storage:hover, .product-nav-link.storage.active { color: #8b5cf6; border-bottom-color: #8b5cf6; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#" class="nav-logo">APEX <span>Pool Series</span></a>
+        <div class="nav-links">
+            <a href="#products">Products</a>
+            <a href="#specs">Specifications</a>
+            <a href="#sizing">Sizing Guide</a>
+            <a href="#contractor">Contractor Program</a>
+        </div>
+        <a href="#contact" class="nav-cta">Become a Partner</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <span class="hero-badge">For Pool Contractors</span>
+        <h1>Premium Pool Equipment Enclosures</h1>
+        <p>Architectural-grade enclosures that solve your clients' biggest complaints: ugly equipment, pump noise, and ruined cushions. Made in UAE by Eurotech Metal Industries.</p>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="number">3</div>
+                <div class="label">Product Lines</div>
+            </div>
+            <div class="hero-stat">
+                <div class="number">70-80%</div>
+                <div class="label">Noise Reduction</div>
+            </div>
+            <div class="hero-stat">
+                <div class="number">20yr+</div>
+                <div class="label">Lifespan</div>
+            </div>
+            <div class="hero-stat">
+                <div class="number">10yr</div>
+                <div class="label">Warranty</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Navigation -->
+    <nav class="product-nav" id="products">
+        <div class="product-nav-inner">
+            <a href="#pump" class="product-nav-link pump active">🔧 APE-P Pump Enclosures</a>
+            <a href="#chiller" class="product-nav-link chiller">❄️ APE-HC Heater/Chiller</a>
+            <a href="#storage" class="product-nav-link storage">📦 APE-S Storage</a>
+        </div>
+    </nav>
+
+    <!-- ========================================
+         APE-P: PUMP ENCLOSURES
+         ======================================== -->
+    <section class="product-section" id="pump">
+        <!-- Hero -->
+        <div class="product-hero">
+            <div class="product-hero-content pump">
+                <div class="product-label">APE-P Series</div>
+                <h2>Pump Room Enclosures</h2>
+                <p class="tagline">Finally silence the pump noise complaints. Acoustic enclosures that cut noise by 70-80% while keeping equipment cool and accessible.</p>
+                <div class="product-hero-price">
+                    <div>
+                        <div class="label">Contractor Price</div>
+                        <div class="amount">AED 2,500 - 7,500</div>
+                    </div>
+                </div>
+                <a href="#specs" class="product-hero-cta">View Full Specs →</a>
+            </div>
+            <div class="product-hero-image">
+                <div class="image-placeholder">
+                    <div class="icon">🔧</div>
+                    <p>Product renders coming soon</p>
+                    <p style="font-size: 0.75rem; margin-top: 0.5rem;">3D visualization • Multiple angles</p>
+                </div>
+                <div class="image-gallery">
+                    <span class="gallery-dot active"></span>
+                    <span class="gallery-dot"></span>
+                    <span class="gallery-dot"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem / Solution -->
+        <div class="problem-solution">
+            <div class="problem-box">
+                <h4>❌ The Problem</h4>
+                <ul>
+                    <li>Pump noise audible from pool deck and bedrooms</li>
+                    <li>Exposed equipment looks ugly and industrial</li>
+                    <li>Sun damage and corrosion reduce equipment life</li>
+                    <li>Clients complain constantly about the noise</li>
+                    <li>No premium solutions available locally</li>
+                </ul>
+            </div>
+            <div class="solution-box">
+                <h4>✓ The APE-P Solution</h4>
+                <ul>
+                    <li>70-80% noise reduction with acoustic foam</li>
+                    <li>Clean architectural design fits any property</li>
+                    <li>Full weather protection extends equipment life</li>
+                    <li>Easy lift-up roof + bi-fold doors for service</li>
+                    <li>Made in UAE, delivered in 1-2 weeks</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Features Strip -->
+        <div class="features-strip">
+            <div class="feature-item">
+                <div class="icon">🔇</div>
+                <h5>70-80% Quieter</h5>
+                <p>25mm acoustic foam lining</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">💧</div>
+                <h5>IP55 Rated</h5>
+                <p>Protected from jets & dust</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">🚪</div>
+                <h5>Easy Access</h5>
+                <p>Lift-up roof + bi-fold doors</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">📱</div>
+                <h5>Smart Monitoring</h5>
+                <p>T/RH sensors + app alerts</p>
+            </div>
+        </div>
+
+        <!-- Size Options -->
+        <div class="sizes-section">
+            <h3>Choose Your Size</h3>
+            <p>3 sizes cover 95% of residential pool equipment configurations</p>
+            <div class="size-cards">
+                <div class="size-card">
+                    <div class="model">APE-P-S</div>
+                    <div class="dims">700 × 600 × 900mm</div>
+                    <div class="best-for">Single pump + compact chlorinator</div>
+                    <div class="price">AED 2,500 <span>contractor</span></div>
+                </div>
+                <div class="size-card popular">
+                    <div class="model">APE-P-M</div>
+                    <div class="dims">1100 × 600 × 900mm</div>
+                    <div class="best-for">Pump + filter (sand or cartridge)</div>
+                    <div class="price">AED 4,500 <span>contractor</span></div>
+                </div>
+                <div class="size-card">
+                    <div class="model">APE-P-L</div>
+                    <div class="dims">1500 × 600 × 900mm</div>
+                    <div class="best-for">Full pump room + automation</div>
+                    <div class="price">AED 7,500 <span>contractor</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="use-cases">
+            <h3>Fits All Standard Pool Equipment</h3>
+            <div class="use-case-grid">
+                <div class="use-case-card">
+                    <div class="image">🔄</div>
+                    <p>Variable Speed Pumps</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="image">🏺</div>
+                    <p>Sand & Cartridge Filters</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="image">🧪</div>
+                    <p>Salt Chlorinators</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="image">🎛️</div>
+                    <p>Pool Automation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         APE-HC: HEATER/CHILLER ENCLOSURES
+         ======================================== -->
+    <section class="product-section" id="chiller">
+        <!-- Hero -->
+        <div class="product-hero">
+            <div class="product-hero-image" style="order: -1;">
+                <div class="image-placeholder">
+                    <div class="icon">❄️</div>
+                    <p>Product renders coming soon</p>
+                    <p style="font-size: 0.75rem; margin-top: 0.5rem;">Louvered design • Full airflow</p>
+                </div>
+                <div class="image-gallery">
+                    <span class="gallery-dot active"></span>
+                    <span class="gallery-dot"></span>
+                    <span class="gallery-dot"></span>
+                </div>
+            </div>
+            <div class="product-hero-content chiller">
+                <div class="product-label">APE-HC Series</div>
+                <h2>Heater & Chiller Enclosures</h2>
+                <p class="tagline">Hide ugly heat pumps without killing airflow. Louvered design delivers 50%+ ventilation while reducing noise 50-60%.</p>
+                <div class="product-hero-price">
+                    <div>
+                        <div class="label">Contractor Price</div>
+                        <div class="amount">AED 3,000 - 7,500</div>
+                    </div>
+                </div>
+                <a href="#specs" class="product-hero-cta">View Full Specs →</a>
+            </div>
+        </div>
+
+        <!-- Problem / Solution -->
+        <div class="problem-solution">
+            <div class="problem-box">
+                <h4>❌ The Problem</h4>
+                <ul>
+                    <li>Heat pumps are big, ugly, and loud</li>
+                    <li>Standard enclosures block airflow and kill efficiency</li>
+                    <li>Clients want them hidden but equipment needs to breathe</li>
+                    <li>Compressor noise carries across the garden</li>
+                    <li>Service access is awkward with solid covers</li>
+                </ul>
+            </div>
+            <div class="solution-box">
+                <h4>✓ The APE-HC Solution</h4>
+                <ul>
+                    <li>45° louvers maintain 50%+ open airflow area</li>
+                    <li>Engineered to match equipment clearance specs</li>
+                    <li>Clean architectural screen hides equipment</li>
+                    <li>50-60% noise reduction from louver angles</li>
+                    <li>Full-height door + removable top for service</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Features Strip -->
+        <div class="features-strip">
+            <div class="feature-item">
+                <div class="icon">💨</div>
+                <h5>50%+ Airflow</h5>
+                <p>45° angled louver panels</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">🔇</div>
+                <h5>50-60% Quieter</h5>
+                <p>Louver angle blocks direct sound</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">🏗️</div>
+                <h5>Crane Access</h5>
+                <p>Removable top panel</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">📱</div>
+                <h5>Smart Monitoring</h5>
+                <p>Temp alerts for overheating</p>
+            </div>
+        </div>
+
+        <!-- Size Options -->
+        <div class="sizes-section">
+            <h3>Choose Your Size</h3>
+            <p>Sized to match common heat pump and chiller dimensions with proper clearances</p>
+            <div class="size-cards">
+                <div class="size-card">
+                    <div class="model">APE-HC-S</div>
+                    <div class="dims">900 × 550 × 1000mm</div>
+                    <div class="best-for">Up to 12kW • Gas heaters, small HP</div>
+                    <div class="price">AED 3,000 <span>contractor</span></div>
+                </div>
+                <div class="size-card popular">
+                    <div class="model">APE-HC-M</div>
+                    <div class="dims">1100 × 650 × 1000mm</div>
+                    <div class="best-for">Up to 20kW • Standard heat pumps</div>
+                    <div class="price">AED 5,000 <span>contractor</span></div>
+                </div>
+                <div class="size-card">
+                    <div class="model">APE-HC-L</div>
+                    <div class="dims">1400 × 750 × 1100mm</div>
+                    <div class="best-for">Up to 35kW • Large commercial</div>
+                    <div class="price">AED 7,500 <span>contractor</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="use-cases">
+            <h3>Compatible Equipment</h3>
+            <div class="use-case-grid">
+                <div class="use-case-card">
+                    <div class="image">🌡️</div>
+                    <p>Heat Pumps</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="image">❄️</div>
+                    <p>Pool Chillers</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="image">🔥</div>
+                    <p>Gas Heaters</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="image">♻️</div>
+                    <p>Heat/Cool Combos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         APE-S: CLIMATE-CONTROLLED STORAGE
+         ======================================== -->
+    <section class="product-section" id="storage">
+        <!-- Hero -->
+        <div class="product-hero">
+            <div class="product-hero-content storage">
+                <div class="product-label">APE-S Series</div>
+                <h2>Climate-Controlled Storage</h2>
+                <p class="tagline">End the moldy cushion problem. Active Peltier dehumidification keeps contents dry at 35-50% RH — no matter how humid it gets outside.</p>
+                <div class="product-hero-price">
+                    <div>
+                        <div class="label">Contractor Price</div>
+                        <div class="amount">AED 5,000 - 11,000</div>
+                    </div>
+                </div>
+                <a href="#specs" class="product-hero-cta">View Full Specs →</a>
+            </div>
+            <div class="product-hero-image">
+                <div class="image-placeholder">
+                    <div class="icon">📦</div>
+                    <p>Product renders coming soon</p>
+                    <p style="font-size: 0.75rem; margin-top: 0.5rem;">Bench-seat option • Peltier system</p>
+                </div>
+                <div class="image-gallery">
+                    <span class="gallery-dot active"></span>
+                    <span class="gallery-dot"></span>
+                    <span class="gallery-dot"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem / Solution -->
+        <div class="problem-solution">
+            <div class="problem-box">
+                <h4>❌ The Problem</h4>
+                <ul>
+                    <li>Gulf humidity (60-90% RH) destroys outdoor fabrics</li>
+                    <li>Cushions get moldy within weeks if stored wrong</li>
+                    <li>Plastic boxes just trap humid air inside</li>
+                    <li>Clients spend thousands on cushions yearly</li>
+                    <li>No real solution exists in the market</li>
+                </ul>
+            </div>
+            <div class="solution-box">
+                <h4>✓ The APE-S Solution</h4>
+                <ul>
+                    <li>Active Peltier dehumidifier maintains 35-50% RH</li>
+                    <li>IP65 sealed construction keeps moisture out</li>
+                    <li>Extracts 250-350ml water per day automatically</li>
+                    <li>Smart monitoring alerts if humidity rises</li>
+                    <li>No consumables — just empty the drain monthly</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Features Strip -->
+        <div class="features-strip">
+            <div class="feature-item">
+                <div class="icon">💧</div>
+                <h5>35-50% RH</h5>
+                <p>Active Peltier dehumidification</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">🔒</div>
+                <h5>IP65 Sealed</h5>
+                <p>Complete moisture barrier</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">🪑</div>
+                <h5>Bench Option</h5>
+                <p>150kg seat rating</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">☀️</div>
+                <h5>Solar Ready</h5>
+                <p>10W panel option available</p>
+            </div>
+        </div>
+
+        <!-- Size Options -->
+        <div class="sizes-section">
+            <h3>Choose Your Size</h3>
+            <p>Sized for typical outdoor furniture cushion sets</p>
+            <div class="size-cards">
+                <div class="size-card">
+                    <div class="model">APE-S-100</div>
+                    <div class="dims">800 × 500 × 500mm</div>
+                    <div class="best-for">~100L • 4-6 cushions or towels</div>
+                    <div class="price">AED 5,000 <span>contractor</span></div>
+                </div>
+                <div class="size-card popular">
+                    <div class="model">APE-S-200</div>
+                    <div class="dims">1200 × 600 × 600mm</div>
+                    <div class="best-for">~200L • Full lounge set</div>
+                    <div class="price">AED 7,500 <span>contractor</span></div>
+                </div>
+                <div class="size-card">
+                    <div class="model">APE-S-350</div>
+                    <div class="dims">1500 × 700 × 700mm</div>
+                    <div class="best-for">~350L • Multiple sets + extras</div>
+                    <div class="price">AED 11,000 <span>contractor</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="use-cases">
+            <h3>Perfect For Storing</h3>
+            <div class="use-case-grid">
+                <div class="use-case-card">
+                    <div class="image">🛋️</div>
+                    <p>Outdoor Cushions</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="image">🏖️</div>
+                    <p>Towels & Linens</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="image">🎾</div>
+                    <p>Pool Toys & Floats</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="image">🧴</div>
+                    <p>Covers & Accessories</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Contractors Choose Us -->
+    <section class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">Why Pool Contractors Partner With Us</h2>
+            <p class="section-subtitle">We've designed this product line specifically for the Gulf region and the contractors who serve it.</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏭</div>
+                    <h4>Made in UAE</h4>
+                    <p>Manufactured by Eurotech Metal Industries. No import delays, no customs issues, fast restocking.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌡️</div>
+                    <h4>Gulf-Rated</h4>
+                    <p>Designed for 50°C+ ambient, 90% humidity, salt pools, and coastal environments.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📐</div>
+                    <h4>Easy Sizing</h4>
+                    <p>3 sizes per product cover 95% of equipment. No custom engineering needed.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h4>Healthy Margins</h4>
+                    <p>Contractor pricing leaves room for profitable markups. Upsell opportunity on every job.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Specifications -->
+    <section class="section section-light" id="specs">
+        <div class="container">
+            <h2 class="section-title">Technical Specifications</h2>
+            <p class="section-subtitle">The engineering details your team needs for specification and installation.</p>
+
+            <!-- Product Tabs -->
+            <div class="spec-tabs">
+                <button class="spec-tab active" data-product="pump">
+                    <span class="tab-icon">🔧</span>
+                    <span class="tab-label">APE-P</span>
+                    <span class="tab-desc">Pump Enclosures</span>
+                </button>
+                <button class="spec-tab" data-product="chiller">
+                    <span class="tab-icon">❄️</span>
+                    <span class="tab-label">APE-HC</span>
+                    <span class="tab-desc">Heater/Chiller</span>
+                </button>
+                <button class="spec-tab" data-product="storage">
+                    <span class="tab-icon">📦</span>
+                    <span class="tab-label">APE-S</span>
+                    <span class="tab-desc">Storage</span>
+                </button>
+            </div>
+
+            <!-- APE-P Content -->
+            <div class="spec-content active" id="spec-pump">
+                <div class="spec-hero">
+                    <div class="spec-hero-text">
+                        <h3>APE-P Series — Pump Enclosures</h3>
+                        <p>Sealed acoustic enclosures with <strong>70-80% noise reduction</strong>. Perfect for pumps, filters, chlorinators, and pool automation equipment.</p>
+                        <div class="spec-badges">
+                            <span class="spec-badge">IP55 Rated</span>
+                            <span class="spec-badge">25mm Acoustic Foam</span>
+                            <span class="spec-badge">Lift-up Roof Access</span>
+                        </div>
+                    </div>
+                    <div class="spec-price-box">
+                        <div class="price-label">Contractor Price</div>
+                        <div class="price-range">AED 2,500 - 7,500</div>
+                        <div class="price-note">Retail: AED 3,500 - 10,000</div>
+                    </div>
+                </div>
+
+                <div class="spec-grid">
+                    <div class="spec-card">
+                        <h4>Size Options</h4>
+                        <table class="spec-table">
+                            <thead>
+                                <tr><th>Model</th><th>External (W×D×H)</th><th>Best For</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>APE-P-S</strong></td><td>700 × 600 × 900mm</td><td>Single pump + chlorinator</td></tr>
+                                <tr class="highlight"><td><strong>APE-P-M</strong></td><td>1100 × 600 × 900mm</td><td>Pump + filter (most common)</td></tr>
+                                <tr><td><strong>APE-P-L</strong></td><td>1500 × 600 × 900mm</td><td>Full pump room setup</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="spec-card">
+                        <h4>Construction</h4>
+                        <div class="spec-list">
+                            <div class="spec-row"><span>Frame</span><span>5052-H32 Aluminum (3.0mm)</span></div>
+                            <div class="spec-row"><span>Panels</span><span>5052-H32 Aluminum (2.0mm)</span></div>
+                            <div class="spec-row"><span>Fasteners</span><span>316 Stainless Steel</span></div>
+                            <div class="spec-row"><span>Acoustic</span><span>25mm closed-cell foam</span></div>
+                            <div class="spec-row"><span>Finish</span><span>Powder coat (2000hr salt spray)</span></div>
+                        </div>
+                    </div>
+
+                    <div class="spec-card">
+                        <h4>Access Design</h4>
+                        <div class="spec-list">
+                            <div class="spec-row"><span>Roof</span><span>Lift-up on 2× gas struts (70°)</span></div>
+                            <div class="spec-row"><span>Front</span><span>Bi-fold doors (full width)</span></div>
+                            <div class="spec-row"><span>Latches</span><span>Compression seal + padlock hasp</span></div>
+                            <div class="spec-row"><span>Ventilation</span><span>Labyrinth vents (passive)</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spec-note">
+                    <strong>Installation:</strong> Requires 50mm base clearance for drainage. Max equipment heat load: 2kW continuous.
+                </div>
+            </div>
+
+            <!-- APE-HC Content -->
+            <div class="spec-content" id="spec-chiller">
+                <div class="spec-hero chiller">
+                    <div class="spec-hero-text">
+                        <h3>APE-HC Series — Heater/Chiller Enclosures</h3>
+                        <p>Louvered enclosures for equipment requiring airflow. <strong>50-60% noise reduction</strong> while maintaining full ventilation for heat pumps and chillers.</p>
+                        <div class="spec-badges">
+                            <span class="spec-badge">50%+ Airflow</span>
+                            <span class="spec-badge">45° Louver Design</span>
+                            <span class="spec-badge">Removable Top Panel</span>
+                        </div>
+                    </div>
+                    <div class="spec-price-box">
+                        <div class="price-label">Contractor Price</div>
+                        <div class="price-range">AED 3,000 - 7,500</div>
+                        <div class="price-note">Retail: AED 4,000 - 10,000</div>
+                    </div>
+                </div>
+
+                <div class="spec-grid">
+                    <div class="spec-card">
+                        <h4>Size Options</h4>
+                        <table class="spec-table">
+                            <thead>
+                                <tr><th>Model</th><th>External (W×D×H)</th><th>Capacity</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>APE-HC-S</strong></td><td>900 × 550 × 1000mm</td><td>Up to 12kW</td></tr>
+                                <tr class="highlight"><td><strong>APE-HC-M</strong></td><td>1100 × 650 × 1000mm</td><td>Up to 20kW</td></tr>
+                                <tr><td><strong>APE-HC-L</strong></td><td>1400 × 750 × 1100mm</td><td>Up to 35kW</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="spec-card">
+                        <h4>Airflow Design</h4>
+                        <div class="spec-list">
+                            <div class="spec-row"><span>Side panels</span><span>45° louvers, 50-55% open</span></div>
+                            <div class="spec-row"><span>Top panel</span><span>70% open or frame only</span></div>
+                            <div class="spec-row"><span>Blade spacing</span><span>25mm center-to-center</span></div>
+                            <div class="spec-row"><span>Blade depth</span><span>40mm</span></div>
+                        </div>
+                    </div>
+
+                    <div class="spec-card">
+                        <h4>Access Design</h4>
+                        <div class="spec-list">
+                            <div class="spec-row"><span>Front door</span><span>Full-height swing (100°)</span></div>
+                            <div class="spec-row"><span>Top panel</span><span>Removable (crane lift points)</span></div>
+                            <div class="spec-row"><span>Platform</span><span>Vibration-isolated mounts</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spec-warning">
+                    <strong>⚠️ Critical:</strong> Always verify equipment manufacturer clearance requirements. Heat pumps typically need 300-450mm side clearance and 500-600mm top clearance.
+                </div>
+            </div>
+
+            <!-- APE-S Content -->
+            <div class="spec-content" id="spec-storage">
+                <div class="spec-hero storage">
+                    <div class="spec-hero-text">
+                        <h3>APE-S Series — Climate-Controlled Storage</h3>
+                        <p>Active Peltier dehumidification keeps contents at <strong>35-50% RH</strong>. No more moldy cushions or musty towels.</p>
+                        <div class="spec-badges">
+                            <span class="spec-badge">IP65 Sealed</span>
+                            <span class="spec-badge">Peltier Dehumidifier</span>
+                            <span class="spec-badge">Smart Monitoring</span>
+                        </div>
+                    </div>
+                    <div class="spec-price-box">
+                        <div class="price-label">Contractor Price</div>
+                        <div class="price-range">AED 5,000 - 11,000</div>
+                        <div class="price-note">Retail: AED 7,000 - 15,000</div>
+                    </div>
+                </div>
+
+                <div class="spec-grid">
+                    <div class="spec-card">
+                        <h4>Size Options</h4>
+                        <table class="spec-table">
+                            <thead>
+                                <tr><th>Model</th><th>External (W×D×H)</th><th>Capacity</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>APE-S-100</strong></td><td>800 × 500 × 500mm</td><td>~100L (4-6 cushions)</td></tr>
+                                <tr class="highlight"><td><strong>APE-S-200</strong></td><td>1200 × 600 × 600mm</td><td>~200L (full lounge set)</td></tr>
+                                <tr><td><strong>APE-S-350</strong></td><td>1500 × 700 × 700mm</td><td>~350L (multiple sets)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="spec-card">
+                        <h4>Climate Control</h4>
+                        <div class="spec-list">
+                            <div class="spec-row"><span>Technology</span><span>Peltier (thermoelectric)</span></div>
+                            <div class="spec-row"><span>Power</span><span>12V DC, 20-25W</span></div>
+                            <div class="spec-row"><span>Extraction</span><span>250-350ml/24hr</span></div>
+                            <div class="spec-row"><span>Target RH</span><span>35-50%</span></div>
+                            <div class="spec-row"><span>Noise</span><span>&lt;25 dBA (silent)</span></div>
+                        </div>
+                    </div>
+
+                    <div class="spec-card">
+                        <h4>Construction</h4>
+                        <div class="spec-list">
+                            <div class="spec-row"><span>IP Rating</span><span>IP65 (sealed)</span></div>
+                            <div class="spec-row"><span>Lid</span><span>Dual gas struts (soft close)</span></div>
+                            <div class="spec-row"><span>Bench seat</span><span>Optional (150kg rating)</span></div>
+                            <div class="spec-row"><span>Power</span><span>12V adapter or solar</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spec-note">
+                    <strong>Why active climate control?</strong> Gulf humidity (60-90% RH) causes mold within weeks. Passive boxes just trap humid air. Peltier actively removes moisture — no consumables, just empty the drain monthly.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Smart Monitoring -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Smart Monitoring Included</h2>
+            <p class="section-subtitle">Every enclosure includes wireless sensors with smartphone app. Your clients can monitor conditions and receive alerts.</p>
+
+            <div class="smart-grid">
+                <div class="smart-card">
+                    <div class="icon">🌡️</div>
+                    <div>
+                        <h4>Temperature Monitoring</h4>
+                        <p>Track interior temperature with ±0.3°C accuracy. Alert if equipment overheating.</p>
+                    </div>
+                </div>
+                <div class="smart-card">
+                    <div class="icon">💧</div>
+                    <div>
+                        <h4>Humidity Monitoring</h4>
+                        <p>Track humidity with ±2% RH accuracy. Critical for storage and detecting leaks.</p>
+                    </div>
+                </div>
+                <div class="smart-card">
+                    <div class="icon">🚪</div>
+                    <div>
+                        <h4>Door/Lid Status</h4>
+                        <p>Know if enclosure is left open. Security alerts for equipment areas.</p>
+                    </div>
+                </div>
+                <div class="smart-card">
+                    <div class="icon">📱</div>
+                    <div>
+                        <h4>Smartphone App</h4>
+                        <p>iOS/Android app with push notifications. Optional WiFi gateway for remote access.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sizing Guide -->
+    <section class="section section-light" id="sizing">
+        <div class="container">
+            <h2 class="section-title">Sizing Guide</h2>
+            <p class="section-subtitle">Quick reference for specifying the right enclosure for your client's equipment.</p>
+
+            <div class="two-col">
+                <div class="card">
+                    <h3>APE-P: Pump Equipment Sizing</h3>
+                    <div class="size-guide">
+                        <div class="size-options">
+                            <div class="size-option">
+                                <div class="model">APE-P-S</div>
+                                <div class="dims">700 × 600 × 900mm</div>
+                                <div class="use">Single pump up to 1.5HP<br>+ compact chlorinator</div>
+                            </div>
+                            <div class="size-option recommended">
+                                <div class="model">APE-P-M</div>
+                                <div class="dims">1100 × 600 × 900mm</div>
+                                <div class="use">Pump + filter<br>(most common)</div>
+                            </div>
+                            <div class="size-option">
+                                <div class="model">APE-P-L</div>
+                                <div class="dims">1500 × 600 × 900mm</div>
+                                <div class="use">Complete pump room<br>with automation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>APE-HC: Heater/Chiller Sizing</h3>
+                    <div class="size-guide">
+                        <div class="size-options">
+                            <div class="size-option">
+                                <div class="model">APE-HC-S</div>
+                                <div class="dims">900 × 550 × 1000mm</div>
+                                <div class="use">Up to 12kW<br>Gas heaters, small HP</div>
+                            </div>
+                            <div class="size-option recommended">
+                                <div class="model">APE-HC-M</div>
+                                <div class="dims">1100 × 650 × 1000mm</div>
+                                <div class="use">Up to 20kW<br>Standard heat pumps</div>
+                            </div>
+                            <div class="size-option">
+                                <div class="model">APE-HC-L</div>
+                                <div class="dims">1400 × 750 × 1100mm</div>
+                                <div class="use">Up to 35kW<br>Large commercial units</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 2rem;">
+                <h3>APE-S: Storage Sizing</h3>
+                <div class="size-guide">
+                    <div class="size-options">
+                        <div class="size-option">
+                            <div class="model">APE-S-100</div>
+                            <div class="dims">800 × 500 × 500mm</div>
+                            <div class="use">100L - 4-6 cushions<br>or towels</div>
+                        </div>
+                        <div class="size-option recommended">
+                            <div class="model">APE-S-200</div>
+                            <div class="dims">1200 × 600 × 600mm</div>
+                            <div class="use">200L - Full lounge set<br>(most popular)</div>
+                        </div>
+                        <div class="size-option">
+                            <div class="model">APE-S-350</div>
+                            <div class="dims">1500 × 700 × 700mm</div>
+                            <div class="use">350L - Multiple sets<br>+ accessories</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contractor Program -->
+    <section class="section" id="contractor">
+        <div class="container">
+            <h2 class="section-title">Contractor Partner Program</h2>
+            <p class="section-subtitle">Structured pricing and support for pool contractors who want to offer Apex enclosures to their clients.</p>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="icon">💰</div>
+                    <h3>Contractor Pricing</h3>
+                    <p>15-25% off retail pricing depending on volume. Healthy margins for you while offering competitive prices to clients.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">📦</div>
+                    <h3>Quick Delivery</h3>
+                    <p>Standard sizes in stock. 1-2 week lead time on most orders. Made locally in UAE - no shipping delays.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">🛠️</div>
+                    <h3>Installation Support</h3>
+                    <p>Detailed installation guides, technical support line, and on-site training for your team if needed.</p>
+                </div>
+            </div>
+
+            <div class="two-col" style="margin-top: 3rem;">
+                <div class="card">
+                    <h3>Typical Project Pricing (Contractor Cost)</h3>
+                    <table>
+                        <tr>
+                            <th>Configuration</th>
+                            <th>Products</th>
+                            <th>Est. Cost</th>
+                        </tr>
+                        <tr>
+                            <td>Basic Package</td>
+                            <td>APE-P-M only</td>
+                            <td>AED 3,500 - 4,500</td>
+                        </tr>
+                        <tr>
+                            <td>Standard Package</td>
+                            <td>APE-P-M + APE-S-200</td>
+                            <td>AED 9,000 - 11,000</td>
+                        </tr>
+                        <tr>
+                            <td>Complete Package</td>
+                            <td>APE-P-L + APE-HC-M + APE-S-200</td>
+                            <td>AED 14,000 - 18,000</td>
+                        </tr>
+                        <tr>
+                            <td>Premium Villa</td>
+                            <td>APE-P-L + APE-HC-L + 2× APE-S-350</td>
+                            <td>AED 25,000 - 32,000</td>
+                        </tr>
+                    </table>
+                    <p class="table-note">Contractor pricing shown. Retail markup of 30-50% typical.</p>
+                </div>
+
+                <div class="card">
+                    <h3>How to Order</h3>
+                    <ol style="padding-left: 1.5rem; color: var(--text-muted);">
+                        <li style="margin-bottom: 0.75rem;"><strong>Register as a Contractor Partner</strong><br>Complete the form below with your trade license</li>
+                        <li style="margin-bottom: 0.75rem;"><strong>Receive Contractor Price List</strong><br>We'll send your discounted pricing within 24 hours</li>
+                        <li style="margin-bottom: 0.75rem;"><strong>Quote Your Client</strong><br>Add your markup and include in your project proposal</li>
+                        <li style="margin-bottom: 0.75rem;"><strong>Place Order</strong><br>50% deposit, balance on delivery</li>
+                        <li><strong>We Deliver</strong><br>Direct to site or your warehouse</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="contact">
+        <h2>Ready to Become a Partner?</h2>
+        <p>Join our network of pool contractors offering premium enclosure solutions. Get contractor pricing and dedicated support.</p>
+        <div class="cta-buttons">
+            <a href="mailto:contractors@apexenclosures.ae?subject=Contractor%20Partnership%20Inquiry" class="btn btn-white">Request Contractor Pricing</a>
+            <a href="https://wa.me/971501234567" class="btn btn-outline">WhatsApp Us</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>Apex Pool Series</h4>
+                    <p>Premium outdoor enclosures designed for the Gulf region. Manufactured in UAE by Eurotech Metal Industries.</p>
+                    <p style="margin-top: 1rem;"><strong>Trade License:</strong> [Your License]<br><strong>TRN:</strong> [Your TRN]</p>
+                </div>
+                <div>
+                    <h4>Products</h4>
+                    <a href="#products">APE-P Pump Enclosures</a>
+                    <a href="#products">APE-HC Heater/Chiller</a>
+                    <a href="#products">APE-S Storage</a>
+                    <a href="#specs">Technical Specs</a>
+                </div>
+                <div>
+                    <h4>Resources</h4>
+                    <a href="#">Installation Guides</a>
+                    <a href="#">Specification Sheets</a>
+                    <a href="#">CAD Files</a>
+                    <a href="#">Warranty Info</a>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <a href="mailto:contractors@apexenclosures.ae">contractors@apexenclosures.ae</a>
+                    <a href="tel:+971501234567">+971 50 123 4567</a>
+                    <p>Dubai, UAE</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Apex Enclosures. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Spec tabs switching
+        document.querySelectorAll('.spec-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const product = tab.dataset.product;
+
+                // Update tabs
+                document.querySelectorAll('.spec-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Update content
+                document.querySelectorAll('.spec-content').forEach(c => c.classList.remove('active'));
+                document.getElementById('spec-' + product).classList.add('active');
+            });
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
