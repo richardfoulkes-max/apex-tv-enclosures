@@ -226,14 +226,6 @@
 
         <form class="login-form" id="authForm">
             <div class="error-message" id="errorMessage"></div>
-            <div class="success-message" id="successMessage"></div>
-
-            <div class="signup-fields" id="signupFields">
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" placeholder="John Smith">
-                </div>
-            </div>
 
             <div class="form-group">
                 <label for="email">Email</label>
@@ -249,8 +241,7 @@
         </form>
 
         <div class="toggle-mode">
-            <span id="toggleText">Don't have an account?</span>
-            <a href="#" id="toggleLink" onclick="toggleMode(event)">Create one</a>
+            <span>Need access? Contact your administrator.</span>
         </div>
     </div>
 
@@ -261,8 +252,6 @@
 
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        let isSignUp = false;
-
         // Check if already logged in
         async function checkExistingSession() {
             const { data: { session } } = await supabaseClient.auth.getSession();
@@ -272,49 +261,19 @@
         }
 
         function redirectAfterLogin() {
-            const redirect = sessionStorage.getItem('redirectAfterLogin') || 'ai-dashboard.html';
+            // Check URL param first, then sessionStorage, default to CRM
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirect = urlParams.get('redirect') ||
+                             sessionStorage.getItem('redirectAfterLogin') ||
+                             'partner-crm.html';
             sessionStorage.removeItem('redirectAfterLogin');
             window.location.href = redirect;
-        }
-
-        function toggleMode(e) {
-            e.preventDefault();
-            isSignUp = !isSignUp;
-
-            const signupFields = document.getElementById('signupFields');
-            const submitBtn = document.getElementById('submitBtn');
-            const toggleText = document.getElementById('toggleText');
-            const toggleLink = document.getElementById('toggleLink');
-
-            if (isSignUp) {
-                signupFields.classList.add('show');
-                submitBtn.textContent = 'Create Account';
-                toggleText.textContent = 'Already have an account?';
-                toggleLink.textContent = 'Sign in';
-            } else {
-                signupFields.classList.remove('show');
-                submitBtn.textContent = 'Sign In';
-                toggleText.textContent = "Don't have an account?";
-                toggleLink.textContent = 'Create one';
-            }
-
-            // Clear messages
-            document.getElementById('errorMessage').classList.remove('show');
-            document.getElementById('successMessage').classList.remove('show');
         }
 
         function showError(message) {
             const errorEl = document.getElementById('errorMessage');
             errorEl.textContent = message;
             errorEl.classList.add('show');
-            document.getElementById('successMessage').classList.remove('show');
-        }
-
-        function showSuccess(message) {
-            const successEl = document.getElementById('successMessage');
-            successEl.textContent = message;
-            successEl.classList.add('show');
-            document.getElementById('errorMessage').classList.remove('show');
         }
 
         document.getElementById('authForm').addEventListener('submit', async (e) => {
@@ -322,64 +281,34 @@
 
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            const name = document.getElementById('name').value;
             const submitBtn = document.getElementById('submitBtn');
 
             submitBtn.disabled = true;
-            submitBtn.textContent = isSignUp ? 'Creating...' : 'Signing in...';
+            submitBtn.textContent = 'Signing in...';
 
             try {
-                if (isSignUp) {
-                    // Sign up
-                    const { data, error } = await supabaseClient.auth.signUp({
-                        email,
-                        password,
-                        options: {
-                            data: { full_name: name }
-                        }
+                const { data, error } = await supabaseClient.auth.signInWithPassword({
+                    email,
+                    password
+                });
+
+                if (error) throw error;
+
+                // Update last login
+                if (data.user) {
+                    await supabaseClient.from('profiles').upsert({
+                        id: data.user.id,
+                        email: email,
+                        last_login: new Date().toISOString()
                     });
-
-                    if (error) throw error;
-
-                    // Create profile
-                    if (data.user) {
-                        await supabaseClient.from('profiles').insert({
-                            id: data.user.id,
-                            email: email,
-                            full_name: name,
-                            role: 'sales'
-                        });
-                    }
-
-                    showSuccess('Account created! Check your email to confirm, then sign in.');
-                    submitBtn.textContent = 'Create Account';
-                    submitBtn.disabled = false;
-
-                } else {
-                    // Sign in
-                    const { data, error } = await supabaseClient.auth.signInWithPassword({
-                        email,
-                        password
-                    });
-
-                    if (error) throw error;
-
-                    // Update last login
-                    if (data.user) {
-                        await supabaseClient.from('profiles').upsert({
-                            id: data.user.id,
-                            email: email,
-                            last_login: new Date().toISOString()
-                        });
-                    }
-
-                    redirectAfterLogin();
                 }
 
+                redirectAfterLogin();
+
             } catch (error) {
-                showError(error.message || 'An error occurred');
+                showError(error.message || 'Invalid email or password');
                 submitBtn.disabled = false;
-                submitBtn.textContent = isSignUp ? 'Create Account' : 'Sign In';
+                submitBtn.textContent = 'Sign In';
             }
         });
 

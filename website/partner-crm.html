@@ -390,7 +390,53 @@
             .back-btn { display: block !important; }
         }
         .back-btn { display: none; }
+        /* User badge in header */
+        .user-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.15);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        .user-badge .user-avatar {
+            width: 28px;
+            height: 28px;
+            background: rgba(255,255,255,0.25);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 11px;
+        }
+        .user-badge .user-info {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        .user-badge .user-name {
+            font-weight: 500;
+        }
+        .user-badge .user-territory {
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+        .user-badge .logout-btn {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.7);
+            cursor: pointer;
+            padding: 4px;
+            margin-left: 4px;
+        }
+        .user-badge .logout-btn:hover {
+            color: white;
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth-guard.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -401,7 +447,6 @@
             <div class="stat"><div class="stat-value" id="activeDeals">0</div><div class="stat-label">Active</div></div>
             <div class="stat"><div class="stat-value" id="pipelineValue">0</div><div class="stat-label">Pipeline</div></div>
             <div class="stat"><div class="stat-value" id="followupsToday">0</div><div class="stat-label">Follow-ups</div></div>
-            <button class="btn btn-outline btn-small" onclick="if(confirm('Reset CRM to default data? This will overwrite any changes.')) { localStorage.removeItem('apexCrmData'); localStorage.removeItem('apexCrmVersion'); location.reload(); }" style="margin-left: 1rem; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); color: white;">Reset</button>
         </div>
     </header>
 
@@ -601,33 +646,88 @@
         </div>
     </div>
 
-    <!-- Supabase Client -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <script>
         // ============ SUPABASE CONFIGURATION ============
-        const SUPABASE_STORAGE_KEY = 'apex_supabase_config';
-        let supabaseClient = null;
-        let useSupabase = false;
+        const SUPABASE_URL = 'https://krhyzbmewvfkacoujimm.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtyaHl6Ym1ld3Zma2Fjb3VqaW1tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjczMjkyNTksImV4cCI6MjA4MjkwNTI1OX0.YygJElB9Vaet1bsz_4U8ePKidrleMnRzkoMCiy6oOUY';
 
-        function initSupabase() {
-            const saved = localStorage.getItem(SUPABASE_STORAGE_KEY);
-            if (saved) {
-                try {
-                    const config = JSON.parse(saved);
-                    if (config.url && config.key) {
-                        supabaseClient = window.supabase.createClient(config.url, config.key);
-                        useSupabase = true;
-                        console.log('Supabase connected for CRM');
-                        updateConnectionBadge(true);
-                    }
-                } catch (e) {
-                    console.warn('Supabase config invalid');
+        let supabaseClient = null;
+        let useSupabase = true; // Always use Supabase
+
+        async function initSupabase() {
+            try {
+                // Use the client from auth-guard if available (authenticated)
+                if (window.supabaseClient) {
+                    supabaseClient = window.supabaseClient;
+                    console.log('Using authenticated Supabase client');
+                } else {
+                    // Fallback to anon client (will be blocked by RLS when enabled)
+                    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                    console.log('Using anonymous Supabase client');
                 }
-            }
-            if (!useSupabase) {
+                useSupabase = true;
+                updateConnectionBadge(true);
+
+                // Show user badge if authenticated
+                if (window.currentUser) {
+                    await showUserBadge();
+                }
+            } catch (e) {
+                console.error('Supabase connection failed:', e);
+                useSupabase = false;
                 updateConnectionBadge(false);
             }
+        }
+
+        async function showUserBadge() {
+            const user = window.currentUser;
+            if (!user) return;
+
+            // Get user's territory
+            let territory = 'Unknown';
+            try {
+                const { data: territories } = await supabaseClient
+                    .from('user_territories')
+                    .select('territory')
+                    .eq('user_id', user.id);
+
+                if (territories && territories.length > 0) {
+                    territory = territories.map(t => t.territory).join(', ');
+                    if (territory === 'ALL') territory = 'All Regions';
+                }
+            } catch (e) {
+                console.log('Could not fetch territory:', e);
+            }
+
+            // Get user name
+            const name = user.user_metadata?.full_name || user.email?.split('@')[0] || 'User';
+            const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+
+            // Create badge
+            const badge = document.createElement('div');
+            badge.className = 'user-badge';
+            badge.innerHTML = `
+                <div class="user-avatar">${initials}</div>
+                <div class="user-info">
+                    <span class="user-name">${name}</span>
+                    <span class="user-territory">${territory}</span>
+                </div>
+                <button class="logout-btn" onclick="signOut()" title="Sign out">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </button>
+            `;
+
+            // Add to header
+            document.querySelector('.header').appendChild(badge);
+        }
+
+        async function signOut() {
+            await supabaseClient.auth.signOut();
+            window.location.href = 'login.html';
         }
 
         function updateConnectionBadge(connected) {
@@ -664,25 +764,35 @@
                 linkedInUrl: '',
                 address: 'Dubai, UAE',
                 leadSource: 'cold_outreach',
-                status: 'Responded',
+                status: 'Contacted',
                 priority: 'High',
                 dealValue: 0,
                 productsInterested: ['75"'],
                 expectedCloseDate: '',
                 winProbability: 40,
                 lostReason: '',
-                followupDate: '2025-01-02',
-                notes: 'Confirmed will prepare quote under individual name. Can fabricate aluminum enclosure but cannot do IP66 certification - may need to source sealing separately. AWAITING QUOTE.',
+                followupDate: '2026-01-16',
+                notes: 'In discussion - requested trade license, we said prototype first as individual. Active conversation with Danica.',
                 contacts: [
-                    { id: 1, name: 'Danica Sison', title: 'Sales', email: 'info@alshurooq.ae', phone: '+971 4 42 55988', isPrimary: true, isDecisionMaker: false }
+                    { id: 1, name: 'Danica Sison', title: 'Sales', email: 'support1@alshurooq.ae', phone: '+971 4 42 55988', isPrimary: true, isDecisionMaker: false }
                 ],
                 activities: [
-                    { id: 1, type: 'email_sent', description: 'RFQ sent via email', timestamp: '2025-12-24T20:00:00Z' },
-                    { id: 2, type: 'email_received', description: 'Response received - reviewing tech package, asked for Trade License', timestamp: '2025-12-26T10:44:00Z' },
-                    { id: 3, type: 'email_sent', description: 'Confirmed proceeding as individual. Preparing quotation.', timestamp: '2025-12-26T14:44:00Z' }
+                    { id: 1, type: 'email_sent', description: 'Initial RFQ sent', timestamp: '2025-12-23T23:13:00Z' },
+                    { id: 2, type: 'email_received', description: 'Reply from Danica - interested, reviewing', timestamp: '2025-12-24T17:00:00Z' },
+                    { id: 3, type: 'email_sent', description: 'Follow-up reply', timestamp: '2025-12-24T23:16:00Z' },
+                    { id: 4, type: 'email_received', description: 'Danica requested trade license', timestamp: '2025-12-26T11:37:00Z' },
+                    { id: 5, type: 'email_sent', description: 'Replied - proceeding as individual for prototype', timestamp: '2025-12-26T14:29:00Z' },
+                    { id: 6, type: 'email_received', description: 'Acknowledgement from Danica', timestamp: '2025-12-26T14:44:00Z' },
+                    { id: 7, type: 'email_received', description: 'Follow-up from Danica', timestamp: '2025-12-31T10:29:00Z' },
+                    { id: 8, type: 'email_sent', description: 'Reply to Danica', timestamp: '2025-12-31T14:42:00Z' },
+                    { id: 9, type: 'email_received', description: 'Reply from Danica', timestamp: '2026-01-05T09:43:00Z' },
+                    { id: 10, type: 'email_sent', description: 'Follow-up sent', timestamp: '2026-01-05T09:46:00Z' },
+                    { id: 11, type: 'email_received', description: 'Reply from Danica', timestamp: '2026-01-06T14:32:00Z' },
+                    { id: 12, type: 'email_received', description: 'Follow-up from Danica', timestamp: '2026-01-09T08:33:00Z' },
+                    { id: 13, type: 'email_sent', description: 'Reply sent', timestamp: '2026-01-09T09:11:00Z' }
                 ],
-                createdAt: '2025-12-24T20:00:00Z',
-                lastContact: '2025-12-26T14:44:00Z'
+                createdAt: '2025-12-23T23:13:00Z',
+                lastContact: '2026-01-09T09:11:00Z'
             },
             {
                 id: 2,
@@ -694,25 +804,34 @@
                 linkedInUrl: '',
                 address: 'JAFZA North, St.N306, Plot MO0625, PO Box 61196, Dubai, UAE',
                 leadSource: 'cold_outreach',
-                status: 'Meeting',
+                status: 'Proposal',
                 priority: 'High',
                 dealValue: 0,
                 productsInterested: ['75"'],
                 expectedCloseDate: '',
-                winProbability: 60,
+                winProbability: 70,
                 lostReason: '',
-                followupDate: '2026-01-15',
-                notes: 'TOP PRIORITY - Sheet metal, powder coating, panels. JAFZA Dubai location. ATE-75 design pack sent Jan 8. Awaiting prototype quote/timeline.',
+                followupDate: '2026-01-13',
+                notes: 'TOP PRIORITY - Factory visit 8 Jan was excellent. 2000hr salt spray, ISO 9001/14001/45001 certified. Guillaume quote due Monday 13 Jan.',
                 contacts: [
-                    { id: 1, name: 'Guillaume Caupert', title: 'Head of Sales and Marketing', email: 'guillaume.caupert@eurotech-metal.com', phone: '+971 56 801 4290', isPrimary: true, isDecisionMaker: true }
+                    { id: 1, name: 'Guillaume Caupert', title: 'Head of Sales and Marketing', email: 'guillaume.caupert@eurotech-metal.com', phone: '+971 56 801 4290', isPrimary: true, isDecisionMaker: true },
+                    { id: 2, name: 'Walid Ragab', title: 'Sales Manager', email: 'walid.mohamed@eurotech-metal.com', phone: '', isPrimary: false, isDecisionMaker: false }
                 ],
                 activities: [
-                    { id: 1, type: 'email_sent', description: 'RFQ sent via email', timestamp: '2025-12-24T20:00:00Z' },
-                    { id: 2, type: 'meeting', description: 'Meeting with Eurotech team', timestamp: '2026-01-04T10:00:00Z' },
-                    { id: 3, type: 'email_sent', description: 'ATE-75 Design Pack (14MB PDF) sent to Guillaume - comprehensive prototype manufacturing spec', timestamp: '2026-01-08T14:00:00Z' }
+                    { id: 1, type: 'email_sent', description: 'Initial RFQ sent to general@eurotech-metal.com', timestamp: '2025-12-23T23:13:00Z' },
+                    { id: 2, type: 'email_received', description: 'Reply from Walid Ragab - interested in project', timestamp: '2025-12-30T09:11:00Z' },
+                    { id: 3, type: 'email_sent', description: 'Follow-up reply to Walid', timestamp: '2025-12-31T14:13:00Z' },
+                    { id: 4, type: 'email_sent', description: 'Follow-up to Walid', timestamp: '2026-01-04T14:33:00Z' },
+                    { id: 5, type: 'meeting', description: 'Meeting invite received from Walid - factory visit scheduled for 8 Jan', timestamp: '2026-01-05T07:49:00Z' },
+                    { id: 6, type: 'email_received', description: 'FW: Richard documents from Walid', timestamp: '2026-01-05T09:43:00Z' },
+                    { id: 7, type: 'email_received', description: 'Guillaume confirming factory visit', timestamp: '2026-01-08T08:40:00Z' },
+                    { id: 8, type: 'site_visit', description: 'Factory tour at JAFZA. Very impressed - 2000hr salt spray test, ISO 9001/14001/45001 certified. Met Guillaume (Head of Sales) and team.', timestamp: '2026-01-08T13:00:00Z' },
+                    { id: 9, type: 'email_sent', description: 'Sent ATE-75 Design Pack (14MB PDF) to Guillaume after visit', timestamp: '2026-01-08T16:58:00Z' },
+                    { id: 10, type: 'email_received', description: 'Guillaume confirmed working on technical review, quote by Monday', timestamp: '2026-01-09T16:45:00Z' },
+                    { id: 11, type: 'email_sent', description: 'Thank you reply - looking forward to quote', timestamp: '2026-01-09T21:48:00Z' }
                 ],
-                createdAt: '2025-12-24T20:00:00Z',
-                lastContact: '2026-01-08T14:00:00Z'
+                createdAt: '2025-12-23T23:13:00Z',
+                lastContact: '2026-01-09T21:48:00Z'
             },
             {
                 id: 3,
@@ -920,16 +1039,17 @@
                 winProbability: 50,
                 lostReason: '',
                 followupDate: '2025-01-03',
-                notes: 'TOP PICK - Pure OEM fabricator. 10+ years, ISO 9001, makes outdoor enclosures to spec. Responded on WhatsApp - will follow up.',
+                notes: 'TOP PICK - Pure OEM fabricator. 10+ years, ISO 9001, makes outdoor enclosures to spec. Initial contact made with Jason.',
                 contacts: [
-                    { id: 1, name: '', title: 'Sales', email: 'sales@kdmsteel.com', phone: '+86-13175970882', isPrimary: true, isDecisionMaker: false }
+                    { id: 1, name: 'Jason', title: 'Sales', email: 'sales@kdmsteel.com', phone: '+86-13175970882', isPrimary: true, isDecisionMaker: false }
                 ],
                 activities: [
-                    { id: 1, type: 'email_sent', description: 'RFQ sent via email + WhatsApp follow-up', timestamp: '2025-12-28T10:00:00Z' },
-                    { id: 2, type: 'email_received', description: 'WhatsApp response received - said they will follow up', timestamp: '2025-12-28T14:00:00Z' }
+                    { id: 1, type: 'email_sent', description: 'Initial RFQ sent for custom electronics enclosure', timestamp: '2025-12-28T09:39:00Z' },
+                    { id: 2, type: 'email_received', description: 'Reply from Jason - interested in project', timestamp: '2025-12-29T16:55:00Z' },
+                    { id: 3, type: 'email_sent', description: 'Follow-up reply to Jason', timestamp: '2025-12-31T14:43:00Z' }
                 ],
-                createdAt: '2025-12-28T10:00:00Z',
-                lastContact: '2025-12-28T14:00:00Z'
+                createdAt: '2025-12-28T09:39:00Z',
+                lastContact: '2025-12-31T14:43:00Z'
             },
             {
                 id: 11,
@@ -1221,16 +1341,18 @@
                 dealValue: 0,
                 productsInterested: ['75"'],
                 expectedCloseDate: '',
-                winProbability: 0,
+                winProbability: 30,
                 lostReason: '',
-                followupDate: '',
+                followupDate: '2026-01-16',
                 notes: 'TIER 1 - ISO 9001:2015. 65+ years experience (since 1954). 40,000+ sq ft facility. Second generation family business. Weatherproof aluminum enclosures, electrical enclosures, NEMA cabinets.',
                 contacts: [
                     { id: 1, name: 'Steve Bull', title: 'President', email: 'sales@bullmetal.com', phone: '(860) 346-9691', isPrimary: true, isDecisionMaker: true }
                 ],
-                activities: [],
-                createdAt: '2026-01-09T12:00:00Z',
-                lastContact: null
+                activities: [
+                    { id: 1, type: 'email_sent', description: 'Initial RFQ sent (US manufacturing partner outreach)', timestamp: '2026-01-09T13:50:00Z' }
+                ],
+                createdAt: '2026-01-09T13:50:00Z',
+                lastContact: '2026-01-09T13:50:00Z'
             },
             {
                 id: 201,
@@ -1242,23 +1364,27 @@
                 linkedInUrl: 'https://www.linkedin.com/company/accurate-metal-fabricating',
                 address: '4620 W. 19th Street, Cicero, IL 60804',
                 leadSource: 'cold_outreach',
-                status: 'Contacted',
+                status: 'Proposal',
                 priority: 'High',
                 dealValue: 0,
                 productsInterested: ['75"'],
                 expectedCloseDate: '',
-                winProbability: 0,
+                winProbability: 50,
                 lostReason: '',
-                followupDate: '',
-                notes: 'TIER 1 - ISO 9001:2015. 80+ years experience. IN-HOUSE POWDER COATING LINE. 16 press brakes, 7 turrets, 3 laser tables. $1,000 order minimum, B2B only.',
+                followupDate: '2026-01-16',
+                notes: 'HOT LEAD - Ted replied same day. Can do watertight aluminum, willing to sign NDA, 4-6 week sample lead time. Sent NDA + Design Pack 9 Jan.',
                 contacts: [
-                    { id: 1, name: 'Daniel Cohen', title: 'Managing Director', email: 'sales@accuratemetalfab.com', phone: '773-432-4720', isPrimary: true, isDecisionMaker: true },
-                    { id: 2, name: 'Ted Zaplatosch', title: 'Sales Representative', email: 'sales@accuratemetalfab.com', phone: '773-432-4720', isPrimary: false, isDecisionMaker: false },
+                    { id: 1, name: 'Ted Zaplatosch', title: 'Sales Representative', email: 'tzaplatosch@accuratemetalfab.com', phone: '773-432-4720', isPrimary: true, isDecisionMaker: false },
+                    { id: 2, name: 'Daniel Cohen', title: 'Managing Director', email: 'sales@accuratemetalfab.com', phone: '773-432-4720', isPrimary: false, isDecisionMaker: true },
                     { id: 3, name: 'David Kamins', title: 'Sales Representative', email: 'sales@accuratemetalfab.com', phone: '773-432-4720', isPrimary: false, isDecisionMaker: false }
                 ],
-                activities: [],
-                createdAt: '2026-01-09T12:00:00Z',
-                lastContact: null
+                activities: [
+                    { id: 1, type: 'email_sent', description: 'Initial RFQ sent (US manufacturing partner outreach)', timestamp: '2026-01-09T13:51:00Z' },
+                    { id: 2, type: 'email_received', description: 'Ted replied - can do watertight aluminum, willing to sign NDA, needs DXF/PDF, 4-6 week sample lead time', timestamp: '2026-01-09T20:17:00Z' },
+                    { id: 3, type: 'email_sent', description: 'Sent NDA + ATE-75 Design Pack. Requested quotes for 50/100/150 + prototype. Mentioned CAD coming from Dubai.', timestamp: '2026-01-09T21:47:00Z' }
+                ],
+                createdAt: '2026-01-09T13:51:00Z',
+                lastContact: '2026-01-09T21:47:00Z'
             },
             {
                 id: 202,
@@ -1275,18 +1401,20 @@
                 dealValue: 0,
                 productsInterested: ['75"'],
                 expectedCloseDate: '',
-                winProbability: 0,
+                winProbability: 30,
                 lostReason: '',
-                followupDate: '',
+                followupDate: '2026-01-16',
                 notes: 'TIER 1 - UL Approved, Intertek IP66 CERTIFIED. NEMA 4X aluminum, saltwater corrosion resistant. Already does IP-rated enclosures - strong fit.',
                 contacts: [
                     { id: 1, name: 'Joshua Henderson', title: 'Sales Director', email: 'jhenderson@bisonprofab.com', phone: '(281) 356-0026', isPrimary: true, isDecisionMaker: true },
                     { id: 2, name: 'Roman Williams', title: 'Sales Director', email: 'rwilliams@bisonprofab.com', phone: '(888) 623-6042', isPrimary: false, isDecisionMaker: true },
                     { id: 3, name: 'Ricardo Amaral', title: 'COO', email: 'ramaral@bisonprofab.com', phone: '(281) 356-0026', isPrimary: false, isDecisionMaker: true }
                 ],
-                activities: [],
-                createdAt: '2026-01-09T12:00:00Z',
-                lastContact: null
+                activities: [
+                    { id: 1, type: 'email_sent', description: 'Initial RFQ sent (US manufacturing partner outreach)', timestamp: '2026-01-09T13:54:00Z' }
+                ],
+                createdAt: '2026-01-09T13:54:00Z',
+                lastContact: '2026-01-09T13:54:00Z'
             },
             {
                 id: 203,
@@ -1303,18 +1431,20 @@
                 dealValue: 0,
                 productsInterested: ['75"'],
                 expectedCloseDate: '',
-                winProbability: 0,
+                winProbability: 30,
                 lostReason: '',
-                followupDate: '',
+                followupDate: '2026-01-16',
                 notes: 'TIER 1 - ISO 9001. Since 1996. NEMA 3R to 4X cabinets. 15-YEAR WARRANTY. Family business (Mahorney family). Telecom, aerospace, green energy, oil/gas sectors.',
                 contacts: [
                     { id: 1, name: 'Dustin Mahorney', title: 'President', email: 'dustin@ddbunlimited.com', phone: '(800) 753-8459', isPrimary: true, isDecisionMaker: true },
                     { id: 2, name: 'Bryan Campbell', title: 'Sales Manager', email: '', phone: '(800) 753-8459 x2867', isPrimary: false, isDecisionMaker: false },
                     { id: 3, name: 'Mike Mahorney', title: 'Corp. General Manager', email: 'mike@ddbunlimited.com', phone: '(800) 753-8459 x2818', isPrimary: false, isDecisionMaker: true }
                 ],
-                activities: [],
-                createdAt: '2026-01-09T12:00:00Z',
-                lastContact: null
+                activities: [
+                    { id: 1, type: 'email_sent', description: 'Initial RFQ sent (US manufacturing partner outreach)', timestamp: '2026-01-09T13:48:00Z' }
+                ],
+                createdAt: '2026-01-09T13:48:00Z',
+                lastContact: '2026-01-09T13:48:00Z'
             },
             // ============ US MANUFACTURERS (Tier 2) ============
             {
@@ -1402,6 +1532,7 @@
                         .order('created_at', { ascending: false });
 
                     if (!pError && partnersData && partnersData.length > 0) {
+                        // Supabase has data - use it
                         // Load contacts and activities for each partner
                         const partnerIds = partnersData.map(p => p.id);
 
@@ -1460,35 +1591,178 @@
                         }));
                         console.log(`Loaded ${partners.length} partners from Supabase`);
                         return;
+                    } else if (!pError && (!partnersData || partnersData.length === 0)) {
+                        // Supabase is empty - seed with initial data
+                        console.log('Supabase is empty, seeding with initial data...');
+                        await seedSupabaseWithInitialData();
+                        return;
                     }
                 } catch (e) {
-                    console.warn('Supabase load failed, using localStorage', e);
+                    console.error('Supabase load failed:', e);
+                    alert('Failed to connect to CRM database. Please check your connection.');
                 }
-            }
-
-            // Fallback to localStorage
-            const stored = localStorage.getItem('apexCrmData');
-            const version = localStorage.getItem('apexCrmVersion');
-
-            if (version !== 'v13' || !stored) {
-                // Initialize with new data structure (v13 archives stale UAE/GCC contacts)
-                partners = initialPartners;
-                saveData();
-                localStorage.setItem('apexCrmVersion', 'v13');
-            } else {
-                partners = JSON.parse(stored);
-                // Ensure all partners have contactType (migration)
-                partners.forEach(p => {
-                    if (!p.contactType) {
-                        p.contactType = 'partner'; // Default for existing partners
-                    }
-                });
             }
         }
 
-        function saveData() {
-            // Always save to localStorage as backup
-            localStorage.setItem('apexCrmData', JSON.stringify(partners));
+        // Seed Supabase with initial data when empty
+        async function seedSupabaseWithInitialData() {
+            console.log('Seeding Supabase with initial partners...');
+
+            // Map CRM status values to valid database values (until constraints are dropped)
+            const mapStatus = (s) => {
+                if (['Proposal', 'Meeting', 'Won', 'Lost'].includes(s)) return 'Contacted';
+                return s || 'Not Contacted';
+            };
+
+            for (const partner of initialPartners) {
+                try {
+                    // Insert partner (omit partner_type if it might violate constraint)
+                    const partnerData = {
+                        company_name: partner.companyName,
+                        contact_type: partner.contactType || 'partner',
+                        // partner_type omitted due to constraint issues
+                        region: partner.region,
+                        website: partner.website,
+                        linkedin_url: partner.linkedInUrl,
+                        address: partner.address,
+                        lead_source: partner.leadSource,
+                        status: mapStatus(partner.status),
+                        priority: partner.priority,
+                        deal_value: partner.dealValue || 0,
+                        win_probability: partner.winProbability || 0,
+                        expected_close_date: partner.expectedCloseDate || null,
+                        lost_reason: partner.lostReason,
+                        products_interested: partner.productsInterested || [],
+                        followup_date: partner.followupDate || null,
+                        notes: partner.notes,
+                        last_contact: partner.lastContact,
+                        created_at: partner.createdAt || new Date().toISOString()
+                    };
+
+                    const { data: insertedPartner, error: partnerError } = await supabaseClient
+                        .from('partners')
+                        .insert(partnerData)
+                        .select('id')
+                        .single();
+
+                    if (partnerError) {
+                        console.error(`Error inserting partner ${partner.companyName}:`, partnerError);
+                        continue;
+                    }
+
+                    const newPartnerId = insertedPartner.id;
+
+                    // Insert contacts
+                    if (partner.contacts && partner.contacts.length > 0) {
+                        const contactsData = partner.contacts.map(c => ({
+                            partner_id: newPartnerId,
+                            name: c.name,
+                            title: c.title,
+                            email: c.email,
+                            phone: c.phone,
+                            is_primary: c.isPrimary || false,
+                            is_decision_maker: c.isDecisionMaker || false
+                        }));
+
+                        const { error: contactsError } = await supabaseClient
+                            .from('partner_contacts')
+                            .insert(contactsData);
+
+                        if (contactsError) {
+                            console.error(`Error inserting contacts for ${partner.companyName}:`, contactsError);
+                        }
+                    }
+
+                    // Insert activities
+                    if (partner.activities && partner.activities.length > 0) {
+                        const activitiesData = partner.activities.map(a => ({
+                            partner_id: newPartnerId,
+                            activity_type: a.type,
+                            description: a.description,
+                            timestamp: a.timestamp
+                        }));
+
+                        const { error: activitiesError } = await supabaseClient
+                            .from('partner_activities')
+                            .insert(activitiesData);
+
+                        if (activitiesError) {
+                            console.error(`Error inserting activities for ${partner.companyName}:`, activitiesError);
+                        }
+                    }
+
+                    console.log(`Seeded: ${partner.companyName}`);
+                } catch (e) {
+                    console.error(`Error seeding ${partner.companyName}:`, e);
+                }
+            }
+
+            console.log('Seeding complete. Reloading data from Supabase...');
+
+            // Now reload the data from Supabase to get proper UUIDs
+            const { data: partnersData } = await supabaseClient
+                .from('partners')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (partnersData && partnersData.length > 0) {
+                const partnerIds = partnersData.map(p => p.id);
+
+                const { data: contactsData } = await supabaseClient
+                    .from('partner_contacts')
+                    .select('*')
+                    .in('partner_id', partnerIds);
+
+                const { data: activitiesData } = await supabaseClient
+                    .from('partner_activities')
+                    .select('*')
+                    .in('partner_id', partnerIds)
+                    .order('timestamp', { ascending: false });
+
+                partners = partnersData.map(p => ({
+                    id: p.id,
+                    companyName: p.company_name,
+                    contactType: p.contact_type || 'partner',
+                    partnerType: p.partner_type,
+                    region: p.region,
+                    website: p.website,
+                    linkedInUrl: p.linkedin_url,
+                    address: p.address,
+                    leadSource: p.lead_source,
+                    status: p.status,
+                    priority: p.priority,
+                    dealValue: parseFloat(p.deal_value) || 0,
+                    winProbability: p.win_probability,
+                    expectedCloseDate: p.expected_close_date,
+                    lostReason: p.lost_reason,
+                    productsInterested: p.products_interested || [],
+                    followupDate: p.followup_date,
+                    notes: p.notes,
+                    contacts: (contactsData || [])
+                        .filter(c => c.partner_id === p.id)
+                        .map(c => ({
+                            id: c.id,
+                            name: c.name,
+                            title: c.title,
+                            email: c.email,
+                            phone: c.phone,
+                            isPrimary: c.is_primary,
+                            isDecisionMaker: c.is_decision_maker
+                        })),
+                    activities: (activitiesData || [])
+                        .filter(a => a.partner_id === p.id)
+                        .map(a => ({
+                            id: a.id,
+                            type: a.activity_type,
+                            description: a.description,
+                            timestamp: a.timestamp
+                        })),
+                    createdAt: p.created_at,
+                    lastContact: p.last_contact
+                }));
+
+                console.log(`Loaded ${partners.length} partners from Supabase after seeding`);
+            }
         }
 
         // Save a partner to Supabase
@@ -1602,8 +1876,8 @@
             });
 
             const listHtml = filtered.map(p => {
-                const typeClass = 'badge-type-' + p.partnerType.toLowerCase().replace(/[\s\/]+/g, '-');
-                const statusClass = 'badge-status-' + p.status.toLowerCase().replace(/\s+/g, '-');
+                const typeClass = 'badge-type-' + (p.partnerType || 'other').toLowerCase().replace(/[\s\/]+/g, '-');
+                const statusClass = 'badge-status-' + (p.status || 'unknown').toLowerCase().replace(/\s+/g, '-');
                 const contactTypeClass = 'badge-contact-' + (p.contactType || 'partner');
                 const contactTypeLabel = { manufacturing: 'Manufacturing', partner: 'Partner', commercial: 'Commercial', retail: 'Retail' }[p.contactType] || 'Partner';
                 const primaryContact = p.contacts?.find(c => c.isPrimary) || p.contacts?.[0];
@@ -2000,7 +2274,6 @@
             }
 
             partners.push(newPartner);
-            saveData();
             savePartnerToSupabase(newPartner);
             closeModal();
             selectPartner(newPartner.id);
@@ -2026,7 +2299,6 @@
             }
 
             p.contacts.push(newContact);
-            saveData();
             savePartnerToSupabase(p);
             closeModal();
             renderDetail();
@@ -2038,7 +2310,6 @@
             const p = partners.find(p => p.id === selectedPartnerId);
             if (!p) return;
             p.contacts = p.contacts.filter(c => c.id !== contactId);
-            saveData();
             savePartnerToSupabase(p);
             renderDetail();
         }
@@ -2070,7 +2341,7 @@
         function deletePartner(id) {
             if (!confirm('Delete this partner? This cannot be undone.')) return;
             partners = partners.filter(p => p.id !== id);
-            saveData();
+            // TODO: Add deletePartnerFromSupabase(id)
             closeDetail();
             renderList();
         }
@@ -2079,7 +2350,6 @@
             const p = partners.find(p => p.id === selectedPartnerId);
             if (!p) return;
             p.notes = document.getElementById('partnerNotes').value;
-            saveData();
             savePartnerToSupabase(p);
         }
 
@@ -2097,7 +2367,6 @@
             p.activities = p.activities || [];
             p.activities.push(activity);
             p.lastContact = activity.timestamp;
-            saveData();
             savePartnerToSupabase(p);
             renderDetail();
         }
@@ -2126,7 +2395,6 @@
                 p.status = 'Contacted';
             }
 
-            saveData();
             savePartnerToSupabase(p);
             saveActivityToSupabase(p.id, activity);
             document.getElementById('newActivityDesc').value = '';
@@ -2152,7 +2420,6 @@
                         if (reason) p.lostReason = reason;
                     }
 
-                    saveData();
                     savePartnerToSupabase(p);
                     renderDetail();
                     renderList();
@@ -2247,7 +2514,6 @@
             p.priority = document.getElementById('editPriority').value;
             p.followupDate = document.getElementById('editFollowup').value;
 
-            saveData();
             savePartnerToSupabase(p);
             document.getElementById('editCompanyModal').remove();
             renderDetail();
@@ -2365,7 +2631,6 @@
             p.swiftCode = document.getElementById('editSwift').value;
             p.billingAddress = document.getElementById('editBillingAddress').value;
 
-            saveData();
             savePartnerToSupabase(p);
             document.getElementById('editBusinessModal').remove();
             renderDetail();
@@ -2429,7 +2694,6 @@
             p.expectedCloseDate = document.getElementById('editCloseDate').value;
             p.productsInterested = Array.from(document.querySelectorAll('.productCheckbox:checked')).map(cb => cb.value);
 
-            saveData();
             savePartnerToSupabase(p);
             document.getElementById('editDealModal').remove();
             renderDetail();
@@ -2450,13 +2714,6 @@
         }
 
         // ============ INIT ============
-        // Force reset if ?reset in URL
-        if (window.location.search.includes('reset')) {
-            localStorage.removeItem('apexCrmData');
-            localStorage.removeItem('apexCrmVersion');
-            window.location.href = window.location.pathname;
-        }
-
         document.addEventListener('DOMContentLoaded', async () => {
             initSupabase();
             await loadData();
@@ -2469,7 +2726,828 @@
         });
     </script>
     <script src="nav.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="auth-guard.js"></script>
+
+    <!-- AI CRM Assistant -->
+    <style>
+        .ai-fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            height: 52px;
+            padding: 0 20px 0 16px;
+            border-radius: 26px;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(139, 92, 246, 0.45);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            z-index: 1000;
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .ai-fab:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 24px rgba(139, 92, 246, 0.55);
+        }
+        .ai-fab svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+        .ai-fab-pulse {
+            position: absolute;
+            inset: -3px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            opacity: 0;
+            animation: ai-pulse 2s ease-in-out infinite;
+            z-index: -1;
+        }
+        @keyframes ai-pulse {
+            0%, 100% { opacity: 0; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(1.08); }
+        }
+
+        .ai-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1001;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .ai-modal-overlay.active {
+            display: flex;
+        }
+
+        .ai-modal {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .ai-modal-header {
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            color: white;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .ai-modal-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ai-modal-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.5rem;
+            line-height: 1;
+            opacity: 0.8;
+        }
+        .ai-modal-close:hover { opacity: 1; }
+
+        .ai-modal-body {
+            padding: 20px;
+        }
+
+        .ai-input-area {
+            position: relative;
+        }
+        .ai-input-area.drag-over textarea {
+            border-color: #8b5cf6;
+            background: #f5f3ff;
+        }
+        .ai-drop-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(139, 92, 246, 0.95);
+            border-radius: 12px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            pointer-events: none;
+        }
+        .ai-input-area.drag-over .ai-drop-overlay {
+            display: flex;
+        }
+        .ai-drop-icon {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+        }
+        .ai-file-preview {
+            display: none;
+            margin-top: 8px;
+            padding: 10px 12px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            align-items: center;
+            gap: 8px;
+        }
+        .ai-file-preview.active {
+            display: flex;
+        }
+        .ai-file-preview .file-icon {
+            font-size: 1.2rem;
+        }
+        .ai-file-preview .file-info {
+            flex: 1;
+        }
+        .ai-file-preview .file-name {
+            font-weight: 500;
+            color: #374151;
+        }
+        .ai-file-preview .file-size {
+            color: #6b7280;
+            font-size: 0.75rem;
+        }
+        .ai-file-preview .file-remove {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0 4px;
+        }
+        .ai-file-preview .file-remove:hover {
+            color: #ef4444;
+        }
+        .ai-input-area textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            resize: vertical;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        .ai-input-area textarea:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+        .ai-input-area textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        .ai-examples {
+            margin-top: 12px;
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+        .ai-examples-title {
+            font-size: 0.75rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .ai-example {
+            font-size: 0.85rem;
+            color: #4b5563;
+            padding: 4px 0;
+            cursor: pointer;
+        }
+        .ai-example:hover {
+            color: #8b5cf6;
+        }
+        .ai-example::before {
+            content: '→ ';
+            color: #8b5cf6;
+        }
+
+        .ai-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .ai-btn {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .ai-btn-primary {
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            color: white;
+            border: none;
+        }
+        .ai-btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+        }
+        .ai-btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .ai-btn-secondary {
+            background: white;
+            color: #4b5563;
+            border: 2px solid #e5e7eb;
+        }
+        .ai-btn-secondary:hover {
+            border-color: #8b5cf6;
+            color: #8b5cf6;
+        }
+
+        .ai-response {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 12px;
+            display: none;
+        }
+        .ai-response.success {
+            background: #ecfdf5;
+            border: 1px solid #10b981;
+            display: block;
+        }
+        .ai-response.error {
+            background: #fef2f2;
+            border: 1px solid #ef4444;
+            display: block;
+        }
+        .ai-response.pending {
+            background: #f3f4f6;
+            border: 1px solid #9ca3af;
+            display: block;
+        }
+        .ai-response-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ai-response.success .ai-response-title { color: #059669; }
+        .ai-response.error .ai-response-title { color: #dc2626; }
+        .ai-response.pending .ai-response-title { color: #6b7280; }
+
+        .ai-spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #e5e7eb;
+            border-top-color: #8b5cf6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Voice Input Button */
+        .ai-voice-btn {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            border: 2px solid #e5e7eb;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            z-index: 2;
+        }
+        .ai-voice-btn:hover {
+            background: #e5e7eb;
+            border-color: #8b5cf6;
+        }
+        .ai-voice-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #6b7280;
+        }
+        .ai-voice-btn:hover svg {
+            fill: #8b5cf6;
+        }
+        .ai-voice-btn.listening {
+            background: #dc2626;
+            border-color: #dc2626;
+            animation: voice-pulse 1.5s ease-in-out infinite;
+        }
+        .ai-voice-btn.listening svg {
+            fill: white;
+        }
+        @keyframes voice-pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(220, 38, 38, 0); }
+        }
+        .ai-voice-status {
+            position: absolute;
+            bottom: 58px;
+            right: 12px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            display: none;
+            white-space: nowrap;
+        }
+        .ai-voice-status.show {
+            display: block;
+        }
+        .ai-voice-unsupported {
+            display: none;
+            color: #9ca3af;
+            font-size: 0.75rem;
+            text-align: center;
+            margin-top: 4px;
+        }
+    </style>
+
+    <!-- Floating AI Button -->
+    <button class="ai-fab" onclick="openAIModal()" title="AI Assistant">
+        <div class="ai-fab-pulse"></div>
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <span>AI Assistant</span>
+    </button>
+
+    <!-- AI Modal -->
+    <div class="ai-modal-overlay" id="aiModal">
+        <div class="ai-modal">
+            <div class="ai-modal-header">
+                <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg> AI Assistant</h3>
+                <button class="ai-modal-close" onclick="closeAIModal()">&times;</button>
+            </div>
+            <div class="ai-modal-body">
+                <div class="ai-input-area" id="aiDropZone">
+                    <textarea id="aiInput" placeholder="Tell me what to do... or drag & drop a file
+
+Examples:
+• Add a contact named Ted at Accurate Metal
+• Log a call with Eurotech about prototype timeline
+• Drag an email to extract contacts"></textarea>
+                    <button class="ai-voice-btn" id="aiVoiceBtn" onclick="toggleVoiceInput()" title="Voice input">
+                        <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V5zm6 6c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+                    </button>
+                    <div class="ai-voice-status" id="aiVoiceStatus">Listening...</div>
+                    <div class="ai-drop-overlay" id="aiDropOverlay">
+                        <div class="ai-drop-icon">📄</div>
+                        <div>Drop file here</div>
+                    </div>
+                </div>
+                <div class="ai-file-preview" id="aiFilePreview"></div>
+
+                <div class="ai-examples">
+                    <div class="ai-examples-title">Quick Actions</div>
+                    <div class="ai-example" onclick="setAIExample('Add a new contact: John Smith at Eurotech, email john@eurotech.com')">Add a contact</div>
+                    <div class="ai-example" onclick="setAIExample('Log a call with Al Shurooq - discussed pricing for 10 units')">Log an activity</div>
+                    <div class="ai-example" onclick="setAIExample('Update Eurotech status to Proposal')">Update partner status</div>
+                    <div class="ai-example" onclick="setAIExample('Add note to Rainbow: Need to follow up on samples')">Add a note</div>
+                </div>
+
+                <div class="ai-actions">
+                    <button class="ai-btn ai-btn-secondary" onclick="closeAIModal()">Cancel</button>
+                    <button class="ai-btn ai-btn-primary" id="aiSubmitBtn" onclick="submitAIRequest()">
+                        <span id="aiSubmitText">Send to AI</span>
+                    </button>
+                </div>
+
+                <div class="ai-response" id="aiResponse">
+                    <div class="ai-response-title" id="aiResponseTitle"></div>
+                    <div id="aiResponseBody"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // AI Modal Functions
+        let aiFileContent = null;
+        let aiFileName = null;
+
+        function openAIModal() {
+            document.getElementById('aiModal').classList.add('active');
+            document.getElementById('aiInput').focus();
+        }
+
+        function closeAIModal() {
+            document.getElementById('aiModal').classList.remove('active');
+            document.getElementById('aiInput').value = '';
+            document.getElementById('aiResponse').className = 'ai-response';
+            clearAIFile();
+        }
+
+        function setAIExample(text) {
+            document.getElementById('aiInput').value = text;
+            document.getElementById('aiInput').focus();
+        }
+
+        // Drag and Drop handling
+        function setupDragDrop() {
+            const dropZone = document.getElementById('aiDropZone');
+            const textarea = document.getElementById('aiInput');
+
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(event => {
+                dropZone.addEventListener(event, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+            });
+
+            ['dragenter', 'dragover'].forEach(event => {
+                dropZone.addEventListener(event, () => {
+                    dropZone.classList.add('drag-over');
+                });
+            });
+
+            ['dragleave', 'drop'].forEach(event => {
+                dropZone.addEventListener(event, () => {
+                    dropZone.classList.remove('drag-over');
+                });
+            });
+
+            dropZone.addEventListener('drop', handleFileDrop);
+
+            // Also handle paste
+            textarea.addEventListener('paste', handlePaste);
+        }
+
+        function handleFileDrop(e) {
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                processFile(files[0]);
+            }
+        }
+
+        function handlePaste(e) {
+            const items = e.clipboardData?.items;
+            if (!items) return;
+
+            for (let item of items) {
+                if (item.kind === 'file') {
+                    e.preventDefault();
+                    const file = item.getAsFile();
+                    processFile(file);
+                    return;
+                }
+            }
+        }
+
+        function processFile(file) {
+            const maxSize = 100 * 1024; // 100KB limit
+            if (file.size > maxSize) {
+                alert('File too large. Maximum size is 100KB.');
+                return;
+            }
+
+            const allowedTypes = ['text/plain', 'text/html', 'text/csv', 'application/json', 'message/rfc822', ''];
+            const allowedExtensions = ['.txt', '.html', '.htm', '.csv', '.json', '.eml', '.msg', '.md'];
+
+            const ext = '.' + file.name.split('.').pop().toLowerCase();
+            if (!allowedTypes.includes(file.type) && !allowedExtensions.includes(ext)) {
+                alert('Unsupported file type. Please use text, HTML, CSV, JSON, or email files.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                aiFileContent = e.target.result;
+                aiFileName = file.name;
+                showFilePreview(file);
+
+                // Pre-fill with instruction
+                const input = document.getElementById('aiInput');
+                if (!input.value.trim()) {
+                    input.value = `Parse this ${ext.replace('.', '')} file and extract any contacts, companies, or actionable items for the CRM:`;
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function showFilePreview(file) {
+            const preview = document.getElementById('aiFilePreview');
+            const size = file.size < 1024 ? `${file.size} B` : `${(file.size / 1024).toFixed(1)} KB`;
+            const icon = getFileIcon(file.name);
+
+            preview.innerHTML = `
+                <span class="file-icon">${icon}</span>
+                <div class="file-info">
+                    <div class="file-name">${file.name}</div>
+                    <div class="file-size">${size}</div>
+                </div>
+                <button class="file-remove" onclick="clearAIFile()" title="Remove file">&times;</button>
+            `;
+            preview.classList.add('active');
+        }
+
+        function getFileIcon(filename) {
+            const ext = filename.split('.').pop().toLowerCase();
+            const icons = {
+                'txt': '📄', 'md': '📝', 'html': '🌐', 'htm': '🌐',
+                'csv': '📊', 'json': '📋', 'eml': '📧', 'msg': '📧'
+            };
+            return icons[ext] || '📎';
+        }
+
+        function clearAIFile() {
+            aiFileContent = null;
+            aiFileName = null;
+            const preview = document.getElementById('aiFilePreview');
+            preview.classList.remove('active');
+            preview.innerHTML = '';
+        }
+
+        // Initialize drag/drop when modal opens
+        document.addEventListener('DOMContentLoaded', setupDragDrop);
+
+        // Voice Input using Web Speech API
+        let recognition = null;
+        let isListening = false;
+
+        function initVoiceRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                // Hide voice button if not supported
+                const voiceBtn = document.getElementById('aiVoiceBtn');
+                if (voiceBtn) voiceBtn.style.display = 'none';
+                console.log('Speech recognition not supported');
+                return;
+            }
+
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+
+            recognition.onstart = () => {
+                isListening = true;
+                document.getElementById('aiVoiceBtn').classList.add('listening');
+                document.getElementById('aiVoiceStatus').classList.add('show');
+                document.getElementById('aiVoiceStatus').textContent = 'Listening...';
+            };
+
+            recognition.onend = () => {
+                isListening = false;
+                document.getElementById('aiVoiceBtn').classList.remove('listening');
+                document.getElementById('aiVoiceStatus').classList.remove('show');
+            };
+
+            recognition.onerror = (event) => {
+                console.log('Speech recognition error:', event.error);
+                isListening = false;
+                document.getElementById('aiVoiceBtn').classList.remove('listening');
+                document.getElementById('aiVoiceStatus').textContent = 'Error: ' + event.error;
+                setTimeout(() => {
+                    document.getElementById('aiVoiceStatus').classList.remove('show');
+                }, 2000);
+            };
+
+            recognition.onresult = (event) => {
+                const input = document.getElementById('aiInput');
+                let finalTranscript = '';
+                let interimTranscript = '';
+
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        finalTranscript += transcript;
+                    } else {
+                        interimTranscript += transcript;
+                    }
+                }
+
+                // Show interim results in status
+                if (interimTranscript) {
+                    document.getElementById('aiVoiceStatus').textContent = interimTranscript.substring(0, 40) + (interimTranscript.length > 40 ? '...' : '');
+                }
+
+                // Append final transcript to input
+                if (finalTranscript) {
+                    const currentValue = input.value.trim();
+                    input.value = currentValue ? currentValue + ' ' + finalTranscript : finalTranscript;
+                    input.focus();
+                }
+            };
+        }
+
+        function toggleVoiceInput() {
+            if (!recognition) {
+                initVoiceRecognition();
+                if (!recognition) {
+                    alert('Voice input is not supported in your browser. Try Chrome, Safari, or Edge.');
+                    return;
+                }
+            }
+
+            if (isListening) {
+                recognition.stop();
+            } else {
+                try {
+                    recognition.start();
+                } catch (e) {
+                    // Already started, stop and restart
+                    recognition.stop();
+                    setTimeout(() => recognition.start(), 100);
+                }
+            }
+        }
+
+        // Initialize voice recognition on page load
+        document.addEventListener('DOMContentLoaded', initVoiceRecognition);
+
+        async function submitAIRequest() {
+            const input = document.getElementById('aiInput').value.trim();
+            if (!input && !aiFileContent) return;
+
+            const submitBtn = document.getElementById('aiSubmitBtn');
+            const submitText = document.getElementById('aiSubmitText');
+            const response = document.getElementById('aiResponse');
+            const responseTitle = document.getElementById('aiResponseTitle');
+            const responseBody = document.getElementById('aiResponseBody');
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitText.innerHTML = '<span class="ai-spinner"></span>';
+            response.className = 'ai-response pending';
+            responseTitle.innerHTML = '<span class="ai-spinner"></span> Processing...';
+            responseBody.textContent = aiFileContent ? 'AI is analyzing your file...' : 'AI is analyzing your request...';
+
+            try {
+                // Get current CRM data for context
+                const partners = await loadPartnersForAI();
+
+                // Build request with optional file content
+                const requestBody = {
+                    input,
+                    partners: partners.map(p => ({
+                        id: p.id,
+                        name: p.name,
+                        status: p.status,
+                        contactType: p.contactType
+                    }))
+                };
+
+                // Include file content if present
+                if (aiFileContent) {
+                    requestBody.fileContent = aiFileContent;
+                    requestBody.fileName = aiFileName;
+                }
+
+                const res = await fetch('/api/ai-crm', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestBody)
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    // Execute the actions
+                    const results = await executeAIActions(data.actions);
+
+                    response.className = 'ai-response success';
+                    responseTitle.innerHTML = '✓ Done!';
+                    responseBody.innerHTML = results.map(r => `<div>${r}</div>`).join('');
+
+                    // Refresh the CRM view
+                    await loadData();
+                    renderList();
+
+                    // Clear input and file after success
+                    document.getElementById('aiInput').value = '';
+                    clearAIFile();
+                } else {
+                    response.className = 'ai-response error';
+                    responseTitle.innerHTML = '✗ Error';
+                    responseBody.textContent = data.error || 'Could not process request';
+                }
+            } catch (err) {
+                response.className = 'ai-response error';
+                responseTitle.innerHTML = '✗ Error';
+                responseBody.textContent = err.message || 'Failed to connect to AI service';
+            }
+
+            submitBtn.disabled = false;
+            submitText.textContent = 'Send to AI';
+        }
+
+        async function loadPartnersForAI() {
+            const { data, error } = await supabaseClient.from('partners').select('id, name, status, contactType');
+            return data || [];
+        }
+
+        async function executeAIActions(actions) {
+            const results = [];
+
+            for (const action of actions) {
+                try {
+                    switch (action.type) {
+                        case 'add_contact':
+                            await addContactFromAI(action.partnerId, action.contact);
+                            results.push(`Added contact ${action.contact.name} to ${action.partnerName}`);
+                            break;
+
+                        case 'add_activity':
+                            await addActivityFromAI(action.partnerId, action.activity);
+                            results.push(`Logged ${action.activity.type}: "${action.activity.notes}" for ${action.partnerName}`);
+                            break;
+
+                        case 'update_status':
+                            await updateStatusFromAI(action.partnerId, action.status);
+                            results.push(`Updated ${action.partnerName} status to ${action.status}`);
+                            break;
+
+                        case 'add_note':
+                            await addActivityFromAI(action.partnerId, { type: 'Note', notes: action.note });
+                            results.push(`Added note to ${action.partnerName}`);
+                            break;
+
+                        case 'create_partner':
+                            await createPartnerFromAI(action.partner);
+                            results.push(`Created new partner: ${action.partner.name}`);
+                            break;
+
+                        default:
+                            results.push(`Unknown action: ${action.type}`);
+                    }
+                } catch (err) {
+                    results.push(`Failed: ${err.message}`);
+                }
+            }
+
+            return results;
+        }
+
+        async function addContactFromAI(partnerId, contact) {
+            const { error } = await supabase.from('partner_contacts').insert({
+                id: 'contact_' + Date.now(),
+                partner_id: partnerId,
+                name: contact.name,
+                email: contact.email || null,
+                phone: contact.phone || null,
+                role: contact.role || 'Contact',
+                created_at: new Date().toISOString()
+            });
+            if (error) throw error;
+        }
+
+        async function addActivityFromAI(partnerId, activity) {
+            const { error } = await supabase.from('partner_activities').insert({
+                id: 'activity_' + Date.now(),
+                partner_id: partnerId,
+                type: activity.type,
+                notes: activity.notes,
+                created_at: new Date().toISOString()
+            });
+            if (error) throw error;
+        }
+
+        async function updateStatusFromAI(partnerId, status) {
+            const { error } = await supabase.from('partners').update({
+                status,
+                updated_at: new Date().toISOString()
+            }).eq('id', partnerId);
+            if (error) throw error;
+        }
+
+        async function createPartnerFromAI(partner) {
+            const { error } = await supabase.from('partners').insert({
+                id: 'partner_' + Date.now(),
+                name: partner.name,
+                status: partner.status || 'Lead',
+                contactType: partner.contactType || 'partner',
+                notes: partner.notes || '',
+                created_at: new Date().toISOString(),
+                updated_at: new Date().toISOString()
+            });
+            if (error) throw error;
+        }
+
+        // Close modal on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('aiModal').classList.contains('active')) {
+                closeAIModal();
+            }
+        });
+    </script>
 </body>
 </html>

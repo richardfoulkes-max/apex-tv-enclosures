@@ -1,0 +1,37 @@
+Subject: RE: Outdoor TV Enclosure Manufacturing Inquiry - Design Files + NDA
+
+Hi Ted,
+
+Thank you for the quick response - great to hear you can do watertight aluminum enclosures. That's exactly what we need.
+
+I've attached:
+1. **Design NDA** - Simple one-page agreement focused on protecting the design IP. If this works for you, please sign and return.
+
+2. **ATE-75 Design Pack** (PDF) - Comprehensive technical package including:
+   - External and internal dimensions
+   - Materials specification (5052-H32 aluminum)
+   - Thermal system (3x Delta 140mm fans)
+   - Wiring and control logic
+   - Exploded component breakdown
+   - Full BOM (materials only, no pricing)
+
+This should give you enough to assess feasibility and provide a ballpark quote. We're currently finalizing production CAD with a manufacturer here in Dubai - once that's complete, we can send you the full DXF/manufacturing drawings.
+
+**Quantities:** Please quote for:
+- 50 units
+- 100 units
+- 150 units
+
+The 75" model (ATE-75) is the priority. If this goes well, we'd expand to 55", 65", and 85" models.
+
+Happy to jump on a call if you have questions after reviewing the design pack.
+
+Best regards,
+Richard Foulkes
+Apex Enclosures
+apexenclosures@icloud.com
+
+---
+Attachments:
+- Apex-TV-Design-NDA.pdf
+- ATE-75-Design-Pack.pdf

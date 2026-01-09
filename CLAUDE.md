@@ -210,6 +210,36 @@ nav.js injects: body { margin-left: 240px !important; }
 
 ## Recent Work History
 
+### Session: 2026-01-09 (Late Night) - CRM Migration to Supabase Cloud
+
+**Migrated CRM from localStorage to Supabase cloud database:**
+- CRM now fully cloud-based at: https://apex-tv-enclosures.vercel.app/partner-crm.html
+- All 28 partners with contacts and activities migrated to Supabase
+- Removed all localStorage code - pure Supabase storage
+- Removed auth-guard.js (single-user CRM, no login needed)
+- Added seeding function for empty database initialization
+
+**Database changes in Supabase:**
+- Dropped `partners_status_check` constraint (allows Proposal, Meeting, Won, Lost statuses)
+- Dropped `partners_partner_type_check` constraint (allows various partner types)
+- Tables: `partners`, `partner_contacts`, `partner_activities`
+
+**Fixed bugs:**
+- Null check for `partnerType` and `status` in renderList() - was crashing on cloud
+
+**Architecture decision:**
+- CRM data: Supabase cloud (accessible anywhere, shareable)
+- Product development files: Local only (maintain IP control)
+
+**Next feature (MVP planned):**
+- AI CRM Assistant - natural language interface to update CRM
+- Drop in files/messages, AI parses and updates contacts/activities
+- Will use Claude API for parsing
+
+**Supabase project:** https://supabase.com/dashboard/project/krhyzbmewvfkacoujimm
+
+---
+
 ### Session: 2026-01-09 (PM) - US Manufacturer Outreach + CRM Improvements
 
 **Created US manufacturer outreach package:**
