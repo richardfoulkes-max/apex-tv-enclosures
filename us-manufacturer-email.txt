@@ -1,0 +1,68 @@
+SUBJECT: RFQ - Custom Outdoor TV Enclosure (75") - US Manufacturing Partner
+
+CC: Scott@b-stemed.com
+
+---
+
+Dear [CONTACT NAME],
+
+We are Apex Enclosures, developing premium outdoor TV enclosures for the US market. We are seeking a US-based manufacturing partner for prototype development and ongoing production.
+
+PRODUCT SUMMARY:
+- 75" Outdoor TV Enclosure (weatherproof housing for commercial-grade TVs)
+- Dimensions: 1760 × 1120 × 160mm (external)
+- Material: 5052-H32 aluminum, 2.0mm body / 3.0mm structural
+- Finish: Powder coat to AAMA 2604 (1000hr salt spray minimum)
+- IP Rating: IP55 (jet resistant, hose-cleanable)
+- Thermal: 3× PWM-controlled 140mm fans, forced-air cooling
+- Target Market: US residential and commercial outdoor installations
+
+WHY US MANUFACTURING:
+We see the US as our largest growth market and are committed to building a long-term presence with domestic production. We're looking for a manufacturing partner who shares our quality standards and can grow with us as we scale.
+
+WHAT WE ARE LOOKING FOR:
+- Contract manufacturing (we provide complete design, you manufacture to spec)
+- Initial order: 1-2 prototype units
+- Production capability: 50-200+ units/year if prototype approved
+- In-house or trusted partner powder coating (AAMA 2604)
+- Willingness to sign NDA
+
+WE WILL PROVIDE:
+- Complete fabrication drawings (DXF/STEP)
+- Detailed BOM with all specifications
+- Assembly instructions
+- Quality acceptance criteria
+
+REQUEST:
+1. Can you manufacture aluminum enclosures to IP55 specification?
+2. Do you handle powder coating in-house or via subcontractor?
+3. What is your prototype lead time and pricing?
+4. What are your MOQ and volume pricing tiers?
+
+We are ready to share full technical documentation upon confirmation of interest and NDA if required.
+
+Best regards,
+
+Richard Foulkes
+Apex Enclosures
+Email: apexenclosures@icloud.com
+WhatsApp: +971 50 559 8675
+
+---
+
+NOTES FOR SENDING:
+1. Personalize [CONTACT NAME] for each manufacturer
+2. DO NOT attach full design pack initially - wait for NDA/interest
+3. Attach: Brief 1-page product overview only (not full specs)
+4. Follow up after 5 business days if no response
+
+COMPANIES TO CONTACT (Tier 1 first):
+1. Bull Metal Products - Middletown, CT - (860) 346-9691 - bullmetal.com
+2. Accurate Metal Fabricating - Cicero, IL - accuratemetalfab.com
+3. Bison ProFab - Texas - (281) 356-0026 - bisonprofab.com
+4. DDB Unlimited - Oklahoma - ddbunlimited.com
+
+TIER 2 (backup):
+5. APX Enclosures - apx-enclosures.com
+6. American Products - amprod.us
+7. Protocase - protocase.com (Canada - fast prototypes)

@@ -166,6 +166,10 @@ roundtable-ai/              ← Engineering validation briefs
 ## Procedures Reference
 **Before sending emails:** Read `/Users/richardfoulkes/.claude/EMAIL_PROCEDURES.md`
 
+**IMPORTANT - Email Sender:** Always send from `apexenclosures@icloud.com` (NOT richardfoulkes@mac.com)
+- When using AppleScript to open Mail, set the sender account explicitly
+- CC Scott at `Scott@b-stemed.com` on all US manufacturer outreach
+
 **Before sending RFQ documents:** Always run pre-RFQ review checklist:
 1. Remove all competitor references (Apollo, Aqualite, etc.)
 2. Remove target pricing, FOB targets, margins, retail prices

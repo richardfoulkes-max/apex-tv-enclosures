@@ -434,6 +434,7 @@
                         <option value="Contractor">Contractor</option>
                     </select>
                     <select class="filter-select" id="statusFilter" onchange="renderList()">
+                        <option value="live" selected>Live Contacts</option>
                         <option value="">All Status</option>
                         <option value="Not Contacted">Not Contacted</option>
                         <option value="Contacted">Contacted</option>
@@ -446,10 +447,10 @@
                     <select class="filter-select" id="regionFilter" onchange="renderList()">
                         <option value="">All Regions</option>
                         <option value="UAE">UAE</option>
+                        <option value="USA">USA</option>
                         <option value="GCC">GCC</option>
                         <option value="China">China</option>
                         <option value="Europe">Europe</option>
-                        <option value="USA">USA</option>
                     </select>
                 </div>
             </div>
@@ -723,7 +724,7 @@
                 linkedInUrl: '',
                 address: 'Sharjah, UAE',
                 leadSource: 'cold_outreach',
-                status: 'Contacted',
+                status: 'Not Contacted',
                 priority: 'High',
                 dealValue: 0,
                 productsInterested: ['75"'],
@@ -751,7 +752,7 @@
                 linkedInUrl: '',
                 address: 'UAE',
                 leadSource: 'cold_outreach',
-                status: 'Contacted',
+                status: 'Not Contacted',
                 priority: 'Medium',
                 dealValue: 0,
                 productsInterested: ['75"'],
@@ -777,7 +778,7 @@
                 linkedInUrl: '',
                 address: 'UAE',
                 leadSource: 'cold_outreach',
-                status: 'Contacted',
+                status: 'Not Contacted',
                 priority: 'Medium',
                 dealValue: 0,
                 productsInterested: ['75"'],
@@ -804,7 +805,7 @@
                 linkedInUrl: '',
                 address: 'Jeddah, Saudi Arabia',
                 leadSource: 'cold_outreach',
-                status: 'Contacted',
+                status: 'Not Contacted',
                 priority: 'High',
                 dealValue: 0,
                 productsInterested: ['75"'],
@@ -832,7 +833,7 @@
                 linkedInUrl: '',
                 address: 'Saudi Arabia',
                 leadSource: 'cold_outreach',
-                status: 'Contacted',
+                status: 'Not Contacted',
                 priority: 'Medium',
                 dealValue: 0,
                 productsInterested: ['75"'],
@@ -858,7 +859,7 @@
                 linkedInUrl: '',
                 address: 'Saudi Arabia',
                 leadSource: 'cold_outreach',
-                status: 'Contacted',
+                status: 'Not Contacted',
                 priority: 'Medium',
                 dealValue: 0,
                 productsInterested: ['75"'],
@@ -884,7 +885,7 @@
                 linkedInUrl: '',
                 address: 'Saudi Arabia',
                 leadSource: 'cold_outreach',
-                status: 'Contacted',
+                status: 'Not Contacted',
                 priority: 'Medium',
                 dealValue: 0,
                 productsInterested: ['75"'],
@@ -1176,6 +1177,217 @@
                 activities: [],
                 createdAt: '2025-12-31T21:00:00Z',
                 lastContact: null
+            },
+            // ============ STRATEGIC PARTNERS ============
+            {
+                id: 150,
+                companyName: 'Scott - US/UK/EU Sales Partner',
+                contactType: 'partner',
+                partnerType: 'Sales Partner',
+                region: 'USA',
+                website: '',
+                linkedInUrl: '',
+                address: 'UK',
+                leadSource: 'referral',
+                status: 'Meeting',
+                priority: 'High',
+                dealValue: 0,
+                productsInterested: ['75"', '65"'],
+                expectedCloseDate: '',
+                winProbability: 80,
+                lostReason: '',
+                followupDate: '',
+                notes: 'Potential US/UK/EU sales partner. Equity structure: Richard 25% / Tom 25% / Scott 50% for Western markets. CC on all US manufacturer outreach.',
+                contacts: [
+                    { id: 1, name: 'Scott', title: 'Partner', email: 'Scott@b-stemed.com', phone: '', isPrimary: true, isDecisionMaker: true }
+                ],
+                activities: [],
+                createdAt: '2026-01-09T12:00:00Z',
+                lastContact: null
+            },
+            // ============ US MANUFACTURERS (Tier 1) ============
+            {
+                id: 200,
+                companyName: 'Bull Metal Products',
+                contactType: 'manufacturing',
+                partnerType: 'Fabricator',
+                region: 'USA',
+                website: 'https://bullmetal.com',
+                linkedInUrl: 'https://www.linkedin.com/company/bull-metal-products-inc-',
+                address: '191 Saybrook Road, PO Box 738, Middletown, CT 06457',
+                leadSource: 'cold_outreach',
+                status: 'Contacted',
+                priority: 'High',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 0,
+                lostReason: '',
+                followupDate: '',
+                notes: 'TIER 1 - ISO 9001:2015. 65+ years experience (since 1954). 40,000+ sq ft facility. Second generation family business. Weatherproof aluminum enclosures, electrical enclosures, NEMA cabinets.',
+                contacts: [
+                    { id: 1, name: 'Steve Bull', title: 'President', email: 'sales@bullmetal.com', phone: '(860) 346-9691', isPrimary: true, isDecisionMaker: true }
+                ],
+                activities: [],
+                createdAt: '2026-01-09T12:00:00Z',
+                lastContact: null
+            },
+            {
+                id: 201,
+                companyName: 'Accurate Metal Fabricating',
+                contactType: 'manufacturing',
+                partnerType: 'Fabricator',
+                region: 'USA',
+                website: 'https://www.accuratemetalfab.com',
+                linkedInUrl: 'https://www.linkedin.com/company/accurate-metal-fabricating',
+                address: '4620 W. 19th Street, Cicero, IL 60804',
+                leadSource: 'cold_outreach',
+                status: 'Contacted',
+                priority: 'High',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 0,
+                lostReason: '',
+                followupDate: '',
+                notes: 'TIER 1 - ISO 9001:2015. 80+ years experience. IN-HOUSE POWDER COATING LINE. 16 press brakes, 7 turrets, 3 laser tables. $1,000 order minimum, B2B only.',
+                contacts: [
+                    { id: 1, name: 'Daniel Cohen', title: 'Managing Director', email: 'sales@accuratemetalfab.com', phone: '773-432-4720', isPrimary: true, isDecisionMaker: true },
+                    { id: 2, name: 'Ted Zaplatosch', title: 'Sales Representative', email: 'sales@accuratemetalfab.com', phone: '773-432-4720', isPrimary: false, isDecisionMaker: false },
+                    { id: 3, name: 'David Kamins', title: 'Sales Representative', email: 'sales@accuratemetalfab.com', phone: '773-432-4720', isPrimary: false, isDecisionMaker: false }
+                ],
+                activities: [],
+                createdAt: '2026-01-09T12:00:00Z',
+                lastContact: null
+            },
+            {
+                id: 202,
+                companyName: 'Bison ProFab',
+                contactType: 'manufacturing',
+                partnerType: 'Fabricator',
+                region: 'USA',
+                website: 'https://www.bisonprofab.com',
+                linkedInUrl: '',
+                address: '12519 Wanda Ln, Magnolia, TX 77354',
+                leadSource: 'cold_outreach',
+                status: 'Contacted',
+                priority: 'High',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 0,
+                lostReason: '',
+                followupDate: '',
+                notes: 'TIER 1 - UL Approved, Intertek IP66 CERTIFIED. NEMA 4X aluminum, saltwater corrosion resistant. Already does IP-rated enclosures - strong fit.',
+                contacts: [
+                    { id: 1, name: 'Joshua Henderson', title: 'Sales Director', email: 'jhenderson@bisonprofab.com', phone: '(281) 356-0026', isPrimary: true, isDecisionMaker: true },
+                    { id: 2, name: 'Roman Williams', title: 'Sales Director', email: 'rwilliams@bisonprofab.com', phone: '(888) 623-6042', isPrimary: false, isDecisionMaker: true },
+                    { id: 3, name: 'Ricardo Amaral', title: 'COO', email: 'ramaral@bisonprofab.com', phone: '(281) 356-0026', isPrimary: false, isDecisionMaker: true }
+                ],
+                activities: [],
+                createdAt: '2026-01-09T12:00:00Z',
+                lastContact: null
+            },
+            {
+                id: 203,
+                companyName: 'DDB Unlimited',
+                contactType: 'manufacturing',
+                partnerType: 'Fabricator',
+                region: 'USA',
+                website: 'https://www.ddbunlimited.com',
+                linkedInUrl: '',
+                address: '2301 US-77, Pauls Valley, OK 73075',
+                leadSource: 'cold_outreach',
+                status: 'Contacted',
+                priority: 'High',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 0,
+                lostReason: '',
+                followupDate: '',
+                notes: 'TIER 1 - ISO 9001. Since 1996. NEMA 3R to 4X cabinets. 15-YEAR WARRANTY. Family business (Mahorney family). Telecom, aerospace, green energy, oil/gas sectors.',
+                contacts: [
+                    { id: 1, name: 'Dustin Mahorney', title: 'President', email: 'dustin@ddbunlimited.com', phone: '(800) 753-8459', isPrimary: true, isDecisionMaker: true },
+                    { id: 2, name: 'Bryan Campbell', title: 'Sales Manager', email: '', phone: '(800) 753-8459 x2867', isPrimary: false, isDecisionMaker: false },
+                    { id: 3, name: 'Mike Mahorney', title: 'Corp. General Manager', email: 'mike@ddbunlimited.com', phone: '(800) 753-8459 x2818', isPrimary: false, isDecisionMaker: true }
+                ],
+                activities: [],
+                createdAt: '2026-01-09T12:00:00Z',
+                lastContact: null
+            },
+            // ============ US MANUFACTURERS (Tier 2) ============
+            {
+                id: 204,
+                companyName: 'APX Enclosures',
+                contactType: 'manufacturing',
+                partnerType: 'Fabricator',
+                region: 'USA',
+                website: 'https://apx-enclosures.com',
+                linkedInUrl: '',
+                address: 'USA',
+                leadSource: 'cold_outreach',
+                status: 'Not Contacted',
+                priority: 'Medium',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 0,
+                lostReason: '',
+                followupDate: '',
+                notes: 'TIER 2 - Since 2001. NEMA 3R/4X watertight aluminum specialist.',
+                contacts: [],
+                activities: [],
+                createdAt: '2026-01-09T12:00:00Z',
+                lastContact: null
+            },
+            {
+                id: 205,
+                companyName: 'American Products',
+                contactType: 'manufacturing',
+                partnerType: 'Fabricator',
+                region: 'USA',
+                website: 'https://amprod.us',
+                linkedInUrl: '',
+                address: 'Heartland USA',
+                leadSource: 'cold_outreach',
+                status: 'Not Contacted',
+                priority: 'Medium',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 0,
+                lostReason: '',
+                followupDate: '',
+                notes: 'TIER 2 - Since 1989. 100% Made in USA. BABA compliant for government contracts.',
+                contacts: [],
+                activities: [],
+                createdAt: '2026-01-09T12:00:00Z',
+                lastContact: null
+            },
+            {
+                id: 206,
+                companyName: 'Protocase',
+                contactType: 'manufacturing',
+                partnerType: 'Fabricator',
+                region: 'USA',
+                website: 'https://www.protocase.com',
+                linkedInUrl: '',
+                address: 'Nova Scotia, Canada',
+                leadSource: 'cold_outreach',
+                status: 'Not Contacted',
+                priority: 'Medium',
+                dealValue: 0,
+                productsInterested: ['75"'],
+                expectedCloseDate: '',
+                winProbability: 0,
+                lostReason: '',
+                followupDate: '',
+                notes: 'TIER 2 - FAST PROTOTYPES: 2-3 day turnaround. No minimum order. Ships to US. Best for urgent prototype needs.',
+                contacts: [],
+                activities: [],
+                createdAt: '2026-01-09T12:00:00Z',
+                lastContact: null
             }
         ];
 
@@ -1258,11 +1470,11 @@
             const stored = localStorage.getItem('apexCrmData');
             const version = localStorage.getItem('apexCrmVersion');
 
-            if (version !== 'v7' || !stored) {
-                // Initialize with new data structure (v7 adds all contacted manufacturers)
+            if (version !== 'v13' || !stored) {
+                // Initialize with new data structure (v13 archives stale UAE/GCC contacts)
                 partners = initialPartners;
                 saveData();
-                localStorage.setItem('apexCrmVersion', 'v7');
+                localStorage.setItem('apexCrmVersion', 'v13');
             } else {
                 partners = JSON.parse(stored);
                 // Ensure all partners have contactType (migration)
@@ -1373,7 +1585,9 @@
                 if (search && !p.companyName.toLowerCase().includes(search) &&
                     !p.notes?.toLowerCase().includes(search)) return false;
                 if (typeFilter && p.partnerType !== typeFilter) return false;
-                if (statusFilter && p.status !== statusFilter) return false;
+                // "live" = everything except Not Contacted
+                if (statusFilter === 'live' && p.status === 'Not Contacted') return false;
+                if (statusFilter && statusFilter !== 'live' && p.status !== statusFilter) return false;
                 if (regionFilter && p.region !== regionFilter) return false;
                 return true;
             });
