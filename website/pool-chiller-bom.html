@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APE-HC Bill of Materials | Apex Enclosures</title>
+    <title>APE-HC Bill of Materials V2 | Apex Enclosures</title>
     <style>
         :root {
             --primary: #0891b2;
@@ -19,7 +19,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
 
-        .main-container { padding: 2rem; max-width: 1200px; }
+        .main-container { padding: 2rem; max-width: 1400px; }
 
         /* Header */
         .page-header {
@@ -31,15 +31,23 @@
         @media (max-width: 900px) { .page-header { display: none; } }
         .page-header h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
         .page-header .subtitle { opacity: 0.9; font-size: 0.9rem; }
+        .version-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 1rem;
+        }
 
         /* Summary Cards */
         .summary-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
             margin-bottom: 2rem;
         }
-        @media (max-width: 900px) { .summary-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 900px) { .summary-grid { grid-template-columns: 1fr; } }
 
         .summary-card {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
@@ -48,14 +56,10 @@
             padding: 1.25rem;
             text-align: center;
         }
-        .summary-card .value {
-            font-size: 1.75rem;
-            font-weight: 700;
-        }
-        .summary-card .label {
-            font-size: 0.85rem;
-            opacity: 0.9;
-        }
+        .summary-card .model { font-size: 0.85rem; opacity: 0.9; margin-bottom: 0.25rem; }
+        .summary-card .value { font-size: 1.75rem; font-weight: 700; }
+        .summary-card .label { font-size: 0.75rem; opacity: 0.8; }
+        .summary-card .capacity { font-size: 0.85rem; opacity: 0.9; margin-top: 0.25rem; }
 
         /* Sections */
         .section {
@@ -91,8 +95,12 @@
         .subtotal-row { background: #f0f9ff; font-weight: 600; }
         .subtotal-row td { border-top: 2px solid var(--primary); }
 
+        .category-header { background: #f0f9ff; font-weight: 600; color: var(--primary); }
+        .category-header td { border: none; padding: 0.5rem 0.75rem; }
+
         /* Right-align numbers */
-        .num { text-align: right; }
+        .num { text-align: right; font-family: 'SF Mono', Monaco, monospace; }
+        .qty { text-align: center; }
 
         /* Notes */
         .note {
@@ -102,6 +110,10 @@
             margin: 1rem 0;
             font-size: 0.9rem;
             color: var(--text-muted);
+        }
+        .note.warning {
+            background: #fef3c7;
+            border-left-color: var(--accent);
         }
 
         /* Grid */
@@ -118,369 +130,722 @@
         .card h4 { color: var(--primary); margin-bottom: 0.5rem; }
         .card p { font-size: 0.85rem; margin: 0; }
 
+        /* Part number */
+        .part-no { font-family: 'SF Mono', Monaco, monospace; font-size: 0.8rem; color: var(--text-muted); }
+
+        /* Tabs */
+        .tab-container { margin-bottom: 2rem; }
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 1rem;
+        }
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+        .tab:hover { color: var(--primary); }
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            font-weight: 600;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
     </style>
 </head>
 <body>
     <div class="main-container">
         <div class="page-header">
-            <h1>APE-HC Series - Bill of Materials</h1>
-            <p class="subtitle">Component costing for louvered heater/chiller enclosures</p>
+            <h1>APE-HC Series - Bill of Materials <span class="version-badge">V2.0 Acoustic</span></h1>
+            <p class="subtitle">Component costing for acoustic heater/chiller enclosures with discharge hood</p>
         </div>
 
         <!-- Summary Cards -->
         <div class="summary-grid">
             <div class="summary-card">
-                <div class="value">$185</div>
-                <div class="label">APE-HC-M BOM</div>
+                <div class="model">APE-HC-S</div>
+                <div class="value">~$285</div>
+                <div class="label">BOM Cost</div>
+                <div class="capacity">Up to 12kW</div>
             </div>
             <div class="summary-card">
-                <div class="value">$225</div>
-                <div class="label">APE-HC-L BOM</div>
+                <div class="model">APE-HC-M</div>
+                <div class="value">~$360</div>
+                <div class="label">BOM Cost</div>
+                <div class="capacity">Up to 20kW</div>
             </div>
             <div class="summary-card">
-                <div class="value">$155</div>
-                <div class="label">APE-HC-G BOM</div>
-            </div>
-            <div class="summary-card">
-                <div class="value">$285</div>
-                <div class="label">APE-HC-XL BOM</div>
+                <div class="model">APE-HC-L</div>
+                <div class="value">~$485</div>
+                <div class="label">BOM Cost</div>
+                <div class="capacity">Up to 35kW</div>
             </div>
         </div>
 
-        <!-- APE-HC-M BOM -->
+        <!-- Design Overview -->
         <section class="section">
-            <h2>1. APE-HC-M (Medium Heat Pump Enclosure)</h2>
-            <p>1000 x 600 x 900mm - For heat pumps up to 15kW</p>
+            <h2>V2 Acoustic Design Overview</h2>
+            <p>The APE-HC V2 uses a three-component architecture for 15-25 dB noise reduction while maintaining full airflow capacity:</p>
 
-            <table>
-                <tr>
-                    <th>Component</th>
-                    <th>Material</th>
-                    <th>Qty</th>
-                    <th class="num">Unit Cost</th>
-                    <th class="num">Total</th>
-                </tr>
-                <tr>
-                    <td colspan="5" style="background: #f0f9ff; font-weight: 600; color: var(--primary);">Frame Structure</td>
-                </tr>
-                <tr>
-                    <td>Corner posts (40x40x2mm angle)</td>
-                    <td>5052-H32 Aluminum</td>
-                    <td>4 x 900mm</td>
-                    <td class="num">$6.50</td>
-                    <td class="num">$26.00</td>
-                </tr>
-                <tr>
-                    <td>Top/bottom frame rails</td>
-                    <td>5052-H32 Aluminum</td>
-                    <td>8 pcs</td>
-                    <td class="num">$4.00</td>
-                    <td class="num">$32.00</td>
-                </tr>
-                <tr>
-                    <td>Top cross bars</td>
-                    <td>5052-H32 Aluminum</td>
-                    <td>2 pcs</td>
-                    <td class="num">$3.00</td>
-                    <td class="num">$6.00</td>
-                </tr>
-                <tr class="subtotal-row">
-                    <td colspan="4">Frame Subtotal</td>
-                    <td class="num">$64.00</td>
-                </tr>
-                <tr>
-                    <td colspan="5" style="background: #f0f9ff; font-weight: 600; color: var(--primary);">Louvered Panels</td>
-                </tr>
-                <tr>
-                    <td>Side louvered panels (2.0mm)</td>
-                    <td>5052-H32 Aluminum</td>
-                    <td>2 pcs</td>
-                    <td class="num">$18.00</td>
-                    <td class="num">$36.00</td>
-                </tr>
-                <tr>
-                    <td>Front louvered door panel</td>
-                    <td>5052-H32 Aluminum</td>
-                    <td>1 pc</td>
-                    <td class="num">$22.00</td>
-                    <td class="num">$22.00</td>
-                </tr>
-                <tr>
-                    <td>Back panel (solid or louvered)</td>
-                    <td>5052-H32 Aluminum</td>
-                    <td>1 pc</td>
-                    <td class="num">$14.00</td>
-                    <td class="num">$14.00</td>
-                </tr>
-                <tr class="subtotal-row">
-                    <td colspan="4">Panels Subtotal</td>
-                    <td class="num">$72.00</td>
-                </tr>
-                <tr>
-                    <td colspan="5" style="background: #f0f9ff; font-weight: 600; color: var(--primary);">Hardware</td>
-                </tr>
-                <tr>
-                    <td>Piano hinge (316 SS)</td>
-                    <td>316 Stainless Steel</td>
-                    <td>900mm</td>
-                    <td class="num">$8.00</td>
-                    <td class="num">$8.00</td>
-                </tr>
-                <tr>
-                    <td>Toggle latches with padlock hasp</td>
-                    <td>316 Stainless Steel</td>
-                    <td>2 pcs</td>
-                    <td class="num">$4.50</td>
-                    <td class="num">$9.00</td>
-                </tr>
-                <tr>
-                    <td>Gas strut (hold-open)</td>
-                    <td>Steel/316 SS</td>
-                    <td>1 pc</td>
-                    <td class="num">$6.00</td>
-                    <td class="num">$6.00</td>
-                </tr>
-                <tr>
-                    <td>Leveling feet (M10)</td>
-                    <td>316 SS + HDPE</td>
-                    <td>4 pcs</td>
-                    <td class="num">$2.50</td>
-                    <td class="num">$10.00</td>
-                </tr>
-                <tr>
-                    <td>Assembly hardware (screws, rivets)</td>
-                    <td>316 Stainless Steel</td>
-                    <td>Set</td>
-                    <td class="num">$8.00</td>
-                    <td class="num">$8.00</td>
-                </tr>
-                <tr class="subtotal-row">
-                    <td colspan="4">Hardware Subtotal</td>
-                    <td class="num">$41.00</td>
-                </tr>
-                <tr>
-                    <td colspan="5" style="background: #f0f9ff; font-weight: 600; color: var(--primary);">Finish</td>
-                </tr>
-                <tr>
-                    <td>Powder coating (RAL 7016)</td>
-                    <td>Polyester powder</td>
-                    <td>~3 m&sup2;</td>
-                    <td class="num">$2.60/m&sup2;</td>
-                    <td class="num">$8.00</td>
-                </tr>
-                <tr class="total-row">
-                    <td colspan="4"><strong>APE-HC-M Total BOM Cost</strong></td>
-                    <td class="num"><strong>$185.00</strong></td>
-                </tr>
-            </table>
-        </section>
-
-        <!-- APE-HC-L BOM -->
-        <section class="section">
-            <h2>2. APE-HC-L (Large Chiller Enclosure)</h2>
-            <p>1200 x 700 x 1000mm - For chillers up to 25kW</p>
-
-            <table>
-                <tr>
-                    <th>Component</th>
-                    <th>Material</th>
-                    <th>Qty</th>
-                    <th class="num">Unit Cost</th>
-                    <th class="num">Total</th>
-                </tr>
-                <tr>
-                    <td>Corner posts (40x40x2mm)</td>
-                    <td>5052-H32 Aluminum</td>
-                    <td>4 x 1000mm</td>
-                    <td class="num">$7.20</td>
-                    <td class="num">$28.80</td>
-                </tr>
-                <tr>
-                    <td>Frame rails (top/bottom)</td>
-                    <td>5052-H32 Aluminum</td>
-                    <td>8 pcs</td>
-                    <td class="num">$5.00</td>
-                    <td class="num">$40.00</td>
-                </tr>
-                <tr>
-                    <td>Top cross bars</td>
-                    <td>5052-H32 Aluminum</td>
-                    <td>3 pcs</td>
-                    <td class="num">$3.50</td>
-                    <td class="num">$10.50</td>
-                </tr>
-                <tr>
-                    <td>Side louvered panels</td>
-                    <td>5052-H32 Aluminum</td>
-                    <td>2 pcs</td>
-                    <td class="num">$24.00</td>
-                    <td class="num">$48.00</td>
-                </tr>
-                <tr>
-                    <td>Front louvered door</td>
-                    <td>5052-H32 Aluminum</td>
-                    <td>1 pc</td>
-                    <td class="num">$28.00</td>
-                    <td class="num">$28.00</td>
-                </tr>
-                <tr>
-                    <td>Back panel</td>
-                    <td>5052-H32 Aluminum</td>
-                    <td>1 pc</td>
-                    <td class="num">$18.00</td>
-                    <td class="num">$18.00</td>
-                </tr>
-                <tr>
-                    <td>Hardware set (hinges, latches, feet)</td>
-                    <td>316 SS</td>
-                    <td>Set</td>
-                    <td class="num">$42.00</td>
-                    <td class="num">$42.00</td>
-                </tr>
-                <tr>
-                    <td>Powder coating</td>
-                    <td>Polyester</td>
-                    <td>~4 m&sup2;</td>
-                    <td class="num">$2.60</td>
-                    <td class="num">$10.00</td>
-                </tr>
-                <tr class="total-row">
-                    <td colspan="4"><strong>APE-HC-L Total BOM Cost</strong></td>
-                    <td class="num"><strong>$225.30</strong></td>
-                </tr>
-            </table>
-        </section>
-
-        <!-- APE-HC-G BOM -->
-        <section class="section">
-            <h2>3. APE-HC-G (Gas Heater Enclosure)</h2>
-            <p>800 x 500 x 1000mm - For gas heaters up to 400k BTU</p>
-
-            <table>
-                <tr>
-                    <th>Component</th>
-                    <th>Material</th>
-                    <th>Qty</th>
-                    <th class="num">Unit Cost</th>
-                    <th class="num">Total</th>
-                </tr>
-                <tr>
-                    <td>Corner posts (40x40x2mm)</td>
-                    <td>5052-H32 Aluminum</td>
-                    <td>4 x 1000mm</td>
-                    <td class="num">$7.20</td>
-                    <td class="num">$28.80</td>
-                </tr>
-                <tr>
-                    <td>Frame rails</td>
-                    <td>5052-H32 Aluminum</td>
-                    <td>8 pcs</td>
-                    <td class="num">$3.50</td>
-                    <td class="num">$28.00</td>
-                </tr>
-                <tr>
-                    <td>Side louvered panels (smaller)</td>
-                    <td>5052-H32 Aluminum</td>
-                    <td>2 pcs</td>
-                    <td class="num">$14.00</td>
-                    <td class="num">$28.00</td>
-                </tr>
-                <tr>
-                    <td>Front louvered door</td>
-                    <td>5052-H32 Aluminum</td>
-                    <td>1 pc</td>
-                    <td class="num">$18.00</td>
-                    <td class="num">$18.00</td>
-                </tr>
-                <tr>
-                    <td>Back panel (solid)</td>
-                    <td>5052-H32 Aluminum</td>
-                    <td>1 pc</td>
-                    <td class="num">$12.00</td>
-                    <td class="num">$12.00</td>
-                </tr>
-                <tr>
-                    <td>Low-level combustion vent</td>
-                    <td>Aluminum + mesh</td>
-                    <td>1 pc</td>
-                    <td class="num">$8.00</td>
-                    <td class="num">$8.00</td>
-                </tr>
-                <tr>
-                    <td>Hardware set</td>
-                    <td>316 SS</td>
-                    <td>Set</td>
-                    <td class="num">$38.00</td>
-                    <td class="num">$38.00</td>
-                </tr>
-                <tr>
-                    <td>Powder coating</td>
-                    <td>Polyester</td>
-                    <td>~2.5 m&sup2;</td>
-                    <td class="num">$2.60</td>
-                    <td class="num">$6.50</td>
-                </tr>
-                <tr class="total-row">
-                    <td colspan="4"><strong>APE-HC-G Total BOM Cost</strong></td>
-                    <td class="num"><strong>$167.30</strong></td>
-                </tr>
-            </table>
-
-            <div class="note">
-                <strong>Note:</strong> Gas heater variant includes low-level combustion air vent. Flue cutout location varies by heater model - verify with equipment manual before fabrication.
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Base Enclosure</h4>
+                    <p>Open-frame top design with aluminum frame, back panel, floor panel, and access door. Sits on anti-vibration mounts.</p>
+                </div>
+                <div class="card">
+                    <h4>Intake Modules (x2)</h4>
+                    <p>Side-mounted baffled intake with 90&deg; air turn. Weather louvers + mineral wool + perforated liner.</p>
+                </div>
+                <div class="card">
+                    <h4>Discharge Hood</h4>
+                    <p>Removable acoustic hood with solid ceiling, insulated walls, and side acoustic louvers. Crane-removable for service.</p>
+                </div>
+                <div class="card">
+                    <h4>Acoustic Treatment</h4>
+                    <p>Mineral wool absorption (48 kg/m&sup3;), butyl damping mat on panels, optional MLV on door for additional mass.</p>
+                </div>
             </div>
         </section>
 
+        <!-- Model Tabs -->
+        <div class="tab-container">
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('small')">APE-HC-S (Small)</button>
+                <button class="tab" onclick="showTab('medium')">APE-HC-M (Medium)</button>
+                <button class="tab" onclick="showTab('large')">APE-HC-L (Large)</button>
+            </div>
+
+            <!-- APE-HC-S BOM -->
+            <div id="small" class="tab-content active">
+                <section class="section">
+                    <h2>APE-HC-S Bill of Materials</h2>
+                    <p><strong>Internal:</strong> 900 &times; 550 &times; 1000mm | <strong>External:</strong> 1100 &times; 750 &times; 1400mm | <strong>Capacity:</strong> Up to 12kW</p>
+
+                    <table>
+                        <tr>
+                            <th>Part No.</th>
+                            <th>Component</th>
+                            <th>Material</th>
+                            <th class="qty">Qty</th>
+                            <th class="num">Est. Cost</th>
+                        </tr>
+
+                        <!-- Structural Frame -->
+                        <tr class="category-header"><td colspan="5">STRUCTURAL FRAME</td></tr>
+                        <tr>
+                            <td class="part-no">APE-HC-FR-01</td>
+                            <td>Corner Post (40&times;40&times;1000mm)</td>
+                            <td>5052-H32 Aluminum, 3.0mm</td>
+                            <td class="qty">4</td>
+                            <td class="num">$28.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-FR-02/03</td>
+                            <td>Bottom Rails (Long + Short)</td>
+                            <td>5052-H32 Aluminum, 3.0mm</td>
+                            <td class="qty">4</td>
+                            <td class="num">$18.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-FR-04/05</td>
+                            <td>Top Rails (Long + Short)</td>
+                            <td>5052-H32 Aluminum, 3.0mm</td>
+                            <td class="qty">4</td>
+                            <td class="num">$18.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-FR-06</td>
+                            <td>Top Cross Brace (Hood support)</td>
+                            <td>5052-H32 Aluminum, 3.0mm</td>
+                            <td class="qty">2</td>
+                            <td class="num">$8.00</td>
+                        </tr>
+                        <tr class="subtotal-row"><td colspan="4">Frame Subtotal</td><td class="num">$72.00</td></tr>
+
+                        <!-- Panels -->
+                        <tr class="category-header"><td colspan="5">PANELS</td></tr>
+                        <tr>
+                            <td class="part-no">APE-HC-PN-01</td>
+                            <td>Back Panel (powder coated)</td>
+                            <td>5052-H32 Aluminum, 2.0mm</td>
+                            <td class="qty">1</td>
+                            <td class="num">$14.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-PN-02</td>
+                            <td>Floor Panel (1&deg; slope, drain hole)</td>
+                            <td>5052-H32 Aluminum, 2.0mm</td>
+                            <td class="qty">1</td>
+                            <td class="num">$16.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-PN-03</td>
+                            <td>Door Panel (powder coated)</td>
+                            <td>5052-H32 Aluminum, 2.0mm</td>
+                            <td class="qty">1</td>
+                            <td class="num">$18.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-PN-04</td>
+                            <td>Door Frame (L-section perimeter)</td>
+                            <td>5052-H32 Aluminum, 3.0mm</td>
+                            <td class="qty">1 set</td>
+                            <td class="num">$10.00</td>
+                        </tr>
+                        <tr class="subtotal-row"><td colspan="4">Panels Subtotal</td><td class="num">$58.00</td></tr>
+
+                        <!-- Intake Modules -->
+                        <tr class="category-header"><td colspan="5">INTAKE MODULES (pair)</td></tr>
+                        <tr>
+                            <td class="part-no">APE-HC-IM-01</td>
+                            <td>Weather Louver Panel (45&deg; blades)</td>
+                            <td>5052-H32 Aluminum, 2.0mm</td>
+                            <td class="qty">2</td>
+                            <td class="num">$24.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-IM-02</td>
+                            <td>Internal Baffle (90&deg; turn)</td>
+                            <td>5052-H32 Aluminum, 2.0mm</td>
+                            <td class="qty">2</td>
+                            <td class="num">$12.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-IM-03</td>
+                            <td>Baffle Insulation (25mm)</td>
+                            <td>Mineral Wool, 48 kg/m&sup3;</td>
+                            <td class="qty">1.5 m&sup2;</td>
+                            <td class="num">$12.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-IM-04</td>
+                            <td>Perforated Liner (23% open)</td>
+                            <td>5052-H32 Aluminum, 1.0mm</td>
+                            <td class="qty">2</td>
+                            <td class="num">$10.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-IM-05</td>
+                            <td>Debris Screen (10mm mesh)</td>
+                            <td>316 SS Mesh, 1.5mm</td>
+                            <td class="qty">2</td>
+                            <td class="num">$14.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-IM-06</td>
+                            <td>Module Frame (C-channel)</td>
+                            <td>5052-H32 Aluminum, 2.0mm</td>
+                            <td class="qty">2 sets</td>
+                            <td class="num">$16.00</td>
+                        </tr>
+                        <tr class="subtotal-row"><td colspan="4">Intake Modules Subtotal</td><td class="num">$88.00</td></tr>
+
+                        <!-- Discharge Hood -->
+                        <tr class="category-header"><td colspan="5">DISCHARGE HOOD</td></tr>
+                        <tr>
+                            <td class="part-no">APE-HC-HD-01</td>
+                            <td>Hood Corner Posts (40&times;40&times;300mm)</td>
+                            <td>5052-H32 Aluminum, 3.0mm</td>
+                            <td class="qty">4</td>
+                            <td class="num">$12.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-HD-02-05</td>
+                            <td>Hood Rails (Top + Bottom)</td>
+                            <td>5052-H32 Aluminum, 3.0mm</td>
+                            <td class="qty">8</td>
+                            <td class="num">$16.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-HD-06</td>
+                            <td>Hood Ceiling Panel (solid)</td>
+                            <td>5052-H32 Aluminum, 2.0mm</td>
+                            <td class="qty">1</td>
+                            <td class="num">$10.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-HD-07</td>
+                            <td>Hood Ceiling Insulation (50mm)</td>
+                            <td>Mineral Wool, 48 kg/m&sup3;</td>
+                            <td class="qty">1</td>
+                            <td class="num">$8.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-HD-08</td>
+                            <td>Hood Ceiling Liner (23% open)</td>
+                            <td>5052-H32 Aluminum, 1.0mm</td>
+                            <td class="qty">1</td>
+                            <td class="num">$6.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-HD-09/10</td>
+                            <td>Hood Front/Back Walls</td>
+                            <td>5052-H32 Aluminum, 2.0mm</td>
+                            <td class="qty">2</td>
+                            <td class="num">$12.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-HD-11</td>
+                            <td>Hood Wall Insulation (50mm)</td>
+                            <td>Mineral Wool, 48 kg/m&sup3;</td>
+                            <td class="qty">2</td>
+                            <td class="num">$10.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-HD-12</td>
+                            <td>Hood Side Outlet Louvers (acoustic)</td>
+                            <td>5052-H32 Aluminum, 2.0mm</td>
+                            <td class="qty">2</td>
+                            <td class="num">$20.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-HD-13</td>
+                            <td>Hood Lifting Eyes (M10)</td>
+                            <td>316 SS, 8.0mm</td>
+                            <td class="qty">4</td>
+                            <td class="num">$12.00</td>
+                        </tr>
+                        <tr class="subtotal-row"><td colspan="4">Discharge Hood Subtotal</td><td class="num">$106.00</td></tr>
+
+                        <!-- Acoustic Materials -->
+                        <tr class="category-header"><td colspan="5">ACOUSTIC MATERIALS</td></tr>
+                        <tr>
+                            <td class="part-no">APE-HC-AC-04</td>
+                            <td>Butyl Damping Mat (panel CLD)</td>
+                            <td>Butyl-based, 2.0mm</td>
+                            <td class="qty">2.0 m&sup2;</td>
+                            <td class="num">$18.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-AC-05</td>
+                            <td>Mass Loaded Vinyl (door only)</td>
+                            <td>MLV, 3.0mm, 4.9 kg/m&sup2;</td>
+                            <td class="qty">0.5 m&sup2;</td>
+                            <td class="num">$8.00</td>
+                        </tr>
+                        <tr class="subtotal-row"><td colspan="4">Acoustic Materials Subtotal</td><td class="num">$26.00</td></tr>
+
+                        <!-- Sealing & Gaskets -->
+                        <tr class="category-header"><td colspan="5">SEALING &amp; GASKETS</td></tr>
+                        <tr>
+                            <td class="part-no">APE-HC-GK-01</td>
+                            <td>Door Perimeter Gasket (D-profile)</td>
+                            <td>EPDM Rubber</td>
+                            <td class="qty">4.5 m</td>
+                            <td class="num">$9.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-GK-02</td>
+                            <td>Hood Seating Gasket (10&times;20mm)</td>
+                            <td>EPDM Foam, closed-cell</td>
+                            <td class="qty">4.0 m</td>
+                            <td class="num">$8.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-GK-03</td>
+                            <td>Panel Edge Seal</td>
+                            <td>Silicone</td>
+                            <td class="qty">1 tube</td>
+                            <td class="num">$4.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-GK-04</td>
+                            <td>Cable Gland (IP66)</td>
+                            <td>Nylon, M20/M25</td>
+                            <td class="qty">2</td>
+                            <td class="num">$6.00</td>
+                        </tr>
+                        <tr class="subtotal-row"><td colspan="4">Sealing Subtotal</td><td class="num">$27.00</td></tr>
+
+                        <!-- Hardware -->
+                        <tr class="category-header"><td colspan="5">HARDWARE</td></tr>
+                        <tr>
+                            <td class="part-no">APE-HC-LT-01</td>
+                            <td>Door Compression Latch (padlock)</td>
+                            <td>316 SS</td>
+                            <td class="qty">3</td>
+                            <td class="num">$18.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-LT-02</td>
+                            <td>Hood Toggle Clamp (200kg)</td>
+                            <td>316 SS</td>
+                            <td class="qty">4</td>
+                            <td class="num">$16.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-LT-03</td>
+                            <td>Door Hinge (180&deg; opening)</td>
+                            <td>316 SS</td>
+                            <td class="qty">3</td>
+                            <td class="num">$12.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-FS-01-06</td>
+                            <td>Fastener Set (bolts, nuts, washers)</td>
+                            <td>316 SS, M5/M6/M8/M10</td>
+                            <td class="qty">1 set</td>
+                            <td class="num">$24.00</td>
+                        </tr>
+                        <tr class="subtotal-row"><td colspan="4">Hardware Subtotal</td><td class="num">$70.00</td></tr>
+
+                        <!-- Vibration Control -->
+                        <tr class="category-header"><td colspan="5">VIBRATION CONTROL</td></tr>
+                        <tr>
+                            <td class="part-no">APE-HC-VB-01</td>
+                            <td>Anti-Vibration Mount (adjustable)</td>
+                            <td>Rubber-Metal, M10</td>
+                            <td class="qty">4</td>
+                            <td class="num">$24.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-VB-02</td>
+                            <td>Mount Baseplate (100&times;100mm)</td>
+                            <td>316 SS, 3.0mm</td>
+                            <td class="qty">4</td>
+                            <td class="num">$12.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-VB-03</td>
+                            <td>Flexible Pipe Connector</td>
+                            <td>EPDM</td>
+                            <td class="qty">2</td>
+                            <td class="num">$14.00</td>
+                        </tr>
+                        <tr class="subtotal-row"><td colspan="4">Vibration Control Subtotal</td><td class="num">$50.00</td></tr>
+
+                        <!-- Drainage & Finishing -->
+                        <tr class="category-header"><td colspan="5">DRAINAGE &amp; FINISHING</td></tr>
+                        <tr>
+                            <td class="part-no">APE-HC-DR-01/02</td>
+                            <td>Floor Drain + Pipe</td>
+                            <td>316 SS + PVC</td>
+                            <td class="qty">1 set</td>
+                            <td class="num">$8.00</td>
+                        </tr>
+                        <tr>
+                            <td class="part-no">APE-HC-FN-01</td>
+                            <td>Powder Coating (2000hr salt spray)</td>
+                            <td>Polyester</td>
+                            <td class="qty">1 lot</td>
+                            <td class="num">$18.00</td>
+                        </tr>
+                        <tr class="subtotal-row"><td colspan="4">Drainage &amp; Finishing Subtotal</td><td class="num">$26.00</td></tr>
+
+                        <tr class="total-row">
+                            <td colspan="4"><strong>APE-HC-S TOTAL BOM COST</strong></td>
+                            <td class="num"><strong>~$285</strong></td>
+                        </tr>
+                    </table>
+
+                    <div class="note">
+                        <strong>Weight Estimate:</strong> Base Enclosure ~45kg + Hood ~25kg + Intake Modules ~15kg = <strong>~85kg total (empty)</strong>
+                    </div>
+                </section>
+            </div>
+
+            <!-- APE-HC-M BOM -->
+            <div id="medium" class="tab-content">
+                <section class="section">
+                    <h2>APE-HC-M Bill of Materials</h2>
+                    <p><strong>Internal:</strong> 1100 &times; 650 &times; 1000mm | <strong>External:</strong> 1300 &times; 850 &times; 1400mm | <strong>Capacity:</strong> Up to 20kW</p>
+
+                    <table>
+                        <tr>
+                            <th>Category</th>
+                            <th>Components</th>
+                            <th class="num">APE-HC-S</th>
+                            <th class="num">APE-HC-M Delta</th>
+                            <th class="num">APE-HC-M Total</th>
+                        </tr>
+                        <tr>
+                            <td>Structural Frame</td>
+                            <td>Same count, longer rails</td>
+                            <td class="num">$72</td>
+                            <td class="num">+$10</td>
+                            <td class="num">$82</td>
+                        </tr>
+                        <tr>
+                            <td>Panels</td>
+                            <td>Same count, larger area</td>
+                            <td class="num">$58</td>
+                            <td class="num">+$12</td>
+                            <td class="num">$70</td>
+                        </tr>
+                        <tr>
+                            <td>Intake Modules</td>
+                            <td>Larger louvers, more insulation (2.0 m&sup2;)</td>
+                            <td class="num">$88</td>
+                            <td class="num">+$14</td>
+                            <td class="num">$102</td>
+                        </tr>
+                        <tr>
+                            <td>Discharge Hood</td>
+                            <td>Larger hood, more insulation (2.5 m&sup2;)</td>
+                            <td class="num">$106</td>
+                            <td class="num">+$18</td>
+                            <td class="num">$124</td>
+                        </tr>
+                        <tr>
+                            <td>Acoustic Materials</td>
+                            <td>More butyl mat (3.0 m&sup2;), MLV (0.8 m&sup2;)</td>
+                            <td class="num">$26</td>
+                            <td class="num">+$8</td>
+                            <td class="num">$34</td>
+                        </tr>
+                        <tr>
+                            <td>Sealing &amp; Gaskets</td>
+                            <td>Longer runs (5.0m door, 4.5m hood)</td>
+                            <td class="num">$27</td>
+                            <td class="num">+$3</td>
+                            <td class="num">$30</td>
+                        </tr>
+                        <tr>
+                            <td>Hardware</td>
+                            <td>Same count</td>
+                            <td class="num">$70</td>
+                            <td class="num">+$4</td>
+                            <td class="num">$74</td>
+                        </tr>
+                        <tr>
+                            <td>Vibration Control</td>
+                            <td>Same count</td>
+                            <td class="num">$50</td>
+                            <td class="num">$0</td>
+                            <td class="num">$50</td>
+                        </tr>
+                        <tr>
+                            <td>Drainage &amp; Finishing</td>
+                            <td>More powder coating area</td>
+                            <td class="num">$26</td>
+                            <td class="num">+$6</td>
+                            <td class="num">$32</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="2"><strong>APE-HC-M TOTAL BOM COST</strong></td>
+                            <td class="num">$285</td>
+                            <td class="num">+$75</td>
+                            <td class="num"><strong>~$360</strong></td>
+                        </tr>
+                    </table>
+
+                    <div class="note">
+                        <strong>Weight Estimate:</strong> Base Enclosure ~60kg + Hood ~32kg + Intake Modules ~18kg = <strong>~110kg total (empty)</strong>
+                    </div>
+                </section>
+            </div>
+
+            <!-- APE-HC-L BOM -->
+            <div id="large" class="tab-content">
+                <section class="section">
+                    <h2>APE-HC-L Bill of Materials</h2>
+                    <p><strong>Internal:</strong> 1400 &times; 750 &times; 1100mm | <strong>External:</strong> 1600 &times; 950 &times; 1500mm | <strong>Capacity:</strong> Up to 35kW</p>
+
+                    <table>
+                        <tr>
+                            <th>Category</th>
+                            <th>Components</th>
+                            <th class="num">APE-HC-M</th>
+                            <th class="num">APE-HC-L Delta</th>
+                            <th class="num">APE-HC-L Total</th>
+                        </tr>
+                        <tr>
+                            <td>Structural Frame</td>
+                            <td>Taller posts (1100mm), 3 cross braces</td>
+                            <td class="num">$82</td>
+                            <td class="num">+$16</td>
+                            <td class="num">$98</td>
+                        </tr>
+                        <tr>
+                            <td>Panels</td>
+                            <td>Same count, larger area</td>
+                            <td class="num">$70</td>
+                            <td class="num">+$18</td>
+                            <td class="num">$88</td>
+                        </tr>
+                        <tr>
+                            <td>Intake Modules</td>
+                            <td>Larger, more insulation (2.5 m&sup2;)</td>
+                            <td class="num">$102</td>
+                            <td class="num">+$18</td>
+                            <td class="num">$120</td>
+                        </tr>
+                        <tr>
+                            <td>Discharge Hood</td>
+                            <td><strong>4-side outlet</strong>, taller (350mm), more insulation (3.5 m&sup2;)</td>
+                            <td class="num">$124</td>
+                            <td class="num">+$36</td>
+                            <td class="num">$160</td>
+                        </tr>
+                        <tr>
+                            <td>Acoustic Materials</td>
+                            <td>More butyl mat (4.0 m&sup2;), MLV (1.0 m&sup2;)</td>
+                            <td class="num">$34</td>
+                            <td class="num">+$10</td>
+                            <td class="num">$44</td>
+                        </tr>
+                        <tr>
+                            <td>Sealing &amp; Gaskets</td>
+                            <td>Longer runs, 3 cable glands</td>
+                            <td class="num">$30</td>
+                            <td class="num">+$6</td>
+                            <td class="num">$36</td>
+                        </tr>
+                        <tr>
+                            <td>Hardware</td>
+                            <td>4 door latches, 6 hood clamps, 4 hinges</td>
+                            <td class="num">$74</td>
+                            <td class="num">+$18</td>
+                            <td class="num">$92</td>
+                        </tr>
+                        <tr>
+                            <td>Vibration Control</td>
+                            <td>Same count (larger units may need different capacity)</td>
+                            <td class="num">$50</td>
+                            <td class="num">+$4</td>
+                            <td class="num">$54</td>
+                        </tr>
+                        <tr>
+                            <td>Drainage &amp; Finishing</td>
+                            <td>More powder coating area</td>
+                            <td class="num">$32</td>
+                            <td class="num">+$10</td>
+                            <td class="num">$42</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="2"><strong>APE-HC-L TOTAL BOM COST</strong></td>
+                            <td class="num">$360</td>
+                            <td class="num">+$125</td>
+                            <td class="num"><strong>~$485</strong></td>
+                        </tr>
+                    </table>
+
+                    <div class="note">
+                        <strong>Weight Estimate:</strong> Base Enclosure ~80kg + Hood ~40kg + Intake Modules ~25kg = <strong>~145kg total (empty)</strong>
+                    </div>
+
+                    <div class="note warning">
+                        <strong>APE-HC-L Key Difference:</strong> The L model uses a <strong>4-side discharge hood</strong> with acoustic louvers on all four sides (not just 2). This provides the additional outlet area needed for higher airflow capacity while maintaining low velocity for noise control.
+                    </div>
+                </section>
+            </div>
+        </div>
+
         <!-- Pricing Summary -->
         <section class="section">
-            <h2>4. Pricing Summary</h2>
+            <h2>Pricing Summary</h2>
 
             <table>
                 <tr>
                     <th>Model</th>
+                    <th>Capacity</th>
                     <th class="num">BOM Cost</th>
                     <th class="num">Labor + OH</th>
                     <th class="num">FOB Cost</th>
                     <th class="num">Target Retail (AED)</th>
                 </tr>
                 <tr>
-                    <td>APE-HC-M (Medium)</td>
-                    <td class="num">$185</td>
-                    <td class="num">$95</td>
-                    <td class="num">~$320</td>
-                    <td class="num">3,500 - 4,500</td>
-                </tr>
-                <tr>
-                    <td>APE-HC-L (Large)</td>
-                    <td class="num">$225</td>
-                    <td class="num">$110</td>
-                    <td class="num">~$385</td>
+                    <td>APE-HC-S</td>
+                    <td>Up to 12kW</td>
+                    <td class="num">~$285</td>
+                    <td class="num">~$115</td>
+                    <td class="num">~$460</td>
                     <td class="num">4,500 - 5,500</td>
                 </tr>
                 <tr>
-                    <td>APE-HC-G (Gas)</td>
-                    <td class="num">$155</td>
-                    <td class="num">$85</td>
-                    <td class="num">~$275</td>
-                    <td class="num">3,000 - 4,000</td>
+                    <td>APE-HC-M</td>
+                    <td>Up to 20kW</td>
+                    <td class="num">~$360</td>
+                    <td class="num">~$140</td>
+                    <td class="num">~$575</td>
+                    <td class="num">5,500 - 7,000</td>
                 </tr>
                 <tr>
-                    <td>APE-HC-XL (Extra Large)</td>
-                    <td class="num">$285</td>
-                    <td class="num">$130</td>
-                    <td class="num">~$475</td>
-                    <td class="num">6,000 - 7,500</td>
+                    <td>APE-HC-L</td>
+                    <td>Up to 35kW</td>
+                    <td class="num">~$485</td>
+                    <td class="num">~$175</td>
+                    <td class="num">~$760</td>
+                    <td class="num">7,500 - 9,500</td>
                 </tr>
             </table>
 
             <div class="note">
-                <strong>Labor + Overhead includes:</strong> Fabrication labor, QC inspection, packaging, and factory margin (~15%). FOB costs are estimates based on Eurotech manufacturing.
+                <strong>Labor + Overhead includes:</strong> Fabrication labor (~4-6 hours), QC inspection, acoustic testing, packaging, and factory margin (~15%). FOB costs are estimates based on Eurotech manufacturing. Final pricing subject to prototype validation.
+            </div>
+        </section>
+
+        <!-- Design Comparison -->
+        <section class="section">
+            <h2>V2 Acoustic vs V1 Louvered Design</h2>
+            <p>The V2 acoustic design adds significant noise reduction capability at higher cost and weight:</p>
+
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>V1 (Simple Louvered)</th>
+                    <th>V2 (Acoustic)</th>
+                </tr>
+                <tr>
+                    <td>Noise Reduction</td>
+                    <td>~10 dB (weather louvers only)</td>
+                    <td><strong>15-25 dB</strong> (full acoustic treatment)</td>
+                </tr>
+                <tr>
+                    <td>Intake Design</td>
+                    <td>Direct louvers (straight-through)</td>
+                    <td>90&deg; baffled turn with absorption</td>
+                </tr>
+                <tr>
+                    <td>Exhaust Design</td>
+                    <td>Open top with weather louvers</td>
+                    <td>Removable discharge hood with acoustic outlets</td>
+                </tr>
+                <tr>
+                    <td>Panel Treatment</td>
+                    <td>None</td>
+                    <td>Butyl damping mat (CLD)</td>
+                </tr>
+                <tr>
+                    <td>Vibration Isolation</td>
+                    <td>Basic feet</td>
+                    <td>Rubber-metal anti-vib mounts</td>
+                </tr>
+                <tr>
+                    <td>Service Access</td>
+                    <td>Front door only</td>
+                    <td>Front door + removable hood (crane lift)</td>
+                </tr>
+                <tr>
+                    <td>BOM Cost (Medium)</td>
+                    <td>~$185</td>
+                    <td>~$360 (+95%)</td>
+                </tr>
+                <tr>
+                    <td>Weight (Medium)</td>
+                    <td>~45kg</td>
+                    <td>~110kg (+144%)</td>
+                </tr>
+            </table>
+
+            <div class="note">
+                <strong>When to use V2:</strong> Noise-sensitive applications (residential near bedrooms/living areas, hospitality, premium installations). The V2 design targets near-inaudible operation at property boundaries.
             </div>
         </section>
 
         <!-- Color Options -->
         <section class="section">
-            <h2>5. Color Options & Pricing</h2>
+            <h2>Color Options &amp; Pricing</h2>
 
             <div class="grid-2">
                 <div class="card">
@@ -488,61 +853,39 @@
                     <p>RAL 7016 Anthracite Grey (default)<br>RAL 9010 Pure White<br>RAL 7035 Light Grey<br>RAL 9005 Jet Black</p>
                 </div>
                 <div class="card">
-                    <h4>Premium Colors (+AED 75)</h4>
+                    <h4>Premium Colors (+AED 150)</h4>
                     <p>RAL 1015 Light Ivory<br>RAL 7030 Stone Grey<br>RAL 6005 Moss Green<br>RAL 8011 Nut Brown<br>+ 6 more options</p>
                 </div>
             </div>
 
             <div class="card" style="margin-top: 1rem;">
-                <h4>Custom RAL Colors (+AED 150)</h4>
+                <h4>Custom RAL Colors (+AED 300)</h4>
                 <p>Any RAL color can be matched. 2-3 week additional lead time. Minimum order may apply for unusual colors.</p>
             </div>
         </section>
 
-        <!-- Comparison with APE-P -->
-        <section class="section">
-            <h2>6. APE-HC vs APE-P Cost Comparison</h2>
-            <p>Heater/Chiller enclosures are generally less expensive than Pump enclosures due to simpler construction (no acoustic foam, simpler ventilation).</p>
-
-            <table>
-                <tr>
-                    <th>Feature</th>
-                    <th>APE-P (Pump)</th>
-                    <th>APE-HC (Heater/Chiller)</th>
-                </tr>
-                <tr>
-                    <td>Panel construction</td>
-                    <td>Sealed + 25mm acoustic foam</td>
-                    <td>Louvered (no foam)</td>
-                </tr>
-                <tr>
-                    <td>Acoustic foam cost</td>
-                    <td>~$35-45</td>
-                    <td>$0</td>
-                </tr>
-                <tr>
-                    <td>Panel fabrication</td>
-                    <td>More complex (sealed joints)</td>
-                    <td>Simpler (louver press)</td>
-                </tr>
-                <tr>
-                    <td>Gaskets/seals</td>
-                    <td>Required (IP55)</td>
-                    <td>Minimal (IP44)</td>
-                </tr>
-                <tr>
-                    <td>Typical BOM difference</td>
-                    <td>Baseline</td>
-                    <td>~15-20% lower</td>
-                </tr>
-            </table>
-        </section>
-
-        <footer style="background: var(--primary-dark); color: white; padding: 1.5rem; text-align: center; margin-top: 2rem;">
-            <p style="opacity: 0.8;">APE-HC Series Heater/Chiller Enclosures - Apex Enclosures</p>
-            <p style="font-size: 0.85rem; opacity: 0.6;">Document Version: 1.0 | January 2026</p>
+        <footer style="background: var(--primary-dark); color: white; padding: 1.5rem; text-align: center; margin-top: 2rem; border-radius: 0 0 16px 16px;">
+            <p style="opacity: 0.8;">APE-HC Series Acoustic Heater/Chiller Enclosures - Apex Enclosures</p>
+            <p style="font-size: 0.85rem; opacity: 0.6;">Document Version: 2.0 | January 2026</p>
         </footer>
     </div>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            // Remove active from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            // Add active to clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
     <script src="nav.js"></script>
 </body>
 </html>
