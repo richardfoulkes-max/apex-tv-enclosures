@@ -195,6 +195,7 @@
             label: 'APE-S - Storage Enclosure',
             icon: '📦',
             items: [
+                { href: 'pool-storage-concepts.html', label: 'Concept Designs' },
                 { href: 'pool-storage-specification.html', label: 'Specification' }
             ]
         },
