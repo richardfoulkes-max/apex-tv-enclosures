@@ -401,6 +401,7 @@
             <div class="stat"><div class="stat-value" id="activeDeals">0</div><div class="stat-label">Active</div></div>
             <div class="stat"><div class="stat-value" id="pipelineValue">0</div><div class="stat-label">Pipeline</div></div>
             <div class="stat"><div class="stat-value" id="followupsToday">0</div><div class="stat-label">Follow-ups</div></div>
+            <button class="btn btn-outline btn-small" onclick="if(confirm('Reset CRM to default data? This will overwrite any changes.')) { localStorage.removeItem('apexCrmData'); localStorage.removeItem('apexCrmVersion'); location.reload(); }" style="margin-left: 1rem; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); color: white;">Reset</button>
         </div>
     </header>
 
@@ -2235,6 +2236,13 @@
         }
 
         // ============ INIT ============
+        // Force reset if ?reset in URL
+        if (window.location.search.includes('reset')) {
+            localStorage.removeItem('apexCrmData');
+            localStorage.removeItem('apexCrmVersion');
+            window.location.href = window.location.pathname;
+        }
+
         document.addEventListener('DOMContentLoaded', async () => {
             initSupabase();
             await loadData();

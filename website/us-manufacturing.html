@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>US Manufacturing Strategy | Apex Enclosures</title>
+    <title>Apex Enclosures - US Manufacturing Strategy</title>
     <style>
         :root {
             --primary: #0d9488;
@@ -20,18 +20,19 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
 
-        .main-container { padding: 2rem; max-width: 1400px; }
+        .main-container { padding: 2rem; max-width: 1100px; margin: 0 auto; }
 
         /* Header */
         .page-header {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            padding: 1.25rem 2rem;
+            padding: 1.5rem 2rem;
             margin: -2rem -2rem 2rem -2rem;
+            text-align: center;
         }
-        @media (max-width: 900px) { .page-header { display: none; } }
-        .page-header h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
-        .page-header .subtitle { opacity: 0.9; font-size: 0.9rem; }
+        .page-header h1 { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .page-header .subtitle { opacity: 0.9; font-size: 0.95rem; }
+        .page-header .logo { font-size: 0.85rem; opacity: 0.8; margin-bottom: 0.5rem; }
 
         /* Sections */
         .section {
@@ -60,7 +61,7 @@
         th { background: var(--bg); padding: 0.75rem; text-align: left; font-weight: 600; color: var(--primary-dark); border-bottom: 2px solid var(--border); }
         td { padding: 0.75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
         tr:hover { background: #f8fafc; }
-        .num { text-align: right; font-family: 'SF Mono', Monaco, monospace; }
+        .num { text-align: right; font-family: 'SF Mono', Monaco, Consolas, monospace; }
 
         /* Alerts */
         .alert {
@@ -93,7 +94,7 @@
         /* Cards */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
             margin: 1rem 0;
         }
@@ -109,9 +110,9 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            flex-wrap: wrap;
         }
         .card p { font-size: 0.85rem; margin: 0.5rem 0; color: var(--text-muted); }
-        .card .meta { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem; }
         .card a { color: var(--primary); text-decoration: none; }
         .card a:hover { text-decoration: underline; }
 
@@ -120,7 +121,7 @@
             display: inline-block;
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
         }
         .badge-success { background: #dcfce7; color: #166534; }
@@ -135,7 +136,6 @@
         /* Comparison table */
         .compare-good { background: #dcfce7; }
         .compare-bad { background: #fee2e2; }
-        .compare-neutral { background: #f3f4f6; }
 
         /* Links */
         a { color: var(--primary); }
@@ -147,7 +147,7 @@
             gap: 1rem;
             margin-bottom: 2rem;
         }
-        @media (max-width: 900px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 700px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
         .stat-card {
             background: white;
             border-radius: 12px;
@@ -167,11 +167,19 @@
             margin-top: 0.5rem;
         }
 
+        /* Print styles */
+        @media print {
+            body { background: white; }
+            .main-container { max-width: 100%; padding: 0; }
+            .page-header { margin: 0 0 1rem 0; }
+            .section { break-inside: avoid; border: 1px solid #ddd; }
+        }
     </style>
 </head>
 <body>
     <div class="main-container">
         <div class="page-header">
+            <div class="logo">APEX ENCLOSURES</div>
             <h1>US Manufacturing Strategy</h1>
             <p class="subtitle">Domestic production options to serve US market without tariff burden</p>
         </div>
@@ -187,8 +195,8 @@
                 <div class="label">Qualified US Suppliers</div>
             </div>
             <div class="stat-card">
-                <div class="value">4000hr</div>
-                <div class="label">AAMA 2605 Salt Spray</div>
+                <div class="value">1000hr</div>
+                <div class="label">AAMA 2604 Salt Spray</div>
             </div>
             <div class="stat-card">
                 <div class="value">2-4 wks</div>
@@ -208,7 +216,7 @@
             <table>
                 <tr>
                     <th>Cost Component</th>
-                    <th class="num">UAE → US</th>
+                    <th class="num">UAE to US</th>
                     <th class="num">US Domestic</th>
                 </tr>
                 <tr>
@@ -234,7 +242,7 @@
             </table>
 
             <div class="alert alert-success">
-                <strong>Key Insight:</strong> US manufacturing is cost-competitive after tariffs, offers faster lead times (2-4 weeks vs 6-8 weeks), and can achieve <strong>higher quality coating</strong> with AAMA 2605 (4000hr salt spray vs Eurotech's 2000hr).
+                <strong>Key Insight:</strong> US manufacturing is cost-competitive after tariffs, offers faster lead times (2-4 weeks vs 6-8 weeks), and can match Eurotech quality with <strong>AAMA 2604</strong> (1000hr salt spray - standard for exterior architectural work).
             </div>
 
             <h3>Regulatory References</h3>
@@ -247,7 +255,7 @@
 
         <!-- Tier 1 Manufacturers -->
         <section class="section">
-            <h2>2. Tier 1 Manufacturers (Best Match for Eurotech Quality)</h2>
+            <h2>2. Tier 1 Manufacturers (Best Match for Quality)</h2>
             <p>These manufacturers have ISO 9001 certification, proven outdoor aluminum enclosure experience, and in-house powder coating capabilities.</p>
 
             <div class="card-grid">
@@ -256,35 +264,29 @@
                     <p><strong>Location:</strong> Middletown, CT</p>
                     <p><strong>Experience:</strong> 65+ years (since 1954)</p>
                     <p><strong>Facility:</strong> 50,000+ sq ft</p>
-                    <p><strong>Capabilities:</strong> Weatherproof aluminum enclosures, electrical enclosures, NEMA cabinets, custom sheet metal fabrication</p>
-                    <p><strong>Materials:</strong> Aluminum, sheet metal, tubing</p>
+                    <p><strong>Capabilities:</strong> Weatherproof aluminum enclosures, electrical enclosures, NEMA cabinets</p>
                     <div class="contact-info">
                         <strong>Contact:</strong> (860) 346-9691<br>
-                        191 Saybrook Road, PO Box 738, Middletown CT 06457<br>
                         <a href="https://bullmetal.com" target="_blank">bullmetal.com</a>
                     </div>
                 </div>
 
                 <div class="card tier-1">
                     <h4>Accurate Metal Fabricating <span class="badge badge-success">ISO 9001:2015</span></h4>
-                    <p><strong>Location:</strong> Cicero, IL (Chicago suburbs)</p>
+                    <p><strong>Location:</strong> Cicero, IL (Chicago)</p>
                     <p><strong>Experience:</strong> 80+ years</p>
-                    <p><strong>Capabilities:</strong> Outdoor weatherproof aluminum enclosures, corrosion-resistant fabrication, in-house powder coating line</p>
-                    <p><strong>Equipment:</strong> 16 press brakes, 7 turrets, 3 laser tables, laser welders, powder coating line</p>
-                    <p><strong>Strengths:</strong> Large capacity, high-volume capability</p>
+                    <p><strong>Capabilities:</strong> Outdoor weatherproof aluminum, in-house powder coating line</p>
+                    <p><strong>Equipment:</strong> 16 press brakes, 7 turrets, 3 laser tables</p>
                     <div class="contact-info">
-                        <strong>Contact:</strong> Via website quote request<br>
                         <a href="https://www.accuratemetalfab.com" target="_blank">accuratemetalfab.com</a>
                     </div>
                 </div>
 
                 <div class="card tier-1">
-                    <h4>Bison ProFab <span class="badge badge-info">UL Approved</span> <span class="badge badge-success">IP66 Certified</span></h4>
+                    <h4>Bison ProFab <span class="badge badge-info">UL Approved</span> <span class="badge badge-success">IP66</span></h4>
                     <p><strong>Location:</strong> Texas</p>
-                    <p><strong>Certifications:</strong> Underwriter Laboratories (UL) approved, Intertek IP66 certified</p>
-                    <p><strong>Specialty:</strong> NEMA 4X aluminum enclosures, saltwater corrosion resistant</p>
-                    <p><strong>Materials:</strong> 3000, 5000 & 6000 series aluminum</p>
-                    <p><strong>Applications:</strong> Solar battery storage, telecom, traffic control, industrial</p>
+                    <p><strong>Certifications:</strong> UL approved, Intertek IP66 certified</p>
+                    <p><strong>Specialty:</strong> NEMA 4X aluminum, saltwater corrosion resistant</p>
                     <div class="contact-info">
                         <strong>Contact:</strong> (281) 356-0026<br>
                         <a href="https://www.bisonprofab.com" target="_blank">bisonprofab.com</a>
@@ -292,14 +294,12 @@
                 </div>
 
                 <div class="card tier-1">
-                    <h4>DDB Unlimited <span class="badge badge-success">ISO 9001</span> <span class="badge badge-warning">15-Year Warranty</span></h4>
+                    <h4>DDB Unlimited <span class="badge badge-success">ISO 9001</span> <span class="badge badge-warning">15-Yr Warranty</span></h4>
                     <p><strong>Location:</strong> Oklahoma</p>
                     <p><strong>Experience:</strong> Since 1996</p>
-                    <p><strong>Specialty:</strong> NEMA 3R to 4X cabinets, large inventory</p>
+                    <p><strong>Specialty:</strong> NEMA 3R to 4X cabinets</p>
                     <p><strong>Warranty:</strong> 15-year warranty on products</p>
-                    <p><strong>Strengths:</strong> On-site engineering, custom solutions, telecom expertise</p>
                     <div class="contact-info">
-                        <strong>Contact:</strong> Via website quote request<br>
                         <a href="https://www.ddbunlimited.com" target="_blank">ddbunlimited.com</a>
                     </div>
                 </div>
@@ -315,8 +315,7 @@
                     <h4>APX Enclosures</h4>
                     <p><strong>Location:</strong> USA</p>
                     <p><strong>Experience:</strong> Since 2001</p>
-                    <p><strong>Specialty:</strong> NEMA 3R/4X watertight aluminum enclosures</p>
-                    <p><strong>Strengths:</strong> Custom engineering team, non-corrosive weatherproof construction</p>
+                    <p><strong>Specialty:</strong> NEMA 3R/4X watertight aluminum</p>
                     <div class="contact-info">
                         <a href="https://apx-enclosures.com" target="_blank">apx-enclosures.com</a>
                     </div>
@@ -326,8 +325,7 @@
                     <h4>American Products <span class="badge badge-info">BABA Compliant</span></h4>
                     <p><strong>Location:</strong> Heartland USA</p>
                     <p><strong>Experience:</strong> Since 1989</p>
-                    <p><strong>Specialty:</strong> Outdoor cabinets and enclosures</p>
-                    <p><strong>Strengths:</strong> 100% Made in USA, American-sourced materials, Build America Buy America (BABA) compliant for government contracts</p>
+                    <p><strong>Strengths:</strong> 100% Made in USA, BABA compliant for government contracts</p>
                     <div class="contact-info">
                         <a href="https://amprod.us" target="_blank">amprod.us</a>
                     </div>
@@ -336,9 +334,8 @@
                 <div class="card tier-2">
                     <h4>Protocase <span class="badge badge-warning">2-3 Day Turnaround</span></h4>
                     <p><strong>Location:</strong> Nova Scotia, Canada (ships to US)</p>
-                    <p><strong>Strengths:</strong> No minimum order, 2-3 day turnaround, fully finished including powder coating</p>
-                    <p><strong>Coating:</strong> Sandtex polyester powder coat for outdoor durability</p>
-                    <p><strong>Best for:</strong> Prototypes, urgent orders, small batches</p>
+                    <p><strong>Strengths:</strong> No minimum order, 2-3 day turnaround</p>
+                    <p><strong>Best for:</strong> Prototypes, urgent orders</p>
                     <div class="contact-info">
                         <a href="https://www.protocase.com" target="_blank">protocase.com</a>
                     </div>
@@ -349,7 +346,7 @@
         <!-- Powder Coating Standards -->
         <section class="section">
             <h2>4. Powder Coating Quality Standards</h2>
-            <p>To match or exceed Eurotech's 2000hr salt spray rating, specify <strong>AAMA 2605</strong> coating standard.</p>
+            <p>Specify <strong>AAMA 2604</strong> coating standard - this is the industry standard for exterior architectural aluminum and any qualified fabricator can meet it.</p>
 
             <table>
                 <tr>
@@ -364,17 +361,17 @@
                     <td>Basic indoor/outdoor</td>
                     <td>Entry level, not recommended</td>
                 </tr>
-                <tr>
-                    <td>AAMA 2604</td>
-                    <td class="num">1000 hours</td>
-                    <td>Standard outdoor</td>
-                    <td>Good for most applications</td>
-                </tr>
                 <tr class="compare-good">
-                    <td><strong>AAMA 2605</strong></td>
-                    <td class="num"><strong>4000 hours</strong></td>
-                    <td><strong>Coastal / Marine</strong></td>
-                    <td><strong>Exceeds Eurotech (2000hr)</strong></td>
+                    <td><strong>AAMA 2604</strong></td>
+                    <td class="num"><strong>1000 hours</strong></td>
+                    <td><strong>Standard exterior</strong></td>
+                    <td><strong>Recommended - industry standard</strong></td>
+                </tr>
+                <tr>
+                    <td>AAMA 2605</td>
+                    <td class="num">4000 hours</td>
+                    <td>Coastal / Marine</td>
+                    <td>High-rise facades - overkill for enclosures</td>
                 </tr>
                 <tr>
                     <td>Eurotech (reference)</td>
@@ -384,32 +381,14 @@
                 </tr>
             </table>
 
-            <h3>AAMA 2605 Coating Suppliers</h3>
-            <div class="card-grid">
-                <div class="card">
-                    <h4>Gordon Inc.</h4>
-                    <p>AAMA 2605 super-durable polyester powder coating finishes with high impact, chemical, and UV resistance.</p>
-                    <p><strong>Warranty:</strong> Up to 20 years available</p>
-                    <p><a href="https://www.gordon-inc.com/aama-2605-powder-coat-finishes/" target="_blank">gordon-inc.com</a></p>
-                </div>
-                <div class="card">
-                    <h4>TIGER Drylac Series 75</h4>
-                    <p>Hyper Durable powder coating for architectural aluminum. Ideal for metal facades, marine equipment, curtain walls.</p>
-                    <p><strong>Testing:</strong> 10+ years South Florida outdoor exposure</p>
-                    <p><a href="https://www.tiger-coatings.com" target="_blank">tiger-coatings.com</a></p>
-                </div>
-                <div class="card">
-                    <h4>Keylink (Coastal Package)</h4>
-                    <p>AAMA 2605 standard coating + epoxy as part of Coastal Upgrade Package for installations within 1 mile of saltwater.</p>
-                    <p><a href="https://keylinkonline.com/speciality-powder-coating" target="_blank">keylinkonline.com</a></p>
-                </div>
+            <div class="alert alert-info">
+                <strong>Note:</strong> Established fabricators like Bull Metal and Accurate Metal Fab have in-house powder coating lines or trusted coating partners. Simply specify "AAMA 2604 minimum" in your RFQ - they'll handle the rest.
             </div>
         </section>
 
         <!-- Competitive Landscape -->
         <section class="section">
             <h2>5. US Competitor Manufacturing Intelligence</h2>
-            <p>Understanding where US competitors manufacture helps inform our strategy.</p>
 
             <table>
                 <tr>
@@ -422,24 +401,24 @@
                     <td><strong>The TV Shield / PEC</strong></td>
                     <td><span class="badge badge-success">USA - Zebulon, NC</span></td>
                     <td>HMWPE plastic, Triple-coated steel</td>
-                    <td>King Precision Solutions facility. No tariff burden.</td>
+                    <td>No tariff burden</td>
                 </tr>
                 <tr>
                     <td><strong>Apollo Enclosures</strong></td>
                     <td><span class="badge badge-warning">Unclear</span></td>
-                    <td>Zinc-plated steel (powder coated), some aluminum models</td>
-                    <td>May be US or imported. Steel also faces 50% tariff.</td>
+                    <td>Zinc-plated steel, some aluminum</td>
+                    <td>May face same tariffs if imported</td>
                 </tr>
                 <tr>
                     <td><strong>SunBrite TV</strong></td>
                     <td><span class="badge badge-info">Brand only</span></td>
                     <td>N/A - sells complete outdoor TVs</td>
-                    <td>Different business model (TV + enclosure integrated)</td>
+                    <td>Different business model</td>
                 </tr>
             </table>
 
             <div class="alert alert-info">
-                <strong>Competitive Insight:</strong> TV Shield's US manufacturing gives them a structural cost advantage. Our US production would level the playing field while Eurotech's superior quality (ISO certified, 2000hr+ salt spray) remains a differentiator in UAE/UK/EU markets.
+                <strong>Competitive Insight:</strong> TV Shield's US manufacturing gives them a structural cost advantage. Our US production would level the playing field.
             </div>
         </section>
 
@@ -481,8 +460,8 @@
                 <tr>
                     <td>Powder Coating Quality</td>
                     <td>2000hr salt spray</td>
-                    <td>4000hr (AAMA 2605)</td>
-                    <td><span class="badge badge-success">USA</span></td>
+                    <td>1000hr (AAMA 2604)</td>
+                    <td><span class="badge badge-warning">Comparable</span></td>
                 </tr>
                 <tr>
                     <td>Warranty Support</td>
@@ -499,66 +478,9 @@
             </table>
         </section>
 
-        <!-- RFQ Specifications -->
-        <section class="section">
-            <h2>7. RFQ Specification Template</h2>
-            <p>Use these specifications when requesting quotes from US manufacturers:</p>
-
-            <div class="card" style="background: #f8fafc;">
-                <h4>ATE-75 Outdoor TV Enclosure - Manufacturing RFQ</h4>
-
-                <h3 style="margin-top: 1rem;">Materials</h3>
-                <ul style="margin-left: 1.5rem; font-size: 0.9rem;">
-                    <li>Primary material: 5052-H32 Aluminum</li>
-                    <li>Frame thickness: 3.0mm</li>
-                    <li>Panel thickness: 2.0mm</li>
-                    <li>All fasteners: 316 Stainless Steel</li>
-                </ul>
-
-                <h3>Dimensions (External)</h3>
-                <ul style="margin-left: 1.5rem; font-size: 0.9rem;">
-                    <li>Width: 1760mm</li>
-                    <li>Height: 1120mm</li>
-                    <li>Depth: 160mm</li>
-                </ul>
-
-                <h3>Powder Coating</h3>
-                <ul style="margin-left: 1.5rem; font-size: 0.9rem;">
-                    <li>Standard: <strong>AAMA 2605</strong> (marine grade)</li>
-                    <li>Color: RAL 9005 Jet Black (standard)</li>
-                    <li>Salt spray rating: Minimum 4000 hours ASTM B117</li>
-                    <li>Pretreatment: Non-chrome 5-stage process</li>
-                </ul>
-
-                <h3>Construction Requirements</h3>
-                <ul style="margin-left: 1.5rem; font-size: 0.9rem;">
-                    <li>IP55 equivalent weatherproofing</li>
-                    <li>EPDM gaskets on all openings</li>
-                    <li>Hinged service door with compression latches</li>
-                    <li>Ventilation slots: 12× 3mm horizontal slots top and bottom</li>
-                    <li>Internal VESA mounting rails</li>
-                    <li>Cable management provisions</li>
-                </ul>
-
-                <h3>Quantities for Quote</h3>
-                <ul style="margin-left: 1.5rem; font-size: 0.9rem;">
-                    <li>Prototype: 1-2 units</li>
-                    <li>Initial production: 25 units</li>
-                    <li>Volume pricing: 50, 100, 200 units</li>
-                </ul>
-
-                <h3>Certifications Required</h3>
-                <ul style="margin-left: 1.5rem; font-size: 0.9rem;">
-                    <li>ISO 9001 quality management</li>
-                    <li>Salt spray test certificate</li>
-                    <li>Material certifications for aluminum</li>
-                </ul>
-            </div>
-        </section>
-
         <!-- Recommended Strategy -->
         <section class="section">
-            <h2>8. Recommended Manufacturing Strategy</h2>
+            <h2>7. Recommended Manufacturing Strategy</h2>
 
             <div class="alert alert-success">
                 <strong>Dual-Source Strategy:</strong> Use Eurotech for UAE/UK/EU markets (no tariffs) and US manufacturer for North American market.
@@ -600,8 +522,8 @@
             <h3>Next Steps</h3>
             <ol style="margin-left: 1.5rem; color: var(--text-muted);">
                 <li><strong>Request quotes</strong> from Bull Metal, Accurate Metal Fab, and Bison ProFab</li>
-                <li><strong>Specify AAMA 2605</strong> powder coating in all RFQs</li>
-                <li><strong>Request salt spray certifications</strong> and outdoor enclosure references</li>
+                <li><strong>Specify AAMA 2604 minimum</strong> powder coating in all RFQs</li>
+                <li><strong>Ask if coating is in-house or subcontracted</strong></li>
                 <li><strong>Order prototype</strong> from fastest responder (or Protocase for speed)</li>
                 <li><strong>Compare quality</strong> to Eurotech prototype</li>
                 <li><strong>Negotiate volume pricing</strong> for 50+ units</li>
@@ -610,7 +532,7 @@
 
         <!-- Scott Partnership Notes -->
         <section class="section">
-            <h2>9. Notes for Scott (UK/US Sales Partner)</h2>
+            <h2>8. Notes for Scott (UK/US Sales)</h2>
 
             <div class="card-grid">
                 <div class="card">
@@ -627,18 +549,19 @@
                     <p><strong>Landed cost:</strong> ~$1,150-1,500</p>
                     <p><strong>Tariff:</strong> 0%</p>
                     <p><strong>Lead time:</strong> 2-4 weeks</p>
-                    <p><strong>Quality story:</strong> AAMA 2605 (4000hr) - premium coastal grade</p>
+                    <p><strong>Quality story:</strong> AAMA 2604 (1000hr) - architectural exterior grade, Made in USA</p>
                 </div>
             </div>
 
             <div class="alert alert-warning">
-                <strong>Important:</strong> Do NOT ship UAE-manufactured aluminum enclosures to US customers. The 50% tariff makes this uneconomical and could result in customs complications. All US orders must be fulfilled from US manufacturing.
+                <strong>Important:</strong> Do NOT ship UAE-manufactured aluminum enclosures to US customers. The 50% tariff makes this uneconomical. All US orders must be fulfilled from US manufacturing.
             </div>
         </section>
 
-        <footer style="background: var(--primary-dark); color: white; padding: 1.5rem; text-align: center; margin-top: 2rem; border-radius: 0 0 16px 16px;">
-            <p style="opacity: 0.8;">Apex Enclosures - US Manufacturing Strategy</p>
-            <p style="font-size: 0.85rem; opacity: 0.6;">Research Date: January 2026 | Tariff data as of June 2025</p>
+        <footer style="background: var(--primary-dark); color: white; padding: 1.5rem; text-align: center; margin-top: 2rem; border-radius: 16px;">
+            <p style="opacity: 0.9; font-weight: 600;">Apex Enclosures</p>
+            <p style="font-size: 0.85rem; opacity: 0.7;">US Manufacturing Strategy | January 2026</p>
+            <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 0.5rem;">Tariff data as of June 2025 (Section 232)</p>
         </footer>
     </div>
     <script src="nav.js"></script>
