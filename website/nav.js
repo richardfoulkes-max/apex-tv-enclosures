@@ -111,7 +111,8 @@
                 { href: 'qc-checklist.html', label: 'QC Checklist' },
                 { href: 'compliance-guide.html', label: 'Compliance Guide' },
                 { href: 'manufacturer-rfq.html', label: 'RFQ Package' },
-                { href: 'china-suppliers.html', label: 'China Suppliers' }
+                { href: 'china-suppliers.html', label: 'China Suppliers' },
+                { href: 'us-manufacturing.html', label: 'US Manufacturing' }
             ]
         },
         market: {
