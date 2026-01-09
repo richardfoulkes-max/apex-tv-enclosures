@@ -206,6 +206,57 @@ nav.js injects: body { margin-left: 240px !important; }
 
 ## Recent Work History
 
+### Session: 2026-01-09 - US/EU Manufacturing Strategy + Market Analysis + Partnership Structure
+
+**Created 5 standalone HTML documents for Scott (potential UK/US sales partner):**
+
+**1. Apex-US-Manufacturing-Strategy.html** (updated)
+- US manufacturing options due to 50% Section 232 tariff on UAE aluminum
+- Tier 1: Bull Metal (Oklahoma), Metworks (Ohio), RPM Industries (Texas)
+- Tier 2: Fabrication Pros (Arizona), MetalTech Solutions (North Carolina)
+- Updated coating standard: AAMA 2605 → **AAMA 2604** (1000 hours salt spray - practical spec)
+- Removed separate coating suppliers (fabricators handle in-house)
+- RFQ template for US manufacturers
+
+**2. Apex-EU-Manufacturing-Strategy.html** (new)
+- UK manufacturers: Universal Fabrications (Coventry), Profab, C H Barnett
+- EU manufacturers: Delvalle Box (Spain), Enclosure-Tech (Lithuania), Animus (Poland)
+- Coating standard: **Qualicoat Class 2** (European equivalent to AAMA 2604)
+- Three-source strategy: Eurotech→GCC, UK manufacturer→UK, EU manufacturer→EU27
+
+**3. Apex-UK-EU-Market-Analysis.html** (new)
+- Market size: ~$210M Europe (24% of global)
+- Key competitors: Armagard (UK-made), ProofVision (UK outdoor TVs), Apollo (ships from UAE)
+- Climate challenge: 4-6 month outdoor season, rain/frost protection vs heat protection
+- **Verdict: "Proceed with Caution"** - worth exploring as secondary priority to Gulf
+
+**4. Apex-US-Market-Analysis.html** (new)
+- Market size: ~$613M North America (70% of global)
+- Key competitor: TV Shield - US-made, 47,500 installations, $3,149 for 75"
+- 50% tariff barrier requires US manufacturing
+- Investment needed: $100K-200K for credible US presence
+- **Verdict: "Not Now"** - long-term opportunity (2027+), focus on Gulf first
+
+**5. Apex-Partnership-Structure.html** (new)
+- Corporate structure: Apex Middle East + Apex West (US/UK/EU)
+- **Equity split:**
+  - Middle East: Richard 50% / Tom 50%
+  - US/UK/EU: Richard 25% / Tom 25% / Scott 50%
+- Partner roles and responsibilities documented
+- Key terms: IP ownership, profit distribution, exit/transfer provisions
+- Signature lines for agreement in principle
+
+**Key technical decisions:**
+- AAMA 2604 (1000hr salt spray) is practical spec vs 2605 (4000hr overkill)
+- Qualicoat Class 2 is European equivalent standard
+- Fabricators typically handle powder coating in-house
+
+**User philosophy confirmed:** Motivated partners > optimized equity percentages at early stage
+
+**All documents copied to ~/Downloads for sharing with Scott**
+
+---
+
 ### Session: 2026-01-08 (PM) - APE-HC Product Line + Eurotech Factory Visit
 
 **Visited Eurotech Metal Industries - confirmed as manufacturing partner:**

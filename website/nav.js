@@ -83,6 +83,13 @@
                 { href: 'index.html', label: 'Home' }
             ]
         },
+        designStandards: {
+            label: 'Design Standards',
+            icon: '✨',
+            items: [
+                { href: 'design-philosophy.html', label: 'Premium Design Philosophy' }
+            ]
+        },
         tvEnclosures: {
             label: 'ATE - TV Enclosures',
             icon: '📺',
@@ -156,6 +163,13 @@
                 { href: 'index.html', label: 'Home' }
             ]
         },
+        designStandards: {
+            label: 'Design Standards',
+            icon: '✨',
+            items: [
+                { href: 'design-philosophy.html', label: 'Premium Design Philosophy' }
+            ]
+        },
         poolPump: {
             label: 'APE-P - Pump Enclosure',
             icon: '🔵',
@@ -192,11 +206,13 @@
             ]
         },
         poolMarket: {
-            label: 'Market Research',
+            label: 'Market & Sales',
             icon: '📈',
             items: [
-                { href: 'pool-market-research.html', label: 'Pool Market Research' },
-                { href: 'pool-selling-points.html', label: 'Selling Points' }
+                { href: 'pool-sales-strategy.html', label: 'Sales Strategy' },
+                { href: 'pool-market-research.html', label: 'Market Research' },
+                { href: 'pool-selling-points.html', label: 'Selling Points' },
+                { href: 'pool-contractors.html', label: 'Contractor Landing Page' }
             ]
         }
     };

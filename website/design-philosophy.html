@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Design Philosophy | Apex Enclosures</title>
+    <style>
+        :root {
+            --primary: #0d9488;
+            --primary-dark: #0f766e;
+            --accent: #f59e0b;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --gold: #d4a853;
+            --silver: #9ca3af;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+        .main-container { padding: 2rem; max-width: 1200px; margin: 0 auto; }
+
+        .page-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 3rem 2rem;
+            margin: -2rem -2rem 3rem -2rem;
+            text-align: center;
+        }
+        .page-header .logo {
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+        .page-header .tagline {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+        .page-header .version {
+            display: inline-block;
+            background: var(--gold);
+            color: #1a1a2e;
+            padding: 0.35rem 1.25rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        /* Section Styling */
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+        .section h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .section h3 {
+            font-size: 1.15rem;
+            color: var(--primary-dark);
+            margin: 2rem 0 1rem;
+        }
+        .section h4 {
+            font-size: 1rem;
+            color: var(--text);
+            margin: 1.5rem 0 0.75rem;
+        }
+        .section p { color: var(--text-muted); margin-bottom: 1rem; }
+
+        /* Philosophy Statement */
+        .philosophy-statement {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            padding: 3rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .philosophy-statement blockquote {
+            font-size: 1.5rem;
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+        .philosophy-statement cite {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            font-style: normal;
+        }
+
+        /* Principle Cards */
+        .principle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        @media (max-width: 900px) { .principle-grid { grid-template-columns: 1fr; } }
+
+        .principle-card {
+            background: linear-gradient(135deg, #fafafa, #f5f5f5);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .principle-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+        .principle-card .number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0 auto 1rem;
+        }
+        .principle-card h4 {
+            font-size: 1.1rem;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+        }
+        .principle-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Comparison Grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        @media (max-width: 768px) { .comparison-grid { grid-template-columns: 1fr; } }
+
+        .comparison-box {
+            padding: 2rem;
+            border-radius: 12px;
+        }
+        .comparison-box.bad {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+        }
+        .comparison-box.good {
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+        }
+        .comparison-box h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .comparison-box.bad h4 { color: #991b1b; }
+        .comparison-box.good h4 { color: #065f46; }
+        .comparison-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .comparison-box li {
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        .comparison-box.bad li::before { content: '✗'; color: #ef4444; }
+        .comparison-box.good li::before { content: '✓'; color: #10b981; font-weight: bold; }
+
+        /* Spec Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        th {
+            background: #1a1a2e;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 500;
+        }
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+        tr:hover { background: #f8fafc; }
+        .spec-value { font-weight: 600; color: var(--primary-dark); }
+
+        /* Detail Cards */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 768px) { .detail-grid { grid-template-columns: 1fr; } }
+
+        .detail-card {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .detail-card h5 {
+            color: var(--primary-dark);
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .detail-card p {
+            font-size: 0.85rem;
+            margin: 0;
+        }
+        .detail-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0 0;
+        }
+        .detail-card li {
+            font-size: 0.85rem;
+            padding: 0.25rem 0;
+            color: var(--text-muted);
+        }
+
+        /* Material Swatches */
+        .material-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 768px) { .material-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        .material-swatch {
+            text-align: center;
+        }
+        .material-swatch .swatch {
+            height: 80px;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 0.5rem;
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.8);
+        }
+        .material-swatch .name {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .material-swatch .code {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Feature Showcase */
+        .feature-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        @media (max-width: 900px) { .feature-showcase { grid-template-columns: 1fr; } }
+
+        .feature-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .feature-item:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+        .feature-item .image {
+            height: 160px;
+            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        .feature-item .content {
+            padding: 1.25rem;
+        }
+        .feature-item h5 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .feature-item p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Premium Badge */
+        .premium-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--gold), #b8860b);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+        .timeline-item h5 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+        .timeline-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Quote Block */
+        .quote-block {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .quote-block p {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--primary-dark);
+            margin: 0;
+        }
+
+        /* SVG Diagrams */
+        .diagram-container {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="page-header">
+            <div class="logo">APEX ENCLOSURES</div>
+            <h1>Premium Design Philosophy</h1>
+            <p class="tagline">Beautiful objects that happen to protect your equipment</p>
+            <span class="version">VERSION 2.0 - THE APEX VISION</span>
+        </div>
+
+        <!-- Philosophy Statement -->
+        <div class="philosophy-statement">
+            <blockquote>
+                "The only pool enclosure you'll actually want people to see."
+            </blockquote>
+            <cite>— The Apex Design Principle</cite>
+        </div>
+
+        <!-- The Vision -->
+        <section class="section">
+            <h2>The Vision: Apple Meets Architecture</h2>
+
+            <p>Most enclosures are designed by engineers thinking about function. We design like product designers thinking about desire. The goal isn't just to protect equipment—it's to create beautiful objects that elevate outdoor spaces.</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-box bad">
+                    <h4>❌ Industry Standard</h4>
+                    <ul>
+                        <li>Visible screws and fasteners everywhere</li>
+                        <li>Industrial louvers and grilles</li>
+                        <li>Cheap plastic handles and latches</li>
+                        <li>Obvious seams and joints</li>
+                        <li>Generic powder coat finish</li>
+                        <li>"It works" mentality</li>
+                        <li>Assembly required with basic manual</li>
+                        <li>Ships in plain cardboard</li>
+                    </ul>
+                </div>
+                <div class="comparison-box good">
+                    <h4>✓ The Apex Standard</h4>
+                    <ul>
+                        <li>All fasteners hidden or recessed</li>
+                        <li>Architectural ventilation integrated into design</li>
+                        <li>Premium stainless steel hardware</li>
+                        <li>Seamless panels with intentional shadow lines</li>
+                        <li>Precision finishes with anti-fingerprint coating</li>
+                        <li>"People will photograph this" mentality</li>
+                        <li>Pre-assembled, visual setup guide</li>
+                        <li>Premium unboxing experience</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="quote-block">
+                <p>"Design is not just what it looks like and feels like. Design is how it works."<br>— Steve Jobs</p>
+            </div>
+        </section>
+
+        <!-- The Six Principles -->
+        <section class="section">
+            <h2>The Six Design Principles</h2>
+
+            <div class="principle-grid">
+                <div class="principle-card">
+                    <div class="number">1</div>
+                    <h4>Hide the Ugly</h4>
+                    <p>Every screw, hinge, latch, and joint is either hidden, recessed, or made beautiful. If we can't hide it, we make it a feature.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="number">2</div>
+                    <h4>Consistent Language</h4>
+                    <p>Same corner radius (12mm), same shadow gaps (3mm), same panel depths across every product. One design family.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="number">3</div>
+                    <h4>Delight in Details</h4>
+                    <p>Soft-close doors, satisfying magnetic latches, automatic interior lighting. Every interaction should feel premium.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="number">4</div>
+                    <h4>Materials Matter</h4>
+                    <p>Brushed stainless accents, precision edges, quality gaskets. You can feel the difference before you see it.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="number">5</div>
+                    <h4>Invisible Technology</h4>
+                    <p>Smart features that work silently. Temperature monitoring, auto-ventilation, alerts—without visible sensors or wires.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="number">6</div>
+                    <h4>Complete Experience</h4>
+                    <p>From unboxing to installation to daily use. Premium packaging, beautiful documentation, white-glove service option.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design Specifications -->
+        <section class="section">
+            <h2>Design Language Specifications</h2>
+
+            <h3>Geometry & Proportions</h3>
+            <table>
+                <tr>
+                    <th>Element</th>
+                    <th>Specification</th>
+                    <th>Rationale</th>
+                </tr>
+                <tr>
+                    <td>Corner Radius (External)</td>
+                    <td class="spec-value">12mm</td>
+                    <td>Consistent across all products. Soft but not childish.</td>
+                </tr>
+                <tr>
+                    <td>Corner Radius (Internal/Details)</td>
+                    <td class="spec-value">6mm</td>
+                    <td>Half of external for visual hierarchy</td>
+                </tr>
+                <tr>
+                    <td>Panel Gap / Shadow Line</td>
+                    <td class="spec-value">3mm</td>
+                    <td>Visible intentional gap creates depth perception</td>
+                </tr>
+                <tr>
+                    <td>Frame Depth</td>
+                    <td class="spec-value">25mm</td>
+                    <td>Creates substantial "picture frame" effect</td>
+                </tr>
+                <tr>
+                    <td>Panel Recess</td>
+                    <td class="spec-value">5mm</td>
+                    <td>Panels sit behind frame, creating shadow</td>
+                </tr>
+                <tr>
+                    <td>Minimum Touch Target</td>
+                    <td class="spec-value">44mm</td>
+                    <td>Comfortable finger operation (Apple HIG standard)</td>
+                </tr>
+                <tr>
+                    <td>Logo Size</td>
+                    <td class="spec-value">40mm width</td>
+                    <td>Subtle, confident. Embossed, not applied.</td>
+                </tr>
+            </table>
+
+            <h3>Ventilation Design</h3>
+            <div class="diagram-container">
+                <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background -->
+                    <rect x="0" y="0" width="600" height="200" fill="#f8fafc"/>
+
+                    <!-- Industrial (Bad) -->
+                    <g transform="translate(50, 30)">
+                        <text x="75" y="0" text-anchor="middle" font-size="12" fill="#991b1b" font-weight="600">Industrial Louvers</text>
+                        <rect x="0" y="20" width="150" height="120" fill="#e5e7eb" stroke="#9ca3af" stroke-width="2" rx="4"/>
+                        <!-- Ugly louvers -->
+                        <line x1="20" y1="40" x2="130" y2="40" stroke="#6b7280" stroke-width="8"/>
+                        <line x1="20" y1="60" x2="130" y2="60" stroke="#6b7280" stroke-width="8"/>
+                        <line x1="20" y1="80" x2="130" y2="80" stroke="#6b7280" stroke-width="8"/>
+                        <line x1="20" y1="100" x2="130" y2="100" stroke="#6b7280" stroke-width="8"/>
+                        <line x1="20" y1="120" x2="130" y2="120" stroke="#6b7280" stroke-width="8"/>
+                        <text x="75" y="165" text-anchor="middle" font-size="10" fill="#991b1b">Visible, industrial, dated</text>
+                    </g>
+
+                    <!-- Apex (Good) -->
+                    <g transform="translate(350, 30)">
+                        <text x="100" y="0" text-anchor="middle" font-size="12" fill="#065f46" font-weight="600">Apex Architectural Slots</text>
+                        <rect x="0" y="20" width="200" height="120" fill="#1f2937" stroke="#374151" stroke-width="2" rx="12"/>
+                        <!-- Clean shadow line slots -->
+                        <rect x="15" y="35" width="170" height="2" fill="#374151"/>
+                        <rect x="15" y="50" width="170" height="2" fill="#374151"/>
+                        <rect x="15" y="65" width="170" height="2" fill="#374151"/>
+                        <rect x="15" y="80" width="170" height="2" fill="#374151"/>
+                        <rect x="15" y="95" width="170" height="2" fill="#374151"/>
+                        <rect x="15" y="110" width="170" height="2" fill="#374151"/>
+                        <rect x="15" y="125" width="170" height="2" fill="#374151"/>
+                        <text x="100" y="165" text-anchor="middle" font-size="10" fill="#065f46">Minimal, architectural, timeless</text>
+                    </g>
+                </svg>
+            </div>
+            <p style="text-align: center; font-size: 0.85rem;">Ventilation slots are 3mm wide with 12mm spacing—enough airflow, minimal visual impact. Slots align with panel edges for clean geometry.</p>
+        </section>
+
+        <!-- Hardware & Interaction -->
+        <section class="section">
+            <h2>Hardware & Interaction Design</h2>
+
+            <h3>Door Systems</h3>
+            <div class="detail-grid">
+                <div class="detail-card">
+                    <h5>🚪 Hinges</h5>
+                    <p><strong>Concealed European hinges</strong> (Blum or equivalent)</p>
+                    <ul>
+                        <li>Soft-close damping integrated</li>
+                        <li>3-way adjustable for perfect alignment</li>
+                        <li>165° opening for full access</li>
+                        <li>No visible hardware from outside</li>
+                    </ul>
+                </div>
+                <div class="detail-card">
+                    <h5>🔒 Latches</h5>
+                    <p><strong>Push-to-open magnetic latches</strong></p>
+                    <ul>
+                        <li>No visible handles required</li>
+                        <li>Push panel to release, swings open</li>
+                        <li>Magnetic hold when closed</li>
+                        <li>Optional key lock for security</li>
+                    </ul>
+                </div>
+                <div class="detail-card">
+                    <h5>💡 Lighting</h5>
+                    <p><strong>Integrated LED strip</strong> (warm white 3000K)</p>
+                    <ul>
+                        <li>Auto-on when door opens</li>
+                        <li>Magnetic door switch trigger</li>
+                        <li>Illuminates entire interior</li>
+                        <li>Low power (2W), long life (50,000 hrs)</li>
+                    </ul>
+                </div>
+                <div class="detail-card">
+                    <h5>🔧 Service Access</h5>
+                    <p><strong>Tool-free panel removal</strong></p>
+                    <ul>
+                        <li>Quarter-turn cam locks (recessed)</li>
+                        <li>Panels lift off completely</li>
+                        <li>Full 360° equipment access</li>
+                        <li>One person operation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Premium Hardware Specifications</h3>
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>Specification</th>
+                    <th>Upgrade From Standard</th>
+                </tr>
+                <tr>
+                    <td>Hinges</td>
+                    <td class="spec-value">Blum CLIP top BLUMOTION</td>
+                    <td>Generic piano hinges → Concealed soft-close</td>
+                </tr>
+                <tr>
+                    <td>Magnetic Catch</td>
+                    <td class="spec-value">TIP-ON push latch + 8kg magnet</td>
+                    <td>Visible handles → Push-to-open</td>
+                </tr>
+                <tr>
+                    <td>Lock (optional)</td>
+                    <td class="spec-value">EMKA 1000 series compression</td>
+                    <td>Padlock hasp → Integrated lock</td>
+                </tr>
+                <tr>
+                    <td>Gas Struts</td>
+                    <td class="spec-value">Stabilus LIFT-O-MAT</td>
+                    <td>Manual hold → Auto-hold any position</td>
+                </tr>
+                <tr>
+                    <td>Gaskets</td>
+                    <td class="spec-value">EPDM 65 Shore A, black</td>
+                    <td>Generic rubber → Automotive-grade seal</td>
+                </tr>
+                <tr>
+                    <td>LED Strip</td>
+                    <td class="spec-value">IP65 COB LED, 3000K, 90 CRI</td>
+                    <td>None → Automatic interior lighting</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Materials & Finishes -->
+        <section class="section">
+            <h2>Materials & Finishes</h2>
+
+            <h3>Signature Finishes</h3>
+            <div class="material-grid">
+                <div class="material-swatch">
+                    <div class="swatch" style="background: linear-gradient(135deg, #1a1a2e, #0f0f1a);">Signature</div>
+                    <div class="name">Midnight</div>
+                    <div class="code">RAL 9005 + Soft Touch</div>
+                </div>
+                <div class="material-swatch">
+                    <div class="swatch" style="background: linear-gradient(135deg, #d4d4d8, #a1a1aa); color: #333;">Metallic</div>
+                    <div class="name">Lunar Silver</div>
+                    <div class="code">RAL 9006 Metallic</div>
+                </div>
+                <div class="material-swatch">
+                    <div class="swatch" style="background: linear-gradient(135deg, #383e42, #2d3134);">Classic</div>
+                    <div class="name">Graphite</div>
+                    <div class="code">RAL 7016 Matte</div>
+                </div>
+                <div class="material-swatch">
+                    <div class="swatch" style="background: linear-gradient(135deg, #f5f5f4, #e7e5e4); color: #333;">Light</div>
+                    <div class="name">Cloud White</div>
+                    <div class="code">RAL 9010 Satin</div>
+                </div>
+            </div>
+
+            <h3>Premium Finish Options</h3>
+            <div class="material-grid">
+                <div class="material-swatch">
+                    <div class="swatch" style="background: linear-gradient(135deg, #92400e, #78350f);">Premium</div>
+                    <div class="name">Bronze</div>
+                    <div class="code">RAL 8028 + Metallic</div>
+                </div>
+                <div class="material-swatch">
+                    <div class="swatch" style="background: linear-gradient(135deg, #0d9488, #0f766e);">Accent</div>
+                    <div class="name">Ocean Teal</div>
+                    <div class="code">Custom Metallic</div>
+                </div>
+                <div class="material-swatch">
+                    <div class="swatch" style="background: linear-gradient(135deg, #c9a66b, #b8860b);">Luxury</div>
+                    <div class="name">Champagne Gold</div>
+                    <div class="code">Anodized Aluminum</div>
+                </div>
+                <div class="material-swatch">
+                    <div class="swatch" style="background: linear-gradient(135deg, #8b7355, #6b5344); color: #ddd;">Natural</div>
+                    <div class="name">Driftwood</div>
+                    <div class="code">Wood-Grain Film</div>
+                </div>
+            </div>
+
+            <h3>Finish Specifications</h3>
+            <table>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Standard</th>
+                    <th>Premium (+AED 150)</th>
+                    <th>Luxury (+AED 400)</th>
+                </tr>
+                <tr>
+                    <td>Coating Type</td>
+                    <td>Polyester Powder Coat</td>
+                    <td>PVDF Powder Coat</td>
+                    <td>Anodized Aluminum</td>
+                </tr>
+                <tr>
+                    <td>Thickness</td>
+                    <td>60-80 microns</td>
+                    <td>80-100 microns</td>
+                    <td>25 microns (anodic layer)</td>
+                </tr>
+                <tr>
+                    <td>Salt Spray Rating</td>
+                    <td>1000 hours</td>
+                    <td>2000 hours</td>
+                    <td>3000+ hours</td>
+                </tr>
+                <tr>
+                    <td>UV Resistance</td>
+                    <td>5 years</td>
+                    <td>10 years</td>
+                    <td>20+ years</td>
+                </tr>
+                <tr>
+                    <td>Texture</td>
+                    <td>Standard matte</td>
+                    <td>Soft-touch / Anti-fingerprint</td>
+                    <td>Brushed metallic</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Smart Features -->
+        <section class="section">
+            <h2>Invisible Technology</h2>
+
+            <p>Smart features that work silently in the background—no visible sensors, no ugly displays, no complexity. Technology should enhance, not intrude.</p>
+
+            <div class="feature-showcase">
+                <div class="feature-item">
+                    <div class="image">🌡️</div>
+                    <div class="content">
+                        <h5>Climate Monitoring</h5>
+                        <p>Hidden temperature and humidity sensors with app alerts. Know when equipment is stressed before it fails.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="image">🌀</div>
+                    <div class="content">
+                        <h5>Auto Ventilation</h5>
+                        <p>Thermostat-controlled fans activate automatically at 45°C. Silent operation, solar-powered option.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="image">📱</div>
+                    <div class="content">
+                        <h5>Connected Home</h5>
+                        <p>Integration with HomeKit, Google Home, Alexa. "Hey Siri, what's my pool equipment temperature?"</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Smart Features Roadmap</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h5>Now: Active Cooling</h5>
+                    <p>Thermostat-controlled DC fans. Manual threshold setting. Optional solar power kit.</p>
+                </div>
+                <div class="timeline-item">
+                    <h5>Q2 2026: Temperature Alerts</h5>
+                    <p>WiFi sensor module with smartphone app. Push notifications for high temp, door open, humidity alerts.</p>
+                </div>
+                <div class="timeline-item">
+                    <h5>Q3 2026: Smart Home Integration</h5>
+                    <p>HomeKit, Google Home, Alexa compatibility. Voice queries, automation triggers.</p>
+                </div>
+                <div class="timeline-item">
+                    <h5>Q4 2026: Predictive Maintenance</h5>
+                    <p>ML-based equipment health monitoring. "Your pump is running hot—schedule service before failure."</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Unboxing Experience -->
+        <section class="section">
+            <h2>The Unboxing Experience</h2>
+
+            <p>First impressions matter. The moment a customer receives their Apex enclosure should feel like opening a premium product, not receiving industrial equipment.</p>
+
+            <div class="detail-grid">
+                <div class="detail-card">
+                    <h5>📦 Packaging</h5>
+                    <ul>
+                        <li>Clean white outer box with minimal branding</li>
+                        <li>Protective foam corners, not loose packing peanuts</li>
+                        <li>All panels wrapped individually</li>
+                        <li>Hardware in labeled compartments</li>
+                        <li>QR code on box links to setup video</li>
+                    </ul>
+                </div>
+                <div class="detail-card">
+                    <h5>📄 Documentation</h5>
+                    <ul>
+                        <li>Visual-first setup guide (minimal text)</li>
+                        <li>Premium paper stock, quality printing</li>
+                        <li>Quick-start card (not a 50-page manual)</li>
+                        <li>Warranty card with serial number</li>
+                        <li>Thank you note from the team</li>
+                    </ul>
+                </div>
+                <div class="detail-card">
+                    <h5>🔧 Included Accessories</h5>
+                    <ul>
+                        <li>Magnetic bit driver with all needed bits</li>
+                        <li>Touch-up paint pen matching finish</li>
+                        <li>Microfiber cleaning cloth</li>
+                        <li>Silicone lubricant for hinges</li>
+                        <li>Cable ties and clips</li>
+                    </ul>
+                </div>
+                <div class="detail-card">
+                    <h5>🎁 White Glove Option</h5>
+                    <ul>
+                        <li>Scheduled delivery window</li>
+                        <li>Two-person delivery team</li>
+                        <li>Placement in final location</li>
+                        <li>Packaging removal and recycling</li>
+                        <li>10-minute orientation walkthrough</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Family -->
+        <section class="section">
+            <h2>The Apex Product Family</h2>
+
+            <p>Every Apex product shares the same design DNA. A customer should be able to look at any of our enclosures and immediately know it's an Apex.</p>
+
+            <table>
+                <tr>
+                    <th>Product</th>
+                    <th>Application</th>
+                    <th>Shared Design Elements</th>
+                </tr>
+                <tr>
+                    <td><strong>ATE Series</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">TV Enclosures</span></td>
+                    <td>Outdoor televisions</td>
+                    <td>12mm radii, 3mm shadow lines, hidden fasteners, premium finishes, soft-close doors</td>
+                </tr>
+                <tr>
+                    <td><strong>APE-P Series</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Pump Enclosures</span></td>
+                    <td>Pool pumps, filters, chlorinators</td>
+                    <td>12mm radii, 3mm shadow lines, hidden fasteners, premium finishes, soft-close doors</td>
+                </tr>
+                <tr>
+                    <td><strong>APE-HC Series</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Heater/Chiller</span></td>
+                    <td>Heat pumps, chillers, gas heaters</td>
+                    <td>12mm radii, 3mm shadow lines, hidden fasteners, premium finishes, architectural louvers</td>
+                </tr>
+                <tr>
+                    <td><strong>APE-S Series</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Storage</span></td>
+                    <td>Pool chemicals, tools, covers</td>
+                    <td>12mm radii, 3mm shadow lines, hidden fasteners, premium finishes, soft-close doors</td>
+                </tr>
+            </table>
+
+            <h3>Accessories (Future)</h3>
+            <div class="detail-grid">
+                <div class="detail-card">
+                    <h5>🌿 Integrated Planter</h5>
+                    <p>Top-mounted planter box that softens the enclosure into landscape. Drip irrigation compatible.</p>
+                </div>
+                <div class="detail-card">
+                    <h5>🔌 Cable Management</h5>
+                    <p>Matching cable conduit covers that route power and control cables invisibly.</p>
+                </div>
+                <div class="detail-card">
+                    <h5>🔊 Speaker Mount</h5>
+                    <p>Integrated mounting plate for outdoor speakers. Same finish as enclosure.</p>
+                </div>
+                <div class="detail-card">
+                    <h5>💡 Landscape Lighting</h5>
+                    <p>Subtle downlights integrated into enclosure frame. Illuminates surrounding area.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design Review Checklist -->
+        <section class="section">
+            <h2>Design Review Checklist</h2>
+
+            <p>Before any Apex product ships, it must pass this design review:</p>
+
+            <table>
+                <tr>
+                    <th style="width: 50%;">Checkpoint</th>
+                    <th>Pass Criteria</th>
+                </tr>
+                <tr>
+                    <td>All external fasteners hidden or recessed</td>
+                    <td>Zero visible screw heads on exterior surfaces</td>
+                </tr>
+                <tr>
+                    <td>Corner radii consistent</td>
+                    <td>12mm external, 6mm internal on all corners</td>
+                </tr>
+                <tr>
+                    <td>Shadow lines uniform</td>
+                    <td>3mm gaps consistent around all panels (±0.5mm)</td>
+                </tr>
+                <tr>
+                    <td>Soft-close operation</td>
+                    <td>Doors close silently with controlled deceleration</td>
+                </tr>
+                <tr>
+                    <td>Push-to-open function</td>
+                    <td>Single push releases latch, door swings open</td>
+                </tr>
+                <tr>
+                    <td>Interior LED illumination</td>
+                    <td>Automatic on door open, even coverage</td>
+                </tr>
+                <tr>
+                    <td>Finish quality</td>
+                    <td>No orange peel, runs, or thin spots. Uniform color.</td>
+                </tr>
+                <tr>
+                    <td>Gasket seating</td>
+                    <td>Continuous contact, no gaps, proper compression</td>
+                </tr>
+                <tr>
+                    <td>Logo placement</td>
+                    <td>Embossed, 40mm wide, lower right of front panel</td>
+                </tr>
+                <tr>
+                    <td>Packaging presentation</td>
+                    <td>Clean unboxing, all items labeled, no loose parts</td>
+                </tr>
+            </table>
+        </section>
+
+        <footer>
+            <p><strong>Apex Enclosures</strong> — Premium Design Philosophy v2.0</p>
+            <p>January 2026</p>
+        </footer>
+    </div>
+    <script src="nav.js"></script>
+</body>
+</html>
