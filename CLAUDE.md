@@ -210,6 +210,42 @@ nav.js injects: body { margin-left: 240px !important; }
 
 ## Recent Work History
 
+### Session: 2026-01-09 (PM) - US Manufacturer Outreach + CRM Improvements
+
+**Created US manufacturer outreach package:**
+- `us-manufacturer-email.txt` - Email template for US fabricator RFQs
+- `website/us-rfq-overview.html` - 1-page RFQ overview (not full IP)
+- `Apex-US-RFQ-Overview.pdf` - Generated PDF for email attachment
+
+**Added 4 Tier 1 US manufacturers to CRM with full contacts:**
+- Bull Metal Products (CT) - Steve Bull, sales@bullmetal.com
+- Accurate Metal Fabricating (IL) - Daniel Cohen, sales@accuratemetalfab.com
+- Bison ProFab (TX) - Joshua Henderson, jhenderson@bisonprofab.com
+- DDB Unlimited (OK) - Dustin Mahorney, dustin@ddbunlimited.com
+
+**Added Scott as strategic partner:**
+- Email: Scott@b-stemed.com
+- CC'd on all US manufacturer outreach
+
+**CRM improvements:**
+- Default filter now "Live Contacts" (excludes Not Contacted)
+- Archived stale UAE/GCC manufacturers (no response since Dec 24)
+- Bumped version to v13
+
+**Email procedure documented:**
+- Always send from `apexenclosures@icloud.com` (NOT richardfoulkes@mac.com)
+- Added to CLAUDE.md Procedures Reference
+
+**Emails drafted and opened in Mail:**
+- DDB Unlimited (Dustin Mahorney)
+- Bull Metal (Steve Bull)
+- Accurate Metal (Daniel Cohen)
+- Bison ProFab (Joshua Henderson)
+
+**Commit:** `399c4d0` - Add US manufacturer outreach package + CRM updates
+
+---
+
 ### Session: 2026-01-09 - US/EU Manufacturing Strategy + Market Analysis + Partnership Structure
 
 **Created 5 standalone HTML documents for Scott (potential UK/US sales partner):**
