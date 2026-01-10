@@ -130,7 +130,8 @@
                 { href: 'competitor-comparison.html', label: 'Competitor Comparison' },
                 { href: 'product-opportunities.html', label: 'Product Opportunities' },
                 { href: 'us-manufacturing.html', label: '🇺🇸 USA' },
-                { href: 'australia-market.html', label: '🇦🇺 Australia' }
+                { href: 'australia-market.html', label: '🇦🇺 Australia' },
+                { href: 'australia-partner-pack.html', label: '🇦🇺 Australia Partner Pack' }
             ]
         },
         financial: {

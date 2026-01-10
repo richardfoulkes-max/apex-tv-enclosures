@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Enclosures - Australia Partner Opportunity</title>
+    <style>
+        :root {
+            --primary: #0d9488;
+            --primary-dark: #0f766e;
+            --accent: #f59e0b;
+            --danger: #dc2626;
+            --success: #10b981;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #f0fdfa;
+            --card: #ffffff;
+            --border: #ccfbf1;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+        .main-container { padding: 2rem; max-width: 1200px; margin: 0 auto; }
+
+        /* Header */
+        .page-header {
+            background: linear-gradient(135deg, #1e40af, #1e3a8a);
+            color: white;
+            padding: 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .page-header .subtitle { opacity: 0.9; font-size: 1.1rem; }
+        .page-header .flag { font-size: 3rem; margin-bottom: 0.5rem; }
+
+        /* Sections */
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: var(--primary-dark);
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .section h3 {
+            color: var(--text);
+            font-size: 1.1rem;
+            margin: 1.5rem 0 0.75rem;
+        }
+        .section p { color: var(--text-muted); margin-bottom: 1rem; }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+        th { background: #f1f5f9; padding: 0.85rem; text-align: left; font-weight: 600; color: var(--primary-dark); border-bottom: 2px solid var(--border); }
+        td { padding: 0.85rem; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+        tr:hover { background: #f8fafc; }
+        .num { text-align: right; font-family: 'SF Mono', Monaco, Consolas, monospace; }
+        .good { color: var(--success); font-weight: 600; }
+        .bad { color: var(--danger); font-weight: 600; }
+        .winner { background: #f0fdf4 !important; }
+        .loser { background: #fef2f2 !important; }
+
+        /* Alerts */
+        .alert {
+            padding: 1.25rem;
+            border-radius: 10px;
+            margin: 1.25rem 0;
+            font-size: 0.95rem;
+        }
+        .alert-danger {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-left: 4px solid var(--danger);
+            color: #991b1b;
+        }
+        .alert-success {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-left: 4px solid var(--success);
+            color: #166534;
+        }
+        .alert-warning {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-left: 4px solid var(--accent);
+            color: #92400e;
+        }
+        .alert-info {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-left: 4px solid #0284c7;
+            color: #0c4a6e;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .card h4 {
+            color: var(--primary-dark);
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+        }
+        .card ul {
+            margin: 0;
+            padding-left: 1.25rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .card li { margin-bottom: 0.4rem; }
+
+        /* Comparison boxes */
+        .vs-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1.5rem;
+            align-items: start;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 768px) {
+            .vs-container { grid-template-columns: 1fr; }
+            .vs-divider { display: none; }
+        }
+        .vs-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 2px solid #e2e8f0;
+        }
+        .vs-box.winner-box {
+            border-color: var(--success);
+            background: #f0fdf4;
+        }
+        .vs-box.loser-box {
+            border-color: var(--danger);
+            background: #fef2f2;
+        }
+        .vs-box h4 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        .vs-divider {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            align-self: center;
+        }
+
+        /* Stats */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 768px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+        .stat-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .stat-card .number {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .stat-card .label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Quote box */
+        .quote-box {
+            background: linear-gradient(135deg, #1e3a8a, #1e40af);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        .quote-box strong { color: #fbbf24; }
+
+        /* Complaint list */
+        .complaint-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .complaint-item {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+        .complaint-item .issue {
+            font-weight: 600;
+            color: #991b1b;
+            margin-bottom: 0.25rem;
+        }
+        .complaint-item .detail {
+            color: #7f1d1d;
+        }
+        .complaint-item .source {
+            font-size: 0.75rem;
+            color: #b91c1c;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* List styles */
+        ul { margin: 0.5rem 0; padding-left: 1.5rem; }
+        li { margin-bottom: 0.4rem; }
+
+        /* TOC */
+        .toc {
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+        }
+        .toc h3 { margin-bottom: 1rem; color: var(--primary-dark); }
+        .toc ol { margin: 0; padding-left: 1.25rem; }
+        .toc li { margin-bottom: 0.5rem; }
+        .toc a { color: var(--primary); text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="page-header">
+            <div class="flag">🇦🇺</div>
+            <h1>Apex Enclosures - Australia Partner Pack</h1>
+            <div class="subtitle">Complete business case for distribution partnership</div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>Contents</h3>
+            <ol>
+                <li><a href="#opportunity">The Opportunity</a></li>
+                <li><a href="#comparison">Enclosure vs Outdoor TV Comparison</a></li>
+                <li><a href="#complaints">Englaon & Outdoor TV Complaints (Marketing Ammunition)</a></li>
+                <li><a href="#tco">15-Year Total Cost of Ownership</a></li>
+                <li><a href="#manufacturing">Manufacturing Strategy (China for Australia)</a></li>
+                <li><a href="#pricing">Pricing & Margins</a></li>
+                <li><a href="#distribution">Distribution Model</a></li>
+                <li><a href="#next-steps">Next Steps</a></li>
+            </ol>
+        </div>
+
+        <!-- Section 1: The Opportunity -->
+        <div class="section" id="opportunity">
+            <h2>1. The Opportunity</h2>
+
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="number">$60M</div>
+                    <div class="label">AU Outdoor TV Market</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">52%</div>
+                    <div class="label">Price Advantage vs Englaon</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">40%</div>
+                    <div class="label">Partner Margin</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">$500K+</div>
+                    <div class="label">Year 3 Revenue Target</div>
+                </div>
+            </div>
+
+            <h3>The Problem We Solve</h3>
+            <p>Australians have two bad options for outdoor TVs:</p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Option 1: Dedicated Outdoor TV</h4>
+                    <ul>
+                        <li>Englaon 75" = <strong>$7,500 AUD</strong></li>
+                        <li>Generic Chinese panel (not Samsung/LG)</li>
+                        <li>Outdated 2017 smart TV software</li>
+                        <li>If panel dies = throw away entire unit</li>
+                        <li>12-month warranty, parts from China</li>
+                        <li>Screen dims/blacks out in heat (thermal cutoff at 60°C)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Option 2: Put Indoor TV Outside</h4>
+                    <ul>
+                        <li>Samsung 75" = <strong>$2,500 AUD</strong></li>
+                        <li>Dies in 6-12 months from weather</li>
+                        <li>No warranty coverage for outdoor use</li>
+                        <li>Water damage, overheating, insects</li>
+                        <li>Looks terrible (worried about theft)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>Our Solution:</strong> Premium enclosure ($3,200 AUD) + Samsung/LG 75" TV ($2,500-3,000) = $5,700-6,200 total.<br>
+                <strong>$1,300-1,800 CHEAPER than Englaon, with a REAL TV that's serviceable, upgradeable, and backed by Samsung warranty.</strong>
+            </div>
+        </div>
+
+        <!-- Section 2: Head-to-Head Comparison -->
+        <div class="section" id="comparison">
+            <h2>2. Enclosure + Samsung vs Englaon Outdoor TV (75")</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Englaon 75" Outdoor TV</th>
+                        <th>Apex Enclosure + Samsung 75"</th>
+                        <th>Winner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Price</strong></td>
+                        <td>$7,500 AUD</td>
+                        <td>$5,500-6,500 AUD</td>
+                        <td class="good">Apex (save $1,000-2,000)</td>
+                    </tr>
+                    <tr class="winner">
+                        <td><strong>TV Brand</strong></td>
+                        <td class="bad">Unknown Chinese panel</td>
+                        <td class="good">Samsung / LG / Sony</td>
+                        <td class="good">Apex</td>
+                    </tr>
+                    <tr class="winner">
+                        <td><strong>Picture Quality</strong></td>
+                        <td>1500 nits, basic HDR<br><span class="bad">"Almost impossible to see in daylight" - user review</span></td>
+                        <td class="good">2000+ nits, Dolby Vision, 120Hz, VRR</td>
+                        <td class="good">Apex</td>
+                    </tr>
+                    <tr class="winner">
+                        <td><strong>Smart TV Platform</strong></td>
+                        <td class="bad">"Dated 2017 software, extremely slow and limited"<br>Netflix breaks, limited apps, no updates</td>
+                        <td class="good">Samsung Tizen / LG webOS<br>7 years of updates, full app support</td>
+                        <td class="good">Apex</td>
+                    </tr>
+                    <tr class="winner">
+                        <td><strong>Heat Protection</strong></td>
+                        <td class="bad">Backlight cuts off at 60°C<br>Screen goes BLACK in hot weather</td>
+                        <td class="good">Active cooling keeps TV at 35-40°C<br>No dimming, no shutoffs</td>
+                        <td class="good">Apex</td>
+                    </tr>
+                    <tr class="winner">
+                        <td><strong>If TV Fails</strong></td>
+                        <td class="bad">Throw away $7,500 unit<br>Parts not available in Australia</td>
+                        <td class="good">Replace $2,500 TV<br>Any Samsung service center</td>
+                        <td class="good">Apex</td>
+                    </tr>
+                    <tr class="winner">
+                        <td><strong>In 5 Years</strong></td>
+                        <td class="bad">Obsolete tech, stuck with it<br>No upgrade path</td>
+                        <td class="good">Swap to 8K/MicroLED/whatever's new<br>Enclosure lasts 15+ years</td>
+                        <td class="good">Apex</td>
+                    </tr>
+                    <tr class="winner">
+                        <td><strong>Warranty</strong></td>
+                        <td class="bad">12 months from Australian importer<br>Service? Good luck.</td>
+                        <td class="good">TV: Samsung 2-year warranty<br>Enclosure: 5-year warranty</td>
+                        <td class="good">Apex</td>
+                    </tr>
+                    <tr class="winner">
+                        <td><strong>Local Service</strong></td>
+                        <td class="bad">Ship to... where exactly?</td>
+                        <td class="good">Any TV technician, any city</td>
+                        <td class="good">Apex</td>
+                    </tr>
+                    <tr>
+                        <td><strong>IP Rating</strong></td>
+                        <td>IP65</td>
+                        <td>IP55</td>
+                        <td>Englaon*</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-info">
+                <strong>*IP55 vs IP65:</strong> IP55 = protected against water jets. IP65 = adds dust-tight. In Australian residential use, IP55 is more than adequate. You're not pressure-washing your TV. The real question is: what happens when the PANEL dies?
+            </div>
+        </div>
+
+        <!-- Section 3: Complaints Database -->
+        <div class="section" id="complaints">
+            <h2>3. Englaon & Outdoor TV Complaints (Marketing Ammunition)</h2>
+
+            <p>Real complaints from Australian users on forums and review sites. Use these to position our solution.</p>
+
+            <h3>Software & Smart TV Issues</h3>
+            <div class="complaint-grid">
+                <div class="complaint-item">
+                    <div class="issue">Outdated software</div>
+                    <div class="detail">"Smart TV software dated 2017, extremely slow and limited, cumbersome and wearisome operational experience"</div>
+                    <div class="source">- My Generator review</div>
+                </div>
+                <div class="complaint-item">
+                    <div class="issue">Netflix breaks</div>
+                    <div class="detail">"Suddenly unable to watch Netflix, requires USB updates and new remotes to fix"</div>
+                    <div class="source">- Caravaners Forum</div>
+                </div>
+                <div class="complaint-item">
+                    <div class="issue">Apps don't work</div>
+                    <div class="detail">"Channel 10 does not work, Stan isn't compatible, limited number of apps due to hardware constraints"</div>
+                    <div class="source">- ProductReview.com.au</div>
+                </div>
+                <div class="complaint-item">
+                    <div class="issue">Manual WiFi every time</div>
+                    <div class="detail">"Won't automatically connect to WiFi or hotspot - requiring manual connection every time"</div>
+                    <div class="source">- Grey Nomads Forum</div>
+                </div>
+            </div>
+
+            <h3>Hardware Quality Issues</h3>
+            <div class="complaint-grid">
+                <div class="complaint-item">
+                    <div class="issue">Cheap construction</div>
+                    <div class="detail">"When trying to attach wall bracket, screw seized in thread and insert started spinning in plastic hole"</div>
+                    <div class="source">- Grey Nomads Forum</div>
+                </div>
+                <div class="complaint-item">
+                    <div class="issue">Fuse keeps blowing</div>
+                    <div class="detail">"12V plug contains old-fashioned glass tube fuse that keeps blowing because wires are crudely twisted together"</div>
+                    <div class="source">- Caravaners Forum</div>
+                </div>
+                <div class="complaint-item">
+                    <div class="issue">Poor visibility in daylight</div>
+                    <div class="detail">"Picture almost impossible to see in daylight, cursor difficult to see against dark backgrounds"</div>
+                    <div class="source">- ProductReview.com.au</div>
+                </div>
+                <div class="complaint-item">
+                    <div class="issue">Reception problems</div>
+                    <div class="detail">"DTV only works on very strong signal. Previous Kogan picked up 30 stations, Englaon picked up zero"</div>
+                    <div class="source">- Grey Nomads Forum</div>
+                </div>
+            </div>
+
+            <h3>Thermal Protection = Unusable in Heat</h3>
+            <div class="alert alert-danger">
+                <strong>Critical Issue:</strong> Englaon's "high temperature protection ensures the backlight cuts automatically when the internal temperature reaches 60°C."<br><br>
+                Translation: <strong>In hot Australian summer, the screen goes BLACK.</strong> Not dimmer - BLACK. And you can't override it.<br><br>
+                Our enclosure keeps the TV at 35-40°C with active cooling. No dimming, no shutoffs, no surprises.
+            </div>
+
+            <h3>Repair & Service Nightmares</h3>
+            <div class="complaint-grid">
+                <div class="complaint-item">
+                    <div class="issue">Panel replacement impossible</div>
+                    <div class="detail">"Panel replacements cost $400-$5,000. Parts often No Longer Available. Usually more cost-effective to buy new TV."</div>
+                    <div class="source">- HomeGuide TV Repair</div>
+                </div>
+                <div class="complaint-item">
+                    <div class="issue">Can't fix after opening</div>
+                    <div class="detail">"Very hard to fix electronics inside integral casing and still ensure waterproof thereafter"</div>
+                    <div class="source">- TV Shield analysis</div>
+                </div>
+                <div class="complaint-item">
+                    <div class="issue">12-month warranty only</div>
+                    <div class="detail">"Warranty valid for 12 months from original date of purchase. Excludes insufficient ventilation, high temperatures."</div>
+                    <div class="source">- Englaon Warranty page</div>
+                </div>
+                <div class="complaint-item">
+                    <div class="issue">Customer service issues</div>
+                    <div class="detail">"They promised they'd get back to me, but... crickets." Multiple reports of ghosting after initial contact.</div>
+                    <div class="source">- Trustpilot reviews (Sylvox)</div>
+                </div>
+            </div>
+
+            <h3>Sylvox (Similar Chinese Outdoor TV) - Trustpilot Reviews</h3>
+            <div class="complaint-grid">
+                <div class="complaint-item">
+                    <div class="issue">Arrives damaged</div>
+                    <div class="detail">"Ordered twice, both times showed up damaged. Screen damage not noticed until plugged in - only showed streaks."</div>
+                    <div class="source">- Trustpilot 1-star</div>
+                </div>
+                <div class="complaint-item">
+                    <div class="issue">Support ghosted</div>
+                    <div class="detail">"Reached out to support after getting black screen. They promised to get back - crickets. Even Sofa Baton couldn't get response."</div>
+                    <div class="source">- Trustpilot 1-star</div>
+                </div>
+                <div class="complaint-item">
+                    <div class="issue">Refund penalty</div>
+                    <div class="detail">"Charged 10% penalty ($46) on refund when the COMPANY made the mistake."</div>
+                    <div class="source">- Trustpilot 2-star</div>
+                </div>
+                <div class="complaint-item">
+                    <div class="issue">I/O access nightmare</div>
+                    <div class="detail">"I/O door placement means you must plug in ALL cables before mounting. Biggest miss of this TV."</div>
+                    <div class="source">- MBReviews</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Total Cost of Ownership -->
+        <div class="section" id="tco">
+            <h2>4. 15-Year Total Cost of Ownership</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Englaon 75" Outdoor TV</th>
+                        <th>Apex Enclosure + Samsung 75"</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Year 0</strong></td>
+                        <td>$7,500 (new unit)</td>
+                        <td>$3,200 enclosure + $2,500 TV = $5,700</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Year 5</strong></td>
+                        <td class="bad">$7,500 (replace entire unit)</td>
+                        <td class="good">$2,500 (new TV only)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Year 10</strong></td>
+                        <td class="bad">$7,500 (replace again)</td>
+                        <td class="good">$2,500 (new TV only)</td>
+                    </tr>
+                    <tr style="background: #f1f5f9; font-weight: 600;">
+                        <td><strong>15-Year Total</strong></td>
+                        <td class="bad">$22,500</td>
+                        <td class="good">$10,700</td>
+                    </tr>
+                    <tr style="background: #f0fdf4;">
+                        <td><strong>Lifetime Savings</strong></td>
+                        <td colspan="2" style="text-align: center; color: var(--success); font-weight: 700; font-size: 1.2rem;">
+                            Customer saves $11,800 with Apex
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="quote-box">
+                <strong>Sales Script (75"):</strong><br><br>
+                "Englaon 75" costs $7,500. Ours costs $5,700 - you save $1,800 on day one.<br><br>
+                But here's what they don't tell you:<br>
+                • Their panel dies? <strong>Throw away $7,500.</strong><br>
+                • Our Samsung dies? <strong>Replace for $2,500, keep the enclosure.</strong><br>
+                • Their software is from 2017. <strong>Your Samsung gets updates for 7 years.</strong><br>
+                • Their warranty is 12 months. <strong>Ours is 5 years on enclosure, 2 years on TV.</strong><br>
+                • Their screen blacks out in heat. <strong>Ours stays bright, always.</strong><br><br>
+                In 15 years, you'll spend <strong>$22,500 on Englaons</strong>, or <strong>$10,700 with us</strong>.<br><br>
+                <strong>Save $11,800 - and have a better picture the whole time.</strong>"
+            </div>
+        </div>
+
+        <!-- Section 5: Manufacturing Strategy -->
+        <div class="section" id="manufacturing">
+            <h2>5. Manufacturing Strategy (China for Australia)</h2>
+
+            <div class="alert alert-info">
+                <strong>Decision:</strong> Manufacture enclosures in China, ship to Australia. Local AU manufacturing doesn't make sense at our volumes.
+            </div>
+
+            <h3>Why China, Not Australia?</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Factor</th>
+                        <th>China Manufacturing</th>
+                        <th>Australia Manufacturing</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Unit Cost (75")</strong></td>
+                        <td class="good">~$400-500 USD FOB</td>
+                        <td class="bad">~$800-1,200 USD</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MOQ</strong></td>
+                        <td class="good">50-100 units</td>
+                        <td class="bad">10-20 units (but 2-3x cost)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lead Time</strong></td>
+                        <td>4-6 weeks production + 3-4 weeks shipping</td>
+                        <td>2-4 weeks</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Powder Coating Quality</strong></td>
+                        <td class="good">Dulux/Interpon equivalent, 1000hr salt spray</td>
+                        <td class="good">Same (Dulux available)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shipping to Sydney</strong></td>
+                        <td>~$150-200/unit (container)</td>
+                        <td>$0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Import Duty</strong></td>
+                        <td>5% (aluminum products)</td>
+                        <td>$0</td>
+                    </tr>
+                    <tr style="background: #f0fdf4;">
+                        <td><strong>Total Landed Cost</strong></td>
+                        <td class="good">~$600-750 USD</td>
+                        <td class="bad">~$800-1,200 USD</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Recommended China Manufacturer</h3>
+            <div class="card">
+                <h4>KDM Steel (Wuxi, Jiangsu)</h4>
+                <ul>
+                    <li><strong>Contact:</strong> sales@kdmsteel.com, +86-13175970882 (WhatsApp)</li>
+                    <li><strong>Experience:</strong> 10+ years custom enclosures, ISO 9001 certified</li>
+                    <li><strong>Capabilities:</strong> Laser cutting, CNC bending, welding, powder coating</li>
+                    <li><strong>MOQ:</strong> 50 units for first order, negotiable after</li>
+                    <li><strong>Lead time:</strong> 30-45 days production</li>
+                    <li><strong>Payment:</strong> 30% deposit, 70% before shipping</li>
+                </ul>
+            </div>
+
+            <h3>Shipping & Logistics</h3>
+            <table>
+                <tr>
+                    <td><strong>Container size</strong></td>
+                    <td>20ft container holds ~80-100 units (75" size)</td>
+                </tr>
+                <tr>
+                    <td><strong>Shipping cost</strong></td>
+                    <td>~$3,000-4,000 per container to Sydney/Melbourne</td>
+                </tr>
+                <tr>
+                    <td><strong>Per-unit shipping</strong></td>
+                    <td>~$40-50 per unit in full container</td>
+                </tr>
+                <tr>
+                    <td><strong>Transit time</strong></td>
+                    <td>18-25 days China to Australia</td>
+                </tr>
+                <tr>
+                    <td><strong>Customs broker</strong></td>
+                    <td>~$200-300 per shipment</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Section 6: Pricing & Margins -->
+        <div class="section" id="pricing">
+            <h2>6. Pricing & Margins</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Size</th>
+                        <th>Landed Cost</th>
+                        <th>Retail Price (RRP)</th>
+                        <th>Partner Price (40% off)</th>
+                        <th>Partner Margin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>55"</strong></td>
+                        <td>$550 AUD</td>
+                        <td>$2,500 AUD</td>
+                        <td>$1,500 AUD</td>
+                        <td class="good">$950 (63%)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>65"</strong></td>
+                        <td>$650 AUD</td>
+                        <td>$2,800 AUD</td>
+                        <td>$1,680 AUD</td>
+                        <td class="good">$1,030 (61%)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>75"</strong></td>
+                        <td>$750 AUD</td>
+                        <td>$3,200 AUD</td>
+                        <td>$1,920 AUD</td>
+                        <td class="good">$1,170 (61%)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>85"</strong></td>
+                        <td>$900 AUD</td>
+                        <td>$3,800 AUD</td>
+                        <td>$2,280 AUD</td>
+                        <td class="good">$1,380 (60%)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Complete Package Pricing (Enclosure + TV)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Package</th>
+                        <th>Components</th>
+                        <th>Total Customer Cost</th>
+                        <th>vs Englaon</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>55" Complete</strong></td>
+                        <td>Apex 55" + Samsung 55" Crystal UHD</td>
+                        <td>$3,800 AUD</td>
+                        <td class="good">Save $700 vs Englaon $4,500</td>
+                    </tr>
+                    <tr>
+                        <td><strong>65" Complete</strong></td>
+                        <td>Apex 65" + Samsung 65" Crystal UHD</td>
+                        <td>$4,600 AUD</td>
+                        <td class="good">Save $900 vs Englaon $5,500</td>
+                    </tr>
+                    <tr>
+                        <td><strong>75" Complete</strong></td>
+                        <td>Apex 75" + Samsung 75" QLED</td>
+                        <td>$6,200 AUD</td>
+                        <td class="good">Save $1,300 vs Englaon $7,500</td>
+                    </tr>
+                    <tr>
+                        <td><strong>75" Premium</strong></td>
+                        <td>Apex 75" + Samsung 75" Neo QLED</td>
+                        <td>$7,500 AUD</td>
+                        <td class="good">Same price, MUCH better TV</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-success">
+                <strong>Key Message:</strong> For the SAME price as Englaon, customer gets a proper Samsung with Dolby Vision, 120Hz, and full smart TV features - plus an enclosure that will protect their NEXT three TVs.
+            </div>
+        </div>
+
+        <!-- Section 7: Distribution Model -->
+        <div class="section" id="distribution">
+            <h2>7. Distribution Model</h2>
+
+            <h3>Partner Structure</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Apex Provides</h4>
+                    <ul>
+                        <li>Product design and engineering</li>
+                        <li>Manufacturing relationship (China)</li>
+                        <li>Quality control and testing specs</li>
+                        <li>Marketing materials and website content</li>
+                        <li>Technical support and training</li>
+                        <li>Product warranty (manufacturer defects)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Partner Provides</h4>
+                    <ul>
+                        <li>Local inventory (5-10 units initially)</li>
+                        <li>Sales and customer relationships</li>
+                        <li>Installation coordination (optional)</li>
+                        <li>Local customer service</li>
+                        <li>Market feedback and product input</li>
+                        <li>Warranty handling (first line)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Territory & Exclusivity</h3>
+            <table>
+                <tr>
+                    <td><strong>Territory</strong></td>
+                    <td>Australia & New Zealand</td>
+                </tr>
+                <tr>
+                    <td><strong>Exclusivity</strong></td>
+                    <td>Non-exclusive initially, exclusive after $100K annual sales</td>
+                </tr>
+                <tr>
+                    <td><strong>Pricing protection</strong></td>
+                    <td>Apex won't sell direct in AU at less than RRP</td>
+                </tr>
+                <tr>
+                    <td><strong>Minimum order</strong></td>
+                    <td>5 units initial, 10 units per reorder</td>
+                </tr>
+            </table>
+
+            <h3>Initial Investment</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Cost</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Initial inventory (5 units mixed sizes)</td>
+                        <td>$8,500 AUD</td>
+                        <td>At partner pricing</td>
+                    </tr>
+                    <tr>
+                        <td>Shipping (part of first container)</td>
+                        <td>$500 AUD</td>
+                        <td>Shared container cost</td>
+                    </tr>
+                    <tr>
+                        <td>Demo unit (1x 65")</td>
+                        <td>$1,680 AUD</td>
+                        <td>At cost for showroom/photos</td>
+                    </tr>
+                    <tr>
+                        <td>Marketing materials</td>
+                        <td>$0</td>
+                        <td>Provided by Apex</td>
+                    </tr>
+                    <tr style="background: #f1f5f9; font-weight: 600;">
+                        <td><strong>Total Initial Investment</strong></td>
+                        <td><strong>~$10,700 AUD</strong></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Revenue Projections</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Units Sold</th>
+                        <th>Revenue (RRP)</th>
+                        <th>Partner Profit (60% margin)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Year 1</td>
+                        <td>20</td>
+                        <td>$60,000</td>
+                        <td>$22,000</td>
+                    </tr>
+                    <tr>
+                        <td>Year 2</td>
+                        <td>60</td>
+                        <td>$180,000</td>
+                        <td>$66,000</td>
+                    </tr>
+                    <tr>
+                        <td>Year 3</td>
+                        <td>150</td>
+                        <td>$450,000</td>
+                        <td>$165,000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section 8: Next Steps -->
+        <div class="section" id="next-steps">
+            <h2>8. Next Steps</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Step 1: Review & Discuss</h4>
+                    <ul>
+                        <li>Review this document</li>
+                        <li>Call to discuss questions</li>
+                        <li>Validate local market pricing</li>
+                        <li>Identify potential customers</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Step 2: Sample Order</h4>
+                    <ul>
+                        <li>Order 1-2 demo units</li>
+                        <li>Test with Samsung/LG TVs</li>
+                        <li>Take photos for marketing</li>
+                        <li>Get installer feedback</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Step 3: Soft Launch</h4>
+                    <ul>
+                        <li>5-unit initial inventory</li>
+                        <li>List on website/Facebook Marketplace</li>
+                        <li>Target outdoor living installers</li>
+                        <li>First 5 sales to validate demand</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Step 4: Scale</h4>
+                    <ul>
+                        <li>Reorder based on demand</li>
+                        <li>Expand to retail partnerships</li>
+                        <li>Consider installer network</li>
+                        <li>Evaluate exclusivity terms</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>Important Note on Pool Enclosures:</strong><br>
+                This partnership covers <strong>TV enclosures only</strong>. Pool pump enclosures (APE-P) and storage boxes (APE-S) are simple aluminum fabrication with no defensible IP - if you want to sell those in Australia, you can manufacture locally without our involvement. We're happy to share designs, but there's no reason for a partnership structure on commodity products.
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem; padding: 2rem; background: #f1f5f9; border-radius: 12px;">
+                <h3 style="margin-bottom: 1rem;">Ready to Discuss?</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">Contact Richard Foulkes</p>
+                <p style="font-size: 1.1rem;">
+                    <strong>Email:</strong> apexenclosures@icloud.com<br>
+                    <strong>WhatsApp:</strong> +971 XX XXX XXXX
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="nav.js"></script>
+</body>
+</html>
