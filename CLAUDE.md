@@ -210,6 +210,38 @@ nav.js injects: body { margin-left: 240px !important; }
 
 ## Recent Work History
 
+### Session: 2026-01-11 (Continued) - Australia B2B Wholesale Pricing
+
+**Nick Dempsey responded with wholesale market feedback:**
+- Interested in opportunity, wants to explore wholesale too
+- 40,000 small businesses in Australia = potential B2B market
+- Notes that retailers need 40-45% GP - our original 50% margin doesn't work for wholesale
+
+**Added dual pricing model (Australian manufacturing ONLY - NO China):**
+
+| Size | Cost | B2C Retail | B2C GP | Wholesale | Retailer Sells | Our GP | Retailer GP |
+|------|------|------------|--------|-----------|----------------|--------|-------------|
+| 55" | $850 | $1,700 | $850 (50%) | $1,300 | $2,400 | $450 (35%) | $1,100 (46%) |
+| 65" | $1,000 | $2,000 | $1,000 (50%) | $1,500 | $2,700 | $500 (33%) | $1,200 (44%) |
+| 75" | $1,200 | $2,200 | $1,000 (45%) | $1,700 | $3,100 | $500 (29%) | $1,400 (45%) |
+| 85" | $1,500 | $2,700 | $1,200 (44%) | $2,100 | $3,800 | $600 (29%) | $1,700 (45%) |
+
+**Year 1 Projections Added:**
+- Conservative: 100 units, $180K revenue, $75K GP (10 retailers × 5 units + 50 B2C)
+- Moderate: 200 units, $360K revenue, $150K GP (20 retailers × 5 units + 100 B2C)
+- Aggressive: 400 units, $720K revenue, $300K GP (40 retailers × 5 units + 200 B2C)
+
+**Key insight:** B2B wholesale requires higher end retail ($3,100 vs $2,200 for 75") but still 59% cheaper than Englaon $7,500.
+
+**Critical constraint:** User explicitly rejected China manufacturing suggestions - Australia uses local fabrication only.
+
+**Files Modified:**
+- `website/australia-partner-pack.html` - B2B pricing tables and Year 1 projections
+
+**Commit:** `7b9e814` - Add B2B wholesale pricing and Year 1 projections to Australia partner pack
+
+---
+
 ### Session: 2026-01-11 - Australia Partner Pack Rating Highlight
 
 **Added prominent Englaon rating callout to australia-partner-pack.html:**
