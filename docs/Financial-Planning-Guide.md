@@ -393,6 +393,76 @@ Cash required: ~$45,000 float for 75 days
 
 **This is NOT a partnership.** It's a supplier-distributor relationship. Like how a car dealer doesn't "own" Toyota - they just have rights to sell Toyotas in their territory.
 
+### Manufacturing Relationships (Who Deals with Fabricators)
+
+**Hybrid Model: Nick manages AU fab, You manage China volume**
+
+| Order Type | Who Manages | Why |
+|------------|-------------|-----|
+| **Standard AU orders** | Nick | He's local, can visit fab, QC, faster turnaround |
+| **Volume China orders (50+)** | You | Your existing relationships, better margins |
+
+**How it works:**
+
+```
+STANDARD ORDERS (AU Fabricator)
+┌─────────────┐      specs/approval      ┌─────────────┐
+│   You (UAE) │ ──────────────────────►  │    Nick     │
+│             │                          │             │
+│  • Own IP   │  ◄──────────────────────  │ • Orders    │
+│  • Approve  │     wholesale payment    │ • Pays fab  │
+│    1st art  │                          │ • QCs       │
+└─────────────┘                          └──────┬──────┘
+                                                │
+                                                ▼
+                                         AU Fabricator
+                                                │
+                                                ▼
+                                         AU Customer
+
+
+VOLUME ORDERS (China)
+┌─────────────┐                          ┌─────────────┐
+│   You (UAE) │ ──────────────────────►  │    Nick     │
+│             │      ship finished       │             │
+│  • Order    │         units            │ • Receives  │
+│  • Pay fab  │  ◄──────────────────────  │ • Pays you  │
+│  • QC       │     wholesale payment    │ • Sells     │
+└──────┬──────┘                          └─────────────┘
+       │
+       ▼
+ China Factory
+```
+
+**Your role (both models):**
+- Own and control all design IP
+- Provide specs and CAD files to Nick
+- Approve first article before production starts
+- Set quality standards (QC checklist)
+- Set wholesale price (your margin built in)
+- Manage all China volume orders directly
+
+**Nick's role (AU standard orders):**
+- Find and manage AU fabricator relationship
+- Order production, pay fabricator directly
+- QC locally (using your checklist)
+- Pay you wholesale price per unit
+
+**Why this works:**
+- Nick is local - can visit fab, solve problems quickly
+- You're remote - managing AU fab from UAE is impractical
+- You still control design - Nick can only make YOUR product
+- Volume orders (where real margin is) stay with you
+- If Nick leaves, you find new AU distributor - fab just needs new customer
+
+**Protection even though Nick manages AU fab:**
+1. He can only manufacture YOUR design (you own IP)
+2. Design patent protects globally
+3. Specs are licensed, not transferred
+4. First article approval required
+5. You control China volume (better margins, your relationship)
+6. Termination = he loses right to use your specs
+
 ### Protecting Yourself in Distributor Model (Nick)
 
 **Risks with distributor-only relationship:**
