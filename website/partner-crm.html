@@ -3491,13 +3491,39 @@ Examples:
 
             // If it's not a text file, save it to Files tab instead
             if (!isTextFile) {
-                if (!selectedPartnerId) {
-                    showToast('Select a company first, then drop files to save them.', 'warning');
+                // Try to match filename to a partner
+                const fileNameLower = file.name.toLowerCase();
+                let targetPartner = null;
+
+                // Check if filename contains a partner name
+                for (const p of partners) {
+                    const companyWords = p.companyName.toLowerCase().split(/\s+/);
+                    // Match if any significant word (3+ chars) from company name is in filename
+                    const match = companyWords.some(word => word.length >= 3 && fileNameLower.includes(word));
+                    if (match) {
+                        targetPartner = p;
+                        break;
+                    }
+                }
+
+                // Use matched partner, or fall back to selected partner
+                const partnerId = targetPartner?.id || selectedPartnerId;
+                const partnerName = targetPartner?.companyName || partners.find(p => p.id === selectedPartnerId)?.companyName;
+
+                if (!partnerId) {
+                    showToast('Select a company first, or name the file with a company name.', 'warning');
                     return;
                 }
+
+                // If we matched a different partner than selected, update selection
+                if (targetPartner && targetPartner.id !== selectedPartnerId) {
+                    selectedPartnerId = targetPartner.id;
+                    selectPartner(targetPartner.id);
+                }
+
                 // Close AI modal and upload to Files
                 closeAIModal();
-                showToast('Saving file to ' + (partners.find(p => p.id === selectedPartnerId)?.companyName || 'partner') + '...', 'info');
+                showToast('Saving to ' + partnerName + '...', 'info');
                 uploadAttachment(file);
                 return;
             }
