@@ -3484,18 +3484,28 @@ Examples:
         }
 
         function processFile(file) {
-            const maxSize = 100 * 1024; // 100KB limit
-            if (file.size > maxSize) {
-                showToast('File too large for AI parsing. Maximum 100KB for text files.', 'warning');
+            const textTypes = ['text/plain', 'text/html', 'text/csv', 'application/json', 'message/rfc822', ''];
+            const textExtensions = ['.txt', '.html', '.htm', '.csv', '.json', '.eml', '.msg', '.md'];
+            const ext = '.' + file.name.split('.').pop().toLowerCase();
+            const isTextFile = textTypes.includes(file.type) || textExtensions.includes(ext);
+
+            // If it's not a text file, save it to Files tab instead
+            if (!isTextFile) {
+                if (!selectedPartnerId) {
+                    showToast('Select a company first, then drop files to save them.', 'warning');
+                    return;
+                }
+                // Close AI modal and upload to Files
+                closeAIModal();
+                showToast('Saving file to ' + (partners.find(p => p.id === selectedPartnerId)?.companyName || 'partner') + '...', 'info');
+                uploadAttachment(file);
                 return;
             }
 
-            const allowedTypes = ['text/plain', 'text/html', 'text/csv', 'application/json', 'message/rfc822', ''];
-            const allowedExtensions = ['.txt', '.html', '.htm', '.csv', '.json', '.eml', '.msg', '.md'];
-
-            const ext = '.' + file.name.split('.').pop().toLowerCase();
-            if (!allowedTypes.includes(file.type) && !allowedExtensions.includes(ext)) {
-                showToast('AI Assistant only reads text files (TXT, HTML, CSV, JSON, emails). To store PDFs, use the Files tab instead.', 'info', 6000);
+            // Text file - parse with AI
+            const maxSize = 100 * 1024; // 100KB limit for text parsing
+            if (file.size > maxSize) {
+                showToast('File too large for AI parsing. Maximum 100KB for text files.', 'warning');
                 return;
             }
 
