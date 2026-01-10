@@ -2,7 +2,18 @@
 
 ## Executive Summary
 
-This document outlines the capital requirements for launching Apex Enclosures in the US and Australian markets. Total investment ranges from **$8,500 (minimal)** to **$56,000 (fully operational in both markets)**.
+This document outlines the capital requirements for launching Apex Enclosures in the US and Australian markets. Total investment ranges from **$6,500 (minimal)** to **$54,000 (fully operational in both markets)**.
+
+### Key Structure Decision: Different Models for Different Markets
+
+| Market | Your Role | Invoice From | Your Tax Rate |
+|--------|-----------|--------------|---------------|
+| **Australia** | Supplier to Nick | UAE (personal/company) | **0%** |
+| **US** | Owner of US entity | US C-Corp | **21%** |
+
+**Why different?**
+- **Australia:** Nick has existing business. You're just a supplier. Invoice from UAE = 0% tax.
+- **US:** Need local entity for credibility, banking, Scott's options. C-Corp required = 21% tax.
 
 ---
 
@@ -55,17 +66,49 @@ This document outlines the capital requirements for launching Apex Enclosures in
 
 ## Australia Market Budget
 
-### Entity Structure: Partner Model (Nick)
+### Entity Structure: Supplier Model (Invoice from UAE)
 
-**Nick has existing Australian business** - no new entity required.
+**Nick has existing Australian business** - you are simply his supplier.
 
 **Structure:**
-- Nick's company handles all AU sales, GST, insurance
-- You invoice Nick wholesale from US C-Corp (or UAE entity)
-- Nick manages local manufacturing relationships
-- Simple distribution/partnership agreement
+```
+You (UAE)                     Nick (AU Business)
+    │                              │
+    │  Invoice wholesale           │
+    │  from UAE (0% tax)           │
+    ├─────────────────────────────►│
+    │                              │
+    │  Nick sells retail           │
+    │  (25% AU company tax)        │
+    │                              ▼
+    │                         AU Customer
+```
 
-**Your costs: $0 for AU entity setup**
+**Key Points:**
+- You invoice Nick from UAE = **0% tax** on your margin
+- Nick handles AU sales, GST, insurance, compliance
+- No AU entity needed for you
+- No US C-Corp involvement (that's only for US sales)
+- Simple supplier/distributor agreement
+
+**Your costs: $0 for entity setup**
+
+### Tax Comparison: Why UAE (Not US C-Corp)
+
+| Route | Your Tax on AU Profits |
+|-------|------------------------|
+| Invoice from UAE | **0%** |
+| Invoice from US C-Corp | **21%** |
+
+**Example (75" unit):**
+- Your wholesale price to Nick: $1,400
+- Your cost (China landed): $900
+- Your margin: $500
+
+Via UAE: $500 × 0% = **$500 net profit**
+Via US: $500 × 21% = **$395 net profit**
+
+**26% more profit by invoicing from UAE.**
 
 ### Setup Costs (One-Time)
 
@@ -227,7 +270,25 @@ Cash required: ~$45,000 float for 75 days
 
 ## Tax Considerations
 
-### US C-Corp (Non-Resident Owner)
+### Global Structure Overview
+
+```
+                    ┌─────────────────┐
+                    │   YOU (UAE)     │
+                    │   0% tax base   │
+                    └────────┬────────┘
+                             │
+            ┌────────────────┼────────────────┐
+            │                │                │
+            ▼                ▼                ▼
+    ┌───────────────┐ ┌───────────────┐ ┌───────────────┐
+    │  US C-Corp    │ │  Nick (AU)    │ │  Tom (ME)     │
+    │  21% corp tax │ │  You=Supplier │ │  50/50 JV     │
+    │  Scott=Options│ │  0% your tax  │ │  5% IP fee    │
+    └───────────────┘ └───────────────┘ └───────────────┘
+```
+
+### US C-Corp (For US Sales Only)
 
 | Item | Rate | Strategy |
 |------|------|----------|
@@ -237,15 +298,34 @@ Cash required: ~$45,000 float for 75 days
 
 **Optimal structure:** Pay yourself management fees, not dividends. Corp deducts fees, you receive in UAE tax-free.
 
-### Australia (If Pty Ltd)
+**When to use US C-Corp:**
+- US customer sales (need US presence)
+- Scott's equity (options in US entity)
+- US manufacturer payments
+- US bank account for US operations
+
+### Australia (Supplier Model - No AU Entity)
 
 | Item | Rate | Notes |
 |------|------|-------|
-| Company tax | 25% | Small business rate |
-| GST | 10% | Collected from customers, remitted quarterly |
-| Dividend franking | N/A | Franking credits for AU residents only |
+| Your tax on AU profits | **0%** | Invoice from UAE |
+| Nick's company tax | 25% | His problem, not yours |
+| GST | 10% | Nick handles |
+| Withholding on payments to you | **0%** | No AU-UAE withholding on services |
 
-**For non-AU residents:** Similar to US - management fees preferred over dividends.
+**Optimal structure:** You are Nick's supplier. Invoice from UAE. Receive payment in UAE. 0% tax.
+
+**Do NOT route AU profits through US C-Corp** - adds unnecessary 21% tax.
+
+### Tax Summary by Market
+
+| Market | Entity | Your Tax | How to Extract Profits |
+|--------|--------|----------|------------------------|
+| **US** | C-Corp | 21% | Management fees (0% withholding) |
+| **Australia** | None (supplier) | 0% | Invoice from UAE |
+| **Middle East** | 50/50 JV | 0%* | Profit share + 5% IP license |
+
+*UAE/GCC has 0% personal income tax
 
 ---
 
@@ -277,10 +357,97 @@ Cash required: ~$45,000 float for 75 days
 - No investor complications
 - Prove model before raising
 
-### Partner Investment
-- Scott (US): Options for 49%, no cash required from him
-- Nick (AU): Could co-invest for equity stake
-- Tom (ME): Existing 50% partner for ME market
+### Partner Structures (Not All Are Equity)
+
+| Partner | Market | Relationship | Equity? |
+|---------|--------|--------------|---------|
+| **Scott** | US | Options for 49% in US C-Corp | Yes (vesting) |
+| **Nick** | Australia | Distributor - buys wholesale from you | No (customer) |
+| **Tom** | Middle East | 50/50 JV partner | Yes (50%) |
+
+**Nick is NOT an equity partner** - he's a customer/distributor. He buys at wholesale, sells at retail, keeps his margin. You keep your margin. No shared ownership, no complicated accounting.
+
+### What You Own vs What Nick Owns (Australia)
+
+| Asset | You Own | Nick Owns |
+|-------|---------|-----------|
+| **Product IP / Design** | ✅ 100% | ❌ |
+| **Brand "Apex Enclosures"** | ✅ 100% | ❌ |
+| **Manufacturing relationships** | ✅ (China, UAE) | ✅ (AU fabricator, if he sets it up) |
+| **Customer list (AU)** | ✅ Copy rights | ✅ His customers |
+| **Inventory (once paid for)** | ❌ | ✅ His stock |
+| **His company** | ❌ | ✅ 100% |
+| **AU distributor rights** | ✅ You grant these | License only |
+| **Profits from his sales** | ❌ His margin | ✅ His margin |
+| **Profits from wholesale** | ✅ Your margin | ❌ |
+
+**Clear separation:**
+- **You own:** IP, brand, product design, global rights
+- **Nick owns:** His company, his customer relationships, his margin
+- **Nick licenses:** Right to sell Apex products in Australia (revocable)
+
+**If relationship ends:**
+- You keep: All IP, brand, design, right to appoint new AU distributor
+- Nick keeps: His company, customer goodwill he built, unsold inventory (he paid for it)
+- Nick loses: Right to sell Apex products, use of brand
+
+**This is NOT a partnership.** It's a supplier-distributor relationship. Like how a car dealer doesn't "own" Toyota - they just have rights to sell Toyotas in their territory.
+
+### Protecting Yourself in Distributor Model (Nick)
+
+**Risks with distributor-only relationship:**
+
+| Risk | Mitigation |
+|------|------------|
+| Nick finds another supplier | Exclusive agreement with minimum commitments |
+| Nick copies the product | Design patent ($1.5-3K), trade dress over time |
+| Nick doesn't push sales | Minimum order quantities, exclusivity tied to performance |
+| Nick damages the brand | Brand guidelines, quality requirements, termination rights |
+| Nick doesn't pay | Prepayment or short credit terms (Net 14) |
+| Nick poaches your other markets | Territory restriction (Australia only) |
+
+**Key Terms for Distributor Agreement:**
+
+1. **Exclusivity (conditional):**
+   - Nick gets exclusive AU rights IF he hits minimums
+   - Minimums: e.g., 50 units Year 1, 100 units Year 2
+   - Miss minimums = loses exclusivity (you can add other AU distributors)
+
+2. **Territory restriction:**
+   - Nick can only sell in Australia
+   - Cannot sell to US, ME, or other markets
+   - Cannot sell online outside Australia
+
+3. **Payment terms:**
+   - Prepayment for first 3 orders
+   - Then Net 14 after relationship established
+   - Credit limit based on track record
+
+4. **IP protection:**
+   - Nick cannot manufacture competing products
+   - Cannot reverse-engineer or share specs
+   - Must use your branding, cannot rebrand
+   - Design patent protects you globally
+
+5. **Termination:**
+   - Either party can exit with 90 days notice
+   - Immediate termination for payment default
+   - You keep all IP, customer data, brand
+
+6. **Non-compete (if he exits):**
+   - 12-24 month non-compete on similar products
+   - Protects against him copying and competing
+
+**Bottom line:** You're protected by:
+- Written distributor agreement (not handshake)
+- Design patent (file before sharing detailed specs)
+- Performance-based exclusivity
+- Short payment terms
+- Termination rights
+
+**Cost to protect yourself:** ~$2,000-4,000
+- Distributor agreement (lawyer): $500-1,000
+- Design patent: $1,500-3,000
 
 ### External Funding (Future)
 - Only consider after proving unit economics
@@ -313,6 +480,7 @@ Cash required: ~$45,000 float for 75 days
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 1.0 | 2026-01-11 | Richard Foulkes | Initial version |
+| 1.1 | 2026-01-11 | Richard Foulkes | Corrected AU structure: invoice from UAE (0% tax) not US C-Corp. Added Nick ownership/protection sections. |
 
 ---
 
