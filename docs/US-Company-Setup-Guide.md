@@ -61,8 +61,9 @@ Maximize salary (reduces corp profit, not taxed in US) → minimize dividends (a
 
 ```
 Grant: Options for 490,000 shares (49%)
-Vesting: 4 years
-Cliff: 1 year (25% vests at 12 months)
+Vesting: 3 years
+Cliff: 1 year (16.3% vests at 12 months)
+Monthly vesting: Remaining 32.7% vests monthly over Years 2-3
 Strike Price: $0.001/share
 Exercise Cost: $490 total for full 49%
 ```
@@ -70,8 +71,37 @@ Exercise Cost: $490 total for full 49%
 ### Protections Built In
 - Unvested options expire on departure
 - 90-day exercise window on death
-- Company buyback right on vested shares
 - Right of first refusal on any transfer
+
+### Company Repurchase Right (KEY PROTECTION)
+
+**If Scott leaves VOLUNTARILY before Year 4:**
+- Company CAN (not must) buy back ALL vested shares
+- Price: **Lower of FMV or original strike price**
+- Window: 90 days from departure to exercise repurchase
+- Scott must sell if company exercises this right
+
+**What this means:**
+- Scott vests 49% over 3 years (faster)
+- But if he quits at Year 2, you can buy back his 32.6% for ~$326
+- He only keeps shares "safely" after Year 4
+- Protects you from someone vesting and bailing
+
+**Repurchase right does NOT apply if:**
+- Scott is terminated without cause (he keeps vested shares)
+- Scott dies or becomes disabled (estate keeps vested shares)
+- Company is sold (acceleration, he keeps everything)
+- After Year 4 (fully earned, no clawback)
+
+### Vesting Schedule
+
+| Time | Vested | Repurchasable? |
+|------|--------|----------------|
+| 6 months | 0% | N/A |
+| 1 year (cliff) | 16.3% | Yes, until Year 4 |
+| 2 years | 32.6% | Yes, until Year 4 |
+| 3 years | 49% | Yes, until Year 4 |
+| **4 years** | 49% | **No - fully his** |
 
 ### If Richard Dies - Business Continuity
 
