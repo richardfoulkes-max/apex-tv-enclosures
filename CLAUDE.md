@@ -210,6 +210,63 @@ nav.js injects: body { margin-left: 240px !important; }
 
 ## Recent Work History
 
+### Session: 2026-01-11 - Australia Partner Pack Rating Highlight
+
+**Added prominent Englaon rating callout to australia-partner-pack.html:**
+- Large red gradient box at top of Section 3 (Competitor Issues)
+- Shows ★★☆☆☆ 2/5 stars from ProductReview.com.au
+- Added "50% of reviews are 1-star" statistic
+- Clarifies "These aren't cherry-picked complaints — this is their actual rating"
+
+**Key methodology decision documented:**
+- NEVER cherry-pick negative reviews without context
+- Always include: overall star rating, total review count, % positive vs negative
+- Sylvox removed (4.3/5 rating - unfair to use minority 15% complaints)
+- Englaon kept (2/5 rating - legitimate pattern of issues)
+
+**Files Modified:**
+- `website/australia-partner-pack.html` - rating highlight added
+- `~/Downloads/Apex-Australia-Partner-Pack.html` - static file for Nick
+
+**Commit:** `8797b1b` - Add prominent Englaon 2/5 rating highlight to Australia partner pack
+
+---
+
+### Session: 2026-01-10 (Late) - APE-S Pool Storage Market Analysis
+
+**Created pool-storage-market.html with comprehensive market opportunity:**
+- **Global market:** $2.8B outdoor storage market
+- **GCC addressable:** 180,000+ private pools
+- **Competitor analysis:** Keter/Suncast (plastic, AED 400-1,500), Lifetime (mid-market), Teak (premium but high-maintenance), Custom built (expensive, slow)
+
+**APE-S Product Line:**
+- APE-S-S (Small): AED 2,500 - chemicals, test kits
+- APE-S-M (Medium): AED 3,500 - chemicals + nets, floats
+- APE-S-L (Large): AED 4,500 - full pool kit
+
+**Bundle Strategy:**
+- APE-P + APE-S-S: AED 5,500 (8% savings)
+- APE-P + APE-S-M: AED 6,300 (10% savings)
+- APE-P + APE-HC + APE-S-L: AED 11,000 (12% savings)
+- **100% order value increase when bundled with APE-P**
+
+**Revenue Projections:**
+- Year 1: 150 units, AED 525K
+- Year 2: 400 units, AED 1.4M
+- Year 3: 750 units, AED 2.6M+ (70% bundle attach rate)
+
+**Manufacturing Synergies:**
+- Same material (5052-H32 aluminum), finish, hardware as APE-P
+- No new tooling = higher margins (55-60% vs 45-50% for pumps)
+
+**Files Created/Modified:**
+- `website/pool-storage-market.html` (new)
+- `website/nav.js` (added Market Analysis to poolStorage section)
+
+**Commit:** `8f318d0` - Add APE-S pool storage market analysis
+
+---
+
 ### Session: 2026-01-10 (PM) - US IP Protection + Australia Market Strategy
 
 **US IP Protection Guide (docs/US-IP-Protection-Guide.md):**
