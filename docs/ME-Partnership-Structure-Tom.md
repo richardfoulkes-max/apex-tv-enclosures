@@ -7,15 +7,17 @@
 
 ## Corporate Structure
 
+### Phase 1: Now (Personal IP Ownership - FREE)
+
 ```
 ┌─────────────────────────────────────┐
-│   APEX GLOBAL HOLDINGS (Richard)    │
+│   RICHARD FOULKES (Personal)        │
 │   - Owns all IP, designs, trademarks│
-│   - 100% Richard Foulkes            │
 │   - Licenses IP to regional entities│
+│   - No holding company cost         │
 └─────────────────┬───────────────────┘
                   │
-                  │ IP License
+                  │ IP License (5% royalty)
                   │
 ┌─────────────────▼───────────────────┐
 │      APEX ENCLOSURES ME LLC         │
@@ -26,38 +28,58 @@
 └─────────────────────────────────────┘
 ```
 
+### Phase 2: When Revenue Justifies (~$2,500/year cost)
+
+```
+┌─────────────────────────────────────┐
+│   APEX GLOBAL HOLDINGS              │
+│   (RAK ICC Offshore ~AED 10K/year)  │
+│   - Richard: 100%                   │
+│   - IP transferred from Richard     │
+└─────────────────┬───────────────────┘
+                  │
+          ┌───────┴───────┐
+          ▼               ▼
+    Apex ME LLC      Apex US Inc
+```
+
 ---
 
 ## Why This Structure
 
 | Benefit | Explanation |
 |---------|-------------|
-| **IP Protection** | Global IP stays with Richard regardless of ME partnership |
+| **Zero Cost Now** | No holding company fees until revenue justifies it |
+| **IP Protection** | Global IP stays with Richard personally regardless of ME partnership |
 | **Regional Flexibility** | ME entity can have local partners without diluting global rights |
-| **Exit Protection** | If ME partnership ends, IP returns to holding company |
-| **Future Regions** | Can create US entity (with Scott) under same holding company |
-| **Licensing Revenue** | Holding company can charge royalty to ME entity (tax efficient) |
+| **Exit Protection** | If ME partnership ends, IP stays with Richard |
+| **Future Upgrade** | Can transfer IP to holding company when revenue exceeds ~$50K/year |
+| **Licensing Revenue** | Richard receives royalty personally (5% of revenue) |
 
 ---
 
-## Apex Global Holdings (Richard 100%)
+## IP Ownership (Richard Personally - Phase 1)
 
-**Purpose:** Own and protect all intellectual property
+**Purpose:** Own and protect all intellectual property at zero cost
 
-**Assets:**
+**Assets Owned by Richard Foulkes Personally:**
 - Product designs (ATE Series, APE Series)
 - Engineering specifications
 - Trademarks (Apex Enclosures)
 - Manufacturing know-how
 - Future product development
 
-**Location:** UAE (RAKICC, ADGM, or DMCC free zone) or BVI/Cayman
+**No Holding Company Needed Until:**
+- Revenue exceeds ~$50,000/year
+- Multiple regional entities operating
+- Tax planning becomes beneficial
 
 **Richard's Rights:**
-- 100% ownership
+- 100% personal ownership
 - Full control of IP licensing terms
 - Can license to multiple regional entities
 - Can revoke license if terms breached
+- Can transfer to holding company anytime
 
 ---
 
@@ -74,9 +96,9 @@
 - Distribution and logistics
 - After-sales service
 
-**Pays to Holding Company:**
-- IP license fee (e.g., 5-10% of revenue or fixed annual fee)
-- This protects IP value and provides tax-efficient extraction
+**Pays to Richard Personally (Phase 1) or Holding Company (Phase 2):**
+- IP license fee: 5% of net revenue
+- This protects IP value and compensates Richard for IP contribution
 
 ---
 
@@ -142,7 +164,8 @@ Minimum floor: Total capital contributed
 
 ## IP License Agreement
 
-**From:** Apex Global Holdings (Richard)
+**Phase 1 - From:** Richard Foulkes (Personal)
+**Phase 2 - From:** Apex Global Holdings (when formed)
 **To:** Apex Enclosures ME LLC
 
 ### Key Terms
@@ -236,35 +259,52 @@ If partners cannot agree on major decision:
 2. One partner offers to buy other out at $X
 3. Other partner must accept OR buy at same price
 4. Loser exits, winner takes 100%
-5. IP stays with holding company regardless
+5. IP stays with Richard personally (Phase 1) or holding company (Phase 2)
 
 ---
 
 ## Documents Needed
 
+### Phase 1 (Now - Personal IP Ownership)
+
 | Document | Purpose | Est. Cost |
 |----------|---------|-----------|
-| Holding Company Formation | Protect IP | $2,000-5,000 |
 | ME LLC Formation | Operating entity | $1,500-3,000 |
 | Shareholders Agreement | 50/50 terms, decision rights | $2,000-4,000 |
 | Buy-Sell Agreement | Death/exit buyback | Included above |
-| IP License Agreement | Holding → ME entity | $1,000-2,000 |
+| IP License Agreement | Richard (personal) → ME entity | $1,000-2,000 |
 | Life Insurance (x2) | Fund buybacks | ~$50-100/month each |
 
-**Total Setup:** ~$8,000-15,000 legal + ongoing insurance
+**Phase 1 Total:** ~$5,500-10,000 legal + ongoing insurance
+
+### Phase 2 (When Revenue Justifies - ~$50K+/year)
+
+| Document | Purpose | Est. Cost |
+|----------|---------|-----------|
+| Holding Company Formation | Protect IP centrally | $2,000-5,000 |
+| IP Transfer Agreement | Richard → Holding Company | $500-1,000 |
+| Updated IP License | Holding → ME entity | Minimal (amendment) |
+
+**Phase 2 Additional:** ~$2,500-6,000
 
 ---
 
 ## Next Steps
 
+### Phase 1 (Now)
 - [ ] Discuss structure with Tom
 - [ ] Agree on valuation method
 - [ ] Agree on license fee %
 - [ ] Get life insurance quotes (both partners)
 - [ ] Engage UAE corporate lawyer
-- [ ] Form holding company
 - [ ] Form ME operating company
-- [ ] Execute all agreements
+- [ ] Execute shareholders agreement, buy-sell, IP license
+- [ ] Register IP ownership (trademarks) in Richard's name
+
+### Phase 2 (When Revenue ~$50K+/year)
+- [ ] Form holding company (RAK ICC or similar)
+- [ ] Transfer IP from Richard to holding company
+- [ ] Update IP license agreement
 
 ---
 
@@ -272,6 +312,7 @@ If partners cannot agree on major decision:
 
 - This is a DRAFT framework - needs proper legal review
 - UAE law governs ME entity
-- Consider ADGM or DIFC for holding company (English common law)
-- Tax advice needed on optimal holding company jurisdiction
+- Phase 1: IP owned by Richard personally (zero cost)
+- Phase 2: Consider ADGM or DIFC for holding company (English common law)
+- Tax advice needed on optimal holding company jurisdiction (when Phase 2)
 - Tom should have independent legal advice before signing

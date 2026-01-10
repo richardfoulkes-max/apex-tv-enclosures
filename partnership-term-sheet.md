@@ -15,12 +15,14 @@ Apex Enclosures manufactures and sells premium outdoor TV and pool equipment enc
 
 ## 2. Corporate Structure
 
+### Phase 1: Now (Personal IP Ownership - Zero Cost)
+
 ```
 ┌─────────────────────────────────────────┐
-│     APEX GLOBAL HOLDINGS                │
-│     Richard Foulkes: 100%               │
+│     RICHARD FOULKES (Personal)          │
 │     - Owns all IP, designs, trademarks  │
 │     - Licenses to regional entities     │
+│     - No holding company cost           │
 └─────────────────┬───────────────────────┘
                   │
                   │ IP License (5% of revenue)
@@ -34,20 +36,36 @@ Apex Enclosures manufactures and sells premium outdoor TV and pool equipment enc
 └─────────────────────────────────────────┘
 ```
 
+### Phase 2: When Revenue Justifies (~$50K+/year)
+
+```
+┌─────────────────────────────────────────┐
+│     APEX GLOBAL HOLDINGS                │
+│     Richard Foulkes: 100%               │
+│     - IP transferred from Richard       │
+│     - Licenses to regional entities     │
+└─────────────────┬───────────────────────┘
+                  │
+          ┌───────┴───────┐
+          ▼               ▼
+    Apex ME LLC      Apex US Inc
+```
+
 **Why this structure:**
-- Global IP protected in holding company (RF retains ultimate control)
+- Phase 1: Zero holding company cost until revenue justifies (~$2,500/year)
+- Global IP protected (RF retains ultimate control regardless of phase)
 - ME operating company is a true 50/50 partnership
-- Clean separation if partnership ends - IP stays with holding company
+- Clean separation if partnership ends - IP stays with Richard
 - Enables future regional entities (US, EU) under same structure
 
 ---
 
 ## 3. Equity Split
 
-### Apex Global Holdings (IP & Brand)
+### IP Ownership (Phase 1: Personal / Phase 2: Holding Company)
 
-| Partner | Ownership |
-|---------|-----------|
+| Party | Ownership |
+|-------|-----------|
 | Richard Foulkes | 100% |
 
 ### Apex Enclosures ME LLC (Operations)
@@ -211,7 +229,8 @@ If either partner exits:
 
 ## 9. IP License Terms
 
-**Licensor:** Apex Global Holdings (Richard)
+**Phase 1 - Licensor:** Richard Foulkes (Personal)
+**Phase 2 - Licensor:** Apex Global Holdings (when formed)
 **Licensee:** Apex Enclosures ME LLC
 
 | Term | Details |
@@ -239,7 +258,7 @@ If either partner exits:
 - Both partners work "at risk"
 
 ### After Profitability
-- IP license fee (5%) paid to Holding Company first
+- IP license fee (5%) paid to Richard personally (Phase 1) or Holding Company (Phase 2)
 - Remaining profit split 50/50
 - Reinvestment decisions made jointly
 - Optional: Equal monthly draws once sustainable
@@ -248,17 +267,22 @@ If either partner exits:
 
 ## 11. Next Steps
 
+### Phase 1 (Now)
 1. [ ] Discuss and agree these terms in principle
 2. [ ] Both partners get independent legal advice
 3. [ ] Engage UAE corporate lawyer to draft:
-   - Apex Global Holdings formation
    - Apex ME LLC formation
    - Shareholders Agreement
    - Buy-Sell Agreement
-   - IP License Agreement
+   - IP License Agreement (Richard personal → ME LLC)
 4. [ ] Obtain life insurance quotes for both partners
 5. [ ] Execute all agreements
 6. [ ] Start selling
+
+### Phase 2 (When Revenue ~$50K+/year)
+7. [ ] Form Apex Global Holdings (RAK ICC or similar)
+8. [ ] Transfer IP from Richard to holding company
+9. [ ] Update IP license agreement
 
 ---
 
@@ -266,7 +290,7 @@ If either partner exits:
 
 We're building this together. Richard built the product, systems, and IP. Tom will build the sales and customer base in the Middle East. Neither succeeds without the other.
 
-50/50 in the ME operating company means equal say in operations and equal share of ME profits. The holding company structure protects the global IP while giving Tom full partnership in the regional business.
+50/50 in the ME operating company means equal say in operations and equal share of ME profits. Richard retaining IP ownership (personally for now, in a holding company when revenue justifies) protects the global business while giving Tom full partnership in the regional operation.
 
 The buy-sell provisions ensure that if anything happens to either of us, the business can continue and families are treated fairly.
 
