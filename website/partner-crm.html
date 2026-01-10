@@ -3464,15 +3464,6 @@ Examples:
             preview.classList.add('active');
         }
 
-        function getFileIcon(filename) {
-            const ext = filename.split('.').pop().toLowerCase();
-            const icons = {
-                'txt': '📄', 'md': '📝', 'html': '🌐', 'htm': '🌐',
-                'csv': '📊', 'json': '📋', 'eml': '📧', 'msg': '📧'
-            };
-            return icons[ext] || '📎';
-        }
-
         function clearAIFile() {
             aiFileContent = null;
             aiFileName = null;
