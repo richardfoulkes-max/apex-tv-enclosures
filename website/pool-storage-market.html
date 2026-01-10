@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APE-S Pool Storage - Market Analysis | Apex Enclosures</title>
+    <style>
+        :root {
+            --primary: #0891b2;
+            --primary-dark: #0e7490;
+            --text: #0f172a;
+            --muted: #64748b;
+            --bg: #f0f9ff;
+            --card: #ffffff;
+            --border: #e0f2fe;
+            --warning: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+        .main-container { padding: 2rem; }
+        @media (max-width: 900px) { .main-container { padding: 1rem; } }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.25rem 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+        }
+        @media (max-width: 900px) { .page-header { display: none; } }
+        .page-header h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .page-header p { opacity: 0.9; font-size: 0.9rem; }
+
+        .header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 2rem; margin-bottom: 2rem; border-radius: 12px; }
+        .header h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+        .header p { opacity: 0.9; }
+
+        h2 { color: var(--primary); font-size: 1.3rem; margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary); }
+        .card { background: var(--card); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid var(--border); }
+        .card-header { font-weight: 600; color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem; }
+
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+        @media (max-width: 1024px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        th { background: var(--bg); padding: 0.75rem; text-align: left; font-weight: 600; color: var(--primary); border-bottom: 2px solid var(--border); }
+        td { padding: 0.75rem; border-bottom: 1px solid var(--border); }
+
+        .badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+        .badge-success { background: #d1fae5; color: #065f46; }
+        .badge-warning { background: #fef3c7; color: #92400e; }
+        .badge-danger { background: #fee2e2; color: #991b1b; }
+        .badge-info { background: #e0f2fe; color: #0369a1; }
+
+        .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+        @media (max-width: 768px) { .stat-row { grid-template-columns: repeat(2, 1fr); } }
+        .stat-card { background: white; padding: 1.25rem; border-radius: 8px; text-align: center; border: 1px solid var(--border); }
+        .stat-card .number { font-size: 1.75rem; font-weight: 700; color: var(--primary); }
+        .stat-card .label { font-size: 0.8rem; color: var(--muted); }
+
+        .alert { padding: 1rem 1.25rem; border-radius: 8px; margin: 1rem 0; display: flex; gap: 0.75rem; align-items: flex-start; }
+        .alert-warning { background: #fef3c7; border-left: 4px solid var(--warning); }
+        .alert-success { background: #d1fae5; border-left: 4px solid var(--success); }
+        .alert-danger { background: #fee2e2; border-left: 4px solid var(--danger); }
+        .alert-info { background: #e0f2fe; border-left: 4px solid var(--primary); }
+
+        .competitor-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 0.5rem; }
+        .competitor-card .price { font-size: 1.25rem; font-weight: 700; color: var(--text); }
+        .competitor-card .details { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
+
+        ul { margin: 0.5rem 0; padding-left: 1.25rem; }
+        li { margin-bottom: 0.35rem; color: var(--muted); }
+        li strong { color: var(--text); }
+
+        .highlight { background: linear-gradient(135deg, #ecfdf5, #d1fae5); border: 2px solid var(--success); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .highlight h3 { color: #065f46; margin-bottom: 1rem; }
+
+        a { color: var(--primary); }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="page-header">
+            <h1>APE-S Series - Market Analysis</h1>
+            <p>Pool storage enclosures: Market opportunity, competitors, and positioning</p>
+        </div>
+
+        <div class="header">
+            <h1>Pool Storage Enclosures (APE-S) - Market Analysis</h1>
+            <p>Premium outdoor storage for pool accessories, chemicals, cushions, and toys</p>
+        </div>
+
+        <!-- Key Stats -->
+        <div class="stat-row">
+            <div class="stat-card">
+                <div class="number">$2.8B</div>
+                <div class="label">Global Outdoor Storage Market</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">500K+</div>
+                <div class="label">GCC Private Pools</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">0</div>
+                <div class="label">Premium GCC Competitors</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">AED 3-6K</div>
+                <div class="label">Target Price Point</div>
+            </div>
+        </div>
+
+        <!-- Why Pool Storage? -->
+        <div class="alert alert-success">
+            <span style="font-size: 1.5rem;">💡</span>
+            <div>
+                <strong>The Insight:</strong> Every villa with a pool needs outdoor storage. Pool toys, cushions, chemicals, cleaning equipment - it all needs a home.
+                Currently people use ugly plastic boxes or convert utility rooms. Premium aluminum cabinets that match the pool area aesthetic don't exist in GCC.
+            </div>
+        </div>
+
+        <h2>What Needs Storing?</h2>
+
+        <div class="grid-4">
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏊</div>
+                <h4 style="color: var(--primary);">Pool Toys</h4>
+                <p style="font-size: 0.85rem; color: var(--muted);">Floats, noodles, inflatables, water guns</p>
+                <span class="badge badge-success">High Volume</span>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🛋️</div>
+                <h4 style="color: var(--primary);">Cushions</h4>
+                <p style="font-size: 0.85rem; color: var(--muted);">Lounger cushions, throw pillows, covers</p>
+                <span class="badge badge-success">Daily Use</span>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧪</div>
+                <h4 style="color: var(--primary);">Chemicals</h4>
+                <p style="font-size: 0.85rem; color: var(--muted);">Chlorine, pH balancers, test kits</p>
+                <span class="badge badge-warning">Ventilation Needed</span>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧹</div>
+                <h4 style="color: var(--primary);">Equipment</h4>
+                <p style="font-size: 0.85rem; color: var(--muted);">Nets, brushes, vacuum, poles</p>
+                <span class="badge badge-info">Tall Storage</span>
+            </div>
+        </div>
+
+        <!-- Market Opportunity -->
+        <h2>Market Opportunity</h2>
+
+        <div class="card">
+            <div class="card-header">Global Outdoor Storage Market</div>
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                    <th>Source</th>
+                </tr>
+                <tr>
+                    <td>Global Market Size (2024)</td>
+                    <td><strong>$2.8 billion</strong></td>
+                    <td>Grand View Research</td>
+                </tr>
+                <tr>
+                    <td>Projected Growth</td>
+                    <td>5.2% CAGR to 2030</td>
+                    <td>Allied Market Research</td>
+                </tr>
+                <tr>
+                    <td>Premium Segment</td>
+                    <td>~15% of market (~$420M)</td>
+                    <td>Estimate</td>
+                </tr>
+                <tr>
+                    <td>Middle East % of Global</td>
+                    <td>~3-5% (~$85-140M)</td>
+                    <td>Estimate based on GDP</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">Why GCC is Perfect for Premium Storage</div>
+                <ul>
+                    <li><strong>Extreme sun:</strong> Plastic storage degrades in 2-3 years under UAE sun</li>
+                    <li><strong>High wealth:</strong> Villa owners spend $50K+ on outdoor furniture</li>
+                    <li><strong>Aesthetics matter:</strong> Pool areas are entertainment spaces, not utility zones</li>
+                    <li><strong>Year-round use:</strong> Pools used 10-12 months/year (not seasonal like EU/US)</li>
+                    <li><strong>Housekeeping culture:</strong> Staff maintain pool areas daily - need organized storage</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-header">Current Solutions (All Inadequate)</div>
+                <ul>
+                    <li><strong>Plastic deck boxes:</strong> $100-300, fade/crack in 2-3 years, look cheap</li>
+                    <li><strong>Utility room:</strong> Inconvenient, not weather-resistant pathway</li>
+                    <li><strong>Indoor storage:</strong> Wet items, chlorine smell inside the house</li>
+                    <li><strong>No storage:</strong> Clutter around pool, trips over toys</li>
+                    <li><strong>Custom built:</strong> $5,000-15,000, 4-6 week lead time</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Addressable Market -->
+        <div class="card">
+            <div class="card-header">GCC Addressable Market</div>
+            <table>
+                <tr>
+                    <th>Segment</th>
+                    <th>Pool Count</th>
+                    <th>Storage Need</th>
+                    <th>Addressable</th>
+                    <th>@ 1% Penetration</th>
+                </tr>
+                <tr>
+                    <td>Luxury Villas (Emirates Hills, Palm, etc.)</td>
+                    <td>40,000</td>
+                    <td>100%</td>
+                    <td>40,000</td>
+                    <td>400 units</td>
+                </tr>
+                <tr>
+                    <td>High-end Communities (Arabian Ranches, etc.)</td>
+                    <td>80,000</td>
+                    <td>80%</td>
+                    <td>64,000</td>
+                    <td>640 units</td>
+                </tr>
+                <tr>
+                    <td>Mid-range Villas</td>
+                    <td>150,000</td>
+                    <td>50%</td>
+                    <td>75,000</td>
+                    <td>750 units</td>
+                </tr>
+                <tr>
+                    <td>Hotels/Resorts (pool cabanas)</td>
+                    <td>500+</td>
+                    <td>100%</td>
+                    <td>5,000+ cabanas</td>
+                    <td>50 units</td>
+                </tr>
+                <tr style="background: #d1fae5; font-weight: 600;">
+                    <td><strong>TOTAL GCC</strong></td>
+                    <td>270,000+</td>
+                    <td></td>
+                    <td><strong>180,000+</strong></td>
+                    <td><strong>1,800 units/yr</strong></td>
+                </tr>
+            </table>
+            <div class="alert alert-info" style="margin-top: 1rem;">
+                <span>📊</span>
+                <div><strong>Revenue potential:</strong> 1,800 units × AED 4,500 average = <strong>AED 8.1M/year</strong> at just 1% penetration</div>
+            </div>
+        </div>
+
+        <!-- Competitor Analysis -->
+        <h2>Competitor Analysis</h2>
+
+        <div class="grid-3">
+            <div class="competitor-card">
+                <h4>Keter (Plastic)</h4>
+                <div class="price">AED 400-1,200</div>
+                <div class="details">
+                    <strong>Pros:</strong> Cheap, widely available (ACE, Carrefour)<br>
+                    <strong>Cons:</strong> Plastic fades/cracks in 2-3 years, looks cheap, no ventilation<br>
+                    <strong>Lifespan:</strong> 2-4 years outdoor UAE
+                </div>
+                <span class="badge badge-danger">Budget</span>
+            </div>
+
+            <div class="competitor-card">
+                <h4>Suncast (Resin)</h4>
+                <div class="price">AED 600-1,800</div>
+                <div class="details">
+                    <strong>Pros:</strong> Better UV resistance than Keter<br>
+                    <strong>Cons:</strong> Still plastic, limited sizes, fades<br>
+                    <strong>Availability:</strong> Limited in GCC
+                </div>
+                <span class="badge badge-warning">Mid-range</span>
+            </div>
+
+            <div class="competitor-card">
+                <h4>Lifetime (HDPE)</h4>
+                <div class="price">AED 800-2,000</div>
+                <div class="details">
+                    <strong>Pros:</strong> Tough HDPE, good UV resistance<br>
+                    <strong>Cons:</strong> Industrial look, not premium aesthetic<br>
+                    <strong>Market:</strong> Commercial focus
+                </div>
+                <span class="badge badge-warning">Mid-range</span>
+            </div>
+
+            <div class="competitor-card">
+                <h4>Teak Storage (Pottery Barn, etc.)</h4>
+                <div class="price">AED 3,000-8,000</div>
+                <div class="details">
+                    <strong>Pros:</strong> Premium look, natural material<br>
+                    <strong>Cons:</strong> Requires annual oiling, can rot, expensive<br>
+                    <strong>Target:</strong> High-end residential
+                </div>
+                <span class="badge badge-success">Premium</span>
+            </div>
+
+            <div class="competitor-card">
+                <h4>Custom Built (Local)</h4>
+                <div class="price">AED 5,000-15,000</div>
+                <div class="details">
+                    <strong>Pros:</strong> Exact fit, any size/material<br>
+                    <strong>Cons:</strong> 4-6 week lead time, variable quality, no warranty<br>
+                    <strong>Supplier:</strong> Pool contractors, carpenters
+                </div>
+                <span class="badge badge-info">Bespoke</span>
+            </div>
+
+            <div class="competitor-card" style="border: 2px solid var(--success);">
+                <h4>Apex APE-S (Proposed)</h4>
+                <div class="price" style="color: var(--success);">AED 3,000-6,000</div>
+                <div class="details">
+                    <strong>Pros:</strong> Marine-grade aluminum, 15+ year lifespan, matches pool aesthetic, ventilated, lockable<br>
+                    <strong>Cons:</strong> New brand, premium pricing<br>
+                    <strong>Positioning:</strong> Between plastic and custom
+                </div>
+                <span class="badge badge-success">Premium Standard</span>
+            </div>
+        </div>
+
+        <!-- Positioning -->
+        <div class="highlight">
+            <h3>Apex APE-S Positioning</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="color: #065f46; margin-bottom: 0.5rem;">The Gap We Fill</h4>
+                    <ul style="color: #065f46;">
+                        <li><strong>Above plastic:</strong> Premium materials, 15+ year lifespan</li>
+                        <li><strong>Below custom:</strong> Standard sizes, 1-2 week delivery</li>
+                        <li><strong>Price sweet spot:</strong> AED 3,000-6,000 (vs $15K custom)</li>
+                        <li><strong>Same aesthetic as APE-P:</strong> Matches pump enclosure</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #065f46; margin-bottom: 0.5rem;">Key Selling Points</h4>
+                    <ul style="color: #065f46;">
+                        <li><strong>"Buy once":</strong> 15-year warranty vs 2-year plastic</li>
+                        <li><strong>"Complete system":</strong> Bundle with pump enclosure</li>
+                        <li><strong>"Pool designer approved":</strong> Matches premium outdoor furniture</li>
+                        <li><strong>"Ventilated":</strong> Safe chemical storage</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bundle Opportunity -->
+        <h2>Bundle Opportunity: Complete Pool Package</h2>
+
+        <div class="card">
+            <div class="card-header">Pool Area Package Pricing</div>
+            <table>
+                <tr>
+                    <th>Package</th>
+                    <th>Contents</th>
+                    <th>Individual Price</th>
+                    <th>Bundle Price</th>
+                    <th>Savings</th>
+                </tr>
+                <tr>
+                    <td><strong>Equipment Only</strong></td>
+                    <td>APE-P Pump Enclosure</td>
+                    <td>AED 3,500</td>
+                    <td>AED 3,500</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><strong>Equipment + Storage</strong></td>
+                    <td>APE-P + APE-S Medium</td>
+                    <td>AED 7,000</td>
+                    <td>AED 6,300</td>
+                    <td>10%</td>
+                </tr>
+                <tr style="background: #fef3c7;">
+                    <td><strong>Complete Pool Area</strong></td>
+                    <td>APE-P + APE-HC + APE-S Large</td>
+                    <td>AED 13,500</td>
+                    <td><strong>AED 11,500</strong></td>
+                    <td><strong>15%</strong></td>
+                </tr>
+            </table>
+            <div class="alert alert-success" style="margin-top: 1rem;">
+                <span>💰</span>
+                <div><strong>Upsell opportunity:</strong> Turn AED 3,500 pump enclosure sale into AED 11,500 complete package. Same customer, same install visit, 3× revenue.</div>
+            </div>
+        </div>
+
+        <!-- Product Line -->
+        <h2>APE-S Product Line</h2>
+
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-header">APE-S-S (Small)</div>
+                <p><strong>Dimensions:</strong> 600 × 500 × 800mm</p>
+                <p><strong>Capacity:</strong> ~240L</p>
+                <p><strong>Use case:</strong> Chemicals, test kits, small accessories</p>
+                <p><strong>Features:</strong> Ventilated, lockable, shelf</p>
+                <p><strong>BOM Est:</strong> $120</p>
+                <p><strong>Retail:</strong> AED 2,500-3,000</p>
+            </div>
+            <div class="card" style="border: 2px solid var(--primary);">
+                <div class="card-header">APE-S-M (Medium) ⭐</div>
+                <p><strong>Dimensions:</strong> 1200 × 600 × 900mm</p>
+                <p><strong>Capacity:</strong> ~650L</p>
+                <p><strong>Use case:</strong> Cushions, toys, chemicals</p>
+                <p><strong>Features:</strong> Dual compartment, ventilated chemical section</p>
+                <p><strong>BOM Est:</strong> $180</p>
+                <p><strong>Retail:</strong> AED 3,500-4,500</p>
+                <span class="badge badge-success">Best Seller Expected</span>
+            </div>
+            <div class="card">
+                <div class="card-header">APE-S-L (Large)</div>
+                <p><strong>Dimensions:</strong> 1800 × 600 × 1200mm</p>
+                <p><strong>Capacity:</strong> ~1,300L</p>
+                <p><strong>Use case:</strong> Full pool storage, cleaning poles, covers</p>
+                <p><strong>Features:</strong> 3 compartments, tall section for poles</p>
+                <p><strong>BOM Est:</strong> $280</p>
+                <p><strong>Retail:</strong> AED 5,000-6,500</p>
+            </div>
+        </div>
+
+        <!-- Go-to-Market -->
+        <h2>Go-to-Market Strategy</h2>
+
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">Sales Channels</div>
+                <table>
+                    <tr>
+                        <th>Channel</th>
+                        <th>Approach</th>
+                        <th>Volume</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Pool Contractors</strong></td>
+                        <td>Bundle with pump enclosure</td>
+                        <td>50%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Outdoor Furniture Stores</strong></td>
+                        <td>Marina Home, Pottery Barn, etc.</td>
+                        <td>25%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Direct Online</strong></td>
+                        <td>Website, Instagram</td>
+                        <td>15%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Developers</strong></td>
+                        <td>Spec into new villa builds</td>
+                        <td>10%</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="card">
+                <div class="card-header">Marketing Messages</div>
+                <ul>
+                    <li><strong>"The last storage you'll ever buy"</strong> - 15-year warranty</li>
+                    <li><strong>"Designed for poolside"</strong> - Matches outdoor furniture</li>
+                    <li><strong>"Safe chemical storage"</strong> - Ventilated, lockable</li>
+                    <li><strong>"Bundle and save"</strong> - Complete pool area package</li>
+                    <li><strong>"Dubai-tested"</strong> - Built for extreme sun</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Revenue Projections -->
+        <h2>Revenue Projections</h2>
+
+        <div class="card">
+            <table>
+                <tr>
+                    <th>Year</th>
+                    <th>Units</th>
+                    <th>Avg Price</th>
+                    <th>Revenue</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td>Year 1</td>
+                    <td>50-100</td>
+                    <td>AED 4,000</td>
+                    <td>AED 200-400K</td>
+                    <td>Bundled with APE-P sales</td>
+                </tr>
+                <tr>
+                    <td>Year 2</td>
+                    <td>200-400</td>
+                    <td>AED 4,200</td>
+                    <td>AED 840K-1.7M</td>
+                    <td>+ furniture store partnerships</td>
+                </tr>
+                <tr style="background: #d1fae5;">
+                    <td>Year 3</td>
+                    <td>500-800</td>
+                    <td>AED 4,500</td>
+                    <td><strong>AED 2.25-3.6M</strong></td>
+                    <td>+ developer specs, Saudi expansion</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Synergies -->
+        <h2>Synergies with APE-P and APE-HC</h2>
+
+        <div class="card">
+            <div class="card-header">Why Pool Storage Makes Strategic Sense</div>
+            <div class="grid-2">
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Same Everything</h4>
+                    <ul>
+                        <li><strong>Same customer:</strong> Villa owner with pool</li>
+                        <li><strong>Same manufacturer:</strong> Eurotech (aluminum)</li>
+                        <li><strong>Same sales channel:</strong> Pool contractors</li>
+                        <li><strong>Same install visit:</strong> One delivery, one setup</li>
+                        <li><strong>Same aesthetic:</strong> Matching finishes</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Increases Order Value</h4>
+                    <ul>
+                        <li><strong>APE-P only:</strong> AED 3,500</li>
+                        <li><strong>APE-P + APE-S:</strong> AED 7,000 (+100%)</li>
+                        <li><strong>Full package:</strong> AED 11,500 (+230%)</li>
+                        <li><strong>Same CAC:</strong> No extra marketing cost</li>
+                        <li><strong>Higher LTV:</strong> Complete pool area = referrals</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Next Steps -->
+        <h2>Next Steps</h2>
+
+        <div class="card">
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Action</th>
+                    <th>Purpose</th>
+                    <th>Priority</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Add APE-S to Eurotech RFQ</td>
+                    <td>Get manufacturing quote alongside APE-P</td>
+                    <td><span class="badge badge-success">HIGH</span></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Create 3 size specifications</td>
+                    <td>Small/Medium/Large with dimensions</td>
+                    <td><span class="badge badge-success">HIGH</span></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Design ventilated chemical section</td>
+                    <td>Safety feature for chlorine storage</td>
+                    <td><span class="badge badge-warning">MEDIUM</span></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Test bundle pricing with contractors</td>
+                    <td>Validate 10-15% bundle discount</td>
+                    <td><span class="badge badge-warning">MEDIUM</span></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Create renders matching APE-P</td>
+                    <td>Show complete pool area package</td>
+                    <td><span class="badge badge-info">LOW</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <p style="text-align: center; color: var(--muted); margin-top: 2rem; font-size: 0.85rem;">
+            Research compiled January 2026 | Apex Enclosures | Internal Use Only
+        </p>
+    </div>
+    <script src="nav.js"></script>
+</body>
+</html>

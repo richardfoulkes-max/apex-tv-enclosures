@@ -197,7 +197,8 @@
             icon: '📦',
             items: [
                 { href: 'pool-storage-concepts.html', label: 'Concept Designs' },
-                { href: 'pool-storage-specification.html', label: 'Specification' }
+                { href: 'pool-storage-specification.html', label: 'Specification' },
+                { href: 'pool-storage-market.html', label: 'Market Analysis' }
             ]
         },
         poolManufacturing: {
