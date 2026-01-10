@@ -210,6 +210,47 @@ nav.js injects: body { margin-left: 240px !important; }
 
 ## Recent Work History
 
+### Session: 2026-01-10 (PM) - US IP Protection + Australia Market Strategy
+
+**US IP Protection Guide (docs/US-IP-Protection-Guide.md):**
+- Comprehensive comparison: Design Patent vs Utility Patent vs Trade Dress
+- **Design Patent:** $1,500-3,000, 15 years, protects ornamental appearance
+- **Utility Patent:** $5,000-15,000, 20 years, protects functional innovations (likely not needed)
+- **Trade Dress:** Indefinite, requires 5+ years secondary meaning
+- **Recommended strategy:** File Design Patent for v5.3.0 integrated bezel design now, build Trade Dress over time
+
+**Australia Market Strategy (website/australia-market.html):**
+- Market size estimate: ~$40-60M AUD (5-6% of global)
+- Key competitors analyzed:
+  - Englaon (Melbourne-based): 55" @ $4,500, 65" @ $5,500
+  - Sylvox: 55" @ $3,000-5,000
+  - Kinytech/DeerTV: 75" @ $1,388 (cheap Chinese)
+- **Apex positioning:** AUD $3,000 for 75" (between cheap Chinese and expensive outdoor TVs)
+- Distribution model: Local partner with 40% margin, 5-10 unit initial inventory
+
+**Tier 1 Australian Manufacturers Identified:**
+1. Metaltex (Melbourne) - ISO 9001, 45+ years, Dulux/Interpon powder coating
+2. AG Holding (Melbourne) - ISO 9001, 65+ years, in-house powder coating
+3. Wilson & Gilkes (NSW) - 75 years, in-house powder coating
+4. FORM2000 (Melbourne) - 30+ years OEM manufacturing
+
+**Tier 2 Australian Manufacturers:**
+- Westberg Sheetmetal (Melbourne)
+- Aston Precision (Melbourne)
+- Sheetmetal Improvements (Gold Coast, QLD)
+
+**Files Created:**
+- `docs/US-IP-Protection-Guide.md` (new)
+- `website/australia-market.html` (new)
+- `australia-manufacturer-email.txt` (new)
+
+**Navigation Updated:**
+- Added "Australia Market" to Manufacturing section in nav.js
+
+**Commit:** `b925f2a` - Add US IP Protection guide and Australia market strategy
+
+---
+
 ### Session: 2026-01-10 - CRM Improvements + Partnership Structures
 
 **CRM UI Improvements:**
