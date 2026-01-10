@@ -210,9 +210,20 @@ If partners cannot agree on major decision:
 2. Company buys Richard's 50% at FMV
 3. Money goes to Richard's estate
 4. Tom owns 100% of ME entity
-5. **IP License continues** (critical - must be in agreement)
-6. Tom can continue operating under license
+5. **IP License continues AUTOMATICALLY** (critical - irrevocable)
+6. Tom can continue operating under license indefinitely
 7. Richard's heirs inherit holding company + IP
+
+**CRITICAL - Tom's Protection from Richard's Heirs:**
+- IP License is **IRREVOCABLE** for ME territory as long as Tom operates
+- Richard's heirs CANNOT:
+  - Revoke or terminate Tom's IP license
+  - Raise license fees beyond agreed escalation
+  - Block Tom's ME operations
+  - Interfere with Tom's business decisions
+- Heirs receive license fee income (5% of revenue) but NO control
+- License continues for life of the ME business or until Tom chooses to exit
+- If heirs want to sell holding company, Tom has RIGHT OF FIRST REFUSAL
 
 ### Scenario 3: Tom Wants Out
 1. Tom gives 90 days notice

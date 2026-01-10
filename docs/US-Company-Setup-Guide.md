@@ -73,6 +73,25 @@ Exercise Cost: $490 total for full 49%
 - Company buyback right on vested shares
 - Right of first refusal on any transfer
 
+### If Richard Dies - Business Continuity
+
+**Scott's rights are PROTECTED:**
+1. Scott continues operating US business uninterrupted
+2. Richard's heirs inherit Richard's shares but CANNOT:
+   - Remove Scott as operator
+   - Block day-to-day business decisions
+   - Revoke Scott's vested options
+   - Interfere with US territory operations
+3. Heirs receive economic benefits only (dividends, eventual sale proceeds)
+4. Scott has RIGHT OF FIRST REFUSAL to buy Richard's shares from estate at FMV
+5. If heirs want to sell, Scott can match any third-party offer
+
+**Built into Operating Agreement:**
+- "Successor Passive Investor" clause - heirs get money, not control
+- Scott retains full operational authority for US territory
+- Major decisions require Scott's consent (heirs cannot override)
+- Heirs can sell their shares but Scott has first right to buy
+
 ---
 
 ## Buy-Sell Agreement Terms

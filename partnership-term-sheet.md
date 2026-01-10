@@ -143,8 +143,15 @@ If partners cannot agree:
 3. Payment within 90 days
 4. Money goes to Richard's estate
 5. Tom continues with 100% of ME entity
-6. IP License continues (Tom can keep operating)
+6. **IP License continues AUTOMATICALLY and is IRREVOCABLE**
 7. Richard's heirs inherit Apex Global Holdings (IP)
+
+**Tom's Protection from Richard's Heirs:**
+- IP License CANNOT be revoked by Richard's heirs
+- Heirs CANNOT interfere with Tom's ME operations
+- Heirs CANNOT raise license fees beyond agreed terms
+- Heirs receive license income (5%) but NO operational control
+- Tom has RIGHT OF FIRST REFUSAL if heirs want to sell holding company
 
 ### Valuation Method
 
