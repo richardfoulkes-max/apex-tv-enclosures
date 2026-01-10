@@ -1,0 +1,135 @@
+# Apex US Company Setup Guide
+
+**Status:** On hold until prototype confirmed
+**Last Updated:** 2026-01-10
+
+---
+
+## Recommended Structure
+
+- **Entity:** Delaware C-Corp via Stripe Atlas
+- **Cost:** $500 setup + ~$325/year ongoing
+- **Why Delaware:** Credibility with US manufacturers, investor-friendly, Stripe Atlas support
+
+---
+
+## Ownership Structure
+
+| Party | Equity | Notes |
+|-------|--------|-------|
+| Richard | 100% shares | Full ownership |
+| Scott | Options for 49% | 4-year vest, 1-year cliff |
+| Reserve | 1% | Future employees/advisors |
+
+**Key:** Scott gets OPTIONS, not actual shares. Protects against death, divorce, departure.
+
+---
+
+## Tax Implications (Dubai Resident Owner)
+
+### Federal (IRS)
+- 21% corporate tax on profits
+- Form 1120 annual return (required)
+- Form 5472 foreign ownership disclosure ($25K penalty if missed)
+- Salary to yourself: 0% US tax (non-resident wages)
+- Dividends: 30% withholding (no US-UAE treaty)
+
+### Delaware State
+- Franchise tax: $225/year minimum
+- State income tax: 0% (no operations in Delaware)
+- Annual report: $50/year
+- Due: March 1
+
+### Strategy
+Maximize salary (reduces corp profit, not taxed in US) → minimize dividends (avoid 30% withholding)
+
+---
+
+## Annual Compliance
+
+| Date | Task | Cost |
+|------|------|------|
+| March 1 | Delaware Franchise Tax + Annual Report | ~$275 |
+| April 15 | Form 1120 + 5472 | CPA: $500-1,500 |
+| Quarterly | Estimated tax payments | 21% of profits |
+
+**Total annual cost:** ~$1,500-3,000 (taxes + CPA + registered agent)
+
+---
+
+## Scott's Options Terms
+
+```
+Grant: Options for 490,000 shares (49%)
+Vesting: 4 years
+Cliff: 1 year (25% vests at 12 months)
+Strike Price: $0.001/share
+Exercise Cost: $490 total for full 49%
+```
+
+### Protections Built In
+- Unvested options expire on departure
+- 90-day exercise window on death
+- Company buyback right on vested shares
+- Right of first refusal on any transfer
+
+---
+
+## Buy-Sell Agreement Terms
+
+**Trigger Events:**
+- Death
+- Permanent disability
+- Voluntary departure
+- Termination for cause
+
+**Buyback:**
+- Automatic at Fair Market Value
+- Valuation: Formula-based (e.g., 3x net profit)
+- Payment: Within 90 days
+- Funding: Key-person life insurance policy
+
+---
+
+## Setup Checklist (When Ready)
+
+- [ ] Go to stripe.com/atlas
+- [ ] Choose C-Corporation
+- [ ] Company name: Apex Enclosures Inc. (or similar)
+- [ ] Add yourself as sole founder initially
+- [ ] Complete formation (~10 mins, 1-2 days to process)
+- [ ] Open Mercury bank account (via Atlas)
+- [ ] Get EIN (automatic, slower for non-US residents)
+- [ ] Find US CPA familiar with foreign-owned corps
+- [ ] Draft Stock Option Plan
+- [ ] Draft Buy-Sell Agreement
+- [ ] Get life insurance quotes for key-person policy
+
+---
+
+## Recommended Services
+
+| Service | Purpose | Cost |
+|---------|---------|------|
+| Stripe Atlas | Formation | $500 |
+| Mercury | US bank account | Free |
+| Xero/QuickBooks | Bookkeeping | ~$30/month |
+| Clerky or Carta | Equity docs | ~$500-1,500 |
+| US CPA | Tax filing | ~$1,000/year |
+
+---
+
+## Resources
+
+- Stripe Atlas: https://stripe.com/atlas
+- Mercury Bank: https://mercury.com
+- Clerky (equity docs): https://clerky.com
+- Carta (cap table): https://carta.com
+
+---
+
+## Notes
+
+- No US-UAE tax treaty exists
+- UAE 9% corporate tax may apply to US company profits (CFC rules)
+- Revisit this when prototype quote received from Accurate Metal
