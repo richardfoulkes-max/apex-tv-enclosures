@@ -118,19 +118,19 @@
                 { href: 'qc-checklist.html', label: 'QC Checklist' },
                 { href: 'compliance-guide.html', label: 'Compliance Guide' },
                 { href: 'manufacturer-rfq.html', label: 'RFQ Package' },
-                { href: 'china-suppliers.html', label: 'China Suppliers' },
-                { href: 'us-manufacturing.html', label: 'US Manufacturing' },
-                { href: 'australia-market.html', label: 'Australia Market' }
+                { href: 'china-suppliers.html', label: 'China Suppliers' }
             ]
         },
         market: {
             label: 'Market Research',
             icon: '📈',
             items: [
-                { href: 'market-research.html', label: 'Market Research' },
+                { href: 'market-research.html', label: 'Overview' },
                 { href: 'competitor-analysis.html', label: 'Competitor Analysis' },
                 { href: 'competitor-comparison.html', label: 'Competitor Comparison' },
-                { href: 'product-opportunities.html', label: 'Product Opportunities' }
+                { href: 'product-opportunities.html', label: 'Product Opportunities' },
+                { href: 'us-manufacturing.html', label: '🇺🇸 USA' },
+                { href: 'australia-market.html', label: '🇦🇺 Australia' }
             ]
         },
         financial: {
