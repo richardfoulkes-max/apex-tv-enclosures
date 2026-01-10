@@ -210,6 +210,39 @@ nav.js injects: body { margin-left: 240px !important; }
 
 ## Recent Work History
 
+### Session: 2026-01-11 (Latest) - Financial Planning & US Entity Structure
+
+**Added China volume manufacturing option for Australia:**
+- Standard orders: Australian local manufacturing (3-4 weeks)
+- Volume orders (50+ units): China manufacturing (8-10 weeks)
+- Volume pricing: 75" landed at $900 vs $1,200 AU, wholesale $1,400, 36% GP
+- Updated Year 1 projections with mixed manufacturing: Aggressive = 500 units, $800K revenue, $325K GP
+
+**Created Financial Planning Guide (`docs/Financial-Planning-Guide.md`):**
+- US setup: $2,000-3,850 (Stripe Atlas + design patent)
+- US annual: $3,500-6,600 (franchise tax, accounting, insurance)
+- Australia setup: $0-2,000 (Nick has existing business)
+- Australia annual: $650-2,000 (marketing contribution only)
+- Combined minimal: $6,500-14,000
+- Combined ready-to-sell: $31,000-54,000
+- Break-even: 8-15 units/year
+
+**Clarified US Entity Structure for UAE-based British citizens:**
+- **S-Corp NOT available** - requires US citizens/residents only
+- **C-Corp is the ONLY option** for non-US residents
+- **No US-UAE tax treaty** - 30% dividend withholding (vs 15% with US-UK treaty)
+- **Tax strategy:** Pay management fees (0% withholding, deductible) NOT dividends (30% withholding)
+- **99% vs 100% ownership:** Makes no difference for C-Corps. Only matters for LLCs (single-member = disregarded, 2+ = partnership)
+
+**Nick's AU business:** Handles all entity/compliance, we invoice wholesale from US C-Corp.
+
+**Files Created:**
+- `docs/Financial-Planning-Guide.md`
+
+**Commits:** `19a0c7e`, `f4aa187`, `4942225`
+
+---
+
 ### Session: 2026-01-11 (Continued) - Australia B2B Wholesale Pricing
 
 **Nick Dempsey responded with wholesale market feedback:**
