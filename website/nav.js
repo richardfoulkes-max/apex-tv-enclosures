@@ -119,7 +119,8 @@
                 { href: 'compliance-guide.html', label: 'Compliance Guide' },
                 { href: 'manufacturer-rfq.html', label: 'RFQ Package' },
                 { href: 'china-suppliers.html', label: 'China Suppliers' },
-                { href: 'us-manufacturing.html', label: 'US Manufacturing' }
+                { href: 'us-manufacturing.html', label: 'US Manufacturing' },
+                { href: 'australia-market.html', label: 'Australia Market' }
             ]
         },
         market: {

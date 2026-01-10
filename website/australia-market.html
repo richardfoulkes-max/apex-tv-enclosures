@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Enclosures - Australia Market Strategy</title>
+    <style>
+        :root {
+            --primary: #0d9488;
+            --primary-dark: #0f766e;
+            --accent: #f59e0b;
+            --danger: #dc2626;
+            --success: #10b981;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #f0fdfa;
+            --card: #ffffff;
+            --border: #ccfbf1;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+        .main-container { padding: 2rem; max-width: 1100px; margin: 0 auto; }
+
+        /* Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.5rem 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .page-header .subtitle { opacity: 0.9; font-size: 0.95rem; }
+        .page-header .logo { font-size: 0.85rem; opacity: 0.8; margin-bottom: 0.5rem; }
+
+        /* Sections */
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+        .section h2 {
+            color: var(--primary-dark);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border);
+        }
+        .section h3 {
+            color: var(--text);
+            font-size: 1.1rem;
+            margin: 1.5rem 0 0.75rem;
+        }
+        .section p { color: var(--text-muted); margin-bottom: 1rem; }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+        th { background: var(--bg); padding: 0.75rem; text-align: left; font-weight: 600; color: var(--primary-dark); border-bottom: 2px solid var(--border); }
+        td { padding: 0.75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+        tr:hover { background: #f8fafc; }
+        .num { text-align: right; font-family: 'SF Mono', Monaco, Consolas, monospace; }
+
+        /* Alerts */
+        .alert {
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        .alert-danger {
+            background: #fef2f2;
+            border-left: 4px solid var(--danger);
+            color: #991b1b;
+        }
+        .alert-success {
+            background: #f0fdf4;
+            border-left: 4px solid var(--success);
+            color: #166534;
+        }
+        .alert-warning {
+            background: #fffbeb;
+            border-left: 4px solid var(--accent);
+            color: #92400e;
+        }
+        .alert-info {
+            background: #f0fdfa;
+            border-left: 4px solid var(--primary);
+            color: var(--primary-dark);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        .card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+        }
+        .card h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .card p { font-size: 0.85rem; margin: 0.5rem 0; color: var(--text-muted); }
+        .card a { color: var(--primary); text-decoration: none; }
+        .card a:hover { text-decoration: underline; }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .badge-success { background: #dcfce7; color: #166534; }
+        .badge-warning { background: #fef3c7; color: #92400e; }
+        .badge-danger { background: #fee2e2; color: #991b1b; }
+        .badge-info { background: #e0f2fe; color: #0369a1; }
+
+        /* Tier labels */
+        .tier-1 { border-left: 4px solid var(--success); }
+        .tier-2 { border-left: 4px solid var(--accent); }
+
+        /* Comparison table */
+        .compare-good { background: #dcfce7; }
+        .compare-bad { background: #fee2e2; }
+
+        /* Links */
+        a { color: var(--primary); }
+
+        /* Summary stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 700px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .stat-card .value { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .stat-card .label { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* Contact info */
+        .contact-info {
+            background: #f0fdfa;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Print styles */
+        @media print {
+            body { background: white; }
+            .main-container { max-width: 100%; padding: 0; }
+            .page-header { margin: 0 0 1rem 0; }
+            .section { break-inside: avoid; border: 1px solid #ddd; }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="page-header">
+            <div class="logo">APEX ENCLOSURES</div>
+            <h1>Australia Market Strategy</h1>
+            <p class="subtitle">Market analysis, competitors, and domestic manufacturing options for Australian expansion</p>
+        </div>
+
+        <!-- Summary Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="value">~$50M</div>
+                <div class="label">AU Market Size (est.)</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">0%</div>
+                <div class="label">Tariff from UAE</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">7</div>
+                <div class="label">Qualified AU Suppliers</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">2-3 wks</div>
+                <div class="label">Lead Time (local)</div>
+            </div>
+        </div>
+
+        <!-- Market Opportunity -->
+        <section class="section">
+            <h2>1. Australian Market Opportunity</h2>
+
+            <div class="alert alert-success">
+                <strong>Verdict: ATTRACTIVE SECONDARY MARKET</strong> - No tariff barriers, strong outdoor living culture, premium pricing tolerance. Good fit as a secondary market with local distribution partner.
+            </div>
+
+            <h3>Why Australia?</h3>
+            <ul style="margin-left: 1.5rem; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+                <li><strong>Climate compatibility:</strong> Hot summers (35-45°C), similar thermal requirements to Gulf</li>
+                <li><strong>Outdoor living culture:</strong> BBQ/alfresco dining is central to Australian lifestyle</li>
+                <li><strong>Premium market:</strong> Australians pay premium for quality outdoor products</li>
+                <li><strong>No tariff barrier:</strong> UAE→Australia has minimal/no duties on aluminum products</li>
+                <li><strong>Distribution opportunity:</strong> Potential partner available for local distribution</li>
+            </ul>
+
+            <h3>Market Size Estimate</h3>
+            <table>
+                <tr>
+                    <th>Segment</th>
+                    <th>Market Size</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td>Global Outdoor TV Enclosure Market</td>
+                    <td class="num">~$875M (2025)</td>
+                    <td>Growing 5% CAGR to $1.2B by 2031</td>
+                </tr>
+                <tr>
+                    <td>Australia % of Global</td>
+                    <td class="num">~5-6%</td>
+                    <td>APAC is 15-20%, Australia is significant portion</td>
+                </tr>
+                <tr>
+                    <td><strong>Australia Estimate</strong></td>
+                    <td class="num"><strong>$40-60M</strong></td>
+                    <td>Enclosures + outdoor TVs combined</td>
+                </tr>
+            </table>
+
+            <h3>Climate Considerations</h3>
+            <p>Australian climate varies significantly by region:</p>
+            <table>
+                <tr>
+                    <th>Region</th>
+                    <th>Summer Peak</th>
+                    <th>Climate Type</th>
+                    <th>Apex Fit</th>
+                </tr>
+                <tr>
+                    <td>Queensland (Brisbane, Gold Coast)</td>
+                    <td class="num">32-35°C</td>
+                    <td>Subtropical/Tropical</td>
+                    <td><span class="badge badge-success">Excellent</span></td>
+                </tr>
+                <tr>
+                    <td>Western Australia (Perth)</td>
+                    <td class="num">35-42°C</td>
+                    <td>Mediterranean/Hot</td>
+                    <td><span class="badge badge-success">Excellent</span></td>
+                </tr>
+                <tr>
+                    <td>New South Wales (Sydney)</td>
+                    <td class="num">28-35°C</td>
+                    <td>Temperate</td>
+                    <td><span class="badge badge-success">Good</span></td>
+                </tr>
+                <tr>
+                    <td>Victoria (Melbourne)</td>
+                    <td class="num">25-38°C</td>
+                    <td>Variable</td>
+                    <td><span class="badge badge-warning">Seasonal</span></td>
+                </tr>
+            </table>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Queensland and Western Australia are primary targets - year-round outdoor living, similar to Gulf climate.</p>
+        </section>
+
+        <!-- Competitor Analysis -->
+        <section class="section">
+            <h2>2. Australian Competitors</h2>
+
+            <div class="alert alert-info">
+                <strong>Competitive Landscape:</strong> Market is fragmented between dedicated outdoor TV brands (expensive) and cheap Chinese enclosures (low quality). Gap exists for quality mid-market enclosures.
+            </div>
+
+            <h3>Dedicated Outdoor TVs (Premium)</h3>
+            <table>
+                <tr>
+                    <th>Brand</th>
+                    <th>55" Price (AUD)</th>
+                    <th>75" Price (AUD)</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td><strong>Englaon</strong></td>
+                    <td class="num">$4,500</td>
+                    <td class="num">~$6,500+</td>
+                    <td>Melbourne-based, IP65, Harvey Norman/Bunnings</td>
+                </tr>
+                <tr>
+                    <td><strong>Sylvox</strong></td>
+                    <td class="num">$3,000-5,000</td>
+                    <td class="num">$6,000-8,000</td>
+                    <td>Chinese brand, AU distribution, IP55/IP65</td>
+                </tr>
+                <tr>
+                    <td><strong>SunBrite TV</strong></td>
+                    <td class="num">$5,000+</td>
+                    <td class="num">$8,000+</td>
+                    <td>US brand, premium positioning</td>
+                </tr>
+            </table>
+
+            <h3>Enclosure Solutions (Budget)</h3>
+            <table>
+                <tr>
+                    <th>Brand</th>
+                    <th>55-65" Price</th>
+                    <th>75" Price</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td><strong>Kinytech / DeerTV</strong></td>
+                    <td class="num">$600-900</td>
+                    <td class="num">$1,388</td>
+                    <td>Chinese, ships direct, basic quality</td>
+                </tr>
+                <tr>
+                    <td><strong>Generic (eBay/Amazon)</strong></td>
+                    <td class="num">$400-700</td>
+                    <td class="num">$800-1,200</td>
+                    <td>No warranty support, variable quality</td>
+                </tr>
+            </table>
+
+            <h3>Apex Positioning</h3>
+            <div class="alert alert-success">
+                <strong>Gap in Market:</strong> Quality enclosure at AUD $3,500-4,500 (75") sits between cheap Chinese ($1,400) and expensive outdoor TVs ($6,500+). Saves customer $3,000-5,000 vs dedicated outdoor TV.
+            </div>
+
+            <table>
+                <tr>
+                    <th>Solution</th>
+                    <th>75" Cost</th>
+                    <th>Quality</th>
+                    <th>Value Proposition</th>
+                </tr>
+                <tr class="compare-bad">
+                    <td>Kinytech 75" Enclosure</td>
+                    <td class="num">$1,388</td>
+                    <td>Basic</td>
+                    <td>Cheap but low quality, 30°C thermostat</td>
+                </tr>
+                <tr class="compare-good">
+                    <td><strong>Apex 75" Enclosure</strong></td>
+                    <td class="num">~$3,800</td>
+                    <td>Premium</td>
+                    <td>PWM cooling, IP55, marine-grade coating</td>
+                </tr>
+                <tr>
+                    <td>Englaon 75" Outdoor TV</td>
+                    <td class="num">~$6,500</td>
+                    <td>Premium</td>
+                    <td>All-in-one but expensive, locked to one TV</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Manufacturing Options -->
+        <section class="section">
+            <h2>3. Australian Manufacturing Options</h2>
+
+            <p>Two strategies available for serving Australia:</p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Option A: Ship from UAE</h4>
+                    <p><strong>Source:</strong> Eurotech (Dubai)</p>
+                    <p><strong>FOB Cost:</strong> ~$870</p>
+                    <p><strong>Shipping:</strong> ~$150-250 (sea freight)</p>
+                    <p><strong>Tariff:</strong> 0% (FTA)</p>
+                    <p><strong>Landed:</strong> ~$1,100-1,200</p>
+                    <p><strong>Lead time:</strong> 3-4 weeks</p>
+                    <p><strong>Pros:</strong> Lower cost, existing supply chain</p>
+                    <p><strong>Cons:</strong> Longer lead time, shipping costs</p>
+                </div>
+                <div class="card">
+                    <h4>Option B: Local AU Manufacturing</h4>
+                    <p><strong>Source:</strong> Australian fabricator</p>
+                    <p><strong>Unit Cost:</strong> ~$1,400-1,800</p>
+                    <p><strong>Shipping:</strong> ~$50-100 (domestic)</p>
+                    <p><strong>Tariff:</strong> N/A</p>
+                    <p><strong>Landed:</strong> ~$1,500-1,900</p>
+                    <p><strong>Lead time:</strong> 2-3 weeks</p>
+                    <p><strong>Pros:</strong> "Made in Australia" marketing, faster delivery</p>
+                    <p><strong>Cons:</strong> Higher cost, new supplier qualification</p>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>Recommendation:</strong> Start with Option A (UAE supply) to validate demand. Switch to Option B if volume justifies local production (50+ units/year) or if "Made in Australia" commands premium.
+            </div>
+        </section>
+
+        <!-- Tier 1 Manufacturers -->
+        <section class="section">
+            <h2>4. Tier 1 Australian Manufacturers</h2>
+            <p>These manufacturers have ISO certification, proven aluminum enclosure experience, and in-house powder coating.</p>
+
+            <div class="card-grid">
+                <div class="card tier-1">
+                    <h4>Metaltex <span class="badge badge-success">ISO 9001</span></h4>
+                    <p><strong>Location:</strong> Melbourne, VIC</p>
+                    <p><strong>Experience:</strong> Since 1979 (45+ years)</p>
+                    <p><strong>Capabilities:</strong> Aluminum, stainless, CNC, in-house Dulux/Interpon powder coating</p>
+                    <p><strong>Strengths:</strong> OEM manufacturer for major Australian companies</p>
+                    <div class="contact-info">
+                        <a href="https://metaltex.com.au" target="_blank">metaltex.com.au</a>
+                    </div>
+                </div>
+
+                <div class="card tier-1">
+                    <h4>AG Holding <span class="badge badge-success">ISO 9001</span></h4>
+                    <p><strong>Location:</strong> Carrum Downs, VIC</p>
+                    <p><strong>Experience:</strong> Since 1958 (65+ years)</p>
+                    <p><strong>Capabilities:</strong> Complex enclosures and cabinets, in-house powder coating</p>
+                    <p><strong>Strengths:</strong> One-stop service: laser cutting, folding, welding, powder coat</p>
+                    <div class="contact-info">
+                        <a href="https://agholding.com.au" target="_blank">agholding.com.au</a>
+                    </div>
+                </div>
+
+                <div class="card tier-1">
+                    <h4>Wilson & Gilkes <span class="badge badge-success">75 Years</span></h4>
+                    <p><strong>Location:</strong> NSW</p>
+                    <p><strong>Experience:</strong> 75 years</p>
+                    <p><strong>Capabilities:</strong> Industrial enclosures, on-site powder coating, fast prototypes</p>
+                    <p><strong>Strengths:</strong> All manufacturing in-house, corporate color matching</p>
+                    <div class="contact-info">
+                        <a href="https://wilsongilkes.com.au" target="_blank">wilsongilkes.com.au</a>
+                    </div>
+                </div>
+
+                <div class="card tier-1">
+                    <h4>FORM2000 <span class="badge badge-info">30+ Years OEM</span></h4>
+                    <p><strong>Location:</strong> Melbourne, VIC</p>
+                    <p><strong>Experience:</strong> 30+ years OEM manufacturing</p>
+                    <p><strong>Capabilities:</strong> Fully automated sheet metal, end-to-end service</p>
+                    <p><strong>Strengths:</strong> Design through prototyping through production</p>
+                    <div class="contact-info">
+                        <a href="https://form2000.com.au" target="_blank">form2000.com.au</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tier 2 Manufacturers -->
+        <section class="section">
+            <h2>5. Tier 2 Australian Manufacturers</h2>
+
+            <div class="card-grid">
+                <div class="card tier-2">
+                    <h4>Westberg Sheetmetal</h4>
+                    <p><strong>Location:</strong> Melbourne, VIC</p>
+                    <p><strong>Capabilities:</strong> Full service: design, cutting, bending, welding, powder coat</p>
+                    <p><strong>Strengths:</strong> One-stop-shop for all metal fabrication</p>
+                    <div class="contact-info">
+                        <a href="https://westberg.com.au" target="_blank">westberg.com.au</a>
+                    </div>
+                </div>
+
+                <div class="card tier-2">
+                    <h4>Aston Precision</h4>
+                    <p><strong>Location:</strong> Melbourne/Dandenong, VIC</p>
+                    <p><strong>Experience:</strong> 20+ years</p>
+                    <p><strong>Capabilities:</strong> Aluminum, stainless, laser cutting, MIG/TIG welding, powder coating</p>
+                    <div class="contact-info">
+                        <a href="https://www.astonprecision.com" target="_blank">astonprecision.com</a>
+                    </div>
+                </div>
+
+                <div class="card tier-2">
+                    <h4>Sheetmetal Improvements</h4>
+                    <p><strong>Location:</strong> Gold Coast, QLD</p>
+                    <p><strong>Capabilities:</strong> Enclosures, cabinets, plasma/laser cutting, powder coating</p>
+                    <p><strong>Strengths:</strong> 100% Australian-owned, Queensland location</p>
+                    <div class="contact-info">
+                        <a href="https://www.sheetmetalimprovements.com.au" target="_blank">sheetmetalimprovements.com.au</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coating Standards -->
+        <section class="section">
+            <h2>6. Australian Coating Standards</h2>
+            <p>Specify these standards when requesting quotes from Australian fabricators:</p>
+
+            <table>
+                <tr>
+                    <th>Standard</th>
+                    <th>Equivalent To</th>
+                    <th>Salt Spray</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td>AS/NZS 4680:2006</td>
+                    <td>ISO 1461</td>
+                    <td>N/A (galvanizing)</td>
+                    <td>Hot-dip galvanizing standard</td>
+                </tr>
+                <tr class="compare-good">
+                    <td><strong>Dulux/Interpon Powder</strong></td>
+                    <td>AAMA 2604</td>
+                    <td><strong>1000+ hours</strong></td>
+                    <td><strong>Recommended - exterior architectural</strong></td>
+                </tr>
+                <tr>
+                    <td>Qualicoat Class 2</td>
+                    <td>AAMA 2604</td>
+                    <td>1000 hours</td>
+                    <td>European equivalent standard</td>
+                </tr>
+            </table>
+
+            <div class="alert alert-info">
+                <strong>Note:</strong> Australian fabricators commonly use Dulux or Interpon powder coating, which meets or exceeds AAMA 2604 requirements. Specify "exterior-grade powder coating, minimum 1000 hours salt spray" in your RFQ.
+            </div>
+        </section>
+
+        <!-- Go-to-Market Strategy -->
+        <section class="section">
+            <h2>7. Go-to-Market Strategy</h2>
+
+            <h3>Distribution Model</h3>
+            <p>Recommended approach with local distribution partner:</p>
+
+            <table>
+                <tr>
+                    <th>Element</th>
+                    <th>Strategy</th>
+                </tr>
+                <tr>
+                    <td><strong>Partner Role</strong></td>
+                    <td>Local sales, customer service, installation coordination</td>
+                </tr>
+                <tr>
+                    <td><strong>Apex Role</strong></td>
+                    <td>Product supply, technical support, marketing materials</td>
+                </tr>
+                <tr>
+                    <td><strong>Initial Inventory</strong></td>
+                    <td>5-10 units held locally for demos and quick delivery</td>
+                </tr>
+                <tr>
+                    <td><strong>Pricing</strong></td>
+                    <td>Partner buys at wholesale (~40% margin), sells at AUD $3,500-4,500</td>
+                </tr>
+                <tr>
+                    <td><strong>Territory</strong></td>
+                    <td>Exclusive for Australia (non-exclusive for NZ)</td>
+                </tr>
+            </table>
+
+            <h3>Target Channels</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Residential</h4>
+                    <p><strong>Buyers:</strong> Homeowners with outdoor entertainment areas</p>
+                    <p><strong>Channels:</strong> Harvey Norman, JB Hi-Fi partnerships, direct online</p>
+                    <p><strong>Volume:</strong> 50-100 units/year at scale</p>
+                </div>
+                <div class="card">
+                    <h4>Commercial</h4>
+                    <p><strong>Buyers:</strong> Pubs, clubs, hotels, restaurants</p>
+                    <p><strong>Channels:</strong> AV installers, hospitality suppliers</p>
+                    <p><strong>Volume:</strong> 20-50 units/year, higher margin</p>
+                </div>
+            </div>
+
+            <h3>Marketing Positioning</h3>
+            <ul style="margin-left: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+                <li><strong>Primary message:</strong> "Use YOUR TV outdoors" - bring your existing TV outside</li>
+                <li><strong>Cost story:</strong> Save $3,000-5,000 vs dedicated outdoor TV</li>
+                <li><strong>Quality story:</strong> Marine-grade aluminum, not cheap Chinese plastic</li>
+                <li><strong>Australian conditions:</strong> Tested for 45°C+ with direct sun (Dubai-proven)</li>
+            </ul>
+        </section>
+
+        <!-- Pricing Strategy -->
+        <section class="section">
+            <h2>8. Pricing Strategy (AUD)</h2>
+
+            <h3>Option A: UAE Supply Chain</h3>
+            <table>
+                <tr>
+                    <th>Size</th>
+                    <th>FOB UAE</th>
+                    <th>Freight</th>
+                    <th>Landed</th>
+                    <th>Wholesale</th>
+                    <th>Retail</th>
+                </tr>
+                <tr>
+                    <td>55"</td>
+                    <td class="num">$750</td>
+                    <td class="num">$150</td>
+                    <td class="num">$900</td>
+                    <td class="num">$1,500</td>
+                    <td class="num"><strong>$2,500</strong></td>
+                </tr>
+                <tr>
+                    <td>65"</td>
+                    <td class="num">$800</td>
+                    <td class="num">$175</td>
+                    <td class="num">$975</td>
+                    <td class="num">$1,650</td>
+                    <td class="num"><strong>$2,800</strong></td>
+                </tr>
+                <tr>
+                    <td>75"</td>
+                    <td class="num">$870</td>
+                    <td class="num">$200</td>
+                    <td class="num">$1,070</td>
+                    <td class="num">$1,800</td>
+                    <td class="num"><strong>$3,000</strong></td>
+                </tr>
+                <tr>
+                    <td>85"</td>
+                    <td class="num">$950</td>
+                    <td class="num">$250</td>
+                    <td class="num">$1,200</td>
+                    <td class="num">$2,000</td>
+                    <td class="num"><strong>$3,500</strong></td>
+                </tr>
+            </table>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Wholesale = ~65% margin, Retail = ~65% markup on wholesale</p>
+
+            <h3>Competitive Price Check</h3>
+            <table>
+                <tr>
+                    <th>Product</th>
+                    <th>75" Price (AUD)</th>
+                    <th>vs Apex</th>
+                </tr>
+                <tr>
+                    <td>Kinytech 75" Enclosure</td>
+                    <td class="num">$1,388</td>
+                    <td><span class="badge badge-danger">-54%</span> (but lower quality)</td>
+                </tr>
+                <tr class="compare-good">
+                    <td><strong>Apex 75" Enclosure</strong></td>
+                    <td class="num"><strong>$3,000</strong></td>
+                    <td>Target price point</td>
+                </tr>
+                <tr>
+                    <td>Englaon 65" Outdoor TV</td>
+                    <td class="num">$5,500</td>
+                    <td><span class="badge badge-success">+83%</span></td>
+                </tr>
+                <tr>
+                    <td>Sylvox 65" Commercial</td>
+                    <td class="num">$6,000</td>
+                    <td><span class="badge badge-success">+100%</span></td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Next Steps -->
+        <section class="section">
+            <h2>9. Next Steps</h2>
+
+            <ol style="margin-left: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+                <li><strong>Validate partner interest</strong> - Confirm distribution partner commitment</li>
+                <li><strong>Test demand</strong> - Partner runs Facebook/Google ads, measures response</li>
+                <li><strong>Initial shipment</strong> - Send 5-10 units from UAE for local inventory</li>
+                <li><strong>First sales</strong> - Target residential + 1-2 commercial installs</li>
+                <li><strong>Review at 6 months</strong> - If 30+ units sold, evaluate local manufacturing</li>
+            </ol>
+
+            <div class="alert alert-warning">
+                <strong>Key Success Metrics:</strong>
+                <ul style="margin: 0.5rem 0 0 1.5rem;">
+                    <li>Break-even: ~20 units at current margins</li>
+                    <li>Year 1 target: 50 units ($150K revenue, ~$50K gross profit)</li>
+                    <li>Year 2 target: 150 units ($450K revenue) - consider local manufacturing</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Partner Notes -->
+        <section class="section">
+            <h2>10. Distribution Partner Notes</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Partner Benefits</h4>
+                    <ul style="margin-left: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+                        <li>40%+ margin on wholesale pricing</li>
+                        <li>Exclusive Australian territory</li>
+                        <li>Full technical support from Apex</li>
+                        <li>Marketing materials provided</li>
+                        <li>No minimum order commitment (initially)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Partner Requirements</h4>
+                    <ul style="margin-left: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+                        <li>Hold 5-10 unit inventory</li>
+                        <li>Handle customer inquiries and sales</li>
+                        <li>Coordinate local installation (via contractors)</li>
+                        <li>Minimum sales target: 30 units Year 1</li>
+                        <li>Monthly sales reporting</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer style="background: var(--primary-dark); color: white; padding: 1.5rem; text-align: center; margin-top: 2rem; border-radius: 16px;">
+            <p style="opacity: 0.9; font-weight: 600;">Apex Enclosures</p>
+            <p style="font-size: 0.85rem; opacity: 0.7;">Australia Market Strategy | January 2026</p>
+        </footer>
+    </div>
+    <script src="nav.js"></script>
+</body>
+</html>

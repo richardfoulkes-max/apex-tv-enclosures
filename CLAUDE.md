@@ -227,7 +227,8 @@ nav.js injects: body { margin-left: 240px !important; }
 - Recommended: Delaware C-Corp via Stripe Atlas ($500 setup)
 - Documented all tax implications (21% corp tax, 30% dividend withholding)
 - Created `docs/US-Company-Setup-Guide.md` with full setup checklist
-- Scott partnership: 100% Richard ownership + options for 49% (4-year vest)
+- Scott partnership: 100% Richard ownership + options for 49% (3-year vest, repurchase right until Year 4)
+- Added Company Repurchase Right: if Scott quits before Year 4, company can buy back vested shares at lower of FMV or strike price
 
 **ME Partnership Structure (Tom Brooks):**
 - Designed holding company structure: Apex Global Holdings (Richard 100%) + Apex ME LLC (50/50)
@@ -240,16 +241,34 @@ nav.js injects: body { margin-left: 240px !important; }
   - Shotgun clause for deadlocks
   - IP license terms (5% royalty)
 
+**Heir Protection:**
+- Added clauses so if Richard dies, heirs cannot block Tom or Scott from operating
+- "Successor Passive Investor" clause for Scott (heirs get money, not control)
+- Irrevocable IP license for Tom (heirs cannot revoke ME territory license)
+
+**Personal IP Ownership (Cost Optimization):**
+- Updated docs to use phased approach - saves ~$2,500-5,000 initial costs
+- **Phase 1 (Now):** Richard owns IP personally (zero holding company cost)
+- **Phase 2 (When revenue ~$50K+/year):** Transfer IP to Apex Global Holdings
+- Updated corporate structure diagrams, Documents Needed, Next Steps in both docs
+
 **Key Business Decisions:**
-- IP protection via holding company structure
+- IP protection via personal ownership (Phase 1) then holding company (Phase 2)
 - Options (not shares) for partners = protection from death/divorce/departure
+- Company Repurchase Right protects against "vest and bail"
 - Wait on US company setup until prototype confirmed with Accurate Metal
 
 **Files Created/Modified:**
 - `docs/US-Company-Setup-Guide.md` (new)
-- `docs/ME-Partnership-Structure-Tom.md` (new)
-- `partnership-term-sheet.md` (major update)
+- `docs/ME-Partnership-Structure-Tom.md` (new, updated for personal IP ownership)
+- `partnership-term-sheet.md` (major update, phased IP ownership)
 - `website/partner-crm.html` (UI improvements)
+
+**Commits:**
+- `fddfd3c` - Add partnership structures and US company setup guides
+- `32c0f6e` - Add heir protection clauses
+- `abfce5c` - Add Company Repurchase Right for Scott's options
+- `c0d970c` - Update partnership docs: Personal IP ownership (Phase 1)
 
 ---
 
