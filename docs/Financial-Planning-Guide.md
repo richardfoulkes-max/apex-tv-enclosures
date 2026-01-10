@@ -55,37 +55,35 @@ This document outlines the capital requirements for launching Apex Enclosures in
 
 ## Australia Market Budget
 
-### Entity Structure Options
+### Entity Structure: Partner Model (Nick)
 
-**Option A: No Entity (Distributor Model)**
-- Nick operates as independent distributor
-- You invoice him from UAE/US entity
-- Simplest, lowest cost
-- Risk: Less control
+**Nick has existing Australian business** - no new entity required.
 
-**Option B: Australian Pty Ltd**
-- Full local presence
-- Required if you want to sell direct to consumers
-- GST registration mandatory if >$75K AUD revenue
+**Structure:**
+- Nick's company handles all AU sales, GST, insurance
+- You invoice Nick wholesale from US C-Corp (or UAE entity)
+- Nick manages local manufacturing relationships
+- Simple distribution/partnership agreement
+
+**Your costs: $0 for AU entity setup**
 
 ### Setup Costs (One-Time)
 
 | Item | Cost (AUD) | Notes |
 |------|------------|-------|
-| Australian Pty Ltd registration | $500-1,000 | ASIC company registration |
-| ABN Registration | $0 | Australian Business Number - free |
-| GST Registration | $0 | Free, required if >$75K revenue |
+| AU Entity Setup | $0 | Nick's existing business |
+| Partnership Agreement (legal) | $500-1,000 | Optional but recommended |
 | Domain/Website (AU-specific) | $500-1,000 | .com.au domain, AU content |
-| **Total Setup** | **$1,000-2,000** | ~$650-1,300 USD |
+| **Total Setup** | **$500-2,000** | ~$350-1,300 USD |
 
-### Annual Operating Costs
+### Annual Operating Costs (Your Share)
 
 | Item | Cost/Year (AUD) | Notes |
 |------|-----------------|-------|
-| ASIC Annual Review Fee | $290 | Required for Pty Ltd |
-| Accounting/BAS | $1,500-3,000 | Quarterly BAS lodgements + tax return |
-| Product Liability Insurance | $1,500-3,000 | Required for consumer products |
-| **Total Annual** | **$3,300-6,300** | ~$2,200-4,200 USD |
+| ASIC / Accounting | $0 | Nick's responsibility |
+| Product Liability Insurance | $0 | Nick covers as reseller |
+| Marketing contribution | $1,000-3,000 | Split with Nick |
+| **Total Annual** | **$1,000-3,000** | ~$650-2,000 USD |
 
 ### Working Capital (To Launch Sales)
 
@@ -101,8 +99,10 @@ This document outlines the capital requirements for launching Apex Enclosures in
 
 | Scenario | Investment (AUD) | Investment (USD) |
 |----------|------------------|------------------|
-| **Minimal** | $4,300-8,300 | $2,900-5,500 |
-| **Ready to Sell** | $21,800-33,300 | $14,500-22,200 |
+| **Minimal** | $1,500-5,000 | $1,000-3,300 |
+| **Ready to Sell** | $19,000-30,000 | $12,700-20,000 |
+
+*Significantly lower with Nick's existing business handling entity/compliance*
 
 ---
 
@@ -112,13 +112,16 @@ This document outlines the capital requirements for launching Apex Enclosures in
 
 | Scenario | US | Australia | Total (USD) |
 |----------|-----|-----------|-------------|
-| **Minimal** | $5,500-10,500 | $2,900-5,500 | **$8,400-16,000** |
-| **Ready to Sell** | $18,000-34,000 | $14,500-22,200 | **$32,500-56,200** |
+| **Minimal** | $5,500-10,500 | $1,000-3,300 | **$6,500-13,800** |
+| **Ready to Sell** | $18,000-34,000 | $12,700-20,000 | **$30,700-54,000** |
+
+*Australia costs significantly reduced with Nick's existing business*
 
 ### Phased Investment Approach (Recommended)
 
-#### Phase 1: Foundation ($8,500-16,000)
-- Setup entities in both markets
+#### Phase 1: Foundation ($6,500-14,000)
+- Setup US C-Corp
+- Partnership agreement with Nick (AU)
 - Cover first year operating costs
 - No inventory - pure made-to-order model
 - **Timeline:** Month 1-2
@@ -130,7 +133,7 @@ This document outlines the capital requirements for launching Apex Enclosures in
 - **Timeline:** Month 3-6
 
 #### Phase 3: Scale ($10,000-20,000 additional)
-- Larger production runs
+- Larger production runs (China for volume)
 - Marketing expansion
 - Trade show presence
 - **Timeline:** Month 6-12
