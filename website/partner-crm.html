@@ -310,6 +310,37 @@
         .add-activity-form select { width: 140px; }
         .add-activity-form input { flex: 1; }
 
+        /* Attachments */
+        .attachment-upload {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 2px dashed var(--border);
+        }
+        .upload-hint { font-size: 0.8rem; color: var(--text-muted); }
+        .attachments-list { display: flex; flex-direction: column; gap: 0.5rem; }
+        .attachment-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.15s;
+        }
+        .attachment-item:hover { border-color: var(--accent); background: #fafafa; }
+        .attachment-icon { font-size: 1.5rem; }
+        .attachment-info { flex: 1; min-width: 0; }
+        .attachment-name { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .attachment-meta { font-size: 0.75rem; color: var(--text-muted); }
+        .attachment-actions { display: flex; gap: 0.5rem; }
+        .btn-small { padding: 0.35rem 0.75rem; font-size: 0.8rem; }
+
         /* Modal */
         .modal-overlay {
             display: none;
@@ -1547,6 +1578,12 @@
                             .in('partner_id', partnerIds)
                             .order('timestamp', { ascending: false });
 
+                        const { data: attachmentsData } = await supabaseClient
+                            .from('partner_attachments')
+                            .select('*')
+                            .in('partner_id', partnerIds)
+                            .order('uploaded_at', { ascending: false });
+
                         // Transform to local format
                         partners = partnersData.map(p => ({
                             id: p.id,
@@ -1586,6 +1623,8 @@
                                     description: a.description,
                                     timestamp: a.timestamp
                                 })),
+                            attachments: (attachmentsData || [])
+                                .filter(att => att.partner_id === p.id),
                             createdAt: p.created_at,
                             lastContact: p.last_contact
                         }));
@@ -1975,6 +2014,7 @@
                     <button class="tab" onclick="switchTab('deal')">Deal</button>
                     <button class="tab" onclick="switchTab('business')">Business</button>
                     <button class="tab" onclick="switchTab('activity')">Activity (${p.activities?.length || 0})</button>
+                    <button class="tab" onclick="switchTab('attachments')">Files (${p.attachments?.length || 0})</button>
                 </div>
 
                 <!-- Overview Tab -->
@@ -2189,6 +2229,38 @@
                                         <div class="activity-desc">${a.description}</div>
                                     </div>
                                 `).join('') : '<div style="text-align: center; color: var(--text-muted); padding: 2rem;">No activities yet.</div>'}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attachments Tab -->
+                <div class="tab-content" id="tab-attachments">
+                    <div class="card">
+                        <div class="card-header">Files & Documents</div>
+                        <div class="card-body">
+                            <div class="attachment-upload">
+                                <input type="file" id="fileUpload" style="display: none;" onchange="uploadAttachment(this.files[0])">
+                                <button class="btn btn-primary" onclick="document.getElementById('fileUpload').click()">
+                                    📎 Upload File
+                                </button>
+                                <span class="upload-hint">Max 10MB - PDFs, images, documents</span>
+                            </div>
+
+                            <div class="attachments-list">
+                                ${p.attachments?.length ? p.attachments.map(a => `
+                                    <div class="attachment-item">
+                                        <div class="attachment-icon">${getFileIcon(a.file_name)}</div>
+                                        <div class="attachment-info">
+                                            <div class="attachment-name">${a.file_name}</div>
+                                            <div class="attachment-meta">${formatFileSize(a.file_size)} • ${formatDate(a.uploaded_at)}${a.description ? ' • ' + a.description : ''}</div>
+                                        </div>
+                                        <div class="attachment-actions">
+                                            <button class="btn btn-small btn-outline" onclick="downloadAttachment('${a.id}', '${a.file_path}', '${a.file_name}')">Download</button>
+                                            <button class="btn btn-small btn-danger" onclick="deleteAttachment('${a.id}', '${a.file_path}')">×</button>
+                                        </div>
+                                    </div>
+                                `).join('') : '<div style="text-align: center; color: var(--text-muted); padding: 2rem;">No files uploaded yet.</div>'}
                             </div>
                         </div>
                     </div>
@@ -2711,6 +2783,139 @@
             if (!dateStr) return '-';
             const d = new Date(dateStr);
             return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        }
+
+        function formatFileSize(bytes) {
+            if (!bytes) return '0 B';
+            const units = ['B', 'KB', 'MB', 'GB'];
+            let i = 0;
+            while (bytes >= 1024 && i < units.length - 1) {
+                bytes /= 1024;
+                i++;
+            }
+            return bytes.toFixed(i === 0 ? 0 : 1) + ' ' + units[i];
+        }
+
+        function getFileIcon(filename) {
+            const ext = (filename || '').split('.').pop().toLowerCase();
+            const icons = {
+                'pdf': '📕', 'doc': '📘', 'docx': '📘', 'xls': '📗', 'xlsx': '📗',
+                'ppt': '📙', 'pptx': '📙', 'txt': '📄', 'md': '📝',
+                'jpg': '🖼️', 'jpeg': '🖼️', 'png': '🖼️', 'gif': '🖼️', 'svg': '🖼️',
+                'zip': '📦', 'rar': '📦', 'csv': '📊', 'json': '📋',
+                'eml': '📧', 'msg': '📧'
+            };
+            return icons[ext] || '📎';
+        }
+
+        // ============ ATTACHMENTS ============
+        async function uploadAttachment(file) {
+            if (!file || !selectedPartnerId) return;
+
+            const maxSize = 10 * 1024 * 1024; // 10MB
+            if (file.size > maxSize) {
+                alert('File too large. Maximum size is 10MB.');
+                return;
+            }
+
+            const btn = document.querySelector('.attachment-upload button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '⏳ Uploading...';
+            btn.disabled = true;
+
+            try {
+                // Create unique file path
+                const timestamp = Date.now();
+                const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+                const filePath = `${selectedPartnerId}/${timestamp}_${safeName}`;
+
+                // Upload to Supabase Storage
+                const { data: uploadData, error: uploadError } = await supabaseClient.storage
+                    .from('partner-attachments')
+                    .upload(filePath, file);
+
+                if (uploadError) throw uploadError;
+
+                // Create database record
+                const { error: dbError } = await supabaseClient
+                    .from('partner_attachments')
+                    .insert({
+                        partner_id: selectedPartnerId,
+                        file_name: file.name,
+                        file_path: filePath,
+                        file_size: file.size,
+                        file_type: file.type
+                    });
+
+                if (dbError) throw dbError;
+
+                // Reload data and refresh view
+                await loadData();
+                selectPartner(selectedPartnerId);
+                switchTab('attachments');
+
+            } catch (err) {
+                console.error('Upload error:', err);
+                alert('Failed to upload file: ' + err.message);
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                document.getElementById('fileUpload').value = '';
+            }
+        }
+
+        async function downloadAttachment(id, filePath, fileName) {
+            try {
+                const { data, error } = await supabaseClient.storage
+                    .from('partner-attachments')
+                    .download(filePath);
+
+                if (error) throw error;
+
+                // Create download link
+                const url = URL.createObjectURL(data);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = fileName;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+            } catch (err) {
+                console.error('Download error:', err);
+                alert('Failed to download file: ' + err.message);
+            }
+        }
+
+        async function deleteAttachment(id, filePath) {
+            if (!confirm('Delete this file?')) return;
+
+            try {
+                // Delete from storage
+                const { error: storageError } = await supabaseClient.storage
+                    .from('partner-attachments')
+                    .remove([filePath]);
+
+                if (storageError) throw storageError;
+
+                // Delete database record
+                const { error: dbError } = await supabaseClient
+                    .from('partner_attachments')
+                    .delete()
+                    .eq('id', id);
+
+                if (dbError) throw dbError;
+
+                // Reload and refresh
+                await loadData();
+                selectPartner(selectedPartnerId);
+                switchTab('attachments');
+
+            } catch (err) {
+                console.error('Delete error:', err);
+                alert('Failed to delete file: ' + err.message);
+            }
         }
 
         // ============ INIT ============
