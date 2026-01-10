@@ -2350,12 +2350,12 @@
                                 ${p.attachments?.length ? p.attachments.map(a => `
                                     <div class="attachment-item">
                                         <div class="attachment-icon">${getFileIcon(a.file_name)}</div>
-                                        <div class="attachment-info">
-                                            <div class="attachment-name">${a.file_name}</div>
+                                        <div class="attachment-info" onclick="openAttachment('${a.id}', '${a.file_path}', '${a.file_name}')" style="cursor: pointer;">
+                                            <div class="attachment-name" style="color: var(--primary); text-decoration: underline;">${a.file_name}</div>
                                             <div class="attachment-meta">${formatFileSize(a.file_size)} • ${formatDate(a.uploaded_at)}${a.description ? ' • ' + a.description : ''}</div>
                                         </div>
                                         <div class="attachment-actions">
-                                            <button class="btn btn-small btn-outline" onclick="openAttachment('${a.id}', '${a.file_path}', '${a.file_name}')">Open</button>
+                                            <button class="btn btn-small btn-outline" onclick="downloadAttachment('${a.id}', '${a.file_path}', '${a.file_name}')">Download</button>
                                             <button class="btn btn-small btn-danger" onclick="deleteAttachment('${a.id}', '${a.file_path}')">×</button>
                                         </div>
                                     </div>
@@ -3025,6 +3025,30 @@
             } catch (err) {
                 console.error('Open error:', err);
                 showToast('Failed to open file: ' + err.message, 'error');
+            }
+        }
+
+        async function downloadAttachment(id, filePath, fileName) {
+            try {
+                const { data, error } = await supabaseClient.storage
+                    .from('partner-attachments')
+                    .download(filePath);
+
+                if (error) throw error;
+
+                // Create download link
+                const url = URL.createObjectURL(data);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = fileName;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+            } catch (err) {
+                console.error('Download error:', err);
+                showToast('Failed to download file: ' + err.message, 'error');
             }
         }
 
