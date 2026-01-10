@@ -210,6 +210,49 @@ nav.js injects: body { margin-left: 240px !important; }
 
 ## Recent Work History
 
+### Session: 2026-01-10 - CRM Improvements + Partnership Structures
+
+**CRM UI Improvements:**
+- Replaced all browser `confirm()` dialogs with styled modal popups
+- Added toast notifications for all alerts (success/error/warning)
+- File attachments: click filename to open in browser, Download button to save
+- Fixed styled confirm modals for delete operations (contacts, partners, files)
+
+**Signature Management:**
+- Created `Richard Vault/08-Personal/Signatures/` folder
+- Saved Richard's signature for document signing
+
+**US Company Setup Research:**
+- Researched Delaware C-Corp vs Wyoming LLC for non-US residents
+- Recommended: Delaware C-Corp via Stripe Atlas ($500 setup)
+- Documented all tax implications (21% corp tax, 30% dividend withholding)
+- Created `docs/US-Company-Setup-Guide.md` with full setup checklist
+- Scott partnership: 100% Richard ownership + options for 49% (4-year vest)
+
+**ME Partnership Structure (Tom Brooks):**
+- Designed holding company structure: Apex Global Holdings (Richard 100%) + Apex ME LLC (50/50)
+- IP stays in holding company, licensed to regional entities
+- Created `docs/ME-Partnership-Structure-Tom.md` with full terms
+- Updated `partnership-term-sheet.md` with:
+  - Automatic buy-sell on death (both partners)
+  - Life insurance funding for buybacks
+  - FMV valuation formula (3x profit OR 1x revenue)
+  - Shotgun clause for deadlocks
+  - IP license terms (5% royalty)
+
+**Key Business Decisions:**
+- IP protection via holding company structure
+- Options (not shares) for partners = protection from death/divorce/departure
+- Wait on US company setup until prototype confirmed with Accurate Metal
+
+**Files Created/Modified:**
+- `docs/US-Company-Setup-Guide.md` (new)
+- `docs/ME-Partnership-Structure-Tom.md` (new)
+- `partnership-term-sheet.md` (major update)
+- `website/partner-crm.html` (UI improvements)
+
+---
+
 ### Session: 2026-01-09 (Late Night) - CRM Migration to Supabase Cloud
 
 **Migrated CRM from localStorage to Supabase cloud database:**
