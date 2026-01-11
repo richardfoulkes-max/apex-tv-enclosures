@@ -555,8 +555,35 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="auth-guard.js"></script>
+    <style>
+        .auth-loading {
+            position: fixed;
+            inset: 0;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .auth-loading.hidden { display: none; }
+        .auth-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #e2e8f0;
+            border-top-color: #6366f1;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
 </head>
 <body>
+    <div class="auth-loading" id="authLoading">
+        <div class="auth-spinner"></div>
+        <div style="color: #64748b;">Verifying access...</div>
+    </div>
     <div class="toast-container" id="toastContainer"></div>
     <div class="confirm-overlay" id="confirmOverlay">
         <div class="confirm-box">
@@ -3085,6 +3112,24 @@
 
         // ============ INIT ============
         document.addEventListener('DOMContentLoaded', async () => {
+            // Wait for auth-guard to complete
+            const waitForAuth = () => new Promise(resolve => {
+                if (window.currentUser) return resolve();
+                const check = setInterval(() => {
+                    if (window.currentUser) {
+                        clearInterval(check);
+                        resolve();
+                    }
+                }, 50);
+                // Timeout after 3s (auth-guard will redirect if not logged in)
+                setTimeout(() => { clearInterval(check); resolve(); }, 3000);
+            });
+
+            await waitForAuth();
+
+            // Hide loading overlay
+            document.getElementById('authLoading')?.classList.add('hidden');
+
             initSupabase();
             await loadData();
             renderList();

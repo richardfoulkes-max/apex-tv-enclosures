@@ -210,7 +210,43 @@ nav.js injects: body { margin-left: 240px !important; }
 
 ## Recent Work History
 
-### Session: 2026-01-11 (Latest) - Financial Planning & US Entity Structure
+### Session: 2026-01-11 (Late) - CRM Permissions & Nick Onboarding
+
+**Implemented CRM territory-based access with Supabase RLS:**
+- Created `user_territories` table
+- Created `get_territory()` function mapping regions to territories
+- Enabled RLS on: partners, partner_contacts, partner_activities
+- Created territory-based policies for authenticated users
+- Blocked anonymous access
+
+**CRM Users with Territory Access:**
+| User | Territory |
+|------|-----------|
+| richardfoulkes@mac.com | ALL (admin) |
+| tom@apexenclosures.com | ME |
+| scott@b-stemed.com | US |
+| nick@platinumbrands.com.au | AU |
+
+**Added Nick Dempsey to CRM:**
+- Partner: Platinum Brands (Australia, Distributor)
+- Contact: Nick Dempsey (Owner, Primary, Decision Maker)
+- Email: nick@platinumbrands.com.au
+
+**Created Australia Fab Selection doc:**
+- `~/Downloads/Australia-Fab-Selection.html` - sent to Nick
+- Lists 7 qualified AU manufacturers (Tier 1: Metaltex, AG Holding, Wilson & Gilkes, FORM2000)
+
+**To add future CRM users:**
+1. Create in Supabase Auth
+2. Run: `INSERT INTO user_territories (user_id, territory) SELECT id, 'XX' FROM auth.users WHERE email = 'xxx'`
+
+**Files Created:**
+- `docs/Australia-Fab-Selection-Nick.md`
+- `~/Downloads/Australia-Fab-Selection.html`
+
+---
+
+### Session: 2026-01-11 (Earlier) - Financial Planning & US Entity Structure
 
 **Added China volume manufacturing option for Australia:**
 - Standard orders: Australian local manufacturing (3-4 weeks)
