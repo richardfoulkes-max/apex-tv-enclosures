@@ -1,0 +1,73 @@
+# Product/Engineering Pages - LOCAL ONLY (IP Protection)
+# These files exist locally but don't deploy to Vercel
+
+# Product Dashboard
+product-dashboard.html
+
+# Engineering & Specifications
+specification.html
+designs.html
+design-detailed.html
+bom-detailed.html
+bom-75inch.html
+engineering-analysis.html
+control-logic.html
+wiring-diagram.html
+tv-compatibility.html
+audio-noise-video.html
+cavity-requirements.html
+color-configurator.html
+engineering-drawings.html
+drawing-styles.html
+
+# Testing & QC
+testing-plan.html
+qc-checklist.html
+compliance-guide.html
+
+# Manufacturing & RFQs
+manufacturer-rfq.html
+eurotech-rfq.html
+eurotech-profile.html
+china-suppliers.html
+ate-75-prototype-pack.html
+us-rfq-overview.html
+
+# Market Research & Competitor Analysis
+market-research.html
+competitor-analysis.html
+competitor-comparison.html
+product-opportunities.html
+australia-market.html
+australia-partner-pack.html
+
+# Financial (Internal)
+financial-forecast.html
+landed-cost-calculator.html
+global-pricing.html
+services-pricing.html
+
+# Legal (Internal)
+legal-risk.html
+legal/
+
+# Pool Equipment (All)
+pool-*.html
+
+# AI Image Generation
+ai-image-prompts.html
+
+# Customer-facing pages (separate site)
+retail/
+industries/
+commercial/
+partner/
+
+# Archive
+archive/
+
+# Product images
+images/
+
+# Lovable pre-order (deployed separately to Netlify)
+preorder-lovable/
