@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex TV Enclosures | Outdoor TV Protection for Gulf Climate</title>
+    <meta name="description" content="Protect any TV outdoors. IP55 weatherproof, active cooling for 55°C heat, 5-year warranty. Reserve yours with a $100 refundable deposit.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy: #1a1a2e;
+            --navy-light: #25253d;
+            --gold: #d4a574;
+            --orange: #e85d04;
+            --orange-hover: #f97316;
+            --white: #ffffff;
+            --gray: #94a3b8;
+            --light: #f8fafc;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--white);
+            color: var(--navy);
+            line-height: 1.6;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: var(--white);
+            padding: 20px 20px 60px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 32px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-image {
+            max-width: 100%;
+            border-radius: 12px;
+            margin: 32px auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--orange);
+            color: var(--white);
+            padding: 18px 40px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-btn:hover {
+            background: var(--orange-hover);
+            transform: translateY(-2px);
+        }
+
+        .cta-sub {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 12px;
+        }
+
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 24px;
+            font-size: 0.9rem;
+            color: var(--gold);
+        }
+
+        /* Trust Bar */
+        .trust-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 30px 20px;
+            background: var(--light);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .trust-item {
+            text-align: center;
+            padding: 16px 8px;
+        }
+
+        .trust-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .trust-text {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        /* Problem/Solution */
+        .problem {
+            padding: 60px 20px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .problem h2 {
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .problem-box {
+            padding: 24px;
+            border-radius: 12px;
+        }
+
+        .problem-box.bad {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+        }
+
+        .problem-box.good {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+        }
+
+        .problem-box h3 {
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .problem-box ul {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .problem-box li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .problem-box.bad li::before {
+            content: "✕";
+            position: absolute;
+            left: 0;
+            color: #dc2626;
+        }
+
+        .problem-box.good li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        /* Benefits */
+        .benefits {
+            padding: 60px 20px;
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        .benefits h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 1.5rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .benefit {
+            text-align: center;
+            padding: 24px 16px;
+            background: var(--navy-light);
+            border-radius: 12px;
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .benefit h3 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: var(--gold);
+        }
+
+        .benefit p {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 60px 20px;
+            text-align: center;
+            background: var(--light);
+        }
+
+        .pricing h2 {
+            font-size: 1.5rem;
+            margin-bottom: 32px;
+        }
+
+        .price-card {
+            background: var(--white);
+            border: 2px solid var(--navy);
+            border-radius: 16px;
+            padding: 40px 24px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .price-model {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+
+        .price-main {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+
+        .price-compare {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 24px;
+        }
+
+        .price-compare s {
+            color: #dc2626;
+        }
+
+        .price-features {
+            text-align: left;
+            margin-bottom: 32px;
+        }
+
+        .price-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .price-features li:last-child {
+            border-bottom: none;
+        }
+
+        .check {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        .price-cta {
+            width: 100%;
+            padding: 18px;
+            font-size: 1.1rem;
+        }
+
+        .scarcity {
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: var(--orange);
+            font-weight: 500;
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 60px 20px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq h2 {
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 1.5rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px 0;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .faq-a {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            padding: 60px 20px;
+            background: var(--navy);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+
+        .final-cta p {
+            color: var(--gray);
+            margin-bottom: 32px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .guarantees {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .guarantee {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .guarantee span:first-child {
+            color: var(--gold);
+        }
+
+        /* Footer */
+        footer {
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--gray);
+            background: var(--navy-light);
+        }
+
+        footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trust-bar {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .trust-item {
+                padding: 12px;
+                border-bottom: 1px solid #e2e8f0;
+            }
+
+            .trust-item:last-child {
+                border-bottom: none;
+            }
+        }
+
+        /* Sticky Mobile CTA */
+        .sticky-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px 20px;
+            background: var(--white);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .sticky-cta .cta-btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .sticky-cta {
+                display: block;
+            }
+
+            .final-cta {
+                padding-bottom: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="logo">APEX ENCLOSURES</div>
+        <h1>Outdoor Entertainment.<br>Without the $8,000 Price Tag.</h1>
+        <p class="hero-sub">IP55 weatherproof enclosure. Works with any TV. Built for Gulf summers.</p>
+
+        <img src="images/ate-75-v530-front.png" alt="Apex TV Enclosure" class="hero-image" style="max-width: 500px;">
+
+        <a href="#reserve" class="cta-btn">Reserve Yours — $100 Deposit</a>
+        <p class="cta-sub">Fully refundable if you change your mind</p>
+
+        <div class="trust-badge">
+            <span>5-Year Warranty</span>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="trust-item">
+            <div class="trust-icon">IP55</div>
+            <div class="trust-text">Rain & Dust Proof</div>
+        </div>
+        <div class="trust-item">
+            <div class="trust-icon">55°C</div>
+            <div class="trust-text">Active Cooling</div>
+        </div>
+        <div class="trust-item">
+            <div class="trust-icon">5 YR</div>
+            <div class="trust-text">Warranty</div>
+        </div>
+    </div>
+
+    <!-- Problem/Solution -->
+    <section class="problem">
+        <h2>The Outdoor TV Problem</h2>
+        <div class="problem-grid">
+            <div class="problem-box bad">
+                <h3>Regular TVs Outside</h3>
+                <ul>
+                    <li>Die within 6-12 months</li>
+                    <li>Warranty voided instantly</li>
+                    <li>Heat warps the screen</li>
+                    <li>Dust clogs electronics</li>
+                </ul>
+            </div>
+            <div class="problem-box good">
+                <h3>With Apex Enclosure</h3>
+                <ul>
+                    <li>Use any TV you want</li>
+                    <li>Protected for 5+ years</li>
+                    <li>Active cooling for Gulf heat</li>
+                    <li>Swap/upgrade TV anytime</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="benefits">
+        <h2>Engineered for Gulf Climate</h2>
+        <div class="benefits-grid">
+            <div class="benefit">
+                <div class="benefit-icon">🌡️</div>
+                <h3>Active Cooling</h3>
+                <p>3 Delta fans deliver 200+ CFM. Your TV stays cool at 55°C ambient.</p>
+            </div>
+            <div class="benefit">
+                <div class="benefit-icon">🌧️</div>
+                <h3>IP55 Sealed</h3>
+                <p>Rain, pool splash, garden hose — no problem. Dust-tight construction.</p>
+            </div>
+            <div class="benefit">
+                <div class="benefit-icon">📺</div>
+                <h3>Any TV Works</h3>
+                <p>Samsung, LG, Sony, TCL. Your choice. Upgrade anytime.</p>
+            </div>
+            <div class="benefit">
+                <div class="benefit-icon">🔧</div>
+                <h3>Easy Service</h3>
+                <p>Hinged door. Swap TVs in 10 minutes. No special tools.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="reserve">
+        <h2>Reserve Your Enclosure</h2>
+        <div class="price-card">
+            <div class="price-model">ATE-75 (for 70-77" TVs)</div>
+            <div class="price-main">$2,200</div>
+            <div class="price-compare">Compare: SunBrite 75" <s>$8,499</s></div>
+
+            <ul class="price-features">
+                <li><span class="check">✓</span> IP55 weatherproof rating</li>
+                <li><span class="check">✓</span> Active cooling for 55°C</li>
+                <li><span class="check">✓</span> 5-year warranty</li>
+                <li><span class="check">✓</span> Works with any TV brand</li>
+                <li><span class="check">✓</span> Powder-coated aluminum</li>
+                <li><span class="check">✓</span> Free delivery (UAE)</li>
+            </ul>
+
+            <a href="https://wa.me/971XXXXXXXXX?text=I'd%20like%20to%20reserve%20an%20ATE-75%20enclosure" class="cta-btn price-cta">Reserve Now — $100 Deposit</a>
+            <p class="scarcity">First batch: 50 units</p>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <h2>Questions?</h2>
+
+        <div class="faq-item">
+            <div class="faq-q">What TVs does it work with?</div>
+            <div class="faq-a">Any TV that fits the size range. Samsung, LG, Sony, TCL — your choice. The ATE-75 fits 70-77" TVs up to 45kg.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">How does it handle the heat?</div>
+            <div class="faq-a">Three high-static fans deliver 200+ CFM of airflow, pulling cool air in and pushing hot air out. Rated for 55°C ambient — hotter than Dubai's hottest days.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">Is the deposit refundable?</div>
+            <div class="faq-a">Yes, 100% refundable anytime before your enclosure ships. No questions asked.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">When will it ship?</div>
+            <div class="faq-a">First batch ships Q2 2026. Founding customers get priority delivery and 25% off retail.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">What's the warranty?</div>
+            <div class="faq-a">5 years on the enclosure, cooling system, and all components. We stand behind our engineering.</div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <h2>Ready to Protect Your Outdoor TV?</h2>
+        <p>Join the first batch of homeowners getting proper outdoor entertainment — without the $8,000 markup.</p>
+        <a href="#reserve" class="cta-btn">Reserve Now — $100 Deposit</a>
+        <div class="guarantees">
+            <div class="guarantee"><span>✓</span> Fully refundable</div>
+            <div class="guarantee"><span>✓</span> Founding customer pricing</div>
+            <div class="guarantee"><span>✓</span> Priority delivery</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Apex Enclosures | Dubai, UAE</p>
+        <p style="margin-top: 8px;">
+            <a href="https://wa.me/971XXXXXXXXX">WhatsApp</a> ·
+            <a href="mailto:hello@apexenclosures.com">Email</a>
+        </p>
+        <p style="margin-top: 16px; font-size: 0.7rem;">© 2026 Apex Enclosures. All rights reserved.</p>
+    </footer>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="#reserve" class="cta-btn">Reserve — $100 Deposit</a>
+    </div>
+</body>
+</html>

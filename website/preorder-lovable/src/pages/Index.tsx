@@ -3,6 +3,7 @@ import TrustBar from "@/components/TrustBar";
 import ProblemSolution from "@/components/ProblemSolution";
 import WhyApexComparison from "@/components/WhyApexComparison";
 import ProductShowcase from "@/components/ProductShowcase";
+import VideoPlaceholder from "@/components/VideoPlaceholder";
 import WhisperQuiet from "@/components/WhisperQuiet";
 import GulfEngineering from "@/components/GulfEngineering";
 import PremiumFinishes from "@/components/PremiumFinishes";
@@ -22,6 +23,7 @@ const Index = () => {
       <ProblemSolution />
       <WhyApexComparison />
       <ProductShowcase />
+      <VideoPlaceholder />
       <WhisperQuiet />
       <GulfEngineering />
       <PremiumFinishes />

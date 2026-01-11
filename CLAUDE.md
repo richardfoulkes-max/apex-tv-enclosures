@@ -35,6 +35,15 @@ Apex Enclosures business project - outdoor enclosures for Gulf region.
 ## GitHub Repository
 https://github.com/richardfoulkes-max/apex-tv-enclosures (private)
 
+## Deployment Architecture
+| Location | What's Deployed | Access |
+|----------|-----------------|--------|
+| **apex-tv-enclosures.vercel.app** | CRM, AI Queue, Orders, Sales tools only | Password protected (team) |
+| **apex-preorder.netlify.app** | Customer pre-order landing page | Public |
+| **Local only** | Product specs, BOMs, engineering, RFQs | Your Mac only |
+
+Product/engineering pages excluded from Vercel via `.vercelignore` for IP protection.
+
 ## Project Location
 `/Users/richardfoulkes/Library/CloudStorage/OneDrive-Personal/Documents/Projects/apex-tv-enclosures`
 
