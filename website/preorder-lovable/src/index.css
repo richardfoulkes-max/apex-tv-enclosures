@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    /* Apex Brand Colors - HSL format */
+    --background: 0 0% 98%;
+    --foreground: 0 0% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
+
+    /* Deep Navy - Primary brand */
+    --primary: 240 33% 14%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Warm Gold - Accent */
+    --accent: 30 47% 64%;
+    --accent-foreground: 240 33% 14%;
+
+    /* CTA Orange */
+    --cta: 24 87% 46%;
+    --cta-foreground: 0 0% 100%;
+
+    --secondary: 30 20% 96%;
+    --secondary-foreground: 0 0% 15%;
+
+    --muted: 30 10% 94%;
+    --muted-foreground: 0 0% 40%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 15% 90%;
+    --input: 30 15% 90%;
+    --ring: 24 87% 46%;
+
+    --radius: 0.5rem;
+
+    /* Custom shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(240 33% 14% / 0.08);
+    --shadow-elevated: 0 12px 40px -8px hsl(240 33% 14% / 0.15);
+    --shadow-cta: 0 8px 24px -4px hsl(24 87% 46% / 0.4);
+  }
+
+  .dark {
+    --background: 240 33% 8%;
+    --foreground: 0 0% 95%;
+    --card: 240 33% 12%;
+    --card-foreground: 0 0% 95%;
+    --popover: 240 33% 12%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 30 47% 64%;
+    --primary-foreground: 240 33% 14%;
+    --secondary: 240 20% 18%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 240 20% 20%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 30 47% 64%;
+    --accent-foreground: 240 33% 14%;
+    --border: 240 20% 20%;
+    --input: 240 20% 20%;
+    --ring: 30 47% 64%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Montserrat', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  .gradient-gold {
+    background: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(30 55% 72%) 100%);
+  }
+
+  .gradient-navy {
+    background: linear-gradient(180deg, hsl(var(--primary)) 0%, hsl(240 33% 10%) 100%);
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(30 55% 72%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@layer utilities {
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .shadow-cta {
+    box-shadow: var(--shadow-cta);
+  }
+}
