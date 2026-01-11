@@ -210,6 +210,24 @@ nav.js injects: body { margin-left: 240px !important; }
 
 ## Recent Work History
 
+### Session: 2026-01-11 (Latest) - Auth Guard & Dashboard Update
+
+**Added auth-guard to CRM (partner-crm.html):**
+- Login now required - redirects to login.html if not authenticated
+- Shows "Verifying access..." spinner while checking session
+- Uses authenticated Supabase client for RLS filtering
+- Users only see partners in their territory
+
+**Separated Pool Storage on Dashboard (index.html):**
+- 3-column product grid: TV Enclosures | Pool Equipment | Pool Storage
+- Pool Storage has own amber color scheme with NEW badge
+- Links to Market Analysis and Specification
+- Bundle strategy callout: "Doubles order value"
+
+**Deployed:** Both changes live on Vercel (commits a464377, 06a8af7)
+
+---
+
 ### Session: 2026-01-11 (Late) - CRM Permissions & Nick Onboarding
 
 **Implemented CRM territory-based access with Supabase RLS:**
