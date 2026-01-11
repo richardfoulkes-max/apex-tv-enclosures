@@ -164,11 +164,18 @@ roundtable-ai/              ← Engineering validation briefs
 ---
 
 ## Procedures Reference
+
+**Before drafting outreach emails:** ALWAYS read `docs/email-templates.md` first
+- Contains standard templates for manufacturer RFQs, follow-ups, technical package sends
+- Ensures consistent formatting across all regions
+- Includes region-specific CC recipients and attachment requirements
+
 **Before sending emails:** Read `/Users/richardfoulkes/.claude/EMAIL_PROCEDURES.md`
 
 **IMPORTANT - Email Sender:** Always send from `apexenclosures@icloud.com` (NOT richardfoulkes@mac.com)
 - When using AppleScript to open Mail, set the sender account explicitly
 - CC Scott at `Scott@b-stemed.com` on all US manufacturer outreach
+- CC Nick at `nick@platinumbrands.com.au` on all AU manufacturer outreach
 
 **Before sending RFQ documents:** Always run pre-RFQ review checklist:
 1. Remove all competitor references (Apollo, Aqualite, etc.)
@@ -224,7 +231,13 @@ nav.js injects: body { margin-left: 240px !important; }
 - Links to Market Analysis and Specification
 - Bundle strategy callout: "Doubles order value"
 
-**Deployed:** Both changes live on Vercel (commits a464377, 06a8af7)
+**Made product cards fully clickable:**
+- TV Enclosures → specification.html
+- Pool Equipment → pool-specification.html
+- Pool Storage → pool-storage-market.html
+- Added arrow indicators to show clickability
+
+**Deployed:** All changes live on Vercel (commits a464377, 06a8af7, c25c5ab)
 
 ---
 
