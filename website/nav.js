@@ -20,7 +20,8 @@
         'go-to-market.html',
         'setup.html',
         'product-overview.html',
-        'meeting-eurotech.html'
+        'meeting-eurotech.html',
+        'services-pricing.html'
     ];
 
     // Sales Navigation Structure
@@ -60,7 +61,8 @@
             items: [
                 { href: 'orders.html', label: 'Orders Pipeline' },
                 { href: 'factory-orders.html', label: 'Factory Orders' },
-                { href: 'ai-insights.html', label: 'AI Insights' }
+                { href: 'ai-insights.html', label: 'AI Insights' },
+                { href: 'services-pricing.html', label: 'Services & Pricing' }
             ]
         },
         tools: {
@@ -118,7 +120,8 @@
                 { href: 'qc-checklist.html', label: 'QC Checklist' },
                 { href: 'compliance-guide.html', label: 'Compliance Guide' },
                 { href: 'manufacturer-rfq.html', label: 'RFQ Package' },
-                { href: 'china-suppliers.html', label: 'China Suppliers' }
+                { href: 'china-suppliers.html', label: 'China Suppliers' },
+                { href: 'installation-guide.html', label: 'Installation Guide' }
             ]
         },
         market: {

@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation Guide - ATE-75 Outdoor TV Enclosure | Apex Enclosures</title>
+    <meta name="description" content="Step-by-step installation guide for the Apex ATE-75 outdoor TV enclosure. Professional tips, tool requirements, and safety instructions.">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --primary-light: #2d4a6f;
+            --accent: #c9a227;
+            --accent-light: #d4b341;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--primary);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 800;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(201, 162, 39, 0.2);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background: var(--bg-alt);
+            border-radius: 16px;
+        }
+        .quick-link {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 0.6rem 1.25rem;
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .quick-link:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Info Cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        .info-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .info-card-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-alt);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.75rem;
+            font-size: 1.5rem;
+        }
+        .info-card h3 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        .info-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+        .section-number {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Steps */
+        .steps-container {
+            margin-bottom: 3rem;
+        }
+        .step {
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: var(--primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .step-content h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        .step-content p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+        .callout-icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        .callout-warning {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+        }
+        .callout-warning .callout-icon { color: var(--warning); }
+        .callout-danger {
+            background: #fef2f2;
+            border: 1px solid #fca5a5;
+        }
+        .callout-danger .callout-icon { color: var(--danger); }
+        .callout-success {
+            background: #ecfdf5;
+            border: 1px solid #6ee7b7;
+        }
+        .callout-success .callout-icon { color: var(--success); }
+        .callout-info {
+            background: #eff6ff;
+            border: 1px solid #93c5fd;
+        }
+        .callout-info .callout-icon { color: #3b82f6; }
+        .callout-content strong {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Tool List */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        .tool-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg-alt);
+            border-radius: 8px;
+        }
+        .tool-icon {
+            font-size: 1.25rem;
+        }
+        .tool-name {
+            font-weight: 600;
+        }
+        .tool-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Specs Table */
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        .specs-table th,
+        .specs-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .specs-table th {
+            background: var(--bg-alt);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Diagram */
+        .diagram-container {
+            background: var(--bg-alt);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .diagram-caption {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+        }
+
+        /* Checklist */
+        .checklist {
+            background: var(--bg-alt);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .checkbox.checked {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        /* Support Section */
+        .support-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        .support-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .support-section p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        .support-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 0.875rem 1.75rem;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-accent {
+            background: var(--accent);
+            color: var(--primary);
+        }
+        .btn-accent:hover {
+            background: var(--accent-light);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        .footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Print Styles */
+        @media print {
+            .nav, .quick-links, .support-section, .footer { display: none; }
+            .hero { padding: 1rem; }
+            .container { padding: 1rem; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.75rem; }
+            .info-grid { grid-template-columns: 1fr; }
+            .tool-grid { grid-template-columns: 1fr; }
+            .step { grid-template-columns: 1fr; }
+            .step-number { margin-bottom: 0.5rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="retail/index.html" class="logo">
+                <div class="logo-icon">A</div>
+                Apex Enclosures
+            </a>
+            <div class="nav-links">
+                <a href="retail/index.html">Home</a>
+                <a href="retail/faq.html">FAQ</a>
+                <a href="#support">Get Help</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-badge">
+            <span>ATE-75</span>
+        </div>
+        <h1>Installation Guide</h1>
+        <p>Everything you need to successfully install your Apex outdoor TV enclosure. Follow these steps for a professional result.</p>
+    </section>
+
+    <div class="container">
+        <!-- Quick Links -->
+        <div class="quick-links">
+            <a href="#before" class="quick-link">Before You Start</a>
+            <a href="#tools" class="quick-link">Tools Required</a>
+            <a href="#mounting" class="quick-link">Wall Mounting</a>
+            <a href="#tv-install" class="quick-link">TV Installation</a>
+            <a href="#electrical" class="quick-link">Electrical</a>
+            <a href="#testing" class="quick-link">Testing</a>
+        </div>
+
+        <!-- At a Glance -->
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-card-icon">45</div>
+                <h3>Installation Time</h3>
+                <p>minutes (approx.)</p>
+            </div>
+            <div class="info-card">
+                <div class="info-card-icon">2</div>
+                <h3>People Required</h3>
+                <p>for safe handling</p>
+            </div>
+            <div class="info-card">
+                <div class="info-card-icon">38kg</div>
+                <h3>Enclosure Weight</h3>
+                <p>empty (no TV)</p>
+            </div>
+        </div>
+
+        <!-- Section 1: Before You Start -->
+        <section id="before" class="steps-container">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2>Before You Start</h2>
+            </div>
+
+            <div class="callout callout-danger">
+                <div class="callout-icon">!</div>
+                <div class="callout-content">
+                    <strong>Safety First</strong>
+                    Turn off power at the breaker before any electrical work. The enclosure weighs 38kg empty — always use two people when lifting.
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Inspect Your Package</h3>
+                    <p>Check all components against the packing list. Report any damage or missing items within 48 hours.</p>
+                    <table class="specs-table">
+                        <tr><th>Item</th><th>Qty</th><th>Check</th></tr>
+                        <tr><td>ATE-75 Enclosure body</td><td>1</td><td></td></tr>
+                        <tr><td>Mounting bracket assembly</td><td>1</td><td></td></tr>
+                        <tr><td>Mounting hardware pack</td><td>1</td><td></td></tr>
+                        <tr><td>VESA adapter rails</td><td>2</td><td></td></tr>
+                        <tr><td>IR extender kit</td><td>1</td><td></td></tr>
+                        <tr><td>Spare air filter</td><td>1</td><td></td></tr>
+                        <tr><td>Quick start guide</td><td>1</td><td></td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Choose Your Location</h3>
+                    <p>Select the optimal position for viewing and protection.</p>
+                    <div class="callout callout-success">
+                        <div class="callout-icon">*</div>
+                        <div class="callout-content">
+                            <strong>Ideal Location Checklist</strong>
+                            Shaded from direct midday sun | Within 3m of power outlet | Solid wall (concrete, brick, or reinforced stud) | Eye-level viewing from seating area | Protected from direct rain/sprinkler spray on vents
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Check Wall Type</h3>
+                    <p>Different walls require different fixings. The enclosure with TV weighs approximately 60-65kg.</p>
+                    <table class="specs-table">
+                        <tr><th>Wall Type</th><th>Fixing Required</th><th>Min. Depth</th></tr>
+                        <tr><td>Concrete / Brick</td><td>M10 concrete anchors (included)</td><td>80mm</td></tr>
+                        <tr><td>Solid Block</td><td>M10 expansion bolts (included)</td><td>80mm</td></tr>
+                        <tr><td>Timber Stud</td><td>Lag bolts into studs (not supplied)</td><td>2 studs min.</td></tr>
+                        <tr><td>Metal Stud</td><td>Toggle bolts (not recommended)</td><td>-</td></tr>
+                    </table>
+                    <div class="callout callout-warning">
+                        <div class="callout-icon">!</div>
+                        <div class="callout-content">
+                            <strong>Not Suitable</strong>
+                            Plasterboard/drywall alone cannot support the weight. You must fix into studs or use a mounting plate.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Tools Required -->
+        <section id="tools" class="steps-container">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2>Tools Required</h2>
+            </div>
+
+            <div class="tool-grid">
+                <div class="tool-item">
+                    <div class="tool-icon">*</div>
+                    <div>
+                        <div class="tool-name">Power Drill</div>
+                        <div class="tool-note">Hammer drill for masonry</div>
+                    </div>
+                </div>
+                <div class="tool-item">
+                    <div class="tool-icon">*</div>
+                    <div>
+                        <div class="tool-name">10mm Masonry Bit</div>
+                        <div class="tool-note">For concrete anchors</div>
+                    </div>
+                </div>
+                <div class="tool-item">
+                    <div class="tool-icon">*</div>
+                    <div>
+                        <div class="tool-name">Spirit Level</div>
+                        <div class="tool-note">600mm or longer</div>
+                    </div>
+                </div>
+                <div class="tool-item">
+                    <div class="tool-icon">*</div>
+                    <div>
+                        <div class="tool-name">Socket Set</div>
+                        <div class="tool-note">13mm, 17mm sockets</div>
+                    </div>
+                </div>
+                <div class="tool-item">
+                    <div class="tool-icon">*</div>
+                    <div>
+                        <div class="tool-name">Phillips Screwdriver</div>
+                        <div class="tool-note">PH2 size</div>
+                    </div>
+                </div>
+                <div class="tool-item">
+                    <div class="tool-icon">*</div>
+                    <div>
+                        <div class="tool-name">Tape Measure</div>
+                        <div class="tool-note">5m minimum</div>
+                    </div>
+                </div>
+                <div class="tool-item">
+                    <div class="tool-icon">*</div>
+                    <div>
+                        <div class="tool-name">Pencil</div>
+                        <div class="tool-note">For marking</div>
+                    </div>
+                </div>
+                <div class="tool-item">
+                    <div class="tool-icon">*</div>
+                    <div>
+                        <div class="tool-name">Step Ladder</div>
+                        <div class="tool-note">Stable platform</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Wall Mounting -->
+        <section id="mounting" class="steps-container">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2>Wall Mounting</h2>
+            </div>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Mark the Bracket Position</h3>
+                    <p>Hold the wall bracket at your chosen height. Use a spirit level to ensure it's perfectly horizontal. Mark all fixing holes with a pencil.</p>
+                    <div class="callout callout-info">
+                        <div class="callout-icon">i</div>
+                        <div class="callout-content">
+                            <strong>Recommended Height</strong>
+                            Center of screen at seated eye level (typically 1000-1200mm from floor to bracket center).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Drill Pilot Holes</h3>
+                    <p>Using a 10mm masonry bit, drill holes to 90mm depth at each marked position. Clear dust from holes with a brush or compressed air.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Install Wall Anchors</h3>
+                    <p>Insert the M10 concrete anchors into the drilled holes. Tap gently with a hammer until flush with the wall surface.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Secure the Bracket</h3>
+                    <p>Position the bracket over the anchors. Insert bolts through bracket into anchors. Tighten with 17mm socket — firm but do not overtighten. Check level one final time.</p>
+                    <div class="callout callout-warning">
+                        <div class="callout-icon">!</div>
+                        <div class="callout-content">
+                            <strong>Important</strong>
+                            Tighten bolts in a star pattern (opposite corners) to ensure even pressure. Target torque: 25-30 Nm.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>Hang the Enclosure</h3>
+                    <p><strong>Two people required.</strong> Lift the enclosure and hook it onto the wall bracket. The enclosure should click into place. Verify it's secure before releasing.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: TV Installation -->
+        <section id="tv-install" class="steps-container">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2>TV Installation</h2>
+            </div>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Open the Service Door</h3>
+                    <p>Release the four latches on the bottom bezel by turning them 90° counter-clockwise. The service door will swing down on its hinges.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Attach VESA Rails to TV</h3>
+                    <p>Using the M6 or M8 bolts (depending on your TV), attach the VESA adapter rails to the back of your TV. Ensure rails are level and secure.</p>
+                    <table class="specs-table">
+                        <tr><th>TV Size</th><th>Common VESA Pattern</th><th>Bolt Size</th></tr>
+                        <tr><td>65"</td><td>400x400mm</td><td>M8 x 25mm</td></tr>
+                        <tr><td>75"</td><td>400x400mm or 600x400mm</td><td>M8 x 25mm</td></tr>
+                        <tr><td>77" OLED</td><td>300x300mm</td><td>M6 x 15mm</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Slide TV into Enclosure</h3>
+                    <p><strong>Two people required.</strong> Carefully lift the TV and slide the VESA rails into the vertical mounting channels inside the enclosure. Lower until the rails lock into position.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Connect Cables</h3>
+                    <p>Route cables through the cable entry point at the rear. Connect:</p>
+                    <ul style="margin: 0.5rem 0 0.5rem 1.5rem;">
+                        <li>Power cable to TV</li>
+                        <li>HDMI cable(s) to TV</li>
+                        <li>IR extender cable (place receiver on front glass)</li>
+                        <li>Ethernet (optional)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>Close and Seal</h3>
+                    <p>Swing the service door up and secure all four latches by turning them 90° clockwise. Ensure the EPDM gasket is properly seated all around.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Electrical Connection -->
+        <section id="electrical" class="steps-container">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <h2>Electrical Connection</h2>
+            </div>
+
+            <div class="callout callout-danger">
+                <div class="callout-icon">!</div>
+                <div class="callout-content">
+                    <strong>Warning</strong>
+                    Electrical work should be performed by a licensed electrician. Ensure the circuit is rated for the total load (TV + enclosure fans = typically 400-500W).
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Power Requirements</h3>
+                    <table class="specs-table">
+                        <tr><th>Component</th><th>Power Draw</th></tr>
+                        <tr><td>Enclosure fans (3x)</td><td>15W maximum</td></tr>
+                        <tr><td>75" TV (typical)</td><td>150-250W</td></tr>
+                        <tr><td>Streaming device</td><td>5-15W</td></tr>
+                        <tr><td><strong>Total</strong></td><td><strong>~300W typical</strong></td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Connect Enclosure Power</h3>
+                    <p>Plug the enclosure's power cable into a weatherproof outdoor socket (IP44 or higher). The enclosure uses a standard 3-pin plug.</p>
+                    <div class="callout callout-info">
+                        <div class="callout-icon">i</div>
+                        <div class="callout-content">
+                            <strong>Power Location</strong>
+                            Ideally, power outlet should be behind or below the enclosure for a clean cable run. Maximum recommended cable run: 3 meters.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Testing -->
+        <section id="testing" class="steps-container">
+            <div class="section-header">
+                <div class="section-number">6</div>
+                <h2>Testing & Handover</h2>
+            </div>
+
+            <div class="checklist">
+                <h3 style="margin-bottom: 1rem;">Installation Checklist</h3>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.classList.toggle('checked')"></div>
+                    <div>Enclosure securely mounted and level</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.classList.toggle('checked')"></div>
+                    <div>TV powers on and displays correctly</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.classList.toggle('checked')"></div>
+                    <div>All HDMI sources working</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.classList.toggle('checked')"></div>
+                    <div>IR extender responds to remote</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.classList.toggle('checked')"></div>
+                    <div>Fans spin up when powered (brief test at startup)</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.classList.toggle('checked')"></div>
+                    <div>Service door latches secure</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.classList.toggle('checked')"></div>
+                    <div>No cable pinching at entry points</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox" onclick="this.classList.toggle('checked')"></div>
+                    <div>Glass clean and free of fingerprints</div>
+                </div>
+            </div>
+
+            <div class="callout callout-success" style="margin-top: 1.5rem;">
+                <div class="callout-icon">*</div>
+                <div class="callout-content">
+                    <strong>Congratulations!</strong>
+                    Your Apex enclosure is installed. For the first week, we recommend checking the enclosure daily to ensure everything is operating correctly. The fans will automatically adjust speed based on temperature.
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Section -->
+        <section id="support" class="support-section">
+            <h2>Need Help?</h2>
+            <p>Our team is here to support your installation</p>
+            <div class="support-buttons">
+                <a href="https://wa.me/971XXXXXXXXX" class="btn btn-accent">
+                    WhatsApp Support
+                </a>
+                <a href="mailto:support@apexenclosures.com" class="btn btn-outline">
+                    Email Us
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 Apex Enclosures. All rights reserved.</p>
+    </footer>
+</body>
+</html>

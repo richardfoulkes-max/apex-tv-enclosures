@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services & Installation Pricing - Apex Enclosures</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+        }
+        .page-header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        .page-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .main-container {
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .stat-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Sections */
+        .section {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        .section-header {
+            background: var(--bg);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .section-header h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .section-body {
+            padding: 1.5rem;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 0.875rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: var(--bg);
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge-success {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .badge-primary {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Price Display */
+        .price {
+            font-weight: 700;
+            color: var(--text);
+        }
+        .price-range {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        .profit {
+            color: var(--success);
+            font-weight: 600;
+        }
+        .margin {
+            background: #dcfce7;
+            color: #166534;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .margin-high {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .margin-medium {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        /* Package Cards */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .package-card {
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+        .package-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+        }
+        .package-card.featured {
+            border-color: var(--primary);
+        }
+        .package-header {
+            padding: 1.25rem;
+            text-align: center;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+        }
+        .package-card.featured .package-header {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+        }
+        .package-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .package-price {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+        .package-card.featured .package-price {
+            color: white;
+        }
+        .package-body {
+            padding: 1.25rem;
+        }
+        .package-body ul {
+            list-style: none;
+        }
+        .package-body li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .package-body li:last-child {
+            border-bottom: none;
+        }
+        .package-body li::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+        }
+        .package-footer {
+            padding: 1rem 1.25rem;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        .package-profit {
+            font-size: 0.85rem;
+        }
+        .package-profit strong {
+            color: var(--success);
+        }
+
+        /* Installer Split */
+        .split-visual {
+            display: flex;
+            height: 24px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .split-installer {
+            background: #fbbf24;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #78350f;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .split-apex {
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Two Column Layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        /* Notes */
+        .notes {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: 8px;
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+        .notes strong {
+            color: #92400e;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .packages-grid { grid-template-columns: 1fr; }
+            .two-col { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            .stats-row { grid-template-columns: 1fr; }
+            .main-container { padding: 1rem; }
+            th, td { padding: 0.5rem; font-size: 0.85rem; }
+        }
+    </style>
+    <script src="nav.js"></script>
+</head>
+<body>
+    <div class="main-container">
+        <div class="page-header">
+            <h1>Services & Installation Pricing</h1>
+            <p>Internal reference for service pricing, margins, and packages</p>
+        </div>
+
+        <div class="container">
+            <!-- Stats Row -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">Avg Service Revenue</div>
+                    <div class="stat-value">AED 1,200</div>
+                    <div class="stat-note">Per enclosure sale</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Service Profit Margin</div>
+                    <div class="stat-value">45-80%</div>
+                    <div class="stat-note">Higher than product</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Profit Uplift</div>
+                    <div class="stat-value">+38%</div>
+                    <div class="stat-note">With premium install + warranty</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Installer Commission</div>
+                    <div class="stat-value">60%</div>
+                    <div class="stat-note">Of installation fee</div>
+                </div>
+            </div>
+
+            <!-- Installation Tiers -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Installation Service Tiers</h2>
+                    <span class="badge badge-primary">Core Offerings</span>
+                </div>
+                <div class="section-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tier</th>
+                                <th>What's Included</th>
+                                <th>Price (AED)</th>
+                                <th>Installer Cost</th>
+                                <th>Your Profit</th>
+                                <th>Margin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>DIY</strong></td>
+                                <td>Installation guide, video tutorial, WhatsApp support</td>
+                                <td><span class="price">Free</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Assisted</strong></td>
+                                <td>Site survey + installation guide + 30-min video call</td>
+                                <td><span class="price">250</span></td>
+                                <td>0</td>
+                                <td class="profit">250</td>
+                                <td><span class="margin margin-high">100%</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Professional</strong></td>
+                                <td>Full installation by certified installer (Dubai/Abu Dhabi)</td>
+                                <td><span class="price">750 - 1,500</span></td>
+                                <td>450 - 900</td>
+                                <td class="profit">300 - 600</td>
+                                <td><span class="margin">40%</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Premium</strong></td>
+                                <td>Install + TV mounting + cable management + demo + cleanup</td>
+                                <td><span class="price">1,500 - 2,500</span></td>
+                                <td>900 - 1,500</td>
+                                <td class="profit">600 - 1,000</td>
+                                <td><span class="margin">40%</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div style="margin-top: 1.5rem;">
+                        <strong>Installer Commission Split (60/40):</strong>
+                        <div class="split-visual">
+                            <div class="split-installer" style="width: 60%;">Installer 60%</div>
+                            <div class="split-apex" style="width: 40%;">Apex 40%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two Column: Add-Ons and Commercial -->
+            <div class="two-col">
+                <!-- Add-On Services -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2>Add-On Services</h2>
+                    </div>
+                    <div class="section-body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Price</th>
+                                    <th>Profit</th>
+                                    <th>Margin</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Site survey (standalone)</td>
+                                    <td><span class="price">150</span></td>
+                                    <td class="profit">100</td>
+                                    <td><span class="margin">67%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>TV procurement & setup</td>
+                                    <td><span class="price">500</span> + TV</td>
+                                    <td class="profit">400</td>
+                                    <td><span class="margin margin-high">80%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Cable routing (in-wall)</td>
+                                    <td><span class="price">300-600</span></td>
+                                    <td class="profit">150-300</td>
+                                    <td><span class="margin">50%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Electrical outlet install</td>
+                                    <td><span class="price">400-800</span></td>
+                                    <td class="profit">100-200</td>
+                                    <td><span class="margin margin-medium">25%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Annual maintenance</td>
+                                    <td><span class="price">350</span>/yr</td>
+                                    <td class="profit">200</td>
+                                    <td><span class="margin">57%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Filter replacement</td>
+                                    <td><span class="price">150</span></td>
+                                    <td class="profit">100</td>
+                                    <td><span class="margin">67%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Extended warranty (5yr)</td>
+                                    <td><span class="price">750</span></td>
+                                    <td class="profit">600</td>
+                                    <td><span class="margin margin-high">80%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Emergency call-out</td>
+                                    <td><span class="price">500</span></td>
+                                    <td class="profit">200</td>
+                                    <td><span class="margin">40%</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Commercial/B2B -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2>Commercial / B2B Services</h2>
+                    </div>
+                    <div class="section-body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Price</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Contractor training (on-site)</td>
+                                    <td><span class="price">1,500</span></td>
+                                    <td>Up to 5 people, 2 hours</td>
+                                </tr>
+                                <tr>
+                                    <td>Contractor training (video)</td>
+                                    <td><span class="price">500</span></td>
+                                    <td>1 hour, recorded</td>
+                                </tr>
+                                <tr>
+                                    <td>Volume install discount</td>
+                                    <td><span class="price">500</span>/unit</td>
+                                    <td>After first at full price</td>
+                                </tr>
+                                <tr>
+                                    <td>Maintenance contract (10+)</td>
+                                    <td><span class="price">~250</span>/unit/yr</td>
+                                    <td>Custom quote</td>
+                                </tr>
+                                <tr>
+                                    <td>Priority support SLA</td>
+                                    <td><span class="price">2,000</span>/yr</td>
+                                    <td>4-hour response</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="notes" style="margin-top: 1.5rem;">
+                            <strong>Site survey note:</strong> AED 150 fee is deducted from order if customer proceeds. Converts ~60% of surveys to sales.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Packages -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Service Packages (Bundles)</h2>
+                    <span class="badge badge-success">Upsell Opportunities</span>
+                </div>
+                <div class="section-body">
+                    <div class="packages-grid">
+                        <!-- Package 1 -->
+                        <div class="package-card">
+                            <div class="package-header">
+                                <div class="package-name">Enclosure Only</div>
+                                <div class="package-price">AED 8,100</div>
+                            </div>
+                            <div class="package-body">
+                                <ul>
+                                    <li>ATE-75 Enclosure</li>
+                                    <li>Installation guide PDF</li>
+                                    <li>Video tutorial access</li>
+                                    <li>WhatsApp support</li>
+                                    <li>3-year warranty</li>
+                                </ul>
+                            </div>
+                            <div class="package-footer">
+                                <div class="package-profit">
+                                    Enclosure profit: <strong>~AED 3,650</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Package 2 -->
+                        <div class="package-card featured">
+                            <div class="package-header">
+                                <div class="package-name">Ready-to-Install</div>
+                                <div class="package-price">AED 8,850</div>
+                            </div>
+                            <div class="package-body">
+                                <ul>
+                                    <li>ATE-75 Enclosure</li>
+                                    <li>Site survey included</li>
+                                    <li>Professional installation</li>
+                                    <li>System test & handover</li>
+                                    <li>3-year warranty</li>
+                                </ul>
+                            </div>
+                            <div class="package-footer">
+                                <div class="package-profit">
+                                    Total profit: <strong>~AED 3,950</strong> (+8%)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Package 3 -->
+                        <div class="package-card">
+                            <div class="package-header">
+                                <div class="package-name">Complete Solution</div>
+                                <div class="package-price">AED 13,500+</div>
+                            </div>
+                            <div class="package-body">
+                                <ul>
+                                    <li>ATE-75 Enclosure</li>
+                                    <li>75" TV (Samsung/LG)</li>
+                                    <li>Premium installation</li>
+                                    <li>5-year extended warranty</li>
+                                    <li>Annual maintenance (1yr)</li>
+                                </ul>
+                            </div>
+                            <div class="package-footer">
+                                <div class="package-profit">
+                                    Total profit: <strong>~AED 5,250</strong> (+44%)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profit Impact Summary -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Profit Impact Summary</h2>
+                </div>
+                <div class="section-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>What Customer Buys</th>
+                                <th>Total Order</th>
+                                <th>Enclosure Profit</th>
+                                <th>Service Profit</th>
+                                <th>Total Profit</th>
+                                <th>% Increase</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Enclosure only</td>
+                                <td><span class="price">8,100</span></td>
+                                <td>3,650</td>
+                                <td>0</td>
+                                <td class="profit">3,650</td>
+                                <td>Baseline</td>
+                            </tr>
+                            <tr>
+                                <td>+ Professional Install</td>
+                                <td><span class="price">9,100</span></td>
+                                <td>3,650</td>
+                                <td>400</td>
+                                <td class="profit">4,050</td>
+                                <td><span class="badge badge-success">+11%</span></td>
+                            </tr>
+                            <tr>
+                                <td>+ Premium Install + Warranty</td>
+                                <td><span class="price">10,850</span></td>
+                                <td>3,650</td>
+                                <td>1,400</td>
+                                <td class="profit">5,050</td>
+                                <td><span class="badge badge-success">+38%</span></td>
+                            </tr>
+                            <tr>
+                                <td>Complete Solution</td>
+                                <td><span class="price">13,500+</span></td>
+                                <td>3,650</td>
+                                <td>1,600</td>
+                                <td class="profit">5,250+</td>
+                                <td><span class="badge badge-success">+44%</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Installer Network Status -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Installer Network Status</h2>
+                    <span class="badge badge-warning">Building</span>
+                </div>
+                <div class="section-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Region</th>
+                                <th>Status</th>
+                                <th>Installers</th>
+                                <th>Action Needed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Dubai</td>
+                                <td><span class="badge badge-warning">Needed</span></td>
+                                <td>0</td>
+                                <td>Find 2-3 certified AV/handyman installers</td>
+                            </tr>
+                            <tr>
+                                <td>Abu Dhabi</td>
+                                <td><span class="badge badge-warning">Needed</span></td>
+                                <td>0</td>
+                                <td>Find 1-2 installers</td>
+                            </tr>
+                            <tr>
+                                <td>Sharjah / Northern Emirates</td>
+                                <td><span class="badge badge-danger">Not Started</span></td>
+                                <td>0</td>
+                                <td>Lower priority - cover from Dubai</td>
+                            </tr>
+                            <tr>
+                                <td>Saudi Arabia</td>
+                                <td><span class="badge badge-danger">Not Started</span></td>
+                                <td>0</td>
+                                <td>Partner with local contractor</td>
+                            </tr>
+                            <tr>
+                                <td>Australia</td>
+                                <td><span class="badge badge-primary">Via Nick</span></td>
+                                <td>TBD</td>
+                                <td>Nick to source local installers</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="notes" style="margin-top: 1.5rem;">
+                        <strong>Installer criteria:</strong> Licensed contractor, completed Apex training, insurance coverage, owns basic tools (drill, level, stud finder), passed installation test.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

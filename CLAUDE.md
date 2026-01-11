@@ -1,5 +1,22 @@
 # Apex Enclosures - Claude Code Context
 
+## READ FIRST - Essential Context File
+**BEFORE doing anything, read:** `.claude/essential-context.md`
+- Contains: email templates, RFQ locations, partner contacts, key decisions
+- Compact file (~150 lines) that survives context compaction
+- Updated each session with critical operational info
+
+---
+
+## CONFIDENTIAL - Manufacturer Identity
+**NEVER disclose the manufacturer name externally.**
+- Use generic terms: "ISO-certified facility", "our manufacturing partner", "certified UAE facility"
+- Applies to: landing pages, marketing, customer communications, partner discussions
+- Internal docs (this file, CRM) may contain the name for operational purposes
+- The manufacturer name has been removed from the public landing page
+
+---
+
 ## Context Preservation Rules
 **IMPORTANT:** To prevent information loss during context compaction:
 1. Update this file after ANY significant design decision or session work
@@ -217,7 +234,51 @@ nav.js injects: body { margin-left: 240px !important; }
 
 ## Recent Work History
 
-### Session: 2026-01-11 (Latest) - Auth Guard & Dashboard Update
+### Session: 2026-01-11 (Latest) - Pre-Order Landing Page LIVE
+
+**Landing Page Deployed:**
+- User built page in Lovable with differentiation sections
+- Connected Lovable to GitHub: `github.com/richardfoulkes-max/apex-outdoor-living`
+- Cloned repo, installed deps (`npm install`), built (`npm run build`)
+- **Final URL: https://apex-preorder.netlify.app** (Netlify, public)
+- Source code saved in `website/preorder-lovable/`
+
+**Microsoft Clarity Tracking Added:**
+- Project ID: `uzuntxvj5r`
+- Free heatmaps, session recordings, scroll depth, rage clicks
+- Tracking code in `index.html`
+
+**Manufacturer Name Removed from Public Pages:**
+- Removed "Eurotech Metal Industries" from `EuropeanManufacturing.tsx`
+- Now says "ISO-certified facility" (generic)
+- Added CONFIDENTIAL section to CLAUDE.md and orchestrator.json
+- **NEVER disclose manufacturer identity externally**
+
+**Differentiation Added (via lovable-update-prompt.md):**
+1. **Why Apex? Comparison Table** - airflow (200+ vs 80 CFM), noise (30 vs 45+ dBA), warranty (5 vs 1 year), colors (200+ vs black only)
+2. **Whisper-Quiet Operation** - PWM intelligent control, sound level visualization
+3. **Gulf Climate Engineering** - 55°C rating, 2000+ hour salt spray, 550W heat dissipation
+4. **Premium Finish Options** - 200+ RAL colors (standard, +$75 premium, +$150 custom)
+5. **European Manufacturing Standards** - ISO 9001, Schneider Electric supplier, AAMA 2604
+
+**D2C Playbook Created (`/Projects/d2c-playbook/`):**
+- Greg Isenberg's ACP Framework (Audience → Community → Product)
+- 25 ad hooks across 10 categories
+- Landing Page Blueprint based on Suns Lifestyle, Warby Parker, Allbirds, Away
+- Dr. Conversion Atlas analysis with Cialdini's 7 principles
+
+**Smoke Test:** On hold until prototype confirmed
+
+**Files Created/Modified:**
+- `docs/landing-page-prompt.md` - Initial AI builder prompt
+- `docs/lovable-update-prompt.md` - Differentiation update for Lovable
+- `docs/conversion-testing-guide.md` - Conversion testing methodology
+- `website/preorder-lovable/` - Full React source from Lovable GitHub
+- `website/preorder-lovable/src/components/EuropeanManufacturing.tsx` - Removed manufacturer name
+
+---
+
+### Session: 2026-01-11 - Auth Guard & Dashboard Update
 
 **Added auth-guard to CRM (partner-crm.html):**
 - Login now required - redirects to login.html if not authenticated
