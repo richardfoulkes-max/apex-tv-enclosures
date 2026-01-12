@@ -129,6 +129,7 @@
             icon: '📈',
             items: [
                 { href: 'market-research.html', label: 'Overview' },
+                { href: 'outdoor-tv-vs-enclosure-analysis.html', label: 'TV vs Enclosure Analysis' },
                 { href: 'competitor-analysis.html', label: 'Competitor Analysis' },
                 { href: 'competitor-comparison.html', label: 'Competitor Comparison' },
                 { href: 'product-opportunities.html', label: 'Product Opportunities' },
