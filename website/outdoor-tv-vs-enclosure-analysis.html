@@ -617,6 +617,118 @@
             </div>
         </section>
 
+        <!-- Market Forecast: Price & Temperature Convergence -->
+        <section class="section">
+            <h2>7. Market Forecast: Price & Temperature Convergence</h2>
+
+            <p>Will outdoor TVs make enclosures obsolete? Research says: <strong>Not for 10+ years, especially in Gulf climates.</strong></p>
+
+            <!-- Chart Container -->
+            <div style="background: #f8f9fa; border-radius: 12px; padding: 20px; margin: 20px 0; height: 400px;">
+                <canvas id="marketChart"></canvas>
+            </div>
+
+            <div class="verdict">
+                <h3>The Gulf Climate Moat</h3>
+                <p>Most outdoor TVs are rated to <strong>50°C max</strong>. Dubai regularly hits <strong>50-52°C ambient</strong> with surface temps reaching <strong>60-70°C</strong>.</p>
+                <p style="margin-top: 10px;"><strong>Apex enclosures with active cooling solve this problem completely.</strong></p>
+            </div>
+
+            <h3>Temperature Ratings vs Gulf Reality</h3>
+            <table>
+                <tr>
+                    <th>Brand/Model</th>
+                    <th>Max Temp Rating</th>
+                    <th>Gulf Suitable?</th>
+                </tr>
+                <tr>
+                    <td>Samsung Terrace</td>
+                    <td>50°C (122°F)</td>
+                    <td><span class="badge badge-warning">Marginal</span></td>
+                </tr>
+                <tr>
+                    <td>SunBrite Pro</td>
+                    <td>50°C (122°F)</td>
+                    <td><span class="badge badge-warning">Marginal</span></td>
+                </tr>
+                <tr>
+                    <td>LG Commercial (in sun)</td>
+                    <td>40°C (104°F)</td>
+                    <td><span class="badge badge-danger">No</span></td>
+                </tr>
+                <tr>
+                    <td>Seura Full Sun</td>
+                    <td>60°C (140°F)</td>
+                    <td><span class="badge badge-success">Yes ($$$)</span></td>
+                </tr>
+                <tr>
+                    <td>Furrion Aurora Pro</td>
+                    <td>60°C (140°F)</td>
+                    <td><span class="badge badge-success">Yes ($$$)</span></td>
+                </tr>
+                <tr class="compare-good">
+                    <td><strong>Apex Enclosure</strong></td>
+                    <td><strong>55°C+ (active cooling)</strong></td>
+                    <td><span class="badge badge-success">Yes</span></td>
+                </tr>
+                <tr class="compare-neutral">
+                    <td><em>Dubai Summer Ambient</em></td>
+                    <td><em>45-52°C</em></td>
+                    <td>-</td>
+                </tr>
+                <tr class="compare-bad">
+                    <td><em>Surface Temp in Sun</em></td>
+                    <td><em>60-70°C</em></td>
+                    <td>-</td>
+                </tr>
+            </table>
+
+            <h3>75" Setup Cost Comparison (2026)</h3>
+            <div class="card-grid">
+                <div class="card" style="border-left: 4px solid var(--success);">
+                    <h4 style="color: var(--success);">$1,800-3,300</h4>
+                    <p><strong>Indoor TV + Enclosure</strong></p>
+                    <p>$700-1,000 TV + $800-1,500 enclosure</p>
+                </div>
+                <div class="card" style="border-left: 4px solid var(--accent);">
+                    <h4 style="color: var(--accent);">$4,000-4,300</h4>
+                    <p><strong>Budget Outdoor TV</strong></p>
+                    <p>Sylvox $3,799 + installation</p>
+                </div>
+                <div class="card" style="border-left: 4px solid var(--danger);">
+                    <h4 style="color: var(--danger);">$6,200-10,500</h4>
+                    <p><strong>Premium Outdoor TV</strong></p>
+                    <p>Samsung Terrace / Seura</p>
+                </div>
+            </div>
+
+            <h3>Market Growth Outlook</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Enclosure Market</h4>
+                    <ul>
+                        <li>$876M → $1.2-2.4B by 2031-2033</li>
+                        <li>5-7.8% CAGR (growing)</li>
+                        <li>TV Shield: 47,500 installs, 58 countries</li>
+                        <li>Apollo expanding to 86" & 98"</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Outdoor TV Pricing Trends</h4>
+                    <ul>
+                        <li>Only 18% drop in 5 years (2020-2025)</li>
+                        <li>Won't reach parity until 2032-2035</li>
+                        <li>Gulf-rated models (60°C) stay premium</li>
+                        <li>Market growing at 10% CAGR</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>Bottom Line:</strong> Enclosures are safe for 10+ years. Gulf climate is your moat - outdoor TVs can't handle 50°C+ reliably. Apex solves a real problem that competitors can't.
+            </div>
+        </section>
+
         <!-- Sources -->
         <section class="section">
             <h2>Sources</h2>
@@ -638,5 +750,138 @@
         </footer>
     </div>
     <script src="nav.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Market Forecast Chart
+        const ctx = document.getElementById('marketChart');
+        if (ctx) {
+            new Chart(ctx.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: ['2020', '2022', '2024', '2026', '2028', '2030', '2032', '2034', '2036'],
+                    datasets: [
+                        {
+                            label: 'Outdoor TV Price (75")',
+                            data: [6500, 5800, 5000, 4200, 3600, 3000, 2600, 2300, 2000],
+                            borderColor: '#dc2626',
+                            backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                            borderWidth: 3,
+                            fill: false,
+                            tension: 0.3,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Enclosure + TV Cost',
+                            data: [3500, 3200, 2800, 2500, 2300, 2100, 2000, 1900, 1800],
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            borderWidth: 3,
+                            fill: false,
+                            tension: 0.3,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Outdoor TV Max Temp (°C)',
+                            data: [50, 50, 50, 52, 54, 55, 57, 58, 60],
+                            borderColor: '#f59e0b',
+                            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            fill: false,
+                            tension: 0.3,
+                            yAxisID: 'y1'
+                        },
+                        {
+                            label: 'Dubai Peak Ambient (°C)',
+                            data: [50, 50, 51, 51, 52, 52, 52, 53, 53],
+                            borderColor: '#e91e63',
+                            backgroundColor: 'rgba(233, 30, 99, 0.2)',
+                            borderWidth: 2,
+                            borderDash: [2, 2],
+                            fill: true,
+                            tension: 0,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Price Convergence & Temperature Capability Forecast',
+                            font: { size: 16, weight: '600' },
+                            color: '#0f172a',
+                            padding: { bottom: 20 }
+                        },
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Cost (USD)',
+                                font: { weight: '600' }
+                            },
+                            min: 0,
+                            max: 7000,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'Temperature (°C)',
+                                font: { weight: '600' }
+                            },
+                            min: 40,
+                            max: 65,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '°C';
+                                }
+                            },
+                            grid: {
+                                drawOnChartArea: false
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Year',
+                                font: { weight: '600' }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 </html>

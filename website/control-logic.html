@@ -517,13 +517,33 @@
 
         <h2>7. Hardware Requirements</h2>
         <h3>7.1 Microcontroller</h3>
+        <div class="info" style="background: #ecfdf5; border-left: 4px solid #059669; padding: 1rem; margin: 1rem 0;">
+            <strong>RECOMMENDED: ESP32-C3</strong> (~$3 cost, +$2 vs basic ATmega)
+            <ul style="margin: 0.5rem 0 0 1.5rem;">
+                <li><strong>Firmware updates</strong> — Reflash via USB without hardware changes</li>
+                <li><strong>Per-fan PWM control</strong> — Run center fan faster for thermal optimization</li>
+                <li><strong>WiFi/BLE built-in</strong> — Future smart home integration (Matter, HomeKit, Alexa)</li>
+                <li><strong>OTA updates</strong> — Push firmware fixes remotely (future feature)</li>
+                <li><strong>Remote monitoring</strong> — View temperature/fan status via app (future feature)</li>
+            </ul>
+        </div>
+        <p style="margin: 1rem 0;"><strong>Minimum requirements:</strong></p>
         <ul style="margin: 1rem 0; padding-left: 2rem;">
-            <li><strong>Recommended:</strong> ATmega328P or ESP32-C3</li>
-            <li>2+ PWM outputs (25kHz capable for silent operation)</li>
-            <li>1-Wire interface for DS18B20 sensors</li>
+            <li>3× independent PWM outputs (25kHz capable for silent operation)</li>
+            <li>1-Wire interface for DS18B20 temperature sensors</li>
             <li>Digital I/O for alarm output</li>
-            <li>Optional: WiFi/BLE for remote monitoring (ESP32)</li>
+            <li>Flash memory for storing calibration data</li>
         </ul>
+
+        <h4>Future Smart Home Integration (ESP32 enables)</h4>
+        <ul style="margin: 1rem 0; padding-left: 2rem;">
+            <li><strong>Matter protocol</strong> — Universal smart home standard (Apple, Google, Amazon, Samsung)</li>
+            <li><strong>HomeKit</strong> — "Hey Siri, what's the enclosure temperature?"</li>
+            <li><strong>REST API</strong> — Integration with home automation (Home Assistant, etc.)</li>
+            <li><strong>Push notifications</strong> — Alert if thermal emergency or filter needs replacement</li>
+            <li><strong>Usage analytics</strong> — Track runtime, fan hours for predictive maintenance</li>
+        </ul>
+        <p style="font-size: 0.9rem; color: var(--text-muted);"><em>Note: Smart features are future roadmap items. Initial production will have WiFi hardware but basic firmware only. Smart features can be enabled via OTA update when ready.</em></p>
 
         <h3>7.2 PWM Frequency</h3>
         <div class="warning">
@@ -534,12 +554,16 @@
         <h3>7.3 Suggested Components</h3>
         <table>
             <tr><th>Component</th><th>Part Number</th><th>Notes</th></tr>
-            <tr><td>MCU</td><td>ATmega328P-AU</td><td>Arduino compatible</td></tr>
-            <tr><td>Voltage Regulator</td><td>AMS1117-3.3</td><td>3.3V for sensors</td></tr>
-            <tr><td>MOSFET Driver</td><td>IRLZ44N</td><td>For PWM output (if needed)</td></tr>
+            <tr><td>MCU</td><td><strong>ESP32-C3-MINI-1</strong></td><td>WiFi/BLE, 4MB flash, 3× PWM capable</td></tr>
+            <tr><td>Dev Board (prototype)</td><td>ESP32-C3-DevKitM-1</td><td>For firmware development</td></tr>
+            <tr><td>Voltage Regulator</td><td>AMS1117-3.3</td><td>3.3V for MCU and sensors</td></tr>
+            <tr><td>MOSFET Driver</td><td>IRLZ44N (×3)</td><td>One per fan for independent PWM</td></tr>
+            <tr><td>Temp Sensor</td><td>DS18B20</td><td>1-Wire digital, ±0.5°C accuracy</td></tr>
             <tr><td>Pull-up Resistor</td><td>4.7kΩ</td><td>For 1-Wire bus</td></tr>
             <tr><td>Decoupling Caps</td><td>100nF + 10µF</td><td>Per IC</td></tr>
+            <tr><td>Antenna</td><td>PCB trace or ceramic</td><td>2.4GHz for WiFi/BLE</td></tr>
         </table>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;"><em>Estimated controller BOM: ~$8-12 including PCB. Volume pricing available.</em></p>
 
         <h2>8. Testing Requirements</h2>
         <ol style="margin: 1rem 0; padding-left: 2rem;">
@@ -554,7 +578,7 @@
         </ol>
 
         <footer style="text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid var(--border); color: var(--text-muted);">
-            <p>Apex TV Enclosures | Control Logic Specification v2.0 | December 2025</p>
+            <p>Apex TV Enclosures | Control Logic Specification v2.1 | January 2026</p>
             <p style="font-size: 0.85rem;">Document: APEX-FW-001</p>
         </footer>
     </div>
