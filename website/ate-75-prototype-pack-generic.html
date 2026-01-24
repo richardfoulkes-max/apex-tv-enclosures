@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATE-75 Prototype Design Pack - Apex TV Enclosures</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+        @media print {
+            body { font-size: 9pt; }
+            .page-break { page-break-before: always; }
+            .no-break { page-break-inside: avoid; }
+            .section-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+            /* Allow tables to break, but repeat headers */
+            thead { display: table-header-group; }
+            tr { page-break-inside: avoid; break-inside: avoid; }
+
+            /* Keep small elements together */
+            .spec-card { page-break-inside: avoid; break-inside: avoid; }
+            .callout { page-break-inside: avoid; break-inside: avoid; }
+            .drawing-container { page-break-inside: avoid; break-inside: avoid; }
+
+            /* Prevent widows/orphans */
+            p, li { orphans: 3; widows: 3; }
+
+            /* Tighter spacing */
+            h3 { margin-top: 1rem; margin-bottom: 0.5rem; }
+            table { margin: 0.5rem 0; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.5;
+            color: #1e293b;
+            background: white;
+        }
+
+        /* Cover Page */
+        .cover-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+            color: white;
+            padding: 2rem;
+        }
+        .cover-logo {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+        .cover-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+        }
+        .cover-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .cover-model {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+        }
+        .cover-specs {
+            background: rgba(255,255,255,0.15);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+        }
+        .cover-specs table {
+            margin: 0 auto;
+            text-align: left;
+        }
+        .cover-specs td {
+            padding: 0.5rem 1rem;
+        }
+        .cover-specs td:first-child {
+            opacity: 0.8;
+        }
+        .cover-specs td:last-child {
+            font-weight: 600;
+        }
+        .cover-footer {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Section Headers */
+        .section-header {
+            background: linear-gradient(135deg, #0d9488, #0f766e);
+            color: white;
+            padding: 1rem 1.5rem;
+            margin: 2rem 0 1.5rem 0;
+            border-radius: 8px;
+        }
+        .section-header h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        /* Content */
+        .content {
+            padding: 1.5rem;
+            max-width: 210mm;
+            margin: 0 auto;
+        }
+
+        h3 {
+            color: #0d9488;
+            font-size: 1.1rem;
+            margin: 1.5rem 0 0.75rem 0;
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid #0d9488;
+        }
+
+        h4 {
+            color: #334155;
+            font-size: 1rem;
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        th, td {
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            border: 1px solid #e2e8f0;
+        }
+        th {
+            background: #f1f5f9;
+            font-weight: 600;
+            color: #334155;
+        }
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .callout-info {
+            background: #f0fdfa;
+            border-left: 4px solid #0d9488;
+        }
+        .callout-warning {
+            background: #fffbeb;
+            border-left: 4px solid #d97706;
+        }
+        .callout-critical {
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+        }
+
+        /* Drawing Container */
+        .drawing-container {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .drawing-container svg {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+        .drawing-title {
+            text-align: center;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Spec Cards */
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .spec-card {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #0d9488;
+        }
+        .spec-card h4 {
+            margin-top: 0;
+            color: #0d9488;
+        }
+        .spec-card ul {
+            margin: 0;
+            padding-left: 1.25rem;
+        }
+        .spec-card li {
+            margin: 0.25rem 0;
+        }
+
+        /* TOC */
+        .toc {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .toc h3 {
+            margin-top: 0;
+            border: none;
+        }
+        .toc ol {
+            columns: 2;
+            padding-left: 1.5rem;
+        }
+        .toc li {
+            margin: 0.5rem 0;
+        }
+
+        /* Lists */
+        ul, ol {
+            padding-left: 1.5rem;
+            margin: 0.5rem 0;
+        }
+        li {
+            margin: 0.25rem 0;
+        }
+
+        /* Footer */
+        .doc-footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid #e2e8f0;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover-page">
+    <div class="cover-logo">APEX</div>
+    <div class="cover-subtitle">TV ENCLOSURES</div>
+
+    <div class="cover-title">Prototype Design Pack</div>
+    <div class="cover-model">Model ATE-75 (75" TV Enclosure)</div>
+
+    <div class="cover-specs">
+        <table>
+            <tr><td>Design Version</td><td>v5.3.0 IP55</td></tr>
+            <tr><td>External Dimensions</td><td>1760 x 1120 x 160mm</td></tr>
+            <tr><td>Weight (empty)</td><td>~38 kg</td></tr>
+            <tr><td>Weather Rating</td><td>IP55 (dust protected + water jet resistant)</td></tr>
+            <tr><td>Design Feature</td><td>Integrated Bezel Ventilation</td></tr>
+            <tr><td>Thermal System</td><td>3x Delta AFB1412HH-A (165-195 CFM)</td></tr>
+        </table>
+    </div>
+
+    <div class="cover-footer">
+        Confidential Manufacturing Document<br>
+        
+        January 2026
+    </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="page-break"></div>
+<div class="content">
+    <div class="section-header">
+        <h2>Table of Contents</h2>
+    </div>
+
+    <div class="toc">
+        <ol>
+            <li>Executive Summary</li>
+            <li>External Dimensions</li>
+            <li>Design Philosophy - Integrated Bezel</li>
+            <li>Technical Drawings</li>
+            <li>Mechanical Construction</li>
+            <li>Thermal Management System</li>
+            <li>Electrical System</li>
+            <li>Sealing & IP55 Protection</li>
+            <li>Bill of Materials</li>
+            <li>Quality Standards & Testing</li>
+            <li>Prototype Validation Requirements</li>
+        </ol>
+    </div>
+
+    <div class="callout callout-info">
+        <strong>Document Purpose:</strong> This design pack contains all specifications required to manufacture the ATE-75 prototype. The enclosure is designed for 75" commercial TVs operating in Gulf region outdoor environments (UAE, Saudi Arabia, Qatar).
+    </div>
+
+    <h3>Product Renders (Reference Only)</h3>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0;">
+        <div style="text-align: center;">
+            <img src="images/ate-75-v530-front.png" alt="ATE-75 External View" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+            <p style="margin-top: 0.5rem; font-size: 0.75rem; color: #64748b; font-style: italic;">External 3/4 View</p>
+        </div>
+        <div style="text-align: center;">
+            <img src="images/ate-75-v530-internal.png" alt="ATE-75 Internal View" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+            <p style="margin-top: 0.5rem; font-size: 0.75rem; color: #64748b; font-style: italic;">Internal View (TV Mounting)</p>
+        </div>
+        <div style="text-align: center;">
+            <img src="images/ate-75-v530-exploded.png" alt="ATE-75 Exploded View" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+            <p style="margin-top: 0.5rem; font-size: 0.75rem; color: #64748b; font-style: italic;">Exploded Assembly View</p>
+        </div>
+    </div>
+    <p style="text-align: center; font-size: 0.8rem; color: #64748b;">(Conceptual Renders - Guide Only)</p>
+</div>
+
+<!-- SECTION 1: EXECUTIVE SUMMARY -->
+<div class="page-break"></div>
+<div class="content">
+    <div class="section-header">
+        <h2>1. Executive Summary</h2>
+    </div>
+
+    <h3>Product Overview</h3>
+    <p>The ATE-75 is a premium weatherproof enclosure designed to protect standard 75" commercial TVs in extreme outdoor conditions. The v5.3.0 design features integrated bezel ventilation - a clean "picture frame" aesthetic with no protruding deflector.</p>
+
+    <h3>Key Design Features</h3>
+    <div class="spec-grid">
+        <div class="spec-card">
+            <h4>Integrated Bezel Ventilation</h4>
+            <ul>
+                <li>80mm top/bottom bezels with recessed slots</li>
+                <li>Slots recessed 30-40mm behind face</li>
+                <li>Clean flush front - NO deflector</li>
+                <li>Bezel edges shield from water jets</li>
+            </ul>
+        </div>
+        <div class="spec-card">
+            <h4>Ducted Rear-Plenum Cooling</h4>
+            <ul>
+                <li>30mm rear air channel</li>
+                <li>Perforated diffuser plate (8mm holes, 40% open)</li>
+                <li>Direct cooling of TV heat sinks</li>
+                <li>Bottom-to-top airflow path</li>
+            </ul>
+        </div>
+        <div class="spec-card">
+            <h4>High-Static Pressure Fans</h4>
+            <ul>
+                <li>3x Delta AFB1412HH-A (140mm)</li>
+                <li>4.8 mmH2O static pressure</li>
+                <li>165-195 CFM total airflow</li>
+                <li>PWM speed control (20-100%)</li>
+            </ul>
+        </div>
+        <div class="spec-card">
+            <h4>IP55 Weather Protection</h4>
+            <ul>
+                <li>Dust protected (limited ingress)</li>
+                <li>Low-pressure water jet resistant</li>
+                <li>Continuous EPDM gasket seals</li>
+                <li>316 SS marine-grade hardware</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>Target Environment</h3>
+    <table>
+        <tr><th>Parameter</th><th>Specification</th></tr>
+        <tr><td>Operating Temperature</td><td>0C to 55C continuous</td></tr>
+        <tr><td>Humidity</td><td>Up to 95% RH non-condensing</td></tr>
+        <tr><td>Rain Exposure</td><td>Heavy/wind-driven rain</td></tr>
+        <tr><td>Sand/Dust</td><td>Sandstorm conditions (MERV 8 filtered)</td></tr>
+        <tr><td>Salt Fog</td><td>>500 hours (coastal UAE spec)</td></tr>
+        <tr><td>UV Exposure</td><td>5+ years stability</td></tr>
+    </table>
+</div>
+
+<!-- SECTION 2: EXTERNAL DIMENSIONS -->
+<div class="page-break"></div>
+<div class="content">
+    <div class="section-header">
+        <h2>2. External Dimensions</h2>
+    </div>
+
+    <h3>ATE-75 Overall Dimensions</h3>
+    <table>
+        <tr><th>Dimension</th><th>Value</th><th>Notes</th></tr>
+        <tr><td>External Width</td><td>1760 mm</td><td>TV width + 2x 40mm side bezels</td></tr>
+        <tr><td>External Height</td><td>1120 mm</td><td>TV height + 2x 80mm top/bottom bezels</td></tr>
+        <tr><td>External Depth</td><td>160 mm</td><td>30mm plenum + TV + glass + bezel</td></tr>
+        <tr><td>Internal Cavity (W x H x D)</td><td>1680 x 960 x 125 mm</td><td>For TV placement</td></tr>
+        <tr><td>Glass Visible Area</td><td>1680 x 960 mm</td><td>Viewable screen area</td></tr>
+        <tr><td>Weight (empty)</td><td>~38 kg</td><td>Without TV installed</td></tr>
+        <tr><td>Weight (with TV)</td><td>~68 kg</td><td>With typical 75" TV (~30kg)</td></tr>
+    </table>
+
+    <h3>Bezel Dimensions</h3>
+    <table>
+        <tr><th>Component</th><th>Dimension</th><th>Purpose</th></tr>
+        <tr><td>Top Bezel Height</td><td>80 mm</td><td>Integrated exhaust slots + fan cavity</td></tr>
+        <tr><td>Bottom Bezel Height</td><td>80 mm</td><td>Integrated intake slots + filter drawer</td></tr>
+        <tr><td>Side Bezel Width</td><td>40 mm</td><td>Standard frame profile</td></tr>
+        <tr><td>Slot Recess Depth</td><td>30-40 mm</td><td>Distance slots are recessed behind face</td></tr>
+        <tr><td>Service Door</td><td>1650 x 80 mm</td><td>Bottom bezel service access</td></tr>
+    </table>
+
+    <h3>Rear Plenum Dimensions</h3>
+    <table>
+        <tr><th>Component</th><th>Dimension</th><th>Notes</th></tr>
+        <tr><td>Plenum Width</td><td>1650 mm</td><td>Spans TV back width</td></tr>
+        <tr><td>Plenum Height</td><td>900 mm</td><td>From intake to exhaust</td></tr>
+        <tr><td>Plenum Depth</td><td>30 mm</td><td>Air channel behind TV</td></tr>
+        <tr><td>Diffuser Plate</td><td>8mm holes, 40% open</td><td>Equalizes airflow distribution</td></tr>
+    </table>
+
+    <h3>Recess Installation Cavity (if wall-recessed)</h3>
+    <table>
+        <tr><th>Dimension</th><th>Value</th><th>Notes</th></tr>
+        <tr><td>Cavity Width</td><td>1820 mm</td><td>+30mm each side</td></tr>
+        <tr><td>Cavity Height</td><td>1160 mm</td><td>+20mm top, +20mm bottom</td></tr>
+        <tr><td>Cavity Depth</td><td>215 mm</td><td>+55mm behind enclosure</td></tr>
+        <tr><td>Top Gap Required</td><td>20 mm</td><td>Fitting tolerance only (front exhaust)</td></tr>
+    </table>
+</div>
+
+<!-- SECTION 3: DESIGN PHILOSOPHY -->
+<div class="page-break"></div>
+<div class="content">
+    <div class="section-header">
+        <h2>3. Design Philosophy - Integrated Bezel v5.3.0</h2>
+    </div>
+
+    <h3>Why Integrated Bezel Design?</h3>
+    <p>The v5.3.0 design eliminates the protruding exhaust deflector found in earlier versions. Instead, ventilation slots are integrated into wider 80mm bezels, recessed 30-40mm behind the front face. This creates:</p>
+
+    <ul>
+        <li><strong>Clean "Picture Frame" Aesthetic</strong> - Flush front face with no protrusions</li>
+        <li><strong>IP55 Protection</strong> - Bezel edges naturally shield slots from water jets</li>
+        <li><strong>Architectural Integration</strong> - Easier to recess into walls</li>
+        <li><strong>Improved Durability</strong> - No deflector to damage or degrade</li>
+    </ul>
+
+    <h3>Airflow Path</h3>
+    <div class="callout callout-info">
+        <strong>Bottom-to-Top Flow:</strong><br>
+        Ambient air enters through recessed slots in bottom 80mm bezel &rarr;
+        passes through gasketed MERV 8 filter drawer &rarr;
+        enters rear plenum through perforated diffuser plate &rarr;
+        flows through 30mm channel directly cooling TV heat sinks &rarr;
+        3x Delta 140mm fans pull air up &rarr;
+        exits through recessed slots in top 80mm bezel
+    </div>
+
+    <h3>Thermal Performance</h3>
+    <table>
+        <tr><th>Parameter</th><th>Value</th><th>Status</th></tr>
+        <tr><td>Design Ambient</td><td>55C (Dubai summer)</td><td>Worst case</td></tr>
+        <tr><td>Solar Load</td><td>~250W absorbed</td><td>Direct sun exposure</td></tr>
+        <tr><td>TV Heat</td><td>~300W (75" LED)</td><td>Maximum operation</td></tr>
+        <tr><td>Total Heat Load</td><td>~550W</td><td>Must be removed</td></tr>
+        <tr><td>Airflow (3x Delta fans)</td><td>165-195 CFM</td><td>At system pressure</td></tr>
+        <tr><td>Thermal Rise</td><td>&lt;15K above ambient</td><td>Air temp increase</td></tr>
+        <tr><td>Wall-Mount Margin</td><td>50-80%</td><td>Excellent</td></tr>
+        <tr><td>Recess Margin</td><td>10-30%</td><td>Adequate with 20mm gap</td></tr>
+    </table>
+
+    <h3>Acoustic Performance</h3>
+    <table>
+        <tr><th>PWM Level</th><th>Slot Velocity</th><th>Sound Level</th><th>Mode</th></tr>
+        <tr><td>20%</td><td>0.7 m/s</td><td>&le;30 dBA</td><td>Idle (near silent)</td></tr>
+        <tr><td>40%</td><td>1.4 m/s</td><td>&le;34 dBA</td><td>Quiet mode</td></tr>
+        <tr><td>60%</td><td>2.1 m/s</td><td>&le;38 dBA</td><td>Normal cooling</td></tr>
+        <tr><td>100%</td><td>3.4 m/s</td><td>&le;48 dBA</td><td>Emergency (audible)</td></tr>
+    </table>
+
+    <div class="callout callout-info">
+        <strong>Design Intent:</strong> Quiet operation most of the time (&le;40% PWM). Fans only reach full speed during thermal emergencies. This is achieved through high-static pressure fans + large slot area (A_eff &ge; 0.035 m2).
+    </div>
+</div>
+
+<!-- SECTION 4: TECHNICAL DRAWINGS -->
+<div class="page-break"></div>
+<div class="content">
+    <div class="section-header">
+        <h2>4. Technical Drawings</h2>
+    </div>
+
+    <h3>4.1 Side Cross-Section - Airflow Path</h3>
+    <div class="drawing-container">
+        <div class="drawing-title">Figure 4.1: Side Cross-Section Showing Airflow (v5.3.0 IP55)</div>
+        <svg viewBox="0 0 700 500" width="100%">
+            <defs>
+                <marker id="air-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                    <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+                </marker>
+                <marker id="hot-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                    <polygon points="0 0, 8 3, 0 6" fill="#ef4444"/>
+                </marker>
+                <linearGradient id="heat-grad" x1="0%" y1="100%" x2="0%" y2="0%">
+                    <stop offset="0%" style="stop-color:#3b82f6"/>
+                    <stop offset="50%" style="stop-color:#f59e0b"/>
+                    <stop offset="100%" style="stop-color:#ef4444"/>
+                </linearGradient>
+            </defs>
+
+            <!-- Title -->
+            <text x="350" y="25" text-anchor="middle" font-size="12" font-weight="600" fill="#1e293b">Side View - 160mm Depth with Integrated Bezel Ventilation</text>
+
+            <!-- Main enclosure outline -->
+            <rect x="150" y="50" width="160" height="400" fill="none" stroke="#1e293b" stroke-width="2" rx="3"/>
+
+            <!-- Rear wall -->
+            <rect x="150" y="50" width="8" height="400" fill="#374151"/>
+            <text x="130" y="250" text-anchor="middle" font-size="8" fill="#374151" transform="rotate(-90 130 250)">REAR WALL</text>
+
+            <!-- 30mm rear plenum -->
+            <rect x="158" y="110" width="30" height="280" fill="#dbeafe" opacity="0.6"/>
+            <text x="173" y="250" text-anchor="middle" font-size="7" fill="#1e40af" transform="rotate(-90 173 250)">30mm PLENUM</text>
+
+            <!-- Perforated diffuser plate -->
+            <rect x="188" y="110" width="4" height="280" fill="#94a3b8"/>
+            <line x1="190" y1="130" x2="190" y2="140" stroke="white" stroke-width="2"/>
+            <line x1="190" y1="160" x2="190" y2="170" stroke="white" stroke-width="2"/>
+            <line x1="190" y1="190" x2="190" y2="200" stroke="white" stroke-width="2"/>
+            <line x1="190" y1="220" x2="190" y2="230" stroke="white" stroke-width="2"/>
+            <line x1="190" y1="250" x2="190" y2="260" stroke="white" stroke-width="2"/>
+            <line x1="190" y1="280" x2="190" y2="290" stroke="white" stroke-width="2"/>
+            <line x1="190" y1="310" x2="190" y2="320" stroke="white" stroke-width="2"/>
+            <line x1="190" y1="340" x2="190" y2="350" stroke="white" stroke-width="2"/>
+            <line x1="190" y1="370" x2="190" y2="380" stroke="white" stroke-width="2"/>
+
+            <!-- TV display -->
+            <rect x="195" y="110" width="55" height="280" fill="#1e293b" stroke="#0f172a" stroke-width="2" rx="2"/>
+            <text x="222" y="250" text-anchor="middle" font-size="9" fill="#94a3b8" transform="rotate(-90 222 250)">75" TV (REAR)</text>
+
+            <!-- Glass panel -->
+            <rect x="258" y="110" width="8" height="280" fill="#93c5fd" stroke="#3b82f6" stroke-width="1" opacity="0.8"/>
+            <text x="278" y="250" text-anchor="start" font-size="7" fill="#1e40af" transform="rotate(-90 278 250)">6mm glass</text>
+
+            <!-- TOP 80mm BEZEL with recessed exhaust -->
+            <rect x="268" y="50" width="42" height="60" fill="#1e293b" stroke="#0f172a" stroke-width="2"/>
+            <!-- Recessed slot cavity -->
+            <rect x="268" y="60" width="25" height="35" fill="#0f172a"/>
+            <!-- Slot openings -->
+            <line x1="270" y1="68" x2="290" y2="68" stroke="#374151" stroke-width="2"/>
+            <line x1="270" y1="76" x2="290" y2="76" stroke="#374151" stroke-width="2"/>
+            <line x1="270" y1="84" x2="290" y2="84" stroke="#374151" stroke-width="2"/>
+            <!-- Fan icon -->
+            <circle cx="285" cy="80" r="14" fill="#1e293b" stroke="#059669" stroke-width="2"/>
+            <text x="285" y="83" text-anchor="middle" font-size="5" fill="#059669">140mm</text>
+            <!-- Front face -->
+            <rect x="293" y="50" width="17" height="60" fill="#1e293b"/>
+
+            <!-- BOTTOM 80mm BEZEL with recessed intake -->
+            <rect x="268" y="390" width="42" height="60" fill="#1e293b" stroke="#0f172a" stroke-width="2"/>
+            <!-- Recessed slot cavity -->
+            <rect x="268" y="405" width="25" height="35" fill="#0f172a"/>
+            <!-- Slot openings -->
+            <line x1="270" y1="412" x2="290" y2="412" stroke="#374151" stroke-width="2"/>
+            <line x1="270" y1="420" x2="290" y2="420" stroke="#374151" stroke-width="2"/>
+            <line x1="270" y1="428" x2="290" y2="428" stroke="#374151" stroke-width="2"/>
+            <!-- Filter -->
+            <rect x="268" y="395" width="25" height="10" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+            <text x="280" y="402" text-anchor="middle" font-size="4" fill="#92400e">FILTER</text>
+            <!-- Front face -->
+            <rect x="293" y="390" width="17" height="60" fill="#1e293b"/>
+
+            <!-- Side bezel -->
+            <rect x="268" y="110" width="42" height="280" fill="#1e293b"/>
+
+            <!-- AIRFLOW ARROWS -->
+            <!-- Intake -->
+            <path d="M 330 420 Q 310 420 295 415 L 275 410" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#air-arrow)"/>
+            <!-- Through filter to plenum -->
+            <path d="M 280 390 L 280 375 Q 280 365 265 365 L 173 365" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#air-arrow)"/>
+            <!-- Rising in plenum -->
+            <path d="M 173 345 L 173 270" stroke="url(#heat-grad)" stroke-width="3" fill="none" marker-end="url(#air-arrow)"/>
+            <path d="M 173 250 L 173 170" stroke="url(#heat-grad)" stroke-width="3" fill="none" marker-end="url(#air-arrow)"/>
+            <path d="M 173 150 L 173 120" stroke="url(#heat-grad)" stroke-width="3" fill="none" marker-end="url(#air-arrow)"/>
+            <!-- To fans -->
+            <path d="M 173 115 Q 173 100 200 100 L 268 100" stroke="#f59e0b" stroke-width="2" fill="none" marker-end="url(#hot-arrow)"/>
+            <!-- Out top -->
+            <path d="M 280 75 L 280 55 L 295 40" stroke="#ef4444" stroke-width="2" fill="none" marker-end="url(#hot-arrow)"/>
+
+            <!-- DIMENSION LINES -->
+            <!-- Depth 160mm -->
+            <line x1="150" y1="470" x2="310" y2="470" stroke="#64748b" stroke-width="1"/>
+            <line x1="150" y1="465" x2="150" y2="475" stroke="#64748b" stroke-width="1"/>
+            <line x1="310" y1="465" x2="310" y2="475" stroke="#64748b" stroke-width="1"/>
+            <text x="230" y="485" text-anchor="middle" font-size="10" font-weight="600" fill="#1e293b">160mm DEPTH</text>
+
+            <!-- Top bezel 80mm -->
+            <line x1="268" y1="40" x2="268" y2="110" stroke="#16a34a" stroke-width="1"/>
+            <text x="255" y="80" text-anchor="end" font-size="7" fill="#16a34a">80mm</text>
+
+            <!-- Bottom bezel 80mm -->
+            <line x1="268" y1="390" x2="268" y2="450" stroke="#16a34a" stroke-width="1"/>
+            <text x="255" y="420" text-anchor="end" font-size="7" fill="#16a34a">80mm</text>
+
+            <!-- LABELS -->
+            <rect x="380" y="35" width="170" height="75" fill="#dcfce7" stroke="#16a34a" stroke-width="1" rx="4"/>
+            <text x="465" y="52" text-anchor="middle" font-size="9" font-weight="600" fill="#166534">TOP BEZEL EXHAUST</text>
+            <text x="390" y="67" font-size="7" fill="#166534">- Recessed slots (30-40mm)</text>
+            <text x="390" y="79" font-size="7" fill="#166534">- 3x Delta 140mm fans</text>
+            <text x="390" y="91" font-size="7" fill="#166534">- NO DEFLECTOR</text>
+            <text x="390" y="103" font-size="7" fill="#166534">- Bezel edge blocks rain</text>
+
+            <rect x="380" y="390" width="170" height="65" fill="#dbeafe" stroke="#3b82f6" stroke-width="1" rx="4"/>
+            <text x="465" y="407" text-anchor="middle" font-size="9" font-weight="600" fill="#1e40af">BOTTOM BEZEL INTAKE</text>
+            <text x="390" y="422" font-size="7" fill="#1e40af">- Recessed slots (30-40mm)</text>
+            <text x="390" y="434" font-size="7" fill="#1e40af">- Gasketed MERV 8 filter</text>
+            <text x="390" y="446" font-size="7" fill="#1e40af">- Bezel edge shields jets</text>
+
+            <!-- Legend -->
+            <rect x="380" y="150" width="170" height="100" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" rx="4"/>
+            <text x="465" y="170" text-anchor="middle" font-size="9" font-weight="600" fill="#1e293b">AIRFLOW LEGEND</text>
+            <line x1="400" y1="190" x2="430" y2="190" stroke="#3b82f6" stroke-width="2"/>
+            <text x="440" y="194" font-size="8" fill="#1e40af">Cool intake</text>
+            <line x1="400" y1="210" x2="430" y2="210" stroke="#f59e0b" stroke-width="2"/>
+            <text x="440" y="214" font-size="8" fill="#92400e">Warming air</text>
+            <line x1="400" y1="230" x2="430" y2="230" stroke="#ef4444" stroke-width="2"/>
+            <text x="440" y="234" font-size="8" fill="#dc2626">Hot exhaust</text>
+        </svg>
+    </div>
+
+    <h3>4.2 Front View - External Appearance</h3>
+    <div class="drawing-container">
+        <div class="drawing-title">Figure 4.2: Front View - 1760 x 1120mm (v5.3.0)</div>
+        <svg viewBox="0 0 700 520" width="100%">
+            <!-- Title -->
+            <text x="350" y="25" text-anchor="middle" font-size="12" font-weight="600" fill="#1e293b">Front View - Clean "Picture Frame" Design</text>
+
+            <!-- Main enclosure outline -->
+            <rect x="100" y="50" width="500" height="400" fill="#1e293b" stroke="#0f172a" stroke-width="3" rx="5"/>
+
+            <!-- TOP 80mm BEZEL with recessed exhaust indicator -->
+            <rect x="100" y="50" width="500" height="50" fill="#1e293b"/>
+            <rect x="140" y="70" width="420" height="20" fill="#0f172a" rx="2" opacity="0.6"/>
+            <text x="350" y="84" text-anchor="middle" font-size="7" fill="#475569">RECESSED EXHAUST SLOTS</text>
+
+            <!-- Glass area -->
+            <rect x="140" y="100" width="420" height="250" fill="#334155" stroke="#3b82f6" stroke-width="2"/>
+            <rect x="145" y="105" width="410" height="240" fill="#1e293b"/>
+            <text x="350" y="220" text-anchor="middle" font-size="16" fill="#475569">75" TV DISPLAY AREA</text>
+            <text x="350" y="240" text-anchor="middle" font-size="10" fill="#64748b">(1680 x 960mm visible)</text>
+            <text x="350" y="260" text-anchor="middle" font-size="9" fill="#3b82f6">6mm Laminated Glass (3+3)</text>
+
+            <!-- BOTTOM 80mm BEZEL with recessed intake + service door -->
+            <rect x="100" y="350" width="500" height="100" fill="#1e293b"/>
+            <rect x="140" y="370" width="420" height="20" fill="#0f172a" rx="2" opacity="0.6"/>
+            <text x="350" y="384" text-anchor="middle" font-size="7" fill="#475569">RECESSED INTAKE SLOTS</text>
+            <!-- Service door line -->
+            <line x1="140" y1="400" x2="560" y2="400" stroke="#475569" stroke-width="1"/>
+
+            <!-- 40mm SIDE BEZELS -->
+            <rect x="100" y="100" width="40" height="250" fill="#1e293b"/>
+            <rect x="560" y="100" width="40" height="250" fill="#1e293b"/>
+
+            <!-- 4 Latches on service door -->
+            <rect x="180" y="405" width="12" height="6" fill="#94a3b8" stroke="#64748b" stroke-width="1" rx="1"/>
+            <rect x="300" y="405" width="12" height="6" fill="#94a3b8" stroke="#64748b" stroke-width="1" rx="1"/>
+            <rect x="420" y="405" width="12" height="6" fill="#94a3b8" stroke="#64748b" stroke-width="1" rx="1"/>
+            <rect x="510" y="405" width="12" height="6" fill="#94a3b8" stroke="#64748b" stroke-width="1" rx="1"/>
+
+            <!-- DIMENSION ANNOTATIONS -->
+            <!-- Width -->
+            <line x1="100" y1="470" x2="600" y2="470" stroke="#64748b" stroke-width="1"/>
+            <line x1="100" y1="465" x2="100" y2="475" stroke="#64748b" stroke-width="1"/>
+            <line x1="600" y1="465" x2="600" y2="475" stroke="#64748b" stroke-width="1"/>
+            <text x="350" y="488" text-anchor="middle" font-size="10" font-weight="600" fill="#1e293b">1760mm</text>
+
+            <!-- Height -->
+            <line x1="620" y1="50" x2="620" y2="450" stroke="#64748b" stroke-width="1"/>
+            <line x1="615" y1="50" x2="625" y2="50" stroke="#64748b" stroke-width="1"/>
+            <line x1="615" y1="450" x2="625" y2="450" stroke="#64748b" stroke-width="1"/>
+            <text x="650" y="255" text-anchor="middle" font-size="10" font-weight="600" fill="#1e293b" transform="rotate(90 650 255)">1120mm</text>
+
+            <!-- Top bezel callout -->
+            <line x1="50" y1="50" x2="50" y2="100" stroke="#16a34a" stroke-width="1"/>
+            <line x1="45" y1="50" x2="55" y2="50" stroke="#16a34a" stroke-width="1"/>
+            <line x1="45" y1="100" x2="55" y2="100" stroke="#16a34a" stroke-width="1"/>
+            <text x="35" y="80" text-anchor="middle" font-size="8" fill="#16a34a">80mm</text>
+
+            <!-- Bottom bezel callout -->
+            <line x1="50" y1="350" x2="50" y2="450" stroke="#16a34a" stroke-width="1"/>
+            <line x1="45" y1="350" x2="55" y2="350" stroke="#16a34a" stroke-width="1"/>
+            <line x1="45" y1="450" x2="55" y2="450" stroke="#16a34a" stroke-width="1"/>
+            <text x="35" y="405" text-anchor="middle" font-size="8" fill="#16a34a">100mm</text>
+
+            <!-- Side bezel callout -->
+            <line x1="100" y1="38" x2="140" y2="38" stroke="#0d9488" stroke-width="1"/>
+            <line x1="100" y1="33" x2="100" y2="43" stroke="#0d9488" stroke-width="1"/>
+            <line x1="140" y1="33" x2="140" y2="43" stroke="#0d9488" stroke-width="1"/>
+            <text x="120" y="32" text-anchor="middle" font-size="8" fill="#0d9488">40mm</text>
+
+            <!-- Design note -->
+            <rect x="170" y="290" width="360" height="50" fill="rgba(13, 148, 136, 0.1)" stroke="#0d9488" stroke-width="1" rx="4"/>
+            <text x="350" y="308" text-anchor="middle" font-size="10" font-weight="600" fill="#0d9488">v5.3.0 INTEGRATED BEZEL DESIGN</text>
+            <text x="350" y="323" text-anchor="middle" font-size="8" fill="#0f766e">Clean flush front - NO DEFLECTOR - "Picture Frame" aesthetic</text>
+            <text x="350" y="336" text-anchor="middle" font-size="8" fill="#0f766e">Ventilation slots recessed 30-40mm behind bezel face</text>
+        </svg>
+    </div>
+</div>
+
+<!-- SECTION 5: MECHANICAL CONSTRUCTION -->
+<div class="page-break"></div>
+<div class="content">
+    <div class="section-header">
+        <h2>5. Mechanical Construction</h2>
+    </div>
+
+    <h3>5.1 Materials</h3>
+    <table>
+        <tr><th>Component</th><th>Material</th><th>Thickness</th><th>Finish</th></tr>
+        <tr><td>Main Shell</td><td>Aluminum 5052-H32</td><td>2.0 mm</td><td>Powder coat RAL 9005 (black)</td></tr>
+        <tr><td>Service Door Frame</td><td>Aluminum 5052-H32</td><td>2.0 mm</td><td>Powder coat to match</td></tr>
+        <tr><td>Front Glass</td><td>Laminated (3+3mm)</td><td>6.0 mm</td><td>AR + anti-fog hydrophilic</td></tr>
+        <tr><td>Rear Panel</td><td>Aluminum 5052-H32</td><td>2.0 mm</td><td>30mm standoff (forms plenum)</td></tr>
+        <tr><td>Top Bezel</td><td>Aluminum 5052-H32</td><td>2.0 mm</td><td>80mm with recessed slots + fans</td></tr>
+        <tr><td>Bottom Bezel</td><td>Aluminum 5052-H32</td><td>2.0 mm</td><td>80mm with intake + filter drawer</td></tr>
+        <tr><td>Diffuser Plate</td><td>Aluminum 5052-H32</td><td>1.5 mm</td><td>8mm holes, 40% open area</td></tr>
+        <tr><td>VESA Mount Plate</td><td>Steel</td><td>6.0 mm</td><td>Through-bolted reinforcement</td></tr>
+        <tr><td>Gaskets</td><td>EPDM closed-cell</td><td>10x15 mm</td><td>Higher durometer, IP55 grade</td></tr>
+        <tr><td>All Fasteners</td><td>Stainless 316</td><td>M4/M5/M6</td><td>Marine grade</td></tr>
+    </table>
+
+    <h3>5.2 Fabrication Requirements</h3>
+    <ul>
+        <li>CNC laser cut + CNC press brake</li>
+        <li>TIG welding where required (full penetration)</li>
+        <li>Integrated stiffening ribs (no oil-canning)</li>
+        <li>All edges deburred, no sharp edges</li>
+        <li>Corner radius: 3mm minimum external</li>
+        <li>Weld finish: Ground flush on visible surfaces</li>
+    </ul>
+
+    <h3>5.3 Door & Access System</h3>
+    <div class="spec-grid">
+        <div class="spec-card">
+            <h4>Hinged Front Frame</h4>
+            <ul>
+                <li>3x concealed 3-knuckle hinges (316 SS)</li>
+                <li>110 minimum opening angle</li>
+                <li>Top-hinged with gas strut support</li>
+                <li>Tool-free TV access</li>
+            </ul>
+        </div>
+        <div class="spec-card">
+            <h4>Gas Struts (x2)</h4>
+            <ul>
+                <li>Force: Sized to hold at 90</li>
+                <li>Material: 316 Stainless steel</li>
+                <li>Soft-close damping action</li>
+                <li>250mm stroke length</li>
+            </ul>
+        </div>
+        <div class="spec-card">
+            <h4>Compression Latches (x4)</h4>
+            <ul>
+                <li>Over-center draw latch design</li>
+                <li>Material: 316 Stainless steel</li>
+                <li>Adjustable keeper for seal</li>
+                <li>200N holding force each</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>5.4 Internal TV Mounting (Vertical Rail System)</h3>
+    <table>
+        <tr><th>Component</th><th>Specification</th></tr>
+        <tr><td>Vertical Rails (x2)</td><td>800mm aluminum, M6 holes every 25mm, 3mm steel</td></tr>
+        <tr><td>Rail Spacing</td><td>Adjustable 400-600mm to match TV VESA width</td></tr>
+        <tr><td>TV Brackets (x2)</td><td>L-shaped, connects TV VESA to rails</td></tr>
+        <tr><td>Height Adjustment</td><td>Full range via slotted rail holes</td></tr>
+        <tr><td>VESA Compatibility</td><td>200x200 to 600x400mm</td></tr>
+        <tr><td>Load Rating</td><td>75kg (3x safety factor)</td></tr>
+    </table>
+
+    <h3>5.5 External Wall Mount (Rear Panel)</h3>
+    <table>
+        <tr><th>Component</th><th>Specification</th></tr>
+        <tr><td>Rear VESA Plate</td><td>6mm steel, 400x400 and 600x400mm holes</td></tr>
+        <tr><td>Hardware</td><td>M8 threaded inserts</td></tr>
+        <tr><td>Bracket Type</td><td>Full-motion dual-arm (customer supplied)</td></tr>
+        <tr><td>Load Rating</td><td>75kg minimum capacity</td></tr>
+    </table>
+</div>
+
+<!-- SECTION 6: THERMAL SYSTEM -->
+<div class="page-break"></div>
+<div class="content">
+    <div class="section-header">
+        <h2>6. Thermal Management System</h2>
+    </div>
+
+    <h3>6.1 Fan Specifications</h3>
+    <table>
+        <tr><th>Parameter</th><th>Specification</th></tr>
+        <tr><td>Model</td><td>Delta AFB1412HH-A</td></tr>
+        <tr><td>Quantity</td><td>3 units (in top bezel cavity)</td></tr>
+        <tr><td>Size</td><td>140mm x 140mm x 25mm</td></tr>
+        <tr><td>Voltage</td><td>12V DC</td></tr>
+        <tr><td>Max Airflow</td><td>~83 CFM each (~250 CFM total)</td></tr>
+        <tr><td>Static Pressure</td><td>4.8 mmH2O</td></tr>
+        <tr><td>System Airflow</td><td>165-195 CFM (after system losses)</td></tr>
+        <tr><td>Control</td><td>4-wire PWM (20-100%)</td></tr>
+        <tr><td>Noise</td><td>&le;34 dBA @ 40% PWM (quiet mode)</td></tr>
+    </table>
+
+    <div class="callout callout-warning">
+        <strong>Why Delta AFB1412HH-A?</strong> This fan was selected for its HIGH STATIC PRESSURE (4.8 mmH2O). The system has significant pressure drops: MERV 8 filter + diffuser plate + rear plenum + recessed slots. Consumer fans like Noctua (2.56 mmH2O) cannot overcome this. The Delta fan maintains airflow even when the filter loads with dust.
+    </div>
+
+    <h3>6.2 Ventilation Slot Design</h3>
+    <table>
+        <tr><th>Parameter</th><th>Top Bezel (Exhaust)</th><th>Bottom Bezel (Intake)</th></tr>
+        <tr><td>Slot Configuration</td><td>12x horizontal slots, 3mm gap</td><td>12x horizontal slots, 3mm gap</td></tr>
+        <tr><td>Slot Width</td><td>1600mm</td><td>1600mm</td></tr>
+        <tr><td>Gross Area</td><td>0.058 m2</td><td>0.058 m2</td></tr>
+        <tr><td>Effective Area (A_eff)</td><td>&ge;0.035 m2</td><td>&ge;0.035 m2</td></tr>
+        <tr><td>Recess Depth</td><td>30-40mm behind face</td><td>30-40mm behind face</td></tr>
+        <tr><td>Protection</td><td>316 SS insect mesh</td><td>316 SS insect mesh</td></tr>
+    </table>
+
+    <h3>6.3 Filter System</h3>
+    <table>
+        <tr><th>Component</th><th>Specification</th></tr>
+        <tr><td>Filter Type</td><td>MERV 8 pleated polyester</td></tr>
+        <tr><td>Housing</td><td>Gasketed slide-out drawer</td></tr>
+        <tr><td>Gasket</td><td>EPDM frame seal (IP55)</td></tr>
+        <tr><td>Access</td><td>Tool-free, pull-tab drawer</td></tr>
+        <tr><td>Spare Included</td><td>Yes (1 extra filter)</td></tr>
+    </table>
+
+    <h3>6.4 PWM Control Parameters</h3>
+    <table>
+        <tr><th>Temperature</th><th>PWM Level</th><th>Mode</th></tr>
+        <tr><td>&lt;30C internal</td><td>20%</td><td>Idle (near silent)</td></tr>
+        <tr><td>30C</td><td>20% (ramp start)</td><td>Ramp begins</td></tr>
+        <tr><td>35C</td><td>50%</td><td>Normal cooling</td></tr>
+        <tr><td>45C</td><td>100%</td><td>Full speed</td></tr>
+        <tr><td>50C</td><td>100% + warning LED</td><td>Alarm state</td></tr>
+        <tr><td>55C for 60s</td><td>100% + buzzer</td><td>Critical - signal shutdown</td></tr>
+    </table>
+
+    <h3>6.5 Mandatory Noise Mitigation</h3>
+    <div class="callout callout-critical">
+        <strong>NO SUBSTITUTIONS:</strong> These specifications are mandatory for acoustic performance.
+    </div>
+    <table>
+        <tr><th>Requirement</th><th>Specification</th></tr>
+        <tr><td>Vibration Isolation</td><td>Silicone grommets, Shore A 40-60, NO metal-to-metal</td></tr>
+        <tr><td>Slot Design</td><td>12x 3mm slots, A_eff &ge; 0.035 m2 (not reducible)</td></tr>
+        <tr><td>Panel Resonance</td><td>&ge;2.0mm aluminum, stiffening ribs where span >400mm</td></tr>
+        <tr><td>PWM Control</td><td>20% baseline, smooth ramp, no on/off thermostat</td></tr>
+    </table>
+</div>
+
+<!-- SECTION 7: ELECTRICAL SYSTEM -->
+<div class="page-break"></div>
+<div class="content">
+    <div class="section-header">
+        <h2>7. Electrical System</h2>
+    </div>
+
+    <h3>7.1 Power Distribution</h3>
+    <table>
+        <tr><th>Component</th><th>Specification</th></tr>
+        <tr><td>Power Inlet</td><td>IEC C14 with fuse holder, 10A</td></tr>
+        <tr><td>Fuse</td><td>5x20mm glass, 3A slow-blow (spare included)</td></tr>
+        <tr><td>Surge Protection</td><td>275V MOV varistor (line-neutral, line-earth)</td></tr>
+        <tr><td>Terminal Block</td><td>DIN rail, 3-position (L, N, E), 10A</td></tr>
+        <tr><td>DC Power Supply</td><td>Mean Well LRS-35-12, 12V 3A, 85-264VAC input</td></tr>
+        <tr><td>Accessory Outlet</td><td>UK 3-pin (Type G), 13A, panel mount</td></tr>
+    </table>
+
+    <h3>7.2 Control Board</h3>
+    <table>
+        <tr><th>Feature</th><th>Specification</th></tr>
+        <tr><td>MCU</td><td><strong>ESP32-C3-MINI-1</strong> (WiFi/BLE, 4MB flash)</td></tr>
+        <tr><td>MOSFET Driver</td><td>IRLZ44N (×3) — one per fan for independent PWM</td></tr>
+        <tr><td>PWM Outputs</td><td>3 channels (independent per-fan control)</td></tr>
+        <tr><td>Temperature Inputs</td><td>2x DS18B20 digital (internal), 1x NTC (exhaust)</td></tr>
+        <tr><td>Indicators</td><td>Power LED, Alarm LED</td></tr>
+        <tr><td>Alarm Output</td><td>12V piezo buzzer (85dB)</td></tr>
+        <tr><td>Failsafe</td><td>100% fans if sensor fails</td></tr>
+        <tr><td>Firmware Update</td><td>USB-C (initial), WiFi OTA (future)</td></tr>
+    </table>
+
+    <div class="callout callout-info">
+        <strong>Why ESP32-C3?</strong> Enables firmware updates without hardware changes. WiFi/BLE built-in for future smart home integration (Matter, HomeKit, Home Assistant). Per-fan PWM allows center fan bias for thermal optimization.
+    </div>
+
+    <h3>7.3 Wiring Requirements</h3>
+    <table>
+        <tr><th>Circuit</th><th>Wire Spec</th><th>Notes</th></tr>
+        <tr><td>Mains</td><td>3G1.0mm2, 105C rated</td><td>Black, ~2m per unit</td></tr>
+        <tr><td>DC Fan</td><td>4-wire PWM, 22AWG shielded</td><td>~1m per fan</td></tr>
+        <tr><td>Sensors</td><td>3-wire, 24AWG</td><td>1-Wire protocol</td></tr>
+        <tr><td>Earth Bonding</td><td>10mm tinned copper braid</td><td>Panel to frame</td></tr>
+    </table>
+
+    <h3>7.4 Cable Entry</h3>
+    <table>
+        <tr><th>Component</th><th>Specification</th></tr>
+        <tr><td>Cable Glands</td><td>M20, IP68, 316 SS body</td></tr>
+        <tr><td>Quantity</td><td>3 (power, HDMI, spare)</td></tr>
+        <tr><td>Cable Range</td><td>6-12mm diameter</td></tr>
+        <tr><td>Breather Vent</td><td>M12 ePTFE membrane (pressure equalization)</td></tr>
+    </table>
+</div>
+
+<!-- SECTION 7.5: WIRING DIAGRAM -->
+<div class="page-break"></div>
+<div class="content">
+    <div class="section-header">
+        <h2>7.5 Wiring Diagram</h2>
+    </div>
+
+    <div class="callout callout-critical">
+        <strong>Safety Warning:</strong> All electrical work must be performed by qualified personnel. Ensure mains power is disconnected before any wiring work. Unit must be properly earthed.
+    </div>
+
+    <h3>System Schematic</h3>
+    <div class="drawing-container">
+        <div class="drawing-title">Figure 7.5: Complete Electrical System Schematic</div>
+        <svg viewBox="0 0 900 600" width="100%">
+            <!-- Background grid -->
+            <defs>
+                <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e2e8f0" stroke-width="0.5"/>
+                </pattern>
+            </defs>
+            <rect width="900" height="600" fill="url(#grid)"/>
+
+            <!-- Title -->
+            <text x="450" y="25" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">APEX ATE-75 ELECTRICAL SCHEMATIC</text>
+
+            <!-- Mains Input Section -->
+            <rect x="30" y="50" width="160" height="100" fill="#fef2f2" stroke="#dc2626" stroke-width="2" rx="4"/>
+            <text x="110" y="70" text-anchor="middle" font-size="10" font-weight="600" fill="#dc2626">MAINS INPUT</text>
+            <text x="110" y="88" text-anchor="middle" font-size="9" fill="#0f172a">220-240V AC 50Hz</text>
+            <!-- IEC Inlet -->
+            <rect x="50" y="100" width="50" height="35" fill="white" stroke="#0f172a" stroke-width="1" rx="2"/>
+            <text x="75" y="122" text-anchor="middle" font-size="7" fill="#0f172a">IEC C14</text>
+            <circle cx="60" cy="112" r="3" fill="#dc2626"/>
+            <circle cx="75" cy="112" r="3" fill="#2563eb"/>
+            <circle cx="90" cy="112" r="3" fill="#16a34a"/>
+            <!-- Fuse -->
+            <rect x="115" y="105" width="40" height="20" fill="white" stroke="#0f172a" stroke-width="1"/>
+            <text x="135" y="118" text-anchor="middle" font-size="6" fill="#0f172a">3A FUSE</text>
+
+            <!-- MOV Surge Protection -->
+            <rect x="30" y="165" width="160" height="45" fill="#fff7ed" stroke="#d97706" stroke-width="1" rx="4"/>
+            <text x="110" y="183" text-anchor="middle" font-size="9" font-weight="600" fill="#d97706">SURGE PROTECTION</text>
+            <text x="110" y="198" text-anchor="middle" font-size="8" fill="#0f172a">MOV 275V (L-N, L-E)</text>
+
+            <!-- Terminal Block -->
+            <rect x="30" y="225" width="160" height="70" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="4"/>
+            <text x="110" y="245" text-anchor="middle" font-size="9" font-weight="600" fill="#16a34a">TERMINAL BLOCK</text>
+            <rect x="45" y="260" width="25" height="20" fill="#dc2626" stroke="#0f172a" stroke-width="1"/>
+            <text x="57" y="274" text-anchor="middle" font-size="7" fill="white">L</text>
+            <rect x="80" y="260" width="25" height="20" fill="#2563eb" stroke="#0f172a" stroke-width="1"/>
+            <text x="92" y="274" text-anchor="middle" font-size="7" fill="white">N</text>
+            <rect x="115" y="260" width="25" height="20" fill="#16a34a" stroke="#0f172a" stroke-width="1"/>
+            <text x="127" y="274" text-anchor="middle" font-size="7" fill="white">E</text>
+
+            <!-- DC Power Supply -->
+            <rect x="220" y="160" width="140" height="120" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="4"/>
+            <text x="290" y="180" text-anchor="middle" font-size="9" font-weight="600" fill="#2563eb">DC POWER SUPPLY</text>
+            <text x="290" y="198" text-anchor="middle" font-size="8" fill="#0f172a">Mean Well LRS-35-12</text>
+            <text x="290" y="215" text-anchor="middle" font-size="7" fill="#64748b">Input: 85-264VAC</text>
+            <text x="290" y="230" text-anchor="middle" font-size="7" fill="#64748b">Output: 12V 3A</text>
+            <!-- DC Output -->
+            <rect x="235" y="250" width="40" height="18" fill="#dc2626" stroke="#0f172a" stroke-width="1"/>
+            <text x="255" y="263" text-anchor="middle" font-size="6" fill="white">+12V</text>
+            <rect x="285" y="250" width="40" height="18" fill="#0f172a" stroke="#0f172a" stroke-width="1"/>
+            <text x="305" y="263" text-anchor="middle" font-size="6" fill="white">GND</text>
+
+            <!-- Fan Controller -->
+            <rect x="400" y="120" width="180" height="170" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2" rx="4"/>
+            <text x="490" y="140" text-anchor="middle" font-size="9" font-weight="600" fill="#7c3aed">PWM FAN CONTROLLER</text>
+            <text x="490" y="158" text-anchor="middle" font-size="8" fill="#0f172a">APEX-CTRL-V1 (MCU)</text>
+            <!-- Inputs -->
+            <text x="420" y="180" font-size="7" fill="#0f172a">Power: 12V DC</text>
+            <text x="420" y="195" font-size="7" fill="#0f172a">Temp1: Internal (DS18B20)</text>
+            <text x="420" y="210" font-size="7" fill="#0f172a">Temp2: Exhaust (NTC)</text>
+            <!-- Outputs -->
+            <text x="420" y="235" font-size="7" fill="#0f172a">PWM1: Fan 1</text>
+            <text x="420" y="250" font-size="7" fill="#0f172a">PWM2: Fan 2</text>
+            <text x="420" y="265" font-size="7" fill="#0f172a">PWM3: Fan 3</text>
+            <text x="420" y="280" font-size="7" fill="#0f172a">Alarm: Buzzer (12V)</text>
+
+            <!-- Fans -->
+            <rect x="620" y="50" width="130" height="100" fill="#dcfce7" stroke="#16a34a" stroke-width="2" rx="4"/>
+            <text x="685" y="70" text-anchor="middle" font-size="9" font-weight="600" fill="#16a34a">EXHAUST FANS</text>
+            <text x="685" y="88" text-anchor="middle" font-size="8" fill="#0f172a">3x Delta AFB1412HH-A</text>
+            <text x="685" y="103" text-anchor="middle" font-size="7" fill="#64748b">140mm, 12V, PWM</text>
+            <text x="685" y="118" text-anchor="middle" font-size="7" fill="#64748b">4.8 mmH2O static</text>
+            <rect x="640" y="125" width="90" height="15" fill="white" stroke="#0f172a" stroke-width="1"/>
+            <text x="685" y="136" text-anchor="middle" font-size="5" fill="#0f172a">+12V | GND | TACH | PWM</text>
+
+            <!-- Temperature Sensors -->
+            <rect x="620" y="170" width="130" height="70" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="4"/>
+            <text x="685" y="190" text-anchor="middle" font-size="9" font-weight="600" fill="#d97706">TEMP SENSORS</text>
+            <text x="685" y="208" text-anchor="middle" font-size="8" fill="#0f172a">DS18B20 x 2</text>
+            <text x="685" y="225" text-anchor="middle" font-size="7" fill="#64748b">1-Wire Digital</text>
+
+            <!-- Alarm Buzzer -->
+            <rect x="620" y="260" width="130" height="50" fill="#fee2e2" stroke="#dc2626" stroke-width="2" rx="4"/>
+            <text x="685" y="280" text-anchor="middle" font-size="9" font-weight="600" fill="#dc2626">ALARM BUZZER</text>
+            <text x="685" y="298" text-anchor="middle" font-size="8" fill="#0f172a">12V Piezo 85dB</text>
+
+            <!-- TV Accessory Outlet -->
+            <rect x="220" y="310" width="140" height="80" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="4"/>
+            <text x="290" y="330" text-anchor="middle" font-size="9" font-weight="600" fill="#16a34a">ACCESSORY OUTLET</text>
+            <text x="290" y="348" text-anchor="middle" font-size="8" fill="#0f172a">UK 3-Pin Socket</text>
+            <text x="290" y="365" text-anchor="middle" font-size="7" fill="#64748b">For TV / Media Player</text>
+            <text x="290" y="380" text-anchor="middle" font-size="7" fill="#64748b">13A Max</text>
+
+            <!-- Earth Bonding -->
+            <rect x="30" y="310" width="160" height="60" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="4"/>
+            <text x="110" y="330" text-anchor="middle" font-size="9" font-weight="600" fill="#16a34a">EARTH BONDING</text>
+            <text x="110" y="350" text-anchor="middle" font-size="8" fill="#0f172a">Frame to mains earth</text>
+            <text x="110" y="365" text-anchor="middle" font-size="7" fill="#64748b">10mm tinned copper braid</text>
+
+            <!-- Wiring Lines -->
+            <!-- Mains to Terminal Block -->
+            <line x1="100" y1="135" x2="100" y2="225" stroke="#dc2626" stroke-width="2"/>
+            <line x1="80" y1="135" x2="80" y2="160" stroke="#2563eb" stroke-width="2"/>
+            <line x1="80" y1="160" x2="92" y2="160" stroke="#2563eb" stroke-width="2"/>
+            <line x1="92" y1="160" x2="92" y2="225" stroke="#2563eb" stroke-width="2"/>
+
+            <!-- Terminal to DC PSU -->
+            <line x1="170" y1="270" x2="200" y2="270" stroke="#dc2626" stroke-width="2"/>
+            <line x1="200" y1="270" x2="200" y2="210" stroke="#dc2626" stroke-width="2"/>
+            <line x1="200" y1="210" x2="220" y2="210" stroke="#dc2626" stroke-width="2"/>
+            <line x1="145" y1="285" x2="210" y2="285" stroke="#2563eb" stroke-width="2"/>
+            <line x1="210" y1="285" x2="210" y2="230" stroke="#2563eb" stroke-width="2"/>
+            <line x1="210" y1="230" x2="220" y2="230" stroke="#2563eb" stroke-width="2"/>
+
+            <!-- Terminal to Accessory Outlet -->
+            <line x1="57" y1="295" x2="57" y2="340" stroke="#dc2626" stroke-width="2"/>
+            <line x1="57" y1="340" x2="220" y2="340" stroke="#dc2626" stroke-width="2"/>
+            <line x1="92" y1="295" x2="92" y2="355" stroke="#2563eb" stroke-width="2"/>
+            <line x1="92" y1="355" x2="220" y2="355" stroke="#2563eb" stroke-width="2"/>
+            <line x1="127" y1="295" x2="127" y2="370" stroke="#16a34a" stroke-width="2"/>
+            <line x1="127" y1="370" x2="220" y2="370" stroke="#16a34a" stroke-width="2"/>
+
+            <!-- DC PSU to Controller -->
+            <line x1="275" y1="268" x2="275" y2="300" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <line x1="275" y1="300" x2="430" y2="300" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <line x1="430" y1="300" x2="430" y2="290" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <line x1="305" y1="268" x2="305" y2="308" stroke="#0f172a" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <line x1="305" y1="308" x2="440" y2="308" stroke="#0f172a" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <line x1="440" y1="308" x2="440" y2="290" stroke="#0f172a" stroke-width="1.5" stroke-dasharray="4,2"/>
+
+            <!-- Controller to Fans -->
+            <line x1="580" y1="170" x2="600" y2="170" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <line x1="600" y1="170" x2="600" y2="100" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <line x1="600" y1="100" x2="620" y2="100" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <line x1="580" y1="230" x2="610" y2="230" stroke="#7c3aed" stroke-width="1.5"/>
+            <line x1="610" y1="230" x2="610" y2="130" stroke="#7c3aed" stroke-width="1.5"/>
+            <line x1="610" y1="130" x2="640" y2="130" stroke="#7c3aed" stroke-width="1.5"/>
+
+            <!-- Controller to Sensors -->
+            <line x1="580" y1="195" x2="595" y2="195" stroke="#d97706" stroke-width="1.5"/>
+            <line x1="595" y1="195" x2="595" y2="205" stroke="#d97706" stroke-width="1.5"/>
+            <line x1="595" y1="205" x2="620" y2="205" stroke="#d97706" stroke-width="1.5"/>
+
+            <!-- Controller to Buzzer -->
+            <line x1="580" y1="280" x2="620" y2="280" stroke="#dc2626" stroke-width="1.5"/>
+
+            <!-- Earth bonding line -->
+            <line x1="127" y1="280" x2="127" y2="310" stroke="#16a34a" stroke-width="2"/>
+
+            <!-- Legend -->
+            <rect x="30" y="410" width="840" height="180" fill="white" stroke="#e2e8f0" stroke-width="1" rx="4"/>
+            <text x="450" y="435" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">WIRING LEGEND & WIRE SCHEDULE</text>
+
+            <!-- Color legend -->
+            <line x1="60" y1="460" x2="100" y2="460" stroke="#dc2626" stroke-width="3"/>
+            <text x="110" y="464" font-size="8" fill="#0f172a">Live (L) - Brown - 1.0mm2</text>
+
+            <line x1="60" y1="480" x2="100" y2="480" stroke="#2563eb" stroke-width="3"/>
+            <text x="110" y="484" font-size="8" fill="#0f172a">Neutral (N) - Blue - 1.0mm2</text>
+
+            <line x1="60" y1="500" x2="100" y2="500" stroke="#16a34a" stroke-width="3"/>
+            <text x="110" y="504" font-size="8" fill="#0f172a">Earth (E) - Grn/Yel - 1.0mm2</text>
+
+            <line x1="280" y1="460" x2="320" y2="460" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,2"/>
+            <text x="330" y="464" font-size="8" fill="#0f172a">+12V DC - Red - 22AWG</text>
+
+            <line x1="280" y1="480" x2="320" y2="480" stroke="#0f172a" stroke-width="2" stroke-dasharray="4,2"/>
+            <text x="330" y="484" font-size="8" fill="#0f172a">DC Ground - Black - 22AWG</text>
+
+            <line x1="280" y1="500" x2="320" y2="500" stroke="#7c3aed" stroke-width="2"/>
+            <text x="330" y="504" font-size="8" fill="#0f172a">PWM Signal - Purple - 22AWG</text>
+
+            <line x1="500" y1="460" x2="540" y2="460" stroke="#d97706" stroke-width="2"/>
+            <text x="550" y="464" font-size="8" fill="#0f172a">Sensor 1-Wire - Orange - 24AWG</text>
+
+            <!-- Notes -->
+            <text x="500" y="490" font-size="8" fill="#0f172a">AC Wiring: H05VV-F 3G1.0mm2 (105C rated)</text>
+            <text x="500" y="505" font-size="8" fill="#0f172a">Fan Cable: 4-wire PWM shielded</text>
+            <text x="500" y="520" font-size="8" fill="#0f172a">All connections: Ferrule crimps or screw terminals</text>
+
+            <!-- Cable glands note -->
+            <text x="700" y="460" font-size="8" fill="#64748b">Cable Entry:</text>
+            <text x="700" y="475" font-size="7" fill="#64748b">3x M20 IP68 glands (316 SS)</text>
+            <text x="700" y="490" font-size="7" fill="#64748b">2x M12 breather vents</text>
+
+            <text x="700" y="515" font-size="7" fill="#64748b">Drawing: APEX-WD-001-R2</text>
+            <text x="700" y="530" font-size="7" fill="#64748b">Date: Jan 2026</text>
+        </svg>
+    </div>
+
+    <h3>Wire Schedule Summary</h3>
+    <table>
+        <tr><th>Circuit</th><th>From</th><th>To</th><th>Wire</th><th>Color</th></tr>
+        <tr style="background:#fef2f2;"><td colspan="5"><strong>AC Mains (220-240V)</strong></td></tr>
+        <tr><td>Live</td><td>IEC Inlet</td><td>Fuse &rarr; Terminal Block</td><td>1.0mm2</td><td>Brown</td></tr>
+        <tr><td>Neutral</td><td>IEC Inlet</td><td>Terminal Block</td><td>1.0mm2</td><td>Blue</td></tr>
+        <tr><td>Earth</td><td>IEC Inlet</td><td>Terminal Block &rarr; Frame</td><td>1.0mm2</td><td>Green/Yellow</td></tr>
+        <tr><td>Live</td><td>Terminal Block</td><td>DC PSU + Accessory</td><td>1.0mm2</td><td>Brown</td></tr>
+        <tr><td>Neutral</td><td>Terminal Block</td><td>DC PSU + Accessory</td><td>1.0mm2</td><td>Blue</td></tr>
+        <tr style="background:#dbeafe;"><td colspan="5"><strong>DC Power (12V)</strong></td></tr>
+        <tr><td>+12V</td><td>DC PSU</td><td>Controller VIN+</td><td>22AWG</td><td>Red</td></tr>
+        <tr><td>GND</td><td>DC PSU</td><td>Controller GND</td><td>22AWG</td><td>Black</td></tr>
+        <tr style="background:#f5f3ff;"><td colspan="5"><strong>Fans (4-wire PWM)</strong></td></tr>
+        <tr><td>Fan 1-3</td><td>Controller</td><td>Delta 140mm fans</td><td>22AWG x4</td><td>+12V/GND/Tach/PWM</td></tr>
+        <tr style="background:#fef3c7;"><td colspan="5"><strong>Sensors</strong></td></tr>
+        <tr><td>Temp 1-2</td><td>Controller</td><td>DS18B20 probes</td><td>24AWG x3</td><td>1-Wire</td></tr>
+        <tr><td>Exhaust</td><td>Controller</td><td>NTC thermistor</td><td>24AWG x2</td><td>Signal</td></tr>
+        <tr style="background:#fee2e2;"><td colspan="5"><strong>Alarm</strong></td></tr>
+        <tr><td>Buzzer</td><td>Controller</td><td>Piezo 85dB</td><td>22AWG x2</td><td>+12V/Signal</td></tr>
+    </table>
+
+    <div class="callout callout-warning">
+        <strong>Important Notes:</strong>
+        <ul>
+            <li>All AC wiring must use H05VV-F rated to 105C minimum</li>
+            <li>Earth bonding braid: 10mm tinned copper between Terminal E and frame bonding point</li>
+            <li>All fan cables routed away from heat sources</li>
+            <li>Ferrule crimps required on all stranded wire terminations</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION 8: SEALING & IP55 -->
+<div class="page-break"></div>
+<div class="content">
+    <div class="section-header">
+        <h2>8. Sealing & IP55 Protection</h2>
+    </div>
+
+    <h3>8.1 IP55 Rating Explained</h3>
+    <table>
+        <tr><th>Digit</th><th>Rating</th><th>Meaning</th></tr>
+        <tr><td>First (5)</td><td>Dust Protected</td><td>Limited dust ingress, not harmful to operation</td></tr>
+        <tr><td>Second (5)</td><td>Water Jet Protected</td><td>Protected against low-pressure water jets from any direction (6.3mm nozzle, 12.5 L/min, 3m distance)</td></tr>
+    </table>
+
+    <h3>8.2 Gasket System</h3>
+    <table>
+        <tr><th>Location</th><th>Material</th><th>Profile</th><th>Compression</th></tr>
+        <tr><td>Main Door</td><td>EPDM closed-cell, higher durometer</td><td>12x15mm channel</td><td>20-30%</td></tr>
+        <tr><td>Glass Seal</td><td>Silicone U-channel</td><td>6mm glass fit</td><td>Continuous</td></tr>
+        <tr><td>Filter Drawer</td><td>EPDM frame seal</td><td>8x10mm</td><td>Compression latch</td></tr>
+        <tr><td>Cable Glands</td><td>IP68 rated</td><td>M16/M20</td><td>Compression fit</td></tr>
+        <tr><td>Service Door</td><td>EPDM closed-cell</td><td>10x12mm</td><td>4 latches + stops</td></tr>
+    </table>
+
+    <h3>8.3 IP55 Design Features</h3>
+    <ul>
+        <li><strong>Integrated Bezel Ventilation:</strong> Slots recessed 30-40mm behind bezel face - bezel edges naturally shield from water jets</li>
+        <li><strong>No External Deflector:</strong> Clean design eliminates potential leak paths</li>
+        <li><strong>Gasketed Filter Drawer:</strong> EPDM seal maintains IP55 at intake</li>
+        <li><strong>316 SS Insect Mesh:</strong> Prevents ingress while maintaining airflow</li>
+        <li><strong>Continuous EPDM Gaskets:</strong> No gaps, corners mitered and bonded</li>
+        <li><strong>Compression Latches:</strong> Ensure consistent gasket compression</li>
+    </ul>
+
+    <div class="callout callout-warning">
+        <strong>Ventilated Enclosure Note:</strong> While designed to IP55, this is an actively ventilated unit. Avoid direct high-pressure jets at intake/exhaust openings. Garden hose and rain exposure are fine.
+    </div>
+</div>
+
+<!-- SECTION 9: BILL OF MATERIALS -->
+<div class="page-break"></div>
+<div class="content">
+    <div class="section-header">
+        <h2>9. Bill of Materials - ATE-75</h2>
+    </div>
+
+    <div class="callout callout-info">
+        <strong>Note:</strong> This BOM lists all components required for prototype fabrication. Quantities are for single unit production.
+    </div>
+
+    <h3>9.1 Enclosure Structure</h3>
+    <table>
+        <tr><th>#</th><th>Component</th><th>Specification</th><th>Qty</th></tr>
+        <tr><td>1.1</td><td>Main Frame Assembly</td><td>5052-H32 Aluminum, 2.0mm, CNC bent, powder coated</td><td>1</td></tr>
+        <tr><td>1.2</td><td>Back Panel</td><td>5052-H32 Aluminum, 2.0mm, with plenum standoffs</td><td>1</td></tr>
+        <tr><td>1.3</td><td>Front Bezel Frame</td><td>6063-T5 Aluminum extrusion, mitered corners</td><td>1</td></tr>
+        <tr><td>1.4</td><td>Top Bezel (80mm)</td><td>5052-H32 Aluminum, recessed slots, fan mounts</td><td>1</td></tr>
+        <tr><td>1.5</td><td>Bottom Bezel (80mm)</td><td>5052-H32 Aluminum, recessed slots, filter drawer</td><td>1</td></tr>
+        <tr><td>1.6</td><td>Diffuser Plate</td><td>1.5mm Aluminum, 8mm holes, 40% open</td><td>1</td></tr>
+        <tr><td>1.7</td><td>VESA Mount Plate (internal)</td><td>3.0mm Steel, universal adjustable</td><td>1</td></tr>
+        <tr><td>1.8</td><td>Vertical Mounting Rails</td><td>800mm, M6 holes @ 25mm spacing</td><td>2</td></tr>
+        <tr><td>1.9</td><td>TV Mounting Brackets</td><td>L-shaped adjustable</td><td>4</td></tr>
+        <tr><td>1.10</td><td>Rear VESA Plate</td><td>6mm steel, 400x400/600x400 pattern</td><td>1</td></tr>
+        <tr><td>1.11</td><td>Gas Struts</td><td>100N, 250mm stroke, 316 SS</td><td>2</td></tr>
+    </table>
+
+    <h3>9.2 Glass Assembly</h3>
+    <table>
+        <tr><th>#</th><th>Component</th><th>Specification</th><th>Qty</th></tr>
+        <tr><td>2.1</td><td>Laminated Glass Panel</td><td>3mm + PVB + 3mm low-iron, 1680 x 960mm</td><td>1</td></tr>
+        <tr><td>2.2</td><td>AR Coating</td><td>Anti-reflective, both sides, &lt;1% reflectance</td><td>Applied</td></tr>
+        <tr><td>2.3</td><td>Anti-Fog Coating</td><td>Hydrophilic interior surface</td><td>Applied</td></tr>
+    </table>
+
+    <h3>9.3 Seals & Gaskets</h3>
+    <table>
+        <tr><th>#</th><th>Component</th><th>Specification</th><th>Qty</th></tr>
+        <tr><td>3.1</td><td>Main Door Gasket</td><td>EPDM channel, 12x15mm, higher durometer</td><td>5m</td></tr>
+        <tr><td>3.2</td><td>Glass Seal Gasket</td><td>Silicone U-channel, 6mm</td><td>5m</td></tr>
+        <tr><td>3.3</td><td>Filter Drawer Gasket</td><td>EPDM frame seal, 8x10mm</td><td>1.5m</td></tr>
+        <tr><td>3.4</td><td>Cable Glands IP68</td><td>M20, 316 SS, 6-12mm range</td><td>3</td></tr>
+        <tr><td>3.5</td><td>Breather Vent</td><td>M12 ePTFE membrane</td><td>2</td></tr>
+    </table>
+
+    <h3>9.4 Thermal System</h3>
+    <table>
+        <tr><th>#</th><th>Component</th><th>Specification</th><th>Qty</th></tr>
+        <tr><td>4.1</td><td>Exhaust Fan</td><td>Delta AFB1412HH-A, 140mm, PWM</td><td>3</td></tr>
+        <tr><td>4.2</td><td>Fan Grommets</td><td>Silicone anti-vibration, Shore A 40-60</td><td>12</td></tr>
+        <tr><td>4.3</td><td>Insect Mesh</td><td>316 SS, fine weave</td><td>As req</td></tr>
+        <tr><td>4.4</td><td>Filter Frame</td><td>ABS plastic, slide-out drawer</td><td>1</td></tr>
+        <tr><td>4.5</td><td>MERV 8 Filter Media</td><td>Pleated polyester, custom size</td><td>2</td></tr>
+    </table>
+
+    <h3>9.5 Control System</h3>
+    <table>
+        <tr><th>#</th><th>Component</th><th>Specification</th><th>Qty</th></tr>
+        <tr><td>5.1</td><td>PWM Controller Board</td><td>MCU-based, 4-channel PWM</td><td>1</td></tr>
+        <tr><td>5.2</td><td>Temperature Sensor</td><td>DS18B20 digital, waterproof</td><td>2</td></tr>
+        <tr><td>5.3</td><td>Exhaust Sensor</td><td>NTC 10K thermistor</td><td>1</td></tr>
+        <tr><td>5.4</td><td>Alarm Buzzer</td><td>12V piezo, 85dB</td><td>1</td></tr>
+    </table>
+
+    <h3>9.6 Electrical</h3>
+    <table>
+        <tr><th>#</th><th>Component</th><th>Specification</th><th>Qty</th></tr>
+        <tr><td>6.1</td><td>IEC Power Inlet</td><td>C14 with fuse holder, 10A</td><td>1</td></tr>
+        <tr><td>6.2</td><td>Fuse</td><td>5x20mm, 3A slow-blow</td><td>2</td></tr>
+        <tr><td>6.3</td><td>MOV Varistor</td><td>275V surge protection</td><td>2</td></tr>
+        <tr><td>6.4</td><td>Terminal Block</td><td>DIN rail, 3-position, 10A</td><td>1</td></tr>
+        <tr><td>6.5</td><td>DC Power Supply</td><td>Mean Well LRS-35-12, 12V 3A</td><td>1</td></tr>
+        <tr><td>6.6</td><td>Accessory Outlet</td><td>UK 3-pin, 13A panel mount</td><td>1</td></tr>
+    </table>
+
+    <h3>9.7 Hardware & Fasteners (316 SS)</h3>
+    <table>
+        <tr><th>#</th><th>Component</th><th>Specification</th><th>Qty</th></tr>
+        <tr><td>7.1</td><td>Frame Screws</td><td>M4 x 10mm pan head, A4-316</td><td>40</td></tr>
+        <tr><td>7.2</td><td>Back Panel Screws</td><td>M5 x 12mm cap head, A4-316</td><td>12</td></tr>
+        <tr><td>7.3</td><td>VESA Screws</td><td>M6 x 15mm with washers, A4-316</td><td>8</td></tr>
+        <tr><td>7.4</td><td>Concealed Hinges</td><td>3-knuckle, 316 SS, 110</td><td>3</td></tr>
+        <tr><td>7.5</td><td>Compression Latches</td><td>Over-center draw latch, 316 SS</td><td>4</td></tr>
+        <tr><td>7.6</td><td>Threaded Inserts</td><td>M4/M6 press-fit for aluminum</td><td>30</td></tr>
+        <tr><td>7.7</td><td>Nylon Washers</td><td>M4/M5 isolation (dissimilar metals)</td><td>50</td></tr>
+    </table>
+
+</div>
+
+<!-- SECTION 10: QUALITY STANDARDS -->
+<div class="page-break"></div>
+<div class="content">
+    <div class="section-header">
+        <h2>10. Quality Standards & Testing</h2>
+    </div>
+
+    <h3>10.1 Material Certifications Required</h3>
+    <ul>
+        <li>Aluminum 5052-H32: Mill certificate with alloy composition</li>
+        <li>316 Stainless Steel: Material test report (fasteners, hinges, latches)</li>
+        <li>Powder Coating: Salt spray test certification (&gt;1500 hours)</li>
+        <li>EPDM Gaskets: Shore hardness + UV stability certification</li>
+        <li>Glass: Lamination certificate + AR coating performance data</li>
+    </ul>
+
+    <h3>10.2 Dimensional Tolerances</h3>
+    <table>
+        <tr><th>Feature</th><th>Tolerance</th></tr>
+        <tr><td>External Dimensions</td><td>&pm;2.0mm</td></tr>
+        <tr><td>Internal Cavity</td><td>&pm;1.5mm</td></tr>
+        <tr><td>Gasket Groove</td><td>&pm;0.5mm</td></tr>
+        <tr><td>Hole Positions</td><td>&pm;0.5mm</td></tr>
+        <tr><td>Flatness (panels)</td><td>&lt;2mm/meter</td></tr>
+        <tr><td>Corner Radius</td><td>3mm &pm;0.5mm</td></tr>
+    </table>
+
+    <h3>10.3 Assembly QC Checks</h3>
+    <ul>
+        <li>All fasteners torqued to specification</li>
+        <li>Gasket compression uniform (visual + feeler gauge)</li>
+        <li>Door opens/closes smoothly, latches engage</li>
+        <li>Glass seated without gaps</li>
+        <li>Fans spin freely, no rattle</li>
+        <li>Filter drawer slides smoothly</li>
+        <li>All electrical connections verified</li>
+    </ul>
+
+    <h3>10.4 IP55 Test Procedure</h3>
+    <table>
+        <tr><th>Test</th><th>Method</th><th>Duration</th><th>Pass Criteria</th></tr>
+        <tr><td>Dust</td><td>Talcum powder chamber</td><td>8 hours</td><td>No harmful deposits on electronics</td></tr>
+        <tr><td>Water Jet</td><td>6.3mm nozzle, 12.5 L/min, 3m</td><td>3 min/side</td><td>No water ingress to electronics</td></tr>
+    </table>
+
+    <h3>10.5 Thermal Test Procedure</h3>
+    <table>
+        <tr><th>Condition</th><th>Setup</th><th>Duration</th><th>Pass Criteria</th></tr>
+        <tr><td>Ambient 55C</td><td>Climate chamber</td><td>4 hours</td><td>Internal &lt;70C, fans &lt;100%</td></tr>
+        <tr><td>PWM Ramp</td><td>Heat from 25C to 50C</td><td>Continuous</td><td>Smooth speed increase</td></tr>
+        <tr><td>Filter Loaded</td><td>50% blocked filter</td><td>2 hours @ 45C</td><td>Adequate cooling maintained</td></tr>
+    </table>
+</div>
+
+<!-- SECTION 11: PROTOTYPE VALIDATION -->
+<div class="page-break"></div>
+<div class="content">
+    <div class="section-header">
+        <h2>11. Prototype Validation Requirements</h2>
+    </div>
+
+    <h3>11.1 Prototype Deliverables</h3>
+    <ul>
+        <li>1x Complete ATE-75 enclosure assembly</li>
+        <li>Complete wiring harness installed</li>
+        <li>PWM controller programmed and tested</li>
+        <li>All accessories (IR extender, cleaning kit, spare filter)</li>
+        <li>Installation manual draft</li>
+    </ul>
+
+    <h3>11.2 Validation Test Checklist</h3>
+    <table>
+        <tr><th>Test</th><th>Method</th><th>Pass/Fail</th></tr>
+        <tr><td>Dimensional Check</td><td>Measure all critical dimensions</td><td></td></tr>
+        <tr><td>Gasket Compression</td><td>Feeler gauge at 8 points</td><td></td></tr>
+        <tr><td>Door Operation</td><td>50 open/close cycles</td><td></td></tr>
+        <tr><td>Latch Engagement</td><td>Pull test (50N hold)</td><td></td></tr>
+        <tr><td>Fan Spin Test</td><td>All 3 fans, free rotation</td><td></td></tr>
+        <tr><td>PWM Control</td><td>20% to 100% ramp</td><td></td></tr>
+        <tr><td>Temperature Sensors</td><td>Read at known temps</td><td></td></tr>
+        <tr><td>Alarm Function</td><td>Trigger at 50C</td><td></td></tr>
+        <tr><td>Filter Drawer</td><td>Insert/remove 10 cycles</td><td></td></tr>
+        <tr><td>Glass Fit</td><td>Visual inspection</td><td></td></tr>
+        <tr><td>TV Mount</td><td>75kg load test</td><td></td></tr>
+        <tr><td>IP55 Water Test</td><td>Garden hose, 3m, 3 min/side</td><td></td></tr>
+        <tr><td>Thermal Soak</td><td>4 hours @ 45C ambient</td><td></td></tr>
+        <tr><td>Acoustic Check</td><td>dBA at 1m, 40% PWM</td><td></td></tr>
+    </table>
+
+    <h3>11.3 Documentation Required</h3>
+    <ul>
+        <li>Inspection report with all measurements</li>
+        <li>Photo documentation (all sides, interior, details)</li>
+        <li>Test results (thermal, IP55, acoustic)</li>
+        <li>Material certificates</li>
+        <li>Any deviations from specification</li>
+    </ul>
+
+    <div class="callout callout-info">
+        <strong>Acceptance Criteria:</strong> Prototype must pass ALL validation tests before production approval. Minor deviations require written approval. Any IP55 or thermal failures require redesign before production.
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+    <p><strong>Apex TV Enclosures</strong></p>
+    <p>ATE-75 Prototype Design Pack | Version 5.3.0 IP55 | January 2026</p>
+    <p>Confidential - For Manufacturing Use Only</p>
+</div>
+
+</body>
+</html>

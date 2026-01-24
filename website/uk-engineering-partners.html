@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UK Engineering Partners - Apex Enclosures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --teal: #0d9488;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --border: #e2e8f0;
+            --success: #059669;
+            --warning: #d97706;
+            --gold: #f59e0b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .main-container { padding: 2rem; max-width: 1400px; margin: 0 auto; }
+        @media (max-width: 768px) { .main-container { padding: 1rem; } }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.5rem 2rem;
+            margin: -2rem -2rem 2rem -2rem;
+        }
+        .page-header h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .page-header p { opacity: 0.9; font-size: 0.9rem; }
+
+        /* Problem Statement */
+        .problem-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .problem-box h3 { color: #92400e; margin-bottom: 0.5rem; }
+        .problem-box blockquote {
+            font-style: italic;
+            color: #78350f;
+            margin: 1rem 0;
+            padding-left: 1rem;
+            border-left: 2px solid #d97706;
+        }
+        .problem-box .need {
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+
+        /* Tier Labels */
+        .tier-label {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .tier-1 { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #78350f; }
+        .tier-2 { background: linear-gradient(135deg, #94a3b8, #64748b); color: white; }
+        .tier-thermal { background: linear-gradient(135deg, #f87171, #ef4444); color: white; }
+        .tier-fab { background: linear-gradient(135deg, #60a5fa, #3b82f6); color: white; }
+
+        /* Company Cards */
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .company-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .company-card:hover {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        .company-card.recommended {
+            border: 2px solid var(--gold);
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+        }
+        .company-card.recommended::before {
+            content: "TOP PICK";
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: var(--gold);
+            color: #78350f;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .company-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        .company-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .company-location {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .company-why {
+            background: var(--bg-alt);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        .company-why strong { color: var(--primary); }
+
+        .company-projects {
+            margin: 1rem 0;
+        }
+        .company-projects h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        .project-tag {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin: 0.125rem;
+        }
+
+        .company-contact {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.25rem 0;
+            font-size: 0.85rem;
+        }
+        .contact-row a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .contact-row a:hover { text-decoration: underline; }
+
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-outline {
+            background: white;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+        .btn-outline:hover { background: var(--bg-alt); }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+        .section-header h2 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        /* Email Template */
+        .email-template {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            margin: 1rem 0;
+            position: relative;
+        }
+        .email-template .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #334155;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+        .email-template .copy-btn:hover { background: #475569; }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        .comparison-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .comparison-table tr:hover { background: var(--bg-alt); }
+        .comparison-table .rank-1 { background: #fef3c7; }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--bg-alt);
+            border-radius: 8px;
+        }
+
+        /* Back link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .back-link:hover { color: var(--primary); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .company-grid { grid-template-columns: 1fr; }
+            .page-header { margin: -1rem -1rem 1rem -1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <a href="index.html" class="back-link">← Back to Dashboard</a>
+
+        <div class="page-header">
+            <h1>UK Engineering Partners Research</h1>
+            <p>Full-service design companies to deliver manufacturing-ready package for Eurotech</p>
+        </div>
+
+        <!-- Problem Statement -->
+        <div class="problem-box">
+            <h3>The Gap (from Eurotech)</h3>
+            <blockquote>
+                "Topics such as ventilation, thermal management, and heat dissipation require a very specific level of expertise. These are critical points for the success of the product... we do not believe we would be able to fully deliver the level of engineering needed."
+            </blockquote>
+            <div class="need">
+                <strong>What we need:</strong> A UK company that can take our v5.3.0 spec and deliver a complete, manufacturing-ready design package (electronics layout + thermal engineering + mechanical CAD/DXF) to hand to Eurotech.
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <a href="#tier1" class="btn btn-primary">Top 3 Picks</a>
+            <a href="#package" class="btn btn-primary" style="background: #059669;">What to Send</a>
+            <a href="#email" class="btn btn-primary" style="background: #dc2626;">Draft Email</a>
+            <a href="#tier2" class="btn btn-outline">Other Options</a>
+            <a href="#thermal" class="btn btn-outline">Thermal Specialists</a>
+            <a href="#comparison" class="btn btn-outline">Comparison Table</a>
+        </div>
+
+        <!-- TIER 1 -->
+        <div class="section-header" id="tier1">
+            <span class="tier-label tier-1">Tier 1</span>
+            <h2>Top Recommendations</h2>
+        </div>
+
+        <div class="company-grid">
+            <!-- Ignitec -->
+            <div class="company-card recommended">
+                <div class="company-header">
+                    <div>
+                        <div class="company-name">Ignitec</div>
+                        <div class="company-location">Bristol, BS32 4RU</div>
+                    </div>
+                    <span class="tier-label tier-1">Best Fit</span>
+                </div>
+                <div class="company-why">
+                    <strong>Why:</strong> Explicitly offers IP67 rated enclosures, weatherproof electronics, custom metal/plastic enclosures. Multidisciplinary team: mechanical engineers + electronic engineers + software developers under one roof.
+                </div>
+                <div class="company-projects">
+                    <h4>Proven Harsh Environment Projects</h4>
+                    <span class="project-tag">Subsea Exploration Controller</span>
+                    <span class="project-tag">Arctic Glacial Sensor</span>
+                    <span class="project-tag">IP67 Ruggedised</span>
+                    <span class="project-tag">Clean Tech</span>
+                </div>
+                <div class="company-contact">
+                    <div class="contact-row">
+                        <span>🌐</span>
+                        <a href="https://www.ignitec.com/" target="_blank">ignitec.com</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>📧</span>
+                        <a href="https://www.ignitec.com/contact-ignitec/" target="_blank">Contact Form</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>⏱️</span>
+                        <span>Prototyping: 1-2 weeks (24-48hr fast track available)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plextek -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div>
+                        <div class="company-name">Plextek</div>
+                        <div class="company-location">Cambridge, CB10 1NY</div>
+                    </div>
+                    <span class="tier-label tier-1">Premium</span>
+                </div>
+                <div class="company-why">
+                    <strong>Why:</strong> 70+ engineers, 35 years experience. <strong>AI-assisted heatsink design</strong>. CFD thermal analysis with ANSYS. Proven outdoor/harsh environment track record.
+                </div>
+                <div class="company-projects">
+                    <h4>Proven Harsh Environment Projects</h4>
+                    <span class="project-tag">IP68 Marine Tracker</span>
+                    <span class="project-tag">Space Debris Radar</span>
+                    <span class="project-tag">All-Weather FOD Detection</span>
+                    <span class="project-tag">UV/Chemical Resistant</span>
+                </div>
+                <div class="company-contact">
+                    <div class="contact-row">
+                        <span>📞</span>
+                        <a href="tel:+441799533200">+44 1799 533200</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>📧</span>
+                        <a href="mailto:hello@plextek.com">hello@plextek.com</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>🌐</span>
+                        <a href="https://www.plextek.com/" target="_blank">plextek.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4D Products -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div>
+                        <div class="company-name">4D Products</div>
+                        <div class="company-location">Manchester / Liverpool</div>
+                    </div>
+                    <span class="tier-label tier-1">CFD Expert</span>
+                </div>
+                <div class="company-why">
+                    <strong>Why:</strong> <strong>Explicit CFD thermal analysis</strong> for enclosures. Fan cooling design experience. Practical heat dissipation approach. IP67/ATEX project experience.
+                </div>
+                <div class="company-projects">
+                    <h4>Proven Projects</h4>
+                    <span class="project-tag">IP67 EnCompass</span>
+                    <span class="project-tag">ATEX Protected</span>
+                    <span class="project-tag">CFD Simulation</span>
+                    <span class="project-tag">Fan Cooling</span>
+                </div>
+                <div class="company-contact">
+                    <div class="contact-row">
+                        <span>📞</span>
+                        <a href="tel:+441925607145">+44 1925 607145</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>📧</span>
+                        <a href="mailto:studio@4dproducts.co.uk">studio@4dproducts.co.uk</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>🌐</span>
+                        <a href="https://4dproducts.co.uk/" target="_blank">4dproducts.co.uk</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIER 2 -->
+        <div class="section-header" id="tier2">
+            <span class="tier-label tier-2">Tier 2</span>
+            <h2>Strong Alternatives</h2>
+        </div>
+
+        <div class="company-grid">
+            <!-- Newbury Electronics -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div>
+                        <div class="company-name">Newbury Electronics</div>
+                        <div class="company-location">Berkshire</div>
+                    </div>
+                </div>
+                <div class="company-why">
+                    <strong>Why:</strong> <strong>In-house thermal test chamber</strong>. SolidWorks + Altium integration. 60+ years experience. "Thermally challenged" circuit design expertise.
+                </div>
+                <div class="company-projects">
+                    <h4>Relevant Projects</h4>
+                    <span class="project-tag">Waterproof Earbuds</span>
+                    <span class="project-tag">EV Car Charger</span>
+                    <span class="project-tag">Sports Wearables</span>
+                </div>
+                <div class="company-contact">
+                    <div class="contact-row">
+                        <span>📞</span>
+                        <a href="tel:+441635540347">+44 1635 40347</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>🌐</span>
+                        <a href="https://www.newburyelectronics.co.uk/innovation/" target="_blank">newburyelectronics.co.uk/innovation</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GB Electronics -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div>
+                        <div class="company-name">GB Electronics</div>
+                        <div class="company-location">West Sussex, BN12 4QY</div>
+                    </div>
+                </div>
+                <div class="company-why">
+                    <strong>Why:</strong> Explicitly mentions <strong>IP-rated enclosure design</strong>. SolidWorks CAD. DFM/DFA focus. CE/UKCA compliance built in. Since 1988.
+                </div>
+                <div class="company-contact">
+                    <div class="contact-row">
+                        <span>📞</span>
+                        <a href="tel:+441903216646">+44 1903 216 646</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>📧</span>
+                        <a href="mailto:info@gbelectronics.com">info@gbelectronics.com</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>🌐</span>
+                        <a href="https://gbelectronics.com/" target="_blank">gbelectronics.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enki -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div>
+                        <div class="company-name">Enki Product Development</div>
+                        <div class="company-location">London</div>
+                    </div>
+                </div>
+                <div class="company-why">
+                    <strong>Why:</strong> Team of <strong>former Dyson engineers</strong>. Thermal management expertise. Milestone-based development minimizes risk. Design to manufacturing under one roof.
+                </div>
+                <div class="company-contact">
+                    <div class="contact-row">
+                        <span>🌐</span>
+                        <a href="https://www.enkiproductdevelopment.com/" target="_blank">enkiproductdevelopment.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ignys -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div>
+                        <div class="company-name">Ignys</div>
+                        <div class="company-location">Nottingham</div>
+                    </div>
+                </div>
+                <div class="company-why">
+                    <strong>Why:</strong> <strong>3x Elektra Award winner</strong>. TWO on-site climate chambers for environmental testing. Power electronics expertise.
+                </div>
+                <div class="company-contact">
+                    <div class="contact-row">
+                        <span>🌐</span>
+                        <a href="https://ignys.com/" target="_blank">ignys.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bluefrog -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div>
+                        <div class="company-name">Bluefrog Design</div>
+                        <div class="company-location">Leicester, LE1 3EB</div>
+                    </div>
+                </div>
+                <div class="company-why">
+                    <strong>Why:</strong> IP65/IP67 enclosure experience. Thermal compatibility testing. Marine/outdoor applications. 30 years experience.
+                </div>
+                <div class="company-contact">
+                    <div class="contact-row">
+                        <span>📞</span>
+                        <a href="tel:+441162530612">+44 116 2530612</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>📧</span>
+                        <a href="mailto:mail@bluefrogdesign.co.uk">mail@bluefrogdesign.co.uk</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>🌐</span>
+                        <a href="https://bluefrogdesign.co.uk/" target="_blank">bluefrogdesign.co.uk</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- D2M -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div>
+                        <div class="company-name">D2M / Design2Market</div>
+                        <div class="company-location">Cheltenham, GL51 9EJ</div>
+                    </div>
+                </div>
+                <div class="company-why">
+                    <strong>Why:</strong> 15+ years, <strong>1626 successful products</strong>. In-house prototyping (3D printing, CNC). UK + China manufacturing partners. Patent attorneys in-house.
+                </div>
+                <div class="company-contact">
+                    <div class="contact-row">
+                        <span>📞</span>
+                        <a href="tel:+441242787996">+44 1242 787996</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>🌐</span>
+                        <a href="https://www.design2market.co.uk/" target="_blank">design2market.co.uk</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Corintech -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div>
+                        <div class="company-name">Corintech</div>
+                        <div class="company-location">Hampshire, SP6 1DZ</div>
+                    </div>
+                </div>
+                <div class="company-why">
+                    <strong>Why:</strong> <strong>45+ years</strong> experience. Harsh environment electronics. Aerospace/defence/automotive. UK + Far East manufacturing.
+                </div>
+                <div class="company-contact">
+                    <div class="contact-row">
+                        <span>📞</span>
+                        <a href="tel:+441425655655">+44 1425 655655</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>🌐</span>
+                        <a href="https://corintech.com/" target="_blank">corintech.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cubik -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div>
+                        <div class="company-name">Cubik Innovation</div>
+                        <div class="company-location">Bristol, BS16 7FR</div>
+                    </div>
+                </div>
+                <div class="company-why">
+                    <strong>Why:</strong> ISO 9001:2015 certified. SolidWorks/Fusion 360 CAD. Strong DFM focus. Concept to volume production.
+                </div>
+                <div class="company-contact">
+                    <div class="contact-row">
+                        <span>📞</span>
+                        <a href="tel:+441172443000">+44 117 244 3000</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>🌐</span>
+                        <a href="https://www.cubik-innovation.co.uk/" target="_blank">cubik-innovation.co.uk</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- THERMAL SPECIALISTS -->
+        <div class="section-header" id="thermal">
+            <span class="tier-label tier-thermal">Specialists</span>
+            <h2>Thermal Consultancies (If Needed Separately)</h2>
+        </div>
+
+        <div class="company-grid">
+            <!-- Warley Design -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div>
+                        <div class="company-name">Warley Design Solutions</div>
+                        <div class="company-location">Essex, SS14 3BN</div>
+                    </div>
+                    <span class="tier-label tier-thermal">CFD</span>
+                </div>
+                <div class="company-why">
+                    <strong>Specialty:</strong> <strong>FloTHERM CFD</strong> simulation. Electronics cooling calculations. Conduction, natural/forced convection, water cooling design.
+                </div>
+                <div class="company-contact">
+                    <div class="contact-row">
+                        <span>📞</span>
+                        <a href="tel:+441277261066">+44 1277 261066</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>📱</span>
+                        <a href="tel:+447775941842">+44 7775 941842</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>📧</span>
+                        <a href="mailto:jdurban@warleydesign.co.uk">jdurban@warleydesign.co.uk</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>🌐</span>
+                        <a href="https://www.warleydesign.co.uk/" target="_blank">warleydesign.co.uk</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CEAD -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div>
+                        <div class="company-name">CEAD Ltd</div>
+                        <div class="company-location">Cambridge, CB3 0GT</div>
+                    </div>
+                    <span class="tier-label tier-thermal">30+ Years</span>
+                </div>
+                <div class="company-why">
+                    <strong>Specialty:</strong> <strong>30+ years electronics cooling</strong>. Heatpipes, coldplates, loop thermo-syphon design. Avionics, medical, telecom experience.
+                </div>
+                <div class="company-contact">
+                    <div class="contact-row">
+                        <span>📞</span>
+                        <a href="tel:+441638508107">+44 1638 508107</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>📧</span>
+                        <a href="mailto:enquiries@ceadltd.co.uk">enquiries@ceadltd.co.uk</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>🌐</span>
+                        <a href="https://www.ceadltd.co.uk/" target="_blank">ceadltd.co.uk</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SHEET METAL FABRICATORS -->
+        <div class="section-header" id="fabricators">
+            <span class="tier-label tier-fab">Fabricators</span>
+            <h2>Sheet Metal Specialists (For DXF Output)</h2>
+        </div>
+
+        <div class="company-grid">
+            <!-- V & F -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div>
+                        <div class="company-name">V & F Sheet Metal</div>
+                        <div class="company-location">Hampshire</div>
+                    </div>
+                </div>
+                <div class="company-why">
+                    <strong>Output:</strong> AutoCAD DWG and DXF. Imports 3D data. Electronics enclosures since 1980s. Trumpf laser cutting.
+                </div>
+                <div class="company-contact">
+                    <div class="contact-row">
+                        <span>📞</span>
+                        <a href="tel:+441489577786">+44 1489 577786</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>📧</span>
+                        <a href="mailto:sales@vandf.co.uk">sales@vandf.co.uk</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Greengate -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div>
+                        <div class="company-name">Greengate Metal</div>
+                        <div class="company-location">Manchester, M24 1RU</div>
+                    </div>
+                </div>
+                <div class="company-why">
+                    <strong>Output:</strong> CAD prototypes. 75+ years. In-house powder coating. Aluminium 0.5-16mm.
+                </div>
+                <div class="company-contact">
+                    <div class="contact-row">
+                        <span>📞</span>
+                        <a href="tel:+441616533443">+44 161 653 3443</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>📧</span>
+                        <a href="mailto:sales@greengatemetal.co.uk">sales@greengatemetal.co.uk</a>
+                    </div>
+                    <div class="contact-row">
+                        <span>🌐</span>
+                        <a href="https://greengatemetal.co.uk/" target="_blank">greengatemetal.co.uk</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Protocase -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div>
+                        <div class="company-name">Protocase UK</div>
+                        <div class="company-location">UK Service (Canada HQ)</div>
+                    </div>
+                </div>
+                <div class="company-why">
+                    <strong>Output:</strong> DXF, DWG, STEP, IGES. <strong>2-3 day turnaround</strong>. No minimum order. Free Protocase Designer software.
+                </div>
+                <div class="company-contact">
+                    <div class="contact-row">
+                        <span>🌐</span>
+                        <a href="https://www.protocase.co.uk/" target="_blank">protocase.co.uk</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPARISON TABLE -->
+        <div class="section-header" id="comparison">
+            <h2>Quick Comparison</h2>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Electronics</th>
+                    <th>Mechanical</th>
+                    <th>Thermal/CFD</th>
+                    <th>IP Rating Exp.</th>
+                    <th>DXF Output</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="rank-1">
+                    <td><strong>Ignitec</strong></td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>IP67</td>
+                    <td>Yes</td>
+                </tr>
+                <tr class="rank-1">
+                    <td><strong>Plextek</strong></td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>AI + ANSYS</td>
+                    <td>IP68</td>
+                    <td>Yes (Creo)</td>
+                </tr>
+                <tr class="rank-1">
+                    <td><strong>4D Products</strong></td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>CFD</td>
+                    <td>IP67/ATEX</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td>Newbury Electronics</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>Test Chamber</td>
+                    <td>Waterproof</td>
+                    <td>SolidWorks</td>
+                </tr>
+                <tr>
+                    <td>GB Electronics</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>Partial</td>
+                    <td>IP-rated</td>
+                    <td>SolidWorks</td>
+                </tr>
+                <tr>
+                    <td>Enki</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>Yes (Dyson)</td>
+                    <td>Partial</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td>Ignys</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>Climate Chambers</td>
+                    <td>Partial</td>
+                    <td>Yes</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- WHAT TO SEND THEM -->
+        <div class="section-header" id="package">
+            <h2>What to Send Them</h2>
+        </div>
+
+        <div style="background: #ecfdf5; border: 2px solid #059669; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
+            <h3 style="color: #065f46; margin-bottom: 1rem;">Critical Requirement</h3>
+            <p style="font-size: 1.1rem; color: #065f46;">
+                We need a partner who can do <strong>BOTH electronics AND mechanical design integrated together</strong>.
+                We have the components selected, but they need to:
+            </p>
+            <ul style="margin: 1rem 0 0 1.5rem; color: #065f46;">
+                <li>Validate our component choices work together electrically</li>
+                <li>Design the control PCB / wiring harness</li>
+                <li>Position all electronics with proper clearances and thermal paths</li>
+                <li>Ensure the mechanical design accommodates the electrical requirements</li>
+                <li>Produce a complete, validated, manufacturing-ready package</li>
+            </ul>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+            <!-- Documents to Send -->
+            <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">Documents to Send (After Scoping Call)</h4>
+                <table style="width: 100%; font-size: 0.85rem;">
+                    <tr>
+                        <td style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                            <strong>1. Product Specification</strong><br>
+                            <span style="color: var(--text-muted);">specification.html (v5.3.0)</span>
+                        </td>
+                        <td style="padding: 0.5rem; border-bottom: 1px solid var(--border); text-align: right;">
+                            <a href="specification.html" class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">View</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                            <strong>2. Bill of Materials</strong><br>
+                            <span style="color: var(--text-muted);">bom-detailed.html - all components</span>
+                        </td>
+                        <td style="padding: 0.5rem; border-bottom: 1px solid var(--border); text-align: right;">
+                            <a href="bom-detailed.html" class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">View</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                            <strong>3. Technical Drawings</strong><br>
+                            <span style="color: var(--text-muted);">designs.html - SVG cross-sections</span>
+                        </td>
+                        <td style="padding: 0.5rem; border-bottom: 1px solid var(--border); text-align: right;">
+                            <a href="designs.html" class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">View</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                            <strong>4. Wiring Diagram</strong><br>
+                            <span style="color: var(--text-muted);">wiring-diagram.html - electrical schematic</span>
+                        </td>
+                        <td style="padding: 0.5rem; border-bottom: 1px solid var(--border); text-align: right;">
+                            <a href="wiring-diagram.html" class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">View</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                            <strong>5. Control Logic</strong><br>
+                            <span style="color: var(--text-muted);">control-logic.html - PWM/thermal control</span>
+                        </td>
+                        <td style="padding: 0.5rem; border-bottom: 1px solid var(--border); text-align: right;">
+                            <a href="control-logic.html" class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">View</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                            <strong>6. Engineering Analysis</strong><br>
+                            <span style="color: var(--text-muted);">engineering-analysis.html - thermal calcs</span>
+                        </td>
+                        <td style="padding: 0.5rem; border-bottom: 1px solid var(--border); text-align: right;">
+                            <a href="engineering-analysis.html" class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">View</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5rem 0;">
+                            <strong>7. Cavity Requirements</strong><br>
+                            <span style="color: var(--text-muted);">cavity-requirements.html - installation</span>
+                        </td>
+                        <td style="padding: 0.5rem; text-align: right;">
+                            <a href="cavity-requirements.html" class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">View</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- What They Must Deliver -->
+            <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">What They Must Deliver</h4>
+
+                <div style="margin-bottom: 1rem;">
+                    <h5 style="font-size: 0.9rem; color: var(--text); margin-bottom: 0.5rem;">Electronics Design</h5>
+                    <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1rem;">
+                        <li>Control PCB design (or validate off-shelf controller)</li>
+                        <li>Wiring harness specification with connector types</li>
+                        <li>Component validation (fans, sensors, PSU work together)</li>
+                        <li>PWM control logic implementation</li>
+                        <li>Cable routing and strain relief design</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <h5 style="font-size: 0.9rem; color: var(--text); margin-bottom: 0.5rem;">Thermal Validation</h5>
+                    <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1rem;">
+                        <li>CFD or equivalent thermal analysis</li>
+                        <li>Airflow validation (165-195 CFM target)</li>
+                        <li>Hot spot identification and mitigation</li>
+                        <li>Fan selection confirmation</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <h5 style="font-size: 0.9rem; color: var(--text); margin-bottom: 0.5rem;">Mechanical CAD</h5>
+                    <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1rem;">
+                        <li>Complete 3D CAD model (STEP/IGES)</li>
+                        <li>DXF files for sheet metal cutting</li>
+                        <li>Assembly drawings with tolerances</li>
+                        <li>Exploded view with part numbers</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 style="font-size: 0.9rem; color: var(--text); margin-bottom: 0.5rem;">Manufacturing Package</h5>
+                    <ul style="font-size: 0.85rem; color: var(--text-muted); margin-left: 1rem;">
+                        <li>BOM with supplier part numbers</li>
+                        <li>Assembly instructions</li>
+                        <li>QC checklist / test procedure</li>
+                        <li>IP55 validation test plan</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- EMAIL TEMPLATE -->
+        <div class="section-header" id="email">
+            <h2>Draft Enquiry Email</h2>
+        </div>
+
+        <p style="margin-bottom: 1rem; color: var(--text-muted);">Copy and customize this email for each company:</p>
+
+        <div class="email-template">
+            <button class="copy-btn" onclick="copyEmail()">Copy</button>Subject: Integrated Electronics + Mechanical Design for Outdoor TV Enclosure
+
+Dear [Company Name],
+
+We're developing the Apex TV Enclosure - an IP55-rated outdoor enclosure
+for consumer TVs, designed for Gulf climate conditions (55°C ambient + solar load).
+
+THE OPPORTUNITY:
+We have a UAE manufacturing partner ready to produce prototypes, but they
+need a complete, validated engineering package. We're looking for a UK
+design partner to take our concept to manufacturing-ready status.
+
+WHY WE NEED INTEGRATED ELECTRONICS + MECHANICAL:
+This isn't just a metal box - it's an actively cooled system with:
+- 3× 140mm Delta fans with PWM speed control
+- Temperature sensors and thermal management logic
+- 24V power distribution to multiple components
+- MERV 8 filtration with pressure drop considerations
+- IP55 sealing with ventilated airflow paths
+
+We have selected the components, but we need a partner who can:
+1. Validate our electronics choices work together as a system
+2. Design/specify the control electronics (PCB or off-shelf controller)
+3. Create the wiring harness and connector specifications
+4. Position all components with proper electrical clearances
+5. Validate thermal performance (CFD or equivalent)
+6. Produce mechanical CAD that accommodates all electrical requirements
+7. Deliver manufacturing-ready DXF for sheet metal fabrication
+
+WHAT WE HAVE:
+- Detailed product specification (v5.3.0) with thermal targets
+- Component BOM (fans, sensors, PSU, filters - all specified)
+- Conceptual wiring diagram and control logic
+- Basic layout concept and airflow strategy
+- Engineering calculations (thermal, acoustic, structural)
+
+WHAT WE NEED DELIVERED:
+- Validated electronics design (control PCB or controller selection)
+- Complete wiring harness specification
+- Thermal validation report
+- Full 3D CAD (STEP) + DXF for sheet metal
+- Assembly documentation and test procedures
+
+KEY SPECIFICATIONS:
+- Enclosure: 1760 × 1120 × 160mm aluminium (5052-H32)
+- Heat load: 550W (300W TV + 250W solar gain)
+- Airflow: 165-195 CFM target
+- Noise: ≤34 dBA at normal operation
+- IP Rating: IP55 (jet resistant)
+
+Could we arrange a 30-minute call to discuss the project scope and
+determine if this fits your capabilities? Happy to share our full
+technical documentation following the call.
+
+Best regards,
+Richard Foulkes
+Apex Enclosures
+apexenclosures@icloud.com
++971 50 559 8675</div>
+
+        <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-alt); border-radius: 8px;">
+            <h3 style="margin-bottom: 1rem;">Recommended Next Steps</h3>
+            <ol style="margin-left: 1.5rem;">
+                <li style="margin-bottom: 0.5rem;"><strong>Send initial email</strong> to Ignitec, Plextek, and 4D Products</li>
+                <li style="margin-bottom: 0.5rem;"><strong>On call, confirm they do integrated electronics + mechanical</strong> - not just "we can put your components in a box"</li>
+                <li style="margin-bottom: 0.5rem;"><strong>After scoping call</strong> - send full technical package (links above)</li>
+                <li style="margin-bottom: 0.5rem;"><strong>Ask for:</strong> Proposal with scope, timeline, and budget</li>
+                <li style="margin-bottom: 0.5rem;"><strong>Key question:</strong> "Will you validate our fan selection and control logic, or just position what we give you?"</li>
+                <li><strong>Red flag:</strong> If they say "just give us the electronics layout and we'll CAD it" - they're not the right partner</li>
+            </ol>
+        </div>
+
+        <div style="margin-top: 1.5rem; padding: 1.5rem; background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px;">
+            <h4 style="color: #991b1b; margin-bottom: 0.5rem;">Questions to Ask on Scoping Call</h4>
+            <ol style="margin-left: 1.5rem; color: #7f1d1d; font-size: 0.9rem;">
+                <li>Do you have electronics engineers who can validate/design the control system, or just mechanical?</li>
+                <li>Can you do thermal CFD analysis, or would that be outsourced?</li>
+                <li>Have you designed products with active fan cooling and PWM control before?</li>
+                <li>What IP-rated outdoor products have you delivered? Can we see examples?</li>
+                <li>What CAD formats do you deliver? Can you produce DXF for sheet metal?</li>
+                <li>What's your typical timeline for a project of this complexity?</li>
+                <li>Do you have in-house prototyping, or would we need a separate manufacturer?</li>
+            </ol>
+        </div>
+
+        <p style="margin-top: 2rem; text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+            Research compiled January 2026 | <a href="index.html">Back to Dashboard</a>
+        </p>
+    </div>
+
+    <script>
+        function copyEmail() {
+            const emailText = document.querySelector('.email-template').innerText.replace('Copy', '').trim();
+            navigator.clipboard.writeText(emailText).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = 'Copy', 2000);
+            });
+        }
+    </script>
+</body>
+</html>
