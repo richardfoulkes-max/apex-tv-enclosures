@@ -129,6 +129,7 @@ Air path: Bottom bezel slots → Filter → Diffuser plate →
 ```
 - **Target:** 165-195 CFM at 55°C ambient + solar
 - **Heat load:** 550W (300W TV + 250W solar gain)
+- **Thermal rise:** <15K above ambient at worst case (55°C + full sun)
 - **Margin:** ~50-80% wall-mount, 10-30% recess (adequate)
 - **Design benefit:** Clean flush front - no protruding deflector
 
