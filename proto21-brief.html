@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proto21 - Supplier Brief | Apex TV Enclosures</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+            color: white;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .header-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .tagline {
+            background: #0077b6;
+            color: white;
+            padding: 12px 40px;
+            font-size: 0.95rem;
+        }
+
+        .content {
+            padding: 30px 40px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0077b6;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            font-size: 1.1rem;
+            color: #0077b6;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e9ecef;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .capability {
+            background: #f0f7ff;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border-left: 3px solid #0077b6;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .tech-list {
+            list-style: none;
+        }
+
+        .tech-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+        }
+
+        .tech-list li:last-child {
+            border-bottom: none;
+        }
+
+        .tech-list strong {
+            color: #0077b6;
+        }
+
+        .clients-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .client-badge {
+            background: #e9ecef;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: #495057;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+
+        .highlight-box strong {
+            color: #856404;
+        }
+
+        .assessment {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .assessment h3 {
+            color: #155724;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .assessment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .pros, .cons {
+            font-size: 0.85rem;
+        }
+
+        .pros h4 {
+            color: #155724;
+            margin-bottom: 8px;
+        }
+
+        .cons h4 {
+            color: #721c24;
+            margin-bottom: 8px;
+        }
+
+        .pros ul, .cons ul {
+            margin-left: 18px;
+        }
+
+        .pros li, .cons li {
+            margin-bottom: 4px;
+        }
+
+        .contact-bar {
+            background: #1a1a2e;
+            color: white;
+            padding: 25px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .contact-item h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #adb5bd;
+            margin-bottom: 5px;
+        }
+
+        .contact-item p {
+            font-size: 0.95rem;
+        }
+
+        .contact-item a {
+            color: #00b4d8;
+            text-decoration: none;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 15px 40px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+            }
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+            .contact-bar {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Proto21</h1>
+            <span class="header-badge">Potential Partner</span>
+        </div>
+
+        <div class="tagline">
+            Largest 3D Printing Farm in MENA | Full Product Development | Jebel Ali, Dubai
+        </div>
+
+        <div class="content">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">220+</div>
+                    <div class="stat-label">3D Printers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">30K+</div>
+                    <div class="stat-label">Parts/Month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Team Members</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Countries Served</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Services Offered</h2>
+                <div class="capabilities-grid">
+                    <div class="capability">3D Design & Modeling</div>
+                    <div class="capability">Rapid Prototyping</div>
+                    <div class="capability">Product Development</div>
+                    <div class="capability">Reverse Engineering</div>
+                    <div class="capability">Low-Volume Production</div>
+                    <div class="capability">Paint & Finishing</div>
+                    <div class="capability">3D Scanning</div>
+                    <div class="capability">Large-Format Printing</div>
+                    <div class="capability">Assembly Services</div>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="section">
+                    <h2>Technologies</h2>
+                    <ul class="tech-list">
+                        <li><strong>MJF</strong> - HP Multi Jet Fusion (industrial nylon)</li>
+                        <li><strong>SLA</strong> - Stereolithography (high-resolution resin)</li>
+                        <li><strong>FDM</strong> - Fused Deposition Modeling</li>
+                        <li><strong>SLS</strong> - Selective Laser Sintering</li>
+                        <li><strong>CJP</strong> - Color Jet Printing (full color)</li>
+                        <li><strong>LfAM</strong> - Robotic Arm (large-format)</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>Materials</h2>
+                    <ul class="tech-list">
+                        <li><strong>HP Nylon PA12</strong> - Functional parts</li>
+                        <li><strong>PLA / PLA+ / PETG</strong> - Thermoplastics</li>
+                        <li><strong>ABS / ASA</strong> - Durable plastics</li>
+                        <li><strong>SLA Resins</strong> - High detail finishing</li>
+                        <li><strong>NinjaFlex</strong> - Flexible parts</li>
+                        <li><strong>Carbon Fiber ABS</strong> - Structural strength</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Notable Achievement:</strong> Guinness World Record for "Largest 3D Printed Structure" -
+                23 canyon-like structures at Myata Restaurant Dubai. Also delivered 32m Adidas facade and 16m Regent Seaglider mockup.
+            </div>
+
+            <div class="section">
+                <h2>Notable Clients</h2>
+                <div class="clients-grid">
+                    <span class="client-badge">Dubai Police</span>
+                    <span class="client-badge">ADNOC</span>
+                    <span class="client-badge">Emirates</span>
+                    <span class="client-badge">Etihad Rail</span>
+                    <span class="client-badge">UAE Defence</span>
+                    <span class="client-badge">EDGE</span>
+                    <span class="client-badge">Expo 2020</span>
+                    <span class="client-badge">Adidas</span>
+                    <span class="client-badge">Thales</span>
+                    <span class="client-badge">Schlumberger</span>
+                    <span class="client-badge">Sobha</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Development Process</h2>
+                <div class="capabilities-grid">
+                    <div class="capability"><strong>1.</strong> Ideation & Briefing</div>
+                    <div class="capability"><strong>2.</strong> Sketching & 3D Design</div>
+                    <div class="capability"><strong>3.</strong> Proof of Concept</div>
+                    <div class="capability"><strong>4.</strong> Prototyping & Testing</div>
+                    <div class="capability"><strong>5.</strong> Refinement & Iteration</div>
+                    <div class="capability"><strong>6.</strong> Final Production</div>
+                </div>
+            </div>
+
+            <div class="assessment">
+                <h3>Assessment for Apex TV Enclosures Project</h3>
+                <div class="assessment-grid">
+                    <div class="pros">
+                        <h4>Strengths</h4>
+                        <ul>
+                            <li>True one-stop-shop capability</li>
+                            <li>Product development expertise</li>
+                            <li>Large-scale manufacturing proven</li>
+                            <li>Local (Jebel Ali) - easy to visit</li>
+                            <li>NDA/IP protection offered</li>
+                            <li>Low-volume production capability</li>
+                            <li>Paint & finishing in-house</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>Considerations</h4>
+                        <ul>
+                            <li>Primarily 3D printing, not sheet metal</li>
+                            <li>May need to partner for aluminum fab</li>
+                            <li>Verify fan/electronics integration exp.</li>
+                            <li>Thermal testing capability unknown</li>
+                            <li>IP55 weatherproofing experience TBC</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-bar">
+            <div class="contact-item">
+                <h4>Location</h4>
+                <p>Jebel Ali Industrial Area 1, Dubai</p>
+            </div>
+            <div class="contact-item">
+                <h4>Phone / WhatsApp</h4>
+                <p><a href="tel:+97142350902">+971 4 235 0902</a></p>
+                <p><a href="tel:+971521049913">+971 52 104 9913</a></p>
+            </div>
+            <div class="contact-item">
+                <h4>Email / Web</h4>
+                <p><a href="mailto:sales@proto21.ae">sales@proto21.ae</a></p>
+                <p><a href="https://proto21.ae" target="_blank">proto21.ae</a></p>
+            </div>
+        </div>
+
+        <div class="footer">
+            Supplier Brief prepared for Apex TV Enclosures | January 2026
+        </div>
+    </div>
+</body>
+</html>

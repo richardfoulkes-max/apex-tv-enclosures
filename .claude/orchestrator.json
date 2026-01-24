@@ -1,0 +1,276 @@
+{
+  "project": "apex-tv-enclosures",
+  "currentPhase": "ai-director-phase2",
+  "phases": {
+    "project-init": {
+      "status": "complete",
+      "completedAt": "2025-12-23"
+    },
+    "website-creation": {
+      "status": "complete",
+      "completedAt": "2025-12-23"
+    },
+    "specification-complete": {
+      "status": "complete",
+      "completedAt": "2025-12-23"
+    },
+    "v3-design": {
+      "status": "superseded",
+      "completedAt": "2025-12-29",
+      "notes": "Front-breathing design failed Roundtable AI engineering review - BLOCK RELEASE"
+    },
+    "v4-design": {
+      "status": "superseded",
+      "completedAt": "2025-12-29",
+      "notes": "Ducted rear plenum, 150mm depth - REDESIGN REQUIRED verdict"
+    },
+    "v5-engineering-validation": {
+      "status": "validated",
+      "startedAt": "2025-12-29",
+      "validatedAt": "2025-12-29",
+      "notes": "PASS FOR PROTOTYPE VALIDATION - 13% thermal margin, watch items: recess install risk"
+    },
+    "v51-website-update": {
+      "status": "complete",
+      "completedAt": "2025-12-29",
+      "notes": "All website HTML files updated to v5.1 specs"
+    },
+    "v52-recess-compatible": {
+      "status": "validated",
+      "startedAt": "2025-12-29",
+      "validatedAt": "2025-12-29",
+      "notes": "v5.2.1 PASS FOR PROTOTYPE - ChatGPT engineering review passed. Fixes: diffuser plate, 60mm top gap, 45° deflector (architectural shadow element), 4 latches, Delta fan lock"
+    },
+    "v521-website-update": {
+      "status": "complete",
+      "completedAt": "2025-12-30",
+      "notes": "All website HTML files updated to v5.2.1 specs (specification, designs, engineering-analysis, index)"
+    },
+    "v522-ip55-upgrade": {
+      "status": "complete",
+      "completedAt": "2025-12-31",
+      "notes": "IP55 upgrade: double-layer labyrinth baffles, 75mm deflector, gasketed filter drawer, higher-durometer EPDM. BOM $638.63. Live site verified."
+    },
+    "pool-enclosure-v1": {
+      "status": "complete",
+      "startedAt": "2026-01-01",
+      "completedAt": "2026-01-01",
+      "notes": "APE Series Pool Equipment Enclosures v1.0. Modular system (BASE + extensions), acoustic soundproofing (70-80% noise reduction), chiller variant. Passive ventilation (no fans). 5 files created."
+    },
+    "pool-enclosure-market-analysis": {
+      "status": "complete",
+      "startedAt": "2026-01-01",
+      "completedAt": "2026-01-01",
+      "notes": "Global market analysis complete. GCC (500-650K pools), Southern Europe (France 3M, Spain 1.3M), USA (10.4M). Year 5 target $5.9M. IP55 rain-proof design. UAE directory (120+ companies). Heater/chiller physics added to designs."
+    },
+    "ai-director-phase2": {
+      "status": "complete",
+      "startedAt": "2026-01-02",
+      "completedAt": "2026-01-02",
+      "notes": "Phase 2: Supabase database integration + Claude API integration. AI Queue and Partner CRM now save to real Supabase database. Backend server created for Claude API proxy. New Enquiry modal generates real AI responses via Claude."
+    },
+    "production-deployment": {
+      "status": "complete",
+      "startedAt": "2026-01-02",
+      "completedAt": "2026-01-02",
+      "notes": "Full production deployment: GitHub repos, Vercel hosting, Vercel Serverless Functions for Claude API. Live at apex-tv-enclosures.vercel.app"
+    },
+    "ai-director-phase3": {
+      "status": "complete",
+      "startedAt": "2026-01-02",
+      "completedAt": "2026-01-02",
+      "notes": "Phase 3: Email automation infrastructure. Created /api/webhook/email, /api/send-reply, /api/enquiries endpoints. AI Queue now loads real enquiries from Supabase and approves via API. Ready for Mailgun webhook connection."
+    },
+    "zapier-integration": {
+      "status": "complete",
+      "startedAt": "2026-01-02",
+      "completedAt": "2026-01-02",
+      "notes": "Zapier webhook integration: /api/zapier.js with sendToZapier() helper. Events: new_enquiry, new_order, order_status_changed, order_won, order_lost. Setup UI in setup.html with test button."
+    },
+    "lead-capture": {
+      "status": "complete",
+      "startedAt": "2026-01-02",
+      "completedAt": "2026-01-02",
+      "notes": "Lead capture features: (1) chat-widget.js - floating chat bubble with 3 options. (2) Lead magnet - 'Outdoor TV Buying Guide' email capture. (3) Contact form modal submits to AI Director. Added to all 8 customer-facing pages (retail, industries, partner, commercial)."
+    },
+    "ai-director-dashboard": {
+      "status": "complete",
+      "startedAt": "2026-01-02",
+      "completedAt": "2026-01-02",
+      "notes": "Dedicated AI Director dashboard (ai-dashboard.html) with stats, navigation cards, activity feed. Consistent nav bar added to all AI Director pages: Dashboard → Queue → Orders → Insights → CRM."
+    },
+    "dashboard-reorganization": {
+      "status": "complete",
+      "startedAt": "2026-01-02",
+      "completedAt": "2026-01-02",
+      "notes": "Split dashboards into Sales vs Product Development. Master dashboard (index.html) with two paths. Product dashboard (product-dashboard.html) with tabs for TV Enclosures and Pool Equipment. Clean separation of daily operations from product development."
+    },
+    "navigation-split": {
+      "status": "complete",
+      "startedAt": "2026-01-03",
+      "completedAt": "2026-01-03",
+      "notes": "Split navigation: sales-nav.js for Sales pages (horizontal bar with Core/Partners/Tools groups), nav.js updated for Product pages only (sidebar). 14 Sales pages updated. Removed internal nav from customer-facing pages."
+    },
+    "unified-navigation": {
+      "status": "complete",
+      "startedAt": "2026-01-03",
+      "completedAt": "2026-01-03",
+      "notes": "Unified nav.js with context-aware sidebars. Main dashboard standalone hub. All Sales pages purple (#6366f1). Fixed header positioning for sidebar. Created partnership term sheet for UK sales partner."
+    }
+  },
+  "lastSession": {
+    "summary": "Jan 12 (Late): Context switch to Apex IQ. Verified Hire Outcomes v1 already built (90d/6m/12m/24m checkpoints, success scoring, departure tracking). Updated FEATURE-PLAN-Jan2026.md with 'Current State' section clarifying what exists vs. what Feature 4 (Placement Learning) will add: regret tracking, failure taxonomy, psychometric linkage, scoring adjustments. Prior session: Accurate Metal follow-up, ESP32-C3 Design Pack sent to Ted.",
+    "endedAt": "2026-01-12T23:00:00Z"
+  },
+  "pendingItems": {},
+  "confidential": {
+    "manufacturerIdentity": "NEVER disclose manufacturer name externally. Use generic terms like 'ISO-certified facility' or 'our manufacturing partner'.",
+    "applies": ["landing pages", "marketing", "customer communications", "partner discussions"]
+  },
+  "deliverables": {
+    "website": [
+      "website/index.html - Main product page with AED pricing",
+      "website/specification.html - Full manufacturing specification + 5 SVG drawings",
+      "website/bom-detailed.html - Bill of materials with Alibaba suppliers",
+      "website/wiring-diagram.html - SVG schematic with wire schedule",
+      "website/control-logic.html - PWM firmware specification",
+      "website/qc-checklist.html - 6-section inspection template",
+      "website/market-research.html - Competitor analysis + OEM contacts"
+    ],
+    "3d-models": [
+      "fusion-scripts/ATE-75-Enclosure.scad - OpenSCAD parametric model",
+      "fusion-scripts/ATE-75-Enclosure.stl - Basic STL mesh",
+      "fusion-scripts/ATE-75-Enclosure.py - Fusion 360 Python script",
+      "fusion-scripts/Fusion-360-Instructions.md - Manual build guide"
+    ],
+    "manufacturer-rfq": [
+      "manufacturer-rfq/ATE-75-Specification.md - Original spec",
+      "manufacturer-rfq/ATE-75-Specification-v4.md - v4.0 ducted design",
+      "manufacturer-rfq/ATE-75-Specification-v5.md - v5.0/5.1 design",
+      "manufacturer-rfq/ATE-75-Specification-v5.2.md - v5.2 recess-compatible (CURRENT)",
+      "manufacturer-rfq/APE-Specification-v1.md - Pool enclosure spec v1.0"
+    ],
+    "roundtable-ai": [
+      "roundtable-ai/engineering-brief.txt - v3.0 review (BLOCK RELEASE)",
+      "roundtable-ai/engineering-brief-v4.txt - v4.0 review (REDESIGN REQUIRED)",
+      "roundtable-ai/engineering-brief-v5.txt - v5.0 review (PENDING)"
+    ],
+    "backend": [
+      "backend/server.js - Node.js/Express Claude API proxy server",
+      "backend/package.json - Backend dependencies"
+    ],
+    "database": [
+      "database/schema.sql - Supabase 8-table schema (customers, enquiries, ai_interactions, etc.)"
+    ],
+    "ai-director": [
+      "ai-director/system-prompt.md - Full AI Director system prompt",
+      "website/ai-queue.html - AI approval queue with Claude integration",
+      "website/ai-insights.html - Learning analytics dashboard",
+      "website/partner-crm.html - Partner CRM with Supabase sync",
+      "website/setup.html - Database + Claude API configuration"
+    ],
+    "serverless-api": [
+      "website/api/health.js - Health check endpoint",
+      "website/api/generate.js - Claude AI response generation",
+      "website/api/translate.js - Translation endpoint",
+      "website/api/enquiries.js - CRUD for enquiries with RAG learning",
+      "website/api/send-reply.js - Send approved replies + learn from edits",
+      "website/api/webhook/email.js - Mailgun webhook receiver (ready)",
+      "website/api/orders.js - Orders pipeline CRUD",
+      "website/api/follow-ups.js - Follow-up reminders CRUD",
+      "website/api/auto-followups.js - Auto-generate follow-ups based on rules"
+    ],
+    "orders-pipeline": [
+      "website/orders.html - 6-stage Kanban pipeline with auto follow-ups, lead temperature, win/loss tracking"
+    ],
+    "zapier": [
+      "website/api/zapier.js - Webhook helper and test endpoint"
+    ],
+    "lead-capture": [
+      "website/retail/chat-widget.js - Floating chat widget with lead magnet and contact form"
+    ],
+    "ai-dashboard": [
+      "website/ai-dashboard.html - Sales & Operations hub with stats and activity feed"
+    ],
+    "product-dashboard": [
+      "website/product-dashboard.html - Product Development hub with TV/Pool tabs"
+    ],
+    "navigation": [
+      "website/nav.js - Unified context-aware sidebar (Sales purple #6366f1, Product teal #0d9488)"
+    ],
+    "partnership": [
+      "partnership-term-sheet.md - 50/50 equity split with vesting milestones for UK sales partner"
+    ],
+    "services": [
+      "website/services-pricing.html - Internal services pricing with profit margins",
+      "website/installation-guide.html - Customer-facing DIY installation guide"
+    ]
+  },
+  "keyDecisions": {
+    "material": "5052-H32 aluminum (coastal corrosion resistance)",
+    "hardware": "316 stainless steel (marine grade)",
+    "thermal": "Ducted rear plenum, 3× Delta AFB1412HH-A fans, 210-250 CFM",
+    "ipRating": "IP55 (double-layer labyrinth, jet resistant)",
+    "depth": "160mm (recess-compatible)",
+    "plenum": "30mm + perforated diffuser plate (8mm holes, 40% open)",
+    "glass": "8mm laminated (4+4) with continuous channel retention",
+    "serviceAccess": "Hinged door, 4 latches + compression stops",
+    "vesaMount": "Through-bolted with 6mm reinforcement plate",
+    "filter": "MERV 8 standard (not optional)",
+    "controller": "ESP32-C3-MINI-1 (WiFi/BLE, per-fan PWM, OTA updates)",
+    "oemManufacturer": "CONFIDENTIAL - do not disclose externally",
+    "targetPrice": "FOB $540-600, Retail AED 7,000",
+    "recessCavity": "1820 × 1130 × 215mm (60mm top gap)",
+    "deflector": "75mm @ 45° architectural shadow element + secondary lip (IP55)"
+  },
+  "designEvolution": {
+    "v3.0": {
+      "concept": "Front-breathing (25mm glass gap)",
+      "depth": "120mm",
+      "fans": "4× 60mm",
+      "verdict": "BLOCK RELEASE - thermal path missed TV heat sinks"
+    },
+    "v4.0": {
+      "concept": "Ducted rear plenum (30mm)",
+      "depth": "150mm",
+      "fans": "2× 120mm",
+      "verdict": "REDESIGN REQUIRED - insufficient margin, poor service access"
+    },
+    "v5.0": {
+      "concept": "Enhanced ducted plenum (50mm) + service door",
+      "depth": "180mm",
+      "fans": "2× 140mm",
+      "verdict": "PASS FOR PROTOTYPE VALIDATION"
+    },
+    "v5.1": {
+      "concept": "v5.0 + third fan provision (blanking plate)",
+      "depth": "180mm",
+      "fans": "2× 140mm + 1 blank",
+      "verdict": "Production de-risk update"
+    },
+    "v5.2.1": {
+      "concept": "Recess-compatible with engineering fixes",
+      "depth": "160mm",
+      "plenum": "30mm + perforated diffuser plate",
+      "fans": "3× Delta AFB1412HH-A (locked model)",
+      "cfm": "210-250 CFM",
+      "recessCavity": "1820 × 1130 × 215mm (60mm top gap)",
+      "deflector": "50mm @ 45° architectural shadow element",
+      "serviceDoor": "4 latches + compression stops",
+      "verdict": "PASS FOR PROTOTYPE - ChatGPT validated"
+    },
+    "v5.2.2": {
+      "concept": "IP55 upgrade with double-layer labyrinth",
+      "depth": "160mm",
+      "plenum": "30mm + perforated diffuser plate",
+      "fans": "3× Delta AFB1412HH-A (locked model)",
+      "cfm": "180-210 CFM (reduced due to IP55 baffle restriction)",
+      "recessCavity": "1820 × 1130 × 215mm (60mm top gap)",
+      "deflector": "75mm @ 45° + secondary lip (IP55)",
+      "intakeBaffle": "Double-layer labyrinth with drip edges",
+      "filterDrawer": "Gasketed for IP55 seal",
+      "serviceDoor": "4 latches + higher-durometer EPDM",
+      "verdict": "UPGRADE FROM v5.2.1 - IP55 for Gulf conditions"
+    }
+  }
+}

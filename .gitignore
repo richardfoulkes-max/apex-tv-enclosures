@@ -1,17 +1,37 @@
-# Claude Code
-# CLAUDE.md - TRACKED for context preservation (removed from ignore)
-.claude/
-
-# OS
+# macOS system files
 .DS_Store
-Thumbs.db
+.AppleDouble
+.LSOverride
+._*
 
-# Node
+# Large binary files
+*.pdf
+*.PDF
+
+# CAD files (large, often proprietary)
+cad/
+
+# Dependencies
 node_modules/
-*.log
 
-# Environment
+# Environment/secrets
 .env
 .env.local
-.vercel
-.env*.local
+.env.*.local
+*.pem
+credentials.json
+
+# IDE settings
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Side project files (not part of Apex)
+retykle-*.html
