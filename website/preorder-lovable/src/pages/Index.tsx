@@ -1,39 +1,43 @@
+import { lazy, Suspense } from "react";
 import HeroSection from "@/components/HeroSection";
 import TrustBar from "@/components/TrustBar";
-import ProblemSolution from "@/components/ProblemSolution";
-import WhyApexComparison from "@/components/WhyApexComparison";
-import ProductShowcase from "@/components/ProductShowcase";
-import VideoPlaceholder from "@/components/VideoPlaceholder";
-import WhisperQuiet from "@/components/WhisperQuiet";
-import GulfEngineering from "@/components/GulfEngineering";
-import PremiumFinishes from "@/components/PremiumFinishes";
-import Benefits from "@/components/Benefits";
-import PricingSection from "@/components/PricingSection";
-import EuropeanManufacturing from "@/components/EuropeanManufacturing";
-import FAQSection from "@/components/FAQSection";
-import FinalCTA from "@/components/FinalCTA";
-import Footer from "@/components/Footer";
-import StickyMobileCTA from "@/components/StickyMobileCTA";
+
+const ProblemSolution = lazy(() => import("@/components/ProblemSolution"));
+const WhyApexComparison = lazy(() => import("@/components/WhyApexComparison"));
+const ProductShowcase = lazy(() => import("@/components/ProductShowcase"));
+const VideoPlaceholder = lazy(() => import("@/components/VideoPlaceholder"));
+const WhisperQuiet = lazy(() => import("@/components/WhisperQuiet"));
+const GulfEngineering = lazy(() => import("@/components/GulfEngineering"));
+const PremiumFinishes = lazy(() => import("@/components/PremiumFinishes"));
+const Benefits = lazy(() => import("@/components/Benefits"));
+const PricingSection = lazy(() => import("@/components/PricingSection"));
+const EuropeanManufacturing = lazy(() => import("@/components/EuropeanManufacturing"));
+const FAQSection = lazy(() => import("@/components/FAQSection"));
+const FinalCTA = lazy(() => import("@/components/FinalCTA"));
+const Footer = lazy(() => import("@/components/Footer"));
+const StickyMobileCTA = lazy(() => import("@/components/StickyMobileCTA"));
 
 const Index = () => {
   return (
     <main className="min-h-screen pb-20 md:pb-0">
       <HeroSection />
       <TrustBar />
-      <ProblemSolution />
-      <WhyApexComparison />
-      <ProductShowcase />
-      <VideoPlaceholder />
-      <WhisperQuiet />
-      <GulfEngineering />
-      <PremiumFinishes />
-      <Benefits />
-      <PricingSection />
-      <EuropeanManufacturing />
-      <FAQSection />
-      <FinalCTA />
-      <Footer />
-      <StickyMobileCTA />
+      <Suspense fallback={null}>
+        <ProblemSolution />
+        <WhyApexComparison />
+        <ProductShowcase />
+        <VideoPlaceholder />
+        <WhisperQuiet />
+        <GulfEngineering />
+        <PremiumFinishes />
+        <Benefits />
+        <PricingSection />
+        <EuropeanManufacturing />
+        <FAQSection />
+        <FinalCTA />
+        <Footer />
+        <StickyMobileCTA />
+      </Suspense>
     </main>
   );
 };

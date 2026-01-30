@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-
-const WHATSAPP_LINK = "https://wa.me/971XXXXXXXXX?text=I'd%20like%20to%20reserve%20an%20ATE-75";
+import { openWhatsApp } from "@/lib/constants";
 
 const StickyMobileCTA = () => {
   return (
@@ -11,7 +10,7 @@ const StickyMobileCTA = () => {
           variant="cta"
           size="lg"
           className="w-full"
-          onClick={() => window.open(WHATSAPP_LINK, "_blank")}
+          onClick={openWhatsApp}
         >
           Reserve Now — AED 375 Deposit
           <ArrowRight className="w-5 h-5" />

@@ -28,8 +28,8 @@ const VideoPlaceholder = () => {
             {/* Content */}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
               {/* Play button */}
-              <div className="w-20 h-20 rounded-full bg-accent/20 border-2 border-accent/40 flex items-center justify-center mb-6 cursor-default">
-                <Play className="w-8 h-8 text-accent ml-1" fill="currentColor" />
+              <div className="w-20 h-20 rounded-full bg-accent/20 border-2 border-accent/40 flex items-center justify-center mb-6 cursor-default" aria-label="Demo video coming soon">
+                <Play className="w-8 h-8 text-accent ml-1" fill="currentColor" aria-hidden="true" />
               </div>
 
               <h3 className="text-xl md:text-2xl font-bold text-primary-foreground mb-2">

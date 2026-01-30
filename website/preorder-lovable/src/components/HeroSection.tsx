@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Shield } from "lucide-react";
 import heroImage from "@/assets/hero-lifestyle.jpg";
-
-const WHATSAPP_LINK = "https://wa.me/971XXXXXXXXX?text=I'd%20like%20to%20reserve%20an%20ATE-75";
+import { openWhatsApp } from "@/lib/constants";
 
 const HeroSection = () => {
   const scrollToPricing = () => {
@@ -18,6 +17,9 @@ const HeroSection = () => {
           src={heroImage}
           alt="Luxury Dubai villa with outdoor TV entertainment setup"
           className="w-full h-full object-cover"
+          width={1920}
+          height={1080}
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/40" />
       </div>
@@ -53,7 +55,7 @@ const HeroSection = () => {
               variant="cta"
               size="xl"
               className="animate-pulse-glow"
-              onClick={() => window.open(WHATSAPP_LINK, "_blank")}
+              onClick={openWhatsApp}
             >
               Reserve Yours — AED 375 Deposit
             </Button>

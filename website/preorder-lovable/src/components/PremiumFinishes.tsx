@@ -38,8 +38,10 @@ const PremiumFinishes = () => {
               >
                 <div
                   className="h-24 w-full"
+                  role="img"
+                  aria-label={`${option.name} color swatch`}
                   style={{
-                    background: option.color.includes("gradient") ? option.color : option.color,
+                    background: option.color,
                   }}
                 />
                 <div className="p-4">

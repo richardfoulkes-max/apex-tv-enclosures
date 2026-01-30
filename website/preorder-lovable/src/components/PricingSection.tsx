@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight } from "lucide-react";
-
-const WHATSAPP_LINK = "https://wa.me/971XXXXXXXXX?text=I'd%20like%20to%20reserve%20an%20ATE-75";
+import { openWhatsApp } from "@/lib/constants";
 
 const PricingSection = () => {
   const features = [
@@ -42,7 +41,7 @@ const PricingSection = () => {
               {/* Price Comparison */}
               <div className="text-center mb-8">
                 <div className="flex items-baseline justify-center gap-3 mb-2">
-                  <span className="text-5xl font-extrabold text-foreground">AED 8,100</span>
+                  <span className="text-5xl font-extrabold text-foreground tabular-nums">AED 8,100</span>
                 </div>
                 <p className="text-muted-foreground">
                   Compare: SunBrite 75"{" "}
@@ -80,7 +79,7 @@ const PricingSection = () => {
                   variant="cta"
                   size="xl"
                   className="w-full animate-pulse-glow"
-                  onClick={() => window.open(WHATSAPP_LINK, "_blank")}
+                  onClick={openWhatsApp}
                 >
                   Reserve Now — AED 375 Deposit
                   <ArrowRight className="w-5 h-5" />

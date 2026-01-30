@@ -47,11 +47,11 @@ const WhisperQuiet = () => {
                         {level.db} dB
                       </span>
                     </div>
-                    <div className="h-3 bg-muted rounded-full overflow-hidden">
+                    <div className="h-3 bg-muted rounded-full overflow-hidden" role="meter" aria-label={`${level.label} noise level`} aria-valuenow={level.db} aria-valuemin={0} aria-valuemax={80}>
                       <div
                         className={`h-full rounded-full transition-all duration-500 ${
-                          level.highlight 
-                            ? "bg-gradient-to-r from-accent to-accent/70" 
+                          level.highlight
+                            ? "bg-gradient-to-r from-accent to-accent/70"
                             : "bg-muted-foreground/30"
                         }`}
                         style={{ width: level.width }}
